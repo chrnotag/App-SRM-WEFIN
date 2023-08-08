@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobile_project/app/core/ui/extensions/theme_extension.dart';
 
+import '../theme/globals.dart';
+
 class WefinTextFormField extends StatelessWidget {
 
   final TextEditingController? controller;
@@ -22,24 +24,25 @@ class WefinTextFormField extends StatelessWidget {
         return TextFormField(
           controller: controller,
           validator: validator,
-          obscureText: obscureTextVNValue,
           decoration: InputDecoration(
               labelText: label,
-              labelStyle: const TextStyle(fontSize: 15, color: Colors.black),
+              labelStyle: const TextStyle(
+                fontSize: AppSizes.fontSizeMedium, 
+                color: AppColors.labelText),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(4),
               ),
               focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: const BorderSide(color: Colors.grey)),
+                  borderRadius: BorderRadius.circular(4),
+                  borderSide: const BorderSide(color: AppColors.labelText)),
               suffixIcon: obscureText
                   ? IconButton(
                       onPressed: () {
                         _obscureTextVN.value = !obscureTextVNValue;
                       },
                       icon: Icon(
-                          obscureTextVNValue ? Icons.lock : Icons.lock_open),
-                          color: context.primaryColor,
+                          obscureTextVNValue ? Icons.remove_red_eye : Icons.lock_open),
+                          color: AppColors.labelText,
                     )
                   : null),
         );

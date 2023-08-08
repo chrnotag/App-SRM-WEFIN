@@ -27,7 +27,7 @@ class _LoginFormState extends State<_LoginForm> {
         child: Column(
           children: [
             WefinTextFormField(
-              label: 'Login',
+              label: 'Digite seu Usuário',
               controller: _loginEC,
               validator: Validatorless.multiple([
                 Validatorless.required('Login obrigatório'),
@@ -36,7 +36,7 @@ class _LoginFormState extends State<_LoginForm> {
             ),
             const SizedBox(height: 20),
             WefinTextFormField(
-              label: 'Senha',
+              label: 'Digite sua Senha',
               obscureText: true,
               controller: _passwordEC,
               validator: Validatorless.multiple([
@@ -45,7 +45,7 @@ class _LoginFormState extends State<_LoginForm> {
                     6, 'Senha deve conter pelo menos 6 caracteres'),
               ]),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 200),
             WefinDefaultButton(
               label: 'Entrar',
               onPressed: () async {

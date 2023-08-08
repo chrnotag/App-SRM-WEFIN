@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobile_project/app/core/ui/extensions/theme_extension.dart';
+import 'package:flutter_mobile_project/app/core/ui/theme/globals.dart';
 
 class WefinDefaultButton extends StatelessWidget {
   final String label;
@@ -16,14 +17,14 @@ class WefinDefaultButton extends StatelessWidget {
     Key? key,
     required this.label,
     required this.onPressed,
-    this.borderRadius = 10,
+    this.borderRadius = 4,
     this.color,
     this.labelColor,
-    this.padding = 10,
+    this.padding = 0,
     this.labelSize = 20,
     this.width =
         double.infinity, //tamanho maximo da tela, o pai segura o tamanho maximo
-    this.height = 66,
+    this.height = 60,
   }) : super(key: key);
 
   @override
@@ -38,13 +39,13 @@ class WefinDefaultButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
           ),
-          backgroundColor: color ?? context.primaryColor,
+          backgroundColor: color ?? AppColors.botaoEnvio,
         ),
         child: Text(
           label,
           style: TextStyle(
             fontSize: labelSize,
-            color: labelColor ?? Colors.white,
+            color: labelColor ?? AppColors.branco,
           ),
         ),
       ),
