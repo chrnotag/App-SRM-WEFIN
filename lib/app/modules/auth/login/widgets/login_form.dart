@@ -46,7 +46,7 @@ class _LoginFormState extends State<_LoginForm> {
               ]),
             ),const SizedBox(height: 20),
             const LinkComponent(
-              label: 'Esqueceu minha senha!',
+              label: 'Esqueci minha senha!',
               route: '/auth/forgot-password',),
             const SizedBox(height: 200),
             WefinDefaultButton(
