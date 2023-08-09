@@ -44,7 +44,10 @@ class _LoginFormState extends State<_LoginForm> {
                 Validatorless.min(
                     6, 'Senha deve conter pelo menos 6 caracteres'),
               ]),
-            ),
+            ),const SizedBox(height: 20),
+            const LinkComponent(
+              label: 'Esqueceu sua senha?',
+              route: '/auth/forgot-password',),
             const SizedBox(height: 200),
             WefinDefaultButton(
               label: 'Entrar',

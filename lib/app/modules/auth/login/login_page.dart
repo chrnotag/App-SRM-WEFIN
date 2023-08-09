@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:validatorless/validatorless.dart';
 
+import '../../../core/ui/widgets/links.dart';
+
 part 'widgets/login_form.dart';
 part 'widgets/login_register_buttons.dart';
 
