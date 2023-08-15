@@ -1,6 +1,7 @@
 import 'package:flutter_mobile_project/app/modules/auth/home/auth_home_page.dart';
 import 'package:flutter_mobile_project/app/modules/auth/login/login_module.dart';
 import 'package:flutter_mobile_project/app/modules/auth/register/register_module.dart';
+import 'package:flutter_mobile_project/app/modules/recuperar/recuperar_senha.dart';
 import 'package:flutter_mobile_project/app/repositories/user/user_repository.dart';
 import 'package:flutter_mobile_project/app/repositories/user/user_repository_impl.dart';
 import 'package:flutter_mobile_project/app/services/user/user_service.dart';
