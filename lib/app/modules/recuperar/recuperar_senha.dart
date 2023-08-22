@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobile_project/app/modules/auth/login/login_page.dart';
 
 class ErrorScreen extends StatelessWidget {
-  static String routeName = '/teste1';
+  static String routeName = '/recuperar';
 
   const ErrorScreen({super.key});
   @override
@@ -51,10 +51,10 @@ class ErrorScreen extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () {
                           ///Exemplo de como usar o navigator
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage(),));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage(),));
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xff5b96cc)),
+                            backgroundColor: const Color(0xff5b96cc)),
                         child: const Padding(
                           padding: EdgeInsets.only(top: 16, bottom: 16),
                           child: Text(

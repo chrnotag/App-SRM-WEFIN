@@ -1,12 +1,13 @@
 import 'package:flutter_mobile_project/app/modules/auth/home/auth_home_page.dart';
 import 'package:flutter_mobile_project/app/modules/auth/login/login_module.dart';
 import 'package:flutter_mobile_project/app/modules/auth/register/register_module.dart';
-import 'package:flutter_mobile_project/app/modules/recuperar/recuperar_senha.dart';
 import 'package:flutter_mobile_project/app/repositories/user/user_repository.dart';
 import 'package:flutter_mobile_project/app/repositories/user/user_repository_impl.dart';
 import 'package:flutter_mobile_project/app/services/user/user_service.dart';
 import 'package:flutter_mobile_project/app/services/user/user_service_impl.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
+import '../home/home_module.dart';
 
 class AuthModule extends Module {
   @override
@@ -31,5 +32,6 @@ class AuthModule extends Module {
             )),
     ModuleRoute('/login', module: LoginModule()),
     ModuleRoute('/register', module: RegisterModule()),
+    ModuleRoute('/HomeApp', module: HomeAppModule())
   ];
 }

@@ -23,43 +23,50 @@ class _LoginFormState extends State<_LoginForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            WefinTextFormField(
-              label: 'Digite seu Usuário',
-              controller: _loginEC,
-              validator: Validatorless.multiple([
-                Validatorless.required('Login obrigatório'),
-                Validatorless.email('E-mail inválido'),
-              ]),
-            ),
-            const SizedBox(height: 20),
-            WefinTextFormField(
-              label: 'Digite sua Senha',
-              obscureText: true,
-              controller: _passwordEC,
-              validator: Validatorless.multiple([
-                Validatorless.required('Senha obrigatória'),
-                Validatorless.min(
-                    6, 'Senha deve conter pelo menos 6 caracteres'),
-              ]),
-            ),const SizedBox(height: 20),
-            const LinkComponent(
-              label: 'Esqueci minha senha!',
-              route: '/auth/forgot-password',),
-            const SizedBox(height: 200),
-            WefinDefaultButton(
-              label: 'Entrar',
-              onPressed: () async {
-                final formValid = _formKey.currentState?.validate() ?? false;
+  key: _formKey,
+  child: Column(
+    children: [
+      WefinTextFormField(
+        label: 'Digite seu Usuário',
+        controller: _loginEC,
+        validator: Validatorless.multiple([
+          Validatorless.required('Login obrigatório'),
+          Validatorless.email('E-mail inválido'),
+        ]),
+      ),
+      const SizedBox(height: 20),
+      WefinTextFormField(
+        label: 'Digite sua Senha',
+        obscureText: true,
+        controller: _passwordEC,
+        validator: Validatorless.multiple([
+          Validatorless.required('Senha obrigatória'),
+          Validatorless.min(6, 'Senha deve conter pelo menos 6 caracteres'),
+        ]),
+      ),
+      const SizedBox(height: 20),
+      const Row(
+        mainAxisAlignment: MainAxisAlignment.end, // Alinha à direita
+        children: [
+          LinkComponent(
+            label: 'Esqueci minha senha!',
+            route: '/HomeApp',
+          ),
+        ],
+      ),
+      const SizedBox(height: 50),
+      WefinDefaultButton(
+        label: 'Entrar',
+        onPressed: () async {
+          final formValid = _formKey.currentState?.validate() ?? false;
 
-                if (formValid) {
-                  await controller.login(_loginEC.text, _passwordEC.text);
-                }
-              },
-            ),
-          ],
-        ));
+          if (formValid) {
+            await controller.login(_loginEC.text, _passwordEC.text);
+          }
+        },
+      ),
+    ],
+  ),
+);
   }
 }

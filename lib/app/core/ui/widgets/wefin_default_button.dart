@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobile_project/app/core/ui/extensions/theme_extension.dart';
 import 'package:flutter_mobile_project/app/core/ui/theme/globals.dart';
 
 class WefinDefaultButton extends StatelessWidget {
