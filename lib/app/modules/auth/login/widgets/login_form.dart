@@ -50,7 +50,7 @@ class _LoginFormState extends State<_LoginForm> {
         children: [
           LinkComponent(
             label: 'Esqueci minha senha!',
-            route: '/HomeApp',
+            route: '/recuperar',
           ),
         ],
       ),
@@ -58,11 +58,7 @@ class _LoginFormState extends State<_LoginForm> {
       WefinDefaultButton(
         label: 'Entrar',
         onPressed: () async {
-          final formValid = _formKey.currentState?.validate() ?? false;
-
-          if (formValid) {
-            await controller.login(_loginEC.text, _passwordEC.text);
-          }
+          Navigator.pushNamed(context, '/HomeApp');
         },
       ),
     ],
