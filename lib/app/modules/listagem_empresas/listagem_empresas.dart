@@ -11,7 +11,7 @@ class ListaEmpresas extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: AppColors.globalBackgroung,
+        backgroundColor: AppColors.globalBackground,
         body: Container(
           decoration: const BoxDecoration(
               image: DecorationImage(

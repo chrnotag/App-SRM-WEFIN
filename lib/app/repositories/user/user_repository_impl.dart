@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter_mobile_project/app/core/exceptions/failure.dart';
 import 'package:flutter_mobile_project/app/core/exceptions/user_exists_exception.dart';
 import 'package:flutter_mobile_project/app/core/logger/app_logger.dart';

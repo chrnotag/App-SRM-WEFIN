@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobile_project/app/core/ui/theme/globals.dart';
 
 class LinkComponent extends StatelessWidget {
   final String label;
@@ -15,8 +16,7 @@ class LinkComponent extends StatelessWidget {
       child: Text(
         label,
         style: const TextStyle(
-          color: Colors.blue,
-          decoration: TextDecoration.underline,
+          color: AppColors.labelText
         ),
       ),
     );

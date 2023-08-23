@@ -28,7 +28,7 @@ abstract class LoginControllerBase with Store {
       Loader.show();
       await _userService.login(login, password);
       Loader.hide();
-      Modular.to.navigate('/auth/');
+      Modular.to.navigate('/HomeApp');
     } on Failure catch (e, s) {
       final errorMessage = e.message ?? 'Erro ao realizar login';
       _log.error(errorMessage, e, s);
