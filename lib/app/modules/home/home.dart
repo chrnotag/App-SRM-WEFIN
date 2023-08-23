@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobile_project/app/core/ui/theme/globals.dart';
+import 'package:flutter_mobile_project/app/modules/home/widgets/contexto.dart';
 import '../../core/ui/widgets/navbar.dart';
 
 class HomeApp extends StatelessWidget {
@@ -20,10 +22,13 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: NavBar(),
-      body: Center(
-        child: Text('Hello, World! This is the home page.'),
+    return Scaffold(
+      appBar: const NavBar(),
+      body: Container(
+        color: AppColors.globalBackground,
+        child: const Center(
+          child: ContextoWidget(),
+        ),
       ),
     );
   }
