@@ -6,14 +6,10 @@ class SqliteAdmConnection with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     var connection = SqliteConnectionFactory();
 
-    switch (state) {
-      case AppLifecycleState.resumed:
-        break;
-      case AppLifecycleState.inactive:
-      case AppLifecycleState.paused:
-      case AppLifecycleState.detached:
-        connection.closeConnection();
-        break;
+    if (state == AppLifecycleState.resumed) {
+      connection.openConnection();
+    } else {
+      connection.closeConnection();
     }
     super.didChangeAppLifecycleState(state);
   }

@@ -13,3 +13,8 @@ void main() async {
     child: const AppWidget(),
   ));
 }
+
+// import 'package:flutter/cupertino.dart';
+// import 'package:flutter_mobile_project/app/modules/listagem_empresas/listagem_empresas.dart';
+
+// void main() async => runApp(const ListaEmpresas());

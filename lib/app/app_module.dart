@@ -2,7 +2,7 @@ import 'package:flutter_mobile_project/app/modules/auth/auth_module.dart';
 import 'package:flutter_mobile_project/app/modules/core/core_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'modules/recuperar/recuperar_senha.dart';
+import 'modules/home/home.dart';
 
 class AppModule extends Module {
   @override
@@ -17,8 +17,8 @@ class AppModule extends Module {
   List<ModularRoute> get routes => [
         ModuleRoute('/auth', module: AuthModule()),
         ChildRoute(
-          '/recovery',
-          child: (context, args) => const ErrorScreen(),
-        )
+          '/HomeApp',
+          child: (context, args) => const HomeApp(),
+        ),
       ];
 }

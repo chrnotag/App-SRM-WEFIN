@@ -20,11 +20,12 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.globalBackgroung,
+      backgroundColor: AppColors.globalBackground,
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/background_image.png'), // Substitua pelo caminho da sua imagem de fundo
+            image: AssetImage(
+                'assets/images/background_image.png'), // Substitua pelo caminho da sua imagem de fundo
             fit: BoxFit.cover,
           ),
         ),
@@ -37,13 +38,25 @@ class LoginPage extends StatelessWidget {
                 Center(
                   child: Image.asset(
                     'assets/images/logo.png',
-                    width: 162.w,
+                    width: 238.w,
                     fit: BoxFit.fill,
+                  ),
+                ),
+                const SizedBox(height: 50), // Espaçamento entre a imagem e o texto
+                const SizedBox(
+                  width: 200, // Largura desejada
+                  child: Text(
+                    "Seja bem vindo ao seu app de gestão",
+                    style: TextStyle(
+                      color: AppColors.labelText,
+                      fontSize: AppSizes.fontSizeLarge,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 SizedBox(height: 100.h),
                 const _LoginForm(),
-                const SizedBox(height: 100),
+                const SizedBox(height: 30),
               ],
             ),
           ),

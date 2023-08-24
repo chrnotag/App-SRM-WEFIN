@@ -2,7 +2,6 @@ import 'package:flutter_mobile_project/app/modules/auth/login/login_controller.d
 import 'package:flutter_mobile_project/app/modules/auth/login/login_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../recuperar/recuperar_senha.dart';
 
 class LoginModule extends Module {
   @override

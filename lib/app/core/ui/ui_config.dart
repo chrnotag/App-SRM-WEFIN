@@ -6,8 +6,8 @@ class UiConfig {
   static String get title => 'Wefin';
 
   static ThemeData get theme => ThemeData(
-        primaryColor: Color(0xff05204f),
-        primaryColorDark: Color(0xff336797),
+        primaryColor: const Color(0xff05204f),
+        primaryColorDark: const Color(0xff336797),
         primaryColorLight: const Color(0xffDDE9C7),
         appBarTheme: const AppBarTheme(
           backgroundColor: Color(0xffd19214),
