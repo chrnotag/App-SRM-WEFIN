@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="25.967" height="32.511" viewBox="0 0 25.967 32.511">
+    <defs>
+        <style>
+            .a{fill:#5b96cc;}.b,.d{fill:none;}.c{clip-path:url(#a);}.d{stroke:#5b96cc;stroke-linecap:round;stroke-linejoin:round;}
+        </style>
+        <clipPath id="a">
+            <path class="a" d="M0,27.571H24.028V0H0Z" />
+        </clipPath>
+    </defs>
+    <g transform="translate(-45.637 -23.876)">
+        <g transform="translate(45.637 26.231)">
+            <g transform="translate(0 0)">
+                <path class="b" d="M0,0H23.952V10.926H0Z" transform="translate(0)" />
+            </g>
+            <path class="b" d="M0,27.571H24.028V0H0Z" transform="translate(0 2.584)" />
+            <g class="c" transform="translate(0 2.584)">
+                <path class="a"
+                    d="M6.034,10H.4A.408.408,0,0,1,0,9.585V.412A.408.408,0,0,1,.4,0h5.63a.408.408,0,0,1,.4.412V9.585A.408.408,0,0,1,6.034,10ZM.808.824v8.35H5.631V.824Z"
+                    transform="translate(0.461 17.574)" />
+                <path class="a"
+                    d="M6.035,8.02H.4A.408.408,0,0,1,0,7.609V.412A.408.408,0,0,1,.4,0H6.035a.408.408,0,0,1,.4.412v7.2A.408.408,0,0,1,6.035,8.02ZM.808.824V7.2H5.631V.824Z"
+                    transform="translate(6.092 19.551)" />
+                <path class="a"
+                    d="M6.035,12.186H.4a.408.408,0,0,1-.4-.412V.412A.408.408,0,0,1,.4,0H6.035a.408.408,0,0,1,.4.412V11.774A.408.408,0,0,1,6.035,12.186ZM.808.823V11.362H5.631V.823Z"
+                    transform="translate(11.722 15.385)" />
+                <path class="a"
+                    d="M6.034,18.178H.4a.408.408,0,0,1-.4-.412V.412A.408.408,0,0,1,.4,0h5.63a.408.408,0,0,1,.4.412V17.766A.408.408,0,0,1,6.034,18.178ZM.808.824V17.354H5.63V.824Z"
+                    transform="translate(17.353 9.393)" />
+            </g>
+        </g>
+        <g transform="translate(45.637 24.741)">
+            <path class="a"
+                d="M11.673,10.926a.437.437,0,0,1-.052,0L.352,9.691A.354.354,0,0,1,0,9.314a.4.4,0,0,1,.453-.29l11.066,1.211L23.257.1a.463.463,0,0,1,.571-.009.3.3,0,0,1,.011.475L11.964,10.823a.446.446,0,0,1-.291.1"
+                transform="translate(0 1.49)" />
+            <path class="d" d="M0,0,1.9,1.9,0,3.806"
+                transform="matrix(0.788, -0.616, 0.616, 0.788, 21.295, 1.172)" />
+        </g>
+    </g>
+</svg>

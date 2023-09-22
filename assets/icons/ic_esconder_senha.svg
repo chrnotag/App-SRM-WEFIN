@@ -1,0 +1,14 @@
+<svg id="Camada_1" data-name="Camada 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+    <defs>
+        <style>.cls-1{fill:#fff;}</style>
+    </defs>
+    <title>icone</title>
+    <g id="Grupo_7900" data-name="Grupo 7900">
+        <path id="Caminho_3143" data-name="Caminho 3143" class="cls-1"
+            d="M153.44,80A76,76,0,0,0,46.07,80L26.29,99.76,46.56,120a76,76,0,0,0,107.37,0l19.78-19.78Zm-3.06,36.52a71,71,0,0,1-100.33,0L33.33,99.76l16.26-16.3a71,71,0,0,1,100.33,0l16.75,16.75Z" />
+        <path id="Caminho_3145" data-name="Caminho 3145" class="cls-1"
+            d="M99.93,67.55a32.38,32.38,0,1,0,32.38,32.38A32.38,32.38,0,0,0,99.93,67.55Zm0,59.76a27.39,27.39,0,1,1,27.4-27.38A27.39,27.39,0,0,1,99.93,127.31Z" />
+    </g>
+    <rect class="cls-1" x="97.51" y="29.15" width="4.99" height="141.69"
+        transform="translate(100 -41.42) rotate(45)" />
+</svg>

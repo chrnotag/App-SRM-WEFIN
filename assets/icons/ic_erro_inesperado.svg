@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="109" height="109" viewBox="0 0 109 109">
+    <defs>
+        <style>
+            .a{fill:#fff;}.b,.c{fill:none;stroke:#fff;}.c{stroke-linecap:round;stroke-width:3px;}
+        </style>
+    </defs>
+    <g transform="translate(-133 -124)">
+        <g transform="translate(131 122)">
+            <path class="a"
+                d="M105.55,2H7.45A5.45,5.45,0,0,0,2,7.45v98.1A5.45,5.45,0,0,0,7.45,111h98.1a5.45,5.45,0,0,0,5.45-5.45V7.45A5.45,5.45,0,0,0,105.55,2ZM7.45,5.633h98.1a1.817,1.817,0,0,1,1.817,1.817v9.083H5.633V7.45A1.817,1.817,0,0,1,7.45,5.633Zm98.1,101.733H7.45a1.817,1.817,0,0,1-1.817-1.817V20.167H107.367V105.55A1.817,1.817,0,0,1,105.55,107.367Z" />
+            <path class="b"
+                d="M7.817,9.633H9.633A1.817,1.817,0,0,0,9.633,6H7.817a1.817,1.817,0,1,0,0,3.633Z"
+                transform="translate(3.267 3.267)" />
+            <path class="b"
+                d="M12.817,9.633h1.817a1.817,1.817,0,1,0,0-3.633H12.817a1.817,1.817,0,0,0,0,3.633Z"
+                transform="translate(7.35 3.267)" />
+            <path class="b"
+                d="M17.817,9.633h1.817a1.817,1.817,0,1,0,0-3.633H17.817a1.817,1.817,0,0,0,0,3.633Z"
+                transform="translate(11.433 3.267)" />
+        </g>
+        <path class="c" d="M9069.576-518.489l37.83-37.83" transform="translate(-8900 722)" />
+        <path class="c" d="M9107.406-518.489l-37.83-37.83" transform="translate(-8900 722)" />
+    </g>
+</svg>
