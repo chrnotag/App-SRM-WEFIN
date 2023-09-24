@@ -1,0 +1,25 @@
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:modular_study/core/constants/route_labels.dart';
+import 'package:modular_study/views/home/ajuda/ajuda_screen.dart';
+import 'package:modular_study/views/home/monitor_operacoes/monitor_operacoes.dart';
+import 'package:modular_study/views/home/selecao_empresas_view/view_selecao_empresas.dart';
+
+import '../core/providers/auth_provider_config/auth_providers.dart';
+
+class HomeModule extends Module {
+  @override
+  void binds(Injector i) {
+    i.addSingleton(AuthProvider.new);
+  }
+
+  @override
+  void routes(RouteManager r) {
+    r.child(AppRoutes.listaSelecaoEmpresasHomeRoute,
+        child: (context) => const ListaSelecaoEmpresas());
+    r.child(AppRoutes.helpScreenHomeRoute, child: (context) => const Ajuda());
+    r.child(
+      AppRoutes.monitorOperacoesHomeRoute,
+      child: (context) => const MonitorOperacoes(),
+    );
+  }
+}

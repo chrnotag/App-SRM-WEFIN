@@ -1,20 +1,14 @@
-import 'package:flutter_mobile_project/app/app_module.dart';
-import 'package:flutter_mobile_project/app/app_widget.dart';
-import 'package:flutter_mobile_project/app/core/application_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:modular_study/app_widget.dart';
 
-void main() async {
+import 'modules/app_module.dart';
 
-  await ApplicationConfig().configureApp();
-
+final GlobalKey<NavigatorState> myNavigatorKey = GlobalKey<NavigatorState>();
+void main() {
+  Modular.setNavigatorKey(myNavigatorKey);
   runApp(ModularApp(
     module: AppModule(),
     child: const AppWidget(),
   ));
 }
-
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter_mobile_project/app/modules/listagem_empresas/listagem_empresas.dart';
-
-// void main() async => runApp(const ListaEmpresas());

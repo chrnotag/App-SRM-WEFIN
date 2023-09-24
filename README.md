@@ -1,23 +1,16 @@
-#  Imagens do projeto
+# smr_app
 
-<img src="/assets/images/readme/readme-imagem1.jpg" width="300" height="600">
-<img src="/assets/images/readme/readme-imagem2.jpg" width="300" height="600">
-  
-#  Informações
+A new Flutter project.
 
-  
-    Versão flutter: 3.10.5
-    
-    Usar FVW ou PURO: Libs indicadas para instalação do flutter e trocar entre versões facilmente
-    
-    Gerencia de Estado: Mobx + Modular
-  
+## Getting Started
 
-#  Build
-  
+This project is a starting point for a Flutter application.
 
-    flutter pub get (baixar dependencias)
-    
-    fluter run (executar o projeto)
-    
-    flutter pub run build_runner build (gerar arquivos do mobx)
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.

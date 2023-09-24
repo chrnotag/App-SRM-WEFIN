@@ -1,4 +1,4 @@
-name: flutter_mobile_project
+name: modular_study
 description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.5 <4.0.0'
+  sdk: '>=3.1.0 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -30,40 +30,49 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_modular: ^5.0.3
-  mobx: ^2.0.7+5
-  flutter_mobx: ^2.0.6+1
-  asuka: ^2.0.0+1
-  dio: ^4.0.6
-  flutter_screenutil: ^5.5.3+2
 
-  flutter_dotenv: ^5.1.0
-  logger: ^1.1.0
-  flutter_secure_storage: ^5.0.2
-  shared_preferences: ^2.0.15
-  validatorless: ^1.2.1
-  flutter_typeahead: ^4.0.0
 
-  sqflite: ^2.0.3
-  synchronized: ^3.0.0+2
-  path: ^1.8.1
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  provider: ^6.0.5
+  flutter_modular: ^6.1.0+1
+  google_fonts: ^5.1.0
+  validatorless: ^1.2.3
+  flutter_screenutil: ^5.9.0
+  flutter_svg: ^2.0.7
+  flutter_native_splash: ^2.3.2
+  flutter_launcher_icons: ^0.13.1
+  device_info_plus: ^9.0.3
   faker: ^2.1.0
+  intl: ^0.18.1
+  json_serializable: ^6.7.1
+  build_runner: ^2.4.6
+  url_launcher: ^6.1.14
+  local_session_timeout: ^2.3.0
+
+flutter_native_splash:
+  color: "#1E3870"
+  image: "assets/images/logo.png"
+  android: true
+  ios: true
+  fullscreen: true
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/icon_main.png"
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  mobx_codegen: ^2.0.7
-  build_runner: ^2.2.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.1
+  flutter_lints: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -77,10 +86,10 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  assets:
-    - assets/images/
-    - .env    
-  
+  # assets:
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
@@ -106,3 +115,13 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  assets:
+    - assets/
+    - assets/images/
+    - assets/images/2.0x/
+    - assets/images/3.0x/
+    - assets/images/readme/
+    - lib/widgets/card_operacoes/
+    - assets/img/
+    - assets/icons/
+
