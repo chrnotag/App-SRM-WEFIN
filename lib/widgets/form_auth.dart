@@ -5,7 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/constants/datas/usuarios_data.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
-import 'package:modular_study/core/utils/get_imei.dart';
+import 'package:modular_study/core/utils/get_device_infos.dart';
 import 'package:modular_study/models/user_model.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_textfield.dart';

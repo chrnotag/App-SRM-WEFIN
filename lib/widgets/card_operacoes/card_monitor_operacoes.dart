@@ -1,14 +1,14 @@
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
+import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/models/operacoes_model/model_operacao.dart';
 
 part 'component_card_operacoes.dart';
-
 part 'expansible_card.dart';
-
 part 'expansible_info_card.dart';
 
 class CardMonitorOperacoes extends StatefulWidget {
@@ -115,7 +115,6 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                         ),
                       ),
                       Container(
-                        //ESSE CONTAINER AQUI!!!!
                         width: 30,
                         decoration: const BoxDecoration(
                             color: AppColors.laranja,

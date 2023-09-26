@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
+import 'package:modular_study/core/constants/route_labels.dart';
 
 import '../generated/assets.dart';
 
@@ -8,14 +10,13 @@ class SelecaoEmpresa extends StatelessWidget {
   final String nomeEmpresa;
   final String label;
   final bool changeble;
-  final VoidCallback? onTap;
 
-  const SelecaoEmpresa(
-      {super.key,
-      required this.nomeEmpresa,
-      this.label = '',
-      this.changeble = true,
-      this.onTap});
+  const SelecaoEmpresa({
+    super.key,
+    required this.nomeEmpresa,
+    this.label = '',
+    this.changeble = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,10 @@ class SelecaoEmpresa extends StatelessWidget {
                     Border.all(color: Colors.white, width: 0.5, strokeAlign: 1),
                 borderRadius: BorderRadius.circular(30)),
             child: InkWell(
-              onTap: onTap,
+              onTap: changeble
+                  ? () =>
+                      Modular.to.navigate(AppRoutes.listaSelecaoEmpresasRoute)
+                  : () {},
               borderRadius: BorderRadius.circular(30),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
