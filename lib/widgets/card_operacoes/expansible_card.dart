@@ -56,7 +56,10 @@ class _FooterExpansibleState extends State<_FooterExpansible> {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Modular.to
+                              .pushNamed(AppRoutes.assinaturaDigitalRoute);
+                        },
                         style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.symmetric(horizontal: 4)),
                         child: Text(

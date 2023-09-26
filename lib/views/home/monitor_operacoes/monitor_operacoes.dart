@@ -26,7 +26,6 @@ class MonitorOperacoes extends StatelessWidget {
                 nomeEmpresa: authProvider.empresaSelecionada!.nome,
                 changeble: true,
                 label: 'Monitor de Operações',
-                onTap: () => Modular.to.pop(),
               ),
             ),
           ),
