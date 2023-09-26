@@ -81,7 +81,14 @@ class _AssinaturaDigitalState extends State<AssinaturaDigital>
                       operacaoModel: operacoes[index],
                     ),
                   ),
-                  Text("teste")
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: operacoes.length,
+                    itemBuilder: (context, index) => CardMonitorOperacoes(
+                      showMoreInfo: true,
+                      operacaoModel: operacoes[index],
+                    ),
+                  ),
                 ],
               ),
             ),
