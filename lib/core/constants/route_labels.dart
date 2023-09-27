@@ -23,6 +23,8 @@ class AppRoutes {
 
   static get assinaturaDigitalHomeRoute => '/assinatura';
 
+  static get menuAppHomeRoute => '/menu_app';
+
   //Escopo para troca de telas usando o Modular.to.navigate HOME
   static get listaSelecaoEmpresasRoute =>
       '$homeRoute$listaSelecaoEmpresasHomeRoute';
@@ -33,4 +35,6 @@ class AppRoutes {
 
   static get monitorOperacoesRoute => '$homeRoute$monitorOperacoesHomeRoute';
   static get assinaturaDigitalRoute => '$homeRoute$assinaturaDigitalHomeRoute';
+
+  static get menuAppRoute => '$homeRoute$menuAppHomeRoute';
 }
