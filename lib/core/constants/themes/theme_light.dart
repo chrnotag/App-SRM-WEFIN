@@ -53,6 +53,7 @@ class ThemeLight {
         ),
         labelSmall: GoogleFonts.montserrat(
             fontSize: AppSizes.fontSizeVerySmall, fontWeight: FontWeight.w300),
+        bodyLarge: GoogleFonts.montserrat(fontSize: AppSizes.fontSizeLarge),
         bodyMedium: GoogleFonts.montserrat(fontSize: AppSizes.fontSizeMedium),
         displayMedium: GoogleFonts.montserrat(fontSize: AppSizes.fontSizeLarge),
         displayLarge:
