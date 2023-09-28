@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
+import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
 import 'package:modular_study/generated/assets.dart';
 import 'package:modular_study/widgets/appbar_logo_perfil.dart';
@@ -19,23 +21,45 @@ class Menu extends StatelessWidget {
       appBar: PreferredSize(
           preferredSize: AppBar().preferredSize, child: const AppBarLogo()),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 6.0),
+        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
         child: Column(
           children: [
-            const Text('Meu Perfil'),
-            const Text('Visualize seus dados e tire suas dúvidas'),
+            Text('Meu Perfil',
+                style: context.textTheme.bodyMedium!
+                    .copyWith(color: AppColors.branco)),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 15.0),
+              child: Text('Visualize seus dados e tire suas dúvidas',
+                  style: context.textTheme.bodySmall!.copyWith(
+                      color: AppColors.branco, fontWeight: FontWeight.w200)),
+            ),
             Expanded(
               child: Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8)),
                 child: Column(
                   children: [
                     Flexible(
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SvgPicture.asset(
-                            Assets.empresaIcon,
-                            width: 50,
+                          Padding(
+                            padding: const EdgeInsets.all(30.0),
+                            child: SvgPicture.asset(
+                              Assets.empresaIcon,
+                              width: 70,
+                              color: AppColors.botaoEnvio,
+                            ),
                           ),
-                          Text(authProvider.empresaSelecionada!.nome),
+                          Text(
+                              authProvider.empresaSelecionada?.nome ??
+                                  'Empresa não selecionada',
+                              style: context.textTheme.bodyLarge!.copyWith(
+                                color: AppColors.globalBackground,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18,
+                                letterSpacing: 1.5,
+                              )),
                         ],
                       ),
                     ),
@@ -53,35 +77,92 @@ class Menu extends StatelessWidget {
                             builder: (context) => AlertDialog(
                               title: Column(
                                 children: [
-                                  SvgPicture.asset(
-                                    Assets.iconsIcAlerta,
-                                    width: 50,
+                                  const Icon(
+                                    LineIcons.exclamationCircle,
+                                    color: AppColors.botaoEnvio,
+                                    size: 80,
                                   ),
-                                  const Text('Atenção!'),
-                                  const Text(
-                                      'Deseja realmente sair do aplicativo?'),
+                                  Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Text('Atenção',
+                                        style: context.textTheme.bodyLarge!
+                                            .copyWith(
+                                          color: AppColors.globalBackground,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 20,
+                                          letterSpacing: 1.5,
+                                        )),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Text('Deseja encerrar o aplicativo?',
+                                        style: context.textTheme.labelSmall!
+                                            .copyWith(
+                                                color: AppColors.labelText)),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12.0),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: ElevatedButton(
+                                              onPressed: () {
+                                                authProvider.clearDataUser();
+                                                Modular.to.navigate(
+                                                    Modular.initialRoute);
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor:
+                                                    AppColors.botaoEnvio,
+                                              ),
+                                              child: const Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 8.0),
+                                                child: Padding(
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child: Text(
+                                                    'SAIR',
+                                                  ),
+                                                ),
+                                              )),
+                                        )
+                                      ],
+                                    ),
+                                  ),
                                   Row(
                                     children: [
-                                      Flexible(
+                                      Expanded(
                                         child: ElevatedButton(
-                                            onPressed: () {},
-                                            child: const Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 8.0),
-                                              child: Text('Sair'),
-                                            )),
-                                      )
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Flexible(
-                                        child: ElevatedButton(
-                                            onPressed: () {},
-                                            child: const Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 8.0),
-                                              child: Text('Cancelar'),
+                                            onPressed: () {
+                                              Modular.to.pop();
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                shadowColor: Colors.transparent,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4),
+                                                    side: const BorderSide(
+                                                        color: AppColors
+                                                            .botaoEnvio,
+                                                        width: 1))),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 8.0),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Text('CANCELAR',
+                                                    style: context
+                                                        .textTheme.labelSmall!
+                                                        .copyWith(
+                                                            color: AppColors
+                                                                .botaoEnvio)),
+                                              ),
                                             )),
                                       )
                                     ],
@@ -90,7 +171,8 @@ class Menu extends StatelessWidget {
                               ),
                             ),
                           );
-                        })
+                        }),
+                    SizedBox(height: 6)
                   ],
                 ),
               ),

@@ -23,9 +23,13 @@ class _MenuItemState extends State<_MenuItem> {
             padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 6.0),
             child: Row(
               children: [
-                Icon(widget.icon),
-                Text(widget.title),
-                const Icon(Icons.arrow_forward_ios)
+                Padding(
+                  padding: const EdgeInsets.only(right:5.0),
+                  child: Icon(widget.icon,color: AppColors.botaoEnvio),
+                ),
+                Text(widget.title,style:context.textTheme.bodyMedium!.copyWith(color: AppColors.globalBackground)),
+                Expanded(child: Container()),
+                const Icon(Icons.arrow_forward_ios, color: AppColors.globalBackground,size: AppSizes.paddingMedium)
               ],
             ),
           ),

@@ -7,7 +7,7 @@ class Assets {
   static const String iconsFavicon = 'assets/icons/favicon.png';
   static const String iconsIcAjuda = 'assets/icons/ic_ajuda.svg';
   static const String imagesIcAjuda = 'assets/images/ic_ajuda.png';
-  static const String iconsIcAlerta = 'assets/icons/ic_alerta.svg';
+  static const String iconsIcAlerta = 'assets/icons/ic_alerta.png';
   static const String iconsIcAnalise = 'assets/icons/ic_analise.svg';
   static const String iconsIcArquivo = 'assets/icons/ic_arquivo.svg';
   static const String iconsIcAssinatura = 'assets/icons/ic_assinatura.svg';
