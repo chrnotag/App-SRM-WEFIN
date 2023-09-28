@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/generated/assets.dart';
 
 class AppBarLogo extends StatelessWidget {
@@ -17,7 +19,7 @@ class AppBarLogo extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
           child: FloatingActionButton.small(
-            onPressed: () {},
+            onPressed: () =>  Modular.to.pushNamed(AppRoutes.menuAppRoute),
             backgroundColor: Colors.transparent,
             elevation: 0,
             shape: RoundedRectangleBorder(
