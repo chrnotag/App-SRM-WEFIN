@@ -15,16 +15,16 @@ class MonitorOperacoes extends StatelessWidget {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     final List<OperacaoModel> listOperacoes = OperacoesData.listaOperacoes;
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: AppBar().preferredSize,
+        child: AppBarLogo(),
+      ),
       body: Column(
         children: [
-          const AppBarLogo(),
-          Padding(
-            padding: EdgeInsets.only(top: 16),
-            child: SelecaoEmpresa(
-              nomeEmpresa: authProvider.empresaSelecionada!.nome,
-              changeble: true,
-              label: 'Monitor de Operações',
-            ),
+          SelecaoEmpresa(
+            nomeEmpresa: authProvider.empresaSelecionada!.nome,
+            changeble: true,
+            tituloPagina: 'Monitor de Operações',
           ),
           Expanded(
             child: Padding(
@@ -33,8 +33,7 @@ class MonitorOperacoes extends StatelessWidget {
                 itemCount: listOperacoes.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) => CardMonitorOperacoes(
-                  operacaoModel: listOperacoes[index],
-                ),
+                    operacaoModel: listOperacoes[index], showMoreInfo: false),
               ),
             ),
           ),
