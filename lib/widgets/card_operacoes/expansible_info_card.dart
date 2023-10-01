@@ -27,97 +27,93 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.4,
-                    child: Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Papéis',
-                                style: context.textTheme.bodyMedium!.copyWith(
-                                    color: AppColors.globalBackground),
-                              ),
-                              if (widget.operacao.papeis!.isNotEmpty)
-                                for (var papel in widget.operacao.papeis!)
-                                  Text(
-                                    papel.replaceAll(RegExp(r'[\[\],]'), ''),
-                                    style: context.textTheme.bodySmall,
-                                  )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Procurador',
-                                style: context.textTheme.bodyMedium!.copyWith(
-                                    color: AppColors.globalBackground),
-                              ),
-                              Text(
-                                widget.operacao.procurador!
-                                    .replaceAll(RegExp(r'[\[\]]'), ''),
-                                style: context.textTheme.bodySmall,
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Situação',
-                                style: context.textTheme.bodyMedium!.copyWith(
-                                    color: AppColors.globalBackground),
-                              ),
-                              Text(
-                                widget.operacao.situacao!
-                                    .replaceAll(RegExp(r'[\[\]]'), ''),
-                                style: context.textTheme.bodySmall!.copyWith(
-                                    color:
-                                        widget.operacao.situacao! == "Aprovada"
-                                            ? AppColors.success
-                                            : widget.operacao.situacao! ==
-                                                    "Pendente"
-                                                ? AppColors.laranja
-                                                : AppColors.error),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Assinantes',
-                                style: context.textTheme.bodyMedium!.copyWith(
-                                    color: AppColors.globalBackground),
-                              ),
-                              if (widget.operacao.assinantes!.isNotEmpty)
-                                for (var papel in widget.operacao.assinantes!)
-                                  Text(
-                                    papel.replaceAll(RegExp(r'[\[\]]'), ''),
-                                    style: context.textTheme.bodySmall,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  )
-                            ],
-                          ),
-                        ],
-                      ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Papéis',
+                              style: context.textTheme.bodyMedium!
+                                  .copyWith(color: AppColors.globalBackground),
+                            ),
+                            if (widget.operacao.papeis!.isNotEmpty)
+                              for (var papel in widget.operacao.papeis!)
+                                Text(
+                                  papel.replaceAll(RegExp(r'[\[\],]'), ''),
+                                  style: context.textTheme.bodySmall,
+                                )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Procurador',
+                              style: context.textTheme.bodyMedium!
+                                  .copyWith(color: AppColors.globalBackground),
+                            ),
+                            Text(
+                              widget.operacao.procurador!
+                                  .replaceAll(RegExp(r'[\[\]]'), ''),
+                              style: context.textTheme.bodySmall,
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Situação',
+                              style: context.textTheme.bodyMedium!
+                                  .copyWith(color: AppColors.globalBackground),
+                            ),
+                            Text(
+                              widget.operacao.situacao!
+                                  .replaceAll(RegExp(r'[\[\]]'), ''),
+                              style: context.textTheme.bodySmall!.copyWith(
+                                  color: widget.operacao.situacao! == "Aprovada"
+                                      ? AppColors.success
+                                      : widget.operacao.situacao! == "Pendente"
+                                          ? AppColors.laranja
+                                          : AppColors.error),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Assinantes',
+                              style: context.textTheme.bodyMedium!
+                                  .copyWith(color: AppColors.globalBackground),
+                            ),
+                            if (widget.operacao.assinantes!.isNotEmpty)
+                              for (var papel in widget.operacao.assinantes!)
+                                Text(
+                                  papel.replaceAll(RegExp(r'[\[\]]'), ''),
+                                  style: context.textTheme.bodySmall,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                )
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(
