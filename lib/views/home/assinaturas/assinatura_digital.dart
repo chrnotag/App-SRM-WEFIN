@@ -35,7 +35,7 @@ class _AssinaturaDigitalState extends State<AssinaturaDigital>
   @override
   Widget build(BuildContext context) {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
-    final List<OperacaoModel> operacoes = OperacoesData.listaOperacoes;
+    final List<List<OperacaoModel>> operacoes = OperacoesData.listaOperacoes;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,
