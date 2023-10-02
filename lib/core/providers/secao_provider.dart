@@ -2,47 +2,68 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:local_session_timeout/local_session_timeout.dart';
+import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
+import 'package:modular_study/core/constants/themes/theme_configs.dart';
 
 import '../../main.dart';
 
 class SessionProvider with ChangeNotifier {
-  final sessionConfig = SessionConfig(
-      invalidateSessionForAppLostFocus: const Duration(seconds: 30),
-      invalidateSessionForUserInactivity: const Duration(seconds: 30));
-
-  final sessionStateStream = StreamController<SessionState>();
-
   bool _isShowingDialog = false;
 
+  Timer? _timer;
+  int _timeout = 10;
+
   SessionProvider() {
-    sessionConfig.stream.listen((SessionTimeoutState timeoutEvent) {
-      if (timeoutEvent == SessionTimeoutState.userInactivityTimeout) {
-        showMyAlertDialog();
-      } else if (timeoutEvent == SessionTimeoutState.appFocusTimeout) {
-        // handle app lost focus timeout
-        Modular.to.pushNamed(Modular.initialRoute);
-      }
-    });
+    startListening();
   }
 
   void startListening() {
-    sessionStateStream.add(SessionState.startListening);
+    if (_timer?.isActive ?? false) {
+      return;
+    }
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      _timeout -= 1;
+      if (_timeout == 0) {
+        timer.cancel();
+        mostrarAlerta();
+      }
+    });
+    notifyListeners();
   }
 
   void stopListening() {
-    sessionStateStream.add(SessionState.stopListening);
+    if (!(_timer?.isActive ?? false)) {
+      return;
+    }
+    _timer?.cancel();
+    notifyListeners();
   }
 
-  void showMyAlertDialog() {
+  void resetListening() {
+    if (_timer!.isActive) {
+      _timer!.cancel();
+    }
+    _timeout = 10;
+    startListening();
+  }
+
+  void mostrarAlerta() {
     if (myNavigatorKey.currentState != null && _isShowingDialog == false) {
       _isShowingDialog = true;
+      stopListening();
       showDialog(
         barrierDismissible: false,
         context: myNavigatorKey.currentContext!,
         builder: (context) => AlertDialog(
-          title: Text('Sessão expirada!'),
-          content: Text('Usuario desconectado por inatividade'),
+          title: Text(
+            'Atenção!',
+            style:
+                context.textTheme.bodyLarge!.copyWith(color: AppColors.error),
+          ),
+          content: Text(
+            'Nenhuma ação foi realizada nos últimos 60 segundos. Você será direcionado para realizar o login novamente.',
+            style: context.textTheme.bodyMedium,
+          ),
           actions: [
             Row(
               children: [
@@ -51,7 +72,9 @@ class SessionProvider with ChangeNotifier {
                     child: Text('OK'),
                     onPressed: () {
                       _isShowingDialog = false;
+                      stopListening();
                       Modular.to.pushNamed(Modular.initialRoute);
+                      Modular.to.pop();
                     },
                   ),
                 ),
