@@ -1,5 +1,8 @@
+import 'dart:js';
+
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
+import 'package:modular_study/views/auth/menu_user/menu.dart';
 import 'package:modular_study/views/home/ajuda/ajuda_screen.dart';
 import 'package:modular_study/views/home/assinaturas/assinatura_digital.dart';
 import 'package:modular_study/views/home/monitor_operacoes/monitor_operacoes.dart';
@@ -25,6 +28,10 @@ class HomeModule extends Module {
     r.child(
       AppRoutes.assinaturaDigitalHomeRoute,
       child: (context) => const AssinaturaDigital(),
+    );
+    r.child(
+      AppRoutes.menuAppHomeRoute,
+      child: (context) => const Menu(),
     );
   }
 }

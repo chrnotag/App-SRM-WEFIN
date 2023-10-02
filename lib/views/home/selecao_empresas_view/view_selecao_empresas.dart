@@ -60,7 +60,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                 SelecaoEmpresa(
                   nomeEmpresa: _authProvider.empresaSelecionada?.nome ??
                       'Não existem empresas no grupo',
-                  label: 'Empresas do grupo ecônomico',
+                  tituloPagina: 'Empresas do grupo ecônomico',
                   changeble: false,
                 ),
                 Padding(

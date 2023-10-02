@@ -46,13 +46,10 @@ class _AssinaturaDigitalState extends State<AssinaturaDigital>
         padding: EdgeInsets.all(16),
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: SelecaoEmpresa(
-                nomeEmpresa: authProvider.empresaSelecionada!.nome,
-                changeble: true,
-                label: 'Assinatura Digital',
-              ),
+            SelecaoEmpresa(
+              nomeEmpresa: authProvider.empresaSelecionada!.nome,
+              changeble: true,
+              tituloPagina: 'Assinatura Digital',
             ),
             Card(
               child: TabBar(controller: _tabController, tabs: [
