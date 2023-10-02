@@ -8,7 +8,6 @@ import 'package:flutter/foundation.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/themes/theme_light.dart';
 import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
@@ -24,27 +23,13 @@ class AppWidget extends StatefulWidget {
 
 class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
   final SessionProvider sessionProvider = Modular.get<SessionProvider>();
-  // bool _isKeyboardOpen = false;
+
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.detached) {
       Provider.of<AuthProvider>(context).clearDataUser();
     }
   }
-
-  // @override
-  // void didChangeMetrics() {
-  //   super.didChangeMetrics();
-  //   final newValue = MediaQuery.of(context).viewInsets.bottom != 0;
-  //   if (newValue != _isKeyboardOpen) {
-  //     _isKeyboardOpen = newValue;
-  //     if (_isKeyboardOpen) {
-  //       sessionProvider.stopListening();
-  //     } else {
-  //       sessionProvider.startListening();
-  //     }
-  //   }
-  // }
 
   @override
   void initState() {
@@ -60,7 +45,6 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-
     ///Abaixo estamos verificando a plataforma em que o app está rodando
     ///Deixarei os comentários in-line para que possa ser de fácil entendimento
     return kIsWeb
