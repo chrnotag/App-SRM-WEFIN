@@ -14,7 +14,7 @@
     </queries>
 
     <application
-        android:label="SMR Asset"
+        android:label="SRM Asset"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
