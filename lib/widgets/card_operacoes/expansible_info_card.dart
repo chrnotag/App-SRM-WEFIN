@@ -83,7 +83,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Situação',
+                                'Status',
                                 style: context.textTheme.bodyMedium!.copyWith(
                                     color: AppColors.globalBackground),
                               ),

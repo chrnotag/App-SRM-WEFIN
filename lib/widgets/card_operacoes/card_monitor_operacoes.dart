@@ -63,7 +63,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                     height: 10,
                                   ),
                                   _ComponentCardOperacoes(
-                                      title: 'Situação',
+                                      title: 'Status',
                                       label: 'Aprovada',
                                       textStyle: context.textTheme.bodySmall!
                                           .copyWith(color: AppColors.laranja))
