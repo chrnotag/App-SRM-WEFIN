@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -11,7 +12,7 @@ class SessionProvider with ChangeNotifier {
   bool _isShowingDialog = false;
 
   Timer? _timer;
-  int _timeout = 10;
+  int _timeout = 60;
 
   SessionProvider() {
     startListening();
@@ -23,6 +24,7 @@ class SessionProvider with ChangeNotifier {
     }
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       _timeout -= 1;
+      log('TEMPO RESTANTE: $_timeout\\seg');
       if (_timeout == 0) {
         timer.cancel();
         mostrarAlerta();
@@ -43,7 +45,7 @@ class SessionProvider with ChangeNotifier {
     if (_timer!.isActive) {
       _timer!.cancel();
     }
-    _timeout = 10;
+    _timeout = 60;
     startListening();
   }
 

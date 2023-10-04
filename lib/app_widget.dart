@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io'
     show
         Platform; //usado para verificar a plataforma atual (android, ios, windows ou mac)
@@ -29,7 +30,16 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
       sessionProvider.stopListening();
     }
     if (state == AppLifecycleState.paused) {
-      sessionProvider.resetListening();
+      if (Modular.to.path != Modular.initialRoute &&
+          Modular.to.path != AppRoutes.forgetPassAuthRoute) {
+        sessionProvider.resetListening();
+      }
+    }
+    if (state == AppLifecycleState.resumed) {
+      if (Modular.to.path != Modular.initialRoute &&
+          Modular.to.path != AppRoutes.forgetPassAuthRoute) {
+        sessionProvider.resetListening();
+      }
     }
   }
 
@@ -47,7 +57,7 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
       } else {
         if (Modular.to.path != Modular.initialRoute &&
             Modular.to.path != AppRoutes.forgetPassAuthRoute) {
-          sessionProvider.startListening();
+          sessionProvider.resetListening();
         }
       }
     }
@@ -70,52 +80,69 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
     ///Abaixo estamos verificando a plataforma em que o app está rodando
     ///Deixarei os comentários in-line para que possa ser de fácil entendimento
     return Listener(
-      onPointerDown: (_) {
+      onPointerDown: (event) {
+        log('tap');
         if (Modular.to.path != Modular.initialRoute &&
             Modular.to.path != AppRoutes.forgetPassAuthRoute) {
           sessionProvider.resetListening();
         }
       },
-      child: kIsWeb
-          ?
-          //kIsWeb é usado para verificar se estamos rodando na web e retorna um bool
-          ScreenUtilInit(
-              designSize: Size(
-                context.width,
-                context.height,
-              ),
-              builder: (context, child) {
-                return MaterialApp.router(
-                  routerConfig: Modular.routerConfig,
-                  theme: ThemeLight.theme_light,
-                  debugShowCheckedModeBanner: false,
-                );
-              })
-          : Platform.isIOS //Verificamos se estamos em um iphone.
-              //caso seja um iphone irá retornar o CupertinoApp para ter o padrão de IOS
-              ? ScreenUtilInit(
-                  designSize: Size(
-                    context.width,
-                    context.height,
-                  ),
-                  builder: (context, child) {
-                    return CupertinoApp.router(
-                      routerConfig: Modular.routerConfig,
-                      theme: ThemeLight.cupertinoThemeLight,
-                    );
-                  })
-              //Caso seja falso, retornaremos o padrão MaterialApp que é para android
-              : ScreenUtilInit(
-                  designSize: Size(
-                    context.width,
-                    context.height,
-                  ),
-                  builder: (context, child) {
-                    return MaterialApp.router(
-                      routerConfig: Modular.routerConfig,
-                      theme: ThemeLight.theme_light,
-                    );
-                  }),
+      child: GestureDetector(
+        onLongPress: () {
+          log('long press down');
+          if (Modular.to.path != Modular.initialRoute &&
+              Modular.to.path != AppRoutes.forgetPassAuthRoute) {
+            sessionProvider.stopListening();
+          }
+        },
+        onLongPressUp: () {
+          log('long press up');
+          if (Modular.to.path != Modular.initialRoute &&
+              Modular.to.path != AppRoutes.forgetPassAuthRoute) {
+            sessionProvider.resetListening();
+          }
+        },
+        child: kIsWeb
+            ?
+            //kIsWeb é usado para verificar se estamos rodando na web e retorna um bool
+            ScreenUtilInit(
+                designSize: Size(
+                  context.width,
+                  context.height,
+                ),
+                builder: (context, child) {
+                  return MaterialApp.router(
+                    routerConfig: Modular.routerConfig,
+                    theme: ThemeLight.theme_light,
+                    debugShowCheckedModeBanner: false,
+                  );
+                })
+            : Platform.isIOS //Verificamos se estamos em um iphone.
+                //caso seja um iphone irá retornar o CupertinoApp para ter o padrão de IOS
+                ? ScreenUtilInit(
+                    designSize: Size(
+                      context.width,
+                      context.height,
+                    ),
+                    builder: (context, child) {
+                      return CupertinoApp.router(
+                        routerConfig: Modular.routerConfig,
+                        theme: ThemeLight.cupertinoThemeLight,
+                      );
+                    })
+                //Caso seja falso, retornaremos o padrão MaterialApp que é para android
+                : ScreenUtilInit(
+                    designSize: Size(
+                      context.width,
+                      context.height,
+                    ),
+                    builder: (context, child) {
+                      return MaterialApp.router(
+                        routerConfig: Modular.routerConfig,
+                        theme: ThemeLight.theme_light,
+                      );
+                    }),
+      ),
     );
   }
 }
