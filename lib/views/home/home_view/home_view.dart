@@ -28,8 +28,48 @@ class _HomeViewState extends State<HomeView> {
             SelecaoEmpresa(
                 nomeEmpresa: authProvider.empresaSelecionada!.nome,
                 changeble: true),
-            
-                
+            // Expanded(child: Container()),
+            GridView.count(
+              // Definindo apenas uma "coluna" para criar um layout de 1 linha
+              crossAxisCount: 1,
+              children: <Widget>[
+                // Espaço vazio
+                Container(color: Colors.transparent),
+                Container(color: Colors.red, height: 100),
+                Container(color: Colors.green, height: 100),
+                Container(color: Colors.blue, height: 100),
+              ],
+
+            ),
+            // Row(
+            //   children: [
+            //     Container(
+            //       height: 50,
+            //       child: ListView(
+            //         scrollDirection: Axis.horizontal,
+            //         shrinkWrap: true,
+            //         children: [
+            //           Container(
+            //             width: 50,
+            //             height: 50,
+            //             color: Colors.red,
+            //           ),
+            //           Container(
+            //             width: 50,
+            //             height: 50,
+            //             color: Colors.red,
+            //           ),
+            //           Container(
+            //             width: 50,
+            //             height: 50,
+            //             color: Colors.red,
+            //           ),
+
+            //         ],
+            //       ),
+            //     ),
+            //   ],
+            // )
           ]),
         ),
       ),
