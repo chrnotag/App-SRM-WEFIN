@@ -12,15 +12,15 @@ class AssinaturaImpl {
   Future<ApiResponse<dynamic>> assinaturas() async {
     final AssinaturaProvider assinaturaProvider =
         Modular.get<AssinaturaProvider>();
-    const url = EndPoints.assinatura;
+    final url = Uri.parse(EndPoints.assinatura).replace(queryParameters: {
+      'identificador': identificador,
+    });
     const headers = {'Content-Type': 'application/json; charset=utf-8'};
-    final body = json.encode(identificador);
-
     try {
-      final response =
-          await http.post(Uri.parse(url), headers: headers, body: body);
-      if (response.statusCode == 200) {
+      final response = await http.post(url);
+      if (response.statusCode == 501) {
         log(response.statusCode.toString());
+        log('teste ${response.bodyBytes}');
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = AssinaturasModel.fromJson(responseBody);
         log(data.toString());
