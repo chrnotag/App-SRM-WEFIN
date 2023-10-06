@@ -104,7 +104,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                             provider.setEmpresaSelecionada =
                                 _searchResults![index];
                             Modular.to
-                                .pushNamed(AppRoutes.monitorOperacoesRoute);
+                                .pushNamed(AppRoutes.homeAppRoute);
                           },
                           child: ListTile(
                             title: Text(_searchResults![index].nome),
