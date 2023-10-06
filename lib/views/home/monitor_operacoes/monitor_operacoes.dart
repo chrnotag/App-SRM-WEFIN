@@ -13,7 +13,8 @@ class MonitorOperacoes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
-    final List<OperacaoModel> listOperacoes = OperacoesData.listaOperacoes;
+    final List<List<OperacaoModel>> listOperacoes =
+        OperacoesData.listaOperacoes;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,

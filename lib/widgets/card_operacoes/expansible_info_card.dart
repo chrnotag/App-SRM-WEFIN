@@ -2,7 +2,7 @@ part of 'card_monitor_operacoes.dart';
 
 class _ExpansibleInfoCard extends StatefulWidget {
   final bool isVisible;
-  final OperacaoModel operacao;
+  final List<OperacaoModel> operacao;
 
   const _ExpansibleInfoCard(
       {super.key, required this.isVisible, required this.operacao});
@@ -12,24 +12,30 @@ class _ExpansibleInfoCard extends StatefulWidget {
 }
 
 class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
+  final PageController pageController = PageController();
+  final ScrollController scrollController = ScrollController();
+  int indicie = 0;
+
   @override
   Widget build(BuildContext context) {
-    return Builder(builder: (context) {
-      return Visibility(
-        visible: widget.isVisible,
-        child: IntrinsicHeight(
-          child: Column(
-            children: [
-              const Divider(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.4,
-                    child: Expanded(
+    var operacoes = widget.operacao;
+    final CarouselController carouselController = CarouselController();
+    return Visibility(
+      visible: widget.isVisible,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Divider(height: 1, color: AppColors.labelText),
+          FlutterCarousel(
+              items: List.generate(
+                operacoes.length,
+                (index) => Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.4,
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Column(
@@ -41,8 +47,8 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                                 style: context.textTheme.bodyMedium!.copyWith(
                                     color: AppColors.globalBackground),
                               ),
-                              if (widget.operacao.papeis!.isNotEmpty)
-                                for (var papel in widget.operacao.papeis!)
+                              if (operacoes.isNotEmpty)
+                                for (var papel in operacoes[indicie].papeis!)
                                   Text(
                                     papel.replaceAll(RegExp(r'[\[\],]'), ''),
                                     style: context.textTheme.bodySmall,
@@ -62,7 +68,8 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                                     color: AppColors.globalBackground),
                               ),
                               Text(
-                                widget.operacao.procurador!
+                                operacoes[indicie]
+                                    .procurador!
                                     .replaceAll(RegExp(r'[\[\]]'), ''),
                                 style: context.textTheme.bodySmall,
                               )
@@ -76,21 +83,22 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Situação',
+                                'Status',
                                 style: context.textTheme.bodyMedium!.copyWith(
                                     color: AppColors.globalBackground),
                               ),
                               Text(
-                                widget.operacao.situacao!
+                                operacoes[indicie]
+                                    .situacao!
                                     .replaceAll(RegExp(r'[\[\]]'), ''),
                                 style: context.textTheme.bodySmall!.copyWith(
-                                    color:
-                                        widget.operacao.situacao! == "Aprovada"
-                                            ? AppColors.success
-                                            : widget.operacao.situacao! ==
-                                                    "Pendente"
-                                                ? AppColors.laranja
-                                                : AppColors.error),
+                                    color: operacoes[indicie].situacao! ==
+                                            "Aprovada"
+                                        ? AppColors.success
+                                        : operacoes[indicie].situacao! ==
+                                                "Pendente"
+                                            ? AppColors.laranja
+                                            : AppColors.error),
                               )
                             ],
                           ),
@@ -106,8 +114,9 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                                 style: context.textTheme.bodyMedium!.copyWith(
                                     color: AppColors.globalBackground),
                               ),
-                              if (widget.operacao.assinantes!.isNotEmpty)
-                                for (var papel in widget.operacao.assinantes!)
+                              if (operacoes[indicie].assinantes!.isNotEmpty)
+                                for (var papel
+                                    in operacoes[indicie].assinantes!)
                                   Text(
                                     papel.replaceAll(RegExp(r'[\[\]]'), ''),
                                     style: context.textTheme.bodySmall,
@@ -119,8 +128,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                         ],
                       ),
                     ),
-                  ),
-                  SizedBox(
+                    SizedBox(
                       width: MediaQuery.of(context).size.width * 0.4,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -135,8 +143,9 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                                 style: context.textTheme.bodyMedium!.copyWith(
                                     color: AppColors.globalBackground),
                               ),
-                              if (widget.operacao.documentos!.isNotEmpty)
-                                for (var papel in widget.operacao.documentos!)
+                              if (operacoes[indicie].documentos!.isNotEmpty)
+                                for (var papel
+                                    in operacoes[indicie].documentos!)
                                   Text(
                                     papel.replaceAll(RegExp(r'[\[\],]'), ''),
                                     style: context.textTheme.bodySmall,
@@ -156,7 +165,8 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                                     color: AppColors.globalBackground),
                               ),
                               Text(
-                                widget.operacao.tipoAssinatura!
+                                operacoes[indicie]
+                                    .tipoAssinatura!
                                     .replaceAll(RegExp(r'[\[\]]'), ''),
                                 style: context.textTheme.bodySmall,
                               )
@@ -175,20 +185,31 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                                     color: AppColors.globalBackground),
                               ),
                               Text(
-                                widget.operacao.data!
+                                operacoes[indicie]
+                                    .data!
                                     .replaceAll(RegExp(r'[\[\]]'), ''),
                                 style: context.textTheme.bodySmall,
                               )
                             ],
                           ),
                         ],
-                      )),
-                ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ],
-          ),
-        ),
-      );
-    });
+              options: CarouselOptions(
+                  showIndicator: true,
+                  controller: carouselController,
+                  scrollDirection: Axis.horizontal,
+                  floatingIndicator: true,
+                  slideIndicator: const CircularSlideIndicator(
+                    currentIndicatorColor: AppColors.botaoEnvio,
+                    alignment: Alignment.center,
+                    indicatorBorderColor: AppColors.botaoEnvio,
+                  )))
+        ],
+      ),
+    );
   }
 }

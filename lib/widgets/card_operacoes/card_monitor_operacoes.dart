@@ -1,5 +1,6 @@
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
@@ -13,7 +14,7 @@ part 'expansible_info_card.dart';
 
 class CardMonitorOperacoes extends StatefulWidget {
   final bool showMoreInfo;
-  final OperacaoModel? operacaoModel;
+  final List<OperacaoModel>? operacaoModel;
 
   const CardMonitorOperacoes(
       {super.key, this.showMoreInfo = true, this.operacaoModel});
@@ -35,7 +36,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Flexible(
+          Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +63,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                     height: 10,
                                   ),
                                   _ComponentCardOperacoes(
-                                      title: 'Situação',
+                                      title: 'Status',
                                       label: 'Aprovada',
                                       textStyle: context.textTheme.bodySmall!
                                           .copyWith(color: AppColors.laranja))
@@ -117,10 +118,11 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                       Container(
                         width: 30,
                         decoration: const BoxDecoration(
-                            color: AppColors.laranja,
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(5),
-                            )),
+                          color: AppColors.laranja,
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(5),
+                          ),
+                        ),
                       ),
                     ],
                   ),

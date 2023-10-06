@@ -17,7 +17,6 @@ class ListaSelecaoEmpresas extends StatefulWidget {
 
 class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
   final AuthProvider authProvider = Modular.get<AuthProvider>();
-  final SessionProvider sessionProvider = Modular.get<SessionProvider>();
 
   final TextEditingController _searchController = TextEditingController();
   List<CedenteModel>? _searchResults;
@@ -26,8 +25,11 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
   void initState() {
     super.initState();
     _searchController.addListener(_onSearchChanged);
-    sessionProvider.startListening();
     _searchResults = authProvider.listaCedente;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final SessionProvider sessionProvider = Modular.get<SessionProvider>();
+      sessionProvider.startListening();
+    });
   }
 
   _onSearchChanged() {
@@ -47,7 +49,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
 
   @override
   Widget build(BuildContext context) {
-    final AuthProvider _authProvider = context.watch<AuthProvider>();
+    final AuthProvider provider = context.watch<AuthProvider>();
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: AppBar().preferredSize, child: AppBarLogo()),
@@ -58,7 +60,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
             child: Column(
               children: [
                 SelecaoEmpresa(
-                  nomeEmpresa: _authProvider.empresaSelecionada?.nome ??
+                  nomeEmpresa: provider.empresaSelecionada?.nome ??
                       'Não existem empresas no grupo',
                   tituloPagina: 'Empresas do grupo ecônomico',
                   changeble: false,
@@ -99,7 +101,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                         ),
                         child: InkWell(
                           onTap: () {
-                            _authProvider.setEmpresaSelecionada =
+                            provider.setEmpresaSelecionada =
                                 _searchResults![index];
                             Modular.to
                                 .pushNamed(AppRoutes.homeAppRoute);

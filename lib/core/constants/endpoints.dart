@@ -5,4 +5,5 @@ class EndPoints {
       'https://core-app-bff-homologacao.interno.srmasset.com/core-app-bff/v1';
 
   static const String login = '$baseURL/usuarios/login';
+  static const String assinatura = '$baseURL/assinaturas';
 }
