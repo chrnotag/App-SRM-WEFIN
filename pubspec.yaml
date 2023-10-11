@@ -51,6 +51,7 @@ dependencies:
   url_launcher: ^6.1.14
   line_icons: ^2.0.3
   flutter_carousel_widget: ^2.1.0
+  dio: ^5.3.3
 
 flutter_native_splash:
   color: "#1E3870"
