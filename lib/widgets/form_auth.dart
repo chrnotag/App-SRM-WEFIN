@@ -1,9 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/constants/datas/usuarios_data.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
+import 'package:modular_study/core/implementations_config/export_impl.dart';
 import 'package:modular_study/core/providers/assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
 import 'package:modular_study/core/utils/get_device_infos.dart';
@@ -28,6 +26,7 @@ class _AuthFormState extends State<AuthForm> {
   final _formKey = GlobalKey<FormState>();
   final _loginEC = TextEditingController();
   final _passwordEC = TextEditingController();
+  String? _mensagemErro;
 
   @override
   void dispose() {
@@ -45,11 +44,15 @@ class _AuthFormState extends State<AuthForm> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           WefinTextFormField(
+            onTap: () => setState(() {
+              _mensagemErro = null;
+            }),
             label: 'Digite seu email',
             controller: _loginEC,
             validator: Validatorless.multiple([
               Validatorless.email('Email inválido!'),
               Validatorless.required('Email Obrigatório'),
+              (value) => _mensagemErro
             ]),
           ),
           const SizedBox(height: 20),
@@ -64,6 +67,7 @@ class _AuthFormState extends State<AuthForm> {
               if (!widget.visible) Validatorless.cpf('CPF Inválido!'),
               Validatorless.min(
                   3, 'Senha com no mínimo 3 e máximo 10 caracteres.'),
+              (value) => _mensagemErro
             ]),
           ),
           const SizedBox(height: 20),
@@ -104,7 +108,15 @@ class _AuthFormState extends State<AuthForm> {
                   authProvider.setLoading();
                   log(authProvider.isLoading.toString());
                   if (response.error != null) {
-                    log(response.error!.mensagem);
+                    final error = response.error as ExceptionModel;
+                    log(error.mensagem ?? 'Sem erro');
+                    setState(() {
+                      if (error.codigo == '500') {
+                        _mensagemErro = error.mensagem;
+                      } else {
+                        _mensagemErro = "Usuário ou senha Incorretos";
+                      }
+                    });
                   } else {
                     Modular.to.navigate(AppRoutes.listaSelecaoEmpresasRoute);
                   }

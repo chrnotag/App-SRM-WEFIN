@@ -10,6 +10,7 @@ class WefinTextFormField extends StatefulWidget {
   final String label;
   final bool obscureText;
   final int? maxLength;
+  final VoidCallback? onTap;
 
   //Construtor configurado para receber os parametros
   const WefinTextFormField(
@@ -18,7 +19,8 @@ class WefinTextFormField extends StatefulWidget {
       this.obscureText = false,
       this.controller,
       this.validator,
-      this.maxLength})
+      this.maxLength,
+      this.onTap})
       : super(key: key); //retorna junto ao construtor a superclasse
 
   @override
@@ -39,6 +41,7 @@ class _WefinTextFormFieldState extends State<WefinTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onTap: widget.onTap,
       controller: widget.controller,
       validator: widget.validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
