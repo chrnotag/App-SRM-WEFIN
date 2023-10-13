@@ -51,6 +51,8 @@ class AuthProvider extends ChangeNotifier {
 
   void clearDataUser() {
     _dataUser = null;
+    _empresaSelecionada = null;
+    _listaCedente = null;
     notifyListeners();
   }
 }
