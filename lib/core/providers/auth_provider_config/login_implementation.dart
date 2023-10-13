@@ -43,7 +43,7 @@ class LoginImpl {
     } catch (e) {
       log("Erro detectado $e");
       final data = ExceptionModel(
-          codigo: '404',
+          codigo: '500',
           dataHora: DateTime.now(),
           erros: ["Desculpe, algo deu errado em nosso servidor"],
           httpStatus: 'INTERNAL_SERVER_ERROR',

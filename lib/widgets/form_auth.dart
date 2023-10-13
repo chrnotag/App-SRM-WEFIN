@@ -111,7 +111,7 @@ class _AuthFormState extends State<AuthForm> {
                     final error = response.error as ExceptionModel;
                     log(error.mensagem ?? 'Sem erro');
                     setState(() {
-                      if (error.codigo == '404') {
+                      if (error.codigo == '500') {
                         _mensagemErro = error.mensagem;
                       } else {
                         _mensagemErro = "Usuário ou senha Incorretos";
