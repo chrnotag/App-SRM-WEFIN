@@ -45,7 +45,6 @@ class LoginImpl {
       final data = ExceptionModel(
           codigo: '500',
           dataHora: DateTime.now(),
-          erros: ["Desculpe, algo deu errado em nosso servidor"],
           httpStatus: 'INTERNAL_SERVER_ERROR',
           mensagem: 'Desculpe, algo deu errado em nosso servidor.');
       return ErrorResponse(data);
