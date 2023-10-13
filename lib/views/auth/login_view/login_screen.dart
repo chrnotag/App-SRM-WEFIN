@@ -19,9 +19,11 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       final sessionProvider = Modular.get<SessionProvider>();
       sessionProvider.stopListening();
+      final AuthProvider authProvider = Modular.get<AuthProvider>();
+      authProvider.clearDataUser();
     });
     super.initState();
   }

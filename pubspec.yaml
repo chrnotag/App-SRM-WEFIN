@@ -52,6 +52,7 @@ dependencies:
   line_icons: ^2.0.3
   flutter_carousel_widget: ^2.1.0
   dio: ^5.3.3
+  internet_connection_checker: ^1.0.0+1
 
 flutter_native_splash:
   color: "#1E3870"

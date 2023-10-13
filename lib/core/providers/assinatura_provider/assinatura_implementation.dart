@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
 
@@ -13,12 +12,10 @@ class AssinaturaImpl {
     final url = Uri.parse(EndPoints.assinatura).replace(queryParameters: {
       'identificador': identificador,
     });
-    final dio = Dio();
     try {
       //log(url.toString());
       final response = await http.post(url);
-      log('teste ${response}');
-      if (response.statusCode == 501 || response.statusCode == 200) {
+      if (response.statusCode == 200) {
         log(response.statusCode.toString());
         log('teste ${response.body}');
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
