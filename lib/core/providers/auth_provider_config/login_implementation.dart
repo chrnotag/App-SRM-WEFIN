@@ -45,12 +45,9 @@ class LoginImpl {
       final data = ExceptionModel(
           codigo: '404',
           dataHora: DateTime.now(),
-          erros: [
-            "Um problema inesperado ocorreu ao processar sua requisição.",
-            "Nosso time técnico já foi notificado e trabalhará para solucionar o problema o mais rápido possível."
-          ],
+          erros: ["Desculpe, algo deu errado em nosso servidor"],
           httpStatus: 'INTERNAL_SERVER_ERROR',
-          mensagem: 'Desculpe, ago deu errado em nosso servidor.');
+          mensagem: 'Desculpe, algo deu errado em nosso servidor.');
       return ErrorResponse(data);
     }
   }
