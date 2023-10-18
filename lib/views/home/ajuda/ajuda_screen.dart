@@ -99,6 +99,36 @@ class Ajuda extends StatelessWidget {
                       ],
                     ),
                   ),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Politica de Uso: ',
+                          style: context.textTheme.bodyMedium!.copyWith(
+                            color: Colors.white,
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'Click aqui para baixar',
+                          style: TextStyle(
+                            color: Colors.blue.shade800,
+                            decoration: TextDecoration.underline,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () async {
+                              final filePath =
+                                  'assets/Politica-de-privacidade.pdf'; // Substitua isso pelo caminho do seu arquivo
+                              final fileUrl = Uri.file(filePath);
+                              if (await canLaunchUrl(fileUrl)) {
+                                await launchUrl(fileUrl);
+                              } else {
+                                throw 'Could not launch $fileUrl';
+                              }
+                            },
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
