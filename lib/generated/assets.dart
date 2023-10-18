@@ -90,4 +90,5 @@ class Assets {
   static const String readmeReadmeImagem2 =
       'assets/images/readme/readme-imagem2.jpg';
   static const String empresaIcon = 'assets/icons/surface.svg';
+  static const String pdfPrivacidade = 'assets/Politica-de-privacidade.pdf';
 }

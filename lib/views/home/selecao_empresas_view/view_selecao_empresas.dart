@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:line_icons/line_icons.dart';
+import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
+import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
 import 'package:modular_study/core/providers/secao_provider.dart';
 import 'package:modular_study/models/auth_login_models/cedente_model.dart';
@@ -29,7 +32,95 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final SessionProvider sessionProvider = Modular.get<SessionProvider>();
       sessionProvider.startListening();
+      verificarPolitica();
     });
+  }
+
+  void verificarPolitica() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text('Política de privacidade',
+                  style: context.textTheme.bodyLarge!.copyWith(
+                    color: AppColors.globalBackground,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 20,
+                    letterSpacing: 1.5,
+                  )),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: GestureDetector(
+                onTap: () {
+                  Modular.to.pop();
+                },
+                child: Text('Clique aqui para vizualizar',
+                    style: context.textTheme.labelMedium!
+                        .copyWith(color: AppColors.labelText)),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                        onPressed: () {
+                          Modular.to.pop();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              const Color.fromARGB(255, 204, 91, 91),
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 8.0),
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              'Recusar',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        )),
+                  )
+                ],
+              ),
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                      onPressed: () {
+                        authProvider.clearDataUser();
+                        Modular.to.navigate(Modular.initialRoute);
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.botaoEnvio,
+                          shadowColor: const Color.fromARGB(0, 255, 255, 255),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4),
+                              side: const BorderSide(
+                                  color: AppColors.botaoEnvio, width: 1))),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text('Aceitar',
+                              style: context.textTheme.labelSmall!
+                                  .copyWith(color: Colors.white)),
+                        ),
+                      )),
+                )
+              ],
+            )
+          ],
+        ),
+      ),
+    );
   }
 
   _onSearchChanged() {
@@ -103,8 +194,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                           onTap: () {
                             provider.setEmpresaSelecionada =
                                 _searchResults![index];
-                            Modular.to
-                                .pushNamed(AppRoutes.homeAppRoute);
+                            Modular.to.pushNamed(AppRoutes.homeAppRoute);
                           },
                           child: ListTile(
                             title: Text(_searchResults![index].nome),
