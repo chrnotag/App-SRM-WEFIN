@@ -30,7 +30,7 @@ class AuthProvider extends ChangeNotifier {
 
   set setDataUser(LoginResponse loginResponse) {
     _dataUser = loginResponse;
-    _setListaCedente = loginResponse.listaCedente ?? [];
+    _setListaCedente = loginResponse.listaCedente;
     notifyListeners();
   }
 

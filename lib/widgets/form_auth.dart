@@ -104,7 +104,6 @@ class _AuthFormState extends State<AuthForm> {
                   log(authProvider.isLoading.toString());
                   if (response.error != null) {
                     final error = response.error as ExceptionModel;
-                    log(error.mensagem ?? 'Sem erro');
                     setState(() {
                       if (error.codigo == '500') {
                         _mensagemErro = error.mensagem;
