@@ -103,7 +103,7 @@ class Ajuda extends StatelessWidget {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: 'Politica de Uso: ',
+                          text: 'Politica de privacidade:',
                           style: context.textTheme.bodyMedium!.copyWith(
                             color: Colors.white,
                           ),
