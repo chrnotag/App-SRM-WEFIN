@@ -38,7 +38,7 @@ Assinante _$AssinanteFromJson(Map<String, dynamic> json) => Assinante(
       nomeAssinante: json['nomeAssinante'] as String,
       identificadorAssinante: json['identificadorAssinante'] as String,
       informacoesAssinante: (json['informacoesAssinante'] as List<dynamic>)
-          .map((e) => InformacoesAssinante.fromJson(e as Map<String, dynamic>))
+          .map((e) => InformacaoAssinante.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -48,9 +48,8 @@ Map<String, dynamic> _$AssinanteToJson(Assinante instance) => <String, dynamic>{
       'informacoesAssinante': instance.informacoesAssinante,
     };
 
-InformacoesAssinante _$InformacoesAssinanteFromJson(
-        Map<String, dynamic> json) =>
-    InformacoesAssinante(
+InformacaoAssinante _$InformacaoAssinanteFromJson(Map<String, dynamic> json) =>
+    InformacaoAssinante(
       papeis:
           (json['papeis'] as List<dynamic>).map((e) => e as String).toList(),
       documentos: (json['documentos'] as List<dynamic>)
@@ -59,20 +58,18 @@ InformacoesAssinante _$InformacoesAssinanteFromJson(
       identificadorAssinador: json['identificadorAssinador'] as String,
       nomeProcurador: json['nomeProcurador'] as String,
       tipoAssinatura: json['tipoAssinatura'] as String,
-      dataAssinatura: json['dataAssinatura'] == null
-          ? null
-          : DateTime.parse(json['dataAssinatura'] as String),
+      dataAssinatura: json['dataAssinatura'] as String,
       statusAssinatura: json['statusAssinatura'] as String,
     );
 
-Map<String, dynamic> _$InformacoesAssinanteToJson(
-        InformacoesAssinante instance) =>
+Map<String, dynamic> _$InformacaoAssinanteToJson(
+        InformacaoAssinante instance) =>
     <String, dynamic>{
       'papeis': instance.papeis,
       'documentos': instance.documentos,
       'identificadorAssinador': instance.identificadorAssinador,
       'nomeProcurador': instance.nomeProcurador,
       'tipoAssinatura': instance.tipoAssinatura,
-      'dataAssinatura': instance.dataAssinatura?.toIso8601String(),
+      'dataAssinatura': instance.dataAssinatura,
       'statusAssinatura': instance.statusAssinatura,
     };
