@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:modular_study/core/providers/assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
 
 import '../../implementations_config/export_impl.dart';
@@ -9,18 +10,21 @@ class AssinaturaImpl {
   const AssinaturaImpl({required this.identificador});
 
   Future<ApiResponse<dynamic>> assinaturas() async {
+    final AssinaturaProvider assinaturaProvider =
+        Modular.get<AssinaturaProvider>();
     final url = Uri.parse(EndPoints.assinatura).replace(queryParameters: {
       'identificador': identificador,
     });
     try {
-      //log(url.toString());
-      final response = await http.post(url);
+      final response =
+          await http.post(url, headers: {'Accept': 'application/json'});
       if (response.statusCode == 200) {
         log(response.statusCode.toString());
         log('teste ${response.body}');
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
-        final data = AssinaturasModel.fromJson(responseBody);
-        // log(data.toString());
+        final data = List<AssinaturasModel>.from(
+            responseBody.map((model) => AssinaturasModel.fromJson(model)));
+        assinaturaProvider.assinaturas = data;
         return SucessResponse(data);
       } else {
         log(response.statusCode.toString());
@@ -29,7 +33,7 @@ class AssinaturaImpl {
         return ErrorResponse(data);
       }
     } catch (e) {
-      log("Erro detectado $e");
+      log("Erro detectado $e, foi no catch");
       final data = ExceptionModel(
           codigo: '404',
           dataHora: DateTime.now(),

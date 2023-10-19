@@ -12,10 +12,11 @@ class AssinaturaProvider extends ChangeNotifier {
   pegarAssinaturas(String identificador) =>
       AssinaturaImpl(identificador: identificador).assinaturas();
 
-  List<AssinaturasModel>? _assinaturasModel;
+  List<AssinaturasModel> _assinaturasModel = [];
 
-  get assinaturas => _assinaturasModel;
+  List<AssinaturasModel> get assinaturas => _assinaturasModel;
 
-  set setAssinaturas(List<AssinaturasModel> assinaturasModel) =>
-      _assinaturasModel = assinaturasModel;
+  set assinaturas(List<AssinaturasModel> assinaturasModel) {
+    _assinaturasModel = assinaturasModel;
+  }
 }

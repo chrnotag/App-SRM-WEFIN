@@ -36,7 +36,7 @@ class AssinaturasModel {
 class Assinante {
   String nomeAssinante;
   String identificadorAssinante;
-  List<InformacoesAssinante> informacoesAssinante;
+  List<InformacaoAssinante> informacoesAssinante;
 
   Assinante({
     required this.nomeAssinante,
@@ -51,16 +51,16 @@ class Assinante {
 }
 
 @JsonSerializable()
-class InformacoesAssinante {
+class InformacaoAssinante {
   List<String> papeis;
   List<String> documentos;
   String identificadorAssinador;
   String nomeProcurador;
   String tipoAssinatura;
-  DateTime? dataAssinatura;
+  String dataAssinatura;
   String statusAssinatura;
 
-  InformacoesAssinante({
+  InformacaoAssinante({
     required this.papeis,
     required this.documentos,
     required this.identificadorAssinador,
@@ -69,7 +69,8 @@ class InformacoesAssinante {
     required this.dataAssinatura,
     required this.statusAssinatura,
   });
-  factory InformacoesAssinante.fromJson(Map<String, dynamic> json) =>
-      _$InformacoesAssinanteFromJson(json);
-  Map<String, dynamic> toJson() => _$InformacoesAssinanteToJson(this);
+  factory InformacaoAssinante.fromJson(Map<String, dynamic> json) =>
+      _$InformacaoAssinanteFromJson(json);
+
+  Map<String, dynamic> toJson() => _$InformacaoAssinanteToJson(this);
 }

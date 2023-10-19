@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:modular_study/core/constants/datas/usuarios_data.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/implementations_config/export_impl.dart';
-import 'package:modular_study/core/providers/assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
 import 'package:modular_study/core/utils/get_device_infos.dart';
 import 'package:modular_study/models/user_model.dart';
@@ -87,10 +86,6 @@ class _AuthFormState extends State<AuthForm> {
           WefinDefaultButton(
             label: widget.label,
             onPressed: () async {
-              final AssinaturaProvider assinatura =
-                  Modular.get<AssinaturaProvider>();
-              var response = assinatura.pegarAssinaturas('teste');
-              log(response.toString());
               if (_formKey.currentState!.validate()) {
                 authProvider.setLoading();
                 if (_loginEC.text == "teste@gmail.com" &&
