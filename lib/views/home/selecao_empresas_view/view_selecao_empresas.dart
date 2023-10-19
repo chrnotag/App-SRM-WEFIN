@@ -70,7 +70,8 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                   Expanded(
                     child: ElevatedButton(
                         onPressed: () {
-                          Modular.to.pop();
+                          authProvider.clearDataUser();
+                          Modular.to.navigate(Modular.initialRoute);
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
@@ -95,8 +96,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                 Expanded(
                   child: ElevatedButton(
                       onPressed: () {
-                        authProvider.clearDataUser();
-                        Modular.to.navigate(Modular.initialRoute);
+                        Modular.to.pop();
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.botaoEnvio,
