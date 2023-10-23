@@ -37,8 +37,9 @@ class _AssinaturaDigitalState extends State<AssinaturaDigital>
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     final AssinaturaProvider assinaturaProvider =
         Modular.get<AssinaturaProvider>();
-    List<AssinaturasModel> assinados = assinaturaProvider.assinados;
-    List<AssinaturasModel> naoAssinados = assinaturaProvider.naoAssinados;
+    List<AssinaturasModel> assinados = assinaturaProvider.acompanharAssinaturas;
+    List<AssinaturasModel> naoAssinados =
+        assinaturaProvider.assinaturasPendentes;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,

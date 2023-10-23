@@ -80,17 +80,18 @@ class _HomeViewState extends State<HomeView> {
                                         color: AppColors.botaoEnvio,
                                       ),
                                       if (assinaturaProvider
-                                          .naoAssinados.isNotEmpty)
+                                          .assinaturasPendentes.isNotEmpty)
                                         CircleAvatar(
                                           radius: 15,
                                           backgroundColor: Colors.red,
                                           child: Text(
                                             assinaturaProvider
-                                                        .naoAssinados.length >
+                                                        .assinaturasPendentes
+                                                        .length >
                                                     99
                                                 ? '99+'
                                                 : assinaturaProvider
-                                                    .naoAssinados.length
+                                                    .assinaturasPendentes.length
                                                     .toString(),
                                             style: context.textTheme.bodySmall!
                                                 .copyWith(color: Colors.white),

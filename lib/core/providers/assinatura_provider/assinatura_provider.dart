@@ -19,19 +19,19 @@ class AssinaturaProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<AssinaturasModel> _assinados = [];
-  List<AssinaturasModel> _naoAssinados = [];
+  List<AssinaturasModel> _assinaturasPendentes = [];
+  List<AssinaturasModel> _acompanharAssinaturas = [];
 
-  List<AssinaturasModel> get assinados => _assinados;
+  List<AssinaturasModel> get acompanharAssinaturas => _assinaturasPendentes;
 
-  set assinados(List<AssinaturasModel> docs) {
-    _assinados = docs;
+  set acompanharAssinaturas(List<AssinaturasModel> docs) {
+    _assinaturasPendentes = docs;
   }
 
-  List<AssinaturasModel> get naoAssinados => _naoAssinados;
+  List<AssinaturasModel> get assinaturasPendentes => _acompanharAssinaturas;
 
-  set naoAssinados(List<AssinaturasModel> docs) {
-    _naoAssinados = docs;
+  set assinaturasPendentes(List<AssinaturasModel> docs) {
+    _acompanharAssinaturas = docs;
   }
 
   void separaAssinaturas(List<AssinaturasModel> assinaturas) {
@@ -46,9 +46,9 @@ class AssinaturaProvider extends ChangeNotifier {
       });
 
       if (naoAssinadoPeloUsuario) {
-        _naoAssinados.add(assinaturas[i]);
+        _acompanharAssinaturas.add(assinaturas[i]);
       } else {
-        _assinados.add(assinaturas[i]);
+        _assinaturasPendentes.add(assinaturas[i]);
       }
     }
     notifyListeners();
