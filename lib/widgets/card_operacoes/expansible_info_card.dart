@@ -2,10 +2,10 @@ part of 'card_monitor_operacoes.dart';
 
 class _ExpansibleInfoCard extends StatefulWidget {
   final bool isVisible;
-  final List<OperacaoModel> operacao;
+  final List<Assinante> assinantes;
 
   const _ExpansibleInfoCard(
-      {super.key, required this.isVisible, required this.operacao});
+      {super.key, required this.isVisible, required this.assinantes});
 
   @override
   State<_ExpansibleInfoCard> createState() => __ExpansibleInfoCardState();
@@ -18,7 +18,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
 
   @override
   Widget build(BuildContext context) {
-    var operacoes = widget.operacao;
+    final assinantes = widget.assinantes;
     final CarouselController carouselController = CarouselController();
     return Visibility(
       visible: widget.isVisible,
@@ -28,175 +28,179 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
           const Divider(height: 1, color: AppColors.labelText),
           FlutterCarousel(
               items: List.generate(
-                operacoes.length,
-                (index) => Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Papéis',
-                                style: context.textTheme.bodyMedium!.copyWith(
-                                    color: AppColors.globalBackground),
-                              ),
-                              if (operacoes.isNotEmpty)
-                                for (var papel in operacoes[indicie].papeis!)
-                                  Text(
-                                    papel.replaceAll(RegExp(r'[\[\],]'), ''),
-                                    style: context.textTheme.bodySmall,
-                                  )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Procurador',
-                                style: context.textTheme.bodyMedium!.copyWith(
-                                    color: AppColors.globalBackground),
-                              ),
-                              Text(
-                                operacoes[indicie]
-                                    .procurador!
-                                    .replaceAll(RegExp(r'[\[\]]'), ''),
-                                style: context.textTheme.bodySmall,
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Status',
-                                style: context.textTheme.bodyMedium!.copyWith(
-                                    color: AppColors.globalBackground),
-                              ),
-                              Text(
-                                operacoes[indicie]
-                                    .situacao!
-                                    .replaceAll(RegExp(r'[\[\]]'), ''),
-                                style: context.textTheme.bodySmall!.copyWith(
-                                    color: operacoes[indicie].situacao! ==
-                                            "Aprovada"
-                                        ? AppColors.success
-                                        : operacoes[indicie].situacao! ==
-                                                "Pendente"
-                                            ? AppColors.laranja
-                                            : AppColors.error),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Assinantes',
-                                style: context.textTheme.bodyMedium!.copyWith(
-                                    color: AppColors.globalBackground),
-                              ),
-                              if (operacoes[indicie].assinantes!.isNotEmpty)
-                                for (var papel
-                                    in operacoes[indicie].assinantes!)
-                                  Text(
-                                    papel.replaceAll(RegExp(r'[\[\]]'), ''),
-                                    style: context.textTheme.bodySmall,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  )
-                            ],
-                          ),
-                        ],
+                assinantes.length,
+                (index) {
+                  final assinanteAtual = assinantes[index];
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Papéis',
+                                  style: context.textTheme.bodyMedium!.copyWith(
+                                      color: AppColors.globalBackground),
+                                ),
+                                if (assinantes.isNotEmpty)
+                                  ...assinanteAtual.informacoesAssinante
+                                      .expand((assinante) =>
+                                          assinante.papeis.map((papel) => Text(
+                                                papel.replaceAll(
+                                                    RegExp(r'[\[\],]'), ''),
+                                                style:
+                                                    context.textTheme.bodySmall,
+                                              )))
+                                      .toList(),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Procurador',
+                                  style: context.textTheme.bodyMedium!.copyWith(
+                                      color: AppColors.globalBackground),
+                                ),
+                                ...assinanteAtual.informacoesAssinante
+                                    .map((procurador) => Text(
+                                          procurador.nomeProcurador.replaceAll(
+                                              RegExp(r'[\[\],]'), ''),
+                                          style: context.textTheme.bodySmall,
+                                        ))
+                                    .toList(),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Status',
+                                  style: context.textTheme.bodyMedium!.copyWith(
+                                      color: AppColors.globalBackground),
+                                ),
+                                ...assinanteAtual.informacoesAssinante
+                                    .map((status) => Text(
+                                          status.statusAssinatura.replaceAll(
+                                              RegExp(r'[\[\],]'), ''),
+                                          style: context.textTheme.bodySmall,
+                                        ))
+                                    .toList(),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Assinante',
+                                  style: context.textTheme.bodyMedium!.copyWith(
+                                      color: AppColors.globalBackground),
+                                ),
+                                Text(
+                                  assinanteAtual.nomeAssinante
+                                      .replaceAll(RegExp(r'[\[\],]'), ''),
+                                  style: context.textTheme.bodySmall,
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Documentos',
-                                style: context.textTheme.bodyMedium!.copyWith(
-                                    color: AppColors.globalBackground),
-                              ),
-                              if (operacoes[indicie].documentos!.isNotEmpty)
-                                for (var papel
-                                    in operacoes[indicie].documentos!)
-                                  Text(
-                                    papel.replaceAll(RegExp(r'[\[\],]'), ''),
-                                    style: context.textTheme.bodySmall,
-                                  )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Tipo de Assinatura',
-                                style: context.textTheme.bodyMedium!.copyWith(
-                                    color: AppColors.globalBackground),
-                              ),
-                              Text(
-                                operacoes[indicie]
-                                    .tipoAssinatura!
-                                    .replaceAll(RegExp(r'[\[\]]'), ''),
-                                style: context.textTheme.bodySmall,
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Data',
-                                style: context.textTheme.bodyMedium!.copyWith(
-                                    color: AppColors.globalBackground),
-                              ),
-                              Text(
-                                operacoes[indicie]
-                                    .data!
-                                    .replaceAll(RegExp(r'[\[\]]'), ''),
-                                style: context.textTheme.bodySmall,
-                              )
-                            ],
-                          ),
-                        ],
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Documentos',
+                                  style: context.textTheme.bodyMedium!.copyWith(
+                                      color: AppColors.globalBackground),
+                                ),
+                                ...assinanteAtual.informacoesAssinante
+                                    .expand((assinante) => assinante.documentos
+                                        .map((documentos) => Text(
+                                              documentos.replaceAll(
+                                                  RegExp(r'[\[\],]'), ''),
+                                              style:
+                                                  context.textTheme.bodySmall,
+                                            )))
+                                    .toList(),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Tipo de Assinatura',
+                                  style: context.textTheme.bodyMedium!.copyWith(
+                                      color: AppColors.globalBackground),
+                                ),
+                                ...assinanteAtual.informacoesAssinante
+                                    .map((tipoAssinatura) => Text(
+                                          tipoAssinatura.tipoAssinatura
+                                              .replaceAll(
+                                                  RegExp(r'[\[\],]'), ''),
+                                          style: context.textTheme.bodySmall,
+                                        ))
+                                    .toList(),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Data',
+                                  style: context.textTheme.bodyMedium!.copyWith(
+                                      color: AppColors.globalBackground),
+                                ),
+                                ...assinanteAtual.informacoesAssinante
+                                    .map((dataAssinatura) => Text(
+                                          dataAssinatura.dataAssinatura
+                                              .replaceAll(
+                                                  RegExp(r'[\[\],]'), ''),
+                                          style: context.textTheme.bodySmall,
+                                        ))
+                                    .toList(),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  );
+                },
               ),
               options: CarouselOptions(
                   showIndicator: true,

@@ -25,6 +25,7 @@ class AssinaturaImpl {
         final data = List<AssinaturasModel>.from(
             responseBody.map((model) => AssinaturasModel.fromJson(model)));
         assinaturaProvider.assinaturas = data;
+        log(data[0].urlAssinador);
         return SucessResponse(data);
       } else {
         log(response.statusCode.toString());
