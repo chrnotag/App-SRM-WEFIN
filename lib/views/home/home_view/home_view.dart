@@ -79,15 +79,23 @@ class _HomeViewState extends State<HomeView> {
                                         Assets.iconsIcAssinatura,
                                         color: AppColors.botaoEnvio,
                                       ),
-                                      CircleAvatar(
-                                        radius: 10,
-                                        backgroundColor: Colors.red,
-                                        child: Text(
-                                          '1',
-                                          style: context.textTheme.bodySmall!
-                                              .copyWith(color: Colors.white),
+                                      if (assinaturaProvider
+                                          .naoAssinados.isNotEmpty)
+                                        CircleAvatar(
+                                          radius: 15,
+                                          backgroundColor: Colors.red,
+                                          child: Text(
+                                            assinaturaProvider
+                                                        .naoAssinados.length >
+                                                    99
+                                                ? '99+'
+                                                : assinaturaProvider
+                                                    .naoAssinados.length
+                                                    .toString(),
+                                            style: context.textTheme.bodySmall!
+                                                .copyWith(color: Colors.white),
+                                          ),
                                         ),
-                                      ),
                                     ],
                                   ),
                                   SizedBox(

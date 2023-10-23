@@ -14,13 +14,8 @@ class AssinaturaProvider extends ChangeNotifier {
   pegarAssinaturas(String identificador) =>
       AssinaturaImpl(identificador: identificador).assinaturas();
 
-  List<AssinaturasModel> _assinaturasModel = [];
-
-  List<AssinaturasModel> get assinaturas => _assinaturasModel;
-
   set assinaturas(List<AssinaturasModel> assinaturasModel) {
-    _assinaturasModel = assinaturasModel;
-    separaAssinaturas();
+    separaAssinaturas(assinaturasModel);
     notifyListeners();
   }
 
@@ -39,21 +34,21 @@ class AssinaturaProvider extends ChangeNotifier {
     _naoAssinados = docs;
   }
 
-  void separaAssinaturas() {
+  void separaAssinaturas(List<AssinaturasModel> assinaturas) {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     for (int i = 0; i < assinaturas.length; i++) {
-      bool assinadoPeloUsuario =
+      bool naoAssinadoPeloUsuario =
           assinaturas[i].assinantes.any((Assinante assinante) {
         return assinante.identificadorAssinante ==
                 authProvider.dataUser!.identificadorUsuario &&
             assinante.informacoesAssinante
-                .any((info) => info.statusAssinatura == "Assinado");
+                .any((info) => info.statusAssinatura != "Assinado");
       });
 
-      if (assinadoPeloUsuario) {
-        _assinados.add(assinaturas[i]);
-      } else {
+      if (naoAssinadoPeloUsuario) {
         _naoAssinados.add(assinaturas[i]);
+      } else {
+        _assinados.add(assinaturas[i]);
       }
     }
     notifyListeners();
