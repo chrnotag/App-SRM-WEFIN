@@ -41,12 +41,12 @@ class AssinaturaProvider extends ChangeNotifier {
   void separaAssinaturas(List<AssinaturasModel> assinaturas) {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     for (var assinatura in assinaturas) {
-      bool AssinadoPeloUsuario = assinatura.assinantes.any((assinante) =>
+      bool assinadoPeloUsuario = assinatura.assinantes.any((assinante) =>
           assinante.informacoesAssinante.any((info) =>
               info.identificadorAssinador ==
                   authProvider.dataUser!.identificadorUsuario &&
               info.statusAssinatura != "Assinado"));
-      if (AssinadoPeloUsuario) {
+      if (assinadoPeloUsuario) {
         _acompanharAssinaturas.add(assinatura);
       } else {
         _assinaturasPendentes.add(assinatura);
