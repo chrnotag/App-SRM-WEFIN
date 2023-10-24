@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
+import 'package:modular_study/core/providers/assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
 import 'package:modular_study/core/providers/secao_provider.dart';
 import 'package:modular_study/models/auth_login_models/cedente_model.dart';
 import 'package:modular_study/widgets/appbar_logo_perfil.dart';
 import 'package:modular_study/widgets/botao_selecao_empresa.dart';
 import 'package:modular_study/widgets/searchbar_person.dart';
+
+import '../../../widgets/loader_widget.dart';
 
 class ListaSelecaoEmpresas extends StatefulWidget {
   const ListaSelecaoEmpresas({super.key});
@@ -140,74 +142,89 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
 
   @override
   Widget build(BuildContext context) {
+    bool isLoading = false;
     final AuthProvider provider = context.watch<AuthProvider>();
+    final AssinaturaProvider assinaturaProvider =
+        Modular.get<AssinaturaProvider>();
+    assinaturaProvider.limparAssinaturas();
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: AppBar().preferredSize, child: AppBarLogo()),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              children: [
-                SelecaoEmpresa(
-                  nomeEmpresa: provider.empresaSelecionada?.nome ??
-                      'Não existem empresas no grupo',
-                  tituloPagina: 'Empresas do grupo ecônomico',
-                  changeble: false,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: SearchBarPersonalizada(
-                      searchController: _searchController,
-                      hint: 'Digite a empresa que deseja buscar'),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.white,
-                  ),
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    itemCount: _searchResults?.length ?? 0,
-                    separatorBuilder: (context, index) =>
-                        Divider(thickness: 1, height: 0),
-                    itemBuilder: (context, index) {
-                      BorderRadius borderRadius = BorderRadius.zero;
-                      if (index == 0 && index == _searchResults!.length - 1) {
-                        // Se houver apenas um item
-                        borderRadius = BorderRadius.circular(15);
-                      } else {
-                        // Primeiro item da lista
-                        borderRadius = const BorderRadius.vertical(
-                          top: Radius.circular(5),
-                          bottom: Radius.circular(5),
-                        );
-                      }
+      body: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SingleChildScrollView(
+              child: Center(
+                child: Column(
+                  children: [
+                    SelecaoEmpresa(
+                      nomeEmpresa: provider.empresaSelecionada?.nome ??
+                          'Não existem empresas no grupo',
+                      tituloPagina: 'Empresas do grupo ecônomico',
+                      changeble: false,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      child: SearchBarPersonalizada(
+                          searchController: _searchController,
+                          hint: 'Digite a empresa que deseja buscar'),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.white,
+                      ),
+                      child: ListView.separated(
+                        shrinkWrap: true,
+                        itemCount: _searchResults?.length ?? 0,
+                        separatorBuilder: (context, index) =>
+                            Divider(thickness: 1, height: 0),
+                        itemBuilder: (context, index) {
+                          BorderRadius borderRadius = BorderRadius.zero;
+                          if (index == 0 &&
+                              index == _searchResults!.length - 1) {
+                            // Se houver apenas um item
+                            borderRadius = BorderRadius.circular(15);
+                          } else {
+                            // Primeiro item da lista
+                            borderRadius = const BorderRadius.vertical(
+                              top: Radius.circular(5),
+                              bottom: Radius.circular(5),
+                            );
+                          }
 
-                      return Container(
-                        decoration: BoxDecoration(
-                          borderRadius: borderRadius,
-                          color: Colors.white,
-                        ),
-                        child: InkWell(
-                          onTap: () {
-                            provider.setEmpresaSelecionada =
-                                _searchResults![index];
-                            Modular.to.pushNamed(AppRoutes.homeAppRoute);
-                          },
-                          child: ListTile(
-                            title: Text(_searchResults![index].nome),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                )
-              ],
+                          return Container(
+                            decoration: BoxDecoration(
+                              borderRadius: borderRadius,
+                              color: Colors.white,
+                            ),
+                            child: InkWell(
+                              onTap: () async {
+                                provider.setEmpresaSelecionada =
+                                    _searchResults![index];
+                                isLoading = true;
+                                await assinaturaProvider.pegarAssinaturas(
+                                    authProvider
+                                        .dataUser!.identificadorUsuario);
+                                isLoading = false;
+                                Modular.to.pushNamed(AppRoutes.homeAppRoute);
+                              },
+                              child: ListTile(
+                                title: Text(_searchResults![index].nome),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ),
           ),
-        ),
+          Visibility(visible: isLoading, child: Loader())
+        ],
       ),
     );
   }

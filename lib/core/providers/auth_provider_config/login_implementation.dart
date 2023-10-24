@@ -28,11 +28,9 @@ class LoginImpl {
       final response =
           await http.post(Uri.parse(url), headers: headers, body: body);
       if (response.statusCode == 200) {
-        log(response.statusCode.toString());
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = LoginResponse.fromJson(responseBody);
         authProvider.setDataUser = data;
-        log(authProvider.listaCedente?[0].nome ?? "SEM CEDENTES");
         return SucessResponse(data);
       } else {
         log(response.statusCode.toString());
@@ -41,7 +39,6 @@ class LoginImpl {
         return ErrorResponse(data);
       }
     } catch (e) {
-      log("Erro detectado $e");
       final data = ExceptionModel(
           codigo: '500',
           dataHora: DateTime.now(),

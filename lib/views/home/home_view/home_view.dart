@@ -11,8 +11,6 @@ import 'package:modular_study/generated/assets.dart';
 import 'package:modular_study/widgets/appbar_logo_perfil.dart';
 import 'package:modular_study/widgets/botao_selecao_empresa.dart';
 
-import '../../../widgets/loader_widget.dart';
-
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
 
@@ -26,7 +24,6 @@ class _HomeViewState extends State<HomeView> {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     final AssinaturaProvider assinaturaProvider =
         Modular.get<AssinaturaProvider>();
-    bool isLoading = false;
     double spacing = 20; // Espaço entre os widgets
     double totalSpacing = 3 * spacing; // Espaço total entre os widgets
     double widthCard = (MediaQuery.of(context).size.width - totalSpacing) / 3;
@@ -53,11 +50,7 @@ class _HomeViewState extends State<HomeView> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       InkWell(
-                        onTap: () async {
-                          isLoading = true;
-                          await assinaturaProvider.pegarAssinaturas(
-                              authProvider.dataUser!.identificadorUsuario);
-                          isLoading = false;
+                        onTap: () {
                           Modular.to
                               .pushNamed(AppRoutes.assinaturaDigitalRoute);
                         },
@@ -80,7 +73,11 @@ class _HomeViewState extends State<HomeView> {
                                         color: AppColors.botaoEnvio,
                                       ),
                                       if (assinaturaProvider
-                                          .assinaturasPendentes.isNotEmpty)
+                                              .assinaturasPendentes
+                                              .isNotEmpty &&
+                                          assinaturaProvider
+                                                  .assinaturasPendentes.length >
+                                              0)
                                         CircleAvatar(
                                           radius: 15,
                                           backgroundColor: Colors.red,
@@ -91,8 +88,7 @@ class _HomeViewState extends State<HomeView> {
                                                     99
                                                 ? '99+'
                                                 : assinaturaProvider
-                                                    .assinaturasPendentes.length
-                                                    .toString(),
+                                                    .notificacaoPendentes(),
                                             style: context.textTheme.bodySmall!
                                                 .copyWith(color: Colors.white),
                                           ),
@@ -193,7 +189,6 @@ class _HomeViewState extends State<HomeView> {
                 )
               ],
             ),
-            Visibility(visible: isLoading, child: Loader())
           ],
         ),
       ),

@@ -34,23 +34,30 @@ class AssinaturaProvider extends ChangeNotifier {
     _acompanharAssinaturas = docs;
   }
 
+  String notificacaoPendentes() {
+    return assinaturasPendentes.length.toString();
+  }
+
   void separaAssinaturas(List<AssinaturasModel> assinaturas) {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
-    for (int i = 0; i < assinaturas.length; i++) {
-      bool naoAssinadoPeloUsuario =
-          assinaturas[i].assinantes.any((Assinante assinante) {
-        return assinante.identificadorAssinante ==
-                authProvider.dataUser!.identificadorUsuario &&
-            assinante.informacoesAssinante
-                .any((info) => info.statusAssinatura != "Assinado");
-      });
-
-      if (naoAssinadoPeloUsuario) {
-        _acompanharAssinaturas.add(assinaturas[i]);
+    for (var assinatura in assinaturas) {
+      bool AssinadoPeloUsuario = assinatura.assinantes.any((assinante) =>
+          assinante.informacoesAssinante.any((info) =>
+              info.identificadorAssinador ==
+                  authProvider.dataUser!.identificadorUsuario &&
+              info.statusAssinatura != "Assinado"));
+      if (AssinadoPeloUsuario) {
+        _acompanharAssinaturas.add(assinatura);
       } else {
-        _assinaturasPendentes.add(assinaturas[i]);
+        _assinaturasPendentes.add(assinatura);
       }
     }
+    notifyListeners();
+  }
+
+  void limparAssinaturas() {
+    assinaturasPendentes = [];
+    acompanharAssinaturas = [];
     notifyListeners();
   }
 }

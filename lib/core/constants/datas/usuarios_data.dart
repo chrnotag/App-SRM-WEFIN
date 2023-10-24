@@ -15,7 +15,7 @@ class UsuariosData {
   static LoginResponse dadosUsuarios = LoginResponse(
       nome: faker.person.name(),
       usuario: faker.person.firstName(),
-      identificadorUsuario: faker.person.lastName(),
+      identificadorUsuario: '11111111111',
       token: faker.jwt.secret,
       tokenType: _randomTokenType(),
       dataExpiraSessao: faker.date.dateTime(),

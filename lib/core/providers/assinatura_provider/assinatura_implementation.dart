@@ -19,22 +19,17 @@ class AssinaturaImpl {
       final response =
           await http.post(url, headers: {'Accept': 'application/json'});
       if (response.statusCode == 200) {
-        log(response.statusCode.toString());
-        log('teste ${response.body}');
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = List<AssinaturasModel>.from(
             responseBody.map((model) => AssinaturasModel.fromJson(model)));
         assinaturaProvider.assinaturas = data;
-        log(data[0].urlAssinador);
         return SucessResponse(data);
       } else {
-        log(response.statusCode.toString());
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = ExceptionModel.fromJson(responseBody);
         return ErrorResponse(data);
       }
     } catch (e) {
-      log("Erro detectado $e");
       final data = ExceptionModel(
           codigo: '500',
           dataHora: DateTime.now(),
