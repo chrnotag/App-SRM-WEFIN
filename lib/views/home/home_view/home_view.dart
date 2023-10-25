@@ -20,6 +20,14 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   @override
+  void dispose() {
+    final AssinaturaProvider assinaturaProvider =
+        Modular.get<AssinaturaProvider>();
+    assinaturaProvider.limparAssinaturas();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     final AssinaturaProvider assinaturaProvider =
