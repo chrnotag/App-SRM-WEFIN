@@ -56,6 +56,7 @@ class _AuthFormState extends State<AuthForm> {
           ),
           const SizedBox(height: 20),
           WefinTextFormField(
+            onTap: () => _mensagemErro = null,
             maxLength: 10,
             label: widget.visible ? 'Digite sua Senha' : 'Digite seu CPF',
             obscureText: widget.visible,
@@ -86,6 +87,7 @@ class _AuthFormState extends State<AuthForm> {
           WefinDefaultButton(
             label: widget.label,
             onPressed: () async {
+              _mensagemErro = null;
               if (_formKey.currentState!.validate()) {
                 authProvider.setLoading();
                 if (_loginEC.text == "teste@gmail.com" &&
@@ -104,7 +106,6 @@ class _AuthFormState extends State<AuthForm> {
                   log(authProvider.isLoading.toString());
                   if (response.error != null) {
                     final error = response.error as ExceptionModel;
-                    log(error.mensagem ?? 'Sem erro');
                     setState(() {
                       if (error.codigo == '500') {
                         _mensagemErro = error.mensagem;

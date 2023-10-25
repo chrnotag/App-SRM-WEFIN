@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/datas/operacoes_data.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
+import 'package:modular_study/core/providers/assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
-import 'package:modular_study/models/operacoes_model/model_operacao.dart';
+import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
 import 'package:modular_study/widgets/appbar_logo_perfil.dart';
 import 'package:modular_study/widgets/botao_selecao_empresa.dart';
 import 'package:modular_study/widgets/card_operacoes/card_monitor_operacoes.dart';
@@ -35,7 +35,11 @@ class _AssinaturaDigitalState extends State<AssinaturaDigital>
   @override
   Widget build(BuildContext context) {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
-    final List<List<OperacaoModel>> operacoes = OperacoesData.listaOperacoes;
+    final AssinaturaProvider assinaturaProvider =
+        Modular.get<AssinaturaProvider>();
+    List<AssinaturasModel> assinados = assinaturaProvider.acompanharAssinaturas;
+    List<AssinaturasModel> naoAssinados =
+        assinaturaProvider.assinaturasPendentes;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,
@@ -72,18 +76,18 @@ class _AssinaturaDigitalState extends State<AssinaturaDigital>
                 children: [
                   ListView.builder(
                     shrinkWrap: true,
-                    itemCount: operacoes.length,
+                    itemCount: naoAssinados.length,
                     itemBuilder: (context, index) => CardMonitorOperacoes(
                       showMoreInfo: true,
-                      operacaoModel: operacoes[index],
+                      assinatura: naoAssinados[index],
                     ),
                   ),
                   ListView.builder(
                     shrinkWrap: true,
-                    itemCount: operacoes.length,
+                    itemCount: assinados.length,
                     itemBuilder: (context, index) => CardMonitorOperacoes(
                       showMoreInfo: true,
-                      operacaoModel: operacoes[index],
+                      assinatura: assinados[index],
                     ),
                   ),
                 ],

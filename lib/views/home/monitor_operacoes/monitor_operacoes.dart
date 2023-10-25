@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/datas/operacoes_data.dart';
+import 'package:modular_study/core/providers/assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
-import 'package:modular_study/models/operacoes_model/model_operacao.dart';
+import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
 import 'package:modular_study/widgets/appbar_logo_perfil.dart';
 import 'package:modular_study/widgets/botao_selecao_empresa.dart';
 import 'package:modular_study/widgets/card_operacoes/card_monitor_operacoes.dart';
@@ -13,8 +13,10 @@ class MonitorOperacoes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
-    final List<List<OperacaoModel>> listOperacoes =
-        OperacoesData.listaOperacoes;
+    final AssinaturaProvider assinaturaProvider =
+        Modular.get<AssinaturaProvider>();
+    List<AssinaturasModel> assinaturas =
+        assinaturaProvider.acompanharAssinaturas;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,
@@ -31,10 +33,10 @@ class MonitorOperacoes extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
               child: ListView.builder(
-                itemCount: listOperacoes.length,
+                itemCount: assinaturas.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) => CardMonitorOperacoes(
-                    operacaoModel: listOperacoes[index], showMoreInfo: false),
+                    showMoreInfo: false, assinatura: assinaturas[index]),
               ),
             ),
           ),

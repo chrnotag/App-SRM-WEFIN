@@ -1,4 +1,5 @@
-import 'package:faker/faker.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -6,7 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
-import 'package:modular_study/models/operacoes_model/model_operacao.dart';
+import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
 
 part 'component_card_operacoes.dart';
 part 'expansible_card.dart';
@@ -14,10 +15,10 @@ part 'expansible_info_card.dart';
 
 class CardMonitorOperacoes extends StatefulWidget {
   final bool showMoreInfo;
-  final List<OperacaoModel>? operacaoModel;
+  final AssinaturasModel assinatura;
 
   const CardMonitorOperacoes(
-      {super.key, this.showMoreInfo = true, this.operacaoModel});
+      {super.key, this.showMoreInfo = true, required this.assinatura});
 
   @override
   State<CardMonitorOperacoes> createState() => _CardMonitorOperacoesState();
@@ -28,7 +29,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
 
   @override
   Widget build(BuildContext context) {
-    final generatedDate = faker.date.dateTime();
+    final assinatura = widget.assinatura;
     return Card(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -56,17 +57,18 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   _ComponentCardOperacoes(
-                                      title: 'Operações',
+                                      title: 'Operação',
                                       label:
-                                          '${faker.randomGenerator.integer(1000)}'),
+                                          assinatura.codigoOperacao.toString()),
                                   const SizedBox(
                                     height: 10,
                                   ),
                                   _ComponentCardOperacoes(
                                       title: 'Status',
-                                      label: 'Aprovada',
+                                      label: assinatura.statusOperacao,
                                       textStyle: context.textTheme.bodySmall!
-                                          .copyWith(color: AppColors.laranja))
+                                          .copyWith(
+                                              color: _mudarCor(assinatura)))
                                 ],
                               ),
                               Column(
@@ -76,19 +78,15 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                 children: [
                                   _ComponentCardOperacoes(
                                       title: 'Data',
-                                      label:
-                                          '${generatedDate.day.toString().padLeft(2, '0')}/'
-                                          '${generatedDate.month.toString().padLeft(2, '0')}/'
-                                          '${generatedDate.year}'),
+                                      label: DateFormat('dd/MM/yyyy')
+                                          .format(assinatura.dataOperacao)),
                                   const SizedBox(
                                     height: 10,
                                   ),
                                   _ComponentCardOperacoes(
                                     title: 'Valor Bruto',
-                                    label: _moneyFormater(double.parse(faker
-                                        .randomGenerator
-                                        .decimal(min: 10)
-                                        .toString())),
+                                    label: _moneyFormater(double.parse(
+                                        assinatura.valorBruto.toString())),
                                   ),
                                 ],
                               ),
@@ -99,16 +97,14 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                 children: [
                                   _ComponentCardOperacoes(
                                       title: 'Produto',
-                                      label: faker.food.cuisine()),
+                                      label: assinatura.siglaProduto),
                                   const SizedBox(
                                     height: 10,
                                   ),
                                   _ComponentCardOperacoes(
                                       title: 'Valor Liquido',
-                                      label: _moneyFormater(double.parse(faker
-                                          .randomGenerator
-                                          .decimal(min: 10)
-                                          .toString()))),
+                                      label: _moneyFormater(double.parse(
+                                          assinatura.valorLiquido.toString()))),
                                 ],
                               ),
                             ],
@@ -117,9 +113,9 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                       ),
                       Container(
                         width: 30,
-                        decoration: const BoxDecoration(
-                          color: AppColors.laranja,
-                          borderRadius: BorderRadius.only(
+                        decoration: BoxDecoration(
+                          color: _mudarCor(assinatura),
+                          borderRadius: const BorderRadius.only(
                             topRight: Radius.circular(5),
                           ),
                         ),
@@ -128,10 +124,10 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                   ),
                 ),
                 AnimatedSize(
-                  duration: Duration(milliseconds: 500),
+                  duration: const Duration(milliseconds: 500),
                   child: _ExpansibleInfoCard(
                     isVisible: _showInfo,
-                    operacao: widget.operacaoModel!,
+                    assinantes: assinatura.assinantes,
                   ),
                 ),
                 _FooterExpansible(
@@ -148,6 +144,29 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
         ],
       ),
     );
+  }
+
+  Color _mudarCor(AssinaturasModel assinatura) {
+    final status = assinatura.statusOperacao.toUpperCase();
+    log(status);
+    const statusAzul = ["EM DIGITAÇÃO", "ENVIADA"];
+    const statusLaranja = [
+      "EM ANÁLISE",
+      "AUTORIZADA",
+      "AGUARDANDO ASSINATURA",
+      "ASSINADO",
+      "PENDENTE"
+    ];
+    const statusVerde = ["PAGAMENTO ENVIADO", "COBRANÇA"];
+
+    if (statusAzul.contains(status)) {
+      return AppColors.botaoEnvio;
+    } else if (statusLaranja.contains(status)) {
+      return AppColors.laranja;
+    } else if (statusVerde.contains(status)) {
+      return AppColors.success;
+    }
+    return AppColors.error;
   }
 
   _moneyFormater(double money) {
