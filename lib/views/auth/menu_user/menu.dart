@@ -107,25 +107,26 @@ class Menu extends StatelessWidget {
                                       children: [
                                         Expanded(
                                           child: ElevatedButton(
-                                              onPressed: () {
-                                                authProvider.clearDataUser();
-                                                Modular.to.navigate(
-                                                    Modular.initialRoute);
-                                              },
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor:
-                                                    AppColors.botaoEnvio,
-                                              ),
-                                              child: const Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 8.0),
-                                                child: Padding(
-                                                  padding: EdgeInsets.all(8.0),
-                                                  child: Text(
-                                                    'SAIR',
-                                                  ),
+                                            onPressed: () {
+                                              authProvider.clearDataUser();
+                                              Modular.to.navigate(
+                                                  Modular.initialRoute);
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor:
+                                                  AppColors.botaoEnvio,
+                                            ),
+                                            child: const Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 8.0),
+                                              child: Padding(
+                                                padding: EdgeInsets.all(8.0),
+                                                child: Text(
+                                                  'SAIR',
                                                 ),
-                                              )),
+                                              ),
+                                            ),
+                                          ),
                                         )
                                       ],
                                     ),

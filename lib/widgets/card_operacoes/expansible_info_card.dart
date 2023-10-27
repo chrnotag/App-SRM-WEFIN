@@ -98,7 +98,10 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                                     .map((status) => Text(
                                           status.statusAssinatura.replaceAll(
                                               RegExp(r'[\[\],]'), ''),
-                                          style: context.textTheme.bodySmall,
+                                          style: context.textTheme.bodySmall!
+                                              .copyWith(
+                                                  color: _mudarCor(
+                                                      assinanteAtual)),
                                         ))
                                     .toList(),
                               ],
@@ -215,5 +218,31 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
         ],
       ),
     );
+  }
+
+  Color _mudarCor(Assinante assinatura) {
+    List<String> todosOsStatus = assinatura.informacoesAssinante
+        .map((info) => info.statusAssinatura.toUpperCase())
+        .toList();
+
+    const statusBotaoEnvio = ["EM DIGITAÇÃO", "ENVIADA"];
+    const statusLaranja = [
+      "EM ANÁLISE",
+      "AUTORIZADA",
+      "AGUARDANDO ASSINATURA",
+      "ASSINADO",
+      "PENDENTE"
+    ];
+    const statusSuccess = ["PAGAMENTO ENVIADO", "COBRANÇA"];
+
+    if (todosOsStatus.any((status) => statusBotaoEnvio.contains(status))) {
+      return AppColors.botaoEnvio;
+    } else if (todosOsStatus.any((status) => statusLaranja.contains(status))) {
+      return AppColors.laranja;
+    } else if (todosOsStatus.any((status) => statusSuccess.contains(status))) {
+      return AppColors.success;
+    }
+
+    return AppColors.error;
   }
 }
