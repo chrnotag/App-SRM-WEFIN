@@ -34,7 +34,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final SessionProvider sessionProvider = Modular.get<SessionProvider>();
       sessionProvider.startListening();
-      verificarPolitica();
+      // verificarPolitica();
     });
   }
 

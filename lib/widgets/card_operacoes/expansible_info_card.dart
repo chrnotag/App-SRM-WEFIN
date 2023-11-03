@@ -273,7 +273,295 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                             SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.7,
                                 child: ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                          title: Column(
+                                            children: [
+                                              Text('Assinar Operação',
+                                                  style: context
+                                                      .textTheme.titleSmall!
+                                                      .copyWith(
+                                                    color: AppColors
+                                                        .globalBackground,
+                                                    fontWeight: FontWeight.w300,
+                                                    fontSize: 15,
+                                                    letterSpacing: 1.5,
+                                                  )),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(12.0),
+                                                child: Text(
+                                                    'Escolha como assinar a operação:',
+                                                    style: context
+                                                        .textTheme.labelSmall!
+                                                        .copyWith(
+                                                            color: AppColors
+                                                                .labelText)),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 12.0),
+                                                child: Row(
+                                                  children: [
+                                                    Expanded(
+                                                      child: ElevatedButton(
+                                                        onPressed: () {
+                                                          showDialog(
+                                                            context: context,
+                                                            builder:
+                                                                (context) =>
+                                                                    AlertDialog(
+                                                              title: Column(
+                                                                children: [
+                                                                  Padding(
+                                                                    padding:
+                                                                        const EdgeInsets
+                                                                            .all(
+                                                                            12.0),
+                                                                    child: Text(
+                                                                        'Confirmação',
+                                                                        style: context
+                                                                            .textTheme
+                                                                            .bodyLarge!
+                                                                            .copyWith(
+                                                                          color:
+                                                                              AppColors.globalBackground,
+                                                                          fontWeight:
+                                                                              FontWeight.w600,
+                                                                          fontSize:
+                                                                              20,
+                                                                          letterSpacing:
+                                                                              1.5,
+                                                                        )),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding:
+                                                                        const EdgeInsets
+                                                                            .all(
+                                                                            12.0),
+                                                                    child: Text(
+                                                                        'Você confirma a assinatura de todos os documentos da operação' +
+                                                                            ' KGPC nº 434343?',
+                                                                        style: context
+                                                                            .textTheme
+                                                                            .labelSmall!
+                                                                            .copyWith(color: AppColors.labelText)),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: const EdgeInsets
+                                                                        .symmetric(
+                                                                        vertical:
+                                                                            12.0),
+                                                                    child: Row(
+                                                                      children: [
+                                                                        Expanded(
+                                                                          child:
+                                                                              ElevatedButton(
+                                                                            onPressed:
+                                                                                () {
+                                                                              showDialog(
+                                                                                context: context,
+                                                                                builder: (context) => AlertDialog(
+                                                                                  title: Column(
+                                                                                    children: [
+                                                                                      Padding(
+                                                                                        padding: const EdgeInsets.all(12.0),
+                                                                                        child: Text('Assinatura Digital confirmada com sucesso',
+                                                                                            style: context.textTheme.bodyLarge!.copyWith(
+                                                                                              color: AppColors.globalBackground,
+                                                                                              fontWeight: FontWeight.w600,
+                                                                                              fontSize: 20,
+                                                                                              letterSpacing: 1.5,
+                                                                                            )),
+                                                                                      ),
+                                                                                      Padding(
+                                                                                        padding: const EdgeInsets.all(12.0),
+                                                                                        child: Text('Quando sua operação possuir o numero de assinaturas necessarias, ela passará para o status de'+'Assinada'+'Você pode acompanhar o status das suas assinaturas clicando no botão abaixo.', style: context.textTheme.labelSmall!.copyWith(color: AppColors.labelText), textAlign: TextAlign.justify,),
+                                                                                      ),
+                                                                                      Padding(
+                                                                                        padding: const EdgeInsets.symmetric(vertical: 12.0),
+                                                                                        child: Row(
+                                                                                          children: [
+                                                                                            Expanded(
+                                                                                              child: ElevatedButton(
+                                                                                                onPressed: () {
+                                                                                                  Modular.to.pushNamed(AppRoutes.assinaturaDigitalRoute);
+                                                                                                },
+                                                                                                style: ElevatedButton.styleFrom(
+                                                                                                  backgroundColor: AppColors.botaoEnvio,
+                                                                                                ),
+                                                                                                child: const Padding(
+                                                                                                  padding: EdgeInsets.symmetric(vertical: 8.0),
+                                                                                                  child: Padding(
+                                                                                                    padding: EdgeInsets.all(8.0),
+                                                                                                    child: Text(
+                                                                                                      'Acompanhar Assinaturas',
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                ),
+                                                                                              ),
+                                                                                            )
+                                                                                          ],
+                                                                                        ),
+                                                                                      ),
+                                                                                      Row(
+                                                                                        children: [
+                                                                                          Expanded(
+                                                                                            child: ElevatedButton(
+                                                                                                onPressed: () {
+                                                                                                  Modular.to.pushNamed(AppRoutes.assinaturaDigitalRoute);
+                                                                                                },
+                                                                                                style: ElevatedButton.styleFrom(backgroundColor: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4), side: const BorderSide(color: AppColors.botaoEnvio, width: 1))),
+                                                                                                child: Padding(
+                                                                                                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                                                                                  child: Padding(
+                                                                                                    padding: const EdgeInsets.all(8.0),
+                                                                                                    child: Text('Fazer Nova Assinatura', style: context.textTheme.labelSmall!.copyWith(color: AppColors.botaoEnvio)),
+                                                                                                  ),
+                                                                                                )),
+                                                                                          )
+                                                                                        ],
+                                                                                      )
+                                                                                    ],
+                                                                                  ),
+                                                                                ),
+                                                                              );
+                                                                            },
+                                                                            style:
+                                                                                ElevatedButton.styleFrom(
+                                                                              backgroundColor: AppColors.botaoEnvio,
+                                                                            ),
+                                                                            child:
+                                                                                const Padding(
+                                                                              padding: EdgeInsets.symmetric(vertical: 8.0),
+                                                                              child: Padding(
+                                                                                padding: EdgeInsets.all(8.0),
+                                                                                child: Text(
+                                                                                  'Confirmar',
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        )
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                  Row(
+                                                                    children: [
+                                                                      Expanded(
+                                                                        child: ElevatedButton(
+                                                                            onPressed: () {},
+                                                                            style: ElevatedButton.styleFrom(backgroundColor: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4), side: const BorderSide(color: AppColors.botaoEnvio, width: 1))),
+                                                                            child: Padding(
+                                                                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                                                              child: Padding(
+                                                                                padding: const EdgeInsets.all(8.0),
+                                                                                child: Text('CANCELAR', style: context.textTheme.labelSmall!.copyWith(color: AppColors.botaoEnvio)),
+                                                                              ),
+                                                                            )),
+                                                                      )
+                                                                    ],
+                                                                  )
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                          backgroundColor:
+                                                              AppColors
+                                                                  .botaoEnvio,
+                                                        ),
+                                                        child: const Padding(
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  vertical:
+                                                                      8.0),
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    8.0),
+                                                            child: Text(
+                                                                'Assinar Dodumentos'),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Expanded(
+                                                    child: ElevatedButton(
+                                                        onPressed: () {
+                                                          Modular.to.pop();
+                                                        },
+                                                        style: ElevatedButton.styleFrom(
+                                                            backgroundColor:
+                                                                Colors.white,
+                                                            shadowColor: Colors
+                                                                .transparent,
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                                side: const BorderSide(
+                                                                    color: AppColors
+                                                                        .botaoEnvio,
+                                                                    width: 1))),
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .symmetric(
+                                                                  vertical:
+                                                                      8.0),
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(8.0),
+                                                            child: Text(
+                                                                'Selecionar Certificado Digital',
+                                                                style: context
+                                                                    .textTheme
+                                                                    .labelSmall!
+                                                                    .copyWith(
+                                                                        color: AppColors
+                                                                            .botaoEnvio)),
+                                                          ),
+                                                        )),
+                                                  )
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            12.0),
+                                                    child: Text(
+                                                      'Certificados disponiveis:',
+                                                      style: context
+                                                          .textTheme.labelSmall!
+                                                          .copyWith(
+                                                              color: AppColors
+                                                                  .labelText),
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                    ),
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
                                     child: Text("Assinar Operação")))
                           ],
                         );
