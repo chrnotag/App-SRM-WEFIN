@@ -379,7 +379,11 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                                                                                       ),
                                                                                       Padding(
                                                                                         padding: const EdgeInsets.all(12.0),
-                                                                                        child: Text('Quando sua operação possuir o numero de assinaturas necessarias, ela passará para o status de'+'Assinada'+'Você pode acompanhar o status das suas assinaturas clicando no botão abaixo.', style: context.textTheme.labelSmall!.copyWith(color: AppColors.labelText), textAlign: TextAlign.justify,),
+                                                                                        child: Text(
+                                                                                          'Quando sua operação possuir o numero de assinaturas necessarias, ela passará para o status de' + 'Assinada' + 'Você pode acompanhar o status das suas assinaturas clicando no botão abaixo.',
+                                                                                          style: context.textTheme.labelSmall!.copyWith(color: AppColors.labelText),
+                                                                                          textAlign: TextAlign.justify,
+                                                                                        ),
                                                                                       ),
                                                                                       Padding(
                                                                                         padding: const EdgeInsets.symmetric(vertical: 12.0),
@@ -454,7 +458,13 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                                                                       Expanded(
                                                                         child: ElevatedButton(
                                                                             onPressed: () {},
-                                                                            style: ElevatedButton.styleFrom(backgroundColor: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4), side: const BorderSide(color: AppColors.botaoEnvio, width: 1))),
+                                                                            style: ElevatedButton.styleFrom(
+                                                                              backgroundColor: Colors.white,
+                                                                              shape: RoundedRectangleBorder(
+                                                                                borderRadius: BorderRadius.circular(4),
+                                                                                side: const BorderSide(color: AppColors.botaoEnvio, width: 1),
+                                                                              ),
+                                                                            ),
                                                                             child: Padding(
                                                                               padding: const EdgeInsets.symmetric(vertical: 8.0),
                                                                               child: Padding(
@@ -499,7 +509,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                                                   Expanded(
                                                     child: ElevatedButton(
                                                         onPressed: () {
-                                                          Modular.to.pop();
+                                                          Modular.to.pushNamed(AppRoutes.importarCertificadoRoute);
                                                         },
                                                         style: ElevatedButton.styleFrom(
                                                             backgroundColor:

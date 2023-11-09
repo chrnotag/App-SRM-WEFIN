@@ -147,15 +147,14 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
         context.watch<AssinaturaProvider>();
     final overlay = Overlay.of(context);
     final overlayLoader = OverlayEntry(
-      builder: (context) => Positioned.fill(
-          child: Material(
+      builder: (context) => const Material(
         color: Colors.transparent,
         child: Loader(),
-      )),
+      ),
     );
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: AppBar().preferredSize, child: AppBarLogo()),
+          preferredSize: AppBar().preferredSize, child: const AppBarLogo()),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
