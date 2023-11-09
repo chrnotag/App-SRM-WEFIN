@@ -4,6 +4,7 @@ import 'package:modular_study/views/auth/menu_user/menu.dart';
 import 'package:modular_study/views/home/ajuda/ajuda_screen.dart';
 import 'package:modular_study/views/home/assinaturas/assinatura_digital.dart';
 import 'package:modular_study/views/home/home_view/home_view.dart';
+import 'package:modular_study/views/home/importar_certificado/importar_certificado.dart';
 import 'package:modular_study/views/home/monitor_operacoes/monitor_operacoes.dart';
 import 'package:modular_study/views/home/selecao_empresas_view/view_selecao_empresas.dart';
 
@@ -31,5 +32,6 @@ class HomeModule extends Module {
     r.child(
       AppRoutes.homeAppHomeRoute,
       child: (context) => const HomeView());
+    r.child(AppRoutes.importarCertificadoHomeRoute, child: (context) => const ImportarCertificado(),);
   }
 }
