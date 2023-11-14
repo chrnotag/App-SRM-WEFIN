@@ -27,6 +27,7 @@ class AppRoutes {
 
   static get homeAppHomeRoute => '/home_app';
   static get importarCertificadoHomeRoute => '/importar_certificado';
+  static get guiaImportarDispositivoHomeRoute => '/importar_dispositivo';
 
   //Escopo para troca de telas usando o Modular.to.navigate HOME
   static get listaSelecaoEmpresasRoute =>
@@ -44,4 +45,5 @@ class AppRoutes {
   static get homeAppRoute => '$homeRoute$homeAppHomeRoute';
 
   static get importarCertificadoRoute => '$homeRoute$importarCertificadoHomeRoute';
+  static get guiaImportarDispositivoRoute => '$homeRoute$guiaImportarDispositivoHomeRoute';
 }
