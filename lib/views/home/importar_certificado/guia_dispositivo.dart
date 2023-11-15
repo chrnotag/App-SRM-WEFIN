@@ -1,9 +1,13 @@
 import 'dart:developer';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
+import 'package:modular_study/core/utils/importar_certificado.dart';
 import 'package:modular_study/widgets/transparent_appbar_empty.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../../core/constants/themes/theme_configs.dart';
 
@@ -17,6 +21,7 @@ class GuiaImportDispositivo extends StatefulWidget {
 class _GuiaImportDispositivoState extends State<GuiaImportDispositivo> {
   CarouselController _carrousselControler = CarouselController();
   int _paginaAtual = 0;
+  TextEditingController _senhaCertificadoController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -210,8 +215,42 @@ class _GuiaImportDispositivoState extends State<GuiaImportDispositivo> {
               ),
             ),
             ElevatedButton(
-                onPressed: () {}, child: const Text('Importar Certificado'))
+                onPressed: () async {
+                  Uint8List? fileContent =
+                      await ImportarCertificado.selecionarArquivoCertificado();
+                  log("teste: ${fileContent!.length}");
+                  if (fileContent.isNotEmpty) {
+                    String senha = '';
+                    _pedirSenhaCertificado(fileContent);
+                  }
+                },
+                child: const Text('Importar Certificado'))
           ]),
     ];
+  }
+
+  void _pedirSenhaCertificado(Uint8List fileContent) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: TextField(
+          controller: _senhaCertificadoController,
+          decoration: const InputDecoration(
+              hintText: 'Informe a senha do certificado',
+              border: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black, width: 1))),
+        ),
+        actions: [
+          ElevatedButton(
+              onPressed: () async {
+                await ImportarCertificado.importarCertificado(
+                    fileContent, _senhaCertificadoController.text);
+                Modular.to.pop();
+                Modular.to.pop();
+              },
+              child: Text('OK'))
+        ],
+      ),
+    );
   }
 }
