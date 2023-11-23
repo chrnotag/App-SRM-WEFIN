@@ -9,7 +9,7 @@ class CorOperacao {
         .map((info) => info.statusAssinatura.toUpperCase())
         .toList();
 
-    const statusBotaoEnvio = ["EM DIGITAÇÃO", "ENVIADA"];
+    const statusAzul = ["EM DIGITAÇÃO", "ENVIADA"];
     const statusLaranja = [
       "EM ANÁLISE",
       "AUTORIZADA",
@@ -17,20 +17,20 @@ class CorOperacao {
       "ASSINADO",
       "PENDENTE"
     ];
-    const statusSuccess = ["PAGAMENTO ENVIADO", "COBRANÇA"];
+    const statusVerde = ["PAGAMENTO ENVIADO", "COBRANÇA"];
 
-    if (todosOsStatus.any((status) => statusBotaoEnvio.contains(status))) {
+    if (todosOsStatus.any((status) => statusAzul.contains(status))) {
       return AppColors.botaoEnvio;
     } else if (todosOsStatus.any((status) => statusLaranja.contains(status))) {
       return AppColors.laranja;
-    } else if (todosOsStatus.any((status) => statusSuccess.contains(status))) {
+    } else if (todosOsStatus.any((status) => statusVerde.contains(status))) {
       return AppColors.success;
     }
 
     return AppColors.error;
   }
   static Color definirCorOperacao(AssinaturasModel assinatura) {
-    final status = assinatura.statusOperacao.toUpperCase();
+    final status = assinatura.statusAssinaturaDigital.toUpperCase();
     const statusAzul = ["EM DIGITAÇÃO", "ENVIADA"];
     const statusLaranja = [
       "EM ANÁLISE",
