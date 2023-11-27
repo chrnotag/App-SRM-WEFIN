@@ -11,6 +11,7 @@ import 'package:modular_study/views/home/importar_certificado/leitor_qrcode.dart
 import 'package:modular_study/widgets/dialog_senha_certificado.dart';
 import 'package:modular_study/widgets/transparent_appbar_empty.dart';
 import 'package:share_plus/share_plus.dart';
+import '../../../core/constants/environment.dart';
 import '../../../core/constants/themes/theme_configs.dart';
 
 class GuiaImportCertificado extends StatefulWidget {
@@ -290,7 +291,7 @@ class _GuiaImportCertificadoState extends State<GuiaImportCertificado> {
                           decoration: TextDecoration.underline),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () async {
-                          const String url = "https://google.com";
+                          const String url = Environments.siteQrCode;
                           await Share.share(url);
                         }),
                   TextSpan(
