@@ -6,4 +6,7 @@ class EndPoints {
 
   static const String login = '$baseURL/usuarios/login';
   static const String assinatura = '$baseURL/assinaturas';
+
+  static const siteQrCode = "google.com.br";
+
 }

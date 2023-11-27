@@ -1,9 +1,9 @@
-import 'dart:typed_data';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:modular_study/core/constants/endpoints.dart';
 import 'package:modular_study/core/constants/enuns/import_certificado_enum.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/providers/certificado_provider/importar_certificadode.dart';
@@ -11,7 +11,6 @@ import 'package:modular_study/views/home/importar_certificado/leitor_qrcode.dart
 import 'package:modular_study/widgets/dialog_senha_certificado.dart';
 import 'package:modular_study/widgets/transparent_appbar_empty.dart';
 import 'package:share_plus/share_plus.dart';
-import '../../../core/constants/environment.dart';
 import '../../../core/constants/themes/theme_configs.dart';
 
 class GuiaImportCertificado extends StatefulWidget {
@@ -291,7 +290,7 @@ class _GuiaImportCertificadoState extends State<GuiaImportCertificado> {
                           decoration: TextDecoration.underline),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () async {
-                          const String url = Environments.siteQrCode;
+                          const String url = EndPoints.siteQrCode;
                           await Share.share(url);
                         }),
                   TextSpan(
