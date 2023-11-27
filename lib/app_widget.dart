@@ -14,7 +14,7 @@ import 'package:modular_study/core/constants/extensions/size_screen_media_query.
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/constants/themes/theme_light.dart';
 import 'package:modular_study/core/providers/internet_provider.dart';
-import 'package:modular_study/core/providers/secao_provider.dart';
+import 'package:modular_study/core/providers/sessao_provider.dart';
 import 'package:modular_study/views/auth/sem_conexao/sem_conexao.dart';
 
 class AppWidget extends StatefulWidget {
@@ -93,6 +93,7 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
         context.watch<ConnectivityProvider>();
     return StreamBuilder<bool>(
       stream: connectivityProvider.connectionStatusStream,
+      initialData: true,
       builder: (context, snapshot) {
         if (!snapshot.hasData || !snapshot.data!) {
           return kIsWeb

@@ -137,7 +137,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                                                       style: context
                                                           .textTheme.bodySmall!
                                                           .copyWith(
-                                                              color: _mudarCor(
+                                                              color: CorOperacao.definirCorAssinante(
                                                                   assinanteAtual)),
                                                     ))
                                                 .toList(),
@@ -593,29 +593,4 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
         : Container();
   }
 
-  Color _mudarCor(Assinante assinatura) {
-    List<String> todosOsStatus = assinatura.informacoesAssinante
-        .map((info) => info.statusAssinatura.toUpperCase())
-        .toList();
-
-    const statusBotaoEnvio = ["EM DIGITAÇÃO", "ENVIADA"];
-    const statusLaranja = [
-      "EM ANÁLISE",
-      "AUTORIZADA",
-      "AGUARDANDO ASSINATURA",
-      "ASSINADO",
-      "PENDENTE"
-    ];
-    const statusSuccess = ["PAGAMENTO ENVIADO", "COBRANÇA"];
-
-    if (todosOsStatus.any((status) => statusBotaoEnvio.contains(status))) {
-      return AppColors.botaoEnvio;
-    } else if (todosOsStatus.any((status) => statusLaranja.contains(status))) {
-      return AppColors.laranja;
-    } else if (todosOsStatus.any((status) => statusSuccess.contains(status))) {
-      return AppColors.success;
-    }
-
-    return AppColors.error;
-  }
 }

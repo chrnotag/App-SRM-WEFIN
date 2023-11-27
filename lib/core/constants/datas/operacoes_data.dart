@@ -1,230 +1,89 @@
 import 'package:faker/faker.dart';
 import 'package:intl/intl.dart';
+import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
 import 'package:modular_study/models/operacoes_model/model_operacao.dart';
 
 class OperacoesData {
   OperacoesData._();
 
-  static List<List<OperacaoModel>> listaOperacoes = [
-    [
-      OperacaoModel(
-          papeis: [
-            faker.lorem.words(2).toString(),
-            faker.lorem.words(2).toString(),
-            faker.lorem.words(2).toString(),
+  static List<AssinaturasModel> listaOperacoes = [
+    AssinaturasModel(
+      codigoOperacao: 101,
+      statusAssinaturaDigital: "Validada",
+      siglaProduto: "Produto A",
+      statusOperacao: "EM DIGITAÇÃO",
+      valorBruto: 5000,
+      valorLiquido: 4500.0,
+      dataOperacao: DateTime(2023, 11, 14),
+      urlAssinador: "http://assinador.com/url",
+      assinantes: [
+        Assinante(
+          nomeAssinante: "João Silva",
+          identificadorAssinante: "ID123",
+          informacoesAssinante: [
+            InformacaoAssinante(
+                papeis: ["Diretor"],
+                documentos: ["Documento 1"],
+                identificadorAssinador: "IDAss123",
+                nomeProcurador: "Ana Santos",
+                tipoAssinatura: "Digital",
+                dataAssinatura: "2023-11-14",
+                statusAssinatura: "EM DIGITAÇÃO"),
           ],
-          procurador: '${faker.person.firstName()} ${faker.person.lastName()}',
-          situacao: 'Aprovada',
-          assinantes: [
-            '${faker.person.firstName()} ${faker.person.lastName()}',
-            '${faker.person.firstName()} ${faker.person.lastName()}',
-            '${faker.person.firstName()} ${faker.person.lastName()}'
+        ),
+      ],
+    ),
+    AssinaturasModel(
+      codigoOperacao: 101,
+      statusAssinaturaDigital: "Validada",
+      siglaProduto: "Produto A",
+      statusOperacao: "PAGAMENTO ENVIADO",
+      valorBruto: 5000,
+      valorLiquido: 4500.0,
+      dataOperacao: DateTime(2023, 11, 14),
+      urlAssinador: "http://assinador.com/url",
+      assinantes: [
+        Assinante(
+          nomeAssinante: "João Silva",
+          identificadorAssinante: "ID123",
+          informacoesAssinante: [
+            InformacaoAssinante(
+                papeis: ["Diretor"],
+                documentos: ["Documento 1"],
+                identificadorAssinador: "IDAss123",
+                nomeProcurador: "Ana Santos",
+                tipoAssinatura: "Digital",
+                dataAssinatura: "2023-11-14",
+                statusAssinatura: "COBRANÇA"),
           ],
-          documentos: [
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-            faker.internet.domainName(),
+        ),
+      ],
+    ),
+    AssinaturasModel(
+      codigoOperacao: 101,
+      statusAssinaturaDigital: "Validada",
+      siglaProduto: "Produto A",
+      statusOperacao: "ANY",
+      valorBruto: 5000,
+      valorLiquido: 4500.0,
+      dataOperacao: DateTime(2023, 11, 14),
+      urlAssinador: "http://assinador.com/url",
+      assinantes: [
+        Assinante(
+          nomeAssinante: "João Silva",
+          identificadorAssinante: "ID123",
+          informacoesAssinante: [
+            InformacaoAssinante(
+                papeis: ["Diretor"],
+                documentos: ["Documento 1"],
+                identificadorAssinador: "IDAss123",
+                nomeProcurador: "Ana Santos",
+                tipoAssinatura: "Digital",
+                dataAssinatura: "2023-11-14",
+                statusAssinatura: "ANY"),
           ],
-          tipoAssinatura: 'Multipla',
-          data: DateFormat('dd/MM/yyyy').format(faker.date.dateTime())),
-      OperacaoModel(
-          papeis: [
-            faker.lorem.words(2).toString(),
-            faker.lorem.words(2).toString(),
-            faker.lorem.words(2).toString(),
-          ],
-          procurador: '${faker.person.firstName()} ${faker.person.lastName()}',
-          situacao: 'Pendente',
-          assinantes: [
-            '${faker.person.firstName()} ${faker.person.lastName()}',
-            '${faker.person.firstName()} ${faker.person.lastName()}',
-            '${faker.person.firstName()} ${faker.person.lastName()}'
-          ],
-          documentos: [
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-          ],
-          tipoAssinatura: 'Multipla',
-          data: DateFormat('dd/MM/yyyy').format(faker.date.dateTime())),
-    ],
-    [
-      OperacaoModel(
-          papeis: [
-            faker.lorem.words(2).toString(),
-            faker.lorem.words(2).toString(),
-            faker.lorem.words(2).toString(),
-          ],
-          procurador: '${faker.person.firstName()} ${faker.person.lastName()}',
-          situacao: 'Aprovada',
-          assinantes: [
-            '${faker.person.firstName()} ${faker.person.lastName()}',
-            '${faker.person.firstName()} ${faker.person.lastName()}',
-            '${faker.person.firstName()} ${faker.person.lastName()}'
-          ],
-          documentos: [
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-          ],
-          tipoAssinatura: 'Multipla',
-          data: DateFormat('dd/MM/yyyy').format(faker.date.dateTime())),
-      OperacaoModel(
-          papeis: [
-            faker.lorem.words(2).toString(),
-            faker.lorem.words(2).toString(),
-            faker.lorem.words(2).toString(),
-          ],
-          procurador: '${faker.person.firstName()} ${faker.person.lastName()}',
-          situacao: 'Pendente',
-          assinantes: [
-            '${faker.person.firstName()} ${faker.person.lastName()}',
-            '${faker.person.firstName()} ${faker.person.lastName()}',
-            '${faker.person.firstName()} ${faker.person.lastName()}'
-          ],
-          documentos: [
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-          ],
-          tipoAssinatura: 'Multipla',
-          data: DateFormat('dd/MM/yyyy').format(faker.date.dateTime())),
-    ],
-    [
-      OperacaoModel(
-          papeis: [
-            faker.lorem.words(2).toString(),
-            faker.lorem.words(2).toString(),
-            faker.lorem.words(2).toString(),
-          ],
-          procurador: '${faker.person.firstName()} ${faker.person.lastName()}',
-          situacao: 'Aprovada',
-          assinantes: [
-            '${faker.person.firstName()} ${faker.person.lastName()}',
-            '${faker.person.firstName()} ${faker.person.lastName()}',
-            '${faker.person.firstName()} ${faker.person.lastName()}'
-          ],
-          documentos: [
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-          ],
-          tipoAssinatura: 'Multipla',
-          data: DateFormat('dd/MM/yyyy').format(faker.date.dateTime())),
-      OperacaoModel(
-          papeis: [
-            faker.lorem.words(2).toString(),
-            faker.lorem.words(2).toString(),
-            faker.lorem.words(2).toString(),
-          ],
-          procurador: '${faker.person.firstName()} ${faker.person.lastName()}',
-          situacao: 'Pendente',
-          assinantes: [
-            '${faker.person.firstName()} ${faker.person.lastName()}',
-            '${faker.person.firstName()} ${faker.person.lastName()}',
-            '${faker.person.firstName()} ${faker.person.lastName()}'
-          ],
-          documentos: [
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-          ],
-          tipoAssinatura: 'Multipla',
-          data: DateFormat('dd/MM/yyyy').format(faker.date.dateTime())),
-    ],
-    [
-      OperacaoModel(
-          papeis: [
-            faker.lorem.words(2).toString(),
-            faker.lorem.words(2).toString(),
-            faker.lorem.words(2).toString(),
-          ],
-          procurador: '${faker.person.firstName()} ${faker.person.lastName()}',
-          situacao: 'Aprovada',
-          assinantes: [
-            '${faker.person.firstName()} ${faker.person.lastName()}',
-            '${faker.person.firstName()} ${faker.person.lastName()}',
-            '${faker.person.firstName()} ${faker.person.lastName()}'
-          ],
-          documentos: [
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-          ],
-          tipoAssinatura: 'Multipla',
-          data: DateFormat('dd/MM/yyyy').format(faker.date.dateTime())),
-      OperacaoModel(
-          papeis: [
-            faker.lorem.words(2).toString(),
-            faker.lorem.words(2).toString(),
-            faker.lorem.words(2).toString(),
-          ],
-          procurador: '${faker.person.firstName()} ${faker.person.lastName()}',
-          situacao: 'Pendente',
-          assinantes: [
-            '${faker.person.firstName()} ${faker.person.lastName()}',
-            '${faker.person.firstName()} ${faker.person.lastName()}',
-            '${faker.person.firstName()} ${faker.person.lastName()}'
-          ],
-          documentos: [
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-          ],
-          tipoAssinatura: 'Multipla',
-          data: DateFormat('dd/MM/yyyy').format(faker.date.dateTime())),
-    ],
-    [
-      OperacaoModel(
-          papeis: [
-            faker.lorem.words(2).toString(),
-            faker.lorem.words(2).toString(),
-            faker.lorem.words(2).toString(),
-          ],
-          procurador: '${faker.person.firstName()} ${faker.person.lastName()}',
-          situacao: 'Aprovada',
-          assinantes: [
-            '${faker.person.firstName()} ${faker.person.lastName()}',
-            '${faker.person.firstName()} ${faker.person.lastName()}',
-            '${faker.person.firstName()} ${faker.person.lastName()}'
-          ],
-          documentos: [
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-          ],
-          tipoAssinatura: 'Multipla',
-          data: DateFormat('dd/MM/yyyy').format(faker.date.dateTime())),
-      OperacaoModel(
-          papeis: [
-            faker.lorem.words(2).toString(),
-            faker.lorem.words(2).toString(),
-            faker.lorem.words(2).toString(),
-          ],
-          procurador: '${faker.person.firstName()} ${faker.person.lastName()}',
-          situacao: 'Pendente',
-          assinantes: [
-            '${faker.person.firstName()} ${faker.person.lastName()}',
-            '${faker.person.firstName()} ${faker.person.lastName()}',
-            '${faker.person.firstName()} ${faker.person.lastName()}'
-          ],
-          documentos: [
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-            faker.internet.domainName(),
-          ],
-          tipoAssinatura: 'Multipla',
-          data: DateFormat('dd/MM/yyyy').format(faker.date.dateTime())),
-    ]
+        ),
+      ],
+    ),
   ];
 }

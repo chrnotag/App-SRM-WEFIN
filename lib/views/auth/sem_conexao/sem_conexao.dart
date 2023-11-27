@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
-import 'package:modular_study/core/providers/secao_provider.dart';
+import 'package:modular_study/core/providers/sessao_provider.dart';
 
 import '../../../generated/assets.dart';
 

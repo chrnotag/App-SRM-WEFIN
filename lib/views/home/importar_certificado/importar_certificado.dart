@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:modular_study/core/constants/enuns/import_certificado_enum.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
+import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/widgets/transparent_appbar_empty.dart';
 
 import '../../../core/constants/themes/theme_configs.dart';
@@ -10,7 +13,9 @@ class ImportarCertificado extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(preferredSize: AppBar().preferredSize, child: TransparentAppBarEmpty()),
+      appBar: PreferredSize(
+          preferredSize: AppBar().preferredSize,
+          child: TransparentAppBarEmpty()),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -22,9 +27,9 @@ class ImportarCertificado extends StatelessWidget {
                 Text(
                   'Escolha a forma desejada para importar o certificado.',
                   style: context.textTheme.bodyLarge!.copyWith(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold, color: Colors.white
-                  ),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                   textAlign: TextAlign.center,
                 ),
                 Padding(
@@ -33,15 +38,15 @@ class ImportarCertificado extends StatelessWidget {
                     textAlign: TextAlign.center,
                     text: TextSpan(
                       text: 'QRCode: ',
-                      style: context.textTheme.bodyMedium!
-                          .copyWith(fontWeight: FontWeight.bold, color: Colors.white),
+                      style: context.textTheme.bodyMedium!.copyWith(
+                          fontWeight: FontWeight.bold, color: Colors.white),
                       children: [
                         TextSpan(
                           text:
                               'Selecione essa opção para importar via QRCode usando o nosso site para gerar o QRCode',
-                          style: context.textTheme.bodyMedium!
-                              .copyWith(fontWeight: FontWeight.normal,
-                          color: Colors.white),
+                          style: context.textTheme.bodyMedium!.copyWith(
+                              fontWeight: FontWeight.normal,
+                              color: Colors.white),
                         )
                       ],
                     ),
@@ -51,14 +56,14 @@ class ImportarCertificado extends StatelessWidget {
                   textAlign: TextAlign.center,
                   text: TextSpan(
                     text: 'Do dispositivo: ',
-                    style: context.textTheme.bodyMedium!
-                        .copyWith(fontWeight: FontWeight.bold, color: Colors.white),
+                    style: context.textTheme.bodyMedium!.copyWith(
+                        fontWeight: FontWeight.bold, color: Colors.white),
                     children: [
                       TextSpan(
                         text:
                             'Selecione essa opção para importar o certificado diretamente de seu dispositivo.',
-                        style: context.textTheme.bodyMedium!
-                            .copyWith(fontWeight: FontWeight.normal, color: Colors.white),
+                        style: context.textTheme.bodyMedium!.copyWith(
+                            fontWeight: FontWeight.normal, color: Colors.white),
                       )
                     ],
                   ),
@@ -73,12 +78,15 @@ class ImportarCertificado extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Modular.to.pushNamed(
+                          AppRoutes.guiaImportarCertificadoRoute,
+                          arguments: {ImportarVia.QrCode});
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.botaoEnvio,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4),
-
                       ),
                     ),
                     child: Padding(
@@ -106,13 +114,15 @@ class ImportarCertificado extends StatelessWidget {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Modular.to.pushNamed(AppRoutes.guiaImportarCertificadoRoute,
+                        arguments: ImportarVia.Dispositivo);
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.globalBackground,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4),
-                        side: const BorderSide(
-                            color: Colors.white, width: 2)),
+                        side: const BorderSide(color: Colors.white, width: 2)),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(10),

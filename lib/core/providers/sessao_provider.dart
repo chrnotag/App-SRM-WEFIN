@@ -75,7 +75,7 @@ class SessionProvider with ChangeNotifier {
                     onPressed: () {
                       _isShowingDialog = false;
                       stopListening();
-                      Modular.to.pushNamed(Modular.initialRoute);
+                      Modular.to.navigate(Modular.initialRoute);
                       Modular.to.pop();
                     },
                   ),
