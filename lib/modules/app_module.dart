@@ -4,7 +4,7 @@ import 'package:modular_study/core/providers/assinatura_provider/assinatura_prov
 import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
 import 'package:modular_study/core/providers/certificado_provider/importar_certificadode.dart';
 import 'package:modular_study/core/providers/internet_provider.dart';
-import 'package:modular_study/core/providers/secao_provider.dart';
+import 'package:modular_study/core/providers/sessao_provider.dart';
 import 'package:modular_study/modules/auth_module.dart';
 import 'package:modular_study/modules/home_module.dart';
 

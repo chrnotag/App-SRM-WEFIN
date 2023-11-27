@@ -100,6 +100,8 @@ class ImportarCertificadoProvider extends ChangeNotifier {
               'Erro Desconhecido. Ocorreu um problema não identificado. Por favor, entre em contato com o suporte técnico.';
           break;
       }
+    } catch(e) {
+      errorMsg = 'Erro Desconhecido. Ocorreu um problema não identificado. Por favor, entre em contato com o suporte técnico.';
     }
     return false;
   }
