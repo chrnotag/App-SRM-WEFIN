@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:modular_study/core/constants/enuns/import_certificado_enum.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/widgets/transparent_appbar_empty.dart';
@@ -77,7 +78,11 @@ class ImportarCertificado extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Modular.to.pushNamed(
+                          AppRoutes.guiaImportarCertificadoRoute,
+                          arguments: {ImportarVia.QrCode});
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.botaoEnvio,
                       shape: RoundedRectangleBorder(
@@ -110,8 +115,8 @@ class ImportarCertificado extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Modular.to
-                        .pushNamed(AppRoutes.guiaImportarDispositivoRoute);
+                    Modular.to.pushNamed(AppRoutes.guiaImportarCertificadoRoute,
+                        arguments: ImportarVia.Dispositivo);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.globalBackground,

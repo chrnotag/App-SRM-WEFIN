@@ -1,0 +1,4 @@
+enum ImportarVia{
+  QrCode,
+  Dispositivo
+}

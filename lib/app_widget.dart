@@ -93,6 +93,7 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
         context.watch<ConnectivityProvider>();
     return StreamBuilder<bool>(
       stream: connectivityProvider.connectionStatusStream,
+      initialData: true,
       builder: (context, snapshot) {
         if (!snapshot.hasData || !snapshot.data!) {
           return kIsWeb
