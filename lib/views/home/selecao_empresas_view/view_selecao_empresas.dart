@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
@@ -11,6 +14,7 @@ import 'package:modular_study/widgets/appbar_logo_perfil.dart';
 import 'package:modular_study/widgets/botao_selecao_empresa.dart';
 import 'package:modular_study/widgets/searchbar_person.dart';
 
+import '../../../models/exceptions_responses/exception_model.dart';
 import '../../../widgets/loader_widget.dart';
 
 class ListaSelecaoEmpresas extends StatefulWidget {
@@ -205,16 +209,25 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                           onTap: () async {
                             provider.setEmpresaSelecionada =
                                 _searchResults![index];
-                            try {
-                              setState(() {
-                                overlay.insert(overlayLoader);
-                              });
-                              await assinaturaProvider.pegarAssinaturas(
-                                  authProvider.dataUser!.identificadorUsuario);
+
+                            setState(() {
+                              overlay.insert(overlayLoader);
+                            });
+                            final response = await assinaturaProvider
+                                .pegarAssinaturas(authProvider
+                                    .dataUser!.identificadorUsuario);
+                            if (response.error != null) {
+                              final error = response.error as ExceptionModel;
+                              log('Erro mensagem: ${error.mensagem}');
+                              log('Erros: ${error.erros}');
                               setState(() {
                                 overlayLoader.remove();
                               });
-                            } finally {
+                              Fluttertoast.showToast(
+                                  msg:
+                                      'Erro ao realizar a requisição: ${error.mensagem}');
+                            } else {
+                              overlayLoader.remove();
                               Modular.to.pushNamed(AppRoutes.homeAppRoute);
                             }
                           },
