@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/datas/operacoes_data.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/providers/assinatura_provider/assinatura_provider.dart';
@@ -41,7 +40,6 @@ class _AssinaturaDigitalState extends State<AssinaturaDigital>
     List<AssinaturasModel> assinados = assinaturaProvider.acompanharAssinaturas;
     List<AssinaturasModel> naoAssinados =
         assinaturaProvider.assinaturasPendentes;
-    naoAssinados.addAll(OperacoesData.listaOperacoes);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,

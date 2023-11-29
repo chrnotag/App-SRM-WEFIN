@@ -25,10 +25,11 @@ class CorOperacao {
       return AppColors.laranja;
     } else if (todosOsStatus.any((status) => statusVerde.contains(status))) {
       return AppColors.success;
+    } else {
+      return AppColors.error;
     }
-
-    return AppColors.error;
   }
+
   static Color definirCorOperacao(AssinaturasModel assinatura) {
     final status = assinatura.statusAssinaturaDigital.toUpperCase();
     const statusAzul = ["EM DIGITAÇÃO", "ENVIADA"];
@@ -47,7 +48,8 @@ class CorOperacao {
       return AppColors.laranja;
     } else if (statusVerde.contains(status)) {
       return AppColors.success;
+    } else {
+      return AppColors.error;
     }
-    return AppColors.error;
   }
 }
