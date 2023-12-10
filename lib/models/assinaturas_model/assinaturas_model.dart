@@ -53,14 +53,11 @@ class InformacaoAssinante {
   List<String> papeis;
   List<Documentos> documentos;
   String identificadorAssinador;
+  String? nomeProcurador;
   String tipoAssinatura;
   String? dataAssinatura;
   String statusAssinatura;
-  String? emailAssinador;
-  String? idRegistroLacuna;
   bool? eCPFAssinador;
-  String? idAssinaturaDigital;
-  String? nomeProcurador;
 
   InformacaoAssinante({
     required this.papeis,
@@ -69,10 +66,7 @@ class InformacaoAssinante {
     required this.tipoAssinatura,
     required this.dataAssinatura,
     required this.statusAssinatura,
-    this.emailAssinador,
-    this.idRegistroLacuna,
     this.eCPFAssinador,
-    this.idAssinaturaDigital,
     this.nomeProcurador,
   });
 

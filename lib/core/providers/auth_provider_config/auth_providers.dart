@@ -17,6 +17,7 @@ class AuthProvider extends ChangeNotifier {
     credenciaisUsuario = userModel;
     await LoginImpl(userModel: userModel).login();
   }
+
   late UserModel _credenciaisUsuario;
 
   UserModel get credenciaisUsuario => _credenciaisUsuario;
@@ -25,11 +26,8 @@ class AuthProvider extends ChangeNotifier {
       _credenciaisUsuario = credenciais;
 
   LoginResponse? _dataUser;
-  bool _isLoading = false;
   List<CedenteModel>? _listaCedente;
   CedenteModel? _empresaSelecionada;
-
-  bool get isLoading => _isLoading;
 
   LoginResponse? get dataUser => _dataUser;
 
@@ -53,15 +51,11 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setLoading() {
-    _isLoading = !_isLoading;
-    notifyListeners();
-  }
-
   void clearDataUser() {
     _dataUser = null;
     _empresaSelecionada = null;
     _listaCedente = null;
+    credenciaisUsuario = UserModel(nomeUsuario: '', senha: '', idDevice: '');
     notifyListeners();
   }
 }

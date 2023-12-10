@@ -58,10 +58,7 @@ InformacaoAssinante _$InformacaoAssinanteFromJson(Map<String, dynamic> json) =>
       tipoAssinatura: json['tipoAssinatura'] as String,
       dataAssinatura: json['dataAssinatura'] as String?,
       statusAssinatura: json['statusAssinatura'] as String,
-      emailAssinador: json['emailAssinador'] as String?,
-      idRegistroLacuna: json['idRegistroLacuna'] as String?,
       eCPFAssinador: json['eCPFAssinador'] as bool?,
-      idAssinaturaDigital: json['idAssinaturaDigital'] as String?,
       nomeProcurador: json['nomeProcurador'] as String?,
     );
 
@@ -74,10 +71,7 @@ Map<String, dynamic> _$InformacaoAssinanteToJson(
       'tipoAssinatura': instance.tipoAssinatura,
       'dataAssinatura': instance.dataAssinatura,
       'statusAssinatura': instance.statusAssinatura,
-      'emailAssinador': instance.emailAssinador,
-      'idRegistroLacuna': instance.idRegistroLacuna,
       'eCPFAssinador': instance.eCPFAssinador,
-      'idAssinaturaDigital': instance.idAssinaturaDigital,
       'nomeProcurador': instance.nomeProcurador,
     };
 

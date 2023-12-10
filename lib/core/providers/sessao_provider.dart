@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
-
+import 'auth_provider_config/auth_providers.dart';
 import '../../main.dart';
 
 class SessionProvider with ChangeNotifier {
   bool _isShowingDialog = false;
-
   Timer? _timer;
   int _timeout = 60;
+  final AuthProvider authProvider = Modular.get<AuthProvider>();
 
   SessionProvider() {
     startListening();
@@ -71,9 +71,10 @@ class SessionProvider with ChangeNotifier {
               children: [
                 Expanded(
                   child: TextButton(
-                    child: Text('OK'),
+                    child: const Text('OK'),
                     onPressed: () {
                       _isShowingDialog = false;
+                      authProvider.clearDataUser();
                       stopListening();
                       Modular.to.navigate(Modular.initialRoute);
                       Modular.to.pop();

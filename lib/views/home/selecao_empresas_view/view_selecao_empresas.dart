@@ -35,6 +35,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
   void initState() {
     super.initState();
     _searchController.addListener(_onSearchChanged);
+    _searchResults = authProvider.listaCedente;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final SessionProvider sessionProvider = Modular.get<SessionProvider>();
       sessionProvider.startListening();
@@ -146,7 +147,6 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
 
   @override
   Widget build(BuildContext context) {
-    _searchResults = authProvider.listaCedente;
     final AuthProvider provider = context.watch<AuthProvider>();
     final AssinaturaProvider assinaturaProvider =
         context.watch<AssinaturaProvider>();
@@ -211,33 +211,45 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                             setState(() {
                               overlay.insert(overlayLoader);
                             });
+                            if (authProvider
+                                    .empresaSelecionada!.identificador !=
+                                _searchResults![index].identificador) {
+                              final credenciaisSalvas =
+                                  authProvider.credenciaisUsuario;
 
-                            final credenciaisSalvas =
-                                authProvider.credenciaisUsuario;
+                              final credenciaisLogin = UserModel(
+                                  nomeUsuario: credenciaisSalvas.nomeUsuario,
+                                  senha: credenciaisSalvas.senha,
+                                  idDevice: credenciaisSalvas.idDevice,
+                                  identificadorCedente:
+                                      _searchResults?[index].identificador);
 
-                            final credenciaisLogin = UserModel(
-                                nomeUsuario: credenciaisSalvas.nomeUsuario,
-                                senha: credenciaisSalvas.senha,
-                                idDevice: credenciaisSalvas.idDevice,
-                                identificadorCedente:
-                                    _searchResults?[index].identificador);
-
-                            final respostaLogin =
-                                await authProvider.login(credenciaisLogin);
-                            if (respostaLogin != null && respostaLogin.error != null) {
-                              log('erro login');
-                              _erroTrocaCedente(respostaLogin, overlayLoader);
+                              final respostaLogin =
+                                  await authProvider.login(credenciaisLogin);
+                              if (respostaLogin != null &&
+                                  respostaLogin.error != null) {
+                                _erroTrocaCedente(respostaLogin, overlayLoader);
+                              } else {
+                                final respostaAssinatura =
+                                    await assinaturaProvider.pegarAssinaturas();
+                                if (respostaAssinatura.error != null) {
+                                  _erroTrocaCedente(
+                                      respostaAssinatura, overlayLoader);
+                                } else {
+                                  overlayLoader.remove();
+                                  authProvider.empresaSelecionada =
+                                      _searchResults?[index];
+                                  Modular.to.pushNamed(AppRoutes.homeAppRoute);
+                                }
+                              }
                             } else {
                               final respostaAssinatura =
                                   await assinaturaProvider.pegarAssinaturas();
                               if (respostaAssinatura.error != null) {
-                                log('erro assinatura');
                                 _erroTrocaCedente(
                                     respostaAssinatura, overlayLoader);
                               } else {
                                 overlayLoader.remove();
-                                authProvider.empresaSelecionada =
-                                    _searchResults?[index];
                                 Modular.to.pushNamed(AppRoutes.homeAppRoute);
                               }
                             }
@@ -263,6 +275,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
     setState(() {
       overlayLoader.remove();
     });
-    Fluttertoast.showToast(msg: 'Erro: ${error.mensagem}, ${error.erros}, ${error.httpStatus}');
+    Fluttertoast.showToast(
+        msg: 'Erro: ${error.mensagem}, ${error.erros}, ${error.httpStatus}');
   }
 }

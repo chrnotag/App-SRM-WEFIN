@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:modular_study/core/constants/datas/usuarios_data.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/implementations_config/export_impl.dart';
+import 'package:modular_study/core/providers/assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
 import 'package:modular_study/core/utils/get_device_infos.dart';
+import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
+import 'package:modular_study/models/auth_login_models/usuario_logado_model.dart';
 import 'package:modular_study/models/user_model.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_textfield.dart';
@@ -41,8 +43,7 @@ class _AuthFormState extends State<AuthForm> {
 
   OverlayState? overlay;
   final overlayLoader = OverlayEntry(
-    builder: (context) =>
-    const Material(
+    builder: (context) => const Material(
       color: Colors.transparent,
       child: Loader(),
     ),
@@ -57,16 +58,15 @@ class _AuthFormState extends State<AuthForm> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           WefinTextFormField(
-            onTap: () =>
-                setState(() {
-                  _mensagemErro = null;
-                }),
+            onTap: () => setState(() {
+              _mensagemErro = null;
+            }),
             label: 'Digite seu email',
             controller: _loginEC,
             validator: Validatorless.multiple([
               Validatorless.email('Email inválido!'),
               Validatorless.required('Email Obrigatório'),
-                  (value) => _mensagemErro
+              (value) => _mensagemErro
             ]),
           ),
           const SizedBox(height: 20),
@@ -82,7 +82,7 @@ class _AuthFormState extends State<AuthForm> {
               if (!widget.visible) Validatorless.cpf('CPF Inválido!'),
               Validatorless.min(
                   3, 'Senha com no mínimo 3 e máximo 10 caracteres.'),
-                  (value) => _mensagemErro
+              (value) => _mensagemErro
             ]),
           ),
           const SizedBox(height: 20),
@@ -121,14 +121,12 @@ class _AuthFormState extends State<AuthForm> {
       setState(() {
         overlay!.insert(overlayLoader);
       });
-      log(authProvider.isLoading.toString());
       final userModel = UserModel(
           nomeUsuario: _loginEC.text,
           senha: _passwordEC.text,
           idDevice: await DeviceUtils().getDeviceID());
       final response = await authProvider.login(userModel);
       overlayLoader.remove();
-      log(authProvider.isLoading.toString());
       if (response != null && response.error != null) {
         final error = response.error as ExceptionModel;
         setState(() {
@@ -139,6 +137,8 @@ class _AuthFormState extends State<AuthForm> {
           }
         });
       } else {
+        authProvider.empresaSelecionada =
+            authProvider.dataUser!.listaCedente[0];
         Modular.to.navigate(AppRoutes.listaSelecaoEmpresasRoute);
       }
     }

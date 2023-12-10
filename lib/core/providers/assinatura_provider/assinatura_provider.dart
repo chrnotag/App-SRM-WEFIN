@@ -15,7 +15,6 @@ class AssinaturaProvider extends ChangeNotifier {
 
   set assinaturas(List<AssinaturasModel> assinaturasModel) {
     separaAssinaturas(assinaturasModel);
-    //Adicionar a lista total a uma variavel get para assinaturas
     todasAssinaturas = assinaturasModel;
     notifyListeners();
   }
@@ -55,6 +54,7 @@ class AssinaturaProvider extends ChangeNotifier {
   }
 
   void limparAssinaturas() {
+    todasAssinaturas = [];
     assinaturasPendentes = [];
     notifyListeners();
   }

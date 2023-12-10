@@ -31,6 +31,7 @@ class LoginImpl {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = LoginResponse.fromJson(responseBody);
         authProvider.setDataUser = data;
+        log("retorno: $responseBody");
         return SucessResponse(data);
       } else {
         log("data login: ${response.statusCode.toString()}");
