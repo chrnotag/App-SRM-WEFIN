@@ -4,7 +4,7 @@ import '../../models/assinaturas_model/assinaturas_model.dart';
 import '../constants/themes/theme_configs.dart';
 
 class CorOperacao {
-  static Color definirCorAssinante(Assinante assinatura) {
+  static Color definirCorAssinante(Assinantes assinatura) {
     List<String> todosOsStatus = assinatura.informacoesAssinante
         .map((info) => info.statusAssinatura.toUpperCase())
         .toList();

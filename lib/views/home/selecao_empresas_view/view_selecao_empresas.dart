@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -10,6 +8,7 @@ import 'package:modular_study/core/providers/assinatura_provider/assinatura_prov
 import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
 import 'package:modular_study/core/providers/sessao_provider.dart';
 import 'package:modular_study/models/auth_login_models/cedente_model.dart';
+import 'package:modular_study/models/user_model.dart';
 import 'package:modular_study/widgets/appbar_logo_perfil.dart';
 import 'package:modular_study/widgets/botao_selecao_empresa.dart';
 import 'package:modular_study/widgets/searchbar_person.dart';
@@ -207,28 +206,36 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                         ),
                         child: InkWell(
                           onTap: () async {
-                            provider.setEmpresaSelecionada =
-                                _searchResults![index];
-
                             setState(() {
                               overlay.insert(overlayLoader);
                             });
-                            final response = await assinaturaProvider
-                                .pegarAssinaturas(authProvider
-                                    .dataUser!.identificadorUsuario);
-                            if (response.error != null) {
-                              final error = response.error as ExceptionModel;
-                              log('Erro mensagem: ${error.mensagem}');
-                              log('Erros: ${error.erros}');
-                              setState(() {
-                                overlayLoader.remove();
-                              });
-                              Fluttertoast.showToast(
-                                  msg:
-                                      'Erro ao realizar a requisição: ${error.mensagem}');
+
+                            final credenciaisSalvas =
+                                authProvider.credenciaisUsuario;
+
+                            final credenciaisLogin = UserModel(
+                                nomeUsuario: credenciaisSalvas.nomeUsuario,
+                                senha: credenciaisSalvas.senha,
+                                idDevice: credenciaisSalvas.idDevice,
+                                identificadorCedente:
+                                    _searchResults?[index].identificador);
+
+                            final respostaLogin =
+                                authProvider.login(credenciaisLogin);
+                            if (respostaLogin.error != null) {
+                              _erroTrocaCedente(respostaLogin, overlayLoader);
                             } else {
-                              overlayLoader.remove();
-                              Modular.to.pushNamed(AppRoutes.homeAppRoute);
+                              final respostaAssinatura =
+                                  await assinaturaProvider.pegarAssinaturas();
+                              if (respostaAssinatura.error != null) {
+                                _erroTrocaCedente(
+                                    respostaAssinatura, overlayLoader);
+                              } else {
+                                overlayLoader.remove();
+                                authProvider.empresaSelecionada =
+                                    _searchResults?[index];
+                                Modular.to.pushNamed(AppRoutes.homeAppRoute);
+                              }
                             }
                           },
                           child: ListTile(
@@ -245,5 +252,13 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
         ),
       ),
     );
+  }
+
+  void _erroTrocaCedente(dynamic response, OverlayEntry overlayLoader) {
+    final error = response.error as ExceptionModel;
+    setState(() {
+      overlayLoader.remove();
+    });
+    Fluttertoast.showToast(msg: 'Erro: ${error.mensagem}');
   }
 }

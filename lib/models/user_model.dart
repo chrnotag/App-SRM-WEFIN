@@ -7,11 +7,13 @@ class UserModel {
   UserModel({
     required this.nomeUsuario,
     required this.senha,
+    this.identificadorCedente,
     required this.idDevice,
   });
 
   late final String nomeUsuario;
   late final String senha;
+  String? identificadorCedente;
   late final String idDevice;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>

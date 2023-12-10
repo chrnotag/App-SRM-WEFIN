@@ -5,16 +5,12 @@ import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
 import '../../implementations_config/export_impl.dart';
 
 class AssinaturaImpl {
-  final String identificador;
-
-  const AssinaturaImpl({required this.identificador});
+  const AssinaturaImpl();
 
   Future<ApiResponse<dynamic>> assinaturas() async {
     final AssinaturaProvider assinaturaProvider =
         Modular.get<AssinaturaProvider>();
-    final url = Uri.parse(EndPoints.assinatura).replace(queryParameters: {
-      'identificador': identificador,
-    });
+    final url = Uri.parse(EndPoints.assinatura);
     try {
       final response = await http.post(url, headers: {
         'Accept': 'application/json',

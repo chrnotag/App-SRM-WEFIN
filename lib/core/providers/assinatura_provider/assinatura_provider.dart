@@ -11,8 +11,8 @@ class AssinaturaProvider extends ChangeNotifier {
 
   factory AssinaturaProvider() => _instance;
 
-  pegarAssinaturas(String identificador) =>
-      AssinaturaImpl(identificador: identificador).assinaturas();
+  pegarAssinaturas() =>
+      AssinaturaImpl().assinaturas();
 
   set assinaturas(List<AssinaturasModel> assinaturasModel) {
     separaAssinaturas(assinaturasModel);

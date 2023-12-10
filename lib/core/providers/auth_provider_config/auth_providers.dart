@@ -13,7 +13,17 @@ class AuthProvider extends ChangeNotifier {
     return _instance;
   }
 
-  login(UserModel userModel) => LoginImpl(userModel: userModel).login();
+  login(UserModel userModel) {
+    credenciaisUsuario = userModel;
+    LoginImpl(userModel: userModel).login();
+  }
+
+  late UserModel _credenciaisUsuario;
+
+  UserModel get credenciaisUsuario => _credenciaisUsuario;
+
+  set credenciaisUsuario(UserModel credenciais) =>
+      _credenciaisUsuario = credenciais;
 
   LoginResponse? _dataUser;
   bool _isLoading = false;
@@ -39,7 +49,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  set setEmpresaSelecionada(CedenteModel cedente) {
+  set empresaSelecionada(CedenteModel? cedente) {
     _empresaSelecionada = cedente;
     notifyListeners();
   }

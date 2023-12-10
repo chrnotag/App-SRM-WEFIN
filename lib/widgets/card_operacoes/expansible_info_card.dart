@@ -2,7 +2,7 @@ part of 'card_monitor_operacoes.dart';
 
 class _ExpansibleInfoCard extends StatefulWidget {
   final bool isVisible;
-  final List<Assinante> assinantes;
+  final List<Assinantes> assinantes;
 
   const _ExpansibleInfoCard(
       {super.key, required this.isVisible, required this.assinantes});
@@ -98,7 +98,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                                             ...assinanteAtual
                                                 .informacoesAssinante
                                                 .map((procurador) => Text(
-                                                      procurador.nomeProcurador
+                                                      procurador.emailAssinador
                                                           .replaceAll(
                                                               RegExp(
                                                                   r'[\[\],]'),

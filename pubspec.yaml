@@ -58,6 +58,7 @@ dependencies:
   fluttertoast: ^8.2.4
   share_plus: ^7.2.1
   mobile_scanner: ^3.5.4
+  json_annotation: ^4.8.1
 
 flutter_native_splash:
   color: "#1E3870"

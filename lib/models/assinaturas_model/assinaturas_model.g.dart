@@ -14,10 +14,9 @@ AssinaturasModel _$AssinaturasModelFromJson(Map<String, dynamic> json) =>
       statusOperacao: json['statusOperacao'] as String,
       valorBruto: json['valorBruto'] as int,
       valorLiquido: (json['valorLiquido'] as num).toDouble(),
-      dataOperacao: DateTime.parse(json['dataOperacao'] as String),
-      urlAssinador: json['urlAssinador'] as String,
+      dataOperacao: json['dataOperacao'] as String,
       assinantes: (json['assinantes'] as List<dynamic>)
-          .map((e) => Assinante.fromJson(e as Map<String, dynamic>))
+          .map((e) => Assinantes.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -29,12 +28,11 @@ Map<String, dynamic> _$AssinaturasModelToJson(AssinaturasModel instance) =>
       'statusOperacao': instance.statusOperacao,
       'valorBruto': instance.valorBruto,
       'valorLiquido': instance.valorLiquido,
-      'dataOperacao': instance.dataOperacao.toIso8601String(),
-      'urlAssinador': instance.urlAssinador,
+      'dataOperacao': instance.dataOperacao,
       'assinantes': instance.assinantes,
     };
 
-Assinante _$AssinanteFromJson(Map<String, dynamic> json) => Assinante(
+Assinantes _$AssinantesFromJson(Map<String, dynamic> json) => Assinantes(
       nomeAssinante: json['nomeAssinante'] as String,
       identificadorAssinante: json['identificadorAssinante'] as String,
       informacoesAssinante: (json['informacoesAssinante'] as List<dynamic>)
@@ -42,7 +40,8 @@ Assinante _$AssinanteFromJson(Map<String, dynamic> json) => Assinante(
           .toList(),
     );
 
-Map<String, dynamic> _$AssinanteToJson(Assinante instance) => <String, dynamic>{
+Map<String, dynamic> _$AssinantesToJson(Assinantes instance) =>
+    <String, dynamic>{
       'nomeAssinante': instance.nomeAssinante,
       'identificadorAssinante': instance.identificadorAssinante,
       'informacoesAssinante': instance.informacoesAssinante,
@@ -53,13 +52,16 @@ InformacaoAssinante _$InformacaoAssinanteFromJson(Map<String, dynamic> json) =>
       papeis:
           (json['papeis'] as List<dynamic>).map((e) => e as String).toList(),
       documentos: (json['documentos'] as List<dynamic>)
-          .map((e) => e as String)
+          .map((e) => Documentos.fromJson(e as Map<String, dynamic>))
           .toList(),
       identificadorAssinador: json['identificadorAssinador'] as String,
-      nomeProcurador: json['nomeProcurador'] as String,
       tipoAssinatura: json['tipoAssinatura'] as String,
       dataAssinatura: json['dataAssinatura'] as String,
       statusAssinatura: json['statusAssinatura'] as String,
+      emailAssinador: json['emailAssinador'] as String,
+      idRegistroLacuna: json['idRegistroLacuna'] as String,
+      eCPFAssinador: json['eCPFAssinador'] as bool,
+      idAssinaturaDigital: json['idAssinaturaDigital'] as String,
     );
 
 Map<String, dynamic> _$InformacaoAssinanteToJson(
@@ -68,8 +70,22 @@ Map<String, dynamic> _$InformacaoAssinanteToJson(
       'papeis': instance.papeis,
       'documentos': instance.documentos,
       'identificadorAssinador': instance.identificadorAssinador,
-      'nomeProcurador': instance.nomeProcurador,
       'tipoAssinatura': instance.tipoAssinatura,
       'dataAssinatura': instance.dataAssinatura,
       'statusAssinatura': instance.statusAssinatura,
+      'emailAssinador': instance.emailAssinador,
+      'idRegistroLacuna': instance.idRegistroLacuna,
+      'eCPFAssinador': instance.eCPFAssinador,
+      'idAssinaturaDigital': instance.idAssinaturaDigital,
+    };
+
+Documentos _$DocumentosFromJson(Map<String, dynamic> json) => Documentos(
+      idAssinaturaDigital: json['idAssinaturaDigital'] as int,
+      nome: json['nome'] as String,
+    );
+
+Map<String, dynamic> _$DocumentosToJson(Documentos instance) =>
+    <String, dynamic>{
+      'idAssinaturaDigital': instance.idAssinaturaDigital,
+      'nome': instance.nome,
     };

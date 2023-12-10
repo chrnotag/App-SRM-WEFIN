@@ -10,9 +10,8 @@ class AssinaturasModel {
   String statusOperacao;
   int valorBruto;
   double valorLiquido;
-  DateTime dataOperacao;
-  String urlAssinador;
-  List<Assinante> assinantes;
+  String dataOperacao;
+  List<Assinantes> assinantes;
 
   AssinaturasModel({
     required this.codigoOperacao,
@@ -22,7 +21,6 @@ class AssinaturasModel {
     required this.valorBruto,
     required this.valorLiquido,
     required this.dataOperacao,
-    required this.urlAssinador,
     required this.assinantes,
   });
 
@@ -33,44 +31,66 @@ class AssinaturasModel {
 }
 
 @JsonSerializable()
-class Assinante {
+class Assinantes {
   String nomeAssinante;
   String identificadorAssinante;
   List<InformacaoAssinante> informacoesAssinante;
 
-  Assinante({
+  Assinantes({
     required this.nomeAssinante,
     required this.identificadorAssinante,
     required this.informacoesAssinante,
   });
 
-  factory Assinante.fromJson(Map<String, dynamic> json) =>
-      _$AssinanteFromJson(json);
+  factory Assinantes.fromJson(Map<String, dynamic> json) =>
+      _$AssinantesFromJson(json);
 
-  Map<String, dynamic> toJson() => _$AssinanteToJson(this);
+  Map<String, dynamic> toJson() => _$AssinantesToJson(this);
 }
 
 @JsonSerializable()
 class InformacaoAssinante {
   List<String> papeis;
-  List<String> documentos;
+  List<Documentos> documentos;
   String identificadorAssinador;
-  String nomeProcurador;
   String tipoAssinatura;
   String dataAssinatura;
   String statusAssinatura;
+  String emailAssinador;
+  String idRegistroLacuna;
+  bool eCPFAssinador;
+  String idAssinaturaDigital;
 
   InformacaoAssinante({
     required this.papeis,
     required this.documentos,
     required this.identificadorAssinador,
-    required this.nomeProcurador,
     required this.tipoAssinatura,
     required this.dataAssinatura,
     required this.statusAssinatura,
+    required this.emailAssinador,
+    required this.idRegistroLacuna,
+    required this.eCPFAssinador,
+    required this.idAssinaturaDigital,
   });
   factory InformacaoAssinante.fromJson(Map<String, dynamic> json) =>
       _$InformacaoAssinanteFromJson(json);
 
   Map<String, dynamic> toJson() => _$InformacaoAssinanteToJson(this);
+}
+
+@JsonSerializable()
+class Documentos{
+  int idAssinaturaDigital;
+  String nome;
+  Documentos({
+    required this.idAssinaturaDigital,
+    required this.nome,
+});
+
+  factory Documentos.fromJson(Map<String, dynamic> json) =>
+      _$DocumentosFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DocumentosToJson(this);
+
 }
