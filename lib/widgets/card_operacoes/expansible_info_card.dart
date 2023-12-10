@@ -98,11 +98,11 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                                             ...assinanteAtual
                                                 .informacoesAssinante
                                                 .map((procurador) => Text(
-                                                      procurador.emailAssinador
-                                                          .replaceAll(
+                                                      procurador.nomeProcurador != null ?
+                                                          procurador.nomeProcurador!.replaceAll(
                                                               RegExp(
                                                                   r'[\[\],]'),
-                                                              ''),
+                                                              '') : "",
                                                       style: context
                                                           .textTheme.bodySmall,
                                                     ))
@@ -137,8 +137,9 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                                                       style: context
                                                           .textTheme.bodySmall!
                                                           .copyWith(
-                                                              color: CorOperacao.definirCorAssinante(
-                                                                  assinanteAtual)),
+                                                              color: CorOperacao
+                                                                  .definirCorAssinante(
+                                                                      assinanteAtual)),
                                                     ))
                                                 .toList(),
                                           ],
@@ -196,10 +197,12 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                                           ...assinanteAtual.informacoesAssinante
                                               .expand((assinante) => assinante
                                                   .documentos
-                                                  .map((documentos) => Text(
-                                                        documentos.replaceAll(
-                                                            RegExp(r'[\[\],]'),
-                                                            ''),
+                                                  .map((documento) => Text(
+                                                        documento.nome
+                                                            .replaceAll(
+                                                                RegExp(
+                                                                    r'[\[\],]'),
+                                                                ''),
                                                         style: context.textTheme
                                                             .bodySmall,
                                                       )))
@@ -255,10 +258,10 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                                           ...assinanteAtual.informacoesAssinante
                                               .map((dataAssinatura) => Text(
                                                     dataAssinatura
-                                                        .dataAssinatura
-                                                        .replaceAll(
+                                                        .dataAssinatura != null ?
+                                                        dataAssinatura.dataAssinatura!.replaceAll(
                                                             RegExp(r'[\[\],]'),
-                                                            ''),
+                                                            '') : "",
                                                     style: context
                                                         .textTheme.bodySmall,
                                                   ))
@@ -509,7 +512,9 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                                                   Expanded(
                                                     child: ElevatedButton(
                                                         onPressed: () {
-                                                          Modular.to.pushNamed(AppRoutes.importarCertificadoRoute);
+                                                          Modular.to.pushNamed(
+                                                              AppRoutes
+                                                                  .importarCertificadoRoute);
                                                         },
                                                         style: ElevatedButton.styleFrom(
                                                             backgroundColor:
@@ -592,5 +597,4 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
           )
         : Container();
   }
-
 }

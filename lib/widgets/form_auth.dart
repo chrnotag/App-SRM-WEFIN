@@ -14,6 +14,7 @@ import 'package:validatorless/validatorless.dart';
 
 import '../generated/assets.dart';
 import 'link_component.dart';
+import 'loader_widget.dart';
 
 class AuthForm extends StatefulWidget {
   final String label;
@@ -38,23 +39,34 @@ class _AuthFormState extends State<AuthForm> {
     super.dispose();
   }
 
+  OverlayState? overlay;
+  final overlayLoader = OverlayEntry(
+    builder: (context) =>
+    const Material(
+      color: Colors.transparent,
+      child: Loader(),
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
+    overlay = Overlay.of(context);
     return Form(
       key: _formKey,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           WefinTextFormField(
-            onTap: () => setState(() {
-              _mensagemErro = null;
-            }),
+            onTap: () =>
+                setState(() {
+                  _mensagemErro = null;
+                }),
             label: 'Digite seu email',
             controller: _loginEC,
             validator: Validatorless.multiple([
               Validatorless.email('Email inválido!'),
               Validatorless.required('Email Obrigatório'),
-              (value) => _mensagemErro
+                  (value) => _mensagemErro
             ]),
           ),
           const SizedBox(height: 20),
@@ -70,7 +82,7 @@ class _AuthFormState extends State<AuthForm> {
               if (!widget.visible) Validatorless.cpf('CPF Inválido!'),
               Validatorless.min(
                   3, 'Senha com no mínimo 3 e máximo 10 caracteres.'),
-              (value) => _mensagemErro
+                  (value) => _mensagemErro
             ]),
           ),
           const SizedBox(height: 20),
@@ -106,32 +118,28 @@ class _AuthFormState extends State<AuthForm> {
     final authProvider = Modular.get<AuthProvider>();
     _mensagemErro = null;
     if (_formKey.currentState!.validate()) {
-      authProvider.setLoading();
-      if (_loginEC.text == "teste@gmail.com" && _passwordEC.text == "123") {
-        authProvider.setDataUser = UsuariosData.dadosUsuarios;
-        authProvider.setLoading();
-        Modular.to.navigate(AppRoutes.listaSelecaoEmpresasRoute);
+      setState(() {
+        overlay!.insert(overlayLoader);
+      });
+      log(authProvider.isLoading.toString());
+      final userModel = UserModel(
+          nomeUsuario: _loginEC.text,
+          senha: _passwordEC.text,
+          idDevice: await DeviceUtils().getDeviceID());
+      final response = await authProvider.login(userModel);
+      overlayLoader.remove();
+      log(authProvider.isLoading.toString());
+      if (response != null && response.error != null) {
+        final error = response.error as ExceptionModel;
+        setState(() {
+          if (error.codigo == '500') {
+            _mensagemErro = error.mensagem;
+          } else {
+            _mensagemErro = "Usuário ou senha Incorretos";
+          }
+        });
       } else {
-        log(authProvider.isLoading.toString());
-        final userModel = UserModel(
-            nomeUsuario: _loginEC.text,
-            senha: _passwordEC.text,
-            idDevice: await DeviceUtils().getDeviceID());
-        final response = await authProvider.login(userModel);
-        authProvider.setLoading();
-        log(authProvider.isLoading.toString());
-        if (response.error != null) {
-          final error = response.error as ExceptionModel;
-          setState(() {
-            if (error.codigo == '500') {
-              _mensagemErro = error.mensagem;
-            } else {
-              _mensagemErro = "Usuário ou senha Incorretos";
-            }
-          });
-        } else {
-          Modular.to.navigate(AppRoutes.listaSelecaoEmpresasRoute);
-        }
+        Modular.to.navigate(AppRoutes.listaSelecaoEmpresasRoute);
       }
     }
   }
@@ -149,7 +157,8 @@ class _AuthFormState extends State<AuthForm> {
                   onPressed: () {
                     Modular.to.pop();
                   },
-                  style: ElevatedButton.styleFrom(backgroundColor: AppColors.botaoEnvio),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.botaoEnvio),
                   child: const Text("OK")),
             ),
           ],

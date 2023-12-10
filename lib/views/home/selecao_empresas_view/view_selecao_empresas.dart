@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -33,7 +35,6 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
   void initState() {
     super.initState();
     _searchController.addListener(_onSearchChanged);
-    _searchResults = authProvider.listaCedente;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final SessionProvider sessionProvider = Modular.get<SessionProvider>();
       sessionProvider.startListening();
@@ -145,6 +146,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
 
   @override
   Widget build(BuildContext context) {
+    _searchResults = authProvider.listaCedente;
     final AuthProvider provider = context.watch<AuthProvider>();
     final AssinaturaProvider assinaturaProvider =
         context.watch<AssinaturaProvider>();
@@ -221,13 +223,15 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                                     _searchResults?[index].identificador);
 
                             final respostaLogin =
-                                authProvider.login(credenciaisLogin);
-                            if (respostaLogin.error != null) {
+                                await authProvider.login(credenciaisLogin);
+                            if (respostaLogin != null && respostaLogin.error != null) {
+                              log('erro login');
                               _erroTrocaCedente(respostaLogin, overlayLoader);
                             } else {
                               final respostaAssinatura =
                                   await assinaturaProvider.pegarAssinaturas();
                               if (respostaAssinatura.error != null) {
+                                log('erro assinatura');
                                 _erroTrocaCedente(
                                     respostaAssinatura, overlayLoader);
                               } else {
@@ -259,6 +263,6 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
     setState(() {
       overlayLoader.remove();
     });
-    Fluttertoast.showToast(msg: 'Erro: ${error.mensagem}');
+    Fluttertoast.showToast(msg: 'Erro: ${error.mensagem}, ${error.erros}, ${error.httpStatus}');
   }
 }

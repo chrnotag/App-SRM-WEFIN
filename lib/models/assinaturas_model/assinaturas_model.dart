@@ -8,7 +8,7 @@ class AssinaturasModel {
   String statusAssinaturaDigital;
   String siglaProduto;
   String statusOperacao;
-  int valorBruto;
+  double valorBruto;
   double valorLiquido;
   String dataOperacao;
   List<Assinantes> assinantes;
@@ -54,12 +54,13 @@ class InformacaoAssinante {
   List<Documentos> documentos;
   String identificadorAssinador;
   String tipoAssinatura;
-  String dataAssinatura;
+  String? dataAssinatura;
   String statusAssinatura;
-  String emailAssinador;
-  String idRegistroLacuna;
-  bool eCPFAssinador;
-  String idAssinaturaDigital;
+  String? emailAssinador;
+  String? idRegistroLacuna;
+  bool? eCPFAssinador;
+  String? idAssinaturaDigital;
+  String? nomeProcurador;
 
   InformacaoAssinante({
     required this.papeis,
@@ -68,11 +69,13 @@ class InformacaoAssinante {
     required this.tipoAssinatura,
     required this.dataAssinatura,
     required this.statusAssinatura,
-    required this.emailAssinador,
-    required this.idRegistroLacuna,
-    required this.eCPFAssinador,
-    required this.idAssinaturaDigital,
+    this.emailAssinador,
+    this.idRegistroLacuna,
+    this.eCPFAssinador,
+    this.idAssinaturaDigital,
+    this.nomeProcurador,
   });
+
   factory InformacaoAssinante.fromJson(Map<String, dynamic> json) =>
       _$InformacaoAssinanteFromJson(json);
 
@@ -80,17 +83,17 @@ class InformacaoAssinante {
 }
 
 @JsonSerializable()
-class Documentos{
+class Documentos {
   int idAssinaturaDigital;
   String nome;
+
   Documentos({
     required this.idAssinaturaDigital,
     required this.nome,
-});
+  });
 
   factory Documentos.fromJson(Map<String, dynamic> json) =>
       _$DocumentosFromJson(json);
 
   Map<String, dynamic> toJson() => _$DocumentosToJson(this);
-
 }

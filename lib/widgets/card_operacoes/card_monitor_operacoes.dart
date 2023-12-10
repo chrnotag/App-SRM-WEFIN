@@ -79,8 +79,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                 children: [
                                   _ComponentCardOperacoes(
                                       title: 'Data',
-                                      label: DateFormat('dd/MM/yyyy')
-                                          .format(assinatura.dataOperacao)),
+                                      label: assinatura.dataOperacao.replaceAll("-", "/")),
                                   const SizedBox(
                                     height: 10,
                                   ),

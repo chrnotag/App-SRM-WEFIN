@@ -19,16 +19,14 @@ class AssinaturaImpl {
       log('status code ${response.statusCode}');
       if (response.statusCode == 200) {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
-        log('$responseBody');
-        final data = List<AssinaturasModel>.from(
-            responseBody.map((model) => AssinaturasModel.fromJson(model)));
-        log('data: $data');
+        List<AssinaturasModel> data = [];
+          data = List<AssinaturasModel>.from(
+              responseBody.map((model) => AssinaturasModel.fromJson(model)));
         assinaturaProvider.assinaturas = data;
         return SucessResponse(data);
       } else {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = ExceptionModel.fromJson(responseBody);
-        log('error: $data');
         return ErrorResponse(data);
       }
     } catch (e) {

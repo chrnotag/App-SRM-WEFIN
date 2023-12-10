@@ -12,7 +12,7 @@ AssinaturasModel _$AssinaturasModelFromJson(Map<String, dynamic> json) =>
       statusAssinaturaDigital: json['statusAssinaturaDigital'] as String,
       siglaProduto: json['siglaProduto'] as String,
       statusOperacao: json['statusOperacao'] as String,
-      valorBruto: json['valorBruto'] as int,
+      valorBruto: (json['valorBruto'] as num).toDouble(),
       valorLiquido: (json['valorLiquido'] as num).toDouble(),
       dataOperacao: json['dataOperacao'] as String,
       assinantes: (json['assinantes'] as List<dynamic>)
@@ -56,12 +56,13 @@ InformacaoAssinante _$InformacaoAssinanteFromJson(Map<String, dynamic> json) =>
           .toList(),
       identificadorAssinador: json['identificadorAssinador'] as String,
       tipoAssinatura: json['tipoAssinatura'] as String,
-      dataAssinatura: json['dataAssinatura'] as String,
+      dataAssinatura: json['dataAssinatura'] as String?,
       statusAssinatura: json['statusAssinatura'] as String,
-      emailAssinador: json['emailAssinador'] as String,
-      idRegistroLacuna: json['idRegistroLacuna'] as String,
-      eCPFAssinador: json['eCPFAssinador'] as bool,
-      idAssinaturaDigital: json['idAssinaturaDigital'] as String,
+      emailAssinador: json['emailAssinador'] as String?,
+      idRegistroLacuna: json['idRegistroLacuna'] as String?,
+      eCPFAssinador: json['eCPFAssinador'] as bool?,
+      idAssinaturaDigital: json['idAssinaturaDigital'] as String?,
+      nomeProcurador: json['nomeProcurador'] as String?,
     );
 
 Map<String, dynamic> _$InformacaoAssinanteToJson(
@@ -77,6 +78,7 @@ Map<String, dynamic> _$InformacaoAssinanteToJson(
       'idRegistroLacuna': instance.idRegistroLacuna,
       'eCPFAssinador': instance.eCPFAssinador,
       'idAssinaturaDigital': instance.idAssinaturaDigital,
+      'nomeProcurador': instance.nomeProcurador,
     };
 
 Documentos _$DocumentosFromJson(Map<String, dynamic> json) => Documentos(

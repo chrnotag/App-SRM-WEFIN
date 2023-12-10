@@ -11,27 +11,28 @@ class AssinaturaProvider extends ChangeNotifier {
 
   factory AssinaturaProvider() => _instance;
 
-  pegarAssinaturas() =>
-      AssinaturaImpl().assinaturas();
+  pegarAssinaturas() => AssinaturaImpl().assinaturas();
 
   set assinaturas(List<AssinaturasModel> assinaturasModel) {
     separaAssinaturas(assinaturasModel);
+    //Adicionar a lista total a uma variavel get para assinaturas
+    todasAssinaturas = assinaturasModel;
     notifyListeners();
   }
 
+  List<AssinaturasModel> _assinaturas = [];
+
+  List<AssinaturasModel> get todasAssinaturas => _assinaturas;
+
+  set todasAssinaturas(List<AssinaturasModel> assinaturas) =>
+      _assinaturas = assinaturas;
+
   List<AssinaturasModel> _assinaturasPendentes = [];
-  List<AssinaturasModel> _acompanharAssinaturas = [];
 
-  List<AssinaturasModel> get acompanharAssinaturas => _assinaturasPendentes;
-
-  set acompanharAssinaturas(List<AssinaturasModel> docs) {
-    _assinaturasPendentes = docs;
-  }
-
-  List<AssinaturasModel> get assinaturasPendentes => _acompanharAssinaturas;
+  List<AssinaturasModel> get assinaturasPendentes => _assinaturasPendentes;
 
   set assinaturasPendentes(List<AssinaturasModel> docs) {
-    _acompanharAssinaturas = docs;
+    _assinaturasPendentes = docs;
   }
 
   String notificacaoPendentes() {
@@ -47,8 +48,6 @@ class AssinaturaProvider extends ChangeNotifier {
                   authProvider.dataUser!.identificadorUsuario &&
               info.statusAssinatura != "Assinado"));
       if (assinadoPeloUsuario) {
-        _acompanharAssinaturas.add(assinatura);
-      } else {
         _assinaturasPendentes.add(assinatura);
       }
     }
@@ -57,7 +56,6 @@ class AssinaturaProvider extends ChangeNotifier {
 
   void limparAssinaturas() {
     assinaturasPendentes = [];
-    acompanharAssinaturas = [];
     notifyListeners();
   }
 }

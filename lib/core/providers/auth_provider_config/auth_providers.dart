@@ -13,11 +13,10 @@ class AuthProvider extends ChangeNotifier {
     return _instance;
   }
 
-  login(UserModel userModel) {
+  Future<dynamic> login(UserModel userModel) async {
     credenciaisUsuario = userModel;
-    LoginImpl(userModel: userModel).login();
+    await LoginImpl(userModel: userModel).login();
   }
-
   late UserModel _credenciaisUsuario;
 
   UserModel get credenciaisUsuario => _credenciaisUsuario;

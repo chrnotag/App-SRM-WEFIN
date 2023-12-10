@@ -16,7 +16,7 @@ class MonitorOperacoes extends StatelessWidget {
     final AssinaturaProvider assinaturaProvider =
         Modular.get<AssinaturaProvider>();
     List<AssinaturasModel> assinaturas =
-        assinaturaProvider.acompanharAssinaturas;
+        assinaturaProvider.assinaturasPendentes;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,
