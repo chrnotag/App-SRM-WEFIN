@@ -137,8 +137,6 @@ class _AuthFormState extends State<AuthForm> {
           }
         });
       } else {
-        authProvider.empresaSelecionada =
-            authProvider.dataUser!.listaCedente[0];
         Modular.to.navigate(AppRoutes.listaSelecaoEmpresasRoute);
       }
     }

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:crosspki/crosspki.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -7,8 +8,10 @@ import 'package:intl/intl.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
+import 'package:modular_study/core/providers/certificado_provider/importar_certificadode.dart';
 import 'package:modular_study/core/utils/cor_operacao.dart';
 import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
+import 'package:modular_study/views/home/assinaturas/selecionar_certificado.dart';
 
 part 'component_card_operacoes.dart';
 part 'expansible_card.dart';

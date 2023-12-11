@@ -37,6 +37,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
                   'Por favor, informe a senha do certificado.'),
               (value) => provider.errorMsg
             ]),
+            obscureText: true,
             controller: textController,
             decoration: InputDecoration(
                 hintText: 'Informe a senha do certificado.',
@@ -81,7 +82,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
                 Expanded(
                   child: TextButton(
                     onPressed: () {
-                      Modular.to.navigate(AppRoutes.importarCertificadoRoute);
+                      Modular.to.navigate(AppRoutes.assinaturaDigitalRoute);
                     },
                     style: TextButton.styleFrom(
                         backgroundColor: Colors.transparent,

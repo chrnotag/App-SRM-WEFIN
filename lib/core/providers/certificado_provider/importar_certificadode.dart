@@ -32,10 +32,26 @@ class ImportarCertificadoProvider extends ChangeNotifier {
 
   String? get senhaCertificado => _senhaCertificado;
 
+  List<PKCertificate> listaCertificados = [];
+
+  Future<List<PKCertificate>> listaCertificadosFuture() async {
+    listaCertificados = await CrossPki.listCertificatesWithKey();
+    return listaCertificados;
+  }
+
+  Future<void> deletarCertificado(String thumbprint) async{
+    await CrossPki.removeCertificate(thumbprint);
+    listaCertificados.removeWhere((element) => element.thumbprint == thumbprint);
+    Fluttertoast.showToast(msg: 'Certificado removido com sucesso');
+    notifyListeners();
+  }
+
   set senhaCertificado(String? senha) {
     _senhaCertificado = senha;
     notifyListeners();
   }
+
+
 
   void limparErro() {
     errorMsg = null;
@@ -74,7 +90,6 @@ class ImportarCertificadoProvider extends ChangeNotifier {
     try {
       await CrossPki.importPkcs12(pkcs12, senhaCertificado!);
       var certs = await CrossPki.listCertificatesWithKey();
-      Modular.to.navigate(AppRoutes.importarCertificadoRoute);
       Fluttertoast.showToast(msg: 'Certificado ${certs.first.subjectDisplayName} importado com sucesso!');
       return true;
     } on CrossPkiException catch (e) {
