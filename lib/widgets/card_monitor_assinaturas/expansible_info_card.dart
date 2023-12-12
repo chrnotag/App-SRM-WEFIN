@@ -1,4 +1,4 @@
-part of 'card_monitor_operacoes.dart';
+part of 'card_monitor_assinaturas.dart';
 
 class _ExpansibleInfoCard extends StatefulWidget {
   final bool isVisible;

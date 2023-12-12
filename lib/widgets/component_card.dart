@@ -1,11 +1,14 @@
-part of 'card_monitor_operacoes.dart';
+import 'package:flutter/material.dart';
+import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 
-class _ComponentCardOperacoes extends StatelessWidget {
+import '../core/constants/themes/theme_configs.dart';
+
+class ComponentCardOperacoes extends StatelessWidget {
   final String title;
   final String label;
   final TextStyle? textStyle;
 
-  const _ComponentCardOperacoes(
+  const ComponentCardOperacoes(
       {super.key, required this.title, required this.label, this.textStyle});
 
   @override

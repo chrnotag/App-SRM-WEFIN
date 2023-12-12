@@ -7,7 +7,7 @@ import 'package:modular_study/core/providers/auth_provider_config/auth_providers
 import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
 import 'package:modular_study/widgets/appbar_logo_perfil.dart';
 import 'package:modular_study/widgets/botao_selecao_empresa.dart';
-import 'package:modular_study/widgets/card_operacoes/card_monitor_operacoes.dart';
+import 'package:modular_study/widgets/card_monitor_assinaturas/card_monitor_assinaturas.dart';
 
 class AssinaturaDigital extends StatefulWidget {
   const AssinaturaDigital({super.key});
@@ -76,16 +76,14 @@ class _AssinaturaDigitalState extends State<AssinaturaDigital>
                   ListView.builder(
                     shrinkWrap: true,
                     itemCount: assinaturas.length,
-                    itemBuilder: (context, index) => CardMonitorOperacoes(
-                      showMoreInfo: true,
+                    itemBuilder: (context, index) => CardMonitorAssinaturas(
                       assinatura: assinaturas[index],
                     ),
                   ),
                   ListView.builder(
                     shrinkWrap: true,
                     itemCount: assinados.length,
-                    itemBuilder: (context, index) => CardMonitorOperacoes(
-                      showMoreInfo: true,
+                    itemBuilder: (context, index) => CardMonitorAssinaturas(
                       assinatura: assinados[index],
                     ),
                   ),

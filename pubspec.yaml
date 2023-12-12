@@ -130,7 +130,6 @@ flutter:
     - assets/images/2.0x/
     - assets/images/3.0x/
     - assets/images/readme/
-    - lib/widgets/card_operacoes/
     - assets/img/
     - assets/icons/
 
