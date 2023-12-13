@@ -11,11 +11,22 @@ class AssinaturaProvider extends ChangeNotifier {
 
   factory AssinaturaProvider() => _instance;
 
-  pegarAssinaturas() => AssinaturaImpl().assinaturas();
+  pegarAssinaturas() {
+    return AssinaturaImpl().assinaturas();
+  }
 
   set assinaturas(List<AssinaturasModel> assinaturasModel) {
     separaAssinaturas(assinaturasModel);
     todasAssinaturas = assinaturasModel;
+    notifyListeners();
+  }
+
+  AssinaturasModel? _assinaturaSelecionada;
+
+  AssinaturasModel? get assinaturaSelecionada => _assinaturaSelecionada;
+
+  set assinaturaSelecionada(AssinaturasModel? assinatura) {
+    _assinaturaSelecionada = assinatura;
     notifyListeners();
   }
 

@@ -23,7 +23,6 @@ class LoginImpl {
     const url = EndPoints.login;
     const headers = {'Content-Type': 'application/json; charset=utf-8'};
     final body = json.encode(userModel.toJson());
-
     try {
       final response =
           await http.post(Uri.parse(url), headers: headers, body: body);

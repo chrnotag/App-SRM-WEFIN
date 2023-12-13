@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
+import 'package:modular_study/core/providers/assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/certificado_provider/importar_certificadode.dart';
 import 'package:modular_study/core/utils/cor_operacao.dart';
 import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
@@ -17,8 +18,10 @@ part 'expansible_info_card.dart';
 
 class CardMonitorAssinaturas extends StatefulWidget {
   final AssinaturasModel assinatura;
+  final bool assinarDocumento;
 
-  const CardMonitorAssinaturas({super.key, required this.assinatura});
+  const CardMonitorAssinaturas(
+      {super.key, required this.assinatura, this.assinarDocumento = false});
 
   @override
   State<CardMonitorAssinaturas> createState() => _CardMonitorAssinaturasState();
@@ -30,6 +33,8 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas> {
   @override
   Widget build(BuildContext context) {
     final assinatura = widget.assinatura;
+    final AssinaturaProvider assinaturaProvider =
+        context.watch<AssinaturaProvider>();
     return Card(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -128,6 +133,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas> {
                 AnimatedSize(
                   duration: const Duration(milliseconds: 500),
                   child: _ExpansibleInfoCard(
+                    assinarDocumento: widget.assinarDocumento,
                     isVisible: _showInfo,
                     assinantes: assinatura.assinantes,
                   ),
@@ -135,6 +141,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas> {
                 FooterExpansible(
                   onToggle: () {
                     setState(() {
+                      assinaturaProvider.assinaturaSelecionada = assinatura;
                       _showInfo = !_showInfo;
                     });
                   },

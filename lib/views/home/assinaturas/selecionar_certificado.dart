@@ -5,7 +5,9 @@ import 'package:crosspki/crosspki.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
+import 'package:modular_study/core/providers/assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/certificado_provider/importar_certificadode.dart';
+import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
 
 import '../../../../core/constants/themes/theme_configs.dart';
 
@@ -16,13 +18,15 @@ class SelecionarCertificado extends StatelessWidget {
   Widget build(BuildContext context) {
     final ImportarCertificadoProvider certificadoProvider =
         context.watch<ImportarCertificadoProvider>();
-
+    final AssinaturaProvider assinaturaProvider =
+        context.watch<AssinaturaProvider>();
     final double itemHeight = 50;
     final double maxHeight = 200;
     return AlertDialog(
       title: Column(
         children: [
-          Text('Assinar Operação',
+          Text(
+              'Assinar Operação ${assinaturaProvider.assinaturaSelecionada!.codigoOperacao}',
               style: context.textTheme.titleSmall!.copyWith(
                 color: AppColors.globalBackground,
                 fontWeight: FontWeight.w300,
@@ -74,102 +78,109 @@ class SelecionarCertificado extends StatelessWidget {
                                             .copyWith(color: Colors.white),
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0),
-                                      child: InkWell(
-                                          onTap: () async {
-                                            showDialog(
-                                              context: context,
-                                              builder: (context) => AlertDialog(
-                                                title: Column(
-                                                  children: [
-                                                    Padding(
-                                                      padding: const EdgeInsets.only(bottom: 8.0),
-                                                      child: Text(
-                                                        'Excluir',
-                                                        style: context.textTheme
-                                                            .bodyLarge!
-                                                            .copyWith(
-                                                          fontSize: 16,
-                                                            color: AppColors.globalBackground),
-                                                      ),
+                                    InkWell(
+                                        onTap: () async {
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) => AlertDialog(
+                                              title: Column(
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            bottom: 8.0),
+                                                    child: Text(
+                                                      'Excluir',
+                                                      style: context.textTheme
+                                                          .bodyLarge!
+                                                          .copyWith(
+                                                              fontSize: 16,
+                                                              color: AppColors
+                                                                  .globalBackground),
                                                     ),
-                                                    Text(
-                                                        'Você tem certeza que deseja excluir o certifcado?', style: context.textTheme.bodyMedium!.copyWith(),),
-                                                    Padding(
-                                                      padding: EdgeInsets.only(
-                                                          top: 8),
-                                                      child: Row(
-                                                        mainAxisSize: MainAxisSize.max,
-                                                        children: [
-                                                          Expanded(
-                                                            child: ElevatedButton(
-                                                                onPressed: () {
-                                                                  certificadoProvider
-                                                                      .deletarCertificado(
-                                                                          certificadoProvider
-                                                                              .listaCertificados[
-                                                                                  index]
-                                                                              .thumbprint);
-                                                                  Modular.to.pop();
-                                                                },
-                                                                style: ElevatedButton
-                                                                    .styleFrom(
-                                                                  backgroundColor:
-                                                                      AppColors
-                                                                          .botaoEnvio,
-                                                                ),
-                                                                child: const Text(
-                                                                    'Excluir')),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Row(
+                                                  ),
+                                                  Text(
+                                                    'Você tem certeza que deseja excluir o certifcado?',
+                                                    style: context
+                                                        .textTheme.bodyMedium!
+                                                        .copyWith(),
+                                                  ),
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        top: 8),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
                                                       children: [
                                                         Expanded(
-                                                          child: ElevatedButton(
-                                                            onPressed: () {
-                                                              Modular.to.pop();
-                                                            },
-                                                            style: ElevatedButton.styleFrom(
-                                                                backgroundColor:
-                                                                    Colors.white,
-                                                                shadowColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                shape: RoundedRectangleBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(
-                                                                                4),
-                                                                    side: const BorderSide(
-                                                                        color: AppColors
+                                                          child:
+                                                              ElevatedButton(
+                                                                  onPressed:
+                                                                      () {
+                                                                    certificadoProvider.deletarCertificado(certificadoProvider
+                                                                        .listaCertificados[
+                                                                            index]
+                                                                        .thumbprint);
+                                                                    Modular.to
+                                                                        .pop();
+                                                                  },
+                                                                  style: ElevatedButton
+                                                                      .styleFrom(
+                                                                    backgroundColor:
+                                                                        AppColors
                                                                             .botaoEnvio,
-                                                                        width: 1))),
-                                                            child: Text(
-                                                              'Cancelar',
-                                                              style: context.textTheme
-                                                                  .bodyLarge!
-                                                                  .copyWith(
-                                                                      color: AppColors
-                                                                          .botaoEnvio),
-                                                            ),
-                                                          ),
+                                                                  ),
+                                                                  child: const Text(
+                                                                      'Excluir')),
                                                         ),
                                                       ],
-                                                    )
-                                                  ],
-                                                ),
+                                                    ),
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Expanded(
+                                                        child: ElevatedButton(
+                                                          onPressed: () {
+                                                            Modular.to.pop();
+                                                          },
+                                                          style: ElevatedButton.styleFrom(
+                                                              backgroundColor:
+                                                                  Colors
+                                                                      .white,
+                                                              shadowColor: Colors
+                                                                  .transparent,
+                                                              shape: RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              4),
+                                                                  side: const BorderSide(
+                                                                      color: AppColors
+                                                                          .botaoEnvio,
+                                                                      width:
+                                                                          1))),
+                                                          child: Text(
+                                                            'Cancelar',
+                                                            style: context
+                                                                .textTheme
+                                                                .bodyLarge!
+                                                                .copyWith(
+                                                                    color: AppColors
+                                                                        .botaoEnvio),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
                                               ),
-                                            );
-                                          },
-                                          child: const Icon(
-                                            Icons.close,
-                                            size: 20,
-                                          )),
-                                    )
+                                            ),
+                                          );
+                                        },
+                                        child: const Icon(
+                                          Icons.close,
+                                          size: 20,
+                                        ))
                                   ],
                                 ),
                               ),

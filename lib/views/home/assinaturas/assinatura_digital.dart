@@ -77,6 +77,7 @@ class _AssinaturaDigitalState extends State<AssinaturaDigital>
                     shrinkWrap: true,
                     itemCount: assinaturas.length,
                     itemBuilder: (context, index) => CardMonitorAssinaturas(
+                      assinarDocumento: true,
                       assinatura: assinaturas[index],
                     ),
                   ),
