@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/utils/cor_operacao.dart';
 import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
 import '../component_card.dart';
 
 class CardMonitorOperacoes extends StatefulWidget {
   final AssinaturasModel assinatura;
 
-  const CardMonitorOperacoes(
-      {super.key, required this.assinatura});
+  const CardMonitorOperacoes({super.key, required this.assinatura});
 
   @override
   State<CardMonitorOperacoes> createState() => _CardMonitorOperacoesState();
 }
 
 class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
-
   @override
   Widget build(BuildContext context) {
     final assinatura = widget.assinatura;
@@ -56,11 +53,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                   ComponentCardOperacoes(
                                       title: 'Status',
                                       label: assinatura.statusOperacao,
-                                      textStyle: context.textTheme.bodySmall!
-                                          .copyWith(
-                                              color: CorOperacao
-                                                  .definirCorOperacao(
-                                                      assinatura)))
+                                      textStyle: context.textTheme.bodySmall)
                                 ],
                               ),
                               Column(
@@ -70,8 +63,9 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                 children: [
                                   ComponentCardOperacoes(
                                       title: 'Data',
-                                      label: assinatura.dataOperacao
-                                          .replaceAll("-", "/")),
+                                      label: DateFormat("dd/MM/yyyy").format(
+                                          DateTime.parse(
+                                              assinatura.dataOperacao))),
                                   const SizedBox(
                                     height: 10,
                                   ),
@@ -113,7 +107,8 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Ver Assinaturas'),
-                      ElevatedButton(onPressed: (){}, child: Text('Assinaturas'))
+                      ElevatedButton(
+                          onPressed: () {}, child: Text('Assinaturas'))
                     ],
                   ),
                 )
@@ -124,11 +119,9 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
             width: 30,
             height: 180,
             decoration: BoxDecoration(
-              color: CorOperacao.definirCorOperacao(assinatura),
               borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(5),
-                bottomRight: Radius.circular(5)
-              ),
+                  topRight: Radius.circular(5),
+                  bottomRight: Radius.circular(5)),
             ),
           ),
         ],

@@ -4,11 +4,8 @@ import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/implementations_config/export_impl.dart';
-import 'package:modular_study/core/providers/assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
 import 'package:modular_study/core/utils/get_device_infos.dart';
-import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
-import 'package:modular_study/models/auth_login_models/usuario_logado_model.dart';
 import 'package:modular_study/models/user_model.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_textfield.dart';
@@ -156,7 +153,7 @@ class _AuthFormState extends State<AuthForm> {
                     Modular.to.pop();
                   },
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.botaoEnvio),
+                      backgroundColor: AppColors.statusAzul),
                   child: const Text("OK")),
             ),
           ],
@@ -179,7 +176,7 @@ class _AuthFormState extends State<AuthForm> {
           ),
         ],
       ),
-      icon: SvgPicture.asset(Assets.iconsCheck, color: AppColors.success),
+      icon: SvgPicture.asset(Assets.iconsCheck, color: AppColors.statusVerde),
     );
     showDialog(
         context: context,

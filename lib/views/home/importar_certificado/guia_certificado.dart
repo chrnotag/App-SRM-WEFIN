@@ -72,7 +72,7 @@ class _GuiaImportCertificadoState extends State<GuiaImportCertificado> {
                         duration: Duration(milliseconds: 300),
                         curve: Curves.linear);
                   },
-                  backgroundColor: AppColors.botaoEnvio,
+                  backgroundColor: AppColors.statusAzul,
                   mini: true,
                   child: const Icon(Icons.arrow_forward),
                 ),
@@ -88,7 +88,7 @@ class _GuiaImportCertificadoState extends State<GuiaImportCertificado> {
                       duration: Duration(milliseconds: 300),
                       curve: Curves.linear);
                 },
-                backgroundColor: AppColors.botaoEnvio,
+                backgroundColor: AppColors.statusAzul,
                 mini: true,
                 child: const Icon(Icons.arrow_back),
               ),

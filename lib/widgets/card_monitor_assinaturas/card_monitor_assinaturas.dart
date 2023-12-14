@@ -7,7 +7,6 @@ import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/providers/assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/certificado_provider/importar_certificadode.dart';
-import 'package:modular_study/core/utils/cor_operacao.dart';
 import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
 import 'package:modular_study/views/home/assinaturas/selecionar_certificado.dart';
 
@@ -35,6 +34,10 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas> {
     final assinatura = widget.assinatura;
     final AssinaturaProvider assinaturaProvider =
         context.watch<AssinaturaProvider>();
+    final String statusAssinatura =
+        assinaturaProvider.traduzirStatusAssinaturas(assinatura);
+    final Color corAssinatura =
+        assinaturaProvider.definirCorStatusAssinatura(statusAssinatura);
     return Card(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -70,12 +73,9 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas> {
                                   ),
                                   ComponentCardOperacoes(
                                       title: 'Status',
-                                      label: assinatura.statusOperacao,
+                                      label: statusAssinatura,
                                       textStyle: context.textTheme.bodySmall!
-                                          .copyWith(
-                                              color: CorOperacao
-                                                  .definirCorOperacao(
-                                                      assinatura)))
+                                          .copyWith(color: corAssinatura)),
                                 ],
                               ),
                               Column(
@@ -85,8 +85,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas> {
                                 children: [
                                   ComponentCardOperacoes(
                                       title: 'Data',
-                                      label: assinatura.dataOperacao
-                                          .replaceAll("-", "/")),
+                                      label: DateFormat("dd/MM/yyyy").format(DateTime.parse(assinatura.dataOperacao))),
                                   const SizedBox(
                                     height: 10,
                                   ),
@@ -121,7 +120,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas> {
                       Container(
                         width: 30,
                         decoration: BoxDecoration(
-                          color: CorOperacao.definirCorOperacao(assinatura),
+                          color: corAssinatura,
                           borderRadius: const BorderRadius.only(
                             topRight: Radius.circular(5),
                           ),

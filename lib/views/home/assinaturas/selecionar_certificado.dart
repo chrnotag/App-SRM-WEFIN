@@ -128,7 +128,7 @@ class SelecionarCertificado extends StatelessWidget {
                                                                       .styleFrom(
                                                                     backgroundColor:
                                                                         AppColors
-                                                                            .botaoEnvio,
+                                                                            .statusAzul,
                                                                   ),
                                                                   child: const Text(
                                                                       'Excluir')),
@@ -156,7 +156,7 @@ class SelecionarCertificado extends StatelessWidget {
                                                                               4),
                                                                   side: const BorderSide(
                                                                       color: AppColors
-                                                                          .botaoEnvio,
+                                                                          .statusAzul,
                                                                       width:
                                                                           1))),
                                                           child: Text(
@@ -166,7 +166,7 @@ class SelecionarCertificado extends StatelessWidget {
                                                                 .bodyLarge!
                                                                 .copyWith(
                                                                     color: AppColors
-                                                                        .botaoEnvio),
+                                                                        .statusAzul),
                                                           ),
                                                         ),
                                                       ),
@@ -205,7 +205,7 @@ class SelecionarCertificado extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.botaoEnvio,
+                      backgroundColor: AppColors.statusAzul,
                     ),
                     child: const Padding(
                       padding: EdgeInsets.symmetric(vertical: 8.0),
@@ -238,7 +238,7 @@ class SelecionarCertificado extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(4),
                             side: const BorderSide(
-                                color: AppColors.botaoEnvio, width: 1))),
+                                color: AppColors.statusAzul, width: 1))),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Padding(
@@ -246,7 +246,7 @@ class SelecionarCertificado extends StatelessWidget {
                         child: Text(
                           'Importar novo certificado',
                           style: context.textTheme.bodyLarge!
-                              .copyWith(color: AppColors.botaoEnvio),
+                              .copyWith(color: AppColors.statusAzul),
                         ),
                       ),
                     )),

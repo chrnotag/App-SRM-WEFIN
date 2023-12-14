@@ -78,7 +78,7 @@ class _HomeViewState extends State<HomeView> {
                                     children: [
                                       SvgPicture.asset(
                                         Assets.iconsIcAssinatura,
-                                        color: AppColors.botaoEnvio,
+                                        color: AppColors.statusAzul,
                                       ),
                                       if (assinaturaProvider
                                           .assinaturasPendentes.isNotEmpty)
@@ -129,7 +129,7 @@ class _HomeViewState extends State<HomeView> {
                                 children: [
                                   Icon(
                                     LineIcons.areaChart,
-                                    color: AppColors.botaoEnvio,
+                                    color: AppColors.statusAzul,
                                     size: 40,
                                   ),
                                   SizedBox(
@@ -168,7 +168,7 @@ class _HomeViewState extends State<HomeView> {
                                       SvgPicture.asset(
                                         Assets.iconsIcAtendimento,
                                         fit: BoxFit.fill,
-                                        color: AppColors.botaoEnvio,
+                                        color: AppColors.statusAzul,
                                       ),
                                     ],
                                   ),

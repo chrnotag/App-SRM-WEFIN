@@ -104,12 +104,12 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                         Modular.to.pop();
                       },
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.botaoEnvio,
+                          backgroundColor: AppColors.statusAzul,
                           shadowColor: const Color.fromARGB(0, 255, 255, 255),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4),
                               side: const BorderSide(
-                                  color: AppColors.botaoEnvio, width: 1))),
+                                  color: AppColors.statusAzul, width: 1))),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: Padding(
@@ -160,86 +160,73 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
           preferredSize: AppBar().preferredSize, child: const AppBarLogo()),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              children: [
-                SelecaoEmpresa(
-                  nomeEmpresa: provider.empresaSelecionada?.nome ??
-                      'Não existem empresas no grupo',
-                  tituloPagina: 'Empresas do grupo ecônomico',
-                  changeble: false,
+        child: Center(
+          child: Column(
+            children: [
+              SelecaoEmpresa(
+                nomeEmpresa: provider.empresaSelecionada?.nome ??
+                    'Não existem empresas no grupo',
+                tituloPagina: 'Empresas do grupo ecônomico',
+                changeble: false,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: SearchBarPersonalizada(
+                    searchController: _searchController,
+                    hint: 'Digite a empresa que deseja buscar'),
+              ),
+              Container(
+                constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.7, minHeight: 80),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.white,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: SearchBarPersonalizada(
-                      searchController: _searchController,
-                      hint: 'Digite a empresa que deseja buscar'),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.white,
-                  ),
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    itemCount: _searchResults?.length ?? 0,
-                    separatorBuilder: (context, index) =>
-                        Divider(thickness: 1, height: 0),
-                    itemBuilder: (context, index) {
-                      BorderRadius borderRadius = BorderRadius.zero;
-                      if (index == 0 && index == _searchResults!.length - 1) {
-                        // Se houver apenas um item
-                        borderRadius = BorderRadius.circular(15);
-                      } else {
-                        // Primeiro item da lista
-                        borderRadius = const BorderRadius.vertical(
-                          top: Radius.circular(5),
-                          bottom: Radius.circular(5),
-                        );
-                      }
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: _searchResults?.length ?? 0,
+                  separatorBuilder: (context, index) =>
+                      Divider(thickness: 1, height: 0),
+                  itemBuilder: (context, index) {
+                    BorderRadius borderRadius = BorderRadius.zero;
+                    if (index == 0 && index == _searchResults!.length - 1) {
+                      // Se houver apenas um item
+                      borderRadius = BorderRadius.circular(15);
+                    } else {
+                      // Primeiro item da lista
+                      borderRadius = const BorderRadius.vertical(
+                        top: Radius.circular(5),
+                        bottom: Radius.circular(5),
+                      );
+                    }
 
-                      return Container(
-                        decoration: BoxDecoration(
-                          borderRadius: borderRadius,
-                          color: Colors.white,
-                        ),
-                        child: InkWell(
-                          onTap: () async {
-                            setState(() {
-                              overlay.insert(overlayLoader);
-                            });
-                            if (authProvider
-                                    .empresaSelecionada!.identificador !=
-                                _searchResults![index].identificador) {
-                              final credenciaisSalvas =
-                                  authProvider.credenciaisUsuario;
+                    return Container(
+                      decoration: BoxDecoration(
+                        borderRadius: borderRadius,
+                        color: Colors.white,
+                      ),
+                      child: InkWell(
+                        onTap: () async {
+                          setState(() {
+                            overlay.insert(overlayLoader);
+                          });
+                          if (authProvider
+                                  .empresaSelecionada!.identificador !=
+                              _searchResults![index].identificador) {
+                            final credenciaisSalvas =
+                                authProvider.credenciaisUsuario;
 
-                              final credenciaisLogin = UserModel(
-                                  nomeUsuario: credenciaisSalvas.nomeUsuario,
-                                  senha: credenciaisSalvas.senha,
-                                  idDevice: credenciaisSalvas.idDevice,
-                                  identificadorCedente:
-                                      _searchResults?[index].identificador);
+                            final credenciaisLogin = UserModel(
+                                nomeUsuario: credenciaisSalvas.nomeUsuario,
+                                senha: credenciaisSalvas.senha,
+                                idDevice: credenciaisSalvas.idDevice,
+                                identificadorCedente:
+                                    _searchResults?[index].identificador);
 
-                              final respostaLogin =
-                                  await authProvider.login(credenciaisLogin);
-                              if (respostaLogin != null &&
-                                  respostaLogin.error != null) {
-                                _erroTrocaCedente(respostaLogin, overlayLoader);
-                              } else {
-                                final respostaAssinatura =
-                                    await assinaturaProvider.pegarAssinaturas();
-                                if (respostaAssinatura.error != null) {
-                                  _erroTrocaCedente(
-                                      respostaAssinatura, overlayLoader);
-                                } else {
-                                  overlayLoader.remove();
-                                  authProvider.empresaSelecionada =
-                                      _searchResults?[index];
-                                  Modular.to.pushNamed(AppRoutes.homeAppRoute);
-                                }
-                              }
+                            final respostaLogin =
+                                await authProvider.login(credenciaisLogin);
+                            if (respostaLogin != null &&
+                                respostaLogin.error != null) {
+                              _erroTrocaCedente(respostaLogin, overlayLoader);
                             } else {
                               final respostaAssinatura =
                                   await assinaturaProvider.pegarAssinaturas();
@@ -248,20 +235,32 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                                     respostaAssinatura, overlayLoader);
                               } else {
                                 overlayLoader.remove();
+                                authProvider.empresaSelecionada =
+                                    _searchResults?[index];
                                 Modular.to.pushNamed(AppRoutes.homeAppRoute);
                               }
                             }
-                          },
-                          child: ListTile(
-                            title: Text(_searchResults![index].nome),
-                          ),
+                          } else {
+                            final respostaAssinatura =
+                                await assinaturaProvider.pegarAssinaturas();
+                            if (respostaAssinatura.error != null) {
+                              _erroTrocaCedente(
+                                  respostaAssinatura, overlayLoader);
+                            } else {
+                              overlayLoader.remove();
+                              Modular.to.pushNamed(AppRoutes.homeAppRoute);
+                            }
+                          }
+                        },
+                        child: ListTile(
+                          title: Text(_searchResults![index].nome),
                         ),
-                      );
-                    },
-                  ),
-                )
-              ],
-            ),
+                      ),
+                    );
+                  },
+                ),
+              )
+            ],
           ),
         ),
       ),

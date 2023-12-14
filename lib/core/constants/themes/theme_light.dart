@@ -38,7 +38,7 @@ class ThemeLight {
             900: Color(0xFF010B1A), // Azul (900)
           },
         ),
-        errorColor: AppColors.error,
+        errorColor: AppColors.statusVermelho,
         backgroundColor: const Color(0xFF05204F),
         brightness: Brightness.light,
       ),

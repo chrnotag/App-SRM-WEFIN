@@ -37,7 +37,7 @@ class _AssinaturaDigitalState extends State<AssinaturaDigital>
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     final AssinaturaProvider assinaturaProvider =
         Modular.get<AssinaturaProvider>();
-    List<AssinaturasModel> assinados = assinaturaProvider.assinaturasPendentes;
+    List<AssinaturasModel> assinaturasPendentes = assinaturaProvider.assinaturasPendentes;
     List<AssinaturasModel> assinaturas = assinaturaProvider.todasAssinaturas;
     return Scaffold(
       appBar: PreferredSize(
@@ -83,9 +83,9 @@ class _AssinaturaDigitalState extends State<AssinaturaDigital>
                   ),
                   ListView.builder(
                     shrinkWrap: true,
-                    itemCount: assinados.length,
+                    itemCount: assinaturasPendentes.length,
                     itemBuilder: (context, index) => CardMonitorAssinaturas(
-                      assinatura: assinados[index],
+                      assinatura: assinaturasPendentes[index],
                     ),
                   ),
                 ],

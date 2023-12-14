@@ -2,7 +2,7 @@ part of 'card_monitor_assinaturas.dart';
 
 class _ExpansibleInfoCard extends StatefulWidget {
   final bool isVisible;
-  final List<Assinantes> assinantes;
+  final List<Assinante> assinantes;
   final bool assinarDocumento;
 
   const _ExpansibleInfoCard(
@@ -26,7 +26,6 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
     final CarouselController carouselController = CarouselController();
     final ImportarCertificadoProvider certificadoProvider =
         Modular.get<ImportarCertificadoProvider>();
-    final AssinaturaProvider assinaturaProvider = context.watch<AssinaturaProvider>();
     return widget.isVisible
         ? Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -146,9 +145,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                                                   style: context
                                                       .textTheme.bodySmall!
                                                       .copyWith(
-                                                          color: CorOperacao
-                                                              .definirCorAssinante(
-                                                                  assinanteAtual)),
+                                                          color: AppColors.labelText),
                                                 ))
                                             .toList(),
                                       ],
@@ -269,12 +266,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                                                 dataAssinatura
                                                             .dataAssinatura !=
                                                         null
-                                                    ? dataAssinatura
-                                                        .dataAssinatura!
-                                                        .replaceAll(
-                                                            RegExp(
-                                                                r'[\[\],]'),
-                                                            '')
+                                                    ? DateFormat("dd/MM/yyyy").format(DateTime.parse(dataAssinatura.dataAssinatura!))
                                                     : "",
                                                 style: context
                                                     .textTheme.bodySmall,
@@ -322,9 +314,9 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                     scrollDirection: Axis.horizontal,
                     floatingIndicator: true,
                     slideIndicator: const CircularSlideIndicator(
-                      currentIndicatorColor: AppColors.botaoEnvio,
+                      currentIndicatorColor: AppColors.statusAzul,
                       alignment: Alignment.center,
-                      indicatorBorderColor: AppColors.botaoEnvio,
+                      indicatorBorderColor: AppColors.statusAzul,
                     )))
           ],
         )

@@ -48,7 +48,7 @@ class Menu extends StatelessWidget {
                             child: SvgPicture.asset(
                               Assets.empresaIcon,
                               width: 70,
-                              color: AppColors.botaoEnvio,
+                              color: AppColors.statusAzul,
                             ),
                           ),
                           Text(
@@ -79,7 +79,7 @@ class Menu extends StatelessWidget {
                                 children: [
                                   const Icon(
                                     LineIcons.exclamationCircle,
-                                    color: AppColors.botaoEnvio,
+                                    color: AppColors.statusAzul,
                                     size: 80,
                                   ),
                                   Padding(
@@ -114,7 +114,7 @@ class Menu extends StatelessWidget {
                                             },
                                             style: ElevatedButton.styleFrom(
                                               backgroundColor:
-                                                  AppColors.botaoEnvio,
+                                                  AppColors.statusAzul,
                                             ),
                                             child: const Padding(
                                               padding: EdgeInsets.symmetric(
@@ -148,7 +148,7 @@ class Menu extends StatelessWidget {
                                                             4),
                                                     side: const BorderSide(
                                                         color: AppColors
-                                                            .botaoEnvio,
+                                                            .statusAzul,
                                                         width: 1))),
                                             child: Padding(
                                               padding:
@@ -162,7 +162,7 @@ class Menu extends StatelessWidget {
                                                         .textTheme.labelSmall!
                                                         .copyWith(
                                                             color: AppColors
-                                                                .botaoEnvio)),
+                                                                .statusAzul)),
                                               ),
                                             )),
                                       )

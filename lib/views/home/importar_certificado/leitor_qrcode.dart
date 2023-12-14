@@ -76,7 +76,7 @@ class ExpandedCornerBorderedHolePainter extends CustomPainter {
           ..blendMode = BlendMode.clear);
 
     var borderPaint = Paint()
-      ..color = AppColors.botaoEnvio
+      ..color = AppColors.statusAzul
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3.0;
 
