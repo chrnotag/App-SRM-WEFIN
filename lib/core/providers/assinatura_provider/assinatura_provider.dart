@@ -60,10 +60,10 @@ class AssinaturaProvider extends ChangeNotifier {
     }
   }
 
-  Color definirCorStatusAssinatura(String status){
-    if(status == "Assinado"){
+  Color definirCorStatusAssinatura(String status) {
+    if (status == "Assinado") {
       return AppColors.statusVerde;
-    }else{
+    } else {
       return AppColors.statusAzul;
     }
   }
@@ -73,8 +73,8 @@ class AssinaturaProvider extends ChangeNotifier {
     for (var assinatura in assinaturas) {
       bool naoAssinadoPeloUsuario = assinatura.assinantes.any((assinante) =>
           assinante.informacoesAssinante.any((info) =>
-              info.identificadorAssinador ==
-                  authProvider.dataUser!.identificadorUsuario &&
+          info.identificadorAssinador ==
+              authProvider.dataUser!.identificadorUsuario &&
               info.statusAssinatura != "Assinado"));
       if (naoAssinadoPeloUsuario) {
         _assinaturasPendentes.add(assinatura);
