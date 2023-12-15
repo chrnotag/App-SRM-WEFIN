@@ -62,9 +62,9 @@ class AssinaturaProvider extends ChangeNotifier {
 
   Color definirCorStatusAssinatura(String status) {
     if (status == "Assinado") {
-      return AppColors.statusVerde;
+      return AppColors.verde;
     } else {
-      return AppColors.statusAzul;
+      return AppColors.azul;
     }
   }
 

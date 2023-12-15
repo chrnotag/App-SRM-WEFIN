@@ -25,7 +25,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
     return AlertDialog(
       icon: const Icon(
         Icons.lock_outline_rounded,
-        color: AppColors.statusAzul,
+        color: AppColors.azul,
         size: 50,
       ),
       title: Form(
@@ -60,7 +60,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
                       }
                     },
                     style: TextButton.styleFrom(
-                        backgroundColor: AppColors.statusAzul,
+                        backgroundColor: AppColors.azul,
                         shape: const RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(8)))),
@@ -89,7 +89,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
                         shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8)),
                             side: BorderSide(
-                                color: AppColors.statusAzul, width: 2))),
+                                color: AppColors.azul, width: 2))),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text('Cancelar',

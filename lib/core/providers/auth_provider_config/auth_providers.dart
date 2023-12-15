@@ -1,8 +1,16 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:modular_study/core/providers/assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/auth_provider_config/login_implementation.dart';
 import 'package:modular_study/models/auth_login_models/cedente_model.dart';
 import 'package:modular_study/models/auth_login_models/usuario_logado_model.dart';
 import 'package:modular_study/models/user_model.dart';
+
+import '../../../models/exceptions_responses/exception_model.dart';
+import '../../constants/route_labels.dart';
 
 class AuthProvider extends ChangeNotifier {
   AuthProvider._();
@@ -48,6 +56,52 @@ class AuthProvider extends ChangeNotifier {
 
   set empresaSelecionada(CedenteModel? cedente) {
     _empresaSelecionada = cedente;
+    notifyListeners();
+  }
+
+  CedenteModel buscarEmpresa(String identificadorCedente){
+    return dataUser!.listaCedente.firstWhere((cedente) => cedente.identificador == identificadorCedente);
+  }
+
+  Future<void> RelogarTrocarCedente(String identificadorCedente, OverlayEntry overlayLoader) async {
+    final AssinaturaProvider assinaturaProvider = Modular.get<AssinaturaProvider>();
+    if (empresaSelecionada!.identificador != identificadorCedente) {
+      final credenciaisLogin = UserModel(
+          nomeUsuario: credenciaisUsuario.nomeUsuario,
+          senha: credenciaisUsuario.senha,
+          idDevice: credenciaisUsuario.idDevice,
+          identificadorCedente: identificadorCedente);
+
+      final respostaLogin = await login(credenciaisLogin);
+      if (respostaLogin != null && respostaLogin.error != null) {
+        _erroTrocaCedente(respostaLogin, overlayLoader);
+      } else {
+        final respostaAssinatura = await assinaturaProvider.pegarAssinaturas();
+        if (respostaAssinatura.error != null) {
+          _erroTrocaCedente(respostaAssinatura, overlayLoader);
+        } else {
+          overlayLoader.remove();
+          Modular.to.pushNamed(AppRoutes.homeAppRoute);
+        }
+      }
+    } else {
+        final respostaAssinatura = await assinaturaProvider.pegarAssinaturas();
+        log('reposta assinatura body: ${respostaAssinatura.data}');
+      if (respostaAssinatura.error != null) {
+        _erroTrocaCedente(respostaAssinatura, overlayLoader);
+      } else {
+        overlayLoader.remove();
+        notifyListeners();
+        Modular.to.pushNamed(AppRoutes.homeAppRoute);
+      }
+    }
+  }
+
+  void _erroTrocaCedente(dynamic response, OverlayEntry overlayLoader) {
+    final error = response.error as ExceptionModel;
+      overlayLoader.remove();
+    Fluttertoast.showToast(
+        msg: 'Erro: ${error.mensagem}, ${error.erros}, ${error.httpStatus}');
     notifyListeners();
   }
 

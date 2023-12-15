@@ -7,6 +7,7 @@ import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/providers/assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/certificado_provider/importar_certificadode.dart';
+import 'package:modular_study/core/utils/money_format.dart';
 import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
 import 'package:modular_study/views/home/assinaturas/selecionar_certificado.dart';
 
@@ -91,7 +92,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas> {
                                   ),
                                   ComponentCardOperacoes(
                                     title: 'Valor Bruto',
-                                    label: _moneyFormater(double.parse(
+                                    label: FormatarDinheiro.BR(double.parse(
                                         assinatura.valorBruto.toString())),
                                   ),
                                 ],
@@ -109,7 +110,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas> {
                                   ),
                                   ComponentCardOperacoes(
                                       title: 'Valor Liquido',
-                                      label: _moneyFormater(double.parse(
+                                      label: FormatarDinheiro.BR(double.parse(
                                           assinatura.valorLiquido.toString()))),
                                 ],
                               ),
@@ -153,9 +154,4 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas> {
     );
   }
 
-  _moneyFormater(double money) {
-    return NumberFormat.currency(
-            locale: 'pt-BR', symbol: 'R\$', decimalDigits: 2)
-        .format(money);
-  }
 }

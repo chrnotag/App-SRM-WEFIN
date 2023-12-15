@@ -7,7 +7,6 @@ import '../../implementations_config/export_impl.dart';
 
 class AssinaturaImpl {
   const AssinaturaImpl();
-
   Future<ApiResponse<dynamic>> assinaturas() async {
     final AssinaturaProvider assinaturaProvider =
         Modular.get<AssinaturaProvider>();
@@ -15,7 +14,7 @@ class AssinaturaImpl {
     final url = Uri.parse(EndPoints.assinatura);
     log(authProvider.dataUser!.token);
     try {
-      final response = await http.post(url, headers: {
+      final response = await http.get(url, headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': authProvider.dataUser!.token

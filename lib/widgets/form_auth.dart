@@ -153,7 +153,7 @@ class _AuthFormState extends State<AuthForm> {
                     Modular.to.pop();
                   },
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.statusAzul),
+                      backgroundColor: AppColors.azul),
                   child: const Text("OK")),
             ),
           ],
@@ -176,7 +176,7 @@ class _AuthFormState extends State<AuthForm> {
           ),
         ],
       ),
-      icon: SvgPicture.asset(Assets.iconsCheck, color: AppColors.statusVerde),
+      icon: SvgPicture.asset(Assets.iconsCheck, color: AppColors.verde),
     );
     showDialog(
         context: context,

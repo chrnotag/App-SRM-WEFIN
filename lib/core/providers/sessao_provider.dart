@@ -60,7 +60,7 @@ class SessionProvider with ChangeNotifier {
           title: Text(
             'Atenção!',
             style:
-                context.textTheme.bodyLarge!.copyWith(color: AppColors.statusVermelho),
+                context.textTheme.bodyLarge!.copyWith(color: AppColors.vermelho),
           ),
           content: Text(
             'Nenhuma ação foi realizada nos últimos 60 segundos. Você será direcionado para realizar o login novamente.',

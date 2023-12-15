@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
+import 'package:modular_study/core/utils/money_format.dart';
 import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
 import '../component_card.dart';
 
@@ -71,7 +72,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                   ),
                                   ComponentCardOperacoes(
                                     title: 'Valor Bruto',
-                                    label: _moneyFormater(double.parse(
+                                    label: FormatarDinheiro.BR(double.parse(
                                         assinatura.valorBruto.toString())),
                                   ),
                                 ],
@@ -89,7 +90,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                   ),
                                   ComponentCardOperacoes(
                                       title: 'Valor Liquido',
-                                      label: _moneyFormater(double.parse(
+                                      label: FormatarDinheiro.BR(double.parse(
                                           assinatura.valorLiquido.toString()))),
                                 ],
                               ),
@@ -127,11 +128,5 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
         ],
       ),
     );
-  }
-
-  _moneyFormater(double money) {
-    return NumberFormat.currency(
-            locale: 'pt-BR', symbol: 'R\$', decimalDigits: 2)
-        .format(money);
   }
 }

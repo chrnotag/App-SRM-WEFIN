@@ -30,7 +30,7 @@ class LoginImpl {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = LoginResponse.fromJson(responseBody);
         authProvider.setDataUser = data;
-        authProvider.empresaSelecionada ??= data.listaCedente[0];
+        authProvider.empresaSelecionada = authProvider.buscarEmpresa(data.identificadorCedente);
         return SucessResponse(data);
       } else {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));

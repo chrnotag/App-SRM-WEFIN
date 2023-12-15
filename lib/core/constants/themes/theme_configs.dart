@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color statusAzul = Color(0xFF5B95CC);
+  static const Color azul = Color(0xFF5B95CC);
   static const Color globalBackground = Color(0xFF1E3870);
   static const Color labelText = Color(0xFF8A8A8A);
   static const Color branco = Color(0xFFFFFFFF);
-  static const Color statusLaranja = Color(0xFFF29046);
-  static const Color statusVermelho = Color(0xFFA74D4D);
-  static const Color statusVerde = Color(0xFF84B38A);
+  static const Color laranja = Color(0xFFF29046);
+  static const Color vermelho = Color(0xFFA74D4D);
+  static const Color verde = Color(0xFF84B38A);
   static const Color brancoGelo = Color(0xFFECECEC);
 }
 

@@ -25,7 +25,7 @@ class _MenuItemState extends State<_MenuItem> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right:5.0),
-                  child: Icon(widget.icon,color: AppColors.statusAzul),
+                  child: Icon(widget.icon,color: AppColors.azul),
                 ),
                 Text(widget.title,style:context.textTheme.bodyMedium!.copyWith(color: AppColors.globalBackground)),
                 Expanded(child: Container()),

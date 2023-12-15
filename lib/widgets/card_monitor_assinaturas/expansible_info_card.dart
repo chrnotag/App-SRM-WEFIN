@@ -98,15 +98,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                                           ),
                                           ...assinanteAtual.informacoesAssinante
                                               .map((procurador) => Text(
-                                                    procurador.nomeProcurador !=
-                                                            null
-                                                        ? procurador
-                                                            .nomeProcurador!
-                                                            .replaceAll(
-                                                                RegExp(
-                                                                    r'[\[\],]'),
-                                                                '')
-                                                        : "",
+                                                    procurador.nomeProcurador ?? "",
                                                     style: context
                                                         .textTheme.bodySmall,
                                                   ))
@@ -134,8 +126,8 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                                                           .statusAssinatura ==
                                                       "INIC"
                                                   ? Text(
-                                                      "Aguardando Assinatura", style: context.textTheme.bodySmall!.copyWith(color: AppColors.statusAzul),)
-                                                  : Text("Assinado", style: context.textTheme.bodySmall!.copyWith(color: AppColors.statusVerde)))
+                                                      "Aguardando Assinatura", style: context.textTheme.bodySmall!.copyWith(color: AppColors.azul),)
+                                                  : Text("Assinado", style: context.textTheme.bodySmall!.copyWith(color: AppColors.verde)))
                                               .toList(),
                                         ],
                                       ),
@@ -296,9 +288,9 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                       scrollDirection: Axis.horizontal,
                       floatingIndicator: true,
                       slideIndicator: const CircularSlideIndicator(
-                        currentIndicatorColor: AppColors.statusAzul,
+                        currentIndicatorColor: AppColors.azul,
                         alignment: Alignment.center,
-                        indicatorBorderColor: AppColors.statusAzul,
+                        indicatorBorderColor: AppColors.azul,
                       )))
             ],
           )

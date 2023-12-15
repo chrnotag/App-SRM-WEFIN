@@ -104,12 +104,12 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                         Modular.to.pop();
                       },
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.statusAzul,
+                          backgroundColor: AppColors.azul,
                           shadowColor: const Color.fromARGB(0, 255, 255, 255),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4),
                               side: const BorderSide(
-                                  color: AppColors.statusAzul, width: 1))),
+                                  color: AppColors.azul, width: 1))),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: Padding(
@@ -145,9 +145,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
 
   @override
   Widget build(BuildContext context) {
-    final AuthProvider provider = context.watch<AuthProvider>();
-    final AssinaturaProvider assinaturaProvider =
-        context.watch<AssinaturaProvider>();
+    final AuthProvider authProviderAtt = context.watch<AuthProvider>();
     final overlay = Overlay.of(context);
     final overlayLoader = OverlayEntry(
       builder: (context) => const Material(
@@ -164,7 +162,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
           child: Column(
             children: [
               SelecaoEmpresa(
-                nomeEmpresa: provider.empresaSelecionada?.nome ??
+                nomeEmpresa: authProviderAtt.empresaSelecionada?.nome ??
                     'Não existem empresas no grupo',
                 tituloPagina: 'Empresas do grupo ecônomico',
                 changeble: false,
@@ -209,48 +207,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                           setState(() {
                             overlay.insert(overlayLoader);
                           });
-                          if (authProvider
-                                  .empresaSelecionada!.identificador !=
-                              _searchResults![index].identificador) {
-                            final credenciaisSalvas =
-                                authProvider.credenciaisUsuario;
-
-                            final credenciaisLogin = UserModel(
-                                nomeUsuario: credenciaisSalvas.nomeUsuario,
-                                senha: credenciaisSalvas.senha,
-                                idDevice: credenciaisSalvas.idDevice,
-                                identificadorCedente:
-                                    _searchResults?[index].identificador);
-
-                            final respostaLogin =
-                                await authProvider.login(credenciaisLogin);
-                            if (respostaLogin != null &&
-                                respostaLogin.error != null) {
-                              _erroTrocaCedente(respostaLogin, overlayLoader);
-                            } else {
-                              final respostaAssinatura =
-                                  await assinaturaProvider.pegarAssinaturas();
-                              if (respostaAssinatura.error != null) {
-                                _erroTrocaCedente(
-                                    respostaAssinatura, overlayLoader);
-                              } else {
-                                overlayLoader.remove();
-                                authProvider.empresaSelecionada =
-                                    _searchResults?[index];
-                                Modular.to.pushNamed(AppRoutes.homeAppRoute);
-                              }
-                            }
-                          } else {
-                            final respostaAssinatura =
-                                await assinaturaProvider.pegarAssinaturas();
-                            if (respostaAssinatura.error != null) {
-                              _erroTrocaCedente(
-                                  respostaAssinatura, overlayLoader);
-                            } else {
-                              overlayLoader.remove();
-                              Modular.to.pushNamed(AppRoutes.homeAppRoute);
-                            }
-                          }
+                          authProviderAtt.RelogarTrocarCedente(_searchResults![index].identificador, overlayLoader);
                         },
                         child: ListTile(
                           title: Text(_searchResults![index].nome),
@@ -265,14 +222,5 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
         ),
       ),
     );
-  }
-
-  void _erroTrocaCedente(dynamic response, OverlayEntry overlayLoader) {
-    final error = response.error as ExceptionModel;
-    setState(() {
-      overlayLoader.remove();
-    });
-    Fluttertoast.showToast(
-        msg: 'Erro: ${error.mensagem}, ${error.erros}, ${error.httpStatus}');
   }
 }
