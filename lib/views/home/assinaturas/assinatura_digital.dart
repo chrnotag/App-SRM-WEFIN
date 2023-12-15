@@ -7,7 +7,7 @@ import 'package:modular_study/core/providers/auth_provider_config/auth_providers
 import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
 import 'package:modular_study/widgets/appbar_logo_perfil.dart';
 import 'package:modular_study/widgets/botao_selecao_empresa.dart';
-import 'package:modular_study/widgets/card_operacoes/card_monitor_operacoes.dart';
+import 'package:modular_study/widgets/card_monitor_assinaturas/card_monitor_assinaturas.dart';
 
 class AssinaturaDigital extends StatefulWidget {
   const AssinaturaDigital({super.key});
@@ -37,9 +37,8 @@ class _AssinaturaDigitalState extends State<AssinaturaDigital>
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     final AssinaturaProvider assinaturaProvider =
         Modular.get<AssinaturaProvider>();
-    List<AssinaturasModel> assinados = assinaturaProvider.acompanharAssinaturas;
-    List<AssinaturasModel> naoAssinados =
-        assinaturaProvider.assinaturasPendentes;
+    List<AssinaturasModel> assinaturasPendentes = assinaturaProvider.assinaturasPendentes;
+    List<AssinaturasModel> assinaturas = assinaturaProvider.todasAssinaturas;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,
@@ -76,18 +75,17 @@ class _AssinaturaDigitalState extends State<AssinaturaDigital>
                 children: [
                   ListView.builder(
                     shrinkWrap: true,
-                    itemCount: naoAssinados.length,
-                    itemBuilder: (context, index) => CardMonitorOperacoes(
-                      showMoreInfo: true,
-                      assinatura: naoAssinados[index],
+                    itemCount: assinaturas.length,
+                    itemBuilder: (context, index) => CardMonitorAssinaturas(
+                      assinarDocumento: true,
+                      assinatura: assinaturas[index],
                     ),
                   ),
                   ListView.builder(
                     shrinkWrap: true,
-                    itemCount: assinados.length,
-                    itemBuilder: (context, index) => CardMonitorOperacoes(
-                      showMoreInfo: true,
-                      assinatura: assinados[index],
+                    itemCount: assinaturasPendentes.length,
+                    itemBuilder: (context, index) => CardMonitorAssinaturas(
+                      assinatura: assinaturasPendentes[index],
                     ),
                   ),
                 ],

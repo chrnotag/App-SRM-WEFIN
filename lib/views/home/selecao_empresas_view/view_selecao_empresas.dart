@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -10,6 +8,7 @@ import 'package:modular_study/core/providers/assinatura_provider/assinatura_prov
 import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
 import 'package:modular_study/core/providers/sessao_provider.dart';
 import 'package:modular_study/models/auth_login_models/cedente_model.dart';
+import 'package:modular_study/models/user_model.dart';
 import 'package:modular_study/widgets/appbar_logo_perfil.dart';
 import 'package:modular_study/widgets/botao_selecao_empresa.dart';
 import 'package:modular_study/widgets/searchbar_person.dart';
@@ -105,12 +104,12 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                         Modular.to.pop();
                       },
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.botaoEnvio,
+                          backgroundColor: AppColors.azul,
                           shadowColor: const Color.fromARGB(0, 255, 255, 255),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4),
                               side: const BorderSide(
-                                  color: AppColors.botaoEnvio, width: 1))),
+                                  color: AppColors.azul, width: 1))),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: Padding(
@@ -146,9 +145,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
 
   @override
   Widget build(BuildContext context) {
-    final AuthProvider provider = context.watch<AuthProvider>();
-    final AssinaturaProvider assinaturaProvider =
-        context.watch<AssinaturaProvider>();
+    final AuthProvider authProviderAtt = context.watch<AuthProvider>();
     final overlay = Overlay.of(context);
     final overlayLoader = OverlayEntry(
       builder: (context) => const Material(
@@ -161,86 +158,66 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
           preferredSize: AppBar().preferredSize, child: const AppBarLogo()),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              children: [
-                SelecaoEmpresa(
-                  nomeEmpresa: provider.empresaSelecionada?.nome ??
-                      'Não existem empresas no grupo',
-                  tituloPagina: 'Empresas do grupo ecônomico',
-                  changeble: false,
+        child: Center(
+          child: Column(
+            children: [
+              SelecaoEmpresa(
+                nomeEmpresa: authProviderAtt.empresaSelecionada?.nome ??
+                    'Não existem empresas no grupo',
+                tituloPagina: 'Empresas do grupo ecônomico',
+                changeble: false,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: SearchBarPersonalizada(
+                    searchController: _searchController,
+                    hint: 'Digite a empresa que deseja buscar'),
+              ),
+              Container(
+                constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.7, minHeight: 80),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.white,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: SearchBarPersonalizada(
-                      searchController: _searchController,
-                      hint: 'Digite a empresa que deseja buscar'),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.white,
-                  ),
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    itemCount: _searchResults?.length ?? 0,
-                    separatorBuilder: (context, index) =>
-                        Divider(thickness: 1, height: 0),
-                    itemBuilder: (context, index) {
-                      BorderRadius borderRadius = BorderRadius.zero;
-                      if (index == 0 && index == _searchResults!.length - 1) {
-                        // Se houver apenas um item
-                        borderRadius = BorderRadius.circular(15);
-                      } else {
-                        // Primeiro item da lista
-                        borderRadius = const BorderRadius.vertical(
-                          top: Radius.circular(5),
-                          bottom: Radius.circular(5),
-                        );
-                      }
-
-                      return Container(
-                        decoration: BoxDecoration(
-                          borderRadius: borderRadius,
-                          color: Colors.white,
-                        ),
-                        child: InkWell(
-                          onTap: () async {
-                            provider.setEmpresaSelecionada =
-                                _searchResults![index];
-
-                            setState(() {
-                              overlay.insert(overlayLoader);
-                            });
-                            final response = await assinaturaProvider
-                                .pegarAssinaturas(authProvider
-                                    .dataUser!.identificadorUsuario);
-                            if (response.error != null) {
-                              final error = response.error as ExceptionModel;
-                              log('Erro mensagem: ${error.mensagem}');
-                              log('Erros: ${error.erros}');
-                              setState(() {
-                                overlayLoader.remove();
-                              });
-                              Fluttertoast.showToast(
-                                  msg:
-                                      'Erro ao realizar a requisição: ${error.mensagem}');
-                            } else {
-                              overlayLoader.remove();
-                              Modular.to.pushNamed(AppRoutes.homeAppRoute);
-                            }
-                          },
-                          child: ListTile(
-                            title: Text(_searchResults![index].nome),
-                          ),
-                        ),
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: _searchResults?.length ?? 0,
+                  separatorBuilder: (context, index) =>
+                      Divider(thickness: 1, height: 0),
+                  itemBuilder: (context, index) {
+                    BorderRadius borderRadius = BorderRadius.zero;
+                    if (index == 0 && index == _searchResults!.length - 1) {
+                      // Se houver apenas um item
+                      borderRadius = BorderRadius.circular(15);
+                    } else {
+                      // Primeiro item da lista
+                      borderRadius = const BorderRadius.vertical(
+                        top: Radius.circular(5),
+                        bottom: Radius.circular(5),
                       );
-                    },
-                  ),
-                )
-              ],
-            ),
+                    }
+
+                    return Container(
+                      decoration: BoxDecoration(
+                        borderRadius: borderRadius,
+                        color: Colors.white,
+                      ),
+                      child: InkWell(
+                        onTap: () async {
+                          setState(() {
+                            overlay.insert(overlayLoader);
+                          });
+                          authProviderAtt.RelogarTrocarCedente(_searchResults![index].identificador, overlayLoader);
+                        },
+                        child: ListTile(
+                          title: Text(_searchResults![index].nome),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              )
+            ],
           ),
         ),
       ),

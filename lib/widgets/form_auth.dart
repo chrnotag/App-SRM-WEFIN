@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:modular_study/core/constants/datas/usuarios_data.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
@@ -14,6 +13,7 @@ import 'package:validatorless/validatorless.dart';
 
 import '../generated/assets.dart';
 import 'link_component.dart';
+import 'loader_widget.dart';
 
 class AuthForm extends StatefulWidget {
   final String label;
@@ -38,8 +38,17 @@ class _AuthFormState extends State<AuthForm> {
     super.dispose();
   }
 
+  OverlayState? overlay;
+  final overlayLoader = OverlayEntry(
+    builder: (context) => const Material(
+      color: Colors.transparent,
+      child: Loader(),
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
+    overlay = Overlay.of(context);
     return Form(
       key: _formKey,
       child: Column(
@@ -106,32 +115,26 @@ class _AuthFormState extends State<AuthForm> {
     final authProvider = Modular.get<AuthProvider>();
     _mensagemErro = null;
     if (_formKey.currentState!.validate()) {
-      authProvider.setLoading();
-      if (_loginEC.text == "teste@gmail.com" && _passwordEC.text == "123") {
-        authProvider.setDataUser = UsuariosData.dadosUsuarios;
-        authProvider.setLoading();
-        Modular.to.navigate(AppRoutes.listaSelecaoEmpresasRoute);
+      setState(() {
+        overlay!.insert(overlayLoader);
+      });
+      final userModel = UserModel(
+          nomeUsuario: _loginEC.text,
+          senha: _passwordEC.text,
+          idDevice: await DeviceUtils().getDeviceID());
+      final response = await authProvider.login(userModel);
+      overlayLoader.remove();
+      if (response != null && response.error != null) {
+        final error = response.error as ExceptionModel;
+        setState(() {
+          if (error.codigo == '500') {
+            _mensagemErro = error.mensagem;
+          } else {
+            _mensagemErro = "Usuário ou senha Incorretos";
+          }
+        });
       } else {
-        log(authProvider.isLoading.toString());
-        final userModel = UserModel(
-            nomeUsuario: _loginEC.text,
-            senha: _passwordEC.text,
-            idDevice: await DeviceUtils().getDeviceID());
-        final response = await authProvider.login(userModel);
-        authProvider.setLoading();
-        log(authProvider.isLoading.toString());
-        if (response.error != null) {
-          final error = response.error as ExceptionModel;
-          setState(() {
-            if (error.codigo == '500') {
-              _mensagemErro = error.mensagem;
-            } else {
-              _mensagemErro = "Usuário ou senha Incorretos";
-            }
-          });
-        } else {
-          Modular.to.navigate(AppRoutes.listaSelecaoEmpresasRoute);
-        }
+        Modular.to.navigate(AppRoutes.listaSelecaoEmpresasRoute);
       }
     }
   }
@@ -149,7 +152,8 @@ class _AuthFormState extends State<AuthForm> {
                   onPressed: () {
                     Modular.to.pop();
                   },
-                  style: ElevatedButton.styleFrom(backgroundColor: AppColors.botaoEnvio),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.azul),
                   child: const Text("OK")),
             ),
           ],
@@ -172,7 +176,7 @@ class _AuthFormState extends State<AuthForm> {
           ),
         ],
       ),
-      icon: SvgPicture.asset(Assets.iconsCheck, color: AppColors.success),
+      icon: SvgPicture.asset(Assets.iconsCheck, color: AppColors.verde),
     );
     showDialog(
         context: context,

@@ -84,7 +84,7 @@ class ImportarCertificado extends StatelessWidget {
                           arguments: {ImportarVia.QrCode});
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.botaoEnvio,
+                      backgroundColor: AppColors.azul,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4),
                       ),

@@ -78,14 +78,10 @@ class _HomeViewState extends State<HomeView> {
                                     children: [
                                       SvgPicture.asset(
                                         Assets.iconsIcAssinatura,
-                                        color: AppColors.botaoEnvio,
+                                        color: AppColors.azul,
                                       ),
                                       if (assinaturaProvider
-                                              .assinaturasPendentes
-                                              .isNotEmpty &&
-                                          assinaturaProvider
-                                                  .assinaturasPendentes.length >
-                                              0)
+                                          .assinaturasPendentes.isNotEmpty)
                                         CircleAvatar(
                                           radius: 15,
                                           backgroundColor: Colors.red,
@@ -133,7 +129,7 @@ class _HomeViewState extends State<HomeView> {
                                 children: [
                                   Icon(
                                     LineIcons.areaChart,
-                                    color: AppColors.botaoEnvio,
+                                    color: AppColors.azul,
                                     size: 40,
                                   ),
                                   SizedBox(
@@ -172,7 +168,7 @@ class _HomeViewState extends State<HomeView> {
                                       SvgPicture.asset(
                                         Assets.iconsIcAtendimento,
                                         fit: BoxFit.fill,
-                                        color: AppColors.botaoEnvio,
+                                        color: AppColors.azul,
                                       ),
                                     ],
                                   ),

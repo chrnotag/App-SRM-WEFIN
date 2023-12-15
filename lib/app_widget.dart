@@ -138,7 +138,6 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
   Widget widgetPrincipal(BuildContext context) {
     return Listener(
       onPointerDown: (event) {
-        log('tap');
         if (Modular.to.path != Modular.initialRoute &&
             Modular.to.path != AppRoutes.forgetPassAuthRoute) {
           sessionProvider.resetListening();
@@ -146,14 +145,12 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
       },
       child: GestureDetector(
         onLongPress: () {
-          log('long press down');
           if (Modular.to.path != Modular.initialRoute &&
               Modular.to.path != AppRoutes.forgetPassAuthRoute) {
             sessionProvider.stopListening();
           }
         },
         onLongPressUp: () {
-          log('long press up');
           if (Modular.to.path != Modular.initialRoute &&
               Modular.to.path != AppRoutes.forgetPassAuthRoute) {
             sessionProvider.resetListening();

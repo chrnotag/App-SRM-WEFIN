@@ -58,6 +58,7 @@ dependencies:
   fluttertoast: ^8.2.4
   share_plus: ^7.2.1
   mobile_scanner: ^3.5.4
+  json_annotation: ^4.8.1
 
 flutter_native_splash:
   color: "#1E3870"
@@ -129,7 +130,6 @@ flutter:
     - assets/images/2.0x/
     - assets/images/3.0x/
     - assets/images/readme/
-    - lib/widgets/card_operacoes/
     - assets/img/
     - assets/icons/
 

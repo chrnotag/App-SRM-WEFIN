@@ -8,10 +8,9 @@ class AssinaturasModel {
   String statusAssinaturaDigital;
   String siglaProduto;
   String statusOperacao;
-  int valorBruto;
+  double valorBruto;
   double valorLiquido;
-  DateTime dataOperacao;
-  String urlAssinador;
+  String dataOperacao;
   List<Assinante> assinantes;
 
   AssinaturasModel({
@@ -22,7 +21,6 @@ class AssinaturasModel {
     required this.valorBruto,
     required this.valorLiquido,
     required this.dataOperacao,
-    required this.urlAssinador,
     required this.assinantes,
   });
 
@@ -45,32 +43,51 @@ class Assinante {
   });
 
   factory Assinante.fromJson(Map<String, dynamic> json) =>
-      _$AssinanteFromJson(json);
+      _$AssinantesFromJson(json);
 
-  Map<String, dynamic> toJson() => _$AssinanteToJson(this);
+  Map<String, dynamic> toJson() => _$AssinantesToJson(this);
 }
 
 @JsonSerializable()
 class InformacaoAssinante {
   List<String> papeis;
-  List<String> documentos;
+  List<Documento> documentos;
   String identificadorAssinador;
-  String nomeProcurador;
+  String? nomeProcurador;
   String tipoAssinatura;
-  String dataAssinatura;
+  String? dataAssinatura;
   String statusAssinatura;
+  bool? eCPFAssinador;
 
   InformacaoAssinante({
     required this.papeis,
     required this.documentos,
     required this.identificadorAssinador,
-    required this.nomeProcurador,
     required this.tipoAssinatura,
     required this.dataAssinatura,
     required this.statusAssinatura,
+    this.eCPFAssinador,
+    this.nomeProcurador,
   });
+
   factory InformacaoAssinante.fromJson(Map<String, dynamic> json) =>
       _$InformacaoAssinanteFromJson(json);
 
   Map<String, dynamic> toJson() => _$InformacaoAssinanteToJson(this);
+}
+
+@JsonSerializable()
+class Documento {
+  int idAssinaturaDigital;
+  String nome;
+
+  Documento({
+    required this.idAssinaturaDigital,
+    required this.nome,
+  });
+
+  factory Documento.fromJson(Map<String, dynamic> json) =>
+      _$DocumentosFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DocumentosToJson(this);
 }

@@ -25,7 +25,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
     return AlertDialog(
       icon: const Icon(
         Icons.lock_outline_rounded,
-        color: AppColors.botaoEnvio,
+        color: AppColors.azul,
         size: 50,
       ),
       title: Form(
@@ -37,6 +37,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
                   'Por favor, informe a senha do certificado.'),
               (value) => provider.errorMsg
             ]),
+            obscureText: true,
             controller: textController,
             decoration: InputDecoration(
                 hintText: 'Informe a senha do certificado.',
@@ -59,7 +60,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
                       }
                     },
                     style: TextButton.styleFrom(
-                        backgroundColor: AppColors.botaoEnvio,
+                        backgroundColor: AppColors.azul,
                         shape: const RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(8)))),
@@ -81,14 +82,14 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
                 Expanded(
                   child: TextButton(
                     onPressed: () {
-                      Modular.to.navigate(AppRoutes.importarCertificadoRoute);
+                      Modular.to.navigate(AppRoutes.assinaturaDigitalRoute);
                     },
                     style: TextButton.styleFrom(
                         backgroundColor: Colors.transparent,
                         shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8)),
                             side: BorderSide(
-                                color: AppColors.botaoEnvio, width: 2))),
+                                color: AppColors.azul, width: 2))),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text('Cancelar',

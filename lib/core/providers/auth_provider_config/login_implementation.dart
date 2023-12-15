@@ -23,7 +23,6 @@ class LoginImpl {
     const url = EndPoints.login;
     const headers = {'Content-Type': 'application/json; charset=utf-8'};
     final body = json.encode(userModel.toJson());
-
     try {
       final response =
           await http.post(Uri.parse(url), headers: headers, body: body);
@@ -31,9 +30,9 @@ class LoginImpl {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = LoginResponse.fromJson(responseBody);
         authProvider.setDataUser = data;
+        authProvider.empresaSelecionada = authProvider.buscarEmpresa(data.identificadorCedente);
         return SucessResponse(data);
       } else {
-        log(response.statusCode.toString());
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = ExceptionModel.fromJson(responseBody);
         return ErrorResponse(data);

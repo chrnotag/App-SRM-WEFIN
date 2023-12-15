@@ -39,7 +39,7 @@ class WefinDefaultButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
           ),
-          backgroundColor: color ?? AppColors.botaoEnvio,
+          backgroundColor: color ?? AppColors.azul,
         ),
         child: Text(
           label,

@@ -10,6 +10,7 @@ class LoginResponse {
     required this.nome,
     required this.usuario,
     required this.identificadorUsuario,
+    required this.identificadorCedente,
     required this.token,
     required this.tokenType,
     required this.dataExpiraSessao,
@@ -21,6 +22,7 @@ class LoginResponse {
   late final String nome;
   late final String usuario;
   late final String identificadorUsuario;
+  late final String identificadorCedente;
   late final String token;
   late final String? tokenType;
   late final DateTime dataExpiraSessao;

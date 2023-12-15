@@ -5,7 +5,7 @@ import 'package:modular_study/core/providers/auth_provider_config/auth_providers
 import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
 import 'package:modular_study/widgets/appbar_logo_perfil.dart';
 import 'package:modular_study/widgets/botao_selecao_empresa.dart';
-import 'package:modular_study/widgets/card_operacoes/card_monitor_operacoes.dart';
+import 'package:modular_study/widgets/card_monitor_operacoes/card_monitor_operacoes.dart';
 
 class MonitorOperacoes extends StatelessWidget {
   const MonitorOperacoes({super.key});
@@ -16,7 +16,7 @@ class MonitorOperacoes extends StatelessWidget {
     final AssinaturaProvider assinaturaProvider =
         Modular.get<AssinaturaProvider>();
     List<AssinaturasModel> assinaturas =
-        assinaturaProvider.acompanharAssinaturas;
+        assinaturaProvider.assinaturasPendentes;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,
@@ -35,8 +35,8 @@ class MonitorOperacoes extends StatelessWidget {
               child: ListView.builder(
                 itemCount: assinaturas.length,
                 shrinkWrap: true,
-                itemBuilder: (context, index) => CardMonitorOperacoes(
-                    showMoreInfo: false, assinatura: assinaturas[index]),
+                itemBuilder: (context, index) =>
+                    CardMonitorOperacoes(assinatura: assinaturas[index]),
               ),
             ),
           ),
