@@ -72,8 +72,8 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                   ),
                                   ComponentCardOperacoes(
                                     title: 'Valor Bruto',
-                                    label: FormatarDinheiro.BR(double.parse(
-                                        assinatura.valorBruto.toString())),
+                                    label: FormatarDinheiro.BR(
+                                        assinatura.valorBruto),
                                   ),
                                 ],
                               ),
@@ -90,8 +90,8 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                   ),
                                   ComponentCardOperacoes(
                                       title: 'Valor Liquido',
-                                      label: FormatarDinheiro.BR(double.parse(
-                                          assinatura.valorLiquido.toString()))),
+                                      label: FormatarDinheiro.BR(
+                                          assinatura.valorLiquido)),
                                 ],
                               ),
                             ],

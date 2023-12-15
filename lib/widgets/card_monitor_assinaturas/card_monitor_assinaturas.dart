@@ -86,14 +86,16 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas> {
                                 children: [
                                   ComponentCardOperacoes(
                                       title: 'Data',
-                                      label: DateFormat("dd/MM/yyyy").format(DateTime.parse(assinatura.dataOperacao))),
+                                      label: DateFormat("dd/MM/yyyy").format(
+                                          DateTime.parse(
+                                              assinatura.dataOperacao))),
                                   const SizedBox(
                                     height: 10,
                                   ),
                                   ComponentCardOperacoes(
                                     title: 'Valor Bruto',
-                                    label: FormatarDinheiro.BR(double.parse(
-                                        assinatura.valorBruto.toString())),
+                                    label: FormatarDinheiro.BR(
+                                        assinatura.valorBruto),
                                   ),
                                 ],
                               ),
@@ -110,8 +112,8 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas> {
                                   ),
                                   ComponentCardOperacoes(
                                       title: 'Valor Liquido',
-                                      label: FormatarDinheiro.BR(double.parse(
-                                          assinatura.valorLiquido.toString()))),
+                                      label: FormatarDinheiro.BR(
+                                          assinatura.valorLiquido)),
                                 ],
                               ),
                             ],
@@ -153,5 +155,4 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas> {
       ),
     );
   }
-
 }

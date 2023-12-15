@@ -53,19 +53,11 @@ class AssinaturaProvider extends ChangeNotifier {
   String traduzirStatusAssinaturas(AssinaturasModel assinatura) {
     final status = assinatura.statusAssinaturaDigital.toUpperCase();
     const assinado = ['FINALIZADO', 'ASSINADO_CLIENTE', 'ACEITO', 'ENVIADO'];
-    if (assinado.contains(status)) {
-      return "Assinado";
-    } else {
-      return "Aguardando Assinatura";
-    }
+    return assinado.contains(status) ? "Assinado" : "Aguardando Assinatura";
   }
 
   Color definirCorStatusAssinatura(String status) {
-    if (status == "Assinado") {
-      return AppColors.verde;
-    } else {
-      return AppColors.azul;
-    }
+    return status == "Assinado" ?AppColors.verde : AppColors.azul;
   }
 
   void separaAssinaturas(List<AssinaturasModel> assinaturas) {
