@@ -86,7 +86,6 @@ class AuthProvider extends ChangeNotifier {
       }
     } else {
         final respostaAssinatura = await assinaturaProvider.pegarAssinaturas();
-        log('reposta assinatura body: ${respostaAssinatura.data}');
       if (respostaAssinatura.error != null) {
         _erroTrocaCedente(respostaAssinatura, overlayLoader);
       } else {

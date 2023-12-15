@@ -12,11 +12,9 @@ class DeviceUtils {
       if (Platform.isAndroid) {
         AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
         device_id = androidInfo.id;
-        log(device_id);
       } else if (Platform.isIOS) {
         IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
         device_id = iosInfo.identifierForVendor!;
-        log(device_id);
       }
     } catch (e) {
       print('Erro ao obter o Devide Id: $e');
