@@ -60,13 +60,13 @@ class _AssinaturaDigitalState extends State<AssinaturaDigital>
                   child: Text("Assinaturas Pendentes",
                       textAlign: TextAlign.center,
                       style: context.textTheme.bodyMedium!
-                          .copyWith(color: AppColors.globalBackground)),
+                          .copyWith(color: AppColors.corPrimariaSRM)),
                 ),
                 Tab(
                     child: Text("Acompanhar Assinaturas",
                         textAlign: TextAlign.center,
                         style: context.textTheme.bodyMedium!
-                            .copyWith(color: AppColors.globalBackground))),
+                            .copyWith(color: AppColors.corPrimariaSRM))),
               ]),
             ),
             Expanded(

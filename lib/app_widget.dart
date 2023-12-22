@@ -1,18 +1,11 @@
-import 'dart:developer';
-import 'dart:io'
-    show
-        Platform; //usado para verificar a plataforma atual (android, ios, windows ou mac)
-
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart'
-    show kIsWeb; //usado para verificar se esta rodando na web
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
-import 'package:modular_study/core/constants/themes/theme_light.dart';
+import 'package:modular_study/core/constants/themes/theme_srm.dart';
 import 'package:modular_study/core/providers/internet_provider.dart';
 import 'package:modular_study/core/providers/sessao_provider.dart';
 import 'package:modular_study/views/auth/sem_conexao/sem_conexao.dart';
@@ -87,8 +80,6 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    ///Abaixo estamos verificando a plataforma em que o app está rodando
-    ///Deixarei os comentários in-line para que possa ser de fácil entendimento
     final ConnectivityProvider connectivityProvider =
         context.watch<ConnectivityProvider>();
     return StreamBuilder<bool>(
@@ -96,29 +87,7 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
       initialData: true,
       builder: (context, snapshot) {
         if (!snapshot.hasData || !snapshot.data!) {
-          return kIsWeb
-              ? ScreenUtilInit(
-                  designSize: Size(
-                    context.width,
-                    context.height,
-                  ),
-                  builder: (context, child) {
-                    return const MaterialApp(
-                      home: SemConexaoScreen(),
-                    );
-                  })
-              : Platform.isIOS
-                  ? ScreenUtilInit(
-                      designSize: Size(
-                        context.width,
-                        context.height,
-                      ),
-                      builder: (context, child) {
-                        return const CupertinoApp(
-                          home: SemConexaoScreen(),
-                        );
-                      })
-                  : ScreenUtilInit(
+          return ScreenUtilInit(
                       designSize: Size(
                         context.width,
                         context.height,
@@ -156,36 +125,7 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
             sessionProvider.resetListening();
           }
         },
-        child: kIsWeb
-            ?
-            //kIsWeb é usado para verificar se estamos rodando na web e retorna um bool
-            ScreenUtilInit(
-                designSize: Size(
-                  context.width,
-                  context.height,
-                ),
-                builder: (context, child) {
-                  return MaterialApp.router(
-                    routerConfig: Modular.routerConfig,
-                    theme: ThemeLight.theme_light,
-                    debugShowCheckedModeBanner: false,
-                  );
-                })
-            : Platform.isIOS //Verificamos se estamos em um iphone.
-                //caso seja um iphone irá retornar o CupertinoApp para ter o padrão de IOS
-                ? ScreenUtilInit(
-                    designSize: Size(
-                      context.width,
-                      context.height,
-                    ),
-                    builder: (context, child) {
-                      return CupertinoApp.router(
-                        routerConfig: Modular.routerConfig,
-                        theme: ThemeLight.cupertinoThemeLight,
-                      );
-                    })
-                //Caso seja falso, retornaremos o padrão MaterialApp que é para android
-                : ScreenUtilInit(
+        child: ScreenUtilInit(
                     designSize: Size(
                       context.width,
                       context.height,
@@ -193,7 +133,7 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
                     builder: (context, child) {
                       return MaterialApp.router(
                         routerConfig: Modular.routerConfig,
-                        theme: ThemeLight.theme_light,
+                        theme: ThemeSRM.theme,
                       );
                     }),
       ),

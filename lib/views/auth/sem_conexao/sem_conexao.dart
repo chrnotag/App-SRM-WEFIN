@@ -26,7 +26,7 @@ class _SemConexaoScreenState extends State<SemConexaoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.globalBackground,
+      backgroundColor: AppColors.corPrimariaSRM,
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(

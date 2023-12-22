@@ -22,7 +22,7 @@ class ComponentCardOperacoes extends StatelessWidget {
           Text(
             title,
             style: context.textTheme.bodyMedium!
-                .copyWith(color: AppColors.globalBackground),
+                .copyWith(color: AppColors.corPrimariaSRM),
             textAlign: TextAlign.start,
           ),
           const SizedBox(

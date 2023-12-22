@@ -55,7 +55,7 @@ class Menu extends StatelessWidget {
                               authProvider.empresaSelecionada?.nome ??
                                   'Empresa não selecionada',
                               style: context.textTheme.bodyLarge!.copyWith(
-                                color: AppColors.globalBackground,
+                                color: AppColors.corPrimariaSRM,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 18,
                                 letterSpacing: 1.5,
@@ -87,7 +87,7 @@ class Menu extends StatelessWidget {
                                     child: Text('Atenção',
                                         style: context.textTheme.bodyLarge!
                                             .copyWith(
-                                          color: AppColors.globalBackground,
+                                          color: AppColors.corPrimariaSRM,
                                           fontWeight: FontWeight.w600,
                                           fontSize: 20,
                                           letterSpacing: 1.5,

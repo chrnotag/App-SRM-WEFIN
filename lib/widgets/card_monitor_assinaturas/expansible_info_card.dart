@@ -76,7 +76,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                           Text(
                             'Papéis',
                             style: context.textTheme.bodyMedium!
-                                .copyWith(color: AppColors.globalBackground),
+                                .copyWith(color: AppColors.corPrimariaSRM),
                           ),
                           ...info.papeis
                               .map((papel) => Text(
@@ -96,7 +96,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                           Text(
                             'Procurador',
                             style: context.textTheme.bodyMedium!
-                                .copyWith(color: AppColors.globalBackground),
+                                .copyWith(color: AppColors.corPrimariaSRM),
                           ),
                           Text(
                             info.nomeProcurador ?? "",
@@ -114,7 +114,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                           Text(
                             'Status',
                             style: context.textTheme.bodyMedium!
-                                .copyWith(color: AppColors.globalBackground),
+                                .copyWith(color: AppColors.corPrimariaSRM),
                           ),
                           info.statusAssinatura == "INIC"
                               ? Text(
@@ -137,7 +137,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                           Text(
                             'Assinante',
                             style: context.textTheme.bodyMedium!
-                                .copyWith(color: AppColors.globalBackground),
+                                .copyWith(color: AppColors.corPrimariaSRM),
                           ),
                           Text(
                             assinante.nomeAssinante
@@ -162,7 +162,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                         Text(
                           'Documentos',
                           style: context.textTheme.bodyMedium!
-                              .copyWith(color: AppColors.globalBackground),
+                              .copyWith(color: AppColors.corPrimariaSRM),
                         ),
                         ...info.documentos
                             .map((doc) => Text(
@@ -181,7 +181,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                           Text(
                             'Tipo de Assinatura',
                             style: context.textTheme.bodyMedium!
-                                .copyWith(color: AppColors.globalBackground),
+                                .copyWith(color: AppColors.corPrimariaSRM),
                           ),
                           Text(
                             info.tipoAssinatura
@@ -198,7 +198,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                         Text(
                           'Data',
                           style: context.textTheme.bodyMedium!
-                              .copyWith(color: AppColors.globalBackground),
+                              .copyWith(color: AppColors.corPrimariaSRM),
                         ),
                         Text(
                           info.dataAssinatura != null
