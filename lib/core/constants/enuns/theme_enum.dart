@@ -1,0 +1,4 @@
+enum TemaSelecionado{
+  TRUST,
+  SRM
+}

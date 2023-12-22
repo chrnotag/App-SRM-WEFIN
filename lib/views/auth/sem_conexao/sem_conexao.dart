@@ -38,7 +38,7 @@ class _SemConexaoScreenState extends State<SemConexaoScreen> {
             AppBar(
               centerTitle: true,
               title: Image.asset(
-                Assets.imagesLogo,
+                Assets.logoSRM,
                 scale: 3,
               ),
               backgroundColor: Colors.transparent,

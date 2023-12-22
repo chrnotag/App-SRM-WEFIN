@@ -14,7 +14,7 @@ class AppBarLogo extends StatelessWidget {
       shape: UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.blue.shade900, width: 0.5)),
       centerTitle: true,
-      title: Image.asset(Assets.imagesLogo, width: 70),
+      title: Image.asset(Assets.logoSRM, width: 70),
       actions: [
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),

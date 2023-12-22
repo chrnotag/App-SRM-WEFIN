@@ -18,6 +18,7 @@ class Assets {
   static const String iconsIcCadeado = 'assets/icons/ic_cadeado.svg';
   static const String iconsIcCampoInvalido =
       'assets/icons/ic_campo_invalido.svg';
+  static const String logoTRUST = 'assets/images/logo_trust.png';
   static const String iconsIcCampoValido = 'assets/icons/ic_campo_valido.svg';
   static const String iconsIcCanetaAssinatura =
       'assets/icons/ic_caneta_assinatura.svg';
@@ -75,7 +76,7 @@ class Assets {
   static const String imagesBackgroundImage =
       'assets/images/background_image.png';
   static const String imagesCadeado = 'assets/images/cadeado.svg';
-  static const String imagesLogo = 'assets/images/logo.png';
+  static const String logoSRM = 'assets/images/logo_srm.png';
   static const String imagesNoNetwork = 'assets/images/no_network.png';
   static const String imagesSmrIcon = 'assets/images/smr_icon.png';
   static const String imgDrawableHdpi = 'assets/img/drawable-hdpi.png';

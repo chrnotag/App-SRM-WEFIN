@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: true,
                 title: Image.asset(
-                  Assets.imagesLogo,
+                  Assets.logoSRM,
                   width: isKeyboardVisible
                       ? 80
                       : MediaQuery.of(context).size.width * 0.5,
