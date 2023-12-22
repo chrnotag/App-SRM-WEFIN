@@ -1,13 +1,19 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:line_icons/line_icon.dart';
+import 'package:modular_study/core/constants/enuns/theme_enum.dart';
 import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/constants/themes/theme_srm.dart';
+import 'package:modular_study/core/constants/themes/theme_trust.dart';
 import 'package:modular_study/core/providers/internet_provider.dart';
 import 'package:modular_study/core/providers/sessao_provider.dart';
+import 'package:modular_study/core/providers/theme_provider.dart';
 import 'package:modular_study/views/auth/sem_conexao/sem_conexao.dart';
 
 class AppWidget extends StatefulWidget {
@@ -20,20 +26,20 @@ class AppWidget extends StatefulWidget {
 class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
   final SessionProvider sessionProvider = Modular.get<SessionProvider>();
 
+  final List<String> listaExessaoTimeOut = [Modular.initialRoute, AppRoutes.forgetPassAuthRoute, AppRoutes.loginSRMAuthRoute, AppRoutes.loginTRUSTAuthRoute];
+
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.detached) {
       sessionProvider.stopListening();
     }
     if (state == AppLifecycleState.paused) {
-      if (Modular.to.path != Modular.initialRoute &&
-          Modular.to.path != AppRoutes.forgetPassAuthRoute) {
+      if (!listaExessaoTimeOut.contains(Modular.to.path)) {
         sessionProvider.resetListening();
       }
     }
     if (state == AppLifecycleState.resumed) {
-      if (Modular.to.path != Modular.initialRoute &&
-          Modular.to.path != AppRoutes.forgetPassAuthRoute) {
+      if (!listaExessaoTimeOut.contains(Modular.to.path)) {
         sessionProvider.resetListening();
       }
     }
@@ -51,8 +57,7 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
       if (isKeyboardOpen) {
         sessionProvider.stopListening();
       } else {
-        if (Modular.to.path != Modular.initialRoute &&
-            Modular.to.path != AppRoutes.forgetPassAuthRoute) {
+        if (!listaExessaoTimeOut.contains(Modular.to.path)) {
           sessionProvider.resetListening();
         }
       }
@@ -80,6 +85,7 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeProvider themeProvider = context.watch<ThemeProvider>();
     final ConnectivityProvider connectivityProvider =
         context.watch<ConnectivityProvider>();
     return StreamBuilder<bool>(
@@ -88,54 +94,52 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
       builder: (context, snapshot) {
         if (!snapshot.hasData || !snapshot.data!) {
           return ScreenUtilInit(
-                      designSize: Size(
-                        context.width,
-                        context.height,
-                      ),
-                      builder: (context, child) {
-                        return const MaterialApp(
-                          home: SemConexaoScreen(),
-                        );
-                      });
+              designSize: Size(
+                context.width,
+                context.height,
+              ),
+              builder: (context, child) {
+                return const MaterialApp(
+                  home: SemConexaoScreen(),
+                );
+              });
         } else {
-          return widgetPrincipal(context);
+          return widgetPrincipal(context, themeProvider);
         }
       },
     );
   }
 
-  Widget widgetPrincipal(BuildContext context) {
+  Widget widgetPrincipal(BuildContext context, ThemeProvider themeProvider) {
     return Listener(
       onPointerDown: (event) {
-        if (Modular.to.path != Modular.initialRoute &&
-            Modular.to.path != AppRoutes.forgetPassAuthRoute) {
+        if (!listaExessaoTimeOut.contains(Modular.to.path)) {
           sessionProvider.resetListening();
+          log('teste, ${Modular.to.path}');
         }
       },
       child: GestureDetector(
         onLongPress: () {
-          if (Modular.to.path != Modular.initialRoute &&
-              Modular.to.path != AppRoutes.forgetPassAuthRoute) {
+          if (!listaExessaoTimeOut.contains(Modular.to.path)) {
             sessionProvider.stopListening();
           }
         },
         onLongPressUp: () {
-          if (Modular.to.path != Modular.initialRoute &&
-              Modular.to.path != AppRoutes.forgetPassAuthRoute) {
+          if (!listaExessaoTimeOut.contains(Modular.to.path)) {
             sessionProvider.resetListening();
           }
         },
         child: ScreenUtilInit(
-                    designSize: Size(
-                      context.width,
-                      context.height,
-                    ),
-                    builder: (context, child) {
-                      return MaterialApp.router(
-                        routerConfig: Modular.routerConfig,
-                        theme: ThemeSRM.theme,
-                      );
-                    }),
+            designSize: Size(
+              context.width,
+              context.height,
+            ),
+            builder: (context, child) {
+              return MaterialApp.router(
+                routerConfig: Modular.routerConfig,
+                theme: themeProvider.temaAtual,
+              );
+            }),
       ),
     );
   }

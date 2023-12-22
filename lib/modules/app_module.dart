@@ -5,6 +5,7 @@ import 'package:modular_study/core/providers/auth_provider_config/auth_providers
 import 'package:modular_study/core/providers/certificado_provider/importar_certificadode.dart';
 import 'package:modular_study/core/providers/internet_provider.dart';
 import 'package:modular_study/core/providers/sessao_provider.dart';
+import 'package:modular_study/core/providers/theme_provider.dart';
 import 'package:modular_study/modules/auth_module.dart';
 import 'package:modular_study/modules/home_module.dart';
 
@@ -17,6 +18,7 @@ class AppModule extends Module {
     i.addSingleton(AssinaturaProvider.new);
     i.addSingleton(ConnectivityProvider.new);
     i.addSingleton(ImportarCertificadoProvider.new);
+    i.addSingleton(ThemeProvider.new);
   }
 
   @override

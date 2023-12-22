@@ -36,6 +36,7 @@ class ThemeTRUST {
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent),
         scaffoldBackgroundColor: Colors.white,
+        backgroundColor: Colors.white,
         textTheme: TextTheme(
           bodySmall: GoogleFonts.montserrat(
             fontSize: AppSizes.fontSizeSmall,
