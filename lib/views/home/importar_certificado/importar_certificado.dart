@@ -119,7 +119,7 @@ class ImportarCertificado extends StatelessWidget {
                         arguments: ImportarVia.Dispositivo);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.globalBackground,
+                    backgroundColor: AppColors.corPrimariaSRM,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4),
                         side: const BorderSide(color: Colors.white, width: 2)),

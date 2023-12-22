@@ -107,7 +107,7 @@ class _HomeViewState extends State<HomeView> {
                                     style: context.textTheme.bodyLarge!
                                         .copyWith(
                                             fontWeight: FontWeight.bold,
-                                            color: AppColors.globalBackground),
+                                            color: AppColors.corPrimariaSRM),
                                   ),
                                 ],
                               ),
@@ -140,7 +140,7 @@ class _HomeViewState extends State<HomeView> {
                                     style: context.textTheme.bodyLarge!
                                         .copyWith(
                                             fontWeight: FontWeight.bold,
-                                            color: AppColors.globalBackground),
+                                            color: AppColors.corPrimariaSRM),
                                   )
                                 ],
                               ),
@@ -180,7 +180,7 @@ class _HomeViewState extends State<HomeView> {
                                     style: context.textTheme.bodyLarge!
                                         .copyWith(
                                             fontWeight: FontWeight.bold,
-                                            color: AppColors.globalBackground),
+                                            color: AppColors.corPrimariaSRM),
                                   )
                                 ],
                               ),

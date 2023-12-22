@@ -28,7 +28,7 @@ class SelecionarCertificado extends StatelessWidget {
           Text(
               'Assinar Operação ${assinaturaProvider.assinaturaSelecionada!.codigoOperacao}',
               style: context.textTheme.titleSmall!.copyWith(
-                color: AppColors.globalBackground,
+                color: AppColors.corPrimariaSRM,
                 fontWeight: FontWeight.w300,
                 fontSize: 15,
                 letterSpacing: 1.5,
@@ -96,7 +96,7 @@ class SelecionarCertificado extends StatelessWidget {
                                                           .copyWith(
                                                               fontSize: 16,
                                                               color: AppColors
-                                                                  .globalBackground),
+                                                                  .corPrimariaSRM),
                                                     ),
                                                   ),
                                                   Text(
