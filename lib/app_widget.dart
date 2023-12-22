@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:line_icons/line_icon.dart';
 import 'package:modular_study/core/constants/enuns/theme_enum.dart';
 import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
@@ -84,6 +85,7 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeProvider themeProvider = context.watch<ThemeProvider>();
     final ConnectivityProvider connectivityProvider =
         context.watch<ConnectivityProvider>();
     return StreamBuilder<bool>(
@@ -102,18 +104,18 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
                 );
               });
         } else {
-          return widgetPrincipal(context);
+          return widgetPrincipal(context, themeProvider);
         }
       },
     );
   }
 
-  Widget widgetPrincipal(BuildContext context) {
-    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
+  Widget widgetPrincipal(BuildContext context, ThemeProvider themeProvider) {
     return Listener(
       onPointerDown: (event) {
         if (!listaExessaoTimeOut.contains(Modular.to.path)) {
           sessionProvider.resetListening();
+          log('teste, ${Modular.to.path}');
         }
       },
       child: GestureDetector(
@@ -135,9 +137,7 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
             builder: (context, child) {
               return MaterialApp.router(
                 routerConfig: Modular.routerConfig,
-                theme: themeProvider.temaSelecionado == TemaSelecionado.TRUST
-                    ? ThemeSRM.theme
-                    : ThemeTRUST.theme,
+                theme: themeProvider.temaAtual,
               );
             }),
       ),

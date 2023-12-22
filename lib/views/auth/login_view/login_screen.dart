@@ -48,13 +48,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   Assets.logoSRM,
                   width: isKeyboardVisible
                       ? 80
-                      : MediaQuery.of(context).size.width * 0.5,
+                      : MediaQuery.of(context).size.width * 0.4,
                   fit: BoxFit.fill,
                 ),
               ),
             ),
             SliverPadding(
-              padding: EdgeInsets.all(8),
+              padding: EdgeInsets.all(0),
               sliver: SliverToBoxAdapter(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -64,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       opacity: isKeyboardVisible ? 0.0 : 1.0,
                       child: SizedBox(
                         child: Text(
-                          "Seja bem vindo ao seu app de gestão",
+                          "Seja bem vindo\nao seu app de gestão",
                           style: context.textTheme.bodyMedium!.copyWith(
                               color: AppColors.labelText,
                               fontSize: MediaQuery.of(context).size.width *
