@@ -15,6 +15,8 @@ class ThemeProvider extends ChangeNotifier {
 
   ThemeData get temaAtual => _temaSelecionado == TemaSelecionado.SRM ? ThemeSRM.theme : ThemeTRUST.theme;
 
+  TemaSelecionado get temaSelecionado => _temaSelecionado;
+
   set temaSelecionado(TemaSelecionado tema) {
     _temaSelecionado = tema;
     notifyListeners();

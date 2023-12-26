@@ -22,6 +22,8 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
+    bool isTemaSRM = themeProvider.temaSelecionado == TemaSelecionado.SRM;
     final assinantes = widget.assinantes;
     final CarouselController carouselController = CarouselController();
     final ImportarCertificadoProvider certificadoProvider =
@@ -38,15 +40,21 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                               assinante, info, certificadoProvider)))
                       .toList(),
                   options: CarouselOptions(
-                      showIndicator: true,
-                      controller: carouselController,
-                      scrollDirection: Axis.horizontal,
-                      floatingIndicator: true,
-                      slideIndicator: const CircularSlideIndicator(
-                        currentIndicatorColor: AppColors.azul,
-                        alignment: Alignment.center,
-                        indicatorBorderColor: AppColors.azul,
-                      )))
+                    showIndicator: true,
+                    controller: carouselController,
+                    scrollDirection: Axis.horizontal,
+                    floatingIndicator: false,
+                    slideIndicator: CircularSlideIndicator(
+                        padding: EdgeInsets.only(bottom: 30),
+                        indicatorBorderColor: isTemaSRM
+                            ? Colors.grey.shade500.withAlpha(50)
+                            : context.shadersTrust[400]!.withAlpha(50),
+                        currentIndicatorColor:
+                            isTemaSRM ? Colors.white : context.primaryColor,
+                        indicatorBackgroundColor: isTemaSRM
+                            ? Colors.grey.shade500.withAlpha(50)
+                            : context.shadersTrust[400]!.withAlpha(50)),
+                  ))
             ],
           )
         : Container();
@@ -63,8 +71,11 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.3,
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                    minHeight: 100,
+                    maxHeight: 500,
+                    maxWidth: MediaQuery.of(context).size.width * 0.3),
                 child: IntrinsicHeight(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

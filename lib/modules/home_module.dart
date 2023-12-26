@@ -2,7 +2,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/views/auth/menu_user/menu.dart';
 import 'package:modular_study/views/home/ajuda/ajuda_screen.dart';
-import 'package:modular_study/views/home/assinaturas/assinatura_digital.dart';
+import 'package:modular_study/views/home/assinaturas/monitor_assinaturas.dart';
 import 'package:modular_study/views/home/home_view/home_view.dart';
 import 'package:modular_study/views/home/importar_certificado/guia_certificado.dart';
 import 'package:modular_study/views/home/importar_certificado/importar_certificado.dart';
@@ -24,7 +24,7 @@ class HomeModule extends Module {
     );
     r.child(
       AppRoutes.assinaturaDigitalHomeRoute,
-      child: (context) => const AssinaturaDigital(),
+      child: (context) => const MonitorAssinaturas(),
     );
     r.child(
       AppRoutes.menuAppHomeRoute,

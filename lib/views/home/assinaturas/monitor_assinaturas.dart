@@ -9,14 +9,17 @@ import 'package:modular_study/widgets/appbar_logo_perfil.dart';
 import 'package:modular_study/widgets/botao_selecao_empresa.dart';
 import 'package:modular_study/widgets/card_monitor_assinaturas/card_monitor_assinaturas.dart';
 
-class AssinaturaDigital extends StatefulWidget {
-  const AssinaturaDigital({super.key});
+import '../../../core/constants/enuns/theme_enum.dart';
+import '../../../core/providers/theme_provider.dart';
+
+class MonitorAssinaturas extends StatefulWidget {
+  const MonitorAssinaturas({super.key});
 
   @override
-  State<AssinaturaDigital> createState() => _AssinaturaDigitalState();
+  State<MonitorAssinaturas> createState() => _MonitorAssinaturasState();
 }
 
-class _AssinaturaDigitalState extends State<AssinaturaDigital>
+class _MonitorAssinaturasState extends State<MonitorAssinaturas>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
@@ -39,6 +42,8 @@ class _AssinaturaDigitalState extends State<AssinaturaDigital>
         Modular.get<AssinaturaProvider>();
     List<AssinaturasModel> assinaturasPendentes = assinaturaProvider.assinaturasPendentes;
     List<AssinaturasModel> assinaturas = assinaturaProvider.todasAssinaturas;
+    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
+    bool isTemaSRM = themeProvider.temaSelecionado == TemaSelecionado.SRM;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,
@@ -60,14 +65,14 @@ class _AssinaturaDigitalState extends State<AssinaturaDigital>
                   child: Text("Assinaturas Pendentes",
                       textAlign: TextAlign.center,
                       style: context.textTheme.bodyMedium!
-                          .copyWith(color: AppColors.corPrimariaSRM)),
+                          .copyWith(color: isTemaSRM ? AppColors.corPrimariaSRM : context.shadersTrust[900])),
                 ),
                 Tab(
                     child: Text("Acompanhar Assinaturas",
                         textAlign: TextAlign.center,
                         style: context.textTheme.bodyMedium!
-                            .copyWith(color: AppColors.corPrimariaSRM))),
-              ]),
+                            .copyWith(color: isTemaSRM ?  AppColors.corPrimariaSRM : context.shadersTrust[900]))),
+              ], indicatorColor: context.primaryColor),
             ),
             Expanded(
               child: TabBarView(

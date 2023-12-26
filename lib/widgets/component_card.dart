@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 
+import '../core/constants/enuns/theme_enum.dart';
 import '../core/constants/themes/theme_configs.dart';
+import '../core/providers/theme_provider.dart';
 
 class ComponentCardOperacoes extends StatelessWidget {
   final String title;
@@ -22,7 +25,7 @@ class ComponentCardOperacoes extends StatelessWidget {
           Text(
             title,
             style: context.textTheme.bodyMedium!
-                .copyWith(color: AppColors.corPrimariaSRM),
+                .copyWith(color: Colors.black),
             textAlign: TextAlign.start,
           ),
           const SizedBox(
@@ -32,7 +35,7 @@ class ComponentCardOperacoes extends StatelessWidget {
             label,
             style: textStyle ??
                 context.textTheme.bodySmall!
-                    .copyWith(color: AppColors.labelText, fontSize: 10),
+                    .copyWith(color: AppColors.labelText),
             textAlign: TextAlign.start,
           ),
         ],

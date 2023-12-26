@@ -7,7 +7,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
+
+import '../../constants/themes/theme_configs.dart';
 
 class ImportarCertificadoProvider extends ChangeNotifier {
   Uint8List _pkcs12 = Uint8List(0);
@@ -28,6 +31,29 @@ class ImportarCertificadoProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  PKCertificate? _certificadoSelecionado;
+
+  PKCertificate? get certificadoSelecionado => _certificadoSelecionado;
+
+  set certificadoSelecionado(PKCertificate? certificate) {
+    _certificadoSelecionado = certificate;
+    notifyListeners();
+  }
+
+  void desselecionarCertificado() {
+    _certificadoSelecionado = null;
+  }
+
+  Color alterarCorItemListaCertificado(
+      PKCertificate certificado, BuildContext context) {
+    if (_certificadoSelecionado != null &&
+        _certificadoSelecionado?.thumbprint == certificado.thumbprint) {
+      return context.primaryColor;
+    } else {
+      return Colors.grey.shade400;
+    }
+  }
+
   String? _senhaCertificado;
 
   String? get senhaCertificado => _senhaCertificado;
@@ -39,9 +65,10 @@ class ImportarCertificadoProvider extends ChangeNotifier {
     return listaCertificados;
   }
 
-  Future<void> deletarCertificado(String thumbprint) async{
+  Future<void> deletarCertificado(String thumbprint) async {
     await CrossPki.removeCertificate(thumbprint);
-    listaCertificados.removeWhere((element) => element.thumbprint == thumbprint);
+    listaCertificados
+        .removeWhere((element) => element.thumbprint == thumbprint);
     Fluttertoast.showToast(msg: 'Certificado removido com sucesso');
     notifyListeners();
   }
@@ -51,14 +78,12 @@ class ImportarCertificadoProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
   void limparErro() {
     errorMsg = null;
     notifyListeners();
   }
 
-  Future<void> selecionarArquivoCertificado() async {
+  Future<bool> selecionarArquivoCertificado() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['pkcs12', 'p12', 'pfx'],
@@ -66,31 +91,35 @@ class ImportarCertificadoProvider extends ChangeNotifier {
 
     if (result == null) {
       Fluttertoast.showToast(msg: "Nenhum arquivo foi selecionado.");
-      return;
+      return false;
     }
 
     PlatformFile file = result.files.first;
 
     if (file.path == null) {
       Fluttertoast.showToast(msg: "Caminho do arquivo é nulo.");
-      return;
+      return false;
     }
 
     Uint8List fileContent = await File(file.path!).readAsBytes();
 
     if (fileContent.isEmpty) {
       Fluttertoast.showToast(msg: "Conteúdo do arquivo é vazio.");
-      return;
+      return false;
     }
     pkcs12 = fileContent;
     notifyListeners();
+    return true;
   }
 
   Future<bool> importarCertificado() async {
     try {
       await CrossPki.importPkcs12(pkcs12, senhaCertificado!);
       var certs = await CrossPki.listCertificatesWithKey();
-      Fluttertoast.showToast(msg: 'Certificado ${certs.first.subjectDisplayName} importado com sucesso!');
+      Fluttertoast.showToast(
+          msg:
+              'Certificado ${certs.first.subjectDisplayName} importado com sucesso!');
+      Modular.to.pop();
       return true;
     } on CrossPkiException catch (e) {
       switch (e.code) {
@@ -115,8 +144,9 @@ class ImportarCertificadoProvider extends ChangeNotifier {
               'Erro Desconhecido. Ocorreu um problema não identificado. Por favor, entre em contato com o suporte técnico.';
           break;
       }
-    } catch(e) {
-      errorMsg = 'Erro Desconhecido. Ocorreu um problema não identificado. Por favor, entre em contato com o suporte técnico.';
+    } catch (e) {
+      errorMsg =
+          'Erro Desconhecido. Ocorreu um problema não identificado. Por favor, entre em contato com o suporte técnico.';
     }
     return false;
   }

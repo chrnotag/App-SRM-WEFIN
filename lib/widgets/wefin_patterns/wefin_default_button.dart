@@ -1,54 +1,97 @@
 import 'package:flutter/material.dart';
+import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 
 import '../../core/constants/themes/theme_configs.dart';
 
 class WefinDefaultButton extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;
-  final double borderRadius;
-  final Color? color;
   final Color? labelColor;
-  final double labelSize;
-  final double padding;
-  final double width;
-  final double height;
+  final IconData? icon;
+  final bool filled;
+  final double? fontSize;
 
-  const WefinDefaultButton({
-    Key? key,
-    required this.label,
-    required this.onPressed,
-    this.borderRadius = 4,
-    this.color,
-    this.labelColor,
-    this.padding = 0,
-    this.labelSize = 20,
-    this.width =
-        double.infinity, //tamanho maximo da tela, o pai segura o tamanho maximo
-    this.height = 60,
-  }) : super(key: key);
+  const WefinDefaultButton(
+      {Key? key,
+      required this.label,
+      required this.onPressed,
+      this.labelColor,
+      this.icon,
+      this.filled = true,
+      this.fontSize})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(padding),
-      width: width,
-      height: height,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadius),
-          ),
-          backgroundColor: color ?? AppColors.azul,
-        ),
-        child: Text(
-          label,
-          style: TextStyle(
-            fontSize: labelSize,
-            color: labelColor ?? AppColors.branco,
-          ),
-        ),
-      ),
-    );
+    return filled
+        ? ElevatedButton(
+            onPressed: onPressed,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: context.primaryColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(AppSizes.paddingMedium),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Visibility(
+                    visible: icon != null ? true : false,
+                    child: Icon(
+                      icon,
+                      color: Colors.white,
+                      size: 40,
+                    ),
+                  ),
+                  Text(
+                    label,
+                    style: fontSize != null
+                        ? context.textTheme.bodySmall!
+                            .copyWith(color: Colors.white, fontSize: fontSize)
+                        : context.textTheme.bodySmall!
+                            .copyWith(color: Colors.white),
+                  )
+                ],
+              ),
+            ),
+          )
+        : ElevatedButton(
+            onPressed: onPressed,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.transparent,
+              shadowColor: Colors.transparent,
+              shape: RoundedRectangleBorder(
+                side: BorderSide(color: context.primaryColor, width: 1),
+                borderRadius: BorderRadius.circular(4),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(AppSizes.paddingMedium),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Visibility(
+                    visible: icon != null ? true : false,
+                    child: Icon(
+                      icon,
+                      color: labelColor ?? context.primaryColor,
+                      size: 40,
+                    ),
+                  ),
+                  Text(
+                    label,
+                    style: fontSize != null
+                        ? context.textTheme.bodySmall!.copyWith(
+                            color: labelColor ?? context.primaryColor, fontSize: fontSize)
+                        : context.textTheme.bodySmall!.copyWith(
+                            color: labelColor ?? context.primaryColor),
+                  )
+                ],
+              ),
+            ),
+          );
+    ;
   }
 }

@@ -14,6 +14,8 @@ class _MenuItem extends StatefulWidget {
 class _MenuItemState extends State<_MenuItem> {
   @override
   Widget build(BuildContext context) {
+    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
+    bool isTemaSRM = themeProvider.temaSelecionado == TemaSelecionado.SRM;
     return InkWell(
       onTap: widget.onTap,
       child: Column(
@@ -25,11 +27,11 @@ class _MenuItemState extends State<_MenuItem> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right:5.0),
-                  child: Icon(widget.icon,color: AppColors.azul),
+                  child: Icon(widget.icon,color: isTemaSRM ? AppColors.azul : context.primaryColor,),
                 ),
-                Text(widget.title,style:context.textTheme.bodyMedium!.copyWith(color: AppColors.corPrimariaSRM)),
+                Text(widget.title,style:context.textTheme.bodyMedium!.copyWith(color: isTemaSRM ? AppColors.corPrimariaSRM : context.shadersTrust[900])),
                 Expanded(child: Container()),
-                const Icon(Icons.arrow_forward_ios, color: AppColors.corPrimariaSRM,size: AppSizes.paddingMedium)
+                Icon(Icons.arrow_forward_ios, color: isTemaSRM ? AppColors.azul : context.primaryColor,size: AppSizes.paddingMedium)
               ],
             ),
           ),

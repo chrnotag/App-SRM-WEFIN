@@ -1,18 +1,34 @@
 import 'dart:math';
-import 'dart:ui';
-
 import 'package:crosspki/crosspki.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
+import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/providers/assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/certificado_provider/importar_certificadode.dart';
-import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
+import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
 
 import '../../../../core/constants/themes/theme_configs.dart';
+import '../../../core/constants/enuns/theme_enum.dart';
+import '../../../core/providers/theme_provider.dart';
 
-class SelecionarCertificado extends StatelessWidget {
+part 'widgets/popup_deletar_certificado.dart';
+
+class SelecionarCertificado extends StatefulWidget {
   const SelecionarCertificado({super.key});
+
+  @override
+  State<SelecionarCertificado> createState() => _SelecionarCertificadoState();
+}
+
+class _SelecionarCertificadoState extends State<SelecionarCertificado> {
+  @override
+  void dispose() {
+    final ImportarCertificadoProvider certificadoProvider =
+        Modular.get<ImportarCertificadoProvider>();
+    certificadoProvider.desselecionarCertificado();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +36,8 @@ class SelecionarCertificado extends StatelessWidget {
         context.watch<ImportarCertificadoProvider>();
     final AssinaturaProvider assinaturaProvider =
         context.watch<AssinaturaProvider>();
+    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
+    bool isTemaSRM = themeProvider.temaSelecionado == TemaSelecionado.SRM;
     final double itemHeight = 50;
     final double maxHeight = 200;
     return AlertDialog(
@@ -28,7 +46,9 @@ class SelecionarCertificado extends StatelessWidget {
           Text(
               'Assinar Operação ${assinaturaProvider.assinaturaSelecionada!.codigoOperacao}',
               style: context.textTheme.titleSmall!.copyWith(
-                color: AppColors.corPrimariaSRM,
+                color: isTemaSRM
+                    ? AppColors.corPrimariaSRM
+                    : context.shadersTrust[900],
                 fontWeight: FontWeight.w300,
                 fontSize: 15,
                 letterSpacing: 1.5,
@@ -59,10 +79,31 @@ class SelecionarCertificado extends StatelessWidget {
                           return Padding(
                             padding: const EdgeInsets.all(1.0),
                             child: Container(
-                              color: AppColors.labelText,
+                              color: certificadoProvider
+                                  .alterarCorItemListaCertificado(
+                                      certificadoProvider
+                                          .listaCertificados[index],
+                                      context),
                               height: 40,
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  if (certificadoProvider
+                                              .certificadoSelecionado !=
+                                          null &&
+                                      certificadoProvider
+                                              .certificadoSelecionado!
+                                              .thumbprint ==
+                                          certificadoProvider
+                                              .listaCertificados[index]
+                                              .thumbprint) {
+                                    certificadoProvider.certificadoSelecionado =
+                                        null;
+                                  } else {
+                                    certificadoProvider.certificadoSelecionado =
+                                        certificadoProvider
+                                            .listaCertificados[index];
+                                  }
+                                },
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -70,111 +111,33 @@ class SelecionarCertificado extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 8.0),
-                                      child: Text(
-                                        certificadoProvider
-                                            .listaCertificados[index]
-                                            .subjectDisplayName!,
-                                        style: context.textTheme.bodySmall!
-                                            .copyWith(color: Colors.white),
+                                      child: SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.6,
+                                        child: Text(
+                                          certificadoProvider
+                                              .listaCertificados[index]
+                                              .subjectDisplayName!,
+                                          style: context.textTheme.bodySmall!
+                                              .copyWith(color: Colors.white),
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                          softWrap: true,
+                                        ),
                                       ),
                                     ),
                                     InkWell(
                                         onTap: () async {
                                           showDialog(
                                             context: context,
-                                            builder: (context) => AlertDialog(
-                                              title: Column(
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            bottom: 8.0),
-                                                    child: Text(
-                                                      'Excluir',
-                                                      style: context.textTheme
-                                                          .bodyLarge!
-                                                          .copyWith(
-                                                              fontSize: 16,
-                                                              color: AppColors
-                                                                  .corPrimariaSRM),
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    'Você tem certeza que deseja excluir o certifcado?',
-                                                    style: context
-                                                        .textTheme.bodyMedium!
-                                                        .copyWith(),
-                                                  ),
-                                                  Padding(
-                                                    padding: EdgeInsets.only(
-                                                        top: 8),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Expanded(
-                                                          child:
-                                                              ElevatedButton(
-                                                                  onPressed:
-                                                                      () {
-                                                                    certificadoProvider.deletarCertificado(certificadoProvider
-                                                                        .listaCertificados[
-                                                                            index]
-                                                                        .thumbprint);
-                                                                    Modular.to
-                                                                        .pop();
-                                                                  },
-                                                                  style: ElevatedButton
-                                                                      .styleFrom(
-                                                                    backgroundColor:
-                                                                        AppColors
-                                                                            .azul,
-                                                                  ),
-                                                                  child: const Text(
-                                                                      'Excluir')),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Expanded(
-                                                        child: ElevatedButton(
-                                                          onPressed: () {
-                                                            Modular.to.pop();
-                                                          },
-                                                          style: ElevatedButton.styleFrom(
-                                                              backgroundColor:
-                                                                  Colors
-                                                                      .white,
-                                                              shadowColor: Colors
-                                                                  .transparent,
-                                                              shape: RoundedRectangleBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                  side: const BorderSide(
-                                                                      color: AppColors
-                                                                          .azul,
-                                                                      width:
-                                                                          1))),
-                                                          child: Text(
-                                                            'Cancelar',
-                                                            style: context
-                                                                .textTheme
-                                                                .bodyLarge!
-                                                                .copyWith(
-                                                                    color: AppColors
-                                                                        .azul),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  )
-                                                ],
-                                              ),
-                                            ),
+                                            builder: (context) =>
+                                                PopUpDeletarCertificado(
+                                                        context: context,
+                                                        certificadoProvider:
+                                                            certificadoProvider,
+                                                        index: index)
+                                                    .popUp,
                                           );
                                         },
                                         child: const Icon(
@@ -202,18 +165,12 @@ class SelecionarCertificado extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.azul,
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.0),
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text('Assinar Dodumentos'),
-                      ),
-                    ),
+                  child: WefinDefaultButton(
+                    onPressed:
+                        certificadoProvider.certificadoSelecionado != null
+                            ? () {}
+                            : null,
+                    label: "Assinar Documento",
                   ),
                 )
               ],
@@ -223,33 +180,21 @@ class SelecionarCertificado extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 8.0),
             child: Text(
               'Ou',
-              style: context.textTheme.bodyLarge!
-                  .copyWith(fontSize: 16, color: AppColors.labelText),
+              style: context.textTheme.bodySmall!
+                  .copyWith(color: AppColors.labelText),
             ),
           ),
           Row(
             children: [
               Expanded(
-                child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        shadowColor: Colors.transparent,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4),
-                            side: const BorderSide(
-                                color: AppColors.azul, width: 1))),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'Importar novo certificado',
-                          style: context.textTheme.bodyLarge!
-                              .copyWith(color: AppColors.azul),
-                        ),
-                      ),
-                    )),
+                child: WefinDefaultButton(
+                  onPressed: () {
+                    Modular.to.pushNamed(AppRoutes.importarCertificadoRoute);
+                    Modular.to.pop();
+                  },
+                  label: 'Importar Novo Certificado',
+                  filled: false,
+                ),
               )
             ],
           ),

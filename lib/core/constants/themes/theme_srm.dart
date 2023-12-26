@@ -14,7 +14,7 @@ class ThemeSRM {
   }
 
   static ThemeData get theme => ThemeData(
-        primaryColor: AppColors.corPrimariaSRM,
+        primaryColor: AppColors.azul,
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: const MaterialColor(
             0xFF05204F, // Azul Primário (500)

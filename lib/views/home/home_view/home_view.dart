@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:modular_study/core/constants/enuns/theme_enum.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/providers/assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
+import 'package:modular_study/core/providers/theme_provider.dart';
 import 'package:modular_study/generated/assets.dart';
 import 'package:modular_study/widgets/appbar_logo_perfil.dart';
 import 'package:modular_study/widgets/botao_selecao_empresa.dart';
@@ -36,6 +38,8 @@ class _HomeViewState extends State<HomeView> {
     double totalSpacing = 3 * spacing; // Espaço total entre os widgets
     double widthCard = (MediaQuery.of(context).size.width - totalSpacing) / 3;
     double heigthCard = widthCard * 1.3;
+    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
+    bool isTemaSRM = themeProvider.temaSelecionado == TemaSelecionado.SRM;
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
@@ -78,7 +82,7 @@ class _HomeViewState extends State<HomeView> {
                                     children: [
                                       SvgPicture.asset(
                                         Assets.iconsIcAssinatura,
-                                        color: AppColors.azul,
+                                        color: context.primaryColor,
                                       ),
                                       if (assinaturaProvider
                                           .assinaturasPendentes.isNotEmpty)
@@ -104,10 +108,10 @@ class _HomeViewState extends State<HomeView> {
                                   ),
                                   Text(
                                     'Assinatura Digital',
-                                    style: context.textTheme.bodyLarge!
+                                    style: context.textTheme.bodyMedium!
                                         .copyWith(
                                             fontWeight: FontWeight.bold,
-                                            color: AppColors.corPrimariaSRM),
+                                      color: isTemaSRM ? AppColors.corPrimariaSRM : context.shadersTrust[900],),
                                   ),
                                 ],
                               ),
@@ -129,7 +133,7 @@ class _HomeViewState extends State<HomeView> {
                                 children: [
                                   Icon(
                                     LineIcons.areaChart,
-                                    color: AppColors.azul,
+                                    color: context.primaryColor,
                                     size: 40,
                                   ),
                                   SizedBox(
@@ -137,10 +141,10 @@ class _HomeViewState extends State<HomeView> {
                                   ),
                                   Text(
                                     'Monitor de Operação',
-                                    style: context.textTheme.bodyLarge!
+                                    style: context.textTheme.bodyMedium!
                                         .copyWith(
                                             fontWeight: FontWeight.bold,
-                                            color: AppColors.corPrimariaSRM),
+                                      color: isTemaSRM ? AppColors.corPrimariaSRM : context.shadersTrust[900],),
                                   )
                                 ],
                               ),
@@ -168,7 +172,7 @@ class _HomeViewState extends State<HomeView> {
                                       SvgPicture.asset(
                                         Assets.iconsIcAtendimento,
                                         fit: BoxFit.fill,
-                                        color: AppColors.azul,
+                                        color: context.primaryColor,
                                       ),
                                     ],
                                   ),
@@ -177,10 +181,10 @@ class _HomeViewState extends State<HomeView> {
                                   ),
                                   Text(
                                     'Central de Atendimento',
-                                    style: context.textTheme.bodyLarge!
+                                    style: context.textTheme.bodyMedium!
                                         .copyWith(
                                             fontWeight: FontWeight.bold,
-                                            color: AppColors.corPrimariaSRM),
+                                      color: isTemaSRM ? AppColors.corPrimariaSRM : context.shadersTrust[900],),
                                   )
                                 ],
                               ),
