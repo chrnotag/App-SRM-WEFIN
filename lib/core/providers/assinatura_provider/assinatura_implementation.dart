@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'package:modular_study/core/providers/assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
-import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
+import 'package:modular_study/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 
 import '../../implementations_config/export_impl.dart';
 
@@ -20,9 +20,9 @@ class AssinaturaImpl {
       });
       if (response.statusCode == 200) {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
-        List<AssinaturasModel> data = [];
-        data = List<AssinaturasModel>.from(
-            responseBody.map((model) => AssinaturasModel.fromJson(model)));
+        List<MonitorAssinaturasModel> data = [];
+        data = List<MonitorAssinaturasModel>.from(
+            responseBody.map((model) => MonitorAssinaturasModel.fromJson(model)));
         assinaturaProvider.assinaturas = data;
         return SucessResponse(data);
       } else {

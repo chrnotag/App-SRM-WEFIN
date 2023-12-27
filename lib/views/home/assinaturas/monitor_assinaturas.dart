@@ -4,13 +4,13 @@ import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/providers/assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
-import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
 import 'package:modular_study/widgets/appbar_logo_perfil.dart';
 import 'package:modular_study/widgets/botao_selecao_empresa.dart';
 import 'package:modular_study/widgets/card_monitor_assinaturas/card_monitor_assinaturas.dart';
 
 import '../../../core/constants/enuns/theme_enum.dart';
 import '../../../core/providers/theme_provider.dart';
+import '../../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 
 class MonitorAssinaturas extends StatefulWidget {
   const MonitorAssinaturas({super.key});
@@ -40,8 +40,8 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas>
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     final AssinaturaProvider assinaturaProvider =
         Modular.get<AssinaturaProvider>();
-    List<AssinaturasModel> assinaturasPendentes = assinaturaProvider.assinaturasPendentes;
-    List<AssinaturasModel> assinaturas = assinaturaProvider.todasAssinaturas;
+    List<MonitorAssinaturasModel> assinaturasPendentes = assinaturaProvider.assinaturasPendentes;
+    List<MonitorAssinaturasModel> assinaturas = assinaturaProvider.todasAssinaturas;
     final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
     bool isTemaSRM = themeProvider.temaSelecionado == TemaSelecionado.SRM;
     return Scaffold(

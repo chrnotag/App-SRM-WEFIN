@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -9,6 +11,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
+import 'package:modular_study/views/home/assinaturas/selecionar_certificado.dart';
 
 import '../../constants/themes/theme_configs.dart';
 
@@ -45,12 +48,40 @@ class ImportarCertificadoProvider extends ChangeNotifier {
   }
 
   Color alterarCorItemListaCertificado(
-      PKCertificate certificado, BuildContext context) {
+      PKCertificate? certificado, BuildContext context) {
     if (_certificadoSelecionado != null &&
-        _certificadoSelecionado?.thumbprint == certificado.thumbprint) {
+        _certificadoSelecionado?.thumbprint == certificado!.thumbprint) {
       return context.primaryColor;
     } else {
       return Colors.grey.shade400;
+    }
+  }
+
+  bool isExpirado(PKCertificate certificado) {
+    return certificado.validityEnd.isBefore(DateTime.now());
+  }
+
+  void selecionarCertificadoAssinar(
+      PKCertificate certificado, BuildContext context) async {
+    if (isExpirado(certificado)) {
+      showDialog(
+        context: context,
+        builder: (context) => PopUpDeletarCertificado(
+                context: context,
+                certificado: certificado,
+                title: "Certificado Expirado",
+                label: "Deseja deletar o certificado?")
+            .popUp,
+      );
+      listaCertificados = await listaCertificadosFuture();
+      notifyListeners();
+    } else {
+      if (certificadoSelecionado != null &&
+          certificadoSelecionado!.thumbprint == certificado.thumbprint) {
+        certificadoSelecionado = null;
+      } else {
+        certificadoSelecionado = certificado;
+      }
     }
   }
 
@@ -69,8 +100,15 @@ class ImportarCertificadoProvider extends ChangeNotifier {
     await CrossPki.removeCertificate(thumbprint);
     listaCertificados
         .removeWhere((element) => element.thumbprint == thumbprint);
-    Fluttertoast.showToast(msg: 'Certificado removido com sucesso');
     notifyListeners();
+  }
+
+  String converterCertificadoBase64() {
+    if (certificadoSelecionado != null) {
+      return base64Encode(certificadoSelecionado!.encoded);
+    } else {
+      return "erro";
+    }
   }
 
   set senhaCertificado(String? senha) {
@@ -116,9 +154,16 @@ class ImportarCertificadoProvider extends ChangeNotifier {
     try {
       await CrossPki.importPkcs12(pkcs12, senhaCertificado!);
       var certs = await CrossPki.listCertificatesWithKey();
-      Fluttertoast.showToast(
-          msg:
-              'Certificado ${certs.first.subjectDisplayName} importado com sucesso!');
+      if (isExpirado(certs.first)) {
+        deletarCertificado(certs.first.thumbprint);
+        Fluttertoast.showToast(
+            msg:
+                'Certificado ${certs.first.subjectDisplayName} EXPIRADO! A importação foi cancelada.');
+      } else {
+        Fluttertoast.showToast(
+            msg:
+                'Certificado ${certs.first.subjectDisplayName} importado com sucesso!');
+      }
       Modular.to.pop();
       return true;
     } on CrossPkiException catch (e) {

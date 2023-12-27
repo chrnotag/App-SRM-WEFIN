@@ -8,7 +8,7 @@ import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/providers/assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/certificado_provider/importar_certificadode.dart';
 import 'package:modular_study/core/utils/money_format.dart';
-import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
+import 'package:modular_study/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import 'package:modular_study/views/home/assinaturas/selecionar_certificado.dart';
 
 import '../../core/constants/enuns/theme_enum.dart';
@@ -19,7 +19,7 @@ import 'expansible_card.dart';
 part 'expansible_info_card.dart';
 
 class CardMonitorAssinaturas extends StatefulWidget {
-  final AssinaturasModel assinatura;
+  final MonitorAssinaturasModel assinatura;
   final bool assinarDocumento;
 
   const CardMonitorAssinaturas(

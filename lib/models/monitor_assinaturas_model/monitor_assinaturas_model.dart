@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'assinaturas_model.g.dart';
+part 'monitor_assinaturas_model.g.dart';
 
 @JsonSerializable()
-class AssinaturasModel {
+class MonitorAssinaturasModel {
   int codigoOperacao;
   String statusAssinaturaDigital;
   String siglaProduto;
@@ -13,7 +13,7 @@ class AssinaturasModel {
   String dataOperacao;
   List<Assinante> assinantes;
 
-  AssinaturasModel({
+  MonitorAssinaturasModel({
     required this.codigoOperacao,
     required this.statusAssinaturaDigital,
     required this.siglaProduto,
@@ -24,10 +24,10 @@ class AssinaturasModel {
     required this.assinantes,
   });
 
-  factory AssinaturasModel.fromJson(Map<String, dynamic> json) =>
-      _$AssinaturasModelFromJson(json);
+  factory MonitorAssinaturasModel.fromJson(Map<String, dynamic> json) =>
+      _$MonitorAssinaturasModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$AssinaturasModelToJson(this);
+  Map<String, dynamic> toJson() => _$MonitorAssinaturasModelToJson(this);
 }
 
 @JsonSerializable()
@@ -43,9 +43,9 @@ class Assinante {
   });
 
   factory Assinante.fromJson(Map<String, dynamic> json) =>
-      _$AssinantesFromJson(json);
+      _$AssinanteFromJson(json);
 
-  Map<String, dynamic> toJson() => _$AssinantesToJson(this);
+  Map<String, dynamic> toJson() => _$AssinanteToJson(this);
 }
 
 @JsonSerializable()
@@ -87,7 +87,7 @@ class Documento {
   });
 
   factory Documento.fromJson(Map<String, dynamic> json) =>
-      _$DocumentosFromJson(json);
+      _$DocumentoFromJson(json);
 
-  Map<String, dynamic> toJson() => _$DocumentosToJson(this);
+  Map<String, dynamic> toJson() => _$DocumentoToJson(this);
 }

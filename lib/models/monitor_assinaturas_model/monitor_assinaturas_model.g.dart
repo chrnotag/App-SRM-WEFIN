@@ -1,13 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'assinaturas_model.dart';
+part of 'monitor_assinaturas_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-AssinaturasModel _$AssinaturasModelFromJson(Map<String, dynamic> json) =>
-    AssinaturasModel(
+MonitorAssinaturasModel _$MonitorAssinaturasModelFromJson(
+        Map<String, dynamic> json) =>
+    MonitorAssinaturasModel(
       codigoOperacao: json['codigoOperacao'] as int,
       statusAssinaturaDigital: json['statusAssinaturaDigital'] as String,
       siglaProduto: json['siglaProduto'] as String,
@@ -20,7 +21,8 @@ AssinaturasModel _$AssinaturasModelFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$AssinaturasModelToJson(AssinaturasModel instance) =>
+Map<String, dynamic> _$MonitorAssinaturasModelToJson(
+        MonitorAssinaturasModel instance) =>
     <String, dynamic>{
       'codigoOperacao': instance.codigoOperacao,
       'statusAssinaturaDigital': instance.statusAssinaturaDigital,
@@ -32,7 +34,7 @@ Map<String, dynamic> _$AssinaturasModelToJson(AssinaturasModel instance) =>
       'assinantes': instance.assinantes,
     };
 
-Assinante _$AssinantesFromJson(Map<String, dynamic> json) => Assinante(
+Assinante _$AssinanteFromJson(Map<String, dynamic> json) => Assinante(
       nomeAssinante: json['nomeAssinante'] as String,
       identificadorAssinante: json['identificadorAssinante'] as String,
       informacoesAssinante: (json['informacoesAssinante'] as List<dynamic>)
@@ -40,8 +42,7 @@ Assinante _$AssinantesFromJson(Map<String, dynamic> json) => Assinante(
           .toList(),
     );
 
-Map<String, dynamic> _$AssinantesToJson(Assinante instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$AssinanteToJson(Assinante instance) => <String, dynamic>{
       'nomeAssinante': instance.nomeAssinante,
       'identificadorAssinante': instance.identificadorAssinante,
       'informacoesAssinante': instance.informacoesAssinante,
@@ -68,20 +69,19 @@ Map<String, dynamic> _$InformacaoAssinanteToJson(
       'papeis': instance.papeis,
       'documentos': instance.documentos,
       'identificadorAssinador': instance.identificadorAssinador,
+      'nomeProcurador': instance.nomeProcurador,
       'tipoAssinatura': instance.tipoAssinatura,
       'dataAssinatura': instance.dataAssinatura,
       'statusAssinatura': instance.statusAssinatura,
       'eCPFAssinador': instance.eCPFAssinador,
-      'nomeProcurador': instance.nomeProcurador,
     };
 
-Documento _$DocumentosFromJson(Map<String, dynamic> json) => Documento(
+Documento _$DocumentoFromJson(Map<String, dynamic> json) => Documento(
       idAssinaturaDigital: json['idAssinaturaDigital'] as int,
       nome: json['nome'] as String,
     );
 
-Map<String, dynamic> _$DocumentosToJson(Documento instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$DocumentoToJson(Documento instance) => <String, dynamic>{
       'idAssinaturaDigital': instance.idAssinaturaDigital,
       'nome': instance.nome,
     };

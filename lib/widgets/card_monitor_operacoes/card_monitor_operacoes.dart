@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/utils/money_format.dart';
-import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
+import 'package:modular_study/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import '../component_card.dart';
 
 class CardMonitorOperacoes extends StatefulWidget {
-  final AssinaturasModel assinatura;
+  final MonitorAssinaturasModel assinatura;
 
   const CardMonitorOperacoes({super.key, required this.assinatura});
 
