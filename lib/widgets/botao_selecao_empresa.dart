@@ -31,8 +31,11 @@ class SelecaoEmpresa extends StatelessWidget {
             visible: tituloPagina.isNotEmpty,
             child: Text(
               tituloPagina,
-              style: context.textTheme.bodyMedium!
-                  .copyWith(color: themeProvider.temaSelecionado == TemaSelecionado.SRM ? Colors.white : context.shadersTrust[900]!, fontWeight: FontWeight.w100),
+              style: context.textTheme.bodyMedium!.copyWith(
+                  color: themeProvider.temaSelecionado == TemaSelecionado.SRM
+                      ? Colors.white
+                      : context.shadersTrust[900]!,
+                  fontWeight: FontWeight.w100),
             ),
           ),
           SizedBox(height: 8),
@@ -41,7 +44,12 @@ class SelecaoEmpresa extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                   border: Border.all(
-                      color: themeProvider.temaSelecionado == TemaSelecionado.SRM ? Colors.white : context.primaryColor, width: 0.5, strokeAlign: 1),
+                      color:
+                          themeProvider.temaSelecionado == TemaSelecionado.SRM
+                              ? Colors.white
+                              : context.primaryColor,
+                      width: 0.5,
+                      strokeAlign: 1),
                   borderRadius: BorderRadius.circular(30)),
               child: InkWell(
                 onTap: changeble
@@ -59,8 +67,11 @@ class SelecaoEmpresa extends StatelessWidget {
                         width: MediaQuery.of(context).size.width * 0.4,
                         child: Text(
                           nomeEmpresa,
-                          style: context.textTheme.bodySmall!
-                              .copyWith(color: themeProvider.temaSelecionado == TemaSelecionado.SRM ? Colors.white : context.shadersTrust[900]),
+                          style: context.textTheme.bodySmall!.copyWith(
+                              color: themeProvider.temaSelecionado ==
+                                      TemaSelecionado.SRM
+                                  ? Colors.white
+                                  : context.shadersTrust[900]),
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.center,
                         ),
@@ -72,7 +83,10 @@ class SelecaoEmpresa extends StatelessWidget {
                           padding: const EdgeInsets.only(right: 8.0),
                           child: SvgPicture.asset(
                             Assets.iconsIcChangeCnpj,
-                            color: themeProvider.temaSelecionado == TemaSelecionado.SRM ? Colors.white : context.shadersTrust[900],
+                            color: themeProvider.temaSelecionado ==
+                                    TemaSelecionado.SRM
+                                ? Colors.white
+                                : context.shadersTrust[900],
                             width: 15,
                           )),
                     ),

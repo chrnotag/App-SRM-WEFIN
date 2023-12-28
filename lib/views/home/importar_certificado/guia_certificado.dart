@@ -31,7 +31,7 @@ class _GuiaImportCertificadoState extends State<GuiaImportCertificado> {
 
   @override
   Widget build(BuildContext context) {
-    bool isTemaSRM =  themeProvider.temaSelecionado == TemaSelecionado.SRM;
+    bool isTemaSRM = themeProvider.temaSelecionado == TemaSelecionado.SRM;
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: AppBar().preferredSize,
@@ -59,11 +59,15 @@ class _GuiaImportCertificadoState extends State<GuiaImportCertificado> {
                       },
                       floatingIndicator: true,
                       slideIndicator: CircularSlideIndicator(
-                        padding: EdgeInsets.only(bottom: 30),
-                        indicatorBorderColor: isTemaSRM ? Colors.grey.shade500.withAlpha(50) : context.shadersTrust[400]!.withAlpha(50),
-                        currentIndicatorColor: isTemaSRM ? Colors.white : context.primaryColor,
-                        indicatorBackgroundColor: isTemaSRM ? Colors.grey.shade500.withAlpha(50) : context.shadersTrust[400]!.withAlpha(50)
-                      ),
+                          padding: EdgeInsets.only(bottom: 30),
+                          indicatorBorderColor: isTemaSRM
+                              ? Colors.grey.shade500.withAlpha(50)
+                              : context.shadersTrust[400]!.withAlpha(50),
+                          currentIndicatorColor:
+                              isTemaSRM ? Colors.white : context.primaryColor,
+                          indicatorBackgroundColor: isTemaSRM
+                              ? Colors.grey.shade500.withAlpha(50)
+                              : context.shadersTrust[400]!.withAlpha(50)),
                       showIndicator: true,
                     )),
               ),
@@ -118,11 +122,7 @@ class _GuiaImportCertificadoState extends State<GuiaImportCertificado> {
             Text(
               'Importe seu certificado digital',
               style: context.textTheme.displaySmall!.copyWith(
-                  color: isTemaSRM
-                      ? isTemaSRM
-                          ? Colors.white
-                          : context.shadersTrust[900]
-                      : context.shadersTrust[900],
+                  color: isTemaSRM ? Colors.white : context.shadersTrust[900],
                   fontSize: 22),
             ),
             Container(

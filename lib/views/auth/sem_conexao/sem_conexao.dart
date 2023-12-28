@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:modular_study/core/constants/enuns/theme_enum.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/providers/sessao_provider.dart';
+import 'package:modular_study/core/providers/theme_provider.dart';
 
 import '../../../generated/assets.dart';
 
@@ -25,6 +27,7 @@ class _SemConexaoScreenState extends State<SemConexaoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeProvider themeProvider = Modular.get<ThemeProvider>();
     return Scaffold(
       backgroundColor: AppColors.corPrimariaSRM,
       body: Container(
@@ -38,25 +41,22 @@ class _SemConexaoScreenState extends State<SemConexaoScreen> {
             AppBar(
               centerTitle: true,
               title: Image.asset(
-                Assets.logoSRM,
+                themeProvider.logoTema,
                 scale: 3,
               ),
               backgroundColor: Colors.transparent,
               shadowColor: Colors.transparent,
             ),
-            Image.asset(
-              Assets.imagesNoNetwork,
-              scale: 4,
-              color: Colors.white,
-            ),
+            Image.asset(Assets.imagesNoNetwork,
+                scale: 4, color:themeProvider.brancoOuVerde),
             Column(
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Sem conexão com a internet',
-                    style: context.textTheme.bodyLarge!.copyWith(
-                        color: Colors.white, fontSize: AppSizes.fontSizeLarge),
+                    style: context.textTheme.bodyLarge!
+                        .copyWith(color: themeProvider.brancoOuVerde),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -64,8 +64,8 @@ class _SemConexaoScreenState extends State<SemConexaoScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Verifique sua conexão e tente novamente',
-                    style: context.textTheme.bodyLarge!.copyWith(
-                        color: Colors.white, fontSize: AppSizes.fontSizeMedium),
+                    style: context.textTheme.bodyMedium!
+                        .copyWith(color: themeProvider.brancoOuVerde),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -81,10 +81,8 @@ class _SemConexaoScreenState extends State<SemConexaoScreen> {
                           onPressed: () {},
                           child: Padding(
                             padding: const EdgeInsets.all(10),
-                            child: Text('OK',
-                                style: context.textTheme.bodyLarge!.copyWith(
-                                    fontSize: AppSizes.fontSizeMedium,
-                                    color: Colors.white)),
+                            child:
+                                Text('OK', style: context.textTheme.bodyLarge),
                           )))
                 ],
               ),

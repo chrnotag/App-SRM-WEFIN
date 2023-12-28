@@ -33,6 +33,7 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
   Widget build(BuildContext context) {
     final ThemeProvider themeProvider = context.watch<ThemeProvider>();
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Container(
           decoration: const BoxDecoration(

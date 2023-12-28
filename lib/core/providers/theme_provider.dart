@@ -4,6 +4,9 @@ import 'package:modular_study/core/constants/enuns/theme_enum.dart';
 import 'package:modular_study/core/constants/themes/theme_srm.dart';
 import 'package:modular_study/core/constants/themes/theme_trust.dart';
 
+import '../../generated/assets.dart';
+import '../constants/themes/theme_configs.dart';
+
 class ThemeProvider extends ChangeNotifier {
   ThemeProvider._();
 
@@ -21,4 +24,11 @@ class ThemeProvider extends ChangeNotifier {
     _temaSelecionado = tema;
     notifyListeners();
   }
+
+  bool get isTemaSRM => temaSelecionado == TemaSelecionado.SRM;
+
+  String get logoTema => isTemaSRM ? Assets.logoSRM : Assets.logoTRUST;
+
+  Color get brancoOuVerde =>
+      isTemaSRM ? Colors.white : AppColors.corPrimariaTRUST;
 }
