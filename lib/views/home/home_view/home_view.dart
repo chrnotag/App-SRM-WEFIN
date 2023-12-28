@@ -38,8 +38,6 @@ class _HomeViewState extends State<HomeView> {
     double totalSpacing = 3 * spacing; // Espaço total entre os widgets
     double widthCard = (MediaQuery.of(context).size.width - totalSpacing) / 3;
     double heigthCard = widthCard * 1.3;
-    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
-    bool isTemaSRM = themeProvider.temaSelecionado == TemaSelecionado.SRM;
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
@@ -110,8 +108,7 @@ class _HomeViewState extends State<HomeView> {
                                     'Assinatura Digital',
                                     style: context.textTheme.bodyMedium!
                                         .copyWith(
-                                            fontWeight: FontWeight.bold,
-                                      color: isTemaSRM ? AppColors.corPrimariaSRM : context.shadersTrust[900],),
+                                            fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               ),
@@ -143,8 +140,7 @@ class _HomeViewState extends State<HomeView> {
                                     'Monitor de Operação',
                                     style: context.textTheme.bodyMedium!
                                         .copyWith(
-                                            fontWeight: FontWeight.bold,
-                                      color: isTemaSRM ? AppColors.corPrimariaSRM : context.shadersTrust[900],),
+                                            fontWeight: FontWeight.bold),
                                   )
                                 ],
                               ),
@@ -183,8 +179,7 @@ class _HomeViewState extends State<HomeView> {
                                     'Central de Atendimento',
                                     style: context.textTheme.bodyMedium!
                                         .copyWith(
-                                            fontWeight: FontWeight.bold,
-                                      color: isTemaSRM ? AppColors.corPrimariaSRM : context.shadersTrust[900],),
+                                            fontWeight: FontWeight.bold),
                                   )
                                 ],
                               ),

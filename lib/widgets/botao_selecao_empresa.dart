@@ -22,7 +22,6 @@ class SelecaoEmpresa extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -32,9 +31,7 @@ class SelecaoEmpresa extends StatelessWidget {
             child: Text(
               tituloPagina,
               style: context.textTheme.bodyMedium!.copyWith(
-                  color: themeProvider.temaSelecionado == TemaSelecionado.SRM
-                      ? Colors.white
-                      : context.shadersTrust[900]!,
+                  color: context.onSecondary,
                   fontWeight: FontWeight.w100),
             ),
           ),
@@ -45,9 +42,7 @@ class SelecaoEmpresa extends StatelessWidget {
               decoration: BoxDecoration(
                   border: Border.all(
                       color:
-                          themeProvider.temaSelecionado == TemaSelecionado.SRM
-                              ? Colors.white
-                              : context.primaryColor,
+                          context.onSecondary,
                       width: 0.5,
                       strokeAlign: 1),
                   borderRadius: BorderRadius.circular(30)),
@@ -68,10 +63,7 @@ class SelecaoEmpresa extends StatelessWidget {
                         child: Text(
                           nomeEmpresa,
                           style: context.textTheme.bodySmall!.copyWith(
-                              color: themeProvider.temaSelecionado ==
-                                      TemaSelecionado.SRM
-                                  ? Colors.white
-                                  : context.shadersTrust[900]),
+                              color: context.onSecondary),
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.center,
                         ),
@@ -83,10 +75,7 @@ class SelecaoEmpresa extends StatelessWidget {
                           padding: const EdgeInsets.only(right: 8.0),
                           child: SvgPicture.asset(
                             Assets.iconsIcChangeCnpj,
-                            color: themeProvider.temaSelecionado ==
-                                    TemaSelecionado.SRM
-                                ? Colors.white
-                                : context.shadersTrust[900],
+                            color: context.onSecondary,
                             width: 15,
                           )),
                     ),

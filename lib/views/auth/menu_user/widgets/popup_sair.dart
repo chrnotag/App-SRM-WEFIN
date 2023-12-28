@@ -7,8 +7,6 @@ class PopUpDeslogarApp {
   PopUpDeslogarApp({required this.context, required this.authProvider});
 
   Widget get popUp {
-    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
-    bool isTemaSRM = themeProvider.temaSelecionado == TemaSelecionado.SRM;
     return AlertDialog(
       title: Column(
         children: [
@@ -21,9 +19,6 @@ class PopUpDeslogarApp {
             padding: const EdgeInsets.all(12.0),
             child: Text('Atenção',
                 style: context.textTheme.bodyLarge!.copyWith(
-                  color: isTemaSRM
-                      ? AppColors.corPrimariaSRM
-                      : context.shadersTrust[900],
                   fontWeight: FontWeight.w600,
                   fontSize: 20,
                   letterSpacing: 1.5,
@@ -40,7 +35,7 @@ class PopUpDeslogarApp {
             child: Row(
               children: [
                 Expanded(
-                  child: WefinDefaultButton(
+                  child: BotaoPadrao(
                     onPressed: () {
                       authProvider.clearDataUser();
                       Modular.to.navigate(Modular.initialRoute);
@@ -54,7 +49,7 @@ class PopUpDeslogarApp {
           Row(
             children: [
               Expanded(
-                child: WefinDefaultButton(
+                child: BotaoPadrao(
                     onPressed: () {
                       Modular.to.pop();
                     },

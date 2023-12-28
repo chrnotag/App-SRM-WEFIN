@@ -36,8 +36,6 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
         context.watch<ImportarCertificadoProvider>();
     final AssinaturaProvider assinaturaProvider =
         context.watch<AssinaturaProvider>();
-    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
-    bool isTemaSRM = themeProvider.temaSelecionado == TemaSelecionado.SRM;
     final double itemHeight = 50;
     final double maxHeight = 200;
     return AlertDialog(
@@ -45,10 +43,7 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
         children: [
           Text(
               'Assinar Operação ${assinaturaProvider.assinaturaSelecionada!.codigoOperacao}',
-              style: context.textTheme.titleSmall!.copyWith(
-                color: isTemaSRM
-                    ? AppColors.corPrimariaSRM
-                    : context.shadersTrust[900],
+              style: context.textTheme.bodyMedium!.copyWith(
                 fontWeight: FontWeight.w300,
                 fontSize: 15,
                 letterSpacing: 1.5,
@@ -150,7 +145,7 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
             child: Row(
               children: [
                 Expanded(
-                  child: WefinDefaultButton(
+                  child: BotaoPadrao(
                     onPressed:
                         certificadoProvider.certificadoSelecionado != null
                             ? () {}
@@ -172,7 +167,7 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
           Row(
             children: [
               Expanded(
-                child: WefinDefaultButton(
+                child: BotaoPadrao(
                   onPressed: () {
                     Modular.to.pushNamed(AppRoutes.importarCertificadoRoute);
                     Modular.to.pop();

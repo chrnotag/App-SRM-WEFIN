@@ -29,7 +29,6 @@ class _SemConexaoScreenState extends State<SemConexaoScreen> {
   Widget build(BuildContext context) {
     ThemeProvider themeProvider = Modular.get<ThemeProvider>();
     return Scaffold(
-      backgroundColor: AppColors.corPrimariaSRM,
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
@@ -48,15 +47,14 @@ class _SemConexaoScreenState extends State<SemConexaoScreen> {
               shadowColor: Colors.transparent,
             ),
             Image.asset(Assets.imagesNoNetwork,
-                scale: 4, color:themeProvider.brancoOuVerde),
+                scale: 4, color: context.onSecondary),
             Column(
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Sem conexão com a internet',
-                    style: context.textTheme.bodyLarge!
-                        .copyWith(color: themeProvider.brancoOuVerde),
+                    style: context.textTheme.bodyLarge!.copyWith(color: context.onSecondary),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -64,8 +62,7 @@ class _SemConexaoScreenState extends State<SemConexaoScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Verifique sua conexão e tente novamente',
-                    style: context.textTheme.bodyMedium!
-                        .copyWith(color: themeProvider.brancoOuVerde),
+                    style: context.textTheme.bodyMedium!.copyWith(color: context.onSecondary),
                     textAlign: TextAlign.center,
                   ),
                 ),

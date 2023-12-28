@@ -42,8 +42,6 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas>
         Modular.get<AssinaturaProvider>();
     List<AssinaturasModel> assinaturasPendentes = assinaturaProvider.assinaturasPendentes;
     List<AssinaturasModel> assinaturas = assinaturaProvider.todasAssinaturas;
-    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
-    bool isTemaSRM = themeProvider.temaSelecionado == TemaSelecionado.SRM;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,
@@ -64,14 +62,12 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas>
                 Tab(
                   child: Text("Assinaturas Pendentes",
                       textAlign: TextAlign.center,
-                      style: context.textTheme.bodyMedium!
-                          .copyWith(color: isTemaSRM ? AppColors.corPrimariaSRM : context.shadersTrust[900])),
+                      style: context.textTheme.bodyMedium),
                 ),
                 Tab(
                     child: Text("Acompanhar Assinaturas",
                         textAlign: TextAlign.center,
-                        style: context.textTheme.bodyMedium!
-                            .copyWith(color: isTemaSRM ?  AppColors.corPrimariaSRM : context.shadersTrust[900]))),
+                        style: context.textTheme.bodyMedium)),
               ], indicatorColor: context.primaryColor),
             ),
             Expanded(

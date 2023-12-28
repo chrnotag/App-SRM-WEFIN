@@ -17,8 +17,6 @@ class Ajuda extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
-    bool isTemaSRM = themeProvider.temaSelecionado == TemaSelecionado.SRM;
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: AppBar().preferredSize,
@@ -31,19 +29,19 @@ class Ajuda extends StatelessWidget {
             Image.asset(
               Assets.imagesIcAjuda,
               width: 150,
-              color: isTemaSRM ? Colors.white : context.primaryColor,
+              color: context.onSecondary,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: Text(
                 'Precisa de ajuda?',
-                style: context.textTheme.bodyLarge!.copyWith(color: isTemaSRM ? Colors.white : context.shadersTrust[900]),
+                style: context.textTheme.bodyLarge!.copyWith(color: context.onSecondary),
               ),
             ),
             Text(
               'Pode contar conosco através de um dos nossos canais de atendimento:',
               textAlign: TextAlign.center,
-              style: TextStyle(color: isTemaSRM ? Colors.white : context.shadersTrust[900], fontSize: 16),
+              style: context.textTheme.bodyMedium!.copyWith(color: context.onSecondary),
               softWrap: true,
             ),
             Padding(
@@ -55,14 +53,12 @@ class Ajuda extends StatelessWidget {
                       children: [
                         TextSpan(
                           text: 'Telefone: ',
-                          style: context.textTheme.bodyMedium!.copyWith(
-                            color: isTemaSRM ? Colors.white : context.shadersTrust[900],
-                          ),
+                          style: context.textTheme.bodyMedium!.copyWith(color: context.onSecondary)
                         ),
                         TextSpan(
                           text: '0800 878 1005',
                           style: context.textTheme.bodyMedium!.copyWith(
-                            color: isTemaSRM ? AppColors.azul : context.shadersTrust[700],
+                              color: context.onSecondary,
                             decoration: TextDecoration.underline,
                             fontWeight: FontWeight.bold
                           ),
@@ -86,14 +82,11 @@ class Ajuda extends StatelessWidget {
                         children: [
                           TextSpan(
                             text: 'E-mail: ',
-                            style: context.textTheme.bodyMedium!.copyWith(
-                              color: isTemaSRM ? Colors.white : context.shadersTrust[900],
-                            ),
+                            style: context.textTheme.bodyMedium!.copyWith(color: context.onSecondary,)
                           ),
                           TextSpan(
                             text: 'recebiveis@srmasset.com',
                             style: TextStyle(
-                                color: isTemaSRM ? AppColors.azul : context.shadersTrust[700],
                                 decoration: TextDecoration.underline,
                                 fontWeight: FontWeight.bold
                             ),
@@ -117,14 +110,12 @@ class Ajuda extends StatelessWidget {
                       children: [
                         TextSpan(
                           text: 'Politica de privacidade:',
-                          style: context.textTheme.bodyMedium!.copyWith(
-                            color: isTemaSRM ? Colors.white : context.shadersTrust[900],
-                          ),
+                          style: context.textTheme.bodyMedium!.copyWith(color: context.onSecondary,)
                         ),
                         TextSpan(
                           text: 'Toque aqui',
-                          style: TextStyle(
-                              color: isTemaSRM ? AppColors.azul : context.shadersTrust[700],
+                          style: context.textTheme.bodyMedium!.copyWith(
+                              color: context.onSecondary,
                               decoration: TextDecoration.underline,
                               fontWeight: FontWeight.bold
                           ),

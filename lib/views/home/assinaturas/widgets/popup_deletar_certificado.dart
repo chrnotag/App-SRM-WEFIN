@@ -10,8 +10,6 @@ class PopUpDeletarCertificado {
       {required this.context, required this.certificadoProvider, required this.index});
 
   Widget get popUp {
-    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
-    bool isTemaSRM = themeProvider.temaSelecionado == TemaSelecionado.SRM;
     return AlertDialog(
       title: Column(
         children: [
@@ -19,11 +17,7 @@ class PopUpDeletarCertificado {
             padding: const EdgeInsets.only(bottom: 8.0),
             child: Text(
               'Excluir',
-              style: context.textTheme.bodyMedium!.copyWith(
-                color: isTemaSRM
-                    ? AppColors.corPrimariaSRM
-                    : context.shadersTrust[900],
-              ),
+              style: context.textTheme.bodyMedium
             ),
           ),
           Text(
@@ -36,7 +30,7 @@ class PopUpDeletarCertificado {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Expanded(
-                    child: WefinDefaultButton(
+                    child: BotaoPadrao(
                       onPressed: () {
                         certificadoProvider.deletarCertificado(
                             certificadoProvider
@@ -51,7 +45,7 @@ class PopUpDeletarCertificado {
           Row(
             children: [
               Expanded(
-                child: WefinDefaultButton(
+                child: BotaoPadrao(
                   onPressed: () {
                     Modular.to.pop();
                   },

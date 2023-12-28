@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/providers/assinatura_provider/assinatura_implementation.dart';
 import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
@@ -57,7 +58,7 @@ class AssinaturaProvider extends ChangeNotifier {
   }
 
   Color definirCorStatusAssinatura(String status) {
-    return status == "Assinado" ?AppColors.verde : AppColors.azul;
+    return status == "Assinado" ? AppColors.verde : AppColors.azulPrimarioSRM;
   }
 
   void separaAssinaturas(List<AssinaturasModel> assinaturas) {
@@ -73,6 +74,18 @@ class AssinaturaProvider extends ChangeNotifier {
       }
     }
     notifyListeners();
+  }
+
+  Widget traduzirStatusAssinatura(String status, BuildContext context) {
+    return status == "INIC"
+        ? Text(
+      "Aguardando Assinatura",
+      style: context.textTheme.bodySmall!
+          .copyWith(color: AppColors.azulPrimarioSRM),
+    )
+        : Text("Assinado",
+        style: context.textTheme.bodySmall!
+            .copyWith(color: AppColors.verde));
   }
 
   void limparAssinaturas() {

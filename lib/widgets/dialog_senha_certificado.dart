@@ -50,7 +50,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
             Row(
               children: [
                 Expanded(
-                  child: WefinDefaultButton(
+                  child: BotaoPadrao(
                     onPressed: () async {
                       if (formKey.currentState!.validate()) {
                         provider.senhaCertificado = textController.text;
@@ -68,7 +68,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
             Row(
               children: [
                 Expanded(
-                  child: WefinDefaultButton(
+                  child: BotaoPadrao(
                     onPressed: () {
                       Modular.to.navigate(AppRoutes.assinaturaDigitalRoute);
                     },
