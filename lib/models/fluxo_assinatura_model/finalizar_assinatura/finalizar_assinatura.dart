@@ -9,7 +9,7 @@ class FinalizarAssinaturaModel{
 
   FinalizarAssinaturaModel({required this.codigoOperacao, required this.hashAssinado, required this.chaveDocumento, required this.token});
 
-  factory FinalizarAssinaturaModel.fromJson(Map<String, dynamic> json) => _$FinalizarAssinaturaFromJson(json);
+  factory FinalizarAssinaturaModel.fromJson(Map<String, dynamic> json) => _$FinalizarAssinaturaModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$FinalizarAssinaturaToJson(this);
+  Map<String, dynamic> toJson() => _$FinalizarAssinaturaModelToJson(this);
 }

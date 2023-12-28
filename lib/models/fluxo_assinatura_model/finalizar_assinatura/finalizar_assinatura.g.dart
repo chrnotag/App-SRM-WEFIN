@@ -6,7 +6,8 @@ part of 'finalizar_assinatura.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-FinalizarAssinaturaModel _$FinalizarAssinaturaFromJson(Map<String, dynamic> json) =>
+FinalizarAssinaturaModel _$FinalizarAssinaturaModelFromJson(
+        Map<String, dynamic> json) =>
     FinalizarAssinaturaModel(
       codigoOperacao: json['codigoOperacao'] as int,
       hashAssinado: json['hashAssinado'] as String,
@@ -14,7 +15,7 @@ FinalizarAssinaturaModel _$FinalizarAssinaturaFromJson(Map<String, dynamic> json
       token: json['token'] as String,
     );
 
-Map<String, dynamic> _$FinalizarAssinaturaToJson(
+Map<String, dynamic> _$FinalizarAssinaturaModelToJson(
         FinalizarAssinaturaModel instance) =>
     <String, dynamic>{
       'codigoOperacao': instance.codigoOperacao,

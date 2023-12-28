@@ -6,16 +6,18 @@ part of 'resposta_iniciar_assinatura.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-RespostaIniciarAssinatura _$RespostaIniciarAssinaturaFromJson(
+RespostaIniciarAssinaturaModel _$RespostaIniciarAssinaturaModelFromJson(
         Map<String, dynamic> json) =>
-    RespostaIniciarAssinatura(
-      hashParaAssinar: json['hashParaAssinar'] as Uint8List,
+    RespostaIniciarAssinaturaModel(
+      hashParaAssinar: RespostaIniciarAssinaturaModel._dataFromBase64(
+          json['hashParaAssinar'] as String),
       token: json['token'] as String,
     );
 
-Map<String, dynamic> _$RespostaIniciarAssinaturaToJson(
-        RespostaIniciarAssinatura instance) =>
+Map<String, dynamic> _$RespostaIniciarAssinaturaModelToJson(
+        RespostaIniciarAssinaturaModel instance) =>
     <String, dynamic>{
-      'hashParaAssinar': instance.hashParaAssinar,
+      'hashParaAssinar': RespostaIniciarAssinaturaModel._dataToBase64(
+          instance.hashParaAssinar),
       'token': instance.token,
     };

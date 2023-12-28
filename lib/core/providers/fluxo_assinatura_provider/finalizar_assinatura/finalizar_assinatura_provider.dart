@@ -25,7 +25,7 @@ class FinalizarAssinaturaProvider extends ChangeNotifier {
   }
 
   Future<void> assinarHashs() async {
-    List<RespostaIniciarAssinatura> hashs =
+    List<RespostaIniciarAssinaturaModel> hashs =
         _assinaturaProvider.hashsParaAssinar;
 
     PKCertificate certificado = _certificadoProvider.certificadoSelecionado!;

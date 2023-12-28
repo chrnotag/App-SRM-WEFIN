@@ -14,6 +14,7 @@ class AppBarLogo extends StatelessWidget {
     final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
     bool isTemaSRM = themeProvider.temaSelecionado == TemaSelecionado.SRM;
     return AppBar(
+      iconTheme: IconThemeData(color: AppColors.corPrimariaTRUST),
       backgroundColor: Colors.transparent,
       shadowColor: Colors.transparent,
       shape: UnderlineInputBorder(

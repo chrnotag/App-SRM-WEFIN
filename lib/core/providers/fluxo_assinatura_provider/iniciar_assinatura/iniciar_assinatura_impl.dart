@@ -28,9 +28,9 @@ class IniciarAssinaturaImpl {
       if (response.statusCode == 200) {
         log('teste ${response.body}');
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
-        List<RespostaIniciarAssinatura> data = [];
-        data = List<RespostaIniciarAssinatura>.from(responseBody
-            .map((model) => RespostaIniciarAssinatura.fromJson(model)));
+        List<RespostaIniciarAssinaturaModel> data = [];
+        data = List<RespostaIniciarAssinaturaModel>.from(responseBody
+            .map((model) => RespostaIniciarAssinaturaModel.fromJson(model)));
         iniciarAssinaturaProvider.hashsParaAssinar = data;
         return SucessResponse(data);
       }else{
