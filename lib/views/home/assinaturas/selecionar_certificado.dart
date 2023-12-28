@@ -87,22 +87,7 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                               height: 40,
                               child: InkWell(
                                 onTap: () {
-                                  if (certificadoProvider
-                                              .certificadoSelecionado !=
-                                          null &&
-                                      certificadoProvider
-                                              .certificadoSelecionado!
-                                              .thumbprint ==
-                                          certificadoProvider
-                                              .listaCertificados[index]
-                                              .thumbprint) {
-                                    certificadoProvider.certificadoSelecionado =
-                                        null;
-                                  } else {
-                                    certificadoProvider.certificadoSelecionado =
-                                        certificadoProvider
-                                            .listaCertificados[index];
-                                  }
+                                  certificadoProvider.selecionarCertificado(certificadoProvider.listaCertificados[index]);
                                 },
                                 child: Row(
                                   mainAxisAlignment:

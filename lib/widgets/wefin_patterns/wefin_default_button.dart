@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:modular_study/core/constants/enuns/theme_enum.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
+import 'package:modular_study/core/providers/theme_provider.dart';
 
 import '../../core/constants/themes/theme_configs.dart';
 
@@ -23,6 +26,8 @@ class WefinDefaultButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeProvider themeProvider = Modular.get<ThemeProvider>();
+    bool isTemaSRM = themeProvider.temaSelecionado == TemaSelecionado.SRM;
     return filled
         ? ElevatedButton(
             onPressed: onPressed,
@@ -41,17 +46,17 @@ class WefinDefaultButton extends StatelessWidget {
                     visible: icon != null ? true : false,
                     child: Icon(
                       icon,
-                      color: Colors.white,
+                      color: context.onPrimaryColor,
                       size: 40,
                     ),
                   ),
                   Text(
                     label,
                     style: fontSize != null
-                        ? context.textTheme.bodySmall!
-                            .copyWith(color: Colors.white, fontSize: fontSize)
+                        ? context.textTheme.bodySmall!.copyWith(
+                            color: context.onPrimaryColor, fontSize: fontSize)
                         : context.textTheme.bodySmall!
-                            .copyWith(color: Colors.white),
+                            .copyWith(color: context.onPrimaryColor),
                   )
                 ],
               ),
@@ -84,7 +89,8 @@ class WefinDefaultButton extends StatelessWidget {
                     label,
                     style: fontSize != null
                         ? context.textTheme.bodySmall!.copyWith(
-                            color: labelColor ?? context.primaryColor, fontSize: fontSize)
+                            color: labelColor ?? context.primaryColor,
+                            fontSize: fontSize)
                         : context.textTheme.bodySmall!.copyWith(
                             color: labelColor ?? context.primaryColor),
                   )

@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Column(
                     children: [
                       Image.asset(
-                        themeProvider.temaSelecionado == TemaSelecionado.SRM ? Assets.logoSRM : Assets.logoTRUST,
+                        themeProvider.logoTema,
                         width: isKeyboardVisible
                             ? 80
                             : MediaQuery.of(context).size.width * 0.4,

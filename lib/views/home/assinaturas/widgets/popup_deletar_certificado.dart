@@ -31,7 +31,7 @@ class PopUpDeletarCertificado {
             style: context.textTheme.bodySmall,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 8),
+            padding: const EdgeInsets.symmetric(vertical: 8),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: [

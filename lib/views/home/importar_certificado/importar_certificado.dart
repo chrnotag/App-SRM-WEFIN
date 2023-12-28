@@ -33,7 +33,7 @@ class ImportarCertificado extends StatelessWidget {
                   style: context.textTheme.bodyLarge!.copyWith(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: isTemaSRM ? isTemaSRM ? Colors.white : context.shadersTrust[900] : context.shadersTrust[900]),
+                      color:isTemaSRM ? Colors.white : context.shadersTrust[900]),
                   textAlign: TextAlign.center,
                 ),
                 Padding(
@@ -43,14 +43,14 @@ class ImportarCertificado extends StatelessWidget {
                     text: TextSpan(
                       text: 'QRCode: ',
                       style: context.textTheme.bodyMedium!.copyWith(
-                          fontWeight: FontWeight.bold, color: isTemaSRM ? isTemaSRM ? Colors.white : context.shadersTrust[900] : context.shadersTrust[900]),
+                          fontWeight: FontWeight.bold, color:isTemaSRM ? Colors.white : context.shadersTrust[900]),
                       children: [
                         TextSpan(
                           text:
                               'Selecione essa opção para importar via QRCode usando o nosso site para gerar o QRCode',
                           style: context.textTheme.bodyMedium!.copyWith(
                               fontWeight: FontWeight.normal,
-                              color: isTemaSRM ? isTemaSRM ? Colors.white : context.shadersTrust[900] : context.shadersTrust[900]),
+                              color:isTemaSRM ? Colors.white : context.shadersTrust[900]),
                         )
                       ],
                     ),

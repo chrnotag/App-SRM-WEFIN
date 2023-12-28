@@ -54,6 +54,15 @@ class ImportarCertificadoProvider extends ChangeNotifier {
     }
   }
 
+  void selecionarCertificado(PKCertificate certificado) {
+    if (certificadoSelecionado != null &&
+        certificadoSelecionado!.thumbprint == certificado.thumbprint) {
+      certificadoSelecionado = null;
+    } else {
+      certificadoSelecionado = certificado;
+    }
+  }
+
   String? _senhaCertificado;
 
   String? get senhaCertificado => _senhaCertificado;
