@@ -57,10 +57,9 @@ class Ajuda extends StatelessWidget {
                         ),
                         TextSpan(
                           text: '0800 878 1005',
-                          style: context.textTheme.bodyMedium!.copyWith(
+                          style: context.textTheme.labelMedium!.copyWith(
                               color: context.onSecondary,
                             decoration: TextDecoration.underline,
-                            fontWeight: FontWeight.bold
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () async {
@@ -86,9 +85,9 @@ class Ajuda extends StatelessWidget {
                           ),
                           TextSpan(
                             text: 'recebiveis@srmasset.com',
-                            style: TextStyle(
+                            style: context.textTheme.labelMedium
+                              !.copyWith(
                                 decoration: TextDecoration.underline,
-                                fontWeight: FontWeight.bold
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () async {

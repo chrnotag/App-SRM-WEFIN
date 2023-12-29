@@ -44,7 +44,7 @@ class _WefinTextFormFieldState extends State<WefinTextFormField> {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       maxLength: widget.maxLength,
       style:  TextStyle(
-        color: context.onSurface,
+        color: context.inverseSurface,
       ),
       cursorColor: context.primaryColor,
       decoration: InputDecoration(

@@ -56,16 +56,17 @@ class _LoginScreenState extends State<LoginScreen> {
                             : MediaQuery.of(context).size.width * 0.4,
                         fit: BoxFit.fill,
                       ),
-                      const SizedBox(height: 8,),
+                      const SizedBox(
+                        height: 8,
+                      ),
                       AnimatedOpacity(
                         duration: const Duration(milliseconds: 300),
                         opacity: isKeyboardVisible ? 0.0 : 1.0,
                         child: SizedBox(
                           child: Text(
                             "Seja bem vindo\nao seu app de gestão",
-                            style: context.textTheme.bodyMedium!.copyWith(
-                                color: AppColors.labelText,
-                                fontSize: AppSizes.fontSizeLarge),
+                            style: context.textTheme.bodyLarge!
+                                .copyWith(color: AppColors.labelText),
                             textAlign: TextAlign.center,
                           ),
                         ),

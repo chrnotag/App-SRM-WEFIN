@@ -13,6 +13,21 @@ class ThemeTRUST {
 
   static ThemeData get theme => ThemeData(
         primaryColor: AppColors.verdePrimarioTRUST,
+        searchBarTheme: SearchBarThemeData(
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    side: BorderSide(color: AppColors.verdePrimarioTRUST))),
+            constraints:
+                BoxConstraints.expand(width: double.infinity, height: 35),
+            hintStyle: MaterialStateProperty.all<TextStyle>(
+                GoogleFonts.montserrat(
+                    fontSize: AppSizes.fontSizeMedium,
+                    color: AppColors.labelText)),
+            textStyle:
+                MaterialStateProperty.all<TextStyle>(GoogleFonts.montserrat(
+              fontSize: AppSizes.fontSizeSmall,
+            ))),
         colorScheme: ColorScheme(
             brightness: Brightness.light,
             primary: AppColors.verdePrimarioTRUST,
@@ -24,7 +39,8 @@ class ThemeTRUST {
             background: Colors.white,
             onBackground: AppColors.verdePrimarioTRUST,
             surface: Colors.white,
-            onSurface: Colors.black),
+            onSurface: Colors.black,
+        inverseSurface: Colors.black),
         appBarTheme: const AppBarTheme(
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
