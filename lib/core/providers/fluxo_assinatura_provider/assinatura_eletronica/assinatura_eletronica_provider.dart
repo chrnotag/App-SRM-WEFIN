@@ -40,7 +40,7 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
       BuildContext context, InformacaoAssinante infoAssinante) async {
     final ImportarCertificadoProvider certificadoProvider =
         Modular.get<ImportarCertificadoProvider>();
-    if (infoAssinante.eCPFAssinador) {
+    if (infoAssinante.eCPFAssinador != null && infoAssinante.eCPFAssinador!) {
       certificadoProvider.listaCertificados =
           await certificadoProvider.listaCertificadosFuture();
       if (certificadoProvider.listaCertificados.isEmpty) {

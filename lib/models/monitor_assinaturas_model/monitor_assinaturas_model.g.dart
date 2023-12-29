@@ -59,7 +59,7 @@ InformacaoAssinante _$InformacaoAssinanteFromJson(Map<String, dynamic> json) =>
       tipoAssinatura: json['tipoAssinatura'] as String,
       dataAssinatura: json['dataAssinatura'] as String?,
       statusAssinatura: json['statusAssinatura'] as String,
-      eCPFAssinador: json['eCPFAssinador'] as bool,
+      eCPFAssinador: json['eCPFAssinador'] as bool?,
       nomeProcurador: json['nomeProcurador'] as String?,
     );
 

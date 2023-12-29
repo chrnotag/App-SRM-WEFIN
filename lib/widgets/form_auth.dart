@@ -4,7 +4,7 @@ import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/implementations_config/export_impl.dart';
-import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
+import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:modular_study/core/utils/get_device_infos.dart';
 import 'package:modular_study/models/user_model.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';

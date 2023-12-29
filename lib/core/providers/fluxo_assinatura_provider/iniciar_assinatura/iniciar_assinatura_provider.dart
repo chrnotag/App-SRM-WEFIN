@@ -10,4 +10,9 @@ class IniciarAssinaturaProvider extends ChangeNotifier {
     _hashsParaAssinar = hashs;
     notifyListeners();
   }
+
+  void limparHashs(){
+    hashsParaAssinar = [];
+    notifyListeners();
+  }
 }

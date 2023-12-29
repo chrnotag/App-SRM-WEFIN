@@ -1,10 +1,11 @@
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
+import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:modular_study/core/providers/fluxo_assinatura_provider/iniciar_assinatura/iniciar_assinatura_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:modular_study/models/fluxo_assinatura_model/iniciar_assinatura/iniciar_assinatura.dart';
 import 'package:modular_study/models/fluxo_assinatura_model/iniciar_assinatura/resposta_iniciar_assinatura.dart';
 import '../../../implementations_config/export_impl.dart';
+import '../../auth_provider_config/deslogar/verificar_sessao.dart';
 
 class IniciarAssinaturaImpl {
   IniciarAssinaturaModel iniciarAssinaturaModel;
@@ -25,20 +26,23 @@ class IniciarAssinaturaImpl {
     try {
       final response = await http.post(url, headers: headers, body: body);
       log('status code: ${response.statusCode}');
-      if (response.statusCode == 200) {
-        log('teste ${response.body}');
+      switch (response.statusCode) {
+        case 200:
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         List<RespostaIniciarAssinaturaModel> data = [];
         data = List<RespostaIniciarAssinaturaModel>.from(responseBody
             .map((model) => RespostaIniciarAssinaturaModel.fromJson(model)));
         iniciarAssinaturaProvider.hashsParaAssinar = data;
         return SucessResponse(data);
-      }else{
-        final responseBody = json.decode(utf8.decode(response.bodyBytes));
-        log('teste ${response.body}');
-        final data = ExceptionModel.fromJson(responseBody);
-        Fluttertoast.showToast(msg: 'Falha ao obter as hashs: ${data.mensagem}');
-        return ErrorResponse(data);
+        case 401:
+          VerificarSessao.sessaoExpirada();
+          final responseBody = json.decode(utf8.decode(response.bodyBytes));
+          final data = ExceptionModel.fromJson(responseBody);
+          return ErrorResponse(data);
+        default:
+          final responseBody = json.decode(utf8.decode(response.bodyBytes));
+          final data = ExceptionModel.fromJson(responseBody);
+          return ErrorResponse(data);
       }
     } catch (e) {
       final data = ExceptionModel(

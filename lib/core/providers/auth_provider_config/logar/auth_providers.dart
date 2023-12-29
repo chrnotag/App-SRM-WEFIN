@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
-import 'package:modular_study/core/providers/auth_provider_config/login_implementation.dart';
+import 'package:modular_study/core/providers/auth_provider_config/logar/login_implementation.dart';
 import 'package:modular_study/models/auth_login_models/cedente_model.dart';
 import 'package:modular_study/models/auth_login_models/usuario_logado_model.dart';
 import 'package:modular_study/models/user_model.dart';
 
-import '../../../models/exceptions_responses/exception_model.dart';
-import '../../constants/route_labels.dart';
+import '../../../../models/exceptions_responses/exception_model.dart';
+import '../../../constants/route_labels.dart';
 
 class AuthProvider extends ChangeNotifier {
   AuthProvider._();
@@ -104,7 +104,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void clearDataUser() {
+  void limparDadosUsuario() {
     _dataUser = null;
     _empresaSelecionada = null;
     _listaCedente = null;

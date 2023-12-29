@@ -37,8 +37,7 @@ class PopUpDeslogarApp {
                 Expanded(
                   child: BotaoPadrao(
                     onPressed: () {
-                      authProvider.clearDataUser();
-                      Modular.to.navigate(Modular.initialRoute);
+                      DeslogarUsuario().deslogar();
                     },
                     label: 'SAIR',
                   ),

@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
+import 'package:modular_study/core/providers/auth_provider_config/deslogar/verificar_sessao.dart';
+import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:modular_study/core/providers/fluxo_assinatura_provider/assinatura_eletronica/assinatura_eletronica_provider.dart';
 import 'package:modular_study/models/fluxo_assinatura_model/assinatura_eletronica/assinatura_eletronica_model.dart';
 import '../../../implementations_config/export_impl.dart';
@@ -25,12 +26,18 @@ class AssinaturaEletronicaImpl {
     try {
       final response = await http.post(url, headers: headers, body: body);
       log('statusCode: ${response.statusCode}');
-      if (response.statusCode == 200) {
+      switch (response.statusCode) {
+        case 200:
         Fluttertoast.showToast(msg: 'Sucesso!');
         assinaturaEletronica.statusCodeAssinaturaEletronica =
             response.statusCode;
         return SucessResponse(null);
-      } else {
+        case 401:
+          VerificarSessao.sessaoExpirada();
+          final responseBody = json.decode(utf8.decode(response.bodyBytes));
+          final data = ExceptionModel.fromJson(responseBody);
+          return ErrorResponse(data);
+        default:
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = ExceptionModel.fromJson(responseBody);
         Fluttertoast.showToast(

@@ -195,4 +195,12 @@ class ImportarCertificadoProvider extends ChangeNotifier {
     }
     return false;
   }
+  void limparDadosCertificados(){
+    listaCertificados = [];
+    certificadoSelecionado = null;
+    pkcs12 = Uint8List(0);
+    senhaCertificado = null;
+    limparErro();
+    notifyListeners();
+  }
 }

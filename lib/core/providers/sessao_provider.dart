@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
-import 'auth_provider_config/auth_providers.dart';
+import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
+import 'auth_provider_config/logar/auth_providers.dart';
 import '../../main.dart';
 
 class SessionProvider with ChangeNotifier {
@@ -27,7 +28,7 @@ class SessionProvider with ChangeNotifier {
       log('TEMPO RESTANTE: $_timeout\\seg');
       if (_timeout == 0) {
         timer.cancel();
-        mostrarAlerta();
+        mostrarAlerta(null);
       }
     });
     notifyListeners();
@@ -49,7 +50,7 @@ class SessionProvider with ChangeNotifier {
     startListening();
   }
 
-  void mostrarAlerta() {
+  void mostrarAlerta(String? label) {
     if (myNavigatorKey.currentState != null && _isShowingDialog == false) {
       _isShowingDialog = true;
       stopListening();
@@ -63,18 +64,18 @@ class SessionProvider with ChangeNotifier {
                 context.textTheme.bodyLarge!.copyWith(color: AppColors.vermelho),
           ),
           content: Text(
-            'Nenhuma ação foi realizada nos últimos 60 segundos. Você será direcionado para realizar o login novamente.',
+            label ?? 'Nenhuma ação foi realizada nos últimos 60 segundos. Você será direcionado para realizar o login novamente.',
             style: context.textTheme.bodyMedium,
           ),
           actions: [
             Row(
               children: [
                 Expanded(
-                  child: TextButton(
-                    child: const Text('OK'),
+                  child: BotaoPadrao(
+                    label: 'OK',
                     onPressed: () {
                       _isShowingDialog = false;
-                      authProvider.clearDataUser();
+                      authProvider.limparDadosUsuario();
                       stopListening();
                       Modular.to.navigate(Modular.initialRoute);
                       Modular.to.pop();
