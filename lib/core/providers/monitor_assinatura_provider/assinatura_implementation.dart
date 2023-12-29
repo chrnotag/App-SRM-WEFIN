@@ -1,5 +1,5 @@
 import 'package:http/http.dart' as http;
-import 'package:modular_study/core/providers/assinatura_provider/assinatura_provider.dart';
+import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
 import 'package:modular_study/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 

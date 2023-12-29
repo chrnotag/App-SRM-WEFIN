@@ -9,8 +9,6 @@ class PopUpDeletarCertificado {
   PopUpDeletarCertificado({required this.context, required this.certificado, this.label, this.title});
 
   Widget get popUp {
-    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
-    bool isTemaSRM = themeProvider.temaSelecionado == TemaSelecionado.SRM;
     final ImportarCertificadoProvider certificadoProvider =
         Modular.get<ImportarCertificadoProvider>();
     return AlertDialog(
