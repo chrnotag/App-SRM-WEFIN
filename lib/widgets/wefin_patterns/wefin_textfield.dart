@@ -28,7 +28,6 @@ class WefinTextFormField extends StatefulWidget {
 
 class _WefinTextFormFieldState extends State<WefinTextFormField> {
   late bool _isObscured;
-  final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
 
   @override
   void initState() {
@@ -45,7 +44,7 @@ class _WefinTextFormFieldState extends State<WefinTextFormField> {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       maxLength: widget.maxLength,
       style:  TextStyle(
-        color: themeProvider.temaSelecionado == TemaSelecionado.SRM ? Colors.white : Colors.black,
+        color: context.onSurface,
       ),
       cursorColor: context.primaryColor,
       decoration: InputDecoration(

@@ -79,7 +79,7 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
                                 Image.asset(
                                   Assets.logoSRM,
                                   width: 150,
-                                  color: AppColors.corPrimariaSRM,
+                                  color: AppColors.azul,
                                 ),
                                 Text(
                                   'CAPITAL EM MOVIMENTO',
@@ -98,7 +98,7 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
                             child: Text(
                               'ou',
                               style: context.textTheme.bodyMedium!
-                                  .copyWith(color: AppColors.corPrimariaSRM),
+                                  .copyWith(color: AppColors.azul),
                             ),
                           ),
                           InkWell(

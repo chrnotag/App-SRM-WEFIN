@@ -14,50 +14,73 @@ class ThemeSRM {
   }
 
   static ThemeData get theme => ThemeData(
-        primaryColor: AppColors.azul,
+        primaryColor: AppColors.azulPrimarioSRM,
         colorScheme: ColorScheme(
             brightness: Brightness.light,
-            primary: AppColors.corPrimariaSRM,
-            onPrimary: AppColors.branco,
+            primary: AppColors.azulPrimarioSRM,
+            onPrimary: Colors.white,
             secondary: Colors.white,
-            onSecondary: AppColors.labelText,
+            onSecondary: Colors.white,
             error: AppColors.vermelho,
             onError: Colors.redAccent.shade200,
-            background: AppColors.corPrimariaSRM,
-            onBackground: AppColors.corPrimariaSRM,
-            surface: AppColors.brancoGelo,
+            background: AppColors.azulPrimarioSRM,
+            onBackground: AppColors.azulPrimarioSRM,
+            surface: Colors.white,
             onSurface: Colors.black),
         appBarTheme: const AppBarTheme(
             backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent),
-        scaffoldBackgroundColor: AppColors.corPrimariaSRM,
+            shadowColor: Colors.transparent,
+            iconTheme: IconThemeData(color: Colors.white)),
+        scaffoldBackgroundColor: AppColors.azul,
         textTheme: TextTheme(
           bodySmall: GoogleFonts.montserrat(
             fontSize: AppSizes.fontSizeSmall,
           ),
           labelSmall: GoogleFonts.montserrat(
               fontSize: AppSizes.fontSizeVerySmall,
-              fontWeight: FontWeight.w300),
-          bodyLarge: GoogleFonts.montserrat(fontSize: AppSizes.fontSizeLarge),
-          bodyMedium: GoogleFonts.montserrat(fontSize: AppSizes.fontSizeMedium),
-          displayMedium:
-              GoogleFonts.montserrat(fontSize: AppSizes.fontSizeLarge),
-          displayLarge:
-              GoogleFonts.montserrat(fontSize: AppSizes.fontSizeExtraLarge),
+              fontWeight: FontWeight.bold,
+              color: AppColors.azul),
+          labelMedium: GoogleFonts.montserrat(
+              fontSize: AppSizes.fontSizeMedium,
+              fontWeight: FontWeight.bold,
+              color: AppColors.azul),
+          labelLarge: GoogleFonts.montserrat(
+              fontSize: AppSizes.fontSizeLarge,
+              fontWeight: FontWeight.bold,
+              color: AppColors.azul),
+          bodyLarge: GoogleFonts.montserrat(
+              fontSize: AppSizes.fontSizeLarge,
+              color: AppColors.azul),
+          bodyMedium: GoogleFonts.montserrat(
+              fontSize: AppSizes.fontSizeMedium,
+              color: AppColors.azul),
+          displayMedium: GoogleFonts.montserrat(
+              fontSize: AppSizes.fontSizeLarge,
+              color: AppColors.azul),
+          displayLarge: GoogleFonts.montserrat(
+              fontSize: AppSizes.fontSizeExtraLarge,
+              color: AppColors.azul),
         ),
         primaryTextTheme: TextTheme(
           bodySmall: GoogleFonts.montserrat(
-            fontSize: AppSizes.fontSizeSmall,
-          ),
+              fontSize: AppSizes.fontSizeSmall,
+              color: AppColors.azul),
           labelSmall: GoogleFonts.montserrat(
               fontSize: AppSizes.fontSizeVerySmall,
-              fontWeight: FontWeight.w300),
-          bodyLarge: GoogleFonts.montserrat(fontSize: AppSizes.fontSizeLarge),
-          bodyMedium: GoogleFonts.montserrat(fontSize: AppSizes.fontSizeMedium),
-          displayMedium:
-              GoogleFonts.montserrat(fontSize: AppSizes.fontSizeLarge),
-          displayLarge:
-              GoogleFonts.montserrat(fontSize: AppSizes.fontSizeExtraLarge),
+              fontWeight: FontWeight.w300,
+              color: AppColors.azul),
+          bodyLarge: GoogleFonts.montserrat(
+              fontSize: AppSizes.fontSizeLarge,
+              color: AppColors.azul),
+          bodyMedium: GoogleFonts.montserrat(
+              fontSize: AppSizes.fontSizeMedium,
+              color: AppColors.azul),
+          displayMedium: GoogleFonts.montserrat(
+              fontSize: AppSizes.fontSizeLarge,
+              color: AppColors.azul),
+          displayLarge: GoogleFonts.montserrat(
+              fontSize: AppSizes.fontSizeExtraLarge,
+              color: AppColors.azul),
         ),
       );
 }

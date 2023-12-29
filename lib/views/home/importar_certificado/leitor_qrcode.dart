@@ -6,7 +6,6 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/providers/certificado_provider/importar_certificadode.dart';
 import 'package:modular_study/widgets/dialog_senha_certificado.dart';
-import '../../../core/constants/themes/theme_configs.dart';
 
 class LeitorQrCode extends StatefulWidget {
   const LeitorQrCode({super.key});

@@ -22,8 +22,6 @@ class Menu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
-    bool isTemaSRM = themeProvider.temaSelecionado == TemaSelecionado.SRM;
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     return Scaffold(
       appBar: PreferredSize(
@@ -33,15 +31,12 @@ class Menu extends StatelessWidget {
         child: Column(
           children: [
             Text('Meu Perfil',
-                style: context.textTheme.bodyMedium!.copyWith(
-                    color:
-                        isTemaSRM ? AppColors.branco : context.primaryColor)),
+                style: context.textTheme.bodyMedium!.copyWith(color: context.onSecondary)),
             Padding(
               padding: const EdgeInsets.only(bottom: 15.0),
               child: Text('Visualize seus dados e tire suas dúvidas',
                   style: context.textTheme.bodySmall!.copyWith(
-                      color:
-                          isTemaSRM ? AppColors.branco : context.primaryColor,
+                    color: context.onSecondary,
                       fontWeight: FontWeight.w200)),
             ),
             Expanded(
@@ -59,20 +54,14 @@ class Menu extends StatelessWidget {
                             child: SvgPicture.asset(
                               Assets.empresaIcon,
                               width: 70,
-                              color: isTemaSRM
-                                  ? AppColors.azul
-                                  : context.primaryColor,
+                              color: context.primaryColor,
                             ),
                           ),
                           Text(
                             authProvider.empresaSelecionada?.nome ??
                                 'Empresa não selecionada',
                             style: context.textTheme.bodyLarge!.copyWith(
-                              color: isTemaSRM
-                                  ? AppColors.corPrimariaSRM
-                                  : context.shadersTrust[900],
                               fontWeight: FontWeight.w600,
-                              fontSize: 18,
                               letterSpacing: 1.5,
                             ),
                             textAlign: TextAlign.center,
