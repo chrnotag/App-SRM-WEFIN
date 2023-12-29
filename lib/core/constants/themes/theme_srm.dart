@@ -15,6 +15,21 @@ class ThemeSRM {
 
   static ThemeData get theme => ThemeData(
         primaryColor: AppColors.azulPrimarioSRM,
+        searchBarTheme: SearchBarThemeData(
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    side: BorderSide.none)),
+            constraints:
+                BoxConstraints.expand(width: double.infinity, height: 35),
+            hintStyle: MaterialStateProperty.all<TextStyle>(
+                GoogleFonts.montserrat(
+                    fontSize: AppSizes.fontSizeMedium,
+                    color: AppColors.labelText)),
+            textStyle:
+                MaterialStateProperty.all<TextStyle>(GoogleFonts.montserrat(
+              fontSize: AppSizes.fontSizeSmall,
+            ))),
         colorScheme: ColorScheme(
             brightness: Brightness.light,
             primary: AppColors.azulPrimarioSRM,
@@ -26,7 +41,8 @@ class ThemeSRM {
             background: AppColors.azulPrimarioSRM,
             onBackground: AppColors.azulPrimarioSRM,
             surface: Colors.white,
-            onSurface: Colors.black),
+            onSurface: Colors.black,
+        inverseSurface: Colors.white),
         appBarTheme: const AppBarTheme(
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
@@ -49,38 +65,29 @@ class ThemeSRM {
               fontWeight: FontWeight.bold,
               color: AppColors.azul),
           bodyLarge: GoogleFonts.montserrat(
-              fontSize: AppSizes.fontSizeLarge,
-              color: AppColors.azul),
+              fontSize: AppSizes.fontSizeLarge, color: AppColors.azul),
           bodyMedium: GoogleFonts.montserrat(
-              fontSize: AppSizes.fontSizeMedium,
-              color: AppColors.azul),
+              fontSize: AppSizes.fontSizeMedium, color: AppColors.azul),
           displayMedium: GoogleFonts.montserrat(
-              fontSize: AppSizes.fontSizeLarge,
-              color: AppColors.azul),
+              fontSize: AppSizes.fontSizeLarge, color: AppColors.azul),
           displayLarge: GoogleFonts.montserrat(
-              fontSize: AppSizes.fontSizeExtraLarge,
-              color: AppColors.azul),
+              fontSize: AppSizes.fontSizeExtraLarge, color: AppColors.azul),
         ),
         primaryTextTheme: TextTheme(
           bodySmall: GoogleFonts.montserrat(
-              fontSize: AppSizes.fontSizeSmall,
-              color: AppColors.azul),
+              fontSize: AppSizes.fontSizeSmall, color: AppColors.azul),
           labelSmall: GoogleFonts.montserrat(
               fontSize: AppSizes.fontSizeVerySmall,
               fontWeight: FontWeight.w300,
               color: AppColors.azul),
           bodyLarge: GoogleFonts.montserrat(
-              fontSize: AppSizes.fontSizeLarge,
-              color: AppColors.azul),
+              fontSize: AppSizes.fontSizeLarge, color: AppColors.azul),
           bodyMedium: GoogleFonts.montserrat(
-              fontSize: AppSizes.fontSizeMedium,
-              color: AppColors.azul),
+              fontSize: AppSizes.fontSizeMedium, color: AppColors.azul),
           displayMedium: GoogleFonts.montserrat(
-              fontSize: AppSizes.fontSizeLarge,
-              color: AppColors.azul),
+              fontSize: AppSizes.fontSizeLarge, color: AppColors.azul),
           displayLarge: GoogleFonts.montserrat(
-              fontSize: AppSizes.fontSizeExtraLarge,
-              color: AppColors.azul),
+              fontSize: AppSizes.fontSizeExtraLarge, color: AppColors.azul),
         ),
       );
 }

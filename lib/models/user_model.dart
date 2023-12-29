@@ -5,13 +5,13 @@ part 'user_model.g.dart';
 @JsonSerializable()
 class UserModel {
   UserModel({
-    required this.nomeUsuario,
+    required this.usuario,
     required this.senha,
     this.identificadorCedente,
     required this.idDevice,
   });
 
-  late final String nomeUsuario;
+  late final String usuario;
   late final String senha;
   String? identificadorCedente;
   late final String idDevice;

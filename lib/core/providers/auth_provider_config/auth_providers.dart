@@ -67,7 +67,7 @@ class AuthProvider extends ChangeNotifier {
     final AssinaturaProvider assinaturaProvider = Modular.get<AssinaturaProvider>();
     if (empresaSelecionada!.identificador != identificadorCedente) {
       final credenciaisLogin = UserModel(
-          nomeUsuario: credenciaisUsuario.nomeUsuario,
+          usuario: credenciaisUsuario.usuario,
           senha: credenciaisUsuario.senha,
           idDevice: credenciaisUsuario.idDevice,
           identificadorCedente: identificadorCedente);
@@ -108,7 +108,7 @@ class AuthProvider extends ChangeNotifier {
     _dataUser = null;
     _empresaSelecionada = null;
     _listaCedente = null;
-    credenciaisUsuario = UserModel(nomeUsuario: '', senha: '', idDevice: '');
+    credenciaisUsuario = UserModel(usuario: '', senha: '', idDevice: '');
     notifyListeners();
   }
 }

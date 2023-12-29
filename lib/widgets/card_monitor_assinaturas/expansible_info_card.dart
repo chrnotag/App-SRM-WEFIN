@@ -22,8 +22,6 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
-    bool isTemaSRM = themeProvider.temaSelecionado == TemaSelecionado.SRM;
     final assinantes = widget.assinantes;
     final CarouselController carouselController = CarouselController();
     final ImportarCertificadoProvider certificadoProvider =

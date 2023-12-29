@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/enuns/theme_enum.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/providers/theme_provider.dart';
-
 import '../../core/constants/themes/theme_configs.dart';
 
 class BotaoPadrao extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;
-  final Color? labelColor;
   final IconData? icon;
   final bool filled;
   final double? fontSize;
@@ -18,7 +13,6 @@ class BotaoPadrao extends StatelessWidget {
       {Key? key,
       required this.label,
       required this.onPressed,
-      this.labelColor,
       this.icon,
       this.filled = true,
       this.fontSize})
