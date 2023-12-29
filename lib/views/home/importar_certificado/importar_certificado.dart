@@ -95,7 +95,6 @@ class ImportarCertificado extends StatelessWidget {
                   },
                   label: 'Importar Via Dispositivo',
                   filled: false,
-                  labelColor:  context.onSecondary,
                   icon: Icons.archive_rounded,
                 )
               ],

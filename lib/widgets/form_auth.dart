@@ -120,7 +120,7 @@ class _AuthFormState extends State<AuthForm> {
         overlay!.insert(overlayLoader);
       });
       final userModel = UserModel(
-          nomeUsuario: _loginEC.text,
+          usuario: _loginEC.text,
           senha: _passwordEC.text,
           idDevice: await DeviceUtils().getDeviceID());
       final response = await authProvider.login(userModel);
