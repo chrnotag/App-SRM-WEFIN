@@ -11,7 +11,9 @@ extension ThemeExtension on BuildContext {
   Color get surface => Theme.of(this).colorScheme.surface;
   Color get onSurface => Theme.of(this).colorScheme.onSurface;
   Color get background => Theme.of(this).colorScheme.background;
+  Color get inverseSurface => Theme.of(this).colorScheme.inverseSurface;
   Map<int, Color> get shadersTrust => TrustShades.primaryColor;
   Map<int, Color> get shadersSRM => SRMShaders.primaryColor;
   TextTheme get textTheme => Theme.of(this).textTheme;
+  SearchBarThemeData get searchBarTheme  => Theme.of(this).searchBarTheme;
 }

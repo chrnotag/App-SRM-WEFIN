@@ -53,7 +53,7 @@ class AssinaturaProvider extends ChangeNotifier {
 
   String traduzirStatusAssinaturas(MonitorAssinaturasModel assinatura) {
     final status = assinatura.statusAssinaturaDigital.toUpperCase();
-    const assinado = ['FINALIZADO', 'ASSINADO_CLIENTE', 'ACEITO', 'ENVIADO'];
+    const assinado = ['FINALIZADO', 'ASSINADO_CLIENTE', 'ACEITO', 'ENVIADO', 'COMP'];
     return assinado.contains(status) ? "Assinado" : "Aguardando Assinatura";
   }
 
