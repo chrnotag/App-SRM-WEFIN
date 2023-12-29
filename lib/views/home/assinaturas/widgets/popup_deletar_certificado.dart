@@ -1,6 +1,7 @@
 part of '../selecionar_certificado.dart';
 
 class PopUpDeletarCertificado {
+
   BuildContext context;
   PKCertificate certificado;
   String? title;
@@ -18,12 +19,8 @@ class PopUpDeletarCertificado {
           Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
             child: Text(
-              title ?? 'Excluir',
-              style: context.textTheme.bodyMedium!.copyWith(
-                color: isTemaSRM
-                    ? AppColors.corPrimariaSRM
-                    : context.shadersTrust[900],
-              ),
+              'Excluir',
+              style: context.textTheme.bodyMedium
             ),
           ),
           Text(
@@ -52,7 +49,7 @@ class PopUpDeletarCertificado {
           Row(
             children: [
               Expanded(
-                child: WefinDefaultButton(
+                child: BotaoPadrao(
                   onPressed: () {
                     Modular.to.pop();
                   },

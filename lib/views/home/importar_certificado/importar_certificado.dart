@@ -14,8 +14,6 @@ class ImportarCertificado extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
-    bool isTemaSRM = themeProvider.temaSelecionado == TemaSelecionado.SRM;
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: AppBar().preferredSize,
@@ -30,10 +28,7 @@ class ImportarCertificado extends StatelessWidget {
               children: [
                 Text(
                   'Escolha a forma desejada para importar o certificado.',
-                  style: context.textTheme.bodyLarge!.copyWith(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color:isTemaSRM ? Colors.white : context.shadersTrust[900]),
+                  style: context.textTheme.labelLarge,
                   textAlign: TextAlign.center,
                 ),
                 Padding(
@@ -43,14 +38,15 @@ class ImportarCertificado extends StatelessWidget {
                     text: TextSpan(
                       text: 'QRCode: ',
                       style: context.textTheme.bodyMedium!.copyWith(
-                          fontWeight: FontWeight.bold, color:isTemaSRM ? Colors.white : context.shadersTrust[900]),
+                          fontWeight: FontWeight.bold,
+                          color: context.onSecondary),
                       children: [
                         TextSpan(
                           text:
                               'Selecione essa opção para importar via QRCode usando o nosso site para gerar o QRCode',
                           style: context.textTheme.bodyMedium!.copyWith(
                               fontWeight: FontWeight.normal,
-                              color:isTemaSRM ? Colors.white : context.shadersTrust[900]),
+                              color: context.onSecondary),
                         )
                       ],
                     ),
@@ -61,13 +57,15 @@ class ImportarCertificado extends StatelessWidget {
                   text: TextSpan(
                     text: 'Do dispositivo: ',
                     style: context.textTheme.bodyMedium!.copyWith(
-                        fontWeight: FontWeight.bold, color: isTemaSRM ? Colors.white : context.shadersTrust[900]),
+                        fontWeight: FontWeight.bold,
+                        color: context.onSecondary),
                     children: [
                       TextSpan(
                         text:
                             'Selecione essa opção para importar o certificado diretamente de seu dispositivo.',
                         style: context.textTheme.bodyMedium!.copyWith(
-                            fontWeight: FontWeight.normal, color: isTemaSRM ? Colors.white : context.shadersTrust[900]),
+                            fontWeight: FontWeight.normal,
+                            color: context.onSecondary),
                       )
                     ],
                   ),
@@ -80,27 +78,24 @@ class ImportarCertificado extends StatelessWidget {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: WefinDefaultButton(
-                    onPressed: () {
-                      Modular.to.pushNamed(
-                          AppRoutes.guiaImportarCertificadoRoute,
-                          arguments: {ImportarVia.QrCode});
-                    },
-                    label: 'Importar Via QRCode',
-                    fontSize: 14,
-                    icon: Icons.qr_code_2_rounded,
-                  )
-                ),
-                WefinDefaultButton(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: BotaoPadrao(
+                      onPressed: () {
+                        Modular.to.pushNamed(
+                            AppRoutes.guiaImportarCertificadoRoute,
+                            arguments: {ImportarVia.QrCode});
+                      },
+                      label: 'Importar Via QRCode',
+                      icon: Icons.qr_code_2_rounded,
+                    )),
+                BotaoPadrao(
                   onPressed: () {
                     Modular.to.pushNamed(AppRoutes.guiaImportarCertificadoRoute,
                         arguments: ImportarVia.Dispositivo);
                   },
                   label: 'Importar Via Dispositivo',
-                  fontSize: 14,
                   filled: false,
-                  labelColor: isTemaSRM ? Colors.white : null,
+                  labelColor:  context.onSecondary,
                   icon: Icons.archive_rounded,
                 )
               ],

@@ -28,7 +28,4 @@ class ThemeProvider extends ChangeNotifier {
   bool get isTemaSRM => temaSelecionado == TemaSelecionado.SRM;
 
   String get logoTema => isTemaSRM ? Assets.logoSRM : Assets.logoTRUST;
-
-  Color get brancoOuVerde =>
-      isTemaSRM ? Colors.white : AppColors.corPrimariaTRUST;
 }

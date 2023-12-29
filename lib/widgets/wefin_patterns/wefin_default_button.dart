@@ -6,7 +6,7 @@ import 'package:modular_study/core/providers/theme_provider.dart';
 
 import '../../core/constants/themes/theme_configs.dart';
 
-class WefinDefaultButton extends StatelessWidget {
+class BotaoPadrao extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;
   final Color? labelColor;
@@ -14,7 +14,7 @@ class WefinDefaultButton extends StatelessWidget {
   final bool filled;
   final double? fontSize;
 
-  const WefinDefaultButton(
+  const BotaoPadrao(
       {Key? key,
       required this.label,
       required this.onPressed,
@@ -26,13 +26,10 @@ class WefinDefaultButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeProvider themeProvider = Modular.get<ThemeProvider>();
-    bool isTemaSRM = themeProvider.temaSelecionado == TemaSelecionado.SRM;
     return filled
         ? ElevatedButton(
             onPressed: onPressed,
             style: ElevatedButton.styleFrom(
-              backgroundColor: context.primaryColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(4),
               ),
@@ -43,21 +40,15 @@ class WefinDefaultButton extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Visibility(
-                    visible: icon != null ? true : false,
+                    visible: icon != null,
                     child: Icon(
                       icon,
-                      color: context.onPrimaryColor,
                       size: 40,
                     ),
                   ),
-                  Text(
-                    label,
-                    style: fontSize != null
-                        ? context.textTheme.bodySmall!.copyWith(
-                            color: context.onPrimaryColor, fontSize: fontSize)
-                        : context.textTheme.bodySmall!
-                            .copyWith(color: context.onPrimaryColor),
-                  )
+                  Text(label,
+                      style: context.textTheme.bodyMedium!.copyWith(
+                          color: context.onPrimaryColor, fontSize: fontSize))
                 ],
               ),
             ),
@@ -65,10 +56,10 @@ class WefinDefaultButton extends StatelessWidget {
         : ElevatedButton(
             onPressed: onPressed,
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.transparent,
-              shadowColor: Colors.transparent,
+              backgroundColor: context.onPrimaryColor,
+              shadowColor: Colors.black,
               shape: RoundedRectangleBorder(
-                side: BorderSide(color: context.primaryColor, width: 1),
+                side: BorderSide(color: context.primaryColor, width: 2),
                 borderRadius: BorderRadius.circular(4),
               ),
             ),
@@ -78,26 +69,19 @@ class WefinDefaultButton extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Visibility(
-                    visible: icon != null ? true : false,
+                    visible: icon != null,
                     child: Icon(
                       icon,
-                      color: labelColor ?? context.primaryColor,
+                      color: context.primaryColor,
                       size: 40,
                     ),
                   ),
-                  Text(
-                    label,
-                    style: fontSize != null
-                        ? context.textTheme.bodySmall!.copyWith(
-                            color: labelColor ?? context.primaryColor,
-                            fontSize: fontSize)
-                        : context.textTheme.bodySmall!.copyWith(
-                            color: labelColor ?? context.primaryColor),
-                  )
+                  Text(label,
+                      style: context.textTheme.bodyMedium!.copyWith(
+                          color: context.primaryColor, fontSize: fontSize))
                 ],
               ),
             ),
           );
-    ;
   }
 }

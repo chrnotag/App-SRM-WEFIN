@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color azul = Color(0xFF5B95CC);
-  static const Color corPrimariaSRM = Color(0xFF1E3870);
-  static const Color corPrimariaTRUST = Color(0xff0EAC58);
+  static const Color azul = Color(0xFF1E3870);
+  static const Color azulPrimarioSRM = Color(0xFF5B95CC);
+  static const Color verdePrimarioTRUST = Color(0xff0EAC58);
   static const Color labelText = Color(0xFF8A8A8A);
   static const Color branco = Color(0xFFFFFFFF);
   static const Color laranja = Color(0xFFF29046);
@@ -23,7 +23,7 @@ class AppSizes {
   static const double fontSizeSmall = 12;
   static const double fontSizeRegular = 14;
   static const double fontSizeMedium = 16;
-  static const double fontSizeLarge = 24;
+  static const double fontSizeLarge = 20;
   static const double fontSizeExtraLarge = 32;
 }
 

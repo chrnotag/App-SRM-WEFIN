@@ -64,14 +64,12 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas>
                 Tab(
                   child: Text("Assinaturas Pendentes",
                       textAlign: TextAlign.center,
-                      style: context.textTheme.bodyMedium!
-                          .copyWith(color: isTemaSRM ? AppColors.corPrimariaSRM : context.shadersTrust[900])),
+                      style: context.textTheme.bodyMedium),
                 ),
                 Tab(
                     child: Text("Acompanhar Assinaturas",
                         textAlign: TextAlign.center,
-                        style: context.textTheme.bodyMedium!
-                            .copyWith(color: isTemaSRM ?  AppColors.corPrimariaSRM : context.shadersTrust[900]))),
+                        style: context.textTheme.bodyMedium)),
               ], indicatorColor: context.primaryColor),
             ),
             Expanded(

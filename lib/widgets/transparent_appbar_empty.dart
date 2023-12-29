@@ -8,11 +8,9 @@ class TransparentAppBarEmpty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
     return AppBar(
       backgroundColor: Colors.transparent,
       shadowColor: Colors.transparent,
-      iconTheme: IconThemeData(color: context.primaryColor),
     );
   }
 }
