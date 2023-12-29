@@ -33,7 +33,7 @@ class PopUpDeletarCertificado {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Expanded(
-                  child: WefinDefaultButton(
+                  child: BotaoPadrao(
                     onPressed: () {
                       certificadoProvider.deletarCertificado(certificado.thumbprint);
                       Fluttertoast.showToast(
