@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/providers/sessao_provider.dart';
+import 'package:modular_study/core/providers/theme_provider.dart';
 import 'package:modular_study/widgets/form_auth.dart';
 import 'package:modular_study/widgets/transparent_appbar_empty.dart';
 
@@ -29,6 +30,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeProvider themeProvider = Modular.get<ThemeProvider>();
     return Scaffold(
         body: SingleChildScrollView(
       child: ConstrainedBox(
@@ -57,7 +59,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             width: 100.w,
                             child: SvgPicture.asset(
                               Assets.imagesCadeado,
-                              color: Colors.white,
+                            color: context.onSecondary,
                             ),
                           ),
                         ),
@@ -67,8 +69,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             'Esqueci Minha Senha',
                             textAlign: TextAlign.center,
                             style: context.textTheme.bodyLarge!.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w400),
+                                fontWeight: FontWeight.w400,
+                            color: context.onSecondary),
                           ),
                         ),
                         const SizedBox(

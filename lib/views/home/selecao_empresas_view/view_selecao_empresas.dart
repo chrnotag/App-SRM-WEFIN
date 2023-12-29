@@ -51,7 +51,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
               padding: const EdgeInsets.all(12.0),
               child: Text('Política de privacidade',
                   style: context.textTheme.bodyLarge!.copyWith(
-                    color: AppColors.corPrimariaSRM,
+                    color: AppColors.azulPrimarioSRM,
                     fontWeight: FontWeight.w600,
                     fontSize: 20,
                     letterSpacing: 1.5,

@@ -33,6 +33,7 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
   Widget build(BuildContext context) {
     final ThemeProvider themeProvider = context.watch<ThemeProvider>();
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Container(
           decoration: const BoxDecoration(
@@ -52,14 +53,13 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
                       Text(
                         'Seja bem-vindo\nao seu app de gestão',
                         textAlign: TextAlign.center,
-                        style: context.textTheme.bodyMedium!
-                            .copyWith(fontSize: 20, color: AppColors.labelText),
+                        style: context.textTheme.bodyLarge!
+                            .copyWith(color: AppColors.labelText),
                       ),
                       Text(
                         'Em qual empresa deseja entrar?',
                         style: context.textTheme.bodyMedium!.copyWith(
                             fontWeight: FontWeight.bold,
-                            fontSize: 20,
                             color: AppColors.labelText),
                       ),
                       Column(
@@ -78,15 +78,15 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
                               children: [
                                 Image.asset(
                                   Assets.logoSRM,
-                                  width: 240,
-                                  color: AppColors.corPrimariaSRM,
+                                  width: 150,
+                                  color: AppColors.azul,
                                 ),
                                 Text(
                                   'CAPITAL EM MOVIMENTO',
                                   textAlign: TextAlign.center,
-                                  style: context.textTheme.bodyMedium!.copyWith(
+                                  style: context.textTheme.labelSmall!.copyWith(
                                       color: Color(0xffDE9320),
-                                      fontSize: 15,
+                                      fontSize: 8,
                                       fontWeight: FontWeight.w900),
                                 )
                               ],
@@ -97,8 +97,8 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
                                 vertical: AppSizes.paddingMedium),
                             child: Text(
                               'ou',
-                              style: context.textTheme.bodyLarge!
-                                  .copyWith(color: AppColors.corPrimariaSRM),
+                              style: context.textTheme.bodyMedium!
+                                  .copyWith(color: AppColors.azul),
                             ),
                           ),
                           InkWell(
@@ -109,7 +109,7 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
                             },
                             child: Image.asset(
                               Assets.logoTRUST,
-                              width: 240,
+                              width: 150,
                             ),
                           ),
                         ],

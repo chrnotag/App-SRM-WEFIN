@@ -25,11 +25,11 @@ class _MenuItemState extends State<_MenuItem> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right:5.0),
-                  child: Icon(widget.icon,color: AppColors.azul),
+                  child: Icon(widget.icon,color: context.primaryColor),
                 ),
-                Text(widget.title,style:context.textTheme.bodyMedium!.copyWith(color: AppColors.corPrimariaSRM)),
+                Text(widget.title,style:context.textTheme.bodyMedium),
                 Expanded(child: Container()),
-                const Icon(Icons.arrow_forward_ios, color: AppColors.corPrimariaSRM,size: AppSizes.paddingMedium)
+                Icon(Icons.arrow_forward_ios, color: context.primaryColor, size: AppSizes.paddingMedium)
               ],
             ),
           ),

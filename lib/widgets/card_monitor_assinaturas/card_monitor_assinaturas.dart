@@ -10,7 +10,10 @@ import 'package:modular_study/core/providers/certificado_provider/importar_certi
 import 'package:modular_study/core/utils/money_format.dart';
 import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
 import 'package:modular_study/views/home/assinaturas/selecionar_certificado.dart';
+import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
 
+import '../../core/constants/enuns/theme_enum.dart';
+import '../../core/providers/theme_provider.dart';
 import '../component_card.dart';
 import 'expansible_card.dart';
 
@@ -76,7 +79,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas> {
                                       title: 'Status',
                                       label: statusAssinatura,
                                       textStyle: context.textTheme.bodySmall!
-                                          .copyWith(color: corAssinatura)),
+                                          .copyWith(color: corAssinatura, fontSize: 11)),
                                 ],
                               ),
                               Column(

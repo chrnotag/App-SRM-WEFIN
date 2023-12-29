@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:modular_study/core/constants/enuns/theme_enum.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
 import 'package:modular_study/core/providers/sessao_provider.dart';
+import 'package:modular_study/core/providers/theme_provider.dart';
 import 'package:modular_study/widgets/form_auth.dart';
 
 import '../../../core/constants/themes/theme_configs.dart';
@@ -31,63 +33,56 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final bool isKeyboardVisible =
         MediaQuery.of(context).viewInsets.bottom != 0;
+    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage(Assets.imagesBackgroundImage),
                 fit: BoxFit.cover)),
         child: CustomScrollView(
           slivers: [
-            SliverAppBar(
-              expandedHeight: isKeyboardVisible ? 60 : 250,
-              pinned: true,
-              flexibleSpace: FlexibleSpaceBar(
-                centerTitle: true,
-                title: Image.asset(
-                  Assets.logoSRM,
-                  width: isKeyboardVisible
-                      ? 80
-                      : MediaQuery.of(context).size.width * 0.4,
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-            SliverPadding(
-              padding: EdgeInsets.all(0),
-              sliver: SliverToBoxAdapter(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    AnimatedOpacity(
-                      duration: const Duration(milliseconds: 300),
-                      opacity: isKeyboardVisible ? 0.0 : 1.0,
-                      child: SizedBox(
-                        child: Text(
-                          "Seja bem vindo\nao seu app de gestão",
-                          style: context.textTheme.bodyMedium!.copyWith(
-                              color: AppColors.labelText,
-                              fontSize: MediaQuery.of(context).size.width *
-                                  0.05 *
-                                  MediaQuery.of(context).textScaleFactor),
-                          textAlign: TextAlign.center,
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      Image.asset(
+                        themeProvider.logoTema,
+                        width: isKeyboardVisible
+                            ? 80
+                            : MediaQuery.of(context).size.width * 0.4,
+                        fit: BoxFit.fill,
+                      ),
+                      const SizedBox(height: 8,),
+                      AnimatedOpacity(
+                        duration: const Duration(milliseconds: 300),
+                        opacity: isKeyboardVisible ? 0.0 : 1.0,
+                        child: SizedBox(
+                          child: Text(
+                            "Seja bem vindo\nao seu app de gestão",
+                            style: context.textTheme.bodyMedium!.copyWith(
+                                color: AppColors.labelText,
+                                fontSize: AppSizes.fontSizeLarge),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
+                    ],
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        SizedBox(height: 15), // Espaço após a AppBar
+                        AuthForm(),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-            ),
-            const SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(height: 15), // Espaço após a AppBar
-                    AuthForm(),
-                  ],
-                ),
+                  )
+                ],
               ),
             ),
           ],

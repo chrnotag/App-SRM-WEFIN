@@ -3,9 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/providers/certificado_provider/importar_certificadode.dart';
 import 'package:modular_study/widgets/dialog_senha_certificado.dart';
-import '../../../core/constants/themes/theme_configs.dart';
 
 class LeitorQrCode extends StatefulWidget {
   const LeitorQrCode({super.key});
@@ -46,7 +46,7 @@ class _LeitorQrCodeState extends State<LeitorQrCode> {
           ),
           CustomPaint(
             size: Size.infinite,
-            painter: ExpandedCornerBorderedHolePainter(),
+            painter: ExpandedCornerBorderedHolePainter(context: context),
           ),
         ],
       ),
@@ -55,6 +55,10 @@ class _LeitorQrCodeState extends State<LeitorQrCode> {
 }
 
 class ExpandedCornerBorderedHolePainter extends CustomPainter {
+  BuildContext context;
+
+  ExpandedCornerBorderedHolePainter({required this.context});
+
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint()..color = Colors.black.withOpacity(0.7);
@@ -76,7 +80,7 @@ class ExpandedCornerBorderedHolePainter extends CustomPainter {
           ..blendMode = BlendMode.clear);
 
     var borderPaint = Paint()
-      ..color = AppColors.azul
+      ..color = context.primaryColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3.0;
 

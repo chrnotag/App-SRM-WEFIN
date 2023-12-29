@@ -9,14 +9,17 @@ import 'package:modular_study/widgets/appbar_logo_perfil.dart';
 import 'package:modular_study/widgets/botao_selecao_empresa.dart';
 import 'package:modular_study/widgets/card_monitor_assinaturas/card_monitor_assinaturas.dart';
 
-class AssinaturaDigital extends StatefulWidget {
-  const AssinaturaDigital({super.key});
+import '../../../core/constants/enuns/theme_enum.dart';
+import '../../../core/providers/theme_provider.dart';
+
+class MonitorAssinaturas extends StatefulWidget {
+  const MonitorAssinaturas({super.key});
 
   @override
-  State<AssinaturaDigital> createState() => _AssinaturaDigitalState();
+  State<MonitorAssinaturas> createState() => _MonitorAssinaturasState();
 }
 
-class _AssinaturaDigitalState extends State<AssinaturaDigital>
+class _MonitorAssinaturasState extends State<MonitorAssinaturas>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
@@ -59,15 +62,13 @@ class _AssinaturaDigitalState extends State<AssinaturaDigital>
                 Tab(
                   child: Text("Assinaturas Pendentes",
                       textAlign: TextAlign.center,
-                      style: context.textTheme.bodyMedium!
-                          .copyWith(color: AppColors.corPrimariaSRM)),
+                      style: context.textTheme.bodyMedium),
                 ),
                 Tab(
                     child: Text("Acompanhar Assinaturas",
                         textAlign: TextAlign.center,
-                        style: context.textTheme.bodyMedium!
-                            .copyWith(color: AppColors.corPrimariaSRM))),
-              ]),
+                        style: context.textTheme.bodyMedium)),
+              ], indicatorColor: context.primaryColor),
             ),
             Expanded(
               child: TabBarView(

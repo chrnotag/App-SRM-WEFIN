@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:modular_study/core/constants/enuns/theme_enum.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
+import 'package:modular_study/core/providers/theme_provider.dart';
 
 import '../generated/assets.dart';
 
@@ -28,8 +30,9 @@ class SelecaoEmpresa extends StatelessWidget {
             visible: tituloPagina.isNotEmpty,
             child: Text(
               tituloPagina,
-              style: context.textTheme.bodyMedium!
-                  .copyWith(color: Colors.white, fontWeight: FontWeight.w100),
+              style: context.textTheme.bodyMedium!.copyWith(
+                  color: context.onSecondary,
+                  fontWeight: FontWeight.w100),
             ),
           ),
           SizedBox(height: 8),
@@ -38,7 +41,10 @@ class SelecaoEmpresa extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                   border: Border.all(
-                      color: Colors.white, width: 0.5, strokeAlign: 1),
+                      color:
+                          context.onSecondary,
+                      width: 0.5,
+                      strokeAlign: 1),
                   borderRadius: BorderRadius.circular(30)),
               child: InkWell(
                 onTap: changeble
@@ -56,8 +62,8 @@ class SelecaoEmpresa extends StatelessWidget {
                         width: MediaQuery.of(context).size.width * 0.4,
                         child: Text(
                           nomeEmpresa,
-                          style: context.textTheme.bodySmall!
-                              .copyWith(color: Colors.white),
+                          style: context.textTheme.bodySmall!.copyWith(
+                              color: context.onSecondary),
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.center,
                         ),
@@ -69,7 +75,7 @@ class SelecaoEmpresa extends StatelessWidget {
                           padding: const EdgeInsets.only(right: 8.0),
                           child: SvgPicture.asset(
                             Assets.iconsIcChangeCnpj,
-                            color: Colors.white,
+                            color: context.onSecondary,
                             width: 15,
                           )),
                     ),

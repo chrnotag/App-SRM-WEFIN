@@ -96,8 +96,9 @@ class _AuthFormState extends State<AuthForm> {
             ),
           ),
           const SizedBox(height: 50),
-          WefinDefaultButton(
+          BotaoPadrao(
             label: widget.label,
+            fontSize: 14,
             onPressed: () async {
               if (widget.visible) {
                 await login();

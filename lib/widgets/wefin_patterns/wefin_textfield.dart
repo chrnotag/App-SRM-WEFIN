@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:modular_study/core/constants/enuns/theme_enum.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
+import 'package:modular_study/core/providers/theme_provider.dart';
 
 import '../../core/constants/themes/theme_configs.dart';
 
 class WefinTextFormField extends StatefulWidget {
-  //Variaveis de recebimento de parametros
   final TextEditingController? controller;
   final FormFieldValidator<String>? validator;
   final String label;
   final bool obscureText;
   final int? maxLength;
   final VoidCallback? onTap;
-
-  //Construtor configurado para receber os parametros
   const WefinTextFormField(
       {Key? key,
       required this.label,
@@ -21,17 +21,14 @@ class WefinTextFormField extends StatefulWidget {
       this.validator,
       this.maxLength,
       this.onTap})
-      : super(key: key); //retorna junto ao construtor a superclasse
-
+      : super(key: key);
   @override
-  // ignore: library_private_types_in_public_api
   _WefinTextFormFieldState createState() => _WefinTextFormFieldState();
 }
 
 class _WefinTextFormFieldState extends State<WefinTextFormField> {
-  late bool _isObscured; //Bool que define se o texto é mostrado ou não
+  late bool _isObscured;
 
-  //Inicia o texto com a configuração de obscurecimento passada pelo parametro
   @override
   void initState() {
     super.initState();
@@ -46,10 +43,10 @@ class _WefinTextFormFieldState extends State<WefinTextFormField> {
       validator: widget.validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       maxLength: widget.maxLength,
-      style: const TextStyle(
-        color: AppColors.branco,
+      style:  TextStyle(
+        color: context.onSurface,
       ),
-      cursorColor: AppColors.branco,
+      cursorColor: context.primaryColor,
       decoration: InputDecoration(
         labelText: widget.label,
         labelStyle:
@@ -59,7 +56,7 @@ class _WefinTextFormFieldState extends State<WefinTextFormField> {
         ),
         focusedBorder: UnderlineInputBorder(
           borderRadius: BorderRadius.circular(4),
-          borderSide: const BorderSide(color: AppColors.labelText),
+          borderSide: BorderSide(color: context.primaryColor),
         ),
         suffixIcon: widget.obscureText
             ? IconButton(

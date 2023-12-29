@@ -8,8 +8,14 @@ import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
 import 'package:modular_study/generated/assets.dart';
 import 'package:modular_study/widgets/appbar_logo_perfil.dart';
+import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
+
+import '../../../core/constants/enuns/theme_enum.dart';
+import '../../../core/providers/theme_provider.dart';
 
 part 'widgets/menu_item.dart';
+
+part 'widgets/popup_sair.dart';
 
 class Menu extends StatelessWidget {
   const Menu({Key? key}) : super(key: key);
@@ -25,13 +31,13 @@ class Menu extends StatelessWidget {
         child: Column(
           children: [
             Text('Meu Perfil',
-                style: context.textTheme.bodyMedium!
-                    .copyWith(color: AppColors.branco)),
+                style: context.textTheme.bodyMedium!.copyWith(color: context.onSecondary)),
             Padding(
               padding: const EdgeInsets.only(bottom: 15.0),
               child: Text('Visualize seus dados e tire suas dúvidas',
                   style: context.textTheme.bodySmall!.copyWith(
-                      color: AppColors.branco, fontWeight: FontWeight.w200)),
+                    color: context.onSecondary,
+                      fontWeight: FontWeight.w200)),
             ),
             Expanded(
               child: Card(
@@ -48,18 +54,18 @@ class Menu extends StatelessWidget {
                             child: SvgPicture.asset(
                               Assets.empresaIcon,
                               width: 70,
-                              color: AppColors.azul,
+                              color: context.primaryColor,
                             ),
                           ),
                           Text(
-                              authProvider.empresaSelecionada?.nome ??
-                                  'Empresa não selecionada',
-                              style: context.textTheme.bodyLarge!.copyWith(
-                                color: AppColors.corPrimariaSRM,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 18,
-                                letterSpacing: 1.5,
-                              )),
+                            authProvider.empresaSelecionada?.nome ??
+                                'Empresa não selecionada',
+                            style: context.textTheme.bodyLarge!.copyWith(
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 1.5,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                         ],
                       ),
                     ),
@@ -74,103 +80,10 @@ class Menu extends StatelessWidget {
                         onTap: () {
                           showDialog(
                             context: context,
-                            builder: (context) => AlertDialog(
-                              title: Column(
-                                children: [
-                                  const Icon(
-                                    LineIcons.exclamationCircle,
-                                    color: AppColors.azul,
-                                    size: 80,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: Text('Atenção',
-                                        style: context.textTheme.bodyLarge!
-                                            .copyWith(
-                                          color: AppColors.corPrimariaSRM,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 20,
-                                          letterSpacing: 1.5,
-                                        )),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: Text('Deseja encerrar o aplicativo?',
-                                        style: context.textTheme.labelSmall!
-                                            .copyWith(
-                                                color: AppColors.labelText)),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 12.0),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              authProvider.clearDataUser();
-                                              Modular.to.navigate(
-                                                  Modular.initialRoute);
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor:
-                                                  AppColors.azul,
-                                            ),
-                                            child: const Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 8.0),
-                                              child: Padding(
-                                                padding: EdgeInsets.all(8.0),
-                                                child: Text(
-                                                  'SAIR',
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: ElevatedButton(
-                                            onPressed: () {
-                                              Modular.to.pop();
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                                backgroundColor:
-                                                    Colors.transparent,
-                                                shadowColor: Colors.transparent,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4),
-                                                    side: const BorderSide(
-                                                        color: AppColors
-                                                            .azul,
-                                                        width: 1))),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 8.0),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Text('CANCELAR',
-                                                    style: context
-                                                        .textTheme.labelSmall!
-                                                        .copyWith(
-                                                            color: AppColors
-                                                                .azul)),
-                                              ),
-                                            )),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
+                            builder: (context) => PopUpDeslogarApp(
+                                    context: context,
+                                    authProvider: authProvider)
+                                .popUp,
                           );
                         }),
                     SizedBox(height: 6)

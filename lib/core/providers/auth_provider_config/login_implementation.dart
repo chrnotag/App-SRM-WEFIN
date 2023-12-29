@@ -35,6 +35,7 @@ class LoginImpl {
       } else {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = ExceptionModel.fromJson(responseBody);
+        log('Erro ao realizar login: $responseBody');
         return ErrorResponse(data);
       }
     } catch (e) {

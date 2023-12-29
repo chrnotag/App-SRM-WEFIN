@@ -1,4 +1,3 @@
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
@@ -10,8 +9,11 @@ import 'package:modular_study/core/providers/certificado_provider/importar_certi
 import 'package:modular_study/views/home/importar_certificado/leitor_qrcode.dart';
 import 'package:modular_study/widgets/dialog_senha_certificado.dart';
 import 'package:modular_study/widgets/transparent_appbar_empty.dart';
+import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:share_plus/share_plus.dart';
+import '../../../core/constants/enuns/theme_enum.dart';
 import '../../../core/constants/themes/theme_configs.dart';
+import '../../../core/providers/theme_provider.dart';
 
 class GuiaImportCertificado extends StatefulWidget {
   const GuiaImportCertificado({super.key});
@@ -55,6 +57,13 @@ class _GuiaImportCertificadoState extends State<GuiaImportCertificado> {
                         });
                       },
                       floatingIndicator: true,
+                      slideIndicator: CircularSlideIndicator(
+                          padding: EdgeInsets.only(bottom: 30),
+                          indicatorBorderColor:
+                          Colors.grey.shade500.withAlpha(50),
+                          currentIndicatorColor: context.primaryColor,
+                          indicatorBackgroundColor:
+                          context.primaryColor.withAlpha(80)),
                       showIndicator: true,
                     )),
               ),
@@ -72,7 +81,7 @@ class _GuiaImportCertificadoState extends State<GuiaImportCertificado> {
                         duration: Duration(milliseconds: 300),
                         curve: Curves.linear);
                   },
-                  backgroundColor: AppColors.azul,
+                  backgroundColor: context.primaryColor,
                   mini: true,
                   child: const Icon(Icons.arrow_forward),
                 ),
@@ -88,7 +97,7 @@ class _GuiaImportCertificadoState extends State<GuiaImportCertificado> {
                       duration: Duration(milliseconds: 300),
                       curve: Curves.linear);
                 },
-                backgroundColor: AppColors.azul,
+                backgroundColor: context.primaryColor,
                 mini: true,
                 child: const Icon(Icons.arrow_back),
               ),
@@ -107,129 +116,121 @@ class _GuiaImportCertificadoState extends State<GuiaImportCertificado> {
           children: [
             Text(
               'Importe seu certificado digital',
-              style: context.textTheme.displaySmall!
-                  .copyWith(color: Colors.white, fontSize: 22),
+              style: context.textTheme.bodyLarge!.copyWith(color: context.onSecondary),
             ),
             Container(
               width: 250,
               height: 300,
-              child: const Icon(
+              child: Icon(
                 Icons.archive_rounded,
                 size: 150,
-                color: Colors.white,
               ),
             ),
             SizedBox(
               width: 300,
               child: Text(
                 'Bem-vindo ao assistente de importação de certificado digital. Nas proximas páginas será explicado como importar seu arquivo de certificado digital de seu aparelho móvel.',
-                style:
-                    context.textTheme.bodyMedium!.copyWith(color: Colors.white),
+                style: context.textTheme.bodyMedium!.copyWith(color: context.onSecondary),
                 textAlign: TextAlign.center,
               ),
             ),
           ]),
       Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'Selecione seu Certificado',
-              style: context.textTheme.displaySmall!
-                  .copyWith(color: Colors.white, fontSize: 22),
+              style: context.textTheme.bodyLarge!.copyWith(color: context.onSecondary),
             ),
-            Container(
-              width: 250,
-              height: 300,
-              child: Placeholder(color: Colors.white),
+            const SizedBox(
+              height: 10,
             ),
             SizedBox(
               width: 300,
               child: Text(
                 'Após clicar no botão de importação, seu explorador de arquivos será aberto. Navegue até a localização do seu certificado digital.',
-                style:
-                    context.textTheme.bodyMedium!.copyWith(color: Colors.white),
+                style: context.textTheme.bodyMedium!.copyWith(color: context.onSecondary),
                 textAlign: TextAlign.center,
               ),
             ),
           ]),
       Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'Localize seu Certificado',
-              style: context.textTheme.displaySmall!
-                  .copyWith(color: Colors.white, fontSize: 22),
+              style: context.textTheme.bodyLarge!.copyWith(color: context.onSecondary),
             ),
-            Container(
-              width: 250,
-              height: 300,
-              child: Placeholder(color: Colors.white),
+            const SizedBox(
+              height: 10,
             ),
             SizedBox(
               width: 300,
               child: Text(
                 'Procure na lista de arquivos pelo seu certificado digital. Ele pode estar no formato .pfx, .p12, ou outro dependendo do seu dispositivo.',
-                style:
-                    context.textTheme.bodyMedium!.copyWith(color: Colors.white),
+                style: context.textTheme.bodyMedium!.copyWith(color: context.onSecondary),
                 textAlign: TextAlign.center,
               ),
             ),
           ]),
       Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'Selecionando o Certificado',
-              style: context.textTheme.displaySmall!
-                  .copyWith(color: Colors.white, fontSize: 22),
+              style: context.textTheme.bodyLarge!.copyWith(color: context.onSecondary),
             ),
-            Container(
-              width: 250,
-              height: 300,
-              child: Placeholder(color: Colors.white),
+            const SizedBox(
+              height: 10,
             ),
             SizedBox(
               width: 300,
               child: Text(
                 'Uma vez que encontrar o arquivo do certificado, clique sobre ele para selecioná-lo. Será necessário informar a senha do certificado após isso',
-                style:
-                    context.textTheme.bodyMedium!.copyWith(color: Colors.white),
+                style: context.textTheme.bodyMedium!.copyWith(color: context.onSecondary),
                 textAlign: TextAlign.center,
               ),
             ),
           ]),
       Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'Importação Concluída',
-              style: context.textTheme.displaySmall!
-                  .copyWith(color: Colors.white, fontSize: 22),
+              style: context.textTheme.bodyLarge!.copyWith(color: context.onSecondary),
             ),
-            Container(
-              width: 250,
-              height: 300,
-              child: Placeholder(color: Colors.white),
+            const SizedBox(
+              height: 10,
             ),
             SizedBox(
               width: 300,
               child: Text(
                 'Após selecionar o arquivo, o certificado será importado automaticamente. Basta informar a senha e você estará pronto para utilizá-lo!',
-                style:
-                    context.textTheme.bodyMedium!.copyWith(color: Colors.white),
+                style: context.textTheme.bodyMedium!.copyWith(color: context.onSecondary),
                 textAlign: TextAlign.center,
               ),
             ),
-            ElevatedButton(
-                onPressed: () async {
-                  await provider.selecionarArquivoCertificado();
-                  showDialog(context: context, builder: (context) => DialogSenhaCertificado());
-                },
-                child: const Text('Importar Certificado'))
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.5,
+              child: BotaoPadrao(
+                  onPressed: () async {
+                    bool isPegouCertificado =
+                        await provider.selecionarArquivoCertificado();
+                    if (isPegouCertificado) {
+                      await showDialog(
+                          context: context,
+                          builder: (context) => DialogSenhaCertificado());
+                    }
+                  },
+                  label: 'Importar Certificado'),
+            )
           ]),
     ];
   }
@@ -242,37 +243,33 @@ class _GuiaImportCertificadoState extends State<GuiaImportCertificado> {
           children: [
             Text(
               'Importe seu certificado digital via QR Code',
-              style: context.textTheme.displaySmall!
-                  .copyWith(color: Colors.white, fontSize: 22),
+              textAlign: TextAlign.center,
+              style: context.textTheme.bodyLarge!.copyWith(color: context.onSecondary),
             ),
-            const Icon(
+            Icon(
               Icons.qr_code_2_rounded,
               size: 150,
-              color: Colors.white,
+              color: context.onSecondary,
             ),
             SizedBox(
               width: 300,
               child: Text(
                 'Bem-vindo ao assistente de importação de certificado digital via QR Code. Nas próximas páginas, explicaremos como escanear o QR Code gerado no site para importar seu certificado digital.',
-                style:
-                    context.textTheme.bodyMedium!.copyWith(color: Colors.white),
+                style: context.textTheme.bodyLarge!.copyWith(color: context.onSecondary),
                 textAlign: TextAlign.center,
               ),
             ),
           ]),
       Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'Faça o Upload do Seu Certificado',
-              style: context.textTheme.displaySmall!
-                  .copyWith(color: Colors.white, fontSize: 22),
+              style: context.textTheme.bodyLarge!.copyWith(color: context.onSecondary),
             ),
-            Container(
-              width: 250,
-              height: 300,
-              child: Placeholder(color: Colors.white),
+            const SizedBox(
+              height: 10,
             ),
             SizedBox(
               width: 300,
@@ -280,13 +277,12 @@ class _GuiaImportCertificadoState extends State<GuiaImportCertificado> {
                 text: TextSpan(children: [
                   TextSpan(
                     text: 'Acesse ',
-                    style: context.textTheme.bodyMedium!
-                        .copyWith(color: Colors.white),
+                    style: context.textTheme.bodyMedium!.copyWith(color: context.onSecondary),
                   ),
                   TextSpan(
                       text: 'nosso site',
-                      style: const TextStyle(
-                          color: Colors.blueAccent,
+                      style: context.textTheme.bodyMedium!.copyWith(
+                          color: context.onSecondary,
                           decoration: TextDecoration.underline),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () async {
@@ -296,8 +292,7 @@ class _GuiaImportCertificadoState extends State<GuiaImportCertificado> {
                   TextSpan(
                     text:
                         ' no seu computador e faça o upload do seu certificado digital. Após o upload, um QR Code será gerado na tela para importação no aplicativo.',
-                    style: context.textTheme.bodyMedium!
-                        .copyWith(color: Colors.white),
+                    style: context.textTheme.bodyMedium!.copyWith(color: context.onSecondary),
                   ),
                 ]),
                 textAlign: TextAlign.center,
@@ -306,84 +301,78 @@ class _GuiaImportCertificadoState extends State<GuiaImportCertificado> {
           ]),
       Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'Escanear QR Code',
-              style: context.textTheme.displaySmall!
-                  .copyWith(color: Colors.white, fontSize: 22),
+              style: context.textTheme.bodyLarge!.copyWith(color: context.onSecondary),
             ),
-            Container(
-              width: 250,
-              height: 300,
-              child: Placeholder(color: Colors.white),
+            const SizedBox(
+              height: 10,
             ),
             SizedBox(
               width: 300,
               child: Text(
                 'No aplicativo, use a opção de escanear QR Code para ler o código gerado no site. Isso irá capturar as informações necessárias do seu certificado.',
-                style:
-                    context.textTheme.bodyMedium!.copyWith(color: Colors.white),
+                style: context.textTheme.bodyMedium!.copyWith(color: context.onSecondary),
                 textAlign: TextAlign.center,
               ),
             ),
           ]),
       Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'Informe a Senha do Certificado',
-              style: context.textTheme.displaySmall!
-                  .copyWith(color: Colors.white, fontSize: 22),
+              style: context.textTheme.bodyLarge!.copyWith(color: context.onSecondary),
             ),
-            Container(
-              width: 250,
-              height: 300,
-              child: Placeholder(color: Colors.white),
+            const SizedBox(
+              height: 10,
             ),
             SizedBox(
               width: 300,
               child: Text(
                 'Após escanear o QR Code, será solicitado que você insira a senha do seu certificado digital para concluir a importação.',
-                style:
-                    context.textTheme.bodyMedium!.copyWith(color: Colors.white),
+                style: context.textTheme.bodyMedium!.copyWith(color: context.onSecondary),
                 textAlign: TextAlign.center,
               ),
             ),
           ]),
       Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'Importação Concluída',
-              style: context.textTheme.displaySmall!
-                  .copyWith(color: Colors.white, fontSize: 22),
+              style: context.textTheme.bodyLarge!.copyWith(color: context.onSecondary),
             ),
-            Container(
-              width: 250,
-              height: 300,
-              child: Placeholder(color: Colors.white),
+            const SizedBox(
+              height: 10,
             ),
             SizedBox(
               width: 300,
               child: Text(
                 'Seu certificado foi importado com sucesso! Agora você pode utilizar todas as funcionalidades do aplicativo com seu certificado digital.',
-                style:
-                    context.textTheme.bodyMedium!.copyWith(color: Colors.white),
+                style: context.textTheme.bodyMedium!.copyWith(color: context.onSecondary),
                 textAlign: TextAlign.center,
               ),
             ),
-            ElevatedButton(
-                onPressed: () async {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LeitorQrCode(),
-                      ));
-                },
-                child: const Text('Ler QrCode'))
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.5,
+              child: BotaoPadrao(
+                  onPressed: () async {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LeitorQrCode(),
+                        ));
+                  },
+                  label: 'Ler QrCode'),
+            )
           ]),
     ];
   }

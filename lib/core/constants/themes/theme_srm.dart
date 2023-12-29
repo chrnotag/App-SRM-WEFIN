@@ -14,57 +14,73 @@ class ThemeSRM {
   }
 
   static ThemeData get theme => ThemeData(
-        primaryColor: AppColors.corPrimariaSRM,
-        colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: const MaterialColor(
-            0xFF05204F, // Azul Primário (500)
-            <int, Color>{
-              50: Color(0xFFE1E8F4), // Azul (50)
-              100: Color(0xFFB4C3E0), // Azul (100)
-              200: Color(0xFF879ECB), // Azul (200)
-              300: Color(0xFF5A79B7), // Azul (300)
-              400: Color(0xFF2D549E), // Azul (400)
-              500: Color(0xFF05204F), // Azul Primário (500)
-              600: Color(0xFF041C46), // Azul (600)
-              700: Color(0xFF03183D), // Azul (700)
-              800: Color(0xFF021433), // Azul (800)
-              900: Color(0xFF010B1A), // Azul (900)
-            },
-          ),
-          errorColor: AppColors.vermelho,
-          backgroundColor: const Color(0xFF05204F),
-        ),
+        primaryColor: AppColors.azulPrimarioSRM,
+        colorScheme: ColorScheme(
+            brightness: Brightness.light,
+            primary: AppColors.azulPrimarioSRM,
+            onPrimary: Colors.white,
+            secondary: Colors.white,
+            onSecondary: Colors.white,
+            error: AppColors.vermelho,
+            onError: Colors.redAccent.shade200,
+            background: AppColors.azulPrimarioSRM,
+            onBackground: AppColors.azulPrimarioSRM,
+            surface: Colors.white,
+            onSurface: Colors.black),
         appBarTheme: const AppBarTheme(
             backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent),
-        scaffoldBackgroundColor: AppColors.corPrimariaSRM,
+            shadowColor: Colors.transparent,
+            iconTheme: IconThemeData(color: Colors.white)),
+        scaffoldBackgroundColor: AppColors.azul,
         textTheme: TextTheme(
           bodySmall: GoogleFonts.montserrat(
             fontSize: AppSizes.fontSizeSmall,
           ),
           labelSmall: GoogleFonts.montserrat(
               fontSize: AppSizes.fontSizeVerySmall,
-              fontWeight: FontWeight.w300),
-          bodyLarge: GoogleFonts.montserrat(fontSize: AppSizes.fontSizeLarge),
-          bodyMedium: GoogleFonts.montserrat(fontSize: AppSizes.fontSizeMedium),
-          displayMedium:
-              GoogleFonts.montserrat(fontSize: AppSizes.fontSizeLarge),
-          displayLarge:
-              GoogleFonts.montserrat(fontSize: AppSizes.fontSizeExtraLarge),
+              fontWeight: FontWeight.bold,
+              color: AppColors.azul),
+          labelMedium: GoogleFonts.montserrat(
+              fontSize: AppSizes.fontSizeMedium,
+              fontWeight: FontWeight.bold,
+              color: AppColors.azul),
+          labelLarge: GoogleFonts.montserrat(
+              fontSize: AppSizes.fontSizeLarge,
+              fontWeight: FontWeight.bold,
+              color: AppColors.azul),
+          bodyLarge: GoogleFonts.montserrat(
+              fontSize: AppSizes.fontSizeLarge,
+              color: AppColors.azul),
+          bodyMedium: GoogleFonts.montserrat(
+              fontSize: AppSizes.fontSizeMedium,
+              color: AppColors.azul),
+          displayMedium: GoogleFonts.montserrat(
+              fontSize: AppSizes.fontSizeLarge,
+              color: AppColors.azul),
+          displayLarge: GoogleFonts.montserrat(
+              fontSize: AppSizes.fontSizeExtraLarge,
+              color: AppColors.azul),
         ),
         primaryTextTheme: TextTheme(
           bodySmall: GoogleFonts.montserrat(
-            fontSize: AppSizes.fontSizeSmall,
-          ),
+              fontSize: AppSizes.fontSizeSmall,
+              color: AppColors.azul),
           labelSmall: GoogleFonts.montserrat(
               fontSize: AppSizes.fontSizeVerySmall,
-              fontWeight: FontWeight.w300),
-          bodyLarge: GoogleFonts.montserrat(fontSize: AppSizes.fontSizeLarge),
-          bodyMedium: GoogleFonts.montserrat(fontSize: AppSizes.fontSizeMedium),
-          displayMedium:
-              GoogleFonts.montserrat(fontSize: AppSizes.fontSizeLarge),
-          displayLarge:
-              GoogleFonts.montserrat(fontSize: AppSizes.fontSizeExtraLarge),
+              fontWeight: FontWeight.w300,
+              color: AppColors.azul),
+          bodyLarge: GoogleFonts.montserrat(
+              fontSize: AppSizes.fontSizeLarge,
+              color: AppColors.azul),
+          bodyMedium: GoogleFonts.montserrat(
+              fontSize: AppSizes.fontSizeMedium,
+              color: AppColors.azul),
+          displayMedium: GoogleFonts.montserrat(
+              fontSize: AppSizes.fontSizeLarge,
+              color: AppColors.azul),
+          displayLarge: GoogleFonts.montserrat(
+              fontSize: AppSizes.fontSizeExtraLarge,
+              color: AppColors.azul),
         ),
       );
 }
