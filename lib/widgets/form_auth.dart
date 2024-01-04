@@ -200,7 +200,7 @@ class _AuthFormState extends State<AuthForm> {
           ),
           Text(
             "Acesse o link que enviamos para o seu email para cadastrar uma nova senha de acesso",
-            style: context.textTheme.bodySmall!
+            style: context.textTheme.bodyMedium!
                 .copyWith(fontWeight: FontWeight.w400),
           ),
         ],

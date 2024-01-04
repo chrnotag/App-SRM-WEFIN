@@ -15,6 +15,7 @@ class RecuperarSenhaImpl {
       'accept': 'application/json',
       'plataforma': themeProvider.temaSelecionado.name
     };
+    log("header: $headers");
     final body = json.encode(dadosUsuario.toJson());
     final url = Uri.parse(EndPoints.recuperarSenha);
     log('body: $body');
