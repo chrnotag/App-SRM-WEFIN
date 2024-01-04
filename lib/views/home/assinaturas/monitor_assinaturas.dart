@@ -77,17 +77,17 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas>
                 children: [
                   ListView.builder(
                     shrinkWrap: true,
-                    itemCount: assinaturas.length,
+                    itemCount: assinaturasPendentes.length,
                     itemBuilder: (context, index) => CardMonitorAssinaturas(
                       assinarDocumento: true,
-                      assinatura: assinaturas[index],
+                      assinatura: assinaturasPendentes[index],
                     ),
                   ),
                   ListView.builder(
                     shrinkWrap: true,
-                    itemCount: assinaturasPendentes.length,
+                    itemCount: assinaturas.length,
                     itemBuilder: (context, index) => CardMonitorAssinaturas(
-                      assinatura: assinaturasPendentes[index],
+                      assinatura: assinaturas[index],
                     ),
                   ),
                 ],

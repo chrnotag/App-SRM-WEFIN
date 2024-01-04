@@ -1,5 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
+import 'package:modular_study/core/providers/auth_provider_config/recuperar_senha/recuperar_senha_provider.dart';
 import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:modular_study/core/providers/certificado_provider/importar_certificadode.dart';
@@ -21,6 +22,7 @@ class AppModule extends Module {
     i.addSingleton(ImportarCertificadoProvider.new);
     i.addSingleton(ThemeProvider.new);
     i.addSingleton(IniciarAssinaturaProvider.new);
+    i.addSingleton(RecuperarSenhaProvider.new);
   }
 
   @override

@@ -5,7 +5,9 @@ import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/implementations_config/export_impl.dart';
 import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
+import 'package:modular_study/core/providers/auth_provider_config/recuperar_senha/recuperar_senha_provider.dart';
 import 'package:modular_study/core/utils/get_device_infos.dart';
+import 'package:modular_study/models/recuperar_senha_model/recuperar_senha_model.dart';
 import 'package:modular_study/models/user_model.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_textfield.dart';
@@ -69,15 +71,15 @@ class _AuthFormState extends State<AuthForm> {
           const SizedBox(height: 20),
           WefinTextFormField(
             onTap: () => _mensagemErro = null,
-            maxLength: 10,
-            label: widget.visible ? 'Digite sua Senha' : 'Digite seu CPF',
+            maxLength: widget.visible ? 10 : null,
+            label: widget.visible ? 'Digite sua Senha' : 'Digite seu CNPJ',
             obscureText: widget.visible,
             controller: _passwordEC,
             validator: Validatorless.multiple([
               Validatorless.required(
-                  widget.visible ? 'Senha obrigatória' : 'CPF Obrigatório'),
-              if (!widget.visible) Validatorless.cpf('CPF Inválido!'),
-              Validatorless.min(
+                  widget.visible ? 'Senha obrigatória' : 'CNPJ Obrigatório'),
+              if (!widget.visible) Validatorless.cnpj('CNPJ Inválido!'),
+              if (widget.visible) Validatorless.min(
                   3, 'Senha com no mínimo 3 e máximo 10 caracteres.'),
               (value) => _mensagemErro
             ]),
@@ -141,7 +143,35 @@ class _AuthFormState extends State<AuthForm> {
   }
 
   Future<void> resetPassword() async {
-    final confirmDialog = AlertDialog(
+    RecuperarSenhaProvider recuperarSenhaProvider = Modular.get<RecuperarSenhaProvider>();
+    _mensagemErro= null;
+    if(_formKey.currentState!.validate()){
+      setState(() {
+        overlay!.insert(overlayLoader);
+      });
+      recuperarSenhaProvider.dadosUsuario = RecuperarSenhaModel(identificadorCedente: _passwordEC.text, usuario: _loginEC.text);
+      final response = await recuperarSenhaProvider.recuperarSenha();
+      overlayLoader.remove();
+      if (response != null && response.error != null) {
+        final error = response.error as ExceptionModel;
+        setState(() {
+          if (error.codigo == '500') {
+            _mensagemErro = error.mensagem;
+          } else {
+            _mensagemErro = "Por favor, verifique os dados informados.";
+          }
+        });
+      } else {
+        showDialog(
+            context: context,
+            builder: (context) => confirmarRecuperarSenha(),
+            barrierDismissible: false);
+      }
+    }
+  }
+
+  Widget confirmarRecuperarSenha(){
+    return AlertDialog(
       actionsAlignment: MainAxisAlignment.end,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8))),
@@ -149,13 +179,11 @@ class _AuthFormState extends State<AuthForm> {
         Row(
           children: [
             Expanded(
-              child: ElevatedButton(
-                  onPressed: () {
-                    Modular.to.pop();
-                  },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.azul),
-                  child: const Text("OK")),
+              child: BotaoPadrao(
+                onPressed: () {
+                  Modular.to.pop();
+                },
+                label: "OK",),
             ),
           ],
         )
@@ -179,9 +207,5 @@ class _AuthFormState extends State<AuthForm> {
       ),
       icon: SvgPicture.asset(Assets.iconsCheck, color: AppColors.verde),
     );
-    showDialog(
-        context: context,
-        builder: (context) => confirmDialog,
-        barrierDismissible: false);
   }
 }
