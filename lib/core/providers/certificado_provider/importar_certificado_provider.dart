@@ -93,6 +93,7 @@ class ImportarCertificadoProvider extends ChangeNotifier {
 
   Future<List<PKCertificate>> listaCertificadosFuture() async {
     listaCertificados = await CrossPki.listCertificatesWithKey();
+    notifyListeners();
     return listaCertificados;
   }
 

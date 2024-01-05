@@ -5,7 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/constants/endpoints.dart';
 import 'package:modular_study/core/constants/enuns/import_certificado_enum.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/providers/certificado_provider/importar_certificadode.dart';
+import 'package:modular_study/core/providers/certificado_provider/importar_certificado_provider.dart';
 import 'package:modular_study/views/home/importar_certificado/leitor_qrcode.dart';
 import 'package:modular_study/widgets/dialog_senha_certificado.dart';
 import 'package:modular_study/widgets/transparent_appbar_empty.dart';

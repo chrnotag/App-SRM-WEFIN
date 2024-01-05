@@ -14,8 +14,6 @@ class AssinaturaEletronicaImpl {
 
   Future<ApiResponse<dynamic>> finalizarAssinatura() async {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
-    final AssinaturaEletronicaProvider assinaturaEletronica =
-        Modular.get<AssinaturaEletronicaProvider>();
     final headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -27,8 +25,6 @@ class AssinaturaEletronicaImpl {
       final response = await http.post(url, headers: headers, body: body);
       switch (response.statusCode) {
         case 204:
-        assinaturaEletronica.statusCodeAssinaturaEletronica =
-            response.statusCode;
         return SucessResponse(null);
         case 401:
           VerificarSessao.sessaoExpirada();
