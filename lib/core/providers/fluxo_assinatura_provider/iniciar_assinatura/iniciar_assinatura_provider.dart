@@ -17,7 +17,7 @@ class IniciarAssinaturaProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void IniciarAssinaturaCertificado() async {
+  static IniciarAssinaturaCertificado() async {
     ImportarCertificadoProvider certificadoProvider = Modular.get<ImportarCertificadoProvider>();
     await certificadoProvider.listaCertificadosFuture();
     if (certificadoProvider.listaCertificados.isEmpty) {

@@ -19,21 +19,12 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void iniciarAssinaturaDigital() {}
-
-  Future<dynamic> finalizarAssinaturaDigital(
-      AssinaturaEletronicaModel assinaturaEletronicaModel) async {
-    return await AssinaturaEletronicaImpl(
-        assinaturaEletronicaModel: assinaturaEletronicaModel);
-  }
-
-  void isAssinaturaDigital(
-      BuildContext context, InformacaoAssinante infoAssinante) async {
-    if (infoAssinante.eCPFAssinador) {
-    } else {
-      if (assinaturaEletronica != null) {
-        iniciarAssinaturaDigital();
-      }
+  static Future<void> finalizarAssinaturaDigital(List<Documento> documentos) async {
+    List<AssinaturaEletronicaModel> documentosParaAssinar = [];
+    for(var doc in documentos){
+      documentosParaAssinar.add(AssinaturaEletronicaModel(idAssinaturaDigital: doc.idAssinaturaDigital, codigoEmail: "codigoEmail", deslocamentoFusoHorarioUsuario: deslocamentoFusoHorarioUsuario, evidencias: evidencias));
     }
+    await AssinaturaEletronicaImpl(
+        assinaturaEletronicaModel: assinaturaEletronicaModel).finalizarAssinatura();
   }
 }
