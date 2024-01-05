@@ -41,8 +41,6 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas>
         Modular.get<AssinaturaProvider>();
     List<MonitorAssinaturasModel> assinaturasPendentes = assinaturaProvider.assinaturasPendentes;
     List<MonitorAssinaturasModel> assinaturas = assinaturaProvider.todasAssinaturas;
-    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
-    bool isTemaSRM = themeProvider.temaSelecionado == TemaSelecionado.SRM;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,

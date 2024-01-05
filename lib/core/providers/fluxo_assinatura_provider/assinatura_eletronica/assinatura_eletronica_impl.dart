@@ -25,10 +25,8 @@ class AssinaturaEletronicaImpl {
     final url = Uri.parse(EndPoints.finalizarAssinaturaEletronica);
     try {
       final response = await http.post(url, headers: headers, body: body);
-      log('statusCode: ${response.statusCode}');
       switch (response.statusCode) {
-        case 200:
-        Fluttertoast.showToast(msg: 'Sucesso!');
+        case 204:
         assinaturaEletronica.statusCodeAssinaturaEletronica =
             response.statusCode;
         return SucessResponse(null);
@@ -40,8 +38,6 @@ class AssinaturaEletronicaImpl {
         default:
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = ExceptionModel.fromJson(responseBody);
-        Fluttertoast.showToast(
-            msg: 'Falha ao obter as hashs: ${data.mensagem}');
         return ErrorResponse(data);
       }
     } catch (e) {

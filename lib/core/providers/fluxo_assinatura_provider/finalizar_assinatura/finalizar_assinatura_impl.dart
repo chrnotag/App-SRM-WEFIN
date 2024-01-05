@@ -21,10 +21,8 @@ class FinalizarAssinaturaImpl {
     final body = json.encode(assinaturaFinalizada);
     try {
       final response = await http.post(url, body: body, headers: headers);
-      log('statusCode finalizarAssinatura: ${response.statusCode}');
       switch (response.statusCode) {
-        case 200:
-          log('teste ${response.body}');
+        case 204:
           return SucessResponse(null);
         case 401:
           VerificarSessao.sessaoExpirada();

@@ -79,8 +79,9 @@ class _AuthFormState extends State<AuthForm> {
               Validatorless.required(
                   widget.visible ? 'Senha obrigatória' : 'CNPJ Obrigatório'),
               if (!widget.visible) Validatorless.cnpj('CNPJ Inválido!'),
-              if (widget.visible) Validatorless.min(
-                  3, 'Senha com no mínimo 3 e máximo 10 caracteres.'),
+              if (widget.visible)
+                Validatorless.min(
+                    3, 'Senha com no mínimo 3 e máximo 10 caracteres.'),
               (value) => _mensagemErro
             ]),
           ),
@@ -143,23 +144,20 @@ class _AuthFormState extends State<AuthForm> {
   }
 
   Future<void> resetPassword() async {
-    RecuperarSenhaProvider recuperarSenhaProvider = Modular.get<RecuperarSenhaProvider>();
-    _mensagemErro= null;
-    if(_formKey.currentState!.validate()){
+    RecuperarSenhaProvider recuperarSenhaProvider =
+        Modular.get<RecuperarSenhaProvider>();
+    _mensagemErro = null;
+    if (_formKey.currentState!.validate()) {
       setState(() {
         overlay!.insert(overlayLoader);
       });
-      recuperarSenhaProvider.dadosUsuario = RecuperarSenhaModel(identificadorCedente: _passwordEC.text, usuario: _loginEC.text);
+      recuperarSenhaProvider.dadosUsuario = RecuperarSenhaModel(
+          identificadorCedente: _passwordEC.text, usuario: _loginEC.text);
       final response = await recuperarSenhaProvider.recuperarSenha();
       overlayLoader.remove();
       if (response != null && response.error != null) {
-        final error = response.error as ExceptionModel;
         setState(() {
-          if (error.codigo == '500') {
-            _mensagemErro = error.mensagem;
-          } else {
-            _mensagemErro = "Por favor, verifique os dados informados.";
-          }
+          _mensagemErro = "Por favor, verifique os dados informados.";
         });
       } else {
         showDialog(
@@ -170,7 +168,7 @@ class _AuthFormState extends State<AuthForm> {
     }
   }
 
-  Widget confirmarRecuperarSenha(){
+  Widget confirmarRecuperarSenha() {
     return AlertDialog(
       actionsAlignment: MainAxisAlignment.end,
       shape: RoundedRectangleBorder(
@@ -183,7 +181,8 @@ class _AuthFormState extends State<AuthForm> {
                 onPressed: () {
                   Modular.to.pop();
                 },
-                label: "OK",),
+                label: "OK",
+              ),
             ),
           ],
         )

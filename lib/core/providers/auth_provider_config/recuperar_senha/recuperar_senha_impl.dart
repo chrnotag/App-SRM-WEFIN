@@ -15,16 +15,12 @@ class RecuperarSenhaImpl {
       'accept': 'application/json',
       'plataforma': themeProvider.temaSelecionado.name
     };
-    log("header: $headers");
     final body = json.encode(dadosUsuario.toJson());
     final url = Uri.parse(EndPoints.recuperarSenha);
-    log('body: $body');
     try{
       final response = await http.post(url, headers: headers, body: body);
-      log('response: ${response.body}');
-      log("statusCode: ${response.statusCode}");
       switch(response.statusCode){
-        case 200:
+        case 204:
           return SucessResponse(null);
         default:
           final responseBody = json.decode(utf8.decode(response.bodyBytes));
