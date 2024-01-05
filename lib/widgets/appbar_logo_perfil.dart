@@ -14,6 +14,7 @@ class AppBarLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeProvider themeProvider = Modular.get<ThemeProvider>();
     return AppBar(
+      iconTheme: IconThemeData(color: AppColors.verdePrimarioTRUST),
       backgroundColor: Colors.transparent,
       shadowColor: Colors.transparent,
       centerTitle: true,

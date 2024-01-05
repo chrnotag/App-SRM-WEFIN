@@ -30,7 +30,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeProvider themeProvider = Modular.get<ThemeProvider>();
     return Scaffold(
         body: SingleChildScrollView(
       child: ConstrainedBox(

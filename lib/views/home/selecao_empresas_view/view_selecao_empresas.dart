@@ -4,8 +4,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
-import 'package:modular_study/core/providers/assinatura_provider/assinatura_provider.dart';
-import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
+import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
+import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:modular_study/core/providers/sessao_provider.dart';
 import 'package:modular_study/models/auth_login_models/cedente_model.dart';
 import 'package:modular_study/models/user_model.dart';
@@ -75,7 +75,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                   Expanded(
                     child: ElevatedButton(
                         onPressed: () {
-                          authProvider.clearDataUser();
+                          authProvider.limparDadosUsuario();
                           Modular.to.navigate(Modular.initialRoute);
                         },
                         style: ElevatedButton.styleFrom(

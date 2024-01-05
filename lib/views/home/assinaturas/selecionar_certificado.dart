@@ -1,11 +1,16 @@
+import 'dart:convert';
 import 'dart:math';
+import 'dart:developer' as logg;
 import 'package:crosspki/crosspki.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
-import 'package:modular_study/core/providers/assinatura_provider/assinatura_provider.dart';
+import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/certificado_provider/importar_certificadode.dart';
+import 'package:modular_study/core/providers/fluxo_assinatura_provider/iniciar_assinatura/iniciar_assinatura_impl.dart';
+import 'package:modular_study/models/fluxo_assinatura_model/iniciar_assinatura/iniciar_assinatura.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
 
 import '../../../../core/constants/themes/theme_configs.dart';
@@ -77,12 +82,16 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                               color: certificadoProvider
                                   .alterarCorItemListaCertificado(
                                       certificadoProvider
-                                          .listaCertificados[index],
+                                          .certificadoSelecionado ?? null,
                                       context),
                               height: 40,
                               child: InkWell(
                                 onTap: () {
-                                  certificadoProvider.selecionarCertificado(certificadoProvider.listaCertificados[index]);
+                                  certificadoProvider
+                                      .selecionarCertificadoAssinar(
+                                          certificadoProvider
+                                              .listaCertificados[index],
+                                          context);
                                 },
                                 child: Row(
                                   mainAxisAlignment:
@@ -95,10 +104,7 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                                         width:
                                             MediaQuery.of(context).size.width *
                                                 0.6,
-                                        child: Text(
-                                          certificadoProvider
-                                              .listaCertificados[index]
-                                              .subjectDisplayName!,
+                                        child: Text(certificadoProvider.listaCertificados[index].subjectDisplayName ?? "Certificado Sem Nome",
                                           style: context.textTheme.bodySmall!
                                               .copyWith(color: Colors.white),
                                           overflow: TextOverflow.ellipsis,
@@ -110,15 +116,15 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                                     InkWell(
                                         onTap: () async {
                                           showDialog(
-                                            context: context,
-                                            builder: (context) =>
-                                                PopUpDeletarCertificado(
-                                                        context: context,
-                                                        certificadoProvider:
-                                                            certificadoProvider,
-                                                        index: index)
-                                                    .popUp,
-                                          );
+                                              context: context,
+                                              builder: (context) =>
+                                                  PopUpDeletarCertificado(
+                                                          context: context,
+                                                          certificado:
+                                                              certificadoProvider
+                                                                      .listaCertificados[
+                                                                  index])
+                                                      .popUp);
                                         },
                                         child: const Icon(
                                           Icons.close,
@@ -148,7 +154,11 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                   child: BotaoPadrao(
                     onPressed:
                         certificadoProvider.certificadoSelecionado != null
-                            ? () {}
+                            ? () async {
+                                logg.log("base64 do certificado: ${certificadoProvider.converterCertificadoBase64()}");
+                               IniciarAssinaturaModel data = IniciarAssinaturaModel(certificado: certificadoProvider.converterCertificadoBase64(), codigoOperacao: assinaturaProvider.assinaturaSelecionada!.codigoOperacao);
+                                await IniciarAssinaturaImpl(iniciarAssinaturaModel: data).obterHashParaAssinar();
+                              }
                             : null,
                     label: "Assinar Documento",
                   ),

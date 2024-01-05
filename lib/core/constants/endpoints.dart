@@ -6,4 +6,8 @@ class EndPoints {
   static const String login = '$baseURL/autenticacoes';
   static const String assinatura = '$baseURL/assinaturas';
   static const siteQrCode = "google.com.br";
+  static const iniciarAssinatura = "$assinatura/iniciar-assinatura";
+  static const finalizarAssinatura = "$assinatura/finalizar-assinatura";
+  static const finalizarAssinaturaEletronica = "$assinatura/finalizar-assinatura-eletronica";
+  static const recuperarSenha = "$login/recuperar-senha";
 }

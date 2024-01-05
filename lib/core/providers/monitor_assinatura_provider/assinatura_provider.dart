@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
-import 'package:modular_study/core/providers/assinatura_provider/assinatura_implementation.dart';
-import 'package:modular_study/core/providers/auth_provider_config/auth_providers.dart';
-import 'package:modular_study/models/assinaturas_model/assinaturas_model.dart';
+import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_implementation.dart';
+import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
+import 'package:modular_study/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 
 class AssinaturaProvider extends ChangeNotifier {
   AssinaturaProvider._();
@@ -17,33 +17,33 @@ class AssinaturaProvider extends ChangeNotifier {
     return AssinaturaImpl().assinaturas();
   }
 
-  set assinaturas(List<AssinaturasModel> assinaturasModel) {
+  set assinaturas(List<MonitorAssinaturasModel> assinaturasModel) {
     separaAssinaturas(assinaturasModel);
     todasAssinaturas = assinaturasModel;
     notifyListeners();
   }
 
-  AssinaturasModel? _assinaturaSelecionada;
+  MonitorAssinaturasModel? _assinaturaSelecionada;
 
-  AssinaturasModel? get assinaturaSelecionada => _assinaturaSelecionada;
+  MonitorAssinaturasModel? get assinaturaSelecionada => _assinaturaSelecionada;
 
-  set assinaturaSelecionada(AssinaturasModel? assinatura) {
+  set assinaturaSelecionada(MonitorAssinaturasModel? assinatura) {
     _assinaturaSelecionada = assinatura;
     notifyListeners();
   }
 
-  List<AssinaturasModel> _assinaturas = [];
+  List<MonitorAssinaturasModel> _assinaturas = [];
 
-  List<AssinaturasModel> get todasAssinaturas => _assinaturas;
+  List<MonitorAssinaturasModel> get todasAssinaturas => _assinaturas;
 
-  set todasAssinaturas(List<AssinaturasModel> assinaturas) =>
+  set todasAssinaturas(List<MonitorAssinaturasModel> assinaturas) =>
       _assinaturas = assinaturas;
 
-  List<AssinaturasModel> _assinaturasPendentes = [];
+  List<MonitorAssinaturasModel> _assinaturasPendentes = [];
 
-  List<AssinaturasModel> get assinaturasPendentes => _assinaturasPendentes;
+  List<MonitorAssinaturasModel> get assinaturasPendentes => _assinaturasPendentes;
 
-  set assinaturasPendentes(List<AssinaturasModel> docs) {
+  set assinaturasPendentes(List<MonitorAssinaturasModel> docs) {
     _assinaturasPendentes = docs;
   }
 
@@ -51,7 +51,7 @@ class AssinaturaProvider extends ChangeNotifier {
     return assinaturasPendentes.length.toString();
   }
 
-  String traduzirStatusAssinaturas(AssinaturasModel assinatura) {
+  String traduzirStatusAssinaturas(MonitorAssinaturasModel assinatura) {
     final status = assinatura.statusAssinaturaDigital.toUpperCase();
     const assinado = ['FINALIZADO', 'ASSINADO_CLIENTE', 'ACEITO', 'ENVIADO', 'COMP'];
     return assinado.contains(status) ? "Assinado" : "Aguardando Assinatura";
@@ -61,7 +61,7 @@ class AssinaturaProvider extends ChangeNotifier {
     return status == "Assinado" ? AppColors.verde : AppColors.azulPrimarioSRM;
   }
 
-  void separaAssinaturas(List<AssinaturasModel> assinaturas) {
+  void separaAssinaturas(List<MonitorAssinaturasModel> assinaturas) {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     for (var assinatura in assinaturas) {
       bool naoAssinadoPeloUsuario = assinatura.assinantes.any((assinante) =>
@@ -91,6 +91,8 @@ class AssinaturaProvider extends ChangeNotifier {
   void limparAssinaturas() {
     todasAssinaturas = [];
     assinaturasPendentes = [];
+    assinaturaSelecionada = null;
+    assinaturas = [];
     notifyListeners();
   }
 }

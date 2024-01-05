@@ -3,13 +3,14 @@ part of '../selecionar_certificado.dart';
 class PopUpDeletarCertificado {
 
   BuildContext context;
-  ImportarCertificadoProvider certificadoProvider;
-  int index;
-
-  PopUpDeletarCertificado(
-      {required this.context, required this.certificadoProvider, required this.index});
+  PKCertificate certificado;
+  String? title;
+  String? label;
+  PopUpDeletarCertificado({required this.context, required this.certificado, this.label, this.title});
 
   Widget get popUp {
+    final ImportarCertificadoProvider certificadoProvider =
+        Modular.get<ImportarCertificadoProvider>();
     return AlertDialog(
       title: Column(
         children: [
@@ -21,7 +22,7 @@ class PopUpDeletarCertificado {
             ),
           ),
           Text(
-            'Você tem certeza que deseja excluir o certifcado?',
+            label ?? 'Você tem certeza que deseja excluir o certifcado?',
             style: context.textTheme.bodySmall,
           ),
           Padding(
@@ -30,14 +31,15 @@ class PopUpDeletarCertificado {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Expanded(
-                    child: BotaoPadrao(
-                      onPressed: () {
-                        certificadoProvider.deletarCertificado(
-                            certificadoProvider
-                                .listaCertificados[index].thumbprint);
-                        Modular.to.pop();
-                      },
-                      label: "Confirmar",),
+                  child: BotaoPadrao(
+                    onPressed: () {
+                      certificadoProvider.deletarCertificado(certificado.thumbprint);
+                      Fluttertoast.showToast(
+                          msg: 'Certificado removido com sucesso');
+                      Modular.to.pop();
+                    },
+                    label: "Confirmar",
+                  ),
                 ),
               ],
             ),

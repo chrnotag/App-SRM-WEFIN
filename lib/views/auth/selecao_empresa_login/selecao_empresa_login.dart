@@ -7,7 +7,7 @@ import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/providers/theme_provider.dart';
 import 'package:modular_study/generated/assets.dart';
 
-import '../../../core/providers/auth_provider_config/auth_providers.dart';
+import '../../../core/providers/auth_provider_config/logar/auth_providers.dart';
 import '../../../core/providers/sessao_provider.dart';
 
 class SelecaoEmpresaLogin extends StatefulWidget {
@@ -24,7 +24,7 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
       final sessionProvider = Modular.get<SessionProvider>();
       sessionProvider.stopListening();
       final AuthProvider authProvider = Modular.get<AuthProvider>();
-      authProvider.clearDataUser();
+      authProvider.limparDadosUsuario();
     });
     super.initState();
   }

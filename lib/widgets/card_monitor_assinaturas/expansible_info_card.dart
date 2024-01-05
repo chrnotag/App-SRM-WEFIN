@@ -213,17 +213,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
               width: MediaQuery.of(context).size.width * 0.7,
               child: BotaoPadrao(
                   onPressed: () async {
-                    certificadoProvider.listaCertificados =
-                        await certificadoProvider.listaCertificadosFuture();
-                    if (certificadoProvider.listaCertificados.isEmpty) {
-                      Modular.to.pushNamed(AppRoutes.importarCertificadoRoute);
-                    } else {
-                      showDialog(
-                        context: context,
-                        builder: (context) => SelecionarCertificado(),
-                        useSafeArea: true,
-                      );
-                    }
+
                   },
                   label: "Assinar Operação")),
         )
