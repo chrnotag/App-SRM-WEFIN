@@ -2,18 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
-import 'package:modular_study/core/providers/auth_provider_config/deslogar/deslogar_impl.dart';
 import 'package:modular_study/core/providers/auth_provider_config/deslogar/deslogar_controller.dart';
 import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:modular_study/generated/assets.dart';
 import 'package:modular_study/widgets/appbar_logo_perfil.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
-
-import '../../../core/constants/enuns/theme_enum.dart';
-import '../../../core/providers/theme_provider.dart';
 
 part 'widgets/menu_item.dart';
 
@@ -29,13 +26,13 @@ class Menu extends StatelessWidget {
       appBar: PreferredSize(
           preferredSize: AppBar().preferredSize, child: const AppBarLogo()),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
         child: Column(
           children: [
             Text('Meu Perfil',
                 style: context.textTheme.bodyMedium!.copyWith(color: context.onSecondary)),
             Padding(
-              padding: const EdgeInsets.only(bottom: 15.0),
+              padding: EdgeInsets.only(bottom: 15.h),
               child: Text('Visualize seus dados e tire suas dúvidas',
                   style: context.textTheme.bodySmall!.copyWith(
                     color: context.onSecondary,
@@ -44,7 +41,7 @@ class Menu extends StatelessWidget {
             Expanded(
               child: Card(
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)),
+                    borderRadius: BorderRadius.circular(8.r)),
                 child: Column(
                   children: [
                     Flexible(
@@ -52,10 +49,10 @@ class Menu extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(30.0),
+                            padding: EdgeInsets.all(30.r),
                             child: SvgPicture.asset(
                               Assets.empresaIcon,
-                              width: 70,
+                              width: 70.w,
                               color: context.primaryColor,
                             ),
                           ),
@@ -64,7 +61,7 @@ class Menu extends StatelessWidget {
                                 'Empresa não selecionada',
                             style: context.textTheme.bodyLarge!.copyWith(
                               fontWeight: FontWeight.w600,
-                              letterSpacing: 1.5,
+                              letterSpacing: 1.5.sp,
                             ),
                             textAlign: TextAlign.center,
                           ),
@@ -88,7 +85,7 @@ class Menu extends StatelessWidget {
                                 .popUp,
                           );
                         }),
-                    SizedBox(height: 6)
+                    SizedBox(height: 6.h)
                   ],
                 ),
               ),

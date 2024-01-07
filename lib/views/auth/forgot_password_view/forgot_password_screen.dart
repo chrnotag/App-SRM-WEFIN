@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/providers/sessao_provider.dart';
-import 'package:modular_study/core/providers/theme_provider.dart';
 import 'package:modular_study/widgets/form_auth.dart';
 import 'package:modular_study/widgets/transparent_appbar_empty.dart';
 
@@ -34,7 +34,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         body: SingleChildScrollView(
       child: ConstrainedBox(
         constraints: BoxConstraints(
-          maxHeight: MediaQuery.of(context).size.height,
+          maxHeight: context.height,
         ),
         child: Container(
           decoration: const BoxDecoration(
@@ -52,7 +52,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
+                          padding: EdgeInsets.only(bottom: 10.w),
                           child: SizedBox(
                             height: 120.h,
                             width: 100.w,
@@ -72,8 +72,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             color: context.onSecondary),
                           ),
                         ),
-                        const SizedBox(
-                          height: 15,
+                        SizedBox(
+                          height: 15.h,
                         ),
                         SizedBox(
                           width: 220.w,

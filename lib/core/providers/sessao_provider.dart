@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
@@ -25,7 +23,6 @@ class SessionProvider with ChangeNotifier {
     }
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       _timeout -= 1;
-      log('TEMPO RESTANTE: $_timeout\\seg');
       if (_timeout == 0) {
         timer.cancel();
         mostrarAlerta(null);

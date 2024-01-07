@@ -1,4 +1,3 @@
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:modular_study/models/fluxo_assinatura_model/finalizar_assinatura/finalizar_assinatura.dart';
 import 'package:http/http.dart' as http;

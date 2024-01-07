@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import '../../core/constants/themes/theme_configs.dart';
 
@@ -25,11 +26,11 @@ class BotaoPadrao extends StatelessWidget {
             onPressed: onPressed,
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4),
+                borderRadius: BorderRadius.circular(4.r),
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(AppSizes.paddingMedium),
+              padding: EdgeInsets.all(AppSizes.paddingMedium.r),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -37,7 +38,7 @@ class BotaoPadrao extends StatelessWidget {
                     visible: icon != null,
                     child: Icon(
                       icon,
-                      size: 40,
+                      size: 40.r,
                     ),
                   ),
                   Text(label,
@@ -53,8 +54,8 @@ class BotaoPadrao extends StatelessWidget {
               backgroundColor: context.onPrimaryColor,
               shadowColor: Colors.black,
               shape: RoundedRectangleBorder(
-                side: BorderSide(color: context.primaryColor, width: 2),
-                borderRadius: BorderRadius.circular(4),
+                side: BorderSide(color: context.primaryColor, width: 2.w),
+                borderRadius: BorderRadius.circular(4.r),
               ),
             ),
             child: Padding(
@@ -67,7 +68,7 @@ class BotaoPadrao extends StatelessWidget {
                     child: Icon(
                       icon,
                       color: context.primaryColor,
-                      size: 40,
+                      size: 40.r,
                     ),
                   ),
                   Text(label,

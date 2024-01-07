@@ -6,7 +6,6 @@ import 'theme_configs.dart';
 
 class ThemeSRM {
   ThemeSRM._();
-
   static final ThemeSRM _instance = ThemeSRM._();
 
   factory ThemeSRM() {
@@ -62,7 +61,6 @@ class ThemeSRM {
               color: AppColors.azul),
           labelLarge: GoogleFonts.montserrat(
               fontSize: AppSizes.fontSizeLarge,
-              fontWeight: FontWeight.bold,
               color: AppColors.azul),
           bodyLarge: GoogleFonts.montserrat(
               fontSize: AppSizes.fontSizeLarge, color: AppColors.azul),

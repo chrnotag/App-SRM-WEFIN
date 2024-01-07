@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:modular_study/core/providers/auth_provider_config/recuperar_senha/recuperar_senha_impl.dart';
 import 'package:modular_study/models/recuperar_senha_model/recuperar_senha_model.dart';
 

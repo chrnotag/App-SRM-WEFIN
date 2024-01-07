@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:http/http.dart' as http;
 import 'package:modular_study/core/constants/endpoints.dart';
@@ -29,11 +27,9 @@ class LoginImpl {
       'plataforma': themeProvider.temaSelecionado.name
     };
     final body = json.encode(userModel.toJson());
-    log('Body: $body, Header: $headers');
     try {
       final response =
           await http.post(Uri.parse(url), headers: headers, body: body);
-      log('mensagem retornada: ${response.body}');
       if (response.statusCode == 200) {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = LoginResponse.fromJson(responseBody);
@@ -44,11 +40,9 @@ class LoginImpl {
       } else {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = ExceptionModel.fromJson(responseBody);
-        log('Erro ao realizar login: $responseBody');
         return ErrorResponse(data);
       }
     } catch (e) {
-      log('Erro ao realizar login');
       final data = ExceptionModel(
           codigo: '500',
           dataHora: DateTime.now(),
