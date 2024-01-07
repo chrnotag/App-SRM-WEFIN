@@ -1,19 +1,13 @@
-import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
-
+import 'dart:convert';
 import 'package:crosspki/crosspki.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/views/home/assinaturas/selecionar_certificado.dart';
-
-import '../../constants/themes/theme_configs.dart';
 
 class ImportarCertificadoProvider extends ChangeNotifier {
   Uint8List _pkcs12 = Uint8List(0);

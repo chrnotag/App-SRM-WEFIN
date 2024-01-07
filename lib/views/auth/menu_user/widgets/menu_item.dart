@@ -20,11 +20,11 @@ class _MenuItemState extends State<_MenuItem> {
         children: [
           const Divider(),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 6.0),
+            padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 6.h),
             child: Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(right:5.0),
+                  padding: EdgeInsets.only(right:5.w),
                   child: Icon(widget.icon,color: context.primaryColor),
                 ),
                 Text(widget.title,style:context.textTheme.bodyMedium),

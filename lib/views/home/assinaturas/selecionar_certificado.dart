@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'dart:math';
-import 'dart:developer' as logg;
 import 'package:crosspki/crosspki.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -155,7 +153,6 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                     onPressed:
                         certificadoProvider.certificadoSelecionado != null
                             ? () async {
-                                logg.log("base64 do certificado: ${certificadoProvider.converterCertificadoBase64()}");
                                IniciarAssinaturaModel data = IniciarAssinaturaModel(certificado: certificadoProvider.converterCertificadoBase64(), codigoOperacao: assinaturaProvider.assinaturaSelecionada!.codigoOperacao);
                                 await IniciarAssinaturaImpl(iniciarAssinaturaModel: data).obterHashParaAssinar();
                               }

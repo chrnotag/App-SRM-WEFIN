@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/enuns/theme_enum.dart';
+import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:modular_study/core/providers/sessao_provider.dart';
@@ -52,12 +52,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       Image.asset(
                         themeProvider.logoTema,
                         width: isKeyboardVisible
-                            ? 80
-                            : MediaQuery.of(context).size.width * 0.4,
+                            ? 80.w
+                            : 190.w,
                         fit: BoxFit.fill,
                       ),
-                      const SizedBox(
-                        height: 8,
+                      SizedBox(
+                        height: 8.h,
                       ),
                       AnimatedOpacity(
                         duration: const Duration(milliseconds: 300),
@@ -73,13 +73,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ],
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15.w),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        SizedBox(height: 15), // Espaço após a AppBar
-                        AuthForm(),
+                        SizedBox(height: 15.h), // Espaço após a AppBar
+                        const AuthForm(),
                       ],
                     ),
                   )

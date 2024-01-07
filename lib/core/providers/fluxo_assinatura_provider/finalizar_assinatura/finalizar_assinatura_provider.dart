@@ -1,9 +1,7 @@
 import 'dart:typed_data';
-
 import 'package:crosspki/crosspki.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
 import '../../../../models/fluxo_assinatura_model/iniciar_assinatura/resposta_iniciar_assinatura.dart';
 import '../../certificado_provider/importar_certificadode.dart';
 import '../iniciar_assinatura/iniciar_assinatura_provider.dart';

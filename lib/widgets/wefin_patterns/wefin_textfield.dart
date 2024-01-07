@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modular_study/core/constants/enuns/theme_enum.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/providers/theme_provider.dart';
@@ -52,10 +53,10 @@ class _WefinTextFormFieldState extends State<WefinTextFormField> {
         labelStyle:
             context.textTheme.bodyMedium!.copyWith(color: AppColors.labelText),
         border: UnderlineInputBorder(
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.circular(4.r),
         ),
         focusedBorder: UnderlineInputBorder(
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.circular(4.r),
           borderSide: BorderSide(color: context.primaryColor),
         ),
         suffixIcon: widget.obscureText

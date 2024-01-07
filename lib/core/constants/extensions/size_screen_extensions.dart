@@ -13,5 +13,5 @@ extension SizeScreenExtension on num {
 
   double get sh => ScreenUtil().screenHeight * this;
 
-  double get statusBar => ScreenUtil().statusBarHeight * this;
+  double get statusBarHeight => ScreenUtil().statusBarHeight * this;
 }

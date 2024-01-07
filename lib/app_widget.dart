@@ -5,12 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:line_icons/line_icon.dart';
-import 'package:modular_study/core/constants/enuns/theme_enum.dart';
 import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
-import 'package:modular_study/core/constants/themes/theme_srm.dart';
-import 'package:modular_study/core/constants/themes/theme_trust.dart';
 import 'package:modular_study/core/providers/internet_provider.dart';
 import 'package:modular_study/core/providers/sessao_provider.dart';
 import 'package:modular_study/core/providers/theme_provider.dart';
@@ -115,7 +111,6 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
       onPointerDown: (event) {
         if (!listaExessaoTimeOut.contains(Modular.to.path)) {
           sessionProvider.resetListening();
-          log('teste, ${Modular.to.path}');
         }
       },
       child: GestureDetector(
