@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/enuns/import_certificado_enum.dart';
+import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/providers/certificado_provider/importar_certificado_provider.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_textfield.dart';
 import 'package:validatorless/validatorless.dart';
 import '../core/constants/route_labels.dart';
-import '../core/constants/themes/theme_configs.dart';
 
 class DialogSenhaCertificado extends StatefulWidget {
   const DialogSenhaCertificado({Key? key}) : super(key: key);
@@ -28,7 +27,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
       icon: Icon(
         Icons.lock_outline_rounded,
         color: context.primaryColor,
-        size: 50,
+        size: 50.r,
       ),
       title: Form(
         key: formKey,
@@ -62,8 +61,8 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 8,
+            SizedBox(
+              height: 8.h,
             ),
             Row(
               children: [

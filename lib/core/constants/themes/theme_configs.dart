@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
 
 class AppColors {
   static const Color azul = Color(0xFF1E3870);
@@ -19,12 +20,12 @@ class AppSizes {
   static const double paddingLarge = 24;
   static const double paddingExtraLarge = 32;
 
-  static const double fontSizeVerySmall = 10;
-  static const double fontSizeSmall = 12;
-  static const double fontSizeRegular = 14;
-  static const double fontSizeMedium = 16;
-  static const double fontSizeLarge = 20;
-  static const double fontSizeExtraLarge = 32;
+  static final double fontSizeVerySmall = 10.sp;
+  static final double fontSizeSmall = 12.sp;
+  static final double fontSizeRegular = 14.sp;
+  static final double fontSizeMedium = 16.sp;
+  static final double fontSizeLarge = 20.sp;
+  static final double fontSizeExtraLarge = 32.sp;
 }
 
 class BorderRadiusBotaoEnvio {

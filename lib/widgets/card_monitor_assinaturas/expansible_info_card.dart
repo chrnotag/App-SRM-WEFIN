@@ -43,7 +43,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                     scrollDirection: Axis.horizontal,
                     floatingIndicator: false,
                     slideIndicator: CircularSlideIndicator(
-                        padding: EdgeInsets.only(bottom: 30),
+                        padding: EdgeInsets.only(bottom: 30.h),
                         indicatorBorderColor:
                             Colors.grey.shade500.withAlpha(50),
                         currentIndicatorColor: context.primaryColor,
@@ -67,87 +67,81 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ConstrainedBox(
-              constraints: BoxConstraints(
-                  minHeight: 100,
-                  maxHeight: 500,
-                  maxWidth: MediaQuery.of(context).size.width * 0.3),
-              child: IntrinsicHeight(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Papéis',
-                          style: context.textTheme.bodyMedium,
-                        ),
-                        ...info.papeis
-                            .map((papel) => Text(
-                                  papel.replaceAll(RegExp(r'[\[\],]'), ''),
-                                  style: context.textTheme.bodySmall,
-                                ))
-                            .toList(),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Procurador',
-                          style: context.textTheme.bodyMedium,
-                        ),
-                        Text(
-                          info.nomeProcurador ?? "",
-                          style: context.textTheme.bodySmall,
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Status',
-                          style: context.textTheme.bodyMedium,
-                        ),
-                        assinaturaProvider.traduzirStatusAssinatura(
-                            info.statusAssinatura, context)
-                      ],
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Assinante',
-                          style: context.textTheme.bodyMedium,
-                        ),
-                        Text(
-                          assinante.nomeAssinante
-                              .replaceAll(RegExp(r'[\[\],]'), ''),
-                          style: context.textTheme.bodySmall,
-                        )
-                      ],
-                    ),
-                  ],
-                ),
+            IntrinsicHeight(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Papéis',
+                        style: context.textTheme.bodyMedium,
+                      ),
+                      ...info.papeis
+                          .map((papel) => Text(
+                                papel.replaceAll(RegExp(r'[\[\],]'), ''),
+                                style: context.textTheme.bodySmall,
+                              ))
+                          .toList(),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 8.h,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Procurador',
+                        style: context.textTheme.bodyMedium,
+                      ),
+                      Text(
+                        info.nomeProcurador ?? "",
+                        style: context.textTheme.bodySmall,
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 8.h,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Status',
+                        style: context.textTheme.bodyMedium,
+                      ),
+                      assinaturaProvider.traduzirStatusAssinatura(
+                          info.statusAssinatura, context)
+                    ],
+                  ),
+                  SizedBox(
+                    height: 8.h,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Assinante',
+                        style: context.textTheme.bodyMedium,
+                      ),
+                      Text(
+                        assinante.nomeAssinante
+                            .replaceAll(RegExp(r'[\[\],]'), ''),
+                        style: context.textTheme.bodySmall,
+                      )
+                    ],
+                  ),
+                ],
               ),
             ),
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.3,
+              width: context.width * 0.3,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -168,7 +162,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    padding: EdgeInsets.symmetric(vertical: 8.h),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -210,7 +204,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
         Visibility(
           visible: widget.assinarDocumento,
           child: SizedBox(
-              width: MediaQuery.of(context).size.width * 0.7,
+              width: context.width * 0.7,
               child: BotaoPadrao(
                   onPressed: () async {
 

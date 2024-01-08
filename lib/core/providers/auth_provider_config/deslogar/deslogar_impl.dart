@@ -15,7 +15,7 @@ class DeslogarImpl {
     try {
       await http.delete(url, headers: headers);
     } catch (e) {
-      Fluttertoast.showToast(msg: "Erro: $e, por favor, tente novamente");
+      return;
     }
   }
 }

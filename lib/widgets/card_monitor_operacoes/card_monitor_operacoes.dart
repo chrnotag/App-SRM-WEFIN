@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/utils/money_format.dart';
 import 'package:modular_study/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
@@ -19,8 +20,8 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
   Widget build(BuildContext context) {
     final assinatura = widget.assinatura;
     return Card(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(5.r)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -35,7 +36,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.r),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -48,8 +49,8 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                       title: 'Operação',
                                       label:
                                           assinatura.codigoOperacao.toString()),
-                                  const SizedBox(
-                                    height: 10,
+                                  SizedBox(
+                                    height: 10.h,
                                   ),
                                   ComponentCardOperacoes(
                                       title: 'Status',
@@ -67,8 +68,8 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                       label: DateFormat("dd/MM/yyyy").format(
                                           DateTime.parse(
                                               assinatura.dataOperacao))),
-                                  const SizedBox(
-                                    height: 10,
+                                  SizedBox(
+                                    height: 10.h,
                                   ),
                                   ComponentCardOperacoes(
                                     title: 'Valor Bruto',
@@ -85,8 +86,8 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                   ComponentCardOperacoes(
                                       title: 'Produto',
                                       label: assinatura.siglaProduto),
-                                  const SizedBox(
-                                    height: 10,
+                                  SizedBox(
+                                    height: 10.h,
                                   ),
                                   ComponentCardOperacoes(
                                       title: 'Valor Liquido',
@@ -103,7 +104,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                 ),
                 Divider(),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -117,12 +118,12 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
             ),
           ),
           Container(
-            width: 30,
-            height: 180,
+            width: 30.w,
+            height: 180.h,
             decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
-                  topRight: Radius.circular(5),
-                  bottomRight: Radius.circular(5)),
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(5.r),
+                  bottomRight: Radius.circular(5.r)),
             ),
           ),
         ],

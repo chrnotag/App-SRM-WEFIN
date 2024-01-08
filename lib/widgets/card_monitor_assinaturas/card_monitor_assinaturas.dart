@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
+import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
+import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/certificado_provider/importar_certificado_provider.dart';
 import 'package:modular_study/core/utils/money_format.dart';
 import 'package:modular_study/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
-import 'package:modular_study/views/home/assinaturas/selecionar_certificado.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
 import '../component_card.dart';
 import 'expansible_card.dart';
@@ -39,8 +39,8 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas> {
     final Color corAssinatura =
         assinaturaProvider.definirCorStatusAssinatura(statusAssinatura);
     return Card(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(5.r)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,7 +55,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas> {
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.r),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -68,14 +68,14 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas> {
                                       title: 'Operação',
                                       label:
                                           assinatura.codigoOperacao.toString()),
-                                  const SizedBox(
-                                    height: 10,
+                                  SizedBox(
+                                    height: 10.h,
                                   ),
                                   ComponentCardOperacoes(
                                       title: 'Status',
                                       label: statusAssinatura,
                                       textStyle: context.textTheme.bodySmall!
-                                          .copyWith(color: corAssinatura, fontSize: 11)),
+                                          .copyWith(color: corAssinatura)),
                                 ],
                               ),
                               Column(
@@ -88,8 +88,8 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas> {
                                       label: DateFormat("dd/MM/yyyy").format(
                                           DateTime.parse(
                                               assinatura.dataOperacao))),
-                                  const SizedBox(
-                                    height: 10,
+                                  SizedBox(
+                                    height: 10.h,
                                   ),
                                   ComponentCardOperacoes(
                                     title: 'Valor Bruto',
@@ -106,8 +106,8 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas> {
                                   ComponentCardOperacoes(
                                       title: 'Produto',
                                       label: assinatura.siglaProduto),
-                                  const SizedBox(
-                                    height: 10,
+                                  SizedBox(
+                                    height: 10.h,
                                   ),
                                   ComponentCardOperacoes(
                                       title: 'Valor Liquido',
@@ -120,11 +120,11 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas> {
                         ),
                       ),
                       Container(
-                        width: 30,
+                        width: 30.w,
                         decoration: BoxDecoration(
                           color: corAssinatura,
-                          borderRadius: const BorderRadius.only(
-                            topRight: Radius.circular(5),
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(5.r),
                           ),
                         ),
                       ),

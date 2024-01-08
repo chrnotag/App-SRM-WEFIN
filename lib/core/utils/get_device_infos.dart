@@ -1,6 +1,4 @@
-import 'dart:developer';
 import 'dart:io';
-
 import 'package:device_info_plus/device_info_plus.dart';
 
 class DeviceUtils {
@@ -17,7 +15,7 @@ class DeviceUtils {
         device_id = iosInfo.identifierForVendor!;
       }
     } catch (e) {
-      print('Erro ao obter o Devide Id: $e');
+      //
     }
 
     return device_id;

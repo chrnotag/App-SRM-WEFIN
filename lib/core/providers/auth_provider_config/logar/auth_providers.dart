@@ -59,12 +59,15 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  CedenteModel buscarEmpresa(String identificadorCedente){
-    return dataUser!.listaCedente.firstWhere((cedente) => cedente.identificador == identificadorCedente);
+  CedenteModel buscarEmpresa(String identificadorCedente) {
+    return dataUser!.listaCedente
+        .firstWhere((cedente) => cedente.identificador == identificadorCedente);
   }
 
-  Future<void> RelogarTrocarCedente(String identificadorCedente, OverlayEntry overlayLoader) async {
-    final AssinaturaProvider assinaturaProvider = Modular.get<AssinaturaProvider>();
+  Future<void> RelogarTrocarCedente(
+      String identificadorCedente, OverlayEntry overlayLoader) async {
+    final AssinaturaProvider assinaturaProvider =
+        Modular.get<AssinaturaProvider>();
     if (empresaSelecionada!.identificador != identificadorCedente) {
       final credenciaisLogin = UserModel(
           usuario: credenciaisUsuario.usuario,
@@ -85,7 +88,7 @@ class AuthProvider extends ChangeNotifier {
         }
       }
     } else {
-        final respostaAssinatura = await assinaturaProvider.pegarAssinaturas();
+      final respostaAssinatura = await assinaturaProvider.pegarAssinaturas();
       if (respostaAssinatura.error != null) {
         _erroTrocaCedente(respostaAssinatura, overlayLoader);
       } else {
@@ -97,11 +100,9 @@ class AuthProvider extends ChangeNotifier {
   }
 
   void _erroTrocaCedente(dynamic response, OverlayEntry overlayLoader) {
-    final error = response.error as ExceptionModel;
-      overlayLoader.remove();
-    Fluttertoast.showToast(
-        msg: 'Erro: ${error.mensagem}, ${error.erros}, ${error.httpStatus}');
+    overlayLoader.remove();
     notifyListeners();
+    Fluttertoast.showToast(msg: 'Erro ao acessar o cedente. Tente novamente mais tarde.');
   }
 
   void limparDadosUsuario() {

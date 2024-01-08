@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
@@ -68,7 +69,7 @@ class _AuthFormState extends State<AuthForm> {
               (value) => _mensagemErro
             ]),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.h),
           WefinTextFormField(
             onTap: () => _mensagemErro = null,
             maxLength: widget.visible ? 10 : null,
@@ -85,7 +86,7 @@ class _AuthFormState extends State<AuthForm> {
               (value) => _mensagemErro
             ]),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.h),
           Visibility(
             visible: widget.visible,
             child: Row(
@@ -98,10 +99,10 @@ class _AuthFormState extends State<AuthForm> {
               ],
             ),
           ),
-          const SizedBox(height: 50),
+          SizedBox(height: 50.h),
           BotaoPadrao(
             label: widget.label,
-            fontSize: 14,
+            fontSize: 14.sp,
             onPressed: () async {
               if (widget.visible) {
                 await login();
@@ -172,7 +173,7 @@ class _AuthFormState extends State<AuthForm> {
     return AlertDialog(
       actionsAlignment: MainAxisAlignment.end,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8))),
+          borderRadius: BorderRadius.all(Radius.circular(8.r))),
       actions: [
         Row(
           children: [
@@ -190,7 +191,7 @@ class _AuthFormState extends State<AuthForm> {
       title: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.r),
             child: Text(
               "Dados enviados com sucesso",
               style: context.textTheme.bodyLarge!

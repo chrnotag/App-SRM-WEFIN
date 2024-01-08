@@ -1,15 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/widgets/appbar_logo_perfil.dart';
-import 'package:modular_study/widgets/transparent_appbar_empty.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../../core/constants/enuns/theme_enum.dart';
-import '../../../core/providers/theme_provider.dart';
 import '../../../generated/assets.dart';
 
 class Ajuda extends StatelessWidget {
@@ -28,11 +23,11 @@ class Ajuda extends StatelessWidget {
           children: [
             Image.asset(
               Assets.imagesIcAjuda,
-              width: 150,
+              width: 150.w,
               color: context.onSecondary,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              padding: EdgeInsets.symmetric(vertical: AppSizes.paddingMedium.h),
               child: Text(
                 'Precisa de ajuda?',
                 style: context.textTheme.bodyLarge!.copyWith(color: context.onSecondary),
@@ -45,7 +40,7 @@ class Ajuda extends StatelessWidget {
               softWrap: true,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              padding: EdgeInsets.symmetric(vertical: AppSizes.paddingMedium.h),
               child: Column(
                 children: [
                   RichText(
@@ -75,7 +70,7 @@ class Ajuda extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    padding: EdgeInsets.symmetric(vertical: AppSizes.paddingSmall.h),
                     child: RichText(
                       text: TextSpan(
                         children: [
