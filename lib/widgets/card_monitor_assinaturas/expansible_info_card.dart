@@ -208,7 +208,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
               child: BotaoPadrao(
                   onPressed: () async {
                     IniciarAssinaturaProvider iniciarAssinatura = Modular.get<IniciarAssinaturaProvider>();
-                    iniciarAssinatura.IniciarAssinaturaCertificado(info);
+                    iniciarAssinatura.IniciarAssinatura(info);
                   },
                   label: "Assinar Operação")),
         )

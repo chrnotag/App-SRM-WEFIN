@@ -3,6 +3,7 @@ import 'package:crosspki/crosspki.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
@@ -39,8 +40,8 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
         context.watch<ImportarCertificadoProvider>();
     final AssinaturaProvider assinaturaProvider =
         context.watch<AssinaturaProvider>();
-    final double itemHeight = 50;
-    final double maxHeight = 200;
+    final double itemHeight = 50.h;
+    final double maxHeight = 200.h;
     return AlertDialog(
       title: Column(
         children: [
@@ -48,11 +49,11 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
               'Assinar Operação ${assinaturaProvider.assinaturaSelecionada!.codigoOperacao}',
               style: context.textTheme.bodyMedium!.copyWith(
                 fontWeight: FontWeight.w300,
-                fontSize: 15,
+                fontSize: 15.sp,
                 letterSpacing: 1.5,
               )),
           Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: EdgeInsets.all(12.r),
             child: Text('Escolha um certificado para assinar a operação:',
                 style: context.textTheme.labelSmall!
                     .copyWith(color: AppColors.labelText)),
@@ -82,7 +83,7 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                                       certificadoProvider
                                           .certificadoSelecionado ?? null,
                                       context),
-                              height: 40,
+                              height: 40.h,
                               child: InkWell(
                                 onTap: () {
                                   certificadoProvider
@@ -96,8 +97,8 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 8.w),
                                       child: SizedBox(
                                         width:
                                             MediaQuery.of(context).size.width *
@@ -124,9 +125,9 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                                                                   index])
                                                       .popUp);
                                         },
-                                        child: const Icon(
+                                        child: Icon(
                                           Icons.close,
-                                          size: 20,
+                                          size: 20.r,
                                         ))
                                   ],
                                 ),
@@ -145,7 +146,7 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
             },
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12.0),
+            padding: EdgeInsets.symmetric(vertical: 12.h),
             child: Row(
               children: [
                 Expanded(
@@ -153,8 +154,7 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                     onPressed:
                         certificadoProvider.certificadoSelecionado != null
                             ? () async {
-                               IniciarAssinaturaModel data = IniciarAssinaturaModel(certificado: certificadoProvider.converterCertificadoBase64(), codigoOperacao: assinaturaProvider.assinaturaSelecionada!.codigoOperacao);
-                                await IniciarAssinaturaImpl(iniciarAssinaturaModel: data).obterHashParaAssinar();
+
                               }
                             : null,
                     label: "Assinar Documento",
@@ -164,7 +164,7 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
+            padding: EdgeInsets.only(bottom: 8.h),
             child: Text(
               'Ou',
               style: context.textTheme.bodySmall!

@@ -19,7 +19,7 @@ class IniciarAssinaturaProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void IniciarAssinaturaCertificado(InformacaoAssinante assinante) async {
+  void IniciarAssinatura(InformacaoAssinante assinante) async {
     if (assinante.eCPFAssinador) {
       AssinaturaEletronicaProvider assinaturaEletronicaProvider =
           Modular.get<AssinaturaEletronicaProvider>();
