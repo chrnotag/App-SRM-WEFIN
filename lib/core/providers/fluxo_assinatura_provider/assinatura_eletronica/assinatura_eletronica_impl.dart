@@ -1,7 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/providers/auth_provider_config/deslogar/verificar_sessao.dart';
 import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
-import 'package:modular_study/core/providers/fluxo_assinatura_provider/assinatura_eletronica/assinatura_eletronica_provider.dart';
 import 'package:modular_study/models/fluxo_assinatura_model/assinatura_eletronica/assinatura_eletronica_model.dart';
 import '../../../implementations_config/export_impl.dart';
 import 'package:http/http.dart' as http;
@@ -13,8 +12,6 @@ class AssinaturaEletronicaImpl {
 
   Future<ApiResponse<dynamic>> finalizarAssinatura() async {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
-    final AssinaturaEletronicaProvider assinaturaEletronica =
-        Modular.get<AssinaturaEletronicaProvider>();
     final headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -26,8 +23,6 @@ class AssinaturaEletronicaImpl {
       final response = await http.post(url, headers: headers, body: body);
       switch (response.statusCode) {
         case 204:
-        assinaturaEletronica.statusCodeAssinaturaEletronica =
-            response.statusCode;
         return SucessResponse(null);
         case 401:
           VerificarSessao.sessaoExpirada();

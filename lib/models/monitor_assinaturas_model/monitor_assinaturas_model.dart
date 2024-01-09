@@ -57,7 +57,7 @@ class InformacaoAssinante {
   String tipoAssinatura;
   String? dataAssinatura;
   String statusAssinatura;
-  bool? eCPFAssinador;
+  bool eCPFAssinador;
 
   InformacaoAssinante({
     required this.papeis,
@@ -66,7 +66,7 @@ class InformacaoAssinante {
     required this.tipoAssinatura,
     required this.dataAssinatura,
     required this.statusAssinatura,
-    this.eCPFAssinador,
+    required this.eCPFAssinador,
     this.nomeProcurador,
   });
 

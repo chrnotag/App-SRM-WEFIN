@@ -5,14 +5,14 @@ import 'package:intl/intl.dart';
 import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
 import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
+import 'package:modular_study/core/providers/fluxo_assinatura_provider/iniciar_assinatura/iniciar_assinatura_provider.dart';
 import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
-import 'package:modular_study/core/providers/certificado_provider/importar_certificadode.dart';
+import 'package:modular_study/core/providers/certificado_provider/importar_certificado_provider.dart';
 import 'package:modular_study/core/utils/money_format.dart';
 import 'package:modular_study/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
 import '../component_card.dart';
 import 'expansible_card.dart';
-
 part 'expansible_info_card.dart';
 
 class CardMonitorAssinaturas extends StatefulWidget {
