@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
+import 'package:modular_study/core/providers/fluxo_assinatura_provider/finalizar_assinatura/finalizar_assinatura_provider.dart';
 import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/certificado_provider/importar_certificado_provider.dart';
 import 'package:modular_study/core/providers/fluxo_assinatura_provider/iniciar_assinatura/iniciar_assinatura_impl.dart';
@@ -154,7 +155,8 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                     onPressed:
                         certificadoProvider.certificadoSelecionado != null
                             ? () async {
-
+                      FinalizarAssinaturaProvider finalizarAssinatura = Modular.get<FinalizarAssinaturaProvider>();
+                      finalizarAssinatura.finalizarAssinatura();
                               }
                             : null,
                     label: "Assinar Documento",
