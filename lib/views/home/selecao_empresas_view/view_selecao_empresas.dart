@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
-import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:modular_study/core/providers/sessao_provider.dart';
+import 'package:modular_study/core/utils/overlay.dart';
 import 'package:modular_study/models/auth_login_models/cedente_model.dart';
-import 'package:modular_study/models/user_model.dart';
 import 'package:modular_study/widgets/appbar_logo_perfil.dart';
 import 'package:modular_study/widgets/botao_selecao_empresa.dart';
 import 'package:modular_study/widgets/searchbar_person.dart';
-
-import '../../../models/exceptions_responses/exception_model.dart';
-import '../../../widgets/loader_widget.dart';
 
 class ListaSelecaoEmpresas extends StatefulWidget {
   const ListaSelecaoEmpresas({super.key});
@@ -146,13 +140,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
   @override
   Widget build(BuildContext context) {
     final AuthProvider authProviderAtt = context.watch<AuthProvider>();
-    final overlay = Overlay.of(context);
-    final overlayLoader = OverlayEntry(
-      builder: (context) => const Material(
-        color: Colors.transparent,
-        child: Loader(),
-      ),
-    );
+
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: AppBar().preferredSize, child: const AppBarLogo()),
@@ -205,9 +193,9 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                       child: InkWell(
                         onTap: () async {
                           setState(() {
-                            overlay.insert(overlayLoader);
+                            OverlayApp.iniciaOverlay(context);
                           });
-                          authProviderAtt.RelogarTrocarCedente(_searchResults![index].identificador, overlayLoader);
+                          authProviderAtt.RelogarTrocarCedente(_searchResults![index].identificador);
                         },
                         child: ListTile(
                           title: Text(_searchResults![index].nome),

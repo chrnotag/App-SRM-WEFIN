@@ -5,6 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/auth_provider_config/logar/login_implementation.dart';
+import 'package:modular_study/core/utils/overlay.dart';
 import 'package:modular_study/models/auth_login_models/cedente_model.dart';
 import 'package:modular_study/models/auth_login_models/usuario_logado_model.dart';
 import 'package:modular_study/models/user_model.dart';
@@ -65,7 +66,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future<void> RelogarTrocarCedente(
-      String identificadorCedente, OverlayEntry overlayLoader) async {
+      String identificadorCedente) async {
     final AssinaturaProvider assinaturaProvider =
         Modular.get<AssinaturaProvider>();
     if (empresaSelecionada!.identificador != identificadorCedente) {
@@ -77,30 +78,30 @@ class AuthProvider extends ChangeNotifier {
 
       final respostaLogin = await login(credenciaisLogin);
       if (respostaLogin != null && respostaLogin.error != null) {
-        _erroTrocaCedente(respostaLogin, overlayLoader);
+        _erroTrocaCedente(respostaLogin);
       } else {
         final respostaAssinatura = await assinaturaProvider.pegarAssinaturas();
         if (respostaAssinatura.error != null) {
-          _erroTrocaCedente(respostaAssinatura, overlayLoader);
+          _erroTrocaCedente(respostaAssinatura);
         } else {
-          overlayLoader.remove();
+          OverlayApp.terminaOverlay();
           Modular.to.pushNamed(AppRoutes.homeAppRoute);
         }
       }
     } else {
       final respostaAssinatura = await assinaturaProvider.pegarAssinaturas();
       if (respostaAssinatura.error != null) {
-        _erroTrocaCedente(respostaAssinatura, overlayLoader);
+        _erroTrocaCedente(respostaAssinatura);
       } else {
-        overlayLoader.remove();
+        OverlayApp.terminaOverlay();
         notifyListeners();
         Modular.to.pushNamed(AppRoutes.homeAppRoute);
       }
     }
   }
 
-  void _erroTrocaCedente(dynamic response, OverlayEntry overlayLoader) {
-    overlayLoader.remove();
+  void _erroTrocaCedente(dynamic response) {
+    OverlayApp.terminaOverlay();
     notifyListeners();
     Fluttertoast.showToast(msg: 'Erro ao acessar o cedente. Tente novamente mais tarde.');
   }

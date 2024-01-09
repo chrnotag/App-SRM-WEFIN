@@ -8,6 +8,7 @@ import 'package:modular_study/core/implementations_config/export_impl.dart';
 import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:modular_study/core/providers/auth_provider_config/recuperar_senha/recuperar_senha_provider.dart';
 import 'package:modular_study/core/utils/get_device_infos.dart';
+import 'package:modular_study/core/utils/overlay.dart';
 import 'package:modular_study/models/recuperar_senha_model/recuperar_senha_model.dart';
 import 'package:modular_study/models/user_model.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
@@ -41,17 +42,8 @@ class _AuthFormState extends State<AuthForm> {
     super.dispose();
   }
 
-  OverlayState? overlay;
-  final overlayLoader = OverlayEntry(
-    builder: (context) => const Material(
-      color: Colors.transparent,
-      child: Loader(),
-    ),
-  );
-
   @override
   Widget build(BuildContext context) {
-    overlay = Overlay.of(context);
     return Form(
       key: _formKey,
       child: Column(
@@ -121,14 +113,14 @@ class _AuthFormState extends State<AuthForm> {
     _mensagemErro = null;
     if (_formKey.currentState!.validate()) {
       setState(() {
-        overlay!.insert(overlayLoader);
+        OverlayApp.iniciaOverlay(context);
       });
       final userModel = UserModel(
           usuario: _loginEC.text,
           senha: _passwordEC.text,
           idDevice: await DeviceUtils().getDeviceID());
       final response = await authProvider.login(userModel);
-      overlayLoader.remove();
+      OverlayApp.terminaOverlay();
       if (response != null && response.error != null) {
         final error = response.error as ExceptionModel;
         setState(() {
@@ -150,12 +142,12 @@ class _AuthFormState extends State<AuthForm> {
     _mensagemErro = null;
     if (_formKey.currentState!.validate()) {
       setState(() {
-        overlay!.insert(overlayLoader);
+        OverlayApp.iniciaOverlay(context);
       });
       recuperarSenhaProvider.dadosUsuario = RecuperarSenhaModel(
           identificadorCedente: _passwordEC.text, usuario: _loginEC.text);
       final response = await recuperarSenhaProvider.recuperarSenha();
-      overlayLoader.remove();
+      OverlayApp.terminaOverlay();
       if (response != null && response.error != null) {
         setState(() {
           _mensagemErro = "Por favor, verifique os dados informados.";
