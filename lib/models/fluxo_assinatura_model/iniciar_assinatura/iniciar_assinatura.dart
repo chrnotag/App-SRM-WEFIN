@@ -3,8 +3,8 @@ part 'iniciar_assinatura.g.dart';
 @JsonSerializable()
 class IniciarAssinaturaModel {
   int codigoOperacao;
-  String certificado;
-  IniciarAssinaturaModel({required this.certificado, required this.codigoOperacao});
+  String certificadoBase64;
+  IniciarAssinaturaModel({required this.certificadoBase64, required this.codigoOperacao});
 
   factory IniciarAssinaturaModel.fromJson(Map<String, dynamic> json) => _$IniciarAssinaturaModelFromJson(json);
 

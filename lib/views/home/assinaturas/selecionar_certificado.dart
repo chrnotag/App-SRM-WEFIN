@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:developer' as log;
 import 'package:crosspki/crosspki.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -9,13 +10,10 @@ import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/providers/fluxo_assinatura_provider/finalizar_assinatura/finalizar_assinatura_provider.dart';
 import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/certificado_provider/importar_certificado_provider.dart';
-import 'package:modular_study/core/providers/fluxo_assinatura_provider/iniciar_assinatura/iniciar_assinatura_impl.dart';
-import 'package:modular_study/models/fluxo_assinatura_model/iniciar_assinatura/iniciar_assinatura.dart';
+import 'package:modular_study/core/utils/overlay.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
 
 import '../../../../core/constants/themes/theme_configs.dart';
-import '../../../core/constants/enuns/theme_enum.dart';
-import '../../../core/providers/theme_provider.dart';
 
 part 'widgets/popup_deletar_certificado.dart';
 
@@ -60,7 +58,7 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                     .copyWith(color: AppColors.labelText)),
           ),
           FutureBuilder<List<PKCertificate>>(
-            future: certificadoProvider.listaCertificadosFuture(),
+            future: CrossPki.listCertificatesWithKey(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasData) {
@@ -81,9 +79,7 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                             child: Container(
                               color: certificadoProvider
                                   .alterarCorItemListaCertificado(
-                                      certificadoProvider
-                                          .certificadoSelecionado ?? null,
-                                      context),
+                                      index, context),
                               height: 40.h,
                               child: InkWell(
                                 onTap: () {
@@ -92,19 +88,25 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                                           certificadoProvider
                                               .listaCertificados[index],
                                           context);
+                                  log.log(
+                                      "certificado selecionado: ${certificadoProvider.certificadoSelecionado!.subjectDisplayName}");
                                 },
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 8.w),
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 8.w),
                                       child: SizedBox(
                                         width:
                                             MediaQuery.of(context).size.width *
                                                 0.6,
-                                        child: Text(certificadoProvider.listaCertificados[index].subjectDisplayName ?? "Certificado Sem Nome",
+                                        child: Text(
+                                          certificadoProvider
+                                                  .listaCertificados[index]
+                                                  .subjectDisplayName ??
+                                              "Certificado Sem Nome",
                                           style: context.textTheme.bodySmall!
                                               .copyWith(color: Colors.white),
                                           overflow: TextOverflow.ellipsis,
@@ -152,13 +154,16 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
               children: [
                 Expanded(
                   child: BotaoPadrao(
-                    onPressed:
-                        certificadoProvider.certificadoSelecionado != null
-                            ? () async {
-                      FinalizarAssinaturaProvider finalizarAssinatura = Modular.get<FinalizarAssinaturaProvider>();
-                      finalizarAssinatura.finalizarAssinatura();
-                              }
-                            : null,
+                    onPressed: certificadoProvider.certificadoSelecionado !=
+                            null
+                        ? () async {
+                            Modular.to.pop();
+                            FinalizarAssinaturaProvider finalizarAssinatura =
+                                Modular.get<FinalizarAssinaturaProvider>();
+                            finalizarAssinatura.finalizarAssinatura();
+                            OverlayApp.iniciaOverlay(context);
+                          }
+                        : null,
                     label: "Assinar Documento",
                   ),
                 )

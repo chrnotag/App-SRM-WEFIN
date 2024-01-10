@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
@@ -77,7 +79,8 @@ class AssinaturaProvider extends ChangeNotifier {
   }
 
   Widget traduzirStatusAssinatura(String status, BuildContext context) {
-    return status == "INIC"
+    log("status assinatura: $status");
+    return status.trim() == "Aguardando Assinatura"
         ? Text(
       "Aguardando Assinatura",
       style: context.textTheme.bodySmall!

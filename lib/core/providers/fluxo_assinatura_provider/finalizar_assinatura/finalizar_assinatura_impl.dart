@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
+import 'package:modular_study/core/providers/theme_provider.dart';
 import 'package:modular_study/models/fluxo_assinatura_model/finalizar_assinatura/finalizar_assinatura.dart';
 import 'package:http/http.dart' as http;
 import '../../../implementations_config/export_impl.dart';
@@ -12,14 +14,18 @@ class FinalizarAssinaturaImpl {
   Future<ApiResponse<dynamic>> finalizarAssinatura() async {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     final url = Uri.parse(EndPoints.finalizarAssinatura);
+    ThemeProvider themeProvider = Modular.get<ThemeProvider>();
     final headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': authProvider.dataUser!.token
+      'Authorization': authProvider.dataUser!.token,
+      'plataforma' : themeProvider.temaSelecionado.name,
     };
     final body = json.encode(assinaturaFinalizada);
+    log('body: $body, header: $headers');
     try {
       final response = await http.post(url, body: body, headers: headers);
+      log('finalzar assinatura code: ${response.statusCode}');
       switch (response.statusCode) {
         case 204:
           return SucessResponse(null);
