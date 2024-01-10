@@ -87,7 +87,7 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
                     idAssinaturaDigital: documento.idAssinaturaDigital,
                     codigoEmail: codigoEmail.text,
                     deslocamentoFusoHorarioUsuario:
-                        DateTime.now().timeZoneOffset.inHours.toString(),
+                        DateTime.now().timeZoneOffset.inMinutes.toString(),
                     evidencias: Evidencias(geolocalizacao: geolocalizacao!));
                 final result = await AssinaturaEletronicaImpl(
                         assinaturaEletronicaModel: model)
