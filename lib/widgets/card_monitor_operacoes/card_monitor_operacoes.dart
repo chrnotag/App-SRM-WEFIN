@@ -1,15 +1,23 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
+import 'package:modular_study/core/constants/route_labels.dart';
+import 'package:modular_study/core/providers/monitor_operacao_provider/monitor_operacoes_provider.dart';
 import 'package:modular_study/core/utils/money_format.dart';
-import 'package:modular_study/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
+import 'package:modular_study/models/monitor_operacoes_model/monitor_operacoes_model.dart';
+import '../../core/providers/monitor_assinatura_provider/assinatura_provider.dart';
+import '../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import '../component_card.dart';
 
 class CardMonitorOperacoes extends StatefulWidget {
-  final MonitorAssinaturasModel assinatura;
+  final MonitorOperacoesModel operacoes;
 
-  const CardMonitorOperacoes({super.key, required this.assinatura});
+  const CardMonitorOperacoes({super.key, required this.operacoes});
 
   @override
   State<CardMonitorOperacoes> createState() => _CardMonitorOperacoesState();
@@ -18,7 +26,7 @@ class CardMonitorOperacoes extends StatefulWidget {
 class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
   @override
   Widget build(BuildContext context) {
-    final assinatura = widget.assinatura;
+    final operacao = widget.operacoes;
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(5.r)),
@@ -48,13 +56,13 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                   ComponentCardOperacoes(
                                       title: 'Operação',
                                       label:
-                                          assinatura.codigoOperacao.toString()),
+                                          operacao.codigoOperacao.toString()),
                                   SizedBox(
                                     height: 10.h,
                                   ),
                                   ComponentCardOperacoes(
                                       title: 'Status',
-                                      label: assinatura.statusOperacao,
+                                      label: operacao.statusOperacao,
                                       textStyle: context.textTheme.bodySmall)
                                 ],
                               ),
@@ -67,14 +75,14 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                       title: 'Data',
                                       label: DateFormat("dd/MM/yyyy").format(
                                           DateTime.parse(
-                                              assinatura.dataOperacao))),
+                                              operacao.dataOperacao))),
                                   SizedBox(
                                     height: 10.h,
                                   ),
                                   ComponentCardOperacoes(
                                     title: 'Valor Bruto',
                                     label: FormatarDinheiro.BR(
-                                        assinatura.valorBruto),
+                                        operacao.valorBruto),
                                   ),
                                 ],
                               ),
@@ -85,14 +93,14 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                 children: [
                                   ComponentCardOperacoes(
                                       title: 'Produto',
-                                      label: assinatura.siglaProduto),
+                                      label: operacao.siglaProduto),
                                   SizedBox(
                                     height: 10.h,
                                   ),
                                   ComponentCardOperacoes(
                                       title: 'Valor Liquido',
                                       label: FormatarDinheiro.BR(
-                                          assinatura.valorLiquido)),
+                                          operacao.valorLiquido)),
                                 ],
                               ),
                             ],
@@ -102,16 +110,47 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                     ],
                   ),
                 ),
-                Divider(),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.w),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Ver Assinaturas'),
-                      ElevatedButton(
-                          onPressed: () {}, child: Text('Assinaturas'))
-                    ],
+                Visibility(
+                  visible: isVisivel(operacao),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8.w),
+                    child: Column(
+                      children: [
+                        Divider(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Ver Assinaturas'),
+                            ElevatedButton(
+                                onPressed: () {
+                                  final MonitorOperacoesProvider operacaoProvider =
+                                      Modular.get<MonitorOperacoesProvider>();
+                                  final AssinaturaProvider assinaturaProvider =
+                                      Modular.get<AssinaturaProvider>();
+                                  List<MonitorAssinaturasModel>
+                                      assinaturasPendentes =
+                                      assinaturaProvider.assinaturasPendentes;
+                                  operacaoProvider.aconragemAssinatura(
+                                      assinaturaProvider.todasAssinaturas,
+                                      operacao.codigoOperacao);
+                                  Modular.to.pushNamed(
+                                      AppRoutes.assinaturaDigitalRoute,
+                                      arguments: {
+                                        'assinaturas':
+                                            assinaturaProvider.todasAssinaturas,
+                                        'assinaturasPendentes':
+                                            assinaturasPendentes,
+                                        'tab': 1,
+                                        'destacar': true,
+                                      });
+                                },
+                                child: Text('Assinaturas', style: context.textTheme.bodyMedium!.copyWith(
+                                  color: Colors.white
+                                ),))
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 )
               ],
@@ -129,5 +168,20 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
         ],
       ),
     );
+  }
+
+  bool isVisivel(MonitorOperacoesModel operacao) {
+    AssinaturaProvider assinaturaProvider = Modular.get<AssinaturaProvider>();
+    final mapaAssinaturas = assinaturaProvider.assinaturasMapeadas;
+    if (mapaAssinaturas.containsKey(operacao.codigoOperacao)) {
+      var assinatura = mapaAssinaturas[operacao.codigoOperacao];
+      if ((operacao.statusOperacao.trim() == 'Aguardando Assinatura' ||
+              operacao.statusOperacao.trim() == 'Assinada') &&
+          (assinatura?.statusAssinaturaDigital == 'Assinada' ||
+              assinatura?.statusAssinaturaDigital == 'Aguardando Assinatura')) {
+        return true;
+      }
+    }
+    return false;
   }
 }

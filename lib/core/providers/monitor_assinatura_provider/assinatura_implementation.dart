@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:http/http.dart' as http;
 import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';

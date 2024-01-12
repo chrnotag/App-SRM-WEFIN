@@ -8,6 +8,7 @@ import 'package:modular_study/core/providers/auth_provider_config/logar/auth_pro
 import 'package:modular_study/core/providers/certificado_provider/importar_certificado_provider.dart';
 import 'package:modular_study/core/providers/fluxo_assinatura_provider/iniciar_assinatura/iniciar_assinatura_provider.dart';
 import 'package:modular_study/core/providers/internet_provider.dart';
+import 'package:modular_study/core/providers/monitor_operacao_provider/monitor_operacoes_provider.dart';
 import 'package:modular_study/core/providers/sessao_provider.dart';
 import 'package:modular_study/core/providers/theme_provider.dart';
 import 'package:modular_study/modules/auth_module.dart';
@@ -27,6 +28,7 @@ class AppModule extends Module {
     i.addSingleton(RecuperarSenhaProvider.new);
     i.addSingleton(FinalizarAssinaturaProvider.new);
     i.addSingleton(AssinaturaEletronicaProvider.new);
+    i.addSingleton(MonitorOperacoesProvider.new);
   }
 
   @override
