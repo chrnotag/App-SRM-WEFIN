@@ -62,12 +62,9 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
       ImportarCertificadoProvider certificadoProvider) {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     bool filtroBotaoAssinar() {
-      if (assinante.informacoesAssinante.any((element) =>
-          authProvider.dataUser!.identificadorUsuario ==
-          element.identificadorAssinador)) {
-        return true;
-      }
-      return false;
+      return assinante.informacoesAssinante.any((element) =>
+      authProvider.dataUser!.identificadorUsuario ==
+          element.identificadorAssinador);
     }
 
     AssinaturaProvider assinaturaProvider = Modular.get<AssinaturaProvider>();

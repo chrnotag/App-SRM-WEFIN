@@ -24,7 +24,7 @@ class IniciarAssinaturaProvider extends ChangeNotifier {
   Future<dynamic> obterHashs(IniciarAssinaturaModel model) => IniciarAssinaturaImpl(iniciarAssinaturaModel: model).obterHashParaAssinar();
 
   void IniciarAssinatura(InformacaoAssinante assinante) async {
-    if (assinante.eCPFAssinador) {
+    if (!assinante.eCPFAssinador) {
       AssinaturaEletronicaProvider assinaturaEletronicaProvider =
           Modular.get<AssinaturaEletronicaProvider>();
       showDialog(
