@@ -102,10 +102,8 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
     final assinatura = widget.assinatura;
     final AssinaturaProvider assinaturaProvider =
         context.watch<AssinaturaProvider>();
-    final String statusAssinatura =
-        assinaturaProvider.traduzirStatusAssinaturas(assinatura);
     final Color corAssinatura =
-        assinaturaProvider.definirCorStatusAssinatura(statusAssinatura);
+        assinaturaProvider.definirCorStatusAssinatura(assinatura.statusAssinaturaDigital);
     return AnimatedContainer(
       duration: const Duration(seconds: 1),
       decoration: BoxDecoration(
@@ -149,7 +147,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                                     ),
                                     ComponentCardOperacoes(
                                         title: 'Status',
-                                        label: statusAssinatura,
+                                        label: assinatura.statusAssinaturaDigital,
                                         textStyle: context.textTheme.bodySmall!
                                             .copyWith(color: corAssinatura)),
                                   ],

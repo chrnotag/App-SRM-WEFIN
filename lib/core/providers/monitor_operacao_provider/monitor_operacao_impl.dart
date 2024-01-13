@@ -10,6 +10,7 @@ import 'package:modular_study/core/providers/theme_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:modular_study/models/monitor_operacoes_model/monitor_operacoes_model.dart';
 import '../../implementations_config/api_response.dart';
+import '../auth_provider_config/deslogar/verificar_sessao.dart';
 
 class MonitorOperacaoImpl {
   Future<ApiResponse<dynamic>> carregarOperacoes() async {
@@ -36,6 +37,7 @@ log('status code: ${response.statusCode}');
           operacoesProvider.operacoes = data;
           return SucessResponse(data);
         case 401:
+          VerificarSessao.sessaoExpirada();
           final responseBody = json.decode(response.body);
           final data = ExceptionModel.fromJson(responseBody);
           return ErrorResponse(data);
