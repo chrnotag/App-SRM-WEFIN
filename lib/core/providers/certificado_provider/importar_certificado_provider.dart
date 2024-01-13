@@ -10,6 +10,15 @@ import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/views/home/assinaturas/selecionar_certificado.dart';
 
 class ImportarCertificadoProvider extends ChangeNotifier {
+
+  ImportarCertificadoProvider._();
+
+  static final ImportarCertificadoProvider _instance = ImportarCertificadoProvider._();
+
+  factory ImportarCertificadoProvider(){
+    return _instance;
+  }
+
   Uint8List _pkcs12 = Uint8List(0);
 
   Uint8List get pkcs12 => _pkcs12;
@@ -41,10 +50,11 @@ class ImportarCertificadoProvider extends ChangeNotifier {
     _certificadoSelecionado = null;
   }
 
-  Color alterarCorItemListaCertificado(
-      PKCertificate? certificado, BuildContext context) {
+  Color alterarCorItemListaCertificado(int index, BuildContext context) {
+    PKCertificate certificado = listaCertificados[index];
+
     if (_certificadoSelecionado != null &&
-        _certificadoSelecionado?.thumbprint == certificado!.thumbprint) {
+        _certificadoSelecionado!.thumbprint == certificado.thumbprint) {
       return context.primaryColor;
     } else {
       return Colors.grey.shade400;

@@ -13,15 +13,15 @@ class AssinaturaImpl {
   Future<ApiResponse<dynamic>> assinaturas() async {
     final AssinaturaProvider assinaturaProvider =
         Modular.get<AssinaturaProvider>();
-    final AuthProvider authProvider = Modular.get<AuthProvider>();
     final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
+    final AuthProvider authProvider = Modular.get<AuthProvider>();
     final url = Uri.parse(EndPoints.assinatura);
     try {
       final response = await http.get(url, headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': authProvider.dataUser!.token,
-        'plataforma' : themeProvider.temaSelecionado.name,
+        'plataforma' : themeProvider.temaSelecionado.name
       });
       switch (response.statusCode) {
         case 200:

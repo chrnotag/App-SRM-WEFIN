@@ -1,19 +1,19 @@
 import 'dart:math';
+import 'dart:developer' as log;
 import 'package:crosspki/crosspki.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
+import 'package:modular_study/core/providers/fluxo_assinatura_provider/finalizar_assinatura/finalizar_assinatura_provider.dart';
 import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/certificado_provider/importar_certificado_provider.dart';
-import 'package:modular_study/core/providers/fluxo_assinatura_provider/iniciar_assinatura/iniciar_assinatura_impl.dart';
-import 'package:modular_study/models/fluxo_assinatura_model/iniciar_assinatura/iniciar_assinatura.dart';
+import 'package:modular_study/core/utils/overlay.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
 
 import '../../../../core/constants/themes/theme_configs.dart';
-import '../../../core/constants/enuns/theme_enum.dart';
-import '../../../core/providers/theme_provider.dart';
 
 part 'widgets/popup_deletar_certificado.dart';
 
@@ -39,8 +39,8 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
         context.watch<ImportarCertificadoProvider>();
     final AssinaturaProvider assinaturaProvider =
         context.watch<AssinaturaProvider>();
-    final double itemHeight = 50;
-    final double maxHeight = 200;
+    final double itemHeight = 50.h;
+    final double maxHeight = 200.h;
     return AlertDialog(
       title: Column(
         children: [
@@ -48,17 +48,17 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
               'Assinar Operação ${assinaturaProvider.assinaturaSelecionada!.codigoOperacao}',
               style: context.textTheme.bodyMedium!.copyWith(
                 fontWeight: FontWeight.w300,
-                fontSize: 15,
+                fontSize: 15.sp,
                 letterSpacing: 1.5,
               )),
           Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: EdgeInsets.all(12.r),
             child: Text('Escolha um certificado para assinar a operação:',
                 style: context.textTheme.labelSmall!
                     .copyWith(color: AppColors.labelText)),
           ),
           FutureBuilder<List<PKCertificate>>(
-            future: certificadoProvider.listaCertificadosFuture(),
+            future: CrossPki.listCertificatesWithKey(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasData) {
@@ -79,10 +79,8 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                             child: Container(
                               color: certificadoProvider
                                   .alterarCorItemListaCertificado(
-                                      certificadoProvider
-                                          .certificadoSelecionado ?? null,
-                                      context),
-                              height: 40,
+                                      index, context),
+                              height: 40.h,
                               child: InkWell(
                                 onTap: () {
                                   certificadoProvider
@@ -90,19 +88,25 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                                           certificadoProvider
                                               .listaCertificados[index],
                                           context);
+                                  log.log(
+                                      "certificado selecionado: ${certificadoProvider.certificadoSelecionado!.subjectDisplayName}");
                                 },
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0),
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 8.w),
                                       child: SizedBox(
                                         width:
                                             MediaQuery.of(context).size.width *
                                                 0.6,
-                                        child: Text(certificadoProvider.listaCertificados[index].subjectDisplayName ?? "Certificado Sem Nome",
+                                        child: Text(
+                                          certificadoProvider
+                                                  .listaCertificados[index]
+                                                  .subjectDisplayName ??
+                                              "Certificado Sem Nome",
                                           style: context.textTheme.bodySmall!
                                               .copyWith(color: Colors.white),
                                           overflow: TextOverflow.ellipsis,
@@ -124,9 +128,9 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                                                                   index])
                                                       .popUp);
                                         },
-                                        child: const Icon(
+                                        child: Icon(
                                           Icons.close,
-                                          size: 20,
+                                          size: 20.r,
                                         ))
                                   ],
                                 ),
@@ -145,18 +149,21 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
             },
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12.0),
+            padding: EdgeInsets.symmetric(vertical: 12.h),
             child: Row(
               children: [
                 Expanded(
                   child: BotaoPadrao(
-                    onPressed:
-                        certificadoProvider.certificadoSelecionado != null
-                            ? () async {
-                               IniciarAssinaturaModel data = IniciarAssinaturaModel(certificado: certificadoProvider.converterCertificadoBase64(), codigoOperacao: assinaturaProvider.assinaturaSelecionada!.codigoOperacao);
-                                await IniciarAssinaturaImpl(iniciarAssinaturaModel: data).obterHashParaAssinar();
-                              }
-                            : null,
+                    onPressed: certificadoProvider.certificadoSelecionado !=
+                            null
+                        ? () async {
+                            Modular.to.pop();
+                            FinalizarAssinaturaProvider finalizarAssinatura =
+                                Modular.get<FinalizarAssinaturaProvider>();
+                            finalizarAssinatura.finalizarAssinatura();
+                            OverlayApp.iniciaOverlay(context);
+                          }
+                        : null,
                     label: "Assinar Documento",
                   ),
                 )
@@ -164,7 +171,7 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
+            padding: EdgeInsets.only(bottom: 8.h),
             child: Text(
               'Ou',
               style: context.textTheme.bodySmall!

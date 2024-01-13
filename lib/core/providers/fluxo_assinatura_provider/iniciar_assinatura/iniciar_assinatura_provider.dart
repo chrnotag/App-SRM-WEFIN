@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/providers/fluxo_assinatura_provider/assinatura_eletronica/assinatura_eletronica_provider.dart';
+import 'package:modular_study/core/providers/fluxo_assinatura_provider/iniciar_assinatura/iniciar_assinatura_impl.dart';
+import 'package:modular_study/models/fluxo_assinatura_model/iniciar_assinatura/iniciar_assinatura.dart';
 import 'package:modular_study/models/fluxo_assinatura_model/iniciar_assinatura/resposta_iniciar_assinatura.dart';
 import 'package:modular_study/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import '../../../../main.dart';
@@ -19,7 +21,9 @@ class IniciarAssinaturaProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void IniciarAssinaturaCertificado(InformacaoAssinante assinante) async {
+  Future<dynamic> obterHashs(IniciarAssinaturaModel model) => IniciarAssinaturaImpl(iniciarAssinaturaModel: model).obterHashParaAssinar();
+
+  void IniciarAssinatura(InformacaoAssinante assinante) async {
     if (!assinante.eCPFAssinador) {
       AssinaturaEletronicaProvider assinaturaEletronicaProvider =
           Modular.get<AssinaturaEletronicaProvider>();

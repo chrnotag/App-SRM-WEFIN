@@ -9,15 +9,15 @@ part of 'resposta_iniciar_assinatura.dart';
 RespostaIniciarAssinaturaModel _$RespostaIniciarAssinaturaModelFromJson(
         Map<String, dynamic> json) =>
     RespostaIniciarAssinaturaModel(
-      hashParaAssinar: RespostaIniciarAssinaturaModel._dataFromBase64(
-          json['hashParaAssinar'] as String),
+      hashParaAssinar: json['hashParaAssinar'] as String,
       token: json['token'] as String,
+      chaveDocumento: json['chaveDocumento'] as String,
     );
 
 Map<String, dynamic> _$RespostaIniciarAssinaturaModelToJson(
         RespostaIniciarAssinaturaModel instance) =>
     <String, dynamic>{
-      'hashParaAssinar': RespostaIniciarAssinaturaModel._dataToBase64(
-          instance.hashParaAssinar),
+      'hashParaAssinar': instance.hashParaAssinar,
       'token': instance.token,
+      'chaveDocumento': instance.chaveDocumento,
     };

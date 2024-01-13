@@ -6,20 +6,17 @@ part 'resposta_iniciar_assinatura.g.dart';
 
 @JsonSerializable()
 class RespostaIniciarAssinaturaModel {
-  @JsonKey(fromJson: _dataFromBase64, toJson: _dataToBase64)
-  Uint8List hashParaAssinar;
+  String hashParaAssinar;
   String token;
+  String chaveDocumento;
 
-  RespostaIniciarAssinaturaModel({required this.hashParaAssinar, required this.token});
+  RespostaIniciarAssinaturaModel(
+      {required this.hashParaAssinar,
+      required this.token,
+      required this.chaveDocumento});
 
   factory RespostaIniciarAssinaturaModel.fromJson(Map<String, dynamic> json) =>
       _$RespostaIniciarAssinaturaModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$RespostaIniciarAssinaturaModelToJson(this);
-
-  static Uint8List _dataFromBase64(String base64String) =>
-      base64Decode(base64String);
-
-  static String _dataToBase64(Uint8List data) =>
-      base64Encode(data);
 }

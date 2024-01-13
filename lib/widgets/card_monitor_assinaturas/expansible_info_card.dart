@@ -23,6 +23,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
   @override
   Widget build(BuildContext context) {
     final assinantes = widget.assinantes;
+
     final CarouselController carouselController = CarouselController();
     final ImportarCertificadoProvider certificadoProvider =
         Modular.get<ImportarCertificadoProvider>();
@@ -59,6 +60,13 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
       Assinante assinante,
       InformacaoAssinante info,
       ImportarCertificadoProvider certificadoProvider) {
+    final AuthProvider authProvider = Modular.get<AuthProvider>();
+    bool filtroBotaoAssinar() {
+      return assinante.informacoesAssinante.any((element) =>
+      authProvider.dataUser!.identificadorUsuario ==
+          element.identificadorAssinador);
+    }
+
     AssinaturaProvider assinaturaProvider = Modular.get<AssinaturaProvider>();
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -202,13 +210,14 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
           ],
         ),
         Visibility(
-          visible: widget.assinarDocumento,
+          visible: widget.assinarDocumento && filtroBotaoAssinar(),
           child: SizedBox(
               width: context.width * 0.7,
               child: BotaoPadrao(
                   onPressed: () async {
-                    IniciarAssinaturaProvider iniciarAssinatura = Modular.get<IniciarAssinaturaProvider>();
-                    iniciarAssinatura.IniciarAssinaturaCertificado(info);
+                    IniciarAssinaturaProvider iniciarAssinatura =
+                        Modular.get<IniciarAssinaturaProvider>();
+                    iniciarAssinatura.IniciarAssinatura(info);
                   },
                   label: "Assinar Operação")),
         )

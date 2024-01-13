@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
@@ -19,7 +21,17 @@ class AssinaturaProvider extends ChangeNotifier {
 
   set assinaturas(List<MonitorAssinaturasModel> assinaturasModel) {
     separaAssinaturas(assinaturasModel);
+    mapearAssinaturas = assinaturasModel;
     todasAssinaturas = assinaturasModel;
+    notifyListeners();
+  }
+
+  bool _isDestacado = false;
+
+  bool get isDestacado => _isDestacado;
+
+  set isDestacado(bool destacado) {
+    _isDestacado = destacado;
     notifyListeners();
   }
 
@@ -36,12 +48,15 @@ class AssinaturaProvider extends ChangeNotifier {
 
   List<MonitorAssinaturasModel> get todasAssinaturas => _assinaturas;
 
-  set todasAssinaturas(List<MonitorAssinaturasModel> assinaturas) =>
-      _assinaturas = assinaturas;
+  set todasAssinaturas(List<MonitorAssinaturasModel> assinaturas) {
+    _assinaturas = assinaturas;
+    notifyListeners();
+  }
 
   List<MonitorAssinaturasModel> _assinaturasPendentes = [];
 
-  List<MonitorAssinaturasModel> get assinaturasPendentes => _assinaturasPendentes;
+  List<MonitorAssinaturasModel> get assinaturasPendentes =>
+      _assinaturasPendentes;
 
   set assinaturasPendentes(List<MonitorAssinaturasModel> docs) {
     _assinaturasPendentes = docs;
@@ -49,12 +64,6 @@ class AssinaturaProvider extends ChangeNotifier {
 
   String notificacaoPendentes() {
     return assinaturasPendentes.length.toString();
-  }
-
-  String traduzirStatusAssinaturas(MonitorAssinaturasModel assinatura) {
-    final status = assinatura.statusAssinaturaDigital.toUpperCase();
-    const assinado = ['FINALIZADO', 'ASSINADO_CLIENTE', 'ACEITO', 'ENVIADO', 'COMP'];
-    return assinado.contains(status) ? "Assinado" : "Aguardando Assinatura";
   }
 
   Color definirCorStatusAssinatura(String status) {
@@ -66,8 +75,8 @@ class AssinaturaProvider extends ChangeNotifier {
     for (var assinatura in assinaturas) {
       bool naoAssinadoPeloUsuario = assinatura.assinantes.any((assinante) =>
           assinante.informacoesAssinante.any((info) =>
-          info.identificadorAssinador ==
-              authProvider.dataUser!.identificadorUsuario &&
+              info.identificadorAssinador ==
+                  authProvider.dataUser!.identificadorUsuario &&
               info.statusAssinatura != "Assinado"));
       if (naoAssinadoPeloUsuario) {
         _assinaturasPendentes.add(assinatura);
@@ -77,15 +86,27 @@ class AssinaturaProvider extends ChangeNotifier {
   }
 
   Widget traduzirStatusAssinatura(String status, BuildContext context) {
-    return status == "INIC"
+    log("status assinatura: $status");
+    return status.trim() == "Aguardando Assinatura"
         ? Text(
-      "Aguardando Assinatura",
-      style: context.textTheme.bodySmall!
-          .copyWith(color: AppColors.azulPrimarioSRM),
-    )
+            "Aguardando Assinatura",
+            style: context.textTheme.bodySmall!
+                .copyWith(color: AppColors.azulPrimarioSRM),
+          )
         : Text("Assinado",
-        style: context.textTheme.bodySmall!
-            .copyWith(color: AppColors.verde));
+            style:
+                context.textTheme.bodySmall!.copyWith(color: AppColors.verde));
+  }
+
+  Map<int, MonitorAssinaturasModel> _mapaAssinaturas = {};
+
+  Map<int, MonitorAssinaturasModel> get assinaturasMapeadas => _mapaAssinaturas;
+
+  set mapearAssinaturas(List<MonitorAssinaturasModel> assinaturas) {
+    for (var assinatura in assinaturas) {
+      _mapaAssinaturas[assinatura.codigoOperacao] = assinatura;
+    }
+    notifyListeners();
   }
 
   void limparAssinaturas() {
@@ -93,6 +114,6 @@ class AssinaturaProvider extends ChangeNotifier {
     assinaturasPendentes = [];
     assinaturaSelecionada = null;
     assinaturas = [];
-    notifyListeners();
+    _mapaAssinaturas = {};
   }
 }

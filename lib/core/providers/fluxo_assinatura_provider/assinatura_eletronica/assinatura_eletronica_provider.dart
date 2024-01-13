@@ -52,7 +52,7 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
       if (contador == documentos.length) {
         showDialog(
           context: myNavigatorKey.currentState!.context,
-          builder: (context) => _operacaoAssinada(),
+          builder: (context) => operacaoAssinada(),
         );
       }
     }
@@ -136,11 +136,12 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
     );
   }
 
-  Widget _operacaoAssinada() {
+  Widget operacaoAssinada() {
     return AlertDialog(
       icon: Icon(
         Icons.check_circle_outline,
         color: myNavigatorKey.currentState!.context.primaryColor,
+        size: 20.r,
       ),
       title: Column(
         children: [
@@ -151,11 +152,12 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10.h),
             child: RichText(
+              textAlign: TextAlign.center,
               text: TextSpan(children: [
                 TextSpan(
                     text:
                         'Quando sua operação possuir o numero de assinaturas necessárias, ela passará para o status de ',
-                    style: myNavigatorKey.currentContext!.textTheme.bodyMedium),
+                    style: myNavigatorKey.currentContext!.textTheme.bodyMedium,),
                 TextSpan(
                     text: '\"Assinada\". ',
                     style:
@@ -167,8 +169,11 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
               'Você pode acompanhar o status da sua assinatura clicando no botão abaixo.',
               style: myNavigatorKey.currentContext!.textTheme.bodyMedium),
           BotaoPadrao(label: 'Acompanhar Assinaturas', onPressed: () {}),
-          BotaoPadrao(
-              label: 'Fazer nova assinatura', filled: false, onPressed: () {}),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 10.h),
+            child: BotaoPadrao(
+                label: 'Fazer nova assinatura', filled: false, onPressed: () {}),
+          ),
         ],
       ),
     );
