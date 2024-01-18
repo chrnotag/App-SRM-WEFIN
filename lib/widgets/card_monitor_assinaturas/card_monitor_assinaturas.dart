@@ -13,6 +13,7 @@ import 'package:modular_study/core/providers/fluxo_assinatura_provider/iniciar_a
 import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/certificado_provider/importar_certificado_provider.dart';
 import 'package:modular_study/core/utils/money_format.dart';
+import 'package:modular_study/core/utils/valor_liquido.dart';
 import 'package:modular_study/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
 import '../../core/constants/themes/theme_configs.dart';
@@ -187,9 +188,12 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                                     ),
                                     ComponentCardOperacoes(
                                         title: 'Valor Liquido',
-                                        label: assinaturaProvider
+                                        label: ValorLiquido
                                             .regraExibirValorLiquido(
-                                                assinatura)),
+                                                statusOperacao:
+                                                    assinatura.statusOperacao,
+                                                valor:
+                                                    assinatura.valorLiquido)),
                                   ],
                                 ),
                               ],

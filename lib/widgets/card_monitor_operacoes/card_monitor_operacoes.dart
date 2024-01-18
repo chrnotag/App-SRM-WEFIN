@@ -8,6 +8,7 @@ import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/providers/monitor_operacao_provider/monitor_operacoes_provider.dart';
 import 'package:modular_study/core/utils/money_format.dart';
+import 'package:modular_study/core/utils/valor_liquido.dart';
 import 'package:modular_study/models/monitor_operacoes_model/monitor_operacoes_model.dart';
 import '../../core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import '../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
@@ -26,8 +27,6 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
   @override
   Widget build(BuildContext context) {
     final operacao = widget.operacoes;
-    final MonitorOperacoesProvider operacaoProvider =
-        Modular.get<MonitorOperacoesProvider>();
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(5.r)),
@@ -100,8 +99,11 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                   ),
                                   ComponentCardOperacoes(
                                       title: 'Valor Liquido',
-                                      label: operacaoProvider
-                                          .regraExibirValorLiquido(operacao)),
+                                      label:
+                                          ValorLiquido.regraExibirValorLiquido(
+                                              statusOperacao:
+                                                  operacao.statusOperacao,
+                                              valor: operacao.valorLiquido)),
                                 ],
                               ),
                             ],

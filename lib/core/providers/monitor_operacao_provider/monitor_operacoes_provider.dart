@@ -31,23 +31,4 @@ class MonitorOperacoesProvider extends ChangeNotifier{
     }
   }
 
-  String regraExibirValorLiquido(MonitorOperacoesModel operacao) {
-    switch(operacao.statusOperacao.toLowerCase().trim()){
-      case "aguardando assinatura":
-        return FormatarDinheiro.BR(
-            operacao.valorLiquido);
-      case "assinada":
-        return FormatarDinheiro.BR(
-            operacao.valorLiquido);
-      case "pagamento enviado":
-        return FormatarDinheiro.BR(
-            operacao.valorLiquido);
-      case "cobrança":
-        return FormatarDinheiro.BR(
-            operacao.valorLiquido);
-      default: "---";
-    }
-    return "---";
-  }
-
 }

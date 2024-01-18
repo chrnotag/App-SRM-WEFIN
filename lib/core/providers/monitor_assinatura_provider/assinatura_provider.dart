@@ -18,13 +18,6 @@ class AssinaturaProvider extends ChangeNotifier {
     return AssinaturaImpl().assinaturas();
   }
 
-  String regraExibirValorLiquido(MonitorAssinaturasModel assinatura) {
-    if (assinatura.statusOperacao.toLowerCase().trim() == "formalizada") {
-      return FormatarDinheiro.BR(assinatura!.valorLiquido);
-    }
-    return "---";
-  }
-
   set assinaturas(List<MonitorAssinaturasModel> assinaturasModel) {
     separaAssinaturas(assinaturasModel);
     mapearAssinaturas = assinaturasModel;
