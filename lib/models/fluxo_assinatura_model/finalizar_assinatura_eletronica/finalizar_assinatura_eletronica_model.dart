@@ -1,24 +1,32 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'assinatura_eletronica_model.g.dart';
+part 'finalizar_assinatura_eletronica_model.g.dart';
 
 @JsonSerializable()
-class AssinaturaEletronicaModel {
+class FinalizarAssinaturaEletronicaModel {
   int idAssinaturaDigital;
-  String codigoEmail;
+  int codigoOperacao;
   String deslocamentoFusoHorarioUsuario;
   Evidencias evidencias;
+  String codigoEmail;
+  String ticket;
+  String chaveDocumento;
+  String idDocumentoLacuna;
 
-  AssinaturaEletronicaModel(
+  FinalizarAssinaturaEletronicaModel(
       {required this.idAssinaturaDigital,
-      required this.codigoEmail,
+      required this.codigoOperacao,
       required this.deslocamentoFusoHorarioUsuario,
-      required this.evidencias});
+      required this.evidencias,
+      required this.codigoEmail,
+      required this.ticket,
+      required this.chaveDocumento,
+      required this.idDocumentoLacuna});
 
-  factory AssinaturaEletronicaModel.fromJson(Map<String, dynamic> json) =>
-      _$AssinaturaEletronicaModelFromJson(json);
+  factory FinalizarAssinaturaEletronicaModel.fromJson(Map<String, dynamic> json) =>
+      _$FinalizarAssinaturaEletronicaModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$AssinaturaEletronicaModelToJson(this);
+  Map<String, dynamic> toJson() => _$FinalizarAssinaturaEletronicaModelToJson(this);
 }
 
 @JsonSerializable()
