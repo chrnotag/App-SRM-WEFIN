@@ -11,4 +11,5 @@ class EndPoints {
   static const finalizarAssinaturaEletronica = "$assinatura/finalizar-assinatura-eletronica";
   static const recuperarSenha = "$login/recuperar-senha";
   static const operacoes = "$baseURL/operacoes";
+  static const iniciarAssinaturaEletronica = "$assinatura/iniciar-assinatura-eletronica";
 }

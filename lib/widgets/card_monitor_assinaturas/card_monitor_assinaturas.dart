@@ -8,10 +8,12 @@ import 'package:modular_study/core/constants/extensions/size_screen_extensions.d
 import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
+import 'package:modular_study/core/providers/fluxo_assinatura_provider/assinatura_eletronica/assinatura_eletronica_provider.dart';
 import 'package:modular_study/core/providers/fluxo_assinatura_provider/iniciar_assinatura/iniciar_assinatura_provider.dart';
 import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/certificado_provider/importar_certificado_provider.dart';
 import 'package:modular_study/core/utils/money_format.dart';
+import 'package:modular_study/core/utils/valor_liquido.dart';
 import 'package:modular_study/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
 import '../../core/constants/themes/theme_configs.dart';
@@ -102,8 +104,8 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
     final assinatura = widget.assinatura;
     final AssinaturaProvider assinaturaProvider =
         context.watch<AssinaturaProvider>();
-    final Color corAssinatura =
-        assinaturaProvider.definirCorStatusAssinatura(assinatura.statusAssinaturaDigital);
+    final Color corAssinatura = assinaturaProvider
+        .definirCorStatusAssinatura(assinatura.statusAssinaturaDigital);
     return AnimatedContainer(
       duration: const Duration(seconds: 1),
       decoration: BoxDecoration(
@@ -147,7 +149,8 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                                     ),
                                     ComponentCardOperacoes(
                                         title: 'Status',
-                                        label: assinatura.statusAssinaturaDigital,
+                                        label:
+                                            assinatura.statusAssinaturaDigital,
                                         textStyle: context.textTheme.bodySmall!
                                             .copyWith(color: corAssinatura)),
                                   ],
@@ -185,8 +188,12 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                                     ),
                                     ComponentCardOperacoes(
                                         title: 'Valor Liquido',
-                                        label: FormatarDinheiro.BR(
-                                            assinatura.valorLiquido)),
+                                        label: ValorLiquido
+                                            .regraExibirValorLiquido(
+                                                statusOperacao:
+                                                    assinatura.statusOperacao,
+                                                valor:
+                                                    assinatura.valorLiquido)),
                                   ],
                                 ),
                               ],
@@ -211,6 +218,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                       assinarDocumento: widget.assinarDocumento,
                       isVisible: _showInfo,
                       assinantes: assinatura.assinantes,
+                      codOperacao: assinatura.codigoOperacao,
                     ),
                   ),
                   FooterExpansible(

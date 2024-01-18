@@ -1,29 +1,37 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'assinatura_eletronica_model.dart';
+part of 'finalizar_assinatura_eletronica_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-AssinaturaEletronicaModel _$AssinaturaEletronicaModelFromJson(
+FinalizarAssinaturaEletronicaModel _$FinalizarAssinaturaEletronicaModelFromJson(
         Map<String, dynamic> json) =>
-    AssinaturaEletronicaModel(
+    FinalizarAssinaturaEletronicaModel(
       idAssinaturaDigital: json['idAssinaturaDigital'] as int,
-      codigoEmail: json['codigoEmail'] as String,
+      codigoOperacao: json['codigoOperacao'] as int,
       deslocamentoFusoHorarioUsuario:
           json['deslocamentoFusoHorarioUsuario'] as String,
       evidencias:
           Evidencias.fromJson(json['evidencias'] as Map<String, dynamic>),
+      codigoEmail: json['codigoEmail'] as String,
+      ticket: json['ticket'] as String,
+      chaveDocumento: json['chaveDocumento'] as String,
+      idDocumentoLacuna: json['idDocumentoLacuna'] as String,
     );
 
-Map<String, dynamic> _$AssinaturaEletronicaModelToJson(
-        AssinaturaEletronicaModel instance) =>
+Map<String, dynamic> _$FinalizarAssinaturaEletronicaModelToJson(
+        FinalizarAssinaturaEletronicaModel instance) =>
     <String, dynamic>{
       'idAssinaturaDigital': instance.idAssinaturaDigital,
-      'codigoEmail': instance.codigoEmail,
+      'codigoOperacao': instance.codigoOperacao,
       'deslocamentoFusoHorarioUsuario': instance.deslocamentoFusoHorarioUsuario,
       'evidencias': instance.evidencias,
+      'codigoEmail': instance.codigoEmail,
+      'ticket': instance.ticket,
+      'chaveDocumento': instance.chaveDocumento,
+      'idDocumentoLacuna': instance.idDocumentoLacuna,
     };
 
 Evidencias _$EvidenciasFromJson(Map<String, dynamic> json) => Evidencias(

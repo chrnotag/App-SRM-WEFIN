@@ -1,12 +1,12 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/providers/auth_provider_config/deslogar/verificar_sessao.dart';
 import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
-import 'package:modular_study/models/fluxo_assinatura_model/assinatura_eletronica/assinatura_eletronica_model.dart';
+import 'package:modular_study/models/fluxo_assinatura_model/finalizar_assinatura_eletronica/finalizar_assinatura_eletronica_model.dart';
 import '../../../implementations_config/export_impl.dart';
 import 'package:http/http.dart' as http;
 
 class AssinaturaEletronicaImpl {
-  AssinaturaEletronicaModel assinaturaEletronicaModel;
+  FinalizarAssinaturaEletronicaModel assinaturaEletronicaModel;
 
   AssinaturaEletronicaImpl({required this.assinaturaEletronicaModel});
 
