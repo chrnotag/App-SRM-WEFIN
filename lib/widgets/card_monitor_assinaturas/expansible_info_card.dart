@@ -125,8 +125,12 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                         'Status',
                         style: context.textTheme.bodyMedium,
                       ),
-                      assinaturaProvider.traduzirStatusAssinatura(
-                          info.statusAssinatura, context)
+                      Text(
+                        info.statusAssinatura,
+                        style: context.textTheme.bodySmall!.copyWith(
+                            color: assinaturaProvider
+                                .corStatusAssinatura(info.statusAssinatura)),
+                      ),
                     ],
                   ),
                   SizedBox(

@@ -1,12 +1,11 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_implementation.dart';
 import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:modular_study/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
+
+import '../../utils/money_format.dart';
 
 class AssinaturaProvider extends ChangeNotifier {
   AssinaturaProvider._();
@@ -17,6 +16,13 @@ class AssinaturaProvider extends ChangeNotifier {
 
   pegarAssinaturas() {
     return AssinaturaImpl().assinaturas();
+  }
+
+  String regraExibirValorLiquido(MonitorAssinaturasModel assinatura) {
+    if (assinatura.statusOperacao.toLowerCase().trim() == "formalizada") {
+      return FormatarDinheiro.BR(assinatura!.valorLiquido);
+    }
+    return "---";
   }
 
   set assinaturas(List<MonitorAssinaturasModel> assinaturasModel) {
@@ -85,17 +91,11 @@ class AssinaturaProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Widget traduzirStatusAssinatura(String status, BuildContext context) {
-    log("status assinatura: $status");
-    return status.trim() == "Aguardando Assinatura"
-        ? Text(
-            "Aguardando Assinatura",
-            style: context.textTheme.bodySmall!
-                .copyWith(color: AppColors.azulPrimarioSRM),
-          )
-        : Text("Assinado",
-            style:
-                context.textTheme.bodySmall!.copyWith(color: AppColors.verde));
+  Color corStatusAssinatura(String status) {
+    if (status.toLowerCase().trim() == "aguardando assinatura") {
+      return AppColors.azulPrimarioSRM;
+    }
+    return AppColors.verdePrimarioTRUST;
   }
 
   Map<int, MonitorAssinaturasModel> _mapaAssinaturas = {};

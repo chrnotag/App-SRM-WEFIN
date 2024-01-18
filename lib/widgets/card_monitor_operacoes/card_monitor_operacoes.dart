@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
@@ -27,6 +26,8 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
   @override
   Widget build(BuildContext context) {
     final operacao = widget.operacoes;
+    final MonitorOperacoesProvider operacaoProvider =
+        Modular.get<MonitorOperacoesProvider>();
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(5.r)),
@@ -99,8 +100,8 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                   ),
                                   ComponentCardOperacoes(
                                       title: 'Valor Liquido',
-                                      label: FormatarDinheiro.BR(
-                                          operacao.valorLiquido)),
+                                      label: operacaoProvider
+                                          .regraExibirValorLiquido(operacao)),
                                 ],
                               ),
                             ],
@@ -123,7 +124,8 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                             Text('Ver Assinaturas'),
                             ElevatedButton(
                                 onPressed: () {
-                                  final MonitorOperacoesProvider operacaoProvider =
+                                  final MonitorOperacoesProvider
+                                      operacaoProvider =
                                       Modular.get<MonitorOperacoesProvider>();
                                   final AssinaturaProvider assinaturaProvider =
                                       Modular.get<AssinaturaProvider>();
@@ -144,9 +146,11 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                         'destacar': true,
                                       });
                                 },
-                                child: Text('Assinaturas', style: context.textTheme.bodyMedium!.copyWith(
-                                  color: Colors.white
-                                ),))
+                                child: Text(
+                                  'Assinaturas',
+                                  style: context.textTheme.bodyMedium!
+                                      .copyWith(color: Colors.white),
+                                ))
                           ],
                         ),
                       ],

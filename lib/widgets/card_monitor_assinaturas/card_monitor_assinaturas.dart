@@ -103,8 +103,8 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
     final assinatura = widget.assinatura;
     final AssinaturaProvider assinaturaProvider =
         context.watch<AssinaturaProvider>();
-    final Color corAssinatura =
-        assinaturaProvider.definirCorStatusAssinatura(assinatura.statusAssinaturaDigital);
+    final Color corAssinatura = assinaturaProvider
+        .definirCorStatusAssinatura(assinatura.statusAssinaturaDigital);
     return AnimatedContainer(
       duration: const Duration(seconds: 1),
       decoration: BoxDecoration(
@@ -148,7 +148,8 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                                     ),
                                     ComponentCardOperacoes(
                                         title: 'Status',
-                                        label: assinatura.statusAssinaturaDigital,
+                                        label:
+                                            assinatura.statusAssinaturaDigital,
                                         textStyle: context.textTheme.bodySmall!
                                             .copyWith(color: corAssinatura)),
                                   ],
@@ -186,8 +187,9 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                                     ),
                                     ComponentCardOperacoes(
                                         title: 'Valor Liquido',
-                                        label: FormatarDinheiro.BR(
-                                            assinatura.valorLiquido)),
+                                        label: assinaturaProvider
+                                            .regraExibirValorLiquido(
+                                                assinatura)),
                                   ],
                                 ),
                               ],

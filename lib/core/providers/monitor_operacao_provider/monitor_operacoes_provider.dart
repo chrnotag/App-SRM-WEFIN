@@ -5,6 +5,7 @@ import 'package:modular_study/core/providers/monitor_operacao_provider/monitor_o
 
 import '../../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import '../../../models/monitor_operacoes_model/monitor_operacoes_model.dart';
+import '../../utils/money_format.dart';
 
 class MonitorOperacoesProvider extends ChangeNotifier{
 
@@ -30,5 +31,23 @@ class MonitorOperacoesProvider extends ChangeNotifier{
     }
   }
 
+  String regraExibirValorLiquido(MonitorOperacoesModel operacao) {
+    switch(operacao.statusOperacao.toLowerCase().trim()){
+      case "aguardando assinatura":
+        return FormatarDinheiro.BR(
+            operacao.valorLiquido);
+      case "assinada":
+        return FormatarDinheiro.BR(
+            operacao.valorLiquido);
+      case "pagamento enviado":
+        return FormatarDinheiro.BR(
+            operacao.valorLiquido);
+      case "cobrança":
+        return FormatarDinheiro.BR(
+            operacao.valorLiquido);
+      default: "---";
+    }
+    return "---";
+  }
 
 }
