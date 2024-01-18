@@ -1,9 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
+import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/providers/monitor_operacao_provider/monitor_operacoes_provider.dart';
@@ -27,6 +26,8 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
   @override
   Widget build(BuildContext context) {
     final operacao = widget.operacoes;
+    final MonitorOperacoesProvider operacaoProvider =
+        Modular.get<MonitorOperacoesProvider>();
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(5.r)),
@@ -164,8 +165,12 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
           ),
           Container(
             width: 30.w,
-            height: 180.h,
+            height: isVisivel(operacao)
+                ? context.height * 0.155
+                : context.height * 0.115,
             decoration: BoxDecoration(
+              color: operacaoProvider
+                  .corOperacao[operacao.statusOperacao.toUpperCase().trim()],
               borderRadius: BorderRadius.only(
                   topRight: Radius.circular(5.r),
                   bottomRight: Radius.circular(5.r)),
