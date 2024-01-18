@@ -8,22 +8,45 @@ import 'package:line_icons/line_icons.dart';
 import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/providers/fluxo_assinatura_provider/assinatura_eletronica/assinatura_eletronica_impl.dart';
+import 'package:modular_study/core/providers/fluxo_assinatura_provider/assinatura_eletronica/iniciar_assinatura_eletronica_impl.dart';
 import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/utils/overlay.dart';
 import 'package:modular_study/main.dart';
-import 'package:modular_study/models/fluxo_assinatura_model/assinatura_eletronica/assinatura_eletronica_model.dart';
+import 'package:modular_study/models/fluxo_assinatura_model/finalizar_assinatura_eletronica/finalizar_assinatura_eletronica_model.dart';
+import 'package:modular_study/models/fluxo_assinatura_model/iniciar_assinatura_eletronica/iniciar_assinatura_eletronica_model.dart';
 import 'package:modular_study/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
 
-class AssinaturaEletronicaProvider extends ChangeNotifier {
-  AssinaturaEletronicaModel? _assinaturaEletronicaModel;
+import '../../../../models/fluxo_assinatura_model/iniciar_assinatura_eletronica/response/resposta_inic_ass_eletronica.dart';
 
-  AssinaturaEletronicaModel? get assinaturaEletronica =>
+class AssinaturaEletronicaProvider extends ChangeNotifier {
+  FinalizarAssinaturaEletronicaModel? _assinaturaEletronicaModel;
+
+  FinalizarAssinaturaEletronicaModel? get assinaturaEletronica =>
       _assinaturaEletronicaModel;
 
+  late int _codOperacao;
+
+  int get codOperacao => _codOperacao;
+
+  set codOperacao(int cod) {
+    _codOperacao = cod;
+    notifyListeners();
+  }
+
   set assinaturaEletronica(
-      AssinaturaEletronicaModel? assinaturaEletronicaModel) {
+      FinalizarAssinaturaEletronicaModel? assinaturaEletronicaModel) {
     _assinaturaEletronicaModel = assinaturaEletronicaModel;
+    notifyListeners();
+  }
+
+  late ResponseInicAssinaturaEletronica _respostaAssinaturaEletronica;
+
+  ResponseInicAssinaturaEletronica get respostaAssinaturaEletronica =>
+      _respostaAssinaturaEletronica;
+
+  set respostaAssinaturaEletronica(ResponseInicAssinaturaEletronica resposta) {
+    _respostaAssinaturaEletronica = resposta;
     notifyListeners();
   }
 
@@ -41,10 +64,6 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
 
   Future<void> _finalizarAssinaturaDigital(List<Documento> documentos) async {
     for (var doc in documentos) {
-      showDialog(
-        context: myNavigatorKey.currentState!.context,
-        builder: (context) => _informarCodigoEmail(doc),
-      );
       if (isErroAssinatura) {
         break;
       }
@@ -83,12 +102,17 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
               onPressed: () async {
                 OverlayApp.iniciaOverlay(myNavigatorKey.currentState!.context);
                 final geolocalizacao = await _pegarGeolocalizacao();
-                var model = AssinaturaEletronicaModel(
+                var model = FinalizarAssinaturaEletronicaModel(
                     idAssinaturaDigital: documento.idAssinaturaDigital,
                     codigoEmail: codigoEmail.text,
                     deslocamentoFusoHorarioUsuario:
                         DateTime.now().timeZoneOffset.inMinutes.toString(),
-                    evidencias: Evidencias(geolocalizacao: geolocalizacao!));
+                    evidencias: Evidencias(geolocalizacao: geolocalizacao!),
+                    chaveDocumento: respostaAssinaturaEletronica.chaveDocumento,
+                    codigoOperacao: codOperacao,
+                    idDocumentoLacuna:
+                        respostaAssinaturaEletronica.idDocumentoLacuna,
+                    ticket: respostaAssinaturaEletronica.ticket);
                 final result = await AssinaturaEletronicaImpl(
                         assinaturaEletronicaModel: model)
                     .finalizarAssinatura();
@@ -122,8 +146,18 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
           BotaoPadrao(
               label: 'Confirmar',
               onPressed: () async {
-                await _finalizarAssinaturaDigital(assinante.documentos);
-                Modular.to.pop();
+                final response = await IniciarAssinaturaEletronicaImpl(
+                        codOperacaoModel: IniciarAssinaturaEletronicaModel(
+                            codigoOperacao: codOperacao))
+                    .iniciarAssinaturaEletronica();
+                if (response.error != null) {
+                  await _finalizarAssinaturaDigital(assinante.documentos);
+                  Modular.to.pop();
+                } else {
+                  Fluttertoast.showToast(
+                      msg:
+                          'Erro ao iniciar assinatura, tente novamente mais tarde.');
+                }
               }),
           BotaoPadrao(
               label: 'Cancelar',
@@ -155,9 +189,10 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
               textAlign: TextAlign.center,
               text: TextSpan(children: [
                 TextSpan(
-                    text:
-                        'Quando sua operação possuir o numero de assinaturas necessárias, ela passará para o status de ',
-                    style: myNavigatorKey.currentContext!.textTheme.bodyMedium,),
+                  text:
+                      'Quando sua operação possuir o numero de assinaturas necessárias, ela passará para o status de ',
+                  style: myNavigatorKey.currentContext!.textTheme.bodyMedium,
+                ),
                 TextSpan(
                     text: '\"Assinada\". ',
                     style:
@@ -172,7 +207,9 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10.h),
             child: BotaoPadrao(
-                label: 'Fazer nova assinatura', filled: false, onPressed: () {}),
+                label: 'Fazer nova assinatura',
+                filled: false,
+                onPressed: () {}),
           ),
         ],
       ),

@@ -4,12 +4,14 @@ class _ExpansibleInfoCard extends StatefulWidget {
   final bool isVisible;
   final List<Assinante> assinantes;
   final bool assinarDocumento;
+  final int codOperacao;
 
   const _ExpansibleInfoCard(
       {super.key,
       required this.isVisible,
       required this.assinantes,
-      this.assinarDocumento = false});
+      this.assinarDocumento = false,
+      required this.codOperacao});
 
   @override
   State<_ExpansibleInfoCard> createState() => __ExpansibleInfoCardState();
@@ -63,7 +65,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     bool filtroBotaoAssinar() {
       return assinante.informacoesAssinante.any((element) =>
-      authProvider.dataUser!.identificadorUsuario ==
+          authProvider.dataUser!.identificadorUsuario ==
           element.identificadorAssinador);
     }
 
@@ -215,6 +217,9 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
               width: context.width * 0.7,
               child: BotaoPadrao(
                   onPressed: () async {
+                    AssinaturaEletronicaProvider assEletronicaProvider =
+                        Modular.get<AssinaturaEletronicaProvider>();
+                    assEletronicaProvider.codOperacao = widget.codOperacao;
                     IniciarAssinaturaProvider iniciarAssinatura =
                         Modular.get<IniciarAssinaturaProvider>();
                     iniciarAssinatura.IniciarAssinatura(info);

@@ -8,6 +8,7 @@ import 'package:modular_study/core/constants/extensions/size_screen_extensions.d
 import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
+import 'package:modular_study/core/providers/fluxo_assinatura_provider/assinatura_eletronica/assinatura_eletronica_provider.dart';
 import 'package:modular_study/core/providers/fluxo_assinatura_provider/iniciar_assinatura/iniciar_assinatura_provider.dart';
 import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/certificado_provider/importar_certificado_provider.dart';
@@ -211,6 +212,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                       assinarDocumento: widget.assinarDocumento,
                       isVisible: _showInfo,
                       assinantes: assinatura.assinantes,
+                      codOperacao: assinatura.codigoOperacao,
                     ),
                   ),
                   FooterExpansible(
