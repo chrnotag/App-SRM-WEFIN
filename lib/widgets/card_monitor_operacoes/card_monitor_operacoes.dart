@@ -165,9 +165,12 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
           ),
           Container(
             width: 30.w,
-            height: isVisivel(operacao) ? context.height * 0.155 :context.height * 0.115,
+            height: isVisivel(operacao)
+                ? context.height * 0.155
+                : context.height * 0.115,
             decoration: BoxDecoration(
-              color: operacaoProvider.regraCorOperacao(operacao.statusOperacao),
+              color: operacaoProvider
+                  .corOperacao[operacao.statusOperacao.toUpperCase().trim()],
               borderRadius: BorderRadius.only(
                   topRight: Radius.circular(5.r),
                   bottomRight: Radius.circular(5.r)),

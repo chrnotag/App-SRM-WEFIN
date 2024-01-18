@@ -34,26 +34,14 @@ class MonitorOperacoesProvider extends ChangeNotifier {
     }
   }
 
-  Color regraCorOperacao(String status) {
-    List<String> azul = ['EM DIGITAÇÃO', 'ENVIADA'];
-    List<String> laranja = [
-      'EM ANÁLISE',
-      'AUTORIZADA',
-      'AGUARDANDO ASSINATURA',
-      'ASSINADA'
-    ];
-    List<String> verde = [
-      'PAGAMENTO ENVIADO',
-      'COBRANÇA',
-    ];
-    if (azul.contains(status.toUpperCase().trim())) {
-      return AppColors.azulPrimarioSRM;
-    } else if (laranja.contains(status.toUpperCase().trim())) {
-      return AppColors.laranja;
-    } else if (verde.contains(status.toUpperCase().trim())) {
-      return AppColors.verde;
-    } else {
-      return AppColors.vermelho;
-    }
-  }
+  Map<String, Color> corOperacao = {
+    'EM DIGITAÇÃO': AppColors.azulPrimarioSRM,
+    'ENVIADA': AppColors.azulPrimarioSRM,
+    'EM ANÁLISE': AppColors.laranja,
+    'AUTORIZADA': AppColors.laranja,
+    'AGUARDANDO ASSINATURA': AppColors.laranja,
+    'ASSINADA': AppColors.laranja,
+    'PAGAMENTO ENVIADO': AppColors.verdePrimarioTRUST,
+    'COBRANÇA': AppColors.verdePrimarioTRUST
+  };
 }
