@@ -28,8 +28,12 @@ class AppRoutes {
   static get menuAppHomeRoute => '/menu_app';
 
   static get homeAppHomeRoute => '/home_app';
+
   static get importarCertificadoHomeRoute => '/importar_certificado';
+
   static get guiaImportarCertificadoHomeRoute => '/importar_dispositivo';
+
+  static get leitorQrCodeHomeRoute => '/leitor-qr-code';
 
   //Escopo para troca de telas usando o Modular.to.navigate HOME
   static get listaSelecaoEmpresasRoute =>
@@ -48,4 +52,5 @@ class AppRoutes {
 
   static get importarCertificadoRoute => '$homeRoute$importarCertificadoHomeRoute';
   static get guiaImportarCertificadoRoute => '$homeRoute$guiaImportarCertificadoHomeRoute';
+  static get leitorQrCodeRoute => '$homeRoute$leitorQrCodeHomeRoute';
 }

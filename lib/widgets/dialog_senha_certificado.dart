@@ -32,6 +32,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
       title: Form(
         key: formKey,
         child: WefinTextFormField(
+          textColor: Colors.black,
           onTap: () => provider.limparErro(),
           label: "Senha do certificado",
           validator: Validatorless.multiple([
