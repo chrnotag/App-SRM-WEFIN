@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
+import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/views/home/assinaturas/selecionar_certificado.dart';
 
 class ImportarCertificadoProvider extends ChangeNotifier {
@@ -168,6 +169,7 @@ class ImportarCertificadoProvider extends ChangeNotifier {
         Fluttertoast.showToast(
             msg:
                 'Certificado ${certs.first.subjectDisplayName} importado com sucesso!');
+        Modular.to.navigate(AppRoutes.assinaturaDigitalRoute);
       }
       Modular.to.pop();
       return true;

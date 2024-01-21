@@ -1,11 +1,10 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
+import 'package:modular_study/core/providers/certificado_provider/baixar_certificado_impl.dart';
 import 'package:modular_study/core/providers/certificado_provider/importar_certificado_provider.dart';
-import 'package:modular_study/widgets/dialog_senha_certificado.dart';
 
 class LeitorQrCode extends StatefulWidget {
   const LeitorQrCode({super.key});
@@ -33,12 +32,8 @@ class _LeitorQrCodeState extends State<LeitorQrCode> {
                 _isProcessing = true;
                 final List<Barcode> barcodes = capture.barcodes;
                 if (barcodes.isNotEmpty) {
-                  provider.pkcs12 = barcodes.first.rawBytes!;
+                  BaixarCertificadoImpl.baixar(barcodes.first.rawValue!);
                   _controller.stop();
-                  showDialog(
-                    context: context,
-                    builder: (context) => const DialogSenhaCertificado(),
-                  );
                 }
                 _isProcessing = false;
               },
