@@ -226,7 +226,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                     assEletronicaProvider.codOperacao = widget.codOperacao;
                     IniciarAssinaturaProvider iniciarAssinatura =
                         Modular.get<IniciarAssinaturaProvider>();
-                    iniciarAssinatura.IniciarAssinatura(info);
+                    iniciarAssinatura.IniciarAssinatura(info, context);
                   },
                   label: "Assinar Operação")),
         )

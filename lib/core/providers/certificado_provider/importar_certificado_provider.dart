@@ -11,12 +11,12 @@ import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/views/home/assinaturas/selecionar_certificado.dart';
 
 class ImportarCertificadoProvider extends ChangeNotifier {
-
   ImportarCertificadoProvider._();
 
-  static final ImportarCertificadoProvider _instance = ImportarCertificadoProvider._();
+  static final ImportarCertificadoProvider _instance =
+      ImportarCertificadoProvider._();
 
-  factory ImportarCertificadoProvider(){
+  factory ImportarCertificadoProvider() {
     return _instance;
   }
 
@@ -202,12 +202,12 @@ class ImportarCertificadoProvider extends ChangeNotifier {
     }
     return false;
   }
-  void limparDadosCertificados(){
+
+  void limparDadosCertificados() {
     listaCertificados = [];
-    certificadoSelecionado = null;
-    pkcs12 = Uint8List(0);
-    senhaCertificado = null;
-    limparErro();
-    notifyListeners();
+    _certificadoSelecionado = null;
+    _pkcs12 = Uint8List(0);
+    _senhaCertificado = null;
+    _errorMsg = null;
   }
 }

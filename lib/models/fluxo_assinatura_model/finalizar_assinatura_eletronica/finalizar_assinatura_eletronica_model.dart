@@ -4,7 +4,6 @@ part 'finalizar_assinatura_eletronica_model.g.dart';
 
 @JsonSerializable()
 class FinalizarAssinaturaEletronicaModel {
-  int idAssinaturaDigital;
   int codigoOperacao;
   String deslocamentoFusoHorarioUsuario;
   Evidencias evidencias;
@@ -14,8 +13,7 @@ class FinalizarAssinaturaEletronicaModel {
   String idDocumentoLacuna;
 
   FinalizarAssinaturaEletronicaModel(
-      {required this.idAssinaturaDigital,
-      required this.codigoOperacao,
+      {required this.codigoOperacao,
       required this.deslocamentoFusoHorarioUsuario,
       required this.evidencias,
       required this.codigoEmail,
@@ -23,10 +21,12 @@ class FinalizarAssinaturaEletronicaModel {
       required this.chaveDocumento,
       required this.idDocumentoLacuna});
 
-  factory FinalizarAssinaturaEletronicaModel.fromJson(Map<String, dynamic> json) =>
+  factory FinalizarAssinaturaEletronicaModel.fromJson(
+          Map<String, dynamic> json) =>
       _$FinalizarAssinaturaEletronicaModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$FinalizarAssinaturaEletronicaModelToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$FinalizarAssinaturaEletronicaModelToJson(this);
 }
 
 @JsonSerializable()
