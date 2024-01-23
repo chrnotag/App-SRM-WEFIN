@@ -23,14 +23,14 @@ class IniciarAssinaturaProvider extends ChangeNotifier {
 
   Future<dynamic> obterHashs(IniciarAssinaturaModel model) => IniciarAssinaturaImpl(iniciarAssinaturaModel: model).obterHashParaAssinar();
 
-  void IniciarAssinatura(InformacaoAssinante assinante) async {
-    if (assinante.eCPFAssinador) {
+  void IniciarAssinatura(InformacaoAssinante assinante, BuildContext context) async {
+    if (!assinante.eCPFAssinador) {
       AssinaturaEletronicaProvider assinaturaEletronicaProvider =
           Modular.get<AssinaturaEletronicaProvider>();
       showDialog(
           context: myNavigatorKey.currentState!.context,
           builder: (context) => assinaturaEletronicaProvider
-              .confirmarAssinaturaDialog(assinante));
+              .confirmarAssinaturaDialog(assinante ,context));
     } else {
       ImportarCertificadoProvider certificadoProvider =
           Modular.get<ImportarCertificadoProvider>();
@@ -48,7 +48,6 @@ class IniciarAssinaturaProvider extends ChangeNotifier {
   }
 
   void limparHashs() {
-    hashsParaAssinar = [];
-    notifyListeners();
+    _hashsParaAssinar = [];
   }
 }

@@ -103,10 +103,9 @@ class AssinaturaProvider extends ChangeNotifier {
   }
 
   void limparAssinaturas() {
-    todasAssinaturas = [];
-    assinaturasPendentes = [];
-    assinaturaSelecionada = null;
-    assinaturas = [];
+    _assinaturas = [];
+    _assinaturasPendentes = [];
+    _assinaturaSelecionada = null;
     _mapaAssinaturas = {};
   }
 }

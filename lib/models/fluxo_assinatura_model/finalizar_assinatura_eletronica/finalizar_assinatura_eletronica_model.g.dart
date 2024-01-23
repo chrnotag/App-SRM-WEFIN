@@ -9,7 +9,6 @@ part of 'finalizar_assinatura_eletronica_model.dart';
 FinalizarAssinaturaEletronicaModel _$FinalizarAssinaturaEletronicaModelFromJson(
         Map<String, dynamic> json) =>
     FinalizarAssinaturaEletronicaModel(
-      idAssinaturaDigital: json['idAssinaturaDigital'] as int,
       codigoOperacao: json['codigoOperacao'] as int,
       deslocamentoFusoHorarioUsuario:
           json['deslocamentoFusoHorarioUsuario'] as String,
@@ -24,10 +23,9 @@ FinalizarAssinaturaEletronicaModel _$FinalizarAssinaturaEletronicaModelFromJson(
 Map<String, dynamic> _$FinalizarAssinaturaEletronicaModelToJson(
         FinalizarAssinaturaEletronicaModel instance) =>
     <String, dynamic>{
-      'idAssinaturaDigital': instance.idAssinaturaDigital,
       'codigoOperacao': instance.codigoOperacao,
       'deslocamentoFusoHorarioUsuario': instance.deslocamentoFusoHorarioUsuario,
-      'evidencias': instance.evidencias,
+      'evidencias': instance.evidencias?.toJson(),
       'codigoEmail': instance.codigoEmail,
       'ticket': instance.ticket,
       'chaveDocumento': instance.chaveDocumento,
@@ -41,7 +39,7 @@ Evidencias _$EvidenciasFromJson(Map<String, dynamic> json) => Evidencias(
 
 Map<String, dynamic> _$EvidenciasToJson(Evidencias instance) =>
     <String, dynamic>{
-      'geolocalizacao': instance.geolocalizacao,
+      'geolocalizacao': instance.geolocalizacao?.toJson(),
     };
 
 Geolocalizacao _$GeolocalizacaoFromJson(Map<String, dynamic> json) =>
