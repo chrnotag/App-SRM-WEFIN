@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/constants/enuns/theme_enum.dart';
 import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
+import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/providers/sessao_provider.dart';
 import 'package:modular_study/core/providers/theme_provider.dart';
@@ -76,7 +77,9 @@ class _SemConexaoScreenState extends State<SemConexaoScreen> {
                 children: [
                   Expanded(
                       child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Modular.to.pushNamed(AppRoutes.loginSRMAuthRoute);
+                          },
                           child: Padding(
                             padding: EdgeInsets.all(10.r),
                             child:

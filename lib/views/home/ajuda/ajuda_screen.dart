@@ -48,13 +48,14 @@ class Ajuda extends StatelessWidget {
                       children: [
                         TextSpan(
                           text: 'Telefone: ',
-                          style: context.textTheme.bodyMedium!.copyWith(color: context.onSecondary)
+                          style: context.textTheme.bodySmall!.copyWith(color: context.onSecondary)
                         ),
                         TextSpan(
                           text: '0800 878 1005',
-                          style: context.textTheme.labelMedium!.copyWith(
+                          style: context.textTheme.bodySmall!.copyWith(
                               color: context.onSecondary,
                             decoration: TextDecoration.underline,
+                            fontWeight: FontWeight.bold
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () async {
@@ -76,14 +77,12 @@ class Ajuda extends StatelessWidget {
                         children: [
                           TextSpan(
                             text: 'E-mail: ',
-                            style: context.textTheme.bodyMedium!.copyWith(color: context.onSecondary,)
+                            style: context.textTheme.bodySmall!.copyWith(color: context.onSecondary,)
+                            ,
                           ),
                           TextSpan(
                             text: 'recebiveis@srmasset.com',
-                            style: context.textTheme.labelMedium
-                              !.copyWith(
-                                decoration: TextDecoration.underline,
-                            ),
+                            style: context.textTheme.bodySmall!.copyWith(color: context.onSecondary,fontWeight: FontWeight.bold,decoration: TextDecoration.underline),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () async {
                                 final phoneUrl =
@@ -104,11 +103,11 @@ class Ajuda extends StatelessWidget {
                       children: [
                         TextSpan(
                           text: 'Politica de privacidade:',
-                          style: context.textTheme.bodyMedium!.copyWith(color: context.onSecondary,)
+                          style: context.textTheme.bodySmall!.copyWith(color: context.onSecondary,)
                         ),
                         TextSpan(
                           text: 'Toque aqui',
-                          style: context.textTheme.bodyMedium!.copyWith(
+                          style: context.textTheme.bodySmall!.copyWith(
                               color: context.onSecondary,
                               decoration: TextDecoration.underline,
                               fontWeight: FontWeight.bold
