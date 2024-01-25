@@ -97,6 +97,7 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas>
                           destacar != null &&
                           destacar &&
                           !assinaturaProvider.isDestacado,
+                      visualizarDocumento: true,    
                     ),
                   ),
                 ],
