@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
@@ -31,95 +34,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final SessionProvider sessionProvider = Modular.get<SessionProvider>();
       sessionProvider.startListening();
-      // verificarPolitica();
     });
-  }
-
-  void verificarPolitica() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text('Política de privacidade',
-                  style: context.textTheme.bodyLarge!.copyWith(
-                    color: AppColors.azulPrimarioSRM,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 20,
-                    letterSpacing: 1.5,
-                  )),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: GestureDetector(
-                onTap: () {
-                  Modular.to.pop();
-                },
-                child: Text('Clique aqui para vizualizar',
-                    style: context.textTheme.labelMedium!
-                        .copyWith(color: AppColors.labelText)),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                        onPressed: () {
-                          authProvider.limparDadosUsuario();
-                          Modular.to.navigate(Modular.initialRoute);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              const Color.fromARGB(255, 204, 91, 91),
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8.0),
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text(
-                              'Recusar',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        )),
-                  )
-                ],
-              ),
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: () {
-                        Modular.to.pop();
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.azul,
-                          shadowColor: const Color.fromARGB(0, 255, 255, 255),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4),
-                              side: const BorderSide(
-                                  color: AppColors.azul, width: 1))),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('Aceitar',
-                              style: context.textTheme.labelSmall!
-                                  .copyWith(color: Colors.white)),
-                        ),
-                      )),
-                )
-              ],
-            )
-          ],
-        ),
-      ),
-    );
   }
 
   _onSearchChanged() {
@@ -140,7 +55,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
   @override
   Widget build(BuildContext context) {
     final AuthProvider authProviderAtt = context.watch<AuthProvider>();
-
+    log('quantidade: ${_searchResults![0].assinaturaPendente}');
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: AppBar().preferredSize, child: const AppBarLogo()),
@@ -162,7 +77,9 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                     hint: 'Digite a empresa que deseja buscar'),
               ),
               Container(
-                constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.7, minHeight: 80),
+                constraints: BoxConstraints(
+                    maxHeight: MediaQuery.of(context).size.height * 0.7,
+                    minHeight: 80),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   color: Colors.white,
@@ -195,10 +112,48 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                           setState(() {
                             OverlayApp.iniciaOverlay(context);
                           });
-                          authProviderAtt.RelogarTrocarCedente(_searchResults![index].identificador);
+                          authProviderAtt.RelogarTrocarCedente(
+                              _searchResults![index].identificador);
                         },
                         child: ListTile(
-                          title: Text(_searchResults![index].nome),
+                          title: Row(
+                            children: [
+                              Text(
+                                _searchResults![index].nome,
+                                style: context.textTheme.bodyMedium,
+                              ),
+                              Text(
+                                '/ CNPJ:${_searchResults![index].identificador}',
+                                style: context.textTheme.bodyMedium!
+                                    .copyWith(color: Colors.grey),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const Spacer(
+                                flex: 1,
+                              ),
+                              Visibility(
+                                visible:
+                                    _searchResults![index].assinaturaPendente >
+                                        0,
+                                child: CircleAvatar(
+                                    backgroundColor: AppColors.vermelho,
+                                    radius: 10.r,
+                                    child: Center(
+                                      child: Text(
+                                          _searchResults![index]
+                                                      .assinaturaPendente >=
+                                                  10
+                                              ? '9+'
+                                              : _searchResults![index]
+                                                  .assinaturaPendente
+                                                  .toString(),
+                                          style: context.textTheme.labelSmall!
+                                              .copyWith(color: Colors.white)),
+                                    )),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     );

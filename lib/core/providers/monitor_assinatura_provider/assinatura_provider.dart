@@ -22,7 +22,6 @@ class AssinaturaProvider extends ChangeNotifier {
     separaAssinaturas(assinaturasModel);
     mapearAssinaturas = assinaturasModel;
     todasAssinaturas = assinaturasModel;
-    notifyListeners();
   }
 
   bool _isDestacado = false;
@@ -31,7 +30,6 @@ class AssinaturaProvider extends ChangeNotifier {
 
   set isDestacado(bool destacado) {
     _isDestacado = destacado;
-    notifyListeners();
   }
 
   MonitorAssinaturasModel? _assinaturaSelecionada;
@@ -40,7 +38,7 @@ class AssinaturaProvider extends ChangeNotifier {
 
   set assinaturaSelecionada(MonitorAssinaturasModel? assinatura) {
     _assinaturaSelecionada = assinatura;
-    notifyListeners();
+    
   }
 
   List<MonitorAssinaturasModel> _assinaturas = [];
@@ -49,7 +47,6 @@ class AssinaturaProvider extends ChangeNotifier {
 
   set todasAssinaturas(List<MonitorAssinaturasModel> assinaturas) {
     _assinaturas = assinaturas;
-    notifyListeners();
   }
 
   List<MonitorAssinaturasModel> _assinaturasPendentes = [];
@@ -81,7 +78,6 @@ class AssinaturaProvider extends ChangeNotifier {
         _assinaturasPendentes.add(assinatura);
       }
     }
-    notifyListeners();
   }
 
   Color corStatusAssinatura(String status) {
@@ -99,7 +95,6 @@ class AssinaturaProvider extends ChangeNotifier {
     for (var assinatura in assinaturas) {
       _mapaAssinaturas[assinatura.codigoOperacao] = assinatura;
     }
-    notifyListeners();
   }
 
   void limparAssinaturas() {
