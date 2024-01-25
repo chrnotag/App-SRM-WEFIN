@@ -110,7 +110,7 @@ class _HomeViewState extends State<HomeView> {
                                     ],
                                   ),
                                   SizedBox(
-                                    height: 14,
+                                    height: 12,
                                   ),
                                   Text(
                                     'Assinatura Digital',
@@ -141,10 +141,10 @@ class _HomeViewState extends State<HomeView> {
                                     size: 40,
                                   ),
                                   SizedBox(
-                                    height: 14,
+                                    height: 12,
                                   ),
                                   Text(
-                                    'Monitor de Operação',
+                                    'Monitor de Operações',
                                     style: context.textTheme.bodyMedium!
                                         .copyWith(fontWeight: FontWeight.bold),
                                   )
@@ -179,10 +179,10 @@ class _HomeViewState extends State<HomeView> {
                                     ],
                                   ),
                                   SizedBox(
-                                    height: 14,
+                                    height: 12,
                                   ),
                                   Text(
-                                    'Central de Atendimento',
+                                    'Atendimento',
                                     style: context.textTheme.bodyMedium!
                                         .copyWith(fontWeight: FontWeight.bold),
                                   )
