@@ -228,7 +228,10 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                   widget.visualizarDocumento
                       ? FooterFixed(
                           onToggle: () {
-                            showDialog( builder: (context) => ModalListDocuments().popUp, context: context);
+                            showDialog(context: context, builder: (context) => ModalListDocuments(
+                              context: context,
+                            ).popUp);
+                            
                             setState(() {
                               assinaturaProvider.assinaturaSelecionada =
                                   assinatura;
