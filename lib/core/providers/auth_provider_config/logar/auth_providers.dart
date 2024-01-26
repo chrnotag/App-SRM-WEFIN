@@ -6,11 +6,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/auth_provider_config/logar/login_implementation.dart';
 import 'package:modular_study/core/utils/overlay.dart';
-import 'package:modular_study/models/auth_login_models/cedente_model.dart';
-import 'package:modular_study/models/auth_login_models/usuario_logado_model.dart';
+import 'package:modular_study/models/auth_login_models/SRM/cedente_model.dart';
+import 'package:modular_study/models/auth_login_models/SRM/usuario_logado_model.dart';
 import 'package:modular_study/models/user_model.dart';
-
-import '../../../../models/exceptions_responses/exception_model.dart';
 import '../../../constants/route_labels.dart';
 
 class AuthProvider extends ChangeNotifier {
@@ -47,12 +45,11 @@ class AuthProvider extends ChangeNotifier {
   set setDataUser(LoginResponse loginResponse) {
     _dataUser = loginResponse;
     _setListaCedente = loginResponse.listaCedente;
-    notifyListeners();
+    empresaSelecionada = buscarEmpresa(loginResponse.identificadorCedente!);
   }
 
-  set _setListaCedente(List<CedenteModel> listaCedente) {
-    _listaCedente = listaCedente;
-    notifyListeners();
+  set _setListaCedente(List<CedenteModel>? listaCedente) {
+    _listaCedente = listaCedente!;
   }
 
   set empresaSelecionada(CedenteModel? cedente) {
@@ -65,8 +62,7 @@ class AuthProvider extends ChangeNotifier {
         .firstWhere((cedente) => cedente.identificador == identificadorCedente);
   }
 
-  Future<void> RelogarTrocarCedente(
-      String identificadorCedente) async {
+  Future<void> RelogarTrocarCedente(String identificadorCedente) async {
     final AssinaturaProvider assinaturaProvider =
         Modular.get<AssinaturaProvider>();
     if (empresaSelecionada!.identificador != identificadorCedente) {
@@ -103,7 +99,8 @@ class AuthProvider extends ChangeNotifier {
   void _erroTrocaCedente(dynamic response) {
     OverlayApp.terminaOverlay();
     notifyListeners();
-    Fluttertoast.showToast(msg: 'Erro ao acessar o cedente. Tente novamente mais tarde.');
+    Fluttertoast.showToast(
+        msg: 'Erro ao acessar o cedente. Tente novamente mais tarde.');
   }
 
   void limparDadosUsuario() {

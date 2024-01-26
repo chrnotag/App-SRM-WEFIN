@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/providers/internet_provider.dart';
 import 'package:modular_study/core/providers/sessao_provider.dart';
@@ -20,7 +18,12 @@ class AppWidget extends StatefulWidget {
 class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
   final SessionProvider sessionProvider = Modular.get<SessionProvider>();
 
-  final List<String> listaExessaoTimeOut = [Modular.initialRoute, AppRoutes.forgetPassAuthRoute, AppRoutes.loginSRMAuthRoute, AppRoutes.loginTRUSTAuthRoute];
+  final List<String> listaExessaoTimeOut = [
+    Modular.initialRoute,
+    AppRoutes.forgetPassAuthRoute,
+    AppRoutes.loginSRMAuthRoute,
+    AppRoutes.loginTRUSTAuthRoute
+  ];
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -87,16 +90,9 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
       initialData: true,
       builder: (context, snapshot) {
         if (!snapshot.hasData || !snapshot.data!) {
-          return ScreenUtilInit(
-              designSize: Size(
-                context.width,
-                context.height,
-              ),
-              builder: (context, child) {
-                return const MaterialApp(
-                  home: SemConexaoScreen(),
-                );
-              });
+          return const MaterialApp(
+            home: SemConexaoScreen(),
+          );
         } else {
           return widgetPrincipal(context, themeProvider);
         }
@@ -122,17 +118,10 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
             sessionProvider.resetListening();
           }
         },
-        child: ScreenUtilInit(
-            designSize: Size(
-              context.width,
-              context.height,
-            ),
-            builder: (context, child) {
-              return MaterialApp.router(
-                routerConfig: Modular.routerConfig,
-                theme: themeProvider.temaAtual,
-              );
-            }),
+        child: MaterialApp.router(
+          routerConfig: Modular.routerConfig,
+          theme: themeProvider.temaAtual,
+        ),
       ),
     );
   }

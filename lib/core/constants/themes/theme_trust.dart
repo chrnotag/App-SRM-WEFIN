@@ -45,7 +45,7 @@ class ThemeTRUST {
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
             iconTheme: IconThemeData(color: AppColors.verdePrimarioTRUST)),
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: Color(0xfff1f1f1),
         backgroundColor: Colors.white,
         textTheme: TextTheme(
           bodySmall: GoogleFonts.montserrat(

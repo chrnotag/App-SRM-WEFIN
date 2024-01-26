@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
-import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
 import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
@@ -111,12 +110,12 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
       decoration: BoxDecoration(
         border: Border.all(
             color: _borderColor.value ?? Colors.transparent, width: 5),
-        borderRadius: BorderRadius.all(Radius.circular(8.r)),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
         // Restante da decoração do seu card
       ),
       child: Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(5.r)),
+          borderRadius: BorderRadius.all(Radius.circular(5)),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -131,7 +130,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                       children: [
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsets.all(8.r),
+                            padding: EdgeInsets.all(8),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -145,7 +144,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                                         label: assinatura.codigoOperacao
                                             .toString()),
                                     SizedBox(
-                                      height: 10.h,
+                                      height: 10,
                                     ),
                                     ComponentCardOperacoes(
                                         title: 'Status',
@@ -166,7 +165,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                                             DateTime.parse(
                                                 assinatura.dataOperacao))),
                                     SizedBox(
-                                      height: 10.h,
+                                      height: 10,
                                     ),
                                     ComponentCardOperacoes(
                                       title: 'Valor Bruto',
@@ -184,7 +183,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                                         title: 'Produto',
                                         label: assinatura.siglaProduto),
                                     SizedBox(
-                                      height: 10.h,
+                                      height: 10,
                                     ),
                                     ComponentCardOperacoes(
                                         title: 'Valor Liquido',
@@ -201,11 +200,11 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                           ),
                         ),
                         Container(
-                          width: 30.w,
+                          width: 30,
                           decoration: BoxDecoration(
                             color: corAssinatura,
                             borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(5.r),
+                              topRight: Radius.circular(5),
                             ),
                           ),
                         ),
@@ -218,7 +217,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                       assinarDocumento: widget.assinarDocumento,
                       isVisible: _showInfo,
                       assinantes: assinatura.assinantes,
-                      codOperacao: assinatura.codigoOperacao,
+                      codigoOperacao: assinatura.codigoOperacao,
                     ),
                   ),
                   FooterExpansible(
@@ -228,6 +227,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                         _showInfo = !_showInfo;
                       });
                     },
+                    showInfo: _showInfo,
                   )
                 ],
               ),

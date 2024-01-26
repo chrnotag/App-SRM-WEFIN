@@ -37,7 +37,7 @@ class PopUpDeslogarApp {
                 Expanded(
                   child: BotaoPadrao(
                     onPressed: () {
-                      DeslogarUsuario().deslogar();
+                      DeslogarUsuario().encerrarSessao();
                     },
                     label: 'SAIR',
                   ),

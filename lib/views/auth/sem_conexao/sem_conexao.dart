@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/enuns/theme_enum.dart';
-import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
-import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/providers/sessao_provider.dart';
 import 'package:modular_study/core/providers/theme_provider.dart';
 
@@ -43,7 +40,7 @@ class _SemConexaoScreenState extends State<SemConexaoScreen> {
               centerTitle: true,
               title: Image.asset(
                 themeProvider.logoTema,
-                scale: 3.r,
+                scale: 3,
               ),
               backgroundColor: Colors.transparent,
               shadowColor: Colors.transparent,
@@ -53,25 +50,27 @@ class _SemConexaoScreenState extends State<SemConexaoScreen> {
             Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.all(8.r),
+                  padding: EdgeInsets.all(8),
                   child: Text(
                     'Sem conexão com a internet',
-                    style: context.textTheme.bodyLarge!.copyWith(color: context.onSecondary),
+                    style: context.textTheme.bodyLarge!
+                        .copyWith(color: context.onSecondary),
                     textAlign: TextAlign.center,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(8.r),
+                  padding: EdgeInsets.all(8),
                   child: Text(
                     'Verifique sua conexão e tente novamente',
-                    style: context.textTheme.bodyMedium!.copyWith(color: context.onSecondary),
+                    style: context.textTheme.bodyMedium!
+                        .copyWith(color: context.onSecondary),
                     textAlign: TextAlign.center,
                   ),
                 ),
               ],
             ),
             Padding(
-              padding: EdgeInsets.all(8.r),
+              padding: EdgeInsets.all(8),
               child: Flex(
                 direction: Axis.horizontal,
                 children: [
@@ -81,7 +80,7 @@ class _SemConexaoScreenState extends State<SemConexaoScreen> {
                             Modular.to.pushNamed(AppRoutes.loginSRMAuthRoute);
                           },
                           child: Padding(
-                            padding: EdgeInsets.all(10.r),
+                            padding: EdgeInsets.all(10),
                             child:
                                 Text('OK', style: context.textTheme.bodyLarge),
                           )))

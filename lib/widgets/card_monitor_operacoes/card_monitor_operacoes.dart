@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
-import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
 import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
@@ -30,7 +29,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
         Modular.get<MonitorOperacoesProvider>();
     return Card(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(5.r)),
+        borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,7 +44,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsets.all(8.r),
+                          padding: EdgeInsets.all(8),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -59,7 +58,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                       label:
                                           operacao.codigoOperacao.toString()),
                                   SizedBox(
-                                    height: 10.h,
+                                    height: 10,
                                   ),
                                   ComponentCardOperacoes(
                                       title: 'Status',
@@ -78,7 +77,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                           DateTime.parse(
                                               operacao.dataOperacao))),
                                   SizedBox(
-                                    height: 10.h,
+                                    height: 10,
                                   ),
                                   ComponentCardOperacoes(
                                     title: 'Valor Bruto',
@@ -96,7 +95,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                       title: 'Produto',
                                       label: operacao.siglaProduto),
                                   SizedBox(
-                                    height: 10.h,
+                                    height: 10,
                                   ),
                                   ComponentCardOperacoes(
                                       title: 'Valor Liquido',
@@ -117,7 +116,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                 Visibility(
                   visible: isVisivel(operacao),
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.w),
+                    padding: EdgeInsets.symmetric(horizontal: 8),
                     child: Column(
                       children: [
                         Divider(),
@@ -164,7 +163,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
             ),
           ),
           Container(
-            width: 30.w,
+            width: 30,
             height: isVisivel(operacao)
                 ? context.height * 0.155
                 : context.height * 0.115,
@@ -172,8 +171,8 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
               color: operacaoProvider
                   .corOperacao[operacao.statusOperacao.toUpperCase().trim()],
               borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(5.r),
-                  bottomRight: Radius.circular(5.r)),
+                  topRight: Radius.circular(5),
+                  bottomRight: Radius.circular(5)),
             ),
           ),
         ],
