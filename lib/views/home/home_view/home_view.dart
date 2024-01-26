@@ -182,7 +182,7 @@ class _HomeViewState extends State<HomeView> {
                                     height: 12,
                                   ),
                                   Text(
-                                    'Atendimento',
+                                    'Central de Atendimento',
                                     style: context.textTheme.bodyMedium!
                                         .copyWith(fontWeight: FontWeight.bold),
                                   )
