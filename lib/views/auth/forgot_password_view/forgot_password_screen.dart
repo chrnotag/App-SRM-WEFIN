@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
@@ -52,10 +51,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     Column(
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(bottom: 10.w),
+                          padding: EdgeInsets.only(bottom: 10),
                           child: SizedBox(
-                            height: 120.h,
-                            width: 100.w,
+                            height: 120,
+                            width: 100,
                             child: SvgPicture.asset(
                               Assets.imagesCadeado,
                             color: context.onSecondary,
@@ -63,7 +62,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           ),
                         ),
                         SizedBox(
-                          width: 100.w,
+                          width: 100,
                           child: Text(
                             'Esqueci Minha Senha',
                             textAlign: TextAlign.center,
@@ -73,10 +72,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 15.h,
+                          height: 15,
                         ),
                         SizedBox(
-                          width: 220.w,
+                          width: 220,
                           child: Text(
                             'Para recuperar sua senha por favor, digite o seu CPF e e-mail',
                             textAlign: TextAlign.center,
@@ -88,7 +87,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       ],
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 30.w),
+                      padding: EdgeInsets.symmetric(horizontal: 30),
                       child: const AuthForm(
                         label: 'Enviar',
                         visible: false,

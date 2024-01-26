@@ -49,7 +49,7 @@ class _HomeViewState extends State<HomeView> {
             Column(
               children: [
                 SelecaoEmpresa(
-                  nomeEmpresa: authProvider.empresaSelecionada!.nome,
+                  nomeEmpresa: authProvider.empresaSelecionada?.nome ?? "Sem empresas no grupo economico",
                   changeble: true,
                 ),
                 Flexible(child: Container()),

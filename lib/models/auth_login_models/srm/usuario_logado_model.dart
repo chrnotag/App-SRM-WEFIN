@@ -12,10 +12,9 @@ class LoginResponse {
     required this.identificadorUsuario,
     required this.identificadorCedente,
     required this.token,
-    required this.tokenType,
+    required this.tipoToken,
     required this.dataExpiraSessao,
     required this.idDevice,
-    required this.numeroDeSerie,
     required this.listaCedente,
     required this.urlTermoUso,
     required this.urlPoliticaPrivacidade,
@@ -26,10 +25,9 @@ class LoginResponse {
   late final String identificadorUsuario;
   late final String identificadorCedente;
   late final String token;
-  late final String? tokenType;
+  late final String tipoToken;
   late final DateTime dataExpiraSessao;
   late final String idDevice;
-  late final int? numeroDeSerie;
   late final List<CedenteModel> listaCedente;
   late final String urlTermoUso;
   late final String urlPoliticaPrivacidade;

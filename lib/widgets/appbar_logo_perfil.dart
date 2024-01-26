@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/providers/theme_provider.dart';
@@ -18,18 +17,18 @@ class AppBarLogo extends StatelessWidget {
       backgroundColor: Colors.transparent,
       shadowColor: Colors.transparent,
       centerTitle: true,
-      title: Image.asset(themeProvider.logoTema, width: 70.w),
+      title: Image.asset(themeProvider.logoTema, width: 70),
       actions: [
         Padding(
-          padding: EdgeInsets.fromLTRB(0, 8.h, 8.w, 8.h),
+          padding: EdgeInsets.fromLTRB(0, 8, 8, 8),
           child: FloatingActionButton.small(
             onPressed: () => Modular.to.pushNamed(AppRoutes.menuAppRoute),
             backgroundColor: Colors.transparent,
             elevation: 0,
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50.r),
+                borderRadius: BorderRadius.circular(50),
                 side: BorderSide(width: 1, color: context.onSecondary)),
-            child: Icon(Icons.perm_identity, size: 30.r),
+            child: Icon(Icons.perm_identity, size: 30),
           ),
         )
       ],

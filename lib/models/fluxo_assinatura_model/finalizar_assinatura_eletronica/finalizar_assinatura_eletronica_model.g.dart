@@ -25,7 +25,7 @@ Map<String, dynamic> _$FinalizarAssinaturaEletronicaModelToJson(
     <String, dynamic>{
       'codigoOperacao': instance.codigoOperacao,
       'deslocamentoFusoHorarioUsuario': instance.deslocamentoFusoHorarioUsuario,
-      'evidencias': instance.evidencias?.toJson(),
+      'evidencias': instance.evidencias,
       'codigoEmail': instance.codigoEmail,
       'ticket': instance.ticket,
       'chaveDocumento': instance.chaveDocumento,
@@ -39,7 +39,7 @@ Evidencias _$EvidenciasFromJson(Map<String, dynamic> json) => Evidencias(
 
 Map<String, dynamic> _$EvidenciasToJson(Evidencias instance) =>
     <String, dynamic>{
-      'geolocalizacao': instance.geolocalizacao?.toJson(),
+      'geolocalizacao': instance.geolocalizacao,
     };
 
 Geolocalizacao _$GeolocalizacaoFromJson(Map<String, dynamic> json) =>

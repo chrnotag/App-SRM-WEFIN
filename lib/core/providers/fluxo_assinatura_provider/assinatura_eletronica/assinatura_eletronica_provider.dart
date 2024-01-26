@@ -1,18 +1,14 @@
 // ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/constants/route_labels.dart';
-import 'package:modular_study/core/implementations_config/export_impl.dart';
 import 'package:modular_study/core/providers/fluxo_assinatura_provider/assinatura_eletronica/assinatura_eletronica_impl.dart';
 import 'package:modular_study/core/providers/fluxo_assinatura_provider/assinatura_eletronica/iniciar_assinatura_eletronica_impl.dart';
 import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
-import 'package:modular_study/core/utils/handle_permissions.dart';
-import 'package:modular_study/core/utils/overlay.dart';
 import 'package:modular_study/main.dart';
 import 'package:modular_study/models/fluxo_assinatura_model/finalizar_assinatura_eletronica/finalizar_assinatura_eletronica_model.dart';
 import 'package:modular_study/models/fluxo_assinatura_model/iniciar_assinatura_eletronica/iniciar_assinatura_eletronica_model.dart';
@@ -21,6 +17,8 @@ import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
 
 import '../../../../models/fluxo_assinatura_model/iniciar_assinatura_eletronica/response/resposta_inic_ass_eletronica.dart';
 import '../../../../widgets/loader_widget.dart';
+import '../../../constants/route_labels.dart';
+import '../../../utils/handle_permissions.dart';
 import '../../monitor_operacao_provider/monitor_operacoes_provider.dart';
 
 class AssinaturaEletronicaProvider extends ChangeNotifier {
@@ -29,12 +27,12 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
   FinalizarAssinaturaEletronicaModel? get assinaturaEletronica =>
       _assinaturaEletronicaModel;
 
-  late int _codOperacao;
+  late int _codigoOperacao;
 
-  int get codOperacao => _codOperacao;
+  int get codigoOperacao => _codigoOperacao;
 
-  set codOperacao(int cod) {
-    _codOperacao = cod;
+  set codigoOperacao(int cod) {
+    _codigoOperacao = cod;
     notifyListeners();
   }
 
@@ -78,7 +76,7 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
               DateTime.now().timeZoneOffset.inMinutes.toString(),
           evidencias: Evidencias(geolocalizacao: geolocalizacao!),
           chaveDocumento: respostaAssinaturaEletronica.chaveDocumento,
-          codigoOperacao: codOperacao,
+          codigoOperacao: codigoOperacao,
           idDocumentoLacuna: respostaAssinaturaEletronica.idDocumentoLacuna,
           ticket: respostaAssinaturaEletronica.ticket);
       final result =
@@ -106,21 +104,21 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
         icon: Icon(
           LineIcons.exclamationCircle,
           color: Colors.yellow.shade700,
-          size: 50.r,
+          size: 50,
         ),
         title: Column(
           children: [
             Text(
                 'Por favor, informe o codigo recebido em seu email para assinar a operação ${assinaturaProvider.assinaturaSelecionada!.siglaProduto} nº${assinaturaProvider.assinaturaSelecionada!.codigoOperacao}'),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.h),
+              padding: EdgeInsets.symmetric(vertical: 10),
               child: TextField(
                 controller: codigoEmail,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderSide:
                             const BorderSide(color: Colors.black, width: 1),
-                        borderRadius: BorderRadius.all(Radius.circular(6.r))),
+                        borderRadius: BorderRadius.all(Radius.circular(6))),
                     labelText: 'Informe o codigo',
                     hintText: 'Informe o codigo'),
               ),
@@ -142,7 +140,7 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
                   }
                 }),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.h),
+              padding: EdgeInsets.symmetric(vertical: 10),
               child: BotaoPadrao(label: 'Cancelar', onPressed: () {}),
             )
           ],
@@ -157,7 +155,7 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
       icon: Icon(
         LineIcons.exclamationCircle,
         color: Colors.yellow.shade700,
-        size: 50.r,
+        size: 50,
       ),
       title: Column(
         children: [
@@ -167,13 +165,13 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
             textAlign: TextAlign.center,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 10.h),
+            padding: EdgeInsets.symmetric(vertical: 10),
             child: BotaoPadrao(
                 label: 'Confirmar',
                 onPressed: () async {
                   final response = await IniciarAssinaturaEletronicaImpl(
-                          codOperacaoModel: IniciarAssinaturaEletronicaModel(
-                              codigoOperacao: codOperacao))
+                          codigoOperacaoModel: IniciarAssinaturaEletronicaModel(
+                              codigoOperacao: codigoOperacao))
                       .iniciarAssinaturaEletronica();
                   if (response.error != null) {
                     Fluttertoast.showToast(
@@ -203,7 +201,7 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
               icon: Icon(
                 Icons.check_circle_outline,
                 color: myNavigatorKey.currentState!.context.primaryColor,
-                size: 50.r,
+                size: 50,
               ),
               title: Column(
                 children: [
@@ -212,7 +210,7 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
                     style: myNavigatorKey.currentContext!.textTheme.labelMedium,
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10.h),
+                    padding: EdgeInsets.symmetric(vertical: 10),
                     child: RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(children: [
@@ -243,7 +241,7 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
                         List<MonitorAssinaturasModel> assinaturasPendentes =
                             assinaturaProvider.assinaturasPendentes;
                         operacaoProvider.aconragemAssinatura(
-                            assinaturaProvider.todasAssinaturas, codOperacao);
+                            assinaturaProvider.todasAssinaturas, codigoOperacao);
                         Modular.to.pushNamed(AppRoutes.assinaturaDigitalRoute,
                             arguments: {
                               'assinaturas':
@@ -254,7 +252,7 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
                             });
                       }),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10.h),
+                    padding: EdgeInsets.symmetric(vertical: 10),
                     child: BotaoPadrao(
                         label: 'Realizar nova assinatura',
                         filled: false,

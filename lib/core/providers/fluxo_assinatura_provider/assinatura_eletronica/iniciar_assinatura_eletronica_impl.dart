@@ -8,9 +8,9 @@ import '../../../implementations_config/export_impl.dart';
 import '../../auth_provider_config/deslogar/verificar_sessao.dart';
 
 class IniciarAssinaturaEletronicaImpl {
-  IniciarAssinaturaEletronicaModel codOperacaoModel;
+  IniciarAssinaturaEletronicaModel codigoOperacaoModel;
 
-  IniciarAssinaturaEletronicaImpl({required this.codOperacaoModel});
+  IniciarAssinaturaEletronicaImpl({required this.codigoOperacaoModel});
 
   Future<ApiResponse<dynamic>> iniciarAssinaturaEletronica() async {
     AssinaturaEletronicaProvider assinaturaEletronicaProvider =
@@ -23,7 +23,7 @@ class IniciarAssinaturaEletronicaImpl {
       'Authorization': authProvider.dataUser!.token,
       'plataforma': themeProvider.temaSelecionado.name
     };
-    final body = json.encode(codOperacaoModel);
+    final body = json.encode(codigoOperacaoModel);
     final url = Uri.parse(EndPoints.iniciarAssinaturaEletronica);
     try {
       final response = await http.post(url, body: body, headers: headers);
