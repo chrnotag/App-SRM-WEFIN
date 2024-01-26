@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
+import 'package:modular_study/widgets/card_monitor_assinaturas/pdf_viewer.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
 
 class ModalListDocuments {
@@ -83,7 +84,19 @@ class ModalListDocuments {
                                 padding: EdgeInsets.zero,
                                 backgroundColor: AppColors.brancoGelo,
                               ),
-                              onPressed: () {},
+                              onPressed: () async {
+                                String filePath =
+                                    'path/to/your/pdf/file.pdf'; // Replace with the actual path
+
+                                // Open the PDF in a new screen
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        PDFViewerScreen(filePath: filePath),
+                                  ),
+                                );
+                              },
                               child: Text('Ver',
                                   style: context.textTheme.labelSmall!.copyWith(
                                     color: AppColors.azul,
