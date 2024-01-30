@@ -1,14 +1,12 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
-import 'package:line_icons/line_icons.dart';
-import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
+import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/providers/monitor_operacao_provider/monitor_operacoes_provider.dart';
 import 'package:modular_study/core/utils/money_format.dart';
+import 'package:modular_study/core/utils/valor_liquido.dart';
 import 'package:modular_study/models/monitor_operacoes_model/monitor_operacoes_model.dart';
 import '../../core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import '../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
@@ -27,9 +25,11 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
   @override
   Widget build(BuildContext context) {
     final operacao = widget.operacoes;
+    final MonitorOperacoesProvider operacaoProvider =
+        Modular.get<MonitorOperacoesProvider>();
     return Card(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(5.r)),
+        borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -44,7 +44,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsets.all(8.r),
+                          padding: EdgeInsets.all(8),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -58,7 +58,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                       label:
                                           operacao.codigoOperacao.toString()),
                                   SizedBox(
-                                    height: 10.h,
+                                    height: 10,
                                   ),
                                   ComponentCardOperacoes(
                                       title: 'Status',
@@ -77,7 +77,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                           DateTime.parse(
                                               operacao.dataOperacao))),
                                   SizedBox(
-                                    height: 10.h,
+                                    height: 10,
                                   ),
                                   ComponentCardOperacoes(
                                     title: 'Valor Bruto',
@@ -95,12 +95,15 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                       title: 'Produto',
                                       label: operacao.siglaProduto),
                                   SizedBox(
-                                    height: 10.h,
+                                    height: 10,
                                   ),
                                   ComponentCardOperacoes(
                                       title: 'Valor Liquido',
-                                      label: FormatarDinheiro.BR(
-                                          operacao.valorLiquido)),
+                                      label:
+                                          ValorLiquido.regraExibirValorLiquido(
+                                              statusOperacao:
+                                                  operacao.statusOperacao,
+                                              valor: operacao.valorLiquido)),
                                 ],
                               ),
                             ],
@@ -113,7 +116,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                 Visibility(
                   visible: isVisivel(operacao),
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.w),
+                    padding: EdgeInsets.symmetric(horizontal: 8),
                     child: Column(
                       children: [
                         Divider(),
@@ -123,7 +126,8 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                             Text('Ver Assinaturas'),
                             ElevatedButton(
                                 onPressed: () {
-                                  final MonitorOperacoesProvider operacaoProvider =
+                                  final MonitorOperacoesProvider
+                                      operacaoProvider =
                                       Modular.get<MonitorOperacoesProvider>();
                                   final AssinaturaProvider assinaturaProvider =
                                       Modular.get<AssinaturaProvider>();
@@ -144,9 +148,11 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                         'destacar': true,
                                       });
                                 },
-                                child: Text('Assinaturas', style: context.textTheme.bodyMedium!.copyWith(
-                                  color: Colors.white
-                                ),))
+                                child: Text(
+                                  'Assinaturas',
+                                  style: context.textTheme.bodyMedium!
+                                      .copyWith(color: Colors.white),
+                                ))
                           ],
                         ),
                       ],
@@ -157,12 +163,16 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
             ),
           ),
           Container(
-            width: 30.w,
-            height: 180.h,
+            width: 30,
+            height: isVisivel(operacao)
+                ? context.height * 0.155
+                : context.height * 0.115,
             decoration: BoxDecoration(
+              color: operacaoProvider
+                  .corOperacao[operacao.statusOperacao.toUpperCase().trim()],
               borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(5.r),
-                  bottomRight: Radius.circular(5.r)),
+                  topRight: Radius.circular(5),
+                  bottomRight: Radius.circular(5)),
             ),
           ),
         ],

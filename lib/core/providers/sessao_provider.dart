@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/constants/themes/theme_configs.dart';
-import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
+import 'package:modular_study/core/providers/auth_provider_config/deslogar/verificar_sessao.dart';
+import 'package:modular_study/widgets/popup_generico.dart';
 import 'auth_provider_config/logar/auth_providers.dart';
 import '../../main.dart';
 
@@ -52,38 +51,16 @@ class SessionProvider with ChangeNotifier {
       _isShowingDialog = true;
       stopListening();
       showDialog(
-        barrierDismissible: false,
-        context: myNavigatorKey.currentContext!,
-        builder: (context) => AlertDialog(
-          title: Text(
-            'Atenção!',
-            style:
-                context.textTheme.bodyLarge!.copyWith(color: AppColors.vermelho),
-          ),
-          content: Text(
-            label ?? 'Nenhuma ação foi realizada nos últimos 60 segundos. Você será direcionado para realizar o login novamente.',
-            style: context.textTheme.bodyMedium,
-          ),
-          actions: [
-            Row(
-              children: [
-                Expanded(
-                  child: BotaoPadrao(
-                    label: 'OK',
-                    onPressed: () {
-                      _isShowingDialog = false;
-                      authProvider.limparDadosUsuario();
-                      stopListening();
-                      Modular.to.navigate(Modular.initialRoute);
-                      Modular.to.pop();
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      );
+          barrierDismissible: false,
+          context: myNavigatorKey.currentContext!,
+          builder: (context) => AlertDialogGenerico(
+              title: 'Atenção!',
+              msg:
+                  'Nenhuma ação foi realizada nos últimos 60 segundos. Você será direcionado para realizar o login novamente.',
+              onPressed: () {
+                VerificarSessao.limparDadosSessao();
+                Modular.to.navigate(Modular.initialRoute);
+              }));
     }
   }
 }

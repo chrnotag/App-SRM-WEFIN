@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
@@ -26,13 +25,13 @@ class Menu extends StatelessWidget {
       appBar: PreferredSize(
           preferredSize: AppBar().preferredSize, child: const AppBarLogo()),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         child: Column(
           children: [
             Text('Meu Perfil',
                 style: context.textTheme.bodyMedium!.copyWith(color: context.onSecondary)),
             Padding(
-              padding: EdgeInsets.only(bottom: 15.h),
+              padding: EdgeInsets.only(bottom: 15),
               child: Text('Visualize seus dados e tire suas dúvidas',
                   style: context.textTheme.bodySmall!.copyWith(
                     color: context.onSecondary,
@@ -41,7 +40,7 @@ class Menu extends StatelessWidget {
             Expanded(
               child: Card(
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.r)),
+                    borderRadius: BorderRadius.circular(8)),
                 child: Column(
                   children: [
                     Flexible(
@@ -49,10 +48,10 @@ class Menu extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(30.r),
+                            padding: EdgeInsets.all(30),
                             child: SvgPicture.asset(
                               Assets.empresaIcon,
-                              width: 70.w,
+                              width: 70,
                               color: context.primaryColor,
                             ),
                           ),
@@ -61,7 +60,7 @@ class Menu extends StatelessWidget {
                                 'Empresa não selecionada',
                             style: context.textTheme.bodyLarge!.copyWith(
                               fontWeight: FontWeight.w600,
-                              letterSpacing: 1.5.sp,
+                              letterSpacing: 1.5,
                             ),
                             textAlign: TextAlign.center,
                           ),
@@ -72,7 +71,7 @@ class Menu extends StatelessWidget {
                         icon: LineIcons.questionCircle,
                         title: 'Ajuda',
                         onTap: () =>
-                            Modular.to.pushNamed(AppRoutes.helpScreenRoute)),
+                             Modular.to.pushNamed(AppRoutes.helpScreenRoute)),
                     _MenuItem(
                         icon: Icons.exit_to_app,
                         title: 'Sair',
@@ -85,7 +84,7 @@ class Menu extends StatelessWidget {
                                 .popUp,
                           );
                         }),
-                    SizedBox(height: 6.h)
+                    SizedBox(height: 6)
                   ],
                 ),
               ),

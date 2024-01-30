@@ -1,12 +1,11 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_implementation.dart';
 import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:modular_study/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
+
+import '../../utils/money_format.dart';
 
 class AssinaturaProvider extends ChangeNotifier {
   AssinaturaProvider._();
@@ -23,7 +22,6 @@ class AssinaturaProvider extends ChangeNotifier {
     separaAssinaturas(assinaturasModel);
     mapearAssinaturas = assinaturasModel;
     todasAssinaturas = assinaturasModel;
-    notifyListeners();
   }
 
   bool _isDestacado = false;
@@ -32,7 +30,6 @@ class AssinaturaProvider extends ChangeNotifier {
 
   set isDestacado(bool destacado) {
     _isDestacado = destacado;
-    notifyListeners();
   }
 
   MonitorAssinaturasModel? _assinaturaSelecionada;
@@ -41,7 +38,7 @@ class AssinaturaProvider extends ChangeNotifier {
 
   set assinaturaSelecionada(MonitorAssinaturasModel? assinatura) {
     _assinaturaSelecionada = assinatura;
-    notifyListeners();
+    
   }
 
   List<MonitorAssinaturasModel> _assinaturas = [];
@@ -50,7 +47,6 @@ class AssinaturaProvider extends ChangeNotifier {
 
   set todasAssinaturas(List<MonitorAssinaturasModel> assinaturas) {
     _assinaturas = assinaturas;
-    notifyListeners();
   }
 
   List<MonitorAssinaturasModel> _assinaturasPendentes = [];
@@ -82,20 +78,13 @@ class AssinaturaProvider extends ChangeNotifier {
         _assinaturasPendentes.add(assinatura);
       }
     }
-    notifyListeners();
   }
 
-  Widget traduzirStatusAssinatura(String status, BuildContext context) {
-    log("status assinatura: $status");
-    return status.trim() == "Aguardando Assinatura"
-        ? Text(
-            "Aguardando Assinatura",
-            style: context.textTheme.bodySmall!
-                .copyWith(color: AppColors.azulPrimarioSRM),
-          )
-        : Text("Assinado",
-            style:
-                context.textTheme.bodySmall!.copyWith(color: AppColors.verde));
+  Color corStatusAssinatura(String status) {
+    if (status.toLowerCase().trim() == "aguardando assinatura") {
+      return AppColors.azulPrimarioSRM;
+    }
+    return AppColors.verdePrimarioTRUST;
   }
 
   Map<int, MonitorAssinaturasModel> _mapaAssinaturas = {};
@@ -106,14 +95,12 @@ class AssinaturaProvider extends ChangeNotifier {
     for (var assinatura in assinaturas) {
       _mapaAssinaturas[assinatura.codigoOperacao] = assinatura;
     }
-    notifyListeners();
   }
 
   void limparAssinaturas() {
-    todasAssinaturas = [];
-    assinaturasPendentes = [];
-    assinaturaSelecionada = null;
-    assinaturas = [];
+    _assinaturas = [];
+    _assinaturasPendentes = [];
+    _assinaturaSelecionada = null;
     _mapaAssinaturas = {};
   }
 }

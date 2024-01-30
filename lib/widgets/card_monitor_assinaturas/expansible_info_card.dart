@@ -4,12 +4,14 @@ class _ExpansibleInfoCard extends StatefulWidget {
   final bool isVisible;
   final List<Assinante> assinantes;
   final bool assinarDocumento;
+  final int codigoOperacao;
 
   const _ExpansibleInfoCard(
       {super.key,
       required this.isVisible,
       required this.assinantes,
-      this.assinarDocumento = false});
+      this.assinarDocumento = false,
+      required this.codigoOperacao});
 
   @override
   State<_ExpansibleInfoCard> createState() => __ExpansibleInfoCardState();
@@ -32,25 +34,34 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Divider(),
-              FlutterCarousel(
-                  items: assinantes
-                      .expand((assinante) => assinante.informacoesAssinante.map(
-                          (info) => _construirTelaInformacoesCarrossel(
-                              assinante, info, certificadoProvider)))
-                      .toList(),
-                  options: CarouselOptions(
-                    showIndicator: true,
-                    controller: carouselController,
-                    scrollDirection: Axis.horizontal,
-                    floatingIndicator: false,
-                    slideIndicator: CircularSlideIndicator(
-                        padding: EdgeInsets.only(bottom: 30.h),
-                        indicatorBorderColor:
-                            Colors.grey.shade500.withAlpha(50),
-                        currentIndicatorColor: context.primaryColor,
-                        indicatorBackgroundColor:
-                            context.primaryColor.withAlpha(80)),
-                  ))
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 8),
+                child: SizedBox(
+                  height: 300,
+                  width: context.width,
+                  child: FlutterCarousel(
+                      items: assinantes
+                          .expand((assinante) => assinante.informacoesAssinante
+                              .map((info) => SingleChildScrollView(
+                                    child: _construirTelaInformacoesCarrossel(
+                                        assinante, info, certificadoProvider),
+                                  )))
+                          .toList(),
+                      options: CarouselOptions(
+                        showIndicator: true,
+                        controller: carouselController,
+                        scrollDirection: Axis.horizontal,
+                        floatingIndicator: false,
+                        slideIndicator: CircularSlideIndicator(
+                            padding: EdgeInsets.only(bottom: 10),
+                            indicatorBorderColor:
+                                Colors.grey.shade500.withAlpha(50),
+                            currentIndicatorColor: context.primaryColor,
+                            indicatorBackgroundColor:
+                                context.primaryColor.withAlpha(80)),
+                      )),
+                ),
+              )
             ],
           )
         : Container();
@@ -63,7 +74,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     bool filtroBotaoAssinar() {
       return assinante.informacoesAssinante.any((element) =>
-      authProvider.dataUser!.identificadorUsuario ==
+          authProvider.dataUser!.identificadorUsuario ==
           element.identificadorAssinador);
     }
 
@@ -75,7 +86,8 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            IntrinsicHeight(
+            SizedBox(
+              width: context.width * 0.3,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -88,15 +100,19 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                         style: context.textTheme.bodyMedium,
                       ),
                       ...info.papeis
-                          .map((papel) => Text(
-                                papel.replaceAll(RegExp(r'[\[\],]'), ''),
-                                style: context.textTheme.bodySmall,
-                              ))
+                          .map(
+                            (papel) => Text(
+                              papel.replaceAll(RegExp(r'[\[\],]'), ''),
+                              style: context.textTheme.bodySmall,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          )
                           .toList(),
                     ],
                   ),
                   SizedBox(
-                    height: 8.h,
+                    height: 8,
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -109,11 +125,13 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                       Text(
                         info.nomeProcurador ?? "",
                         style: context.textTheme.bodySmall,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       )
                     ],
                   ),
                   SizedBox(
-                    height: 8.h,
+                    height: 8,
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -123,12 +141,16 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                         'Status',
                         style: context.textTheme.bodyMedium,
                       ),
-                      assinaturaProvider.traduzirStatusAssinatura(
-                          info.statusAssinatura, context)
+                      Text(
+                        info.statusAssinatura,
+                        style: context.textTheme.bodySmall!.copyWith(
+                            color: assinaturaProvider
+                                .corStatusAssinatura(info.statusAssinatura)),
+                      ),
                     ],
                   ),
                   SizedBox(
-                    height: 8.h,
+                    height: 8,
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -142,6 +164,8 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                         assinante.nomeAssinante
                             .replaceAll(RegExp(r'[\[\],]'), ''),
                         style: context.textTheme.bodySmall,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       )
                     ],
                   ),
@@ -162,15 +186,19 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                         style: context.textTheme.bodyMedium,
                       ),
                       ...info.documentos
-                          .map((doc) => Text(
-                                doc.nome.replaceAll(RegExp(r'[\[\],]'), ''),
-                                style: context.textTheme.bodySmall,
-                              ))
+                          .map(
+                            (doc) => Text(
+                              doc.nome.replaceAll(RegExp(r'[\[\],]'), ''),
+                              style: context.textTheme.bodySmall,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          )
                           .toList(),
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.h),
+                    padding: EdgeInsets.symmetric(vertical: 8),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,7 +227,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                         info.dataAssinatura != null
                             ? DateFormat("dd/MM/yyyy")
                                 .format(DateTime.parse(info.dataAssinatura!))
-                            : "",
+                            : "--/--/----",
                         style: context.textTheme.bodySmall,
                       ),
                     ],
@@ -209,17 +237,21 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
             ),
           ],
         ),
-        Visibility(
-          visible: widget.assinarDocumento && filtroBotaoAssinar(),
-          child: SizedBox(
-              width: context.width * 0.7,
-              child: BotaoPadrao(
-                  onPressed: () async {
-                    IniciarAssinaturaProvider iniciarAssinatura =
-                        Modular.get<IniciarAssinaturaProvider>();
-                    iniciarAssinatura.IniciarAssinatura(info);
-                  },
-                  label: "Assinar Operação")),
+        Padding(
+          padding: EdgeInsets.all(15),
+          child: Visibility(
+            visible: widget.assinarDocumento && filtroBotaoAssinar(),
+            child: BotaoPadrao(
+                onPressed: () async {
+                  AssinaturaEletronicaProvider assinaturaEletronicaProvider =
+                      Modular.get<AssinaturaEletronicaProvider>();
+                  assinaturaEletronicaProvider.codigoOperacao = widget.codigoOperacao;
+                  IniciarAssinaturaProvider iniciarAssinatura =
+                      Modular.get<IniciarAssinaturaProvider>();
+                  iniciarAssinatura.IniciarAssinatura(info, context);
+                },
+                label: "Assinar Operação"),
+          ),
         )
       ],
     );

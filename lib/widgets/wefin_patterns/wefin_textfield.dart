@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:modular_study/core/constants/enuns/theme_enum.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/providers/theme_provider.dart';
-
 import '../../core/constants/themes/theme_configs.dart';
 
 class WefinTextFormField extends StatefulWidget {
@@ -14,6 +9,8 @@ class WefinTextFormField extends StatefulWidget {
   final bool obscureText;
   final int? maxLength;
   final VoidCallback? onTap;
+  final Color? textColor;
+
   const WefinTextFormField(
       {Key? key,
       required this.label,
@@ -21,8 +18,10 @@ class WefinTextFormField extends StatefulWidget {
       this.controller,
       this.validator,
       this.maxLength,
-      this.onTap})
+      this.onTap,
+      this.textColor})
       : super(key: key);
+
   @override
   _WefinTextFormFieldState createState() => _WefinTextFormFieldState();
 }
@@ -44,19 +43,18 @@ class _WefinTextFormFieldState extends State<WefinTextFormField> {
       validator: widget.validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       maxLength: widget.maxLength,
-      style:  TextStyle(
-        color: context.inverseSurface,
+      style: TextStyle(
+        color: widget.textColor ?? context.inverseSurface,
       ),
       cursorColor: context.primaryColor,
       decoration: InputDecoration(
         labelText: widget.label,
-        labelStyle:
-            context.textTheme.bodyMedium!.copyWith(color: AppColors.labelText),
+        labelStyle: context.textTheme.bodyMedium!.copyWith(color: Colors.grey),
         border: UnderlineInputBorder(
-          borderRadius: BorderRadius.circular(4.r),
+          borderRadius: BorderRadius.circular(4),
         ),
         focusedBorder: UnderlineInputBorder(
-          borderRadius: BorderRadius.circular(4.r),
+          borderRadius: BorderRadius.circular(4),
           borderSide: BorderSide(color: context.primaryColor),
         ),
         suffixIcon: widget.obscureText

@@ -4,14 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
-import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
 import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
+import 'package:modular_study/core/providers/fluxo_assinatura_provider/assinatura_eletronica/assinatura_eletronica_provider.dart';
 import 'package:modular_study/core/providers/fluxo_assinatura_provider/iniciar_assinatura/iniciar_assinatura_provider.dart';
 import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:modular_study/core/providers/certificado_provider/importar_certificado_provider.dart';
 import 'package:modular_study/core/utils/money_format.dart';
+import 'package:modular_study/core/utils/valor_liquido.dart';
 import 'package:modular_study/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
 import '../../core/constants/themes/theme_configs.dart';
@@ -102,19 +103,19 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
     final assinatura = widget.assinatura;
     final AssinaturaProvider assinaturaProvider =
         context.watch<AssinaturaProvider>();
-    final Color corAssinatura =
-        assinaturaProvider.definirCorStatusAssinatura(assinatura.statusAssinaturaDigital);
+    final Color corAssinatura = assinaturaProvider
+        .definirCorStatusAssinatura(assinatura.statusAssinaturaDigital);
     return AnimatedContainer(
       duration: const Duration(seconds: 1),
       decoration: BoxDecoration(
         border: Border.all(
             color: _borderColor.value ?? Colors.transparent, width: 5),
-        borderRadius: BorderRadius.all(Radius.circular(8.r)),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
         // Restante da decoração do seu card
       ),
       child: Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(5.r)),
+          borderRadius: BorderRadius.all(Radius.circular(5)),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -129,7 +130,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                       children: [
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsets.all(8.r),
+                            padding: EdgeInsets.all(8),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -143,11 +144,12 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                                         label: assinatura.codigoOperacao
                                             .toString()),
                                     SizedBox(
-                                      height: 10.h,
+                                      height: 10,
                                     ),
                                     ComponentCardOperacoes(
                                         title: 'Status',
-                                        label: assinatura.statusAssinaturaDigital,
+                                        label:
+                                            assinatura.statusAssinaturaDigital,
                                         textStyle: context.textTheme.bodySmall!
                                             .copyWith(color: corAssinatura)),
                                   ],
@@ -163,7 +165,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                                             DateTime.parse(
                                                 assinatura.dataOperacao))),
                                     SizedBox(
-                                      height: 10.h,
+                                      height: 10,
                                     ),
                                     ComponentCardOperacoes(
                                       title: 'Valor Bruto',
@@ -181,12 +183,16 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                                         title: 'Produto',
                                         label: assinatura.siglaProduto),
                                     SizedBox(
-                                      height: 10.h,
+                                      height: 10,
                                     ),
                                     ComponentCardOperacoes(
                                         title: 'Valor Liquido',
-                                        label: FormatarDinheiro.BR(
-                                            assinatura.valorLiquido)),
+                                        label: ValorLiquido
+                                            .regraExibirValorLiquido(
+                                                statusOperacao:
+                                                    assinatura.statusOperacao,
+                                                valor:
+                                                    assinatura.valorLiquido)),
                                   ],
                                 ),
                               ],
@@ -194,11 +200,11 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                           ),
                         ),
                         Container(
-                          width: 30.w,
+                          width: 30,
                           decoration: BoxDecoration(
                             color: corAssinatura,
                             borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(5.r),
+                              topRight: Radius.circular(5),
                             ),
                           ),
                         ),
@@ -211,6 +217,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                       assinarDocumento: widget.assinarDocumento,
                       isVisible: _showInfo,
                       assinantes: assinatura.assinantes,
+                      codigoOperacao: assinatura.codigoOperacao,
                     ),
                   ),
                   FooterExpansible(
@@ -220,6 +227,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                         _showInfo = !_showInfo;
                       });
                     },
+                    showInfo: _showInfo,
                   )
                 ],
               ),

@@ -3,10 +3,10 @@ import 'package:modular_study/core/providers/auth_provider_config/deslogar/deslo
 import 'package:modular_study/core/providers/auth_provider_config/deslogar/verificar_sessao.dart';
 
 class DeslogarUsuario {
-  Future<dynamic> deslogar() => DeslogarImpl().deslogar().then((value) => _verificarSessao());
+  Future<dynamic> _deslogar() => DeslogarImpl().deslogar();
 
-  void _verificarSessao() async {
-    await deslogar().then((value) {
+  void encerrarSessao() async {
+    await _deslogar().then((value) {
       VerificarSessao.limparDadosSessao();
       Modular.to.navigate(Modular.initialRoute);
     });

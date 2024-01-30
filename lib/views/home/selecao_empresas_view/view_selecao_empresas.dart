@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:modular_study/core/providers/sessao_provider.dart';
 import 'package:modular_study/core/utils/overlay.dart';
-import 'package:modular_study/models/auth_login_models/cedente_model.dart';
+import 'package:modular_study/models/auth_login_models/SRM/cedente_model.dart';
 import 'package:modular_study/widgets/appbar_logo_perfil.dart';
 import 'package:modular_study/widgets/botao_selecao_empresa.dart';
 import 'package:modular_study/widgets/searchbar_person.dart';
@@ -162,7 +163,9 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                     hint: 'Digite a empresa que deseja buscar'),
               ),
               Container(
-                constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.7, minHeight: 80),
+                constraints: BoxConstraints(
+                    maxHeight: MediaQuery.of(context).size.height * 0.7,
+                    minHeight: 80),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   color: Colors.white,
@@ -195,10 +198,48 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                           setState(() {
                             OverlayApp.iniciaOverlay(context);
                           });
-                          authProviderAtt.RelogarTrocarCedente(_searchResults![index].identificador);
+                          authProviderAtt.RelogarTrocarCedente(
+                              _searchResults![index].identificador);
                         },
                         child: ListTile(
-                          title: Text(_searchResults![index].nome),
+                          title: Row(
+                            children: [
+                              Text(
+                                _searchResults![index].nome,
+                                style: context.textTheme.bodyMedium,
+                              ),
+                              Text(
+                                '/ CNPJ:${_searchResults![index].identificador}',
+                                style: context.textTheme.bodyMedium!
+                                    .copyWith(color: Colors.grey),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const Spacer(
+                                flex: 1,
+                              ),
+                              Visibility(
+                                visible:
+                                    _searchResults![index].assinaturaPendente >
+                                        0,
+                                child: CircleAvatar(
+                                    backgroundColor: AppColors.vermelho,
+                                    radius: 10,
+                                    child: Center(
+                                      child: Text(
+                                          _searchResults![index]
+                                                      .assinaturaPendente >=
+                                                  10
+                                              ? '9+'
+                                              : _searchResults![index]
+                                                  .assinaturaPendente
+                                                  .toString(),
+                                          style: context.textTheme.labelSmall!
+                                              .copyWith(color: Colors.white)),
+                                    )),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     );

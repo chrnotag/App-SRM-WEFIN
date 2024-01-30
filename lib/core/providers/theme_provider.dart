@@ -27,7 +27,6 @@ class ThemeProvider extends ChangeNotifier {
   String get logoTema => isTemaSRM ? Assets.logoSRM : Assets.logoTRUST;
 
   void limparDadosTema(){
-    temaSelecionado = TemaSelecionado.TRUST;
-    notifyListeners();
+    _temaSelecionado = TemaSelecionado.TRUST;
   }
 }

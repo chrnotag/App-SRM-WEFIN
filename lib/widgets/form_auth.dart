@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
+import 'package:modular_study/core/constants/enuns/theme_enum.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/implementations_config/export_impl.dart';
 import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:modular_study/core/providers/auth_provider_config/recuperar_senha/recuperar_senha_provider.dart';
+import 'package:modular_study/core/providers/theme_provider.dart';
 import 'package:modular_study/core/utils/get_device_infos.dart';
 import 'package:modular_study/core/utils/overlay.dart';
 import 'package:modular_study/models/recuperar_senha_model/recuperar_senha_model.dart';
@@ -14,10 +15,8 @@ import 'package:modular_study/models/user_model.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_textfield.dart';
 import 'package:validatorless/validatorless.dart';
-
 import '../generated/assets.dart';
 import 'link_component.dart';
-import 'loader_widget.dart';
 
 class AuthForm extends StatefulWidget {
   final String label;
@@ -61,7 +60,7 @@ class _AuthFormState extends State<AuthForm> {
               (value) => _mensagemErro
             ]),
           ),
-          SizedBox(height: 20.h),
+          SizedBox(height: 20),
           WefinTextFormField(
             onTap: () => _mensagemErro = null,
             maxLength: widget.visible ? 10 : null,
@@ -78,7 +77,7 @@ class _AuthFormState extends State<AuthForm> {
               (value) => _mensagemErro
             ]),
           ),
-          SizedBox(height: 20.h),
+          SizedBox(height: 20),
           Visibility(
             visible: widget.visible,
             child: Row(
@@ -91,10 +90,10 @@ class _AuthFormState extends State<AuthForm> {
               ],
             ),
           ),
-          SizedBox(height: 50.h),
+          SizedBox(height: 50),
           BotaoPadrao(
             label: widget.label,
-            fontSize: 14.sp,
+            fontSize: 14,
             onPressed: () async {
               if (widget.visible) {
                 await login();
@@ -111,16 +110,21 @@ class _AuthFormState extends State<AuthForm> {
   Future<void> login() async {
     final authProvider = Modular.get<AuthProvider>();
     _mensagemErro = null;
+
     if (_formKey.currentState!.validate()) {
       setState(() {
         OverlayApp.iniciaOverlay(context);
       });
+
       final userModel = UserModel(
           usuario: _loginEC.text,
           senha: _passwordEC.text,
           idDevice: await DeviceUtils().getDeviceID());
+
       final response = await authProvider.login(userModel);
+
       OverlayApp.terminaOverlay();
+
       if (response != null && response.error != null) {
         final error = response.error as ExceptionModel;
         setState(() {
@@ -131,7 +135,12 @@ class _AuthFormState extends State<AuthForm> {
           }
         });
       } else {
-        Modular.to.navigate(AppRoutes.listaSelecaoEmpresasRoute);
+        if (authProvider.listaCedente!.length > 1) {
+          Modular.to.navigate(AppRoutes.listaSelecaoEmpresasRoute);
+        } else {
+          authProvider.RelogarTrocarCedente(
+              authProvider.dataUser!.identificadorCedente);
+        }
       }
     }
   }
@@ -165,7 +174,7 @@ class _AuthFormState extends State<AuthForm> {
     return AlertDialog(
       actionsAlignment: MainAxisAlignment.end,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8.r))),
+          borderRadius: BorderRadius.all(Radius.circular(8))),
       actions: [
         Row(
           children: [
@@ -183,7 +192,7 @@ class _AuthFormState extends State<AuthForm> {
       title: Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(8.r),
+            padding: const EdgeInsets.all(8),
             child: Text(
               "Dados enviados com sucesso",
               style: context.textTheme.bodyLarge!

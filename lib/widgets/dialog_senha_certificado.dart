@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/providers/certificado_provider/importar_certificado_provider.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
@@ -27,11 +26,12 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
       icon: Icon(
         Icons.lock_outline_rounded,
         color: context.primaryColor,
-        size: 50.r,
+        size: 50,
       ),
       title: Form(
         key: formKey,
         child: WefinTextFormField(
+          textColor: Colors.black,
           onTap: () => provider.limparErro(),
           label: "Senha do certificado",
           validator: Validatorless.multiple([
@@ -62,7 +62,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
               ],
             ),
             SizedBox(
-              height: 8.h,
+              height: 8,
             ),
             Row(
               children: [
