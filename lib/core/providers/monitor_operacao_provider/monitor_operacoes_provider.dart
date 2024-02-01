@@ -6,6 +6,7 @@ import 'package:modular_study/core/providers/monitor_operacao_provider/monitor_o
 
 import '../../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import '../../../models/monitor_operacoes_model/monitor_operacoes_model.dart';
+import '../../implementations_config/api_response.dart';
 import '../../utils/money_format.dart';
 
 class MonitorOperacoesProvider extends ChangeNotifier {
@@ -18,7 +19,11 @@ class MonitorOperacoesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> carregarOperacoes() => MonitorOperacaoImpl().carregarOperacoes();
+  Future<ApiResponse<dynamic>> carregarOperacoes() async {
+    final response = await MonitorOperacaoImpl().carregarOperacoes();
+    notifyListeners();
+    return response;
+  }
 
   void aconragemAssinatura(
       List<MonitorAssinaturasModel> lista, int codigoBuscado) {
