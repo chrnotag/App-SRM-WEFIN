@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/constants/enuns/theme_enum.dart';
+import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
@@ -46,7 +47,7 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
             children: [
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 32),
+                  padding: EdgeInsets.symmetric(vertical: 32.h),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -57,7 +58,7 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
                             .copyWith(color: AppColors.labelText),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(vertical: AppSizes.paddingExtraLarge),
+                        padding: EdgeInsets.symmetric(vertical: AppSizes.paddingExtraLarge.h),
                         child: Text(
                           'Em qual empresa deseja entrar?',
                           style: context.textTheme.bodyMedium!.copyWith(
@@ -81,7 +82,7 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
                               children: [
                                 Image.asset(
                                   Assets.logoSRM,
-                                  width: 150,
+                                  width: 150.w,
                                   color: AppColors.azul,
                                 ),
                                 Text(
@@ -89,7 +90,7 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
                                   textAlign: TextAlign.center,
                                   style: context.textTheme.labelSmall!.copyWith(
                                       color: Color(0xffDE9320),
-                                      fontSize: 8,
+                                      fontSize: 8.sp,
                                       fontWeight: FontWeight.w900),
                                 )
                               ],
@@ -112,7 +113,7 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
                             },
                             child: Image.asset(
                               Assets.logoTRUST,
-                              width: 150,
+                              width: 150.w,
                             ),
                           ),
                         ],

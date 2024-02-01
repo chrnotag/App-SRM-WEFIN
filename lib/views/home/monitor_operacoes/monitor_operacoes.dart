@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
 import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
@@ -53,6 +54,7 @@ class _MonitorOperacoesState extends State<MonitorOperacoes> {
           backgroundColor: Colors.white,
           color: AppColors.azulPrimarioSRM,
           onRefresh: () => _carregarDados(),
+          displacement: 50.h,
           child: Column(
             children: [
               SelecaoEmpresa(
@@ -74,7 +76,7 @@ class _MonitorOperacoesState extends State<MonitorOperacoes> {
                           icon: Icon(
                             LineIcons.exclamationCircle,
                             color: context.primaryColor,
-                            size: 20,
+                            size: 20.r,
                           ),
                           title: Column(
                             children: [
@@ -83,7 +85,7 @@ class _MonitorOperacoesState extends State<MonitorOperacoes> {
                                 style: context.textTheme.labelMedium,
                               ),
                               Padding(
-                                padding: EdgeInsets.symmetric(vertical: 10),
+                                padding: EdgeInsets.symmetric(vertical: 10.h),
                                 child: Text("Tente novamente mais tarde."),
                               ),
                               BotaoPadrao(
@@ -100,7 +102,7 @@ class _MonitorOperacoesState extends State<MonitorOperacoes> {
                         Expanded(
                           child: Padding(
                             padding:
-                                EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                                EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
                             child: ListView.builder(
                               itemCount: operacoesProvider.operacoes.length,
                               shrinkWrap: true,

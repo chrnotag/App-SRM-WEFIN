@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/constants/contatos.dart';
 import 'package:modular_study/core/constants/enuns/theme_enum.dart';
+import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
 import 'package:modular_study/core/providers/theme_provider.dart';
@@ -19,19 +20,19 @@ class Ajuda extends StatelessWidget {
     bool isSRM = themeProvider.temaSelecionado == TemaSelecionado.SRM;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: AppBar().preferredSize, child: AppBarLogo()),
+          preferredSize: AppBar().preferredSize, child: const AppBarLogo()),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 64),
+        padding: EdgeInsets.symmetric(horizontal: 64.w),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
               Assets.imagesIcAjuda,
-              width: 150,
+              width: 150.w,
               color: context.onSecondary,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: AppSizes.paddingMedium),
+              padding: EdgeInsets.symmetric(vertical: AppSizes.paddingMedium.h),
               child: Text(
                 'Precisa de ajuda?',
                 style: context.textTheme.bodyLarge!
@@ -46,7 +47,7 @@ class Ajuda extends StatelessWidget {
               softWrap: true,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: AppSizes.paddingMedium),
+              padding: EdgeInsets.symmetric(vertical: AppSizes.paddingMedium.h),
               child: Column(
                 children: [
                   RichText(
@@ -54,11 +55,11 @@ class Ajuda extends StatelessWidget {
                       children: [
                         TextSpan(
                             text: 'Telefone: ',
-                            style: context.textTheme.bodySmall!
+                            style: context.textTheme.bodyMedium!
                                 .copyWith(color: context.onSecondary)),
                         TextSpan(
                           text: isSRM ? Contatos.telefoneSrm : Contatos.telefoneTrust,
-                          style: context.textTheme.bodySmall!.copyWith(
+                          style: context.textTheme.bodyMedium!.copyWith(
                               color: context.onSecondary,
                               decoration: TextDecoration.underline,
                               fontWeight: FontWeight.bold),
@@ -83,13 +84,13 @@ class Ajuda extends StatelessWidget {
                         children: [
                           TextSpan(
                             text: 'E-mail: ',
-                            style: context.textTheme.bodySmall!.copyWith(
+                            style: context.textTheme.bodyMedium!.copyWith(
                               color: context.onSecondary,
                             ),
                           ),
                           TextSpan(
                             text: isSRM ? Contatos.emailSrm : Contatos.emailTrust,
-                            style: context.textTheme.bodySmall!.copyWith(
+                            style: context.textTheme.bodyMedium!.copyWith(
                                 color: context.onSecondary,
                                 fontWeight: FontWeight.bold,
                                 decoration: TextDecoration.underline),
@@ -113,12 +114,12 @@ class Ajuda extends StatelessWidget {
                       children: [
                         TextSpan(
                             text: 'Politica de privacidade:',
-                            style: context.textTheme.bodySmall!.copyWith(
+                            style: context.textTheme.bodyMedium!.copyWith(
                               color: context.onSecondary,
                             )),
                         TextSpan(
                           text: 'Toque aqui',
-                          style: context.textTheme.bodySmall!.copyWith(
+                          style: context.textTheme.bodyMedium!.copyWith(
                               color: context.onSecondary,
                               decoration: TextDecoration.underline,
                               fontWeight: FontWeight.bold),

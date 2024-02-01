@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
 import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
@@ -43,17 +44,17 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
         title: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: EdgeInsets.all(12.r),
               child: Text('Política de privacidade',
                   style: context.textTheme.bodyLarge!.copyWith(
                     color: AppColors.azulPrimarioSRM,
                     fontWeight: FontWeight.w600,
-                    fontSize: 20,
-                    letterSpacing: 1.5,
+                    fontSize: 20.sp,
+                    letterSpacing: 1.5.sp,
                   )),
             ),
             Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: EdgeInsets.all(12.r),
               child: GestureDetector(
                 onTap: () {
                   Modular.to.pop();
@@ -64,7 +65,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12.0),
+              padding: EdgeInsets.symmetric(vertical: 12.r),
               child: Row(
                 children: [
                   Expanded(
@@ -77,11 +78,11 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                           backgroundColor:
                               const Color.fromARGB(255, 204, 91, 91),
                         ),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8.0),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(vertical: 8.h),
                           child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text(
+                            padding: EdgeInsets.all(8.r),
+                            child: const Text(
                               'Recusar',
                               style: TextStyle(color: Colors.white),
                             ),
@@ -102,13 +103,13 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                           backgroundColor: AppColors.azul,
                           shadowColor: const Color.fromARGB(0, 255, 255, 255),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4),
+                              borderRadius: BorderRadius.circular(4.r),
                               side: const BorderSide(
                                   color: AppColors.azul, width: 1))),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        padding: EdgeInsets.symmetric(vertical: 8.h),
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.r),
                           child: Text('Aceitar',
                               style: context.textTheme.labelSmall!
                                   .copyWith(color: Colors.white)),
@@ -144,9 +145,9 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
 
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: AppBar().preferredSize, child: const AppBarLogo()),
+          preferredSize: AppBar().preferredSize,child: const AppBarLogo()),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(8.r),
         child: Center(
           child: Column(
             children: [
@@ -157,38 +158,38 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                 changeble: false,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
+                padding: EdgeInsets.symmetric(vertical: 20.h),
                 child: SearchBarPersonalizada(
                     searchController: _searchController,
                     hint: 'Digite a empresa que deseja buscar'),
               ),
               Container(
                 constraints: BoxConstraints(
-                    maxHeight: MediaQuery.of(context).size.height * 0.7,
-                    minHeight: 80),
+                    maxHeight: context.height * 0.7, minHeight: 80.h),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
+                  borderRadius: BorderRadius.circular(15.r),
                   color: Colors.white,
                 ),
                 child: ListView.separated(
                   shrinkWrap: true,
                   itemCount: _searchResults?.length ?? 0,
                   separatorBuilder: (context, index) =>
-                      Divider(thickness: 1, height: 0),
+                      const Divider(thickness: 1, height: 0),
                   itemBuilder: (context, index) {
                     BorderRadius borderRadius = BorderRadius.zero;
                     if (index == 0 && index == _searchResults!.length - 1) {
                       // Se houver apenas um item
-                      borderRadius = BorderRadius.circular(15);
+                      borderRadius = BorderRadius.circular(15.r);
                     } else {
                       // Primeiro item da lista
-                      borderRadius = const BorderRadius.vertical(
-                        top: Radius.circular(5),
-                        bottom: Radius.circular(5),
+                      borderRadius = BorderRadius.vertical(
+                        top: Radius.circular(5.r),
+                        bottom: Radius.circular(5.r),
                       );
                     }
 
                     return Container(
+                      height: 40.h,
                       decoration: BoxDecoration(
                         borderRadius: borderRadius,
                         color: Colors.white,
@@ -202,41 +203,51 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                               _searchResults![index].identificador);
                         },
                         child: ListTile(
-                          title: Row(
+                          title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                _searchResults![index].nome,
-                                style: context.textTheme.bodyMedium,
-                              ),
-                              Text(
-                                '/ CNPJ:${_searchResults![index].identificador}',
-                                style: context.textTheme.bodyMedium!
-                                    .copyWith(color: Colors.grey),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              const Spacer(
-                                flex: 1,
-                              ),
-                              Visibility(
-                                visible:
-                                    _searchResults![index].assinaturaPendente >
-                                        0,
-                                child: CircleAvatar(
-                                    backgroundColor: AppColors.vermelho,
-                                    radius: 10,
-                                    child: Center(
-                                      child: Text(
-                                          _searchResults![index]
-                                                      .assinaturaPendente >=
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  RichText(
+                                    textAlign: TextAlign.start,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    text: TextSpan(children: [
+                                      TextSpan(
+                                        text: _searchResults![index].nome,
+                                        style: context.textTheme.bodyMedium,
+                                      ),
+                                      TextSpan(
+                                        text:
+                                            ' CNPJ:${_searchResults![index].identificador}',
+                                        style: context.textTheme.bodyMedium!
+                                            .copyWith(color: Colors.grey),
+                                      ),
+                                    ]),
+                                  ),
+                                  Spacer(),
+                                  Visibility(
+                                    visible:
+                                    _searchResults![index].assinaturaPendente > 0,
+                                    child: CircleAvatar(
+                                        backgroundColor: AppColors.vermelho,
+                                        radius: 10.r,
+                                        child: Center(
+                                          child: Text(
+                                              _searchResults![index]
+                                                  .assinaturaPendente >=
                                                   10
-                                              ? '9+'
-                                              : _searchResults![index]
+                                                  ? '9+'
+                                                  : _searchResults![index]
                                                   .assinaturaPendente
                                                   .toString(),
-                                          style: context.textTheme.labelSmall!
-                                              .copyWith(color: Colors.white)),
-                                    )),
+                                              style: context.textTheme.labelSmall!
+                                                  .copyWith(color: Colors.white)),
+                                        )),
+                                  ),
+                                ],
                               ),
                             ],
                           ),

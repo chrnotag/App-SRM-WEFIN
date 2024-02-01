@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
+import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
 import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
@@ -85,7 +86,6 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
 
   @override
   void didUpdateWidget(covariant CardMonitorAssinaturas oldWidget) {
-    // TODO: implement didUpdateWidget
     super.didUpdateWidget(oldWidget);
     if (widget.destacar != oldWidget.destacar) {
       _animarBorda();
@@ -109,13 +109,13 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
       duration: const Duration(seconds: 1),
       decoration: BoxDecoration(
         border: Border.all(
-            color: _borderColor.value ?? Colors.transparent, width: 5),
-        borderRadius: BorderRadius.all(Radius.circular(8)),
+            color: _borderColor.value ?? Colors.transparent, width: 5.w),
+        borderRadius: BorderRadius.all(Radius.circular(8.r)),
         // Restante da decoração do seu card
       ),
       child: Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
+          borderRadius: BorderRadius.all(Radius.circular(5.r)),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -130,7 +130,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                       children: [
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsets.all(8),
+                            padding: EdgeInsets.all(8.r),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -144,7 +144,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                                         label: assinatura.codigoOperacao
                                             .toString()),
                                     SizedBox(
-                                      height: 10,
+                                      height: 10.h,
                                     ),
                                     ComponentCardOperacoes(
                                         title: 'Status',
@@ -165,7 +165,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                                             DateTime.parse(
                                                 assinatura.dataOperacao))),
                                     SizedBox(
-                                      height: 10,
+                                      height: 10.h,
                                     ),
                                     ComponentCardOperacoes(
                                       title: 'Valor Bruto',
@@ -183,7 +183,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                                         title: 'Produto',
                                         label: assinatura.siglaProduto),
                                     SizedBox(
-                                      height: 10,
+                                      height: 10.h,
                                     ),
                                     ComponentCardOperacoes(
                                         title: 'Valor Liquido',
@@ -200,11 +200,11 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                           ),
                         ),
                         Container(
-                          width: 30,
+                          width: 30.w,
                           decoration: BoxDecoration(
                             color: corAssinatura,
                             borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(5),
+                              topRight: Radius.circular(5.r),
                             ),
                           ),
                         ),

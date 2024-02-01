@@ -4,6 +4,7 @@ import 'package:crosspki/crosspki.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/providers/fluxo_assinatura_provider/finalizar_assinatura/finalizar_assinatura_provider.dart';
@@ -38,8 +39,8 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
         context.watch<ImportarCertificadoProvider>();
     final AssinaturaProvider assinaturaProvider =
         context.watch<AssinaturaProvider>();
-    final double itemHeight = 50;
-    final double maxHeight = 200;
+    final double itemHeight = 50.h;
+    final double maxHeight = 200.h;
     return AlertDialog(
       title: Column(
         children: [
@@ -47,11 +48,11 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
               'Assinar Operação ${assinaturaProvider.assinaturaSelecionada!.codigoOperacao}',
               style: context.textTheme.bodyMedium!.copyWith(
                 fontWeight: FontWeight.w300,
-                fontSize: 15,
-                letterSpacing: 1.5,
+                fontSize: 15.sp,
+                letterSpacing: 1.5.sp,
               )),
           Padding(
-            padding: EdgeInsets.all(12),
+            padding: EdgeInsets.all(12.r),
             child: Text('Escolha um certificado para assinar a operação:',
                 style: context.textTheme.labelSmall!
                     .copyWith(color: AppColors.labelText)),
@@ -74,12 +75,12 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                             certificadoProvider.listaCertificados.length,
                             (index) {
                           return Padding(
-                            padding: const EdgeInsets.all(1.0),
+                            padding: EdgeInsets.all(1.r),
                             child: Container(
                               color: certificadoProvider
                                   .alterarCorItemListaCertificado(
                                       index, context),
-                              height: 40,
+                              height: 40.h,
                               child: InkWell(
                                 onTap: () {
                                   certificadoProvider
@@ -96,7 +97,7 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                                   children: [
                                     Padding(
                                       padding:
-                                          EdgeInsets.symmetric(horizontal: 8),
+                                          EdgeInsets.symmetric(horizontal: 8.r),
                                       child: SizedBox(
                                         width:
                                             MediaQuery.of(context).size.width *
@@ -129,7 +130,7 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                                         },
                                         child: Icon(
                                           Icons.close,
-                                          size: 20,
+                                          size: 20.r,
                                         ))
                                   ],
                                 ),
@@ -148,7 +149,7 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
             },
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 12),
+            padding: EdgeInsets.symmetric(vertical: 12.h),
             child: Row(
               children: [
                 Expanded(
@@ -170,7 +171,7 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 8),
+            padding: EdgeInsets.only(bottom: 8.h),
             child: Text(
               'Ou',
               style: context.textTheme.bodySmall!

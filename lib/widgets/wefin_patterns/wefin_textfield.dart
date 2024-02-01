@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import '../../core/constants/themes/theme_configs.dart';
 
@@ -43,7 +44,7 @@ class _WefinTextFormFieldState extends State<WefinTextFormField> {
       validator: widget.validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       maxLength: widget.maxLength,
-      style: TextStyle(
+      style: context.textTheme.bodyMedium!.copyWith(
         color: widget.textColor ?? context.inverseSurface,
       ),
       cursorColor: context.primaryColor,
@@ -51,10 +52,10 @@ class _WefinTextFormFieldState extends State<WefinTextFormField> {
         labelText: widget.label,
         labelStyle: context.textTheme.bodyMedium!.copyWith(color: Colors.grey),
         border: UnderlineInputBorder(
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.circular(4.r),
         ),
         focusedBorder: UnderlineInputBorder(
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.circular(4.r),
           borderSide: BorderSide(color: context.primaryColor),
         ),
         suffixIcon: widget.obscureText

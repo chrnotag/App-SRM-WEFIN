@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/providers/auth_provider_config/deslogar/verificar_sessao.dart';
@@ -22,6 +23,7 @@ class SessionProvider with ChangeNotifier {
     }
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       _timeout -= 1;
+      log('TEMPO RESTANTE: $_timeout');
       if (_timeout == 0) {
         timer.cancel();
         mostrarAlerta(null);

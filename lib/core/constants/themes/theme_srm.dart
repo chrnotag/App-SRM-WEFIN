@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
 
 import 'theme_configs.dart';
 
@@ -20,7 +21,7 @@ class ThemeSRM {
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     side: BorderSide.none)),
             constraints:
-                BoxConstraints.expand(width: double.infinity, height: 35),
+                BoxConstraints.expand(width: double.infinity, height: 35.h),
             hintStyle: MaterialStateProperty.all<TextStyle>(
                 GoogleFonts.montserrat(
                     fontSize: AppSizes.fontSizeMedium,
@@ -29,6 +30,7 @@ class ThemeSRM {
                 MaterialStateProperty.all<TextStyle>(GoogleFonts.montserrat(
               fontSize: AppSizes.fontSizeSmall,
             ))),
+        dialogBackgroundColor: Colors.white,
         colorScheme: ColorScheme(
             brightness: Brightness.light,
             primary: AppColors.azulPrimarioSRM,

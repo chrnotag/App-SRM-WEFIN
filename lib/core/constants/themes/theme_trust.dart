@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
 
 class ThemeTRUST {
@@ -16,10 +17,10 @@ class ThemeTRUST {
         searchBarTheme: SearchBarThemeData(
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    side: BorderSide(color: AppColors.verdePrimarioTRUST))),
+                    borderRadius: BorderRadius.all(Radius.circular(10.r)),
+                    side: const BorderSide(color: AppColors.verdePrimarioTRUST))),
             constraints:
-                BoxConstraints.expand(width: double.infinity, height: 35),
+                BoxConstraints.expand(width: double.infinity, height: 35.h),
             hintStyle: MaterialStateProperty.all<TextStyle>(
                 GoogleFonts.montserrat(
                     fontSize: AppSizes.fontSizeMedium,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/constants/enuns/import_certificado_enum.dart';
+import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/providers/certificado_provider/importar_certificado_provider.dart';
 import 'package:modular_study/views/home/importar_certificado/pagina_carrossel_qrcode.dart';
@@ -51,7 +52,7 @@ class _GuiaImportCertificadoState extends State<GuiaImportCertificado> {
                       },
                       floatingIndicator: true,
                       slideIndicator: CircularSlideIndicator(
-                          padding: EdgeInsets.only(bottom: 30),
+                          padding: EdgeInsets.only(bottom: 30.h),
                           indicatorBorderColor:
                           Colors.grey.shade500.withAlpha(50),
                           currentIndicatorColor: context.primaryColor,
@@ -63,15 +64,15 @@ class _GuiaImportCertificadoState extends State<GuiaImportCertificado> {
             ],
           ),
           Positioned(
-              bottom: 16,
-              right: 16,
+              bottom: 16.h,
+              right: 16.w,
               child: Visibility(
                 visible:
                     _paginaAtual < PaginaImportarCertificado.pagina(context).length - 1,
                 child: FloatingActionButton(
                   onPressed: () {
                     _carrousselControler.nextPage(
-                        duration: Duration(milliseconds: 300),
+                        duration: const Duration(milliseconds: 300),
                         curve: Curves.linear);
                   },
                   backgroundColor: context.primaryColor,
@@ -87,7 +88,7 @@ class _GuiaImportCertificadoState extends State<GuiaImportCertificado> {
               child: FloatingActionButton(
                 onPressed: () {
                   _carrousselControler.previousPage(
-                      duration: Duration(milliseconds: 300),
+                      duration: const Duration(milliseconds: 300),
                       curve: Curves.linear);
                 },
                 backgroundColor: context.primaryColor,

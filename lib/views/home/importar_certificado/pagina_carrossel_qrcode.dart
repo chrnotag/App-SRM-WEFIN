@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
+import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:share_plus/share_plus.dart';
@@ -24,11 +26,11 @@ class PaginaQrCodeCarrossel {
             ),
             Icon(
               Icons.qr_code_2_rounded,
-              size: 150,
+              size: 150.r,
               color: context.onSecondary,
             ),
             SizedBox(
-              width: 300,
+              width: 300.w,
               child: Text(
                 'Bem-vindo ao assistente de importação de certificado digital via QR Code. Nas próximas páginas, explicaremos como escanear o QR Code gerado no site para importar seu certificado digital.',
                 style: context.textTheme.bodyLarge!
@@ -46,11 +48,11 @@ class PaginaQrCodeCarrossel {
               style: context.textTheme.bodyLarge!
                   .copyWith(color: context.onSecondary),
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: 10.h,
             ),
             SizedBox(
-              width: 300,
+              width: 300.w,
               child: RichText(
                 text: TextSpan(children: [
                   TextSpan(
@@ -88,11 +90,11 @@ class PaginaQrCodeCarrossel {
               style: context.textTheme.bodyLarge!
                   .copyWith(color: context.onSecondary),
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: 10.h,
             ),
             SizedBox(
-              width: 300,
+              width: 300.w,
               child: Text(
                 'No aplicativo, use a opção de escanear QR Code para ler o código gerado no site. Isso irá capturar as informações necessárias do seu certificado.',
                 style: context.textTheme.bodyMedium!
@@ -110,11 +112,11 @@ class PaginaQrCodeCarrossel {
               style: context.textTheme.bodyLarge!
                   .copyWith(color: context.onSecondary),
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: 10.h,
             ),
             SizedBox(
-              width: 300,
+              width: 300.w,
               child: Text(
                 'Após escanear o QR Code, será solicitado que você insira a senha do seu certificado digital para concluir a importação.',
                 style: context.textTheme.bodyMedium!
@@ -132,11 +134,11 @@ class PaginaQrCodeCarrossel {
               style: context.textTheme.bodyLarge!
                   .copyWith(color: context.onSecondary),
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: 10.h,
             ),
             SizedBox(
-              width: 300,
+              width: 300.w,
               child: Text(
                 'Seu certificado foi importado com sucesso! Agora você pode utilizar todas as funcionalidades do aplicativo com seu certificado digital.',
                 style: context.textTheme.bodyMedium!
@@ -144,11 +146,11 @@ class PaginaQrCodeCarrossel {
                 textAlign: TextAlign.center,
               ),
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: 10.h,
             ),
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.5,
+              width: context.width * 0.5,
               child: BotaoPadrao(
                   onPressed: () async {
                     Modular.to.pushNamed(AppRoutes.leitorQrCodeRoute);
