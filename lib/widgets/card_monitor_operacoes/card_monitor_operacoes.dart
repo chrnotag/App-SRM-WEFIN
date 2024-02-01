@@ -29,7 +29,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
     final MonitorOperacoesProvider operacaoProvider =
         Modular.get<MonitorOperacoesProvider>();
     return SizedBox(
-      height: isVisivel(operacao) ? 205.h : 140.h,
+      height: isVisivel(operacao) ? 206.h : 140.h,
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(5.r)),
@@ -125,44 +125,47 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text('Ver Assinaturas'),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: context.primaryColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(5.r))
-                                  )
-                                ),
-                                  onPressed: () {
-                                    final MonitorOperacoesProvider
-                                        operacaoProvider =
-                                        Modular.get<MonitorOperacoesProvider>();
-                                    final AssinaturaProvider assinaturaProvider =
-                                        Modular.get<AssinaturaProvider>();
-                                    List<MonitorAssinaturasModel>
-                                        assinaturasPendentes =
-                                        assinaturaProvider.assinaturasPendentes;
-                                    operacaoProvider.aconragemAssinatura(
-                                        assinaturaProvider.todasAssinaturas,
-                                        operacao.codigoOperacao);
-                                    Modular.to.pushNamed(
-                                        AppRoutes.assinaturaDigitalRoute,
-                                        arguments: {
-                                          'assinaturas':
-                                              assinaturaProvider.todasAssinaturas,
-                                          'assinaturasPendentes':
-                                              assinaturasPendentes,
-                                          'tab': 1,
-                                          'destacar': true,
-                                        });
-                                  },
-                                  child: Padding(
-                                    padding: EdgeInsets.all(4.r),
-                                    child: Text(
-                                      'Assinaturas',
-                                      style: context.textTheme.bodyMedium!
-                                          .copyWith(color: Colors.white),
-                                    ),
-                                  ))
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 8.0),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: context.primaryColor,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(5.r))
+                                    )
+                                  ),
+                                    onPressed: () {
+                                      final MonitorOperacoesProvider
+                                          operacaoProvider =
+                                          Modular.get<MonitorOperacoesProvider>();
+                                      final AssinaturaProvider assinaturaProvider =
+                                          Modular.get<AssinaturaProvider>();
+                                      List<MonitorAssinaturasModel>
+                                          assinaturasPendentes =
+                                          assinaturaProvider.assinaturasPendentes;
+                                      operacaoProvider.aconragemAssinatura(
+                                          assinaturaProvider.todasAssinaturas,
+                                          operacao.codigoOperacao);
+                                      Modular.to.pushNamed(
+                                          AppRoutes.assinaturaDigitalRoute,
+                                          arguments: {
+                                            'assinaturas':
+                                                assinaturaProvider.todasAssinaturas,
+                                            'assinaturasPendentes':
+                                                assinaturasPendentes,
+                                            'tab': 1,
+                                            'destacar': true,
+                                          });
+                                    },
+                                    child: Padding(
+                                      padding: EdgeInsets.all(4.r),
+                                      child: Text(
+                                        'Assinaturas',
+                                        style: context.textTheme.bodyMedium!
+                                            .copyWith(color: Colors.white),
+                                      ),
+                                    )),
+                              )
                             ],
                           ),
                         ],

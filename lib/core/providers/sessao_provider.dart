@@ -25,8 +25,8 @@ class SessionProvider with ChangeNotifier {
       _timeout -= 1;
       log('TEMPO RESTANTE: $_timeout');
       if (_timeout == 0) {
+        mostrarAlerta();
         timer.cancel();
-        mostrarAlerta(null);
       }
     });
     notifyListeners();
@@ -48,7 +48,7 @@ class SessionProvider with ChangeNotifier {
     startListening();
   }
 
-  void mostrarAlerta(String? label) {
+  void mostrarAlerta() {
     if (myNavigatorKey.currentState != null && _isShowingDialog == false) {
       _isShowingDialog = true;
       stopListening();
@@ -60,6 +60,7 @@ class SessionProvider with ChangeNotifier {
               msg:
                   'Nenhuma ação foi realizada nos últimos 60 segundos. Você será direcionado para realizar o login novamente.',
               onPressed: () {
+                _isShowingDialog = false;
                 VerificarSessao.limparDadosSessao();
                 Modular.to.navigate(Modular.initialRoute);
               }));

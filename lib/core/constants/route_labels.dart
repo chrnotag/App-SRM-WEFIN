@@ -11,7 +11,6 @@ class AppRoutes {
   static get forgetPassAuthRoute => '/forgot_password';
   static get loginSRMAuthRoute => '/login_srm';
   static get loginTRUSTAuthRoute => '/login_trust';
-  static get semConexaoAuthRoute => '/sem-conexao';
 
   //Escopo HOME
   static get homeRoute => '/home';
