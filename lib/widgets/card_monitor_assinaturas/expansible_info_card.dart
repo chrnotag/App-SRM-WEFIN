@@ -35,9 +35,9 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
             children: [
               Divider(),
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 8),
+                padding: EdgeInsets.symmetric(vertical: 8.h),
                 child: SizedBox(
-                  height: 300,
+                  height: 300.h,
                   width: context.width,
                   child: FlutterCarousel(
                       items: assinantes
@@ -53,9 +53,9 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                         scrollDirection: Axis.horizontal,
                         floatingIndicator: false,
                         slideIndicator: CircularSlideIndicator(
-                            padding: EdgeInsets.only(bottom: 10),
+                            padding: EdgeInsets.only(bottom: 10.h),
                             indicatorBorderColor:
-                                Colors.grey.shade500.withAlpha(50),
+                            Colors.grey.shade500.withAlpha(50),
                             currentIndicatorColor: context.primaryColor,
                             indicatorBackgroundColor:
                                 context.primaryColor.withAlpha(80)),
@@ -112,7 +112,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                     ],
                   ),
                   SizedBox(
-                    height: 8,
+                    height: 8.h,
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -131,7 +131,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                     ],
                   ),
                   SizedBox(
-                    height: 8,
+                    height: 8.h,
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -150,7 +150,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                     ],
                   ),
                   SizedBox(
-                    height: 8,
+                    height: 8.h,
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -198,7 +198,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8),
+                    padding: EdgeInsets.symmetric(vertical: 8.h),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -237,20 +237,23 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
             ),
           ],
         ),
-        Padding(
-          padding: EdgeInsets.all(15),
-          child: Visibility(
-            visible: widget.assinarDocumento && filtroBotaoAssinar(),
-            child: BotaoPadrao(
-                onPressed: () async {
-                  AssinaturaEletronicaProvider assinaturaEletronicaProvider =
-                      Modular.get<AssinaturaEletronicaProvider>();
-                  assinaturaEletronicaProvider.codigoOperacao = widget.codigoOperacao;
-                  IniciarAssinaturaProvider iniciarAssinatura =
-                      Modular.get<IniciarAssinaturaProvider>();
-                  iniciarAssinatura.IniciarAssinatura(info, context);
-                },
-                label: "Assinar Operação"),
+        Container(
+          width: context.width * 0.7,
+          child: Padding(
+            padding: EdgeInsets.all(15.r),
+            child: Visibility(
+              visible: widget.assinarDocumento && filtroBotaoAssinar(),
+              child: BotaoPadrao(
+                  onPressed: () async {
+                    AssinaturaEletronicaProvider assinaturaEletronicaProvider =
+                        Modular.get<AssinaturaEletronicaProvider>();
+                    assinaturaEletronicaProvider.codigoOperacao = widget.codigoOperacao;
+                    IniciarAssinaturaProvider iniciarAssinatura =
+                        Modular.get<IniciarAssinaturaProvider>();
+                    iniciarAssinatura.IniciarAssinatura(info, context);
+                  },
+                  label: "Assinar Operação"),
+            ),
           ),
         )
       ],

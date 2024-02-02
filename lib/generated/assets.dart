@@ -75,6 +75,7 @@ class Assets {
   static const String iconsLogo = 'assets/icons/logo.svg';
   static const String imagesBackgroundImage =
       'assets/images/background_image.png';
+  static const String iconPerson = 'assets/images/icon_person.png';
   static const String imagesCadeado = 'assets/images/cadeado.svg';
   static const String logoSRM = 'assets/images/logo_srm.png';
   static const String imagesNoNetwork = 'assets/images/no_network.png';

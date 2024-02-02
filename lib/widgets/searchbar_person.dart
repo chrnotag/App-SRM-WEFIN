@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 
 class SearchBarPersonalizada extends StatelessWidget {
@@ -20,6 +21,8 @@ class SearchBarPersonalizada extends StatelessWidget {
       trailing: [
         Icon(
           Icons.search,
+          size: 25.r,
+          color: Colors.grey,
         )
       ],
     );

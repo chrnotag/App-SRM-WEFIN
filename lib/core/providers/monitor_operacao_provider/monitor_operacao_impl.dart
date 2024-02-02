@@ -30,7 +30,6 @@ log('status code: ${response.statusCode}');
       switch (response.statusCode) {
         case 200:
           final responseBody = json.decode(utf8.decode(response.bodyBytes));
-          log('response: $responseBody');
           final MonitorOperacoesProvider operacoesProvider = Modular.get<MonitorOperacoesProvider>();
           List<MonitorOperacoesModel> data = [];
           data = List<MonitorOperacoesModel>.from(responseBody.map((model) => MonitorOperacoesModel.fromJson(model)));

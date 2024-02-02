@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
 import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
@@ -24,7 +25,7 @@ class SelecaoEmpresa extends StatelessWidget {
   Widget build(BuildContext context) {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: EdgeInsets.all(16.r),
       child: Column(
         children: [
           Visibility(
@@ -35,14 +36,14 @@ class SelecaoEmpresa extends StatelessWidget {
                   color: context.onSecondary, fontWeight: FontWeight.w100),
             ),
           ),
-          SizedBox(height: 8),
+          SizedBox(height: 8.h),
           SizedBox(
             width: context.width * 0.5,
             child: Container(
               decoration: BoxDecoration(
                   border: Border.all(
-                      color: context.onSecondary, width: 0.5, strokeAlign: 1),
-                  borderRadius: BorderRadius.circular(30)),
+                      color: context.onSecondary, width: 0.5.w, strokeAlign: 1),
+                  borderRadius: BorderRadius.circular(30.r)),
               child: InkWell(
                 onTap: changeble && authProvider.listaCedente!.length > 1
                     ? () {
@@ -50,13 +51,13 @@ class SelecaoEmpresa extends StatelessWidget {
                             .navigate(AppRoutes.listaSelecaoEmpresasRoute);
                       }
                     : null,
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(30.r),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Padding(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 4.0, vertical: 2),
+                          EdgeInsets.symmetric(horizontal: 4.0.w, vertical: 2.h),
                       child: SizedBox(
                         width: context.width * 0.4,
                         child: Text(
@@ -71,11 +72,11 @@ class SelecaoEmpresa extends StatelessWidget {
                     Visibility(
                       visible: changeble,
                       child: Padding(
-                          padding: EdgeInsets.only(right: 8),
+                          padding: EdgeInsets.only(right: 8.w),
                           child: SvgPicture.asset(
                             Assets.iconsIcChangeCnpj,
                             color: context.onSecondary,
-                            width: 15,
+                            width: 15.w,
                           )),
                     ),
                   ],

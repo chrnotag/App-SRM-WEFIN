@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import '../core/constants/themes/theme_configs.dart';
 
@@ -13,7 +14,7 @@ class ComponentCardOperacoes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 80,
+      width: 120.w,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,7 +26,7 @@ class ComponentCardOperacoes extends StatelessWidget {
             textAlign: TextAlign.start,
           ),
           SizedBox(
-            height: 8,
+            height: 8.h,
           ),
           Text(
             label,

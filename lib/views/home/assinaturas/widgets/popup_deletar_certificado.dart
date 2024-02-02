@@ -15,7 +15,7 @@ class PopUpDeletarCertificado {
       title: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
+            padding: EdgeInsets.only(bottom: 8.h),
             child: Text(
               'Excluir',
               style: context.textTheme.bodyMedium
@@ -26,7 +26,7 @@ class PopUpDeletarCertificado {
             style: context.textTheme.bodySmall,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
+            padding: EdgeInsets.symmetric(vertical: 8.h),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: [

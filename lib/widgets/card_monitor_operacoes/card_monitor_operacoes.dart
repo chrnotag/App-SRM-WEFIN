@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
+import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
 import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
@@ -27,24 +28,25 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
     final operacao = widget.operacoes;
     final MonitorOperacoesProvider operacaoProvider =
         Modular.get<MonitorOperacoesProvider>();
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                IntrinsicHeight(
-                  child: Row(
+    return SizedBox(
+      height: isVisivel(operacao) ? 210.h : 140.h,
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(5.r)),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsets.all(8),
+                          padding: EdgeInsets.all(8.r),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -58,7 +60,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                       label:
                                           operacao.codigoOperacao.toString()),
                                   SizedBox(
-                                    height: 10,
+                                    height: 10.h,
                                   ),
                                   ComponentCardOperacoes(
                                       title: 'Status',
@@ -77,7 +79,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                           DateTime.parse(
                                               operacao.dataOperacao))),
                                   SizedBox(
-                                    height: 10,
+                                    height: 10.h,
                                   ),
                                   ComponentCardOperacoes(
                                     title: 'Valor Bruto',
@@ -95,7 +97,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                       title: 'Produto',
                                       label: operacao.siglaProduto),
                                   SizedBox(
-                                    height: 10,
+                                    height: 10.h,
                                   ),
                                   ComponentCardOperacoes(
                                       title: 'Valor Liquido',
@@ -112,70 +114,80 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                       ),
                     ],
                   ),
-                ),
-                Visibility(
-                  visible: isVisivel(operacao),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8),
-                    child: Column(
-                      children: [
-                        Divider(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text('Ver Assinaturas'),
-                            ElevatedButton(
-                                onPressed: () {
-                                  final MonitorOperacoesProvider
-                                      operacaoProvider =
-                                      Modular.get<MonitorOperacoesProvider>();
-                                  final AssinaturaProvider assinaturaProvider =
-                                      Modular.get<AssinaturaProvider>();
-                                  List<MonitorAssinaturasModel>
-                                      assinaturasPendentes =
-                                      assinaturaProvider.assinaturasPendentes;
-                                  operacaoProvider.aconragemAssinatura(
-                                      assinaturaProvider.todasAssinaturas,
-                                      operacao.codigoOperacao);
-                                  Modular.to.pushNamed(
-                                      AppRoutes.assinaturaDigitalRoute,
-                                      arguments: {
-                                        'assinaturas':
-                                            assinaturaProvider.todasAssinaturas,
-                                        'assinaturasPendentes':
-                                            assinaturasPendentes,
-                                        'tab': 1,
-                                        'destacar': true,
-                                      });
-                                },
-                                child: Text(
-                                  'Assinaturas',
-                                  style: context.textTheme.bodyMedium!
-                                      .copyWith(color: Colors.white),
-                                ))
-                          ],
-                        ),
-                      ],
+                  Visibility(
+                    visible: isVisivel(operacao),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8.w),
+                      child: Column(
+                        children: [
+                          Divider(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('Ver Assinaturas'),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 8.0),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: context.primaryColor,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(5.r))
+                                    )
+                                  ),
+                                    onPressed: () {
+                                      final MonitorOperacoesProvider
+                                          operacaoProvider =
+                                          Modular.get<MonitorOperacoesProvider>();
+                                      final AssinaturaProvider assinaturaProvider =
+                                          Modular.get<AssinaturaProvider>();
+                                      List<MonitorAssinaturasModel>
+                                          assinaturasPendentes =
+                                          assinaturaProvider.assinaturasPendentes;
+                                      operacaoProvider.aconragemAssinatura(
+                                          assinaturaProvider.todasAssinaturas,
+                                          operacao.codigoOperacao);
+                                      Modular.to.pushNamed(
+                                          AppRoutes.assinaturaDigitalRoute,
+                                          arguments: {
+                                            'assinaturas':
+                                                assinaturaProvider.todasAssinaturas,
+                                            'assinaturasPendentes':
+                                                assinaturasPendentes,
+                                            'tab': 1,
+                                            'destacar': true,
+                                          });
+                                    },
+                                    child: Padding(
+                                      padding: EdgeInsets.all(4.r),
+                                      child: Text(
+                                        'Assinaturas',
+                                        style: context.textTheme.bodyMedium!
+                                            .copyWith(color: Colors.white),
+                                      ),
+                                    )),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
-          ),
-          Container(
-            width: 30,
-            height: isVisivel(operacao)
-                ? context.height * 0.155
-                : context.height * 0.115,
-            decoration: BoxDecoration(
-              color: operacaoProvider
-                  .corOperacao[operacao.statusOperacao.toUpperCase().trim()],
-              borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(5),
-                  bottomRight: Radius.circular(5)),
+            Container(
+              width: 30.w,
+              height: double.maxFinite,
+              decoration: BoxDecoration(
+                color: operacaoProvider
+                    .corOperacao[operacao.statusOperacao.toUpperCase().trim()],
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(5.r),
+                    bottomRight: Radius.circular(5.r)),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

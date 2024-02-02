@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 
 class Loader extends StatelessWidget {
@@ -9,7 +10,10 @@ class Loader extends StatelessWidget {
     return Container(
       color: Colors.black.withOpacity(0.5),
       child: Center(
-        child: CircularProgressIndicator(color: context.primaryColor),
+        child: SizedBox(
+          height: 40.h,
+            width: 40.w,
+            child: CircularProgressIndicator(color: context.primaryColor, strokeWidth: 2.w,)),
       ),
     );
   }

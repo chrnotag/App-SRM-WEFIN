@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 
 class FooterExpansible extends StatefulWidget {
@@ -17,7 +18,7 @@ class _FooterExpansibleState extends State<FooterExpansible> {
     return Container(
       decoration: BoxDecoration(
           color: const Color(0xffFAFAFA),
-          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5))),
+          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5.r))),
       child: TextButton(
         onPressed: widget.onToggle,
         child: Row(

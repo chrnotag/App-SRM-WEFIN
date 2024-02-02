@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
 
@@ -31,7 +32,7 @@ class _AlertDialogGenericoState extends State<AlertDialogGenerico> {
             style: context.textTheme.labelMedium,
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 10, bottom: 20),
+            padding: EdgeInsets.only(top: 10.h, bottom: 20.h),
             child: Text(
               widget.msg,
               style: context.textTheme.bodyMedium,

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/providers/internet_provider.dart';
@@ -85,22 +86,6 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
     final ThemeProvider themeProvider = context.watch<ThemeProvider>();
     final ConnectivityProvider connectivityProvider =
         context.watch<ConnectivityProvider>();
-    return StreamBuilder<bool>(
-      stream: connectivityProvider.connectionStatusStream,
-      initialData: true,
-      builder: (context, snapshot) {
-        if (!snapshot.hasData || !snapshot.data!) {
-          return const MaterialApp(
-            home: SemConexaoScreen(),
-          );
-        } else {
-          return widgetPrincipal(context, themeProvider);
-        }
-      },
-    );
-  }
-
-  Widget widgetPrincipal(BuildContext context, ThemeProvider themeProvider) {
     return Listener(
       onPointerDown: (event) {
         if (!listaExessaoTimeOut.contains(Modular.to.path)) {
@@ -118,9 +103,21 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
             sessionProvider.resetListening();
           }
         },
-        child: MaterialApp.router(
-          routerConfig: Modular.routerConfig,
-          theme: themeProvider.temaAtual,
+        child: StreamBuilder<bool>(
+          stream: connectivityProvider.connectionStatusStream,
+          initialData: true,
+          builder: (context, snapshot) {
+            if (!snapshot.hasData || !snapshot.data!) {
+              return const MaterialApp(
+                home: SemConexaoScreen(),
+              );
+            } else {
+              return MaterialApp.router(
+                routerConfig: Modular.routerConfig,
+                theme: themeProvider.temaAtual,
+              );
+            }
+          },
         ),
       ),
     );

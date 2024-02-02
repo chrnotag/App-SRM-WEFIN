@@ -80,7 +80,10 @@ class AuthProvider extends ChangeNotifier {
         if (respostaAssinatura.error != null) {
           _erroTrocaCedente(respostaAssinatura);
         } else {
-          OverlayApp.terminaOverlay();
+          try{
+            OverlayApp.terminaOverlay();
+          }catch(_){
+          }
           Modular.to.pushNamed(AppRoutes.homeAppRoute);
         }
       }
@@ -89,7 +92,10 @@ class AuthProvider extends ChangeNotifier {
       if (respostaAssinatura.error != null) {
         _erroTrocaCedente(respostaAssinatura);
       } else {
-        OverlayApp.terminaOverlay();
+        try{
+          OverlayApp.terminaOverlay();
+        }catch(_){
+        }
         notifyListeners();
         Modular.to.pushNamed(AppRoutes.homeAppRoute);
       }

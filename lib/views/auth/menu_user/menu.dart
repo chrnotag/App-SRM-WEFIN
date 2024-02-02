@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
@@ -23,24 +24,25 @@ class Menu extends StatelessWidget {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: AppBar().preferredSize, child: const AppBarLogo()),
+          preferredSize: AppBar().preferredSize, child: const AppBarLogo(isPerfilVisivel: false,)),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
         child: Column(
+          
           children: [
             Text('Meu Perfil',
-                style: context.textTheme.bodyMedium!.copyWith(color: context.onSecondary)),
+                style: context.textTheme.bodyLarge!.copyWith(color: context.onSecondary)),
             Padding(
-              padding: EdgeInsets.only(bottom: 15),
+              padding: EdgeInsets.only(bottom: 15.h),
               child: Text('Visualize seus dados e tire suas dúvidas',
-                  style: context.textTheme.bodySmall!.copyWith(
+                  style: context.textTheme.bodyMedium!.copyWith(
                     color: context.onSecondary,
                       fontWeight: FontWeight.w200)),
             ),
             Expanded(
               child: Card(
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)),
+                    borderRadius: BorderRadius.circular(8.r)),
                 child: Column(
                   children: [
                     Flexible(
@@ -48,10 +50,10 @@ class Menu extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(30),
+                            padding: EdgeInsets.all(30.r),
                             child: SvgPicture.asset(
                               Assets.empresaIcon,
-                              width: 70,
+                              width: 70.w,
                               color: context.primaryColor,
                             ),
                           ),
@@ -84,7 +86,7 @@ class Menu extends StatelessWidget {
                                 .popUp,
                           );
                         }),
-                    SizedBox(height: 6)
+                    SizedBox(height: 6.h)
                   ],
                 ),
               ),

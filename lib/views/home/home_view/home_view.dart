@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
+import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/route_labels.dart';
 import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
@@ -33,23 +35,20 @@ class _HomeViewState extends State<HomeView> {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     final AssinaturaProvider assinaturaProvider =
         Modular.get<AssinaturaProvider>();
-    double spacing = 20; // Espaço entre os widgets
-    double totalSpacing = 3 * spacing; // Espaço total entre os widgets
-    double widthCard = (MediaQuery.of(context).size.width - totalSpacing) / 3;
-    double heigthCard = widthCard * 1.3;
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
         child: AppBarLogo(),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16.r),
         child: Stack(
           children: [
             Column(
               children: [
                 SelecaoEmpresa(
-                  nomeEmpresa: authProvider.empresaSelecionada?.nome ?? "Sem empresas no grupo economico",
+                  nomeEmpresa: authProvider.empresaSelecionada?.nome ??
+                      "Sem empresas no grupo economico",
                   changeble: true,
                 ),
                 Flexible(child: Container()),
@@ -74,11 +73,13 @@ class _HomeViewState extends State<HomeView> {
                         },
                         child: Card(
                           child: Container(
-                            height: heigthCard,
-                            width: widthCard,
+                            height: 144.h,
+                            width: 140.w,
                             child: Padding(
-                              padding: const EdgeInsets.all(6.0),
+                              padding: EdgeInsets.all(6.r),
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Row(
                                     mainAxisAlignment:
@@ -89,18 +90,19 @@ class _HomeViewState extends State<HomeView> {
                                       SvgPicture.asset(
                                         Assets.iconsIcAssinatura,
                                         color: context.primaryColor,
+                                        width: 41.w,
                                       ),
                                       if (assinaturaProvider
                                           .assinaturasPendentes.isNotEmpty)
                                         CircleAvatar(
-                                          radius: 15,
+                                          radius: 13.r,
                                           backgroundColor: Colors.red,
                                           child: Text(
                                             assinaturaProvider
                                                         .assinaturasPendentes
                                                         .length >
-                                                    99
-                                                ? '99+'
+                                                    9
+                                                ? '9+'
                                                 : assinaturaProvider
                                                     .notificacaoPendentes(),
                                             style: context.textTheme.bodySmall!
@@ -110,12 +112,15 @@ class _HomeViewState extends State<HomeView> {
                                     ],
                                   ),
                                   SizedBox(
-                                    height: 12,
+                                    height: 12.h,
                                   ),
-                                  Text(
-                                    'Assinatura Digital',
-                                    style: context.textTheme.bodyMedium!
-                                        .copyWith(fontWeight: FontWeight.bold),
+                                  SizedBox(
+                                    width: 84.w,
+                                    child: Text(
+                                      'Assinatura Digital',
+                                      style: context.textTheme.bodyMedium!
+                                          .copyWith(fontWeight: FontWeight.bold),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -128,20 +133,21 @@ class _HomeViewState extends State<HomeView> {
                             .pushNamed(AppRoutes.monitorOperacoesRoute),
                         child: Card(
                           child: Container(
-                            height: heigthCard,
-                            width: widthCard,
+                            height: 144.h,
+                            width: 140.w,
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(8.r),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Icon(
                                     LineIcons.areaChart,
                                     color: context.primaryColor,
-                                    size: 40,
+                                    size: 51.r,
                                   ),
                                   SizedBox(
-                                    height: 12,
+                                    height: 12.h,
                                   ),
                                   Text(
                                     'Monitor de Operações',
@@ -159,11 +165,13 @@ class _HomeViewState extends State<HomeView> {
                             Modular.to.pushNamed(AppRoutes.helpScreenRoute),
                         child: Card(
                           child: Container(
-                            height: heigthCard,
-                            width: widthCard,
+                            height: 144.h,
+                            width: 140.w,
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(8.r),
                               child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
                                     mainAxisAlignment:
@@ -175,11 +183,12 @@ class _HomeViewState extends State<HomeView> {
                                         Assets.iconsIcAtendimento,
                                         fit: BoxFit.fill,
                                         color: context.primaryColor,
+                                        width: 41.w,
                                       ),
                                     ],
                                   ),
                                   SizedBox(
-                                    height: 12,
+                                    height: 12.h,
                                   ),
                                   Text(
                                     'Atendimento',
