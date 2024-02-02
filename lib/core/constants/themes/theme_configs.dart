@@ -20,11 +20,11 @@ class AppSizes {
   static const double paddingLarge = 24;
   static const double paddingExtraLarge = 32;
 
-  static final double fontSizeVerySmall = 10.sp;
-  static final double fontSizeSmall = 12.sp;
-  static final double fontSizeMedium = 14.sp;
-  static final double fontSizeLarge = 20.sp;
-  static final double fontSizeExtraLarge = 32.sp;
+  double fontSizeVerySmall = 10.sp;
+  double fontSizeSmall = 12.sp;
+  double fontSizeMedium = 14.sp;
+  double fontSizeLarge = 20.sp;
+  double fontSizeExtraLarge = 32.sp;
 }
 
 class BorderRadiusBotaoEnvio {

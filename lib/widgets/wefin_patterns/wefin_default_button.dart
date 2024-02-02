@@ -30,7 +30,7 @@ class BotaoPadrao extends StatelessWidget {
                 ),
                 backgroundColor: context.primaryColor),
             child: Padding(
-              padding: EdgeInsets.all(AppSizes.paddingMedium.r),
+              padding: EdgeInsets.all(AppSizes.paddingMedium),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

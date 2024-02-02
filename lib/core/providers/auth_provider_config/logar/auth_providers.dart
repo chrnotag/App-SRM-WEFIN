@@ -82,8 +82,7 @@ class AuthProvider extends ChangeNotifier {
         } else {
           try{
             OverlayApp.terminaOverlay();
-          }catch(e){
-            log('ok');
+          }catch(_){
           }
           Modular.to.pushNamed(AppRoutes.homeAppRoute);
         }
@@ -95,8 +94,7 @@ class AuthProvider extends ChangeNotifier {
       } else {
         try{
           OverlayApp.terminaOverlay();
-        }catch(e){
-          log('ok');
+        }catch(_){
         }
         notifyListeners();
         Modular.to.pushNamed(AppRoutes.homeAppRoute);

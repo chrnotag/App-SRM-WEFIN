@@ -29,7 +29,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
     final MonitorOperacoesProvider operacaoProvider =
         Modular.get<MonitorOperacoesProvider>();
     return SizedBox(
-      height: isVisivel(operacao) ? 206.h : 140.h,
+      height: isVisivel(operacao) ? 210.h : 140.h,
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(5.r)),

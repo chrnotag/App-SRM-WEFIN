@@ -237,20 +237,23 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
             ),
           ],
         ),
-        Padding(
-          padding: EdgeInsets.all(15.r),
-          child: Visibility(
-            visible: widget.assinarDocumento && filtroBotaoAssinar(),
-            child: BotaoPadrao(
-                onPressed: () async {
-                  AssinaturaEletronicaProvider assinaturaEletronicaProvider =
-                      Modular.get<AssinaturaEletronicaProvider>();
-                  assinaturaEletronicaProvider.codigoOperacao = widget.codigoOperacao;
-                  IniciarAssinaturaProvider iniciarAssinatura =
-                      Modular.get<IniciarAssinaturaProvider>();
-                  iniciarAssinatura.IniciarAssinatura(info, context);
-                },
-                label: "Assinar Operação"),
+        Container(
+          width: context.width * 0.7,
+          child: Padding(
+            padding: EdgeInsets.all(15.r),
+            child: Visibility(
+              visible: widget.assinarDocumento && filtroBotaoAssinar(),
+              child: BotaoPadrao(
+                  onPressed: () async {
+                    AssinaturaEletronicaProvider assinaturaEletronicaProvider =
+                        Modular.get<AssinaturaEletronicaProvider>();
+                    assinaturaEletronicaProvider.codigoOperacao = widget.codigoOperacao;
+                    IniciarAssinaturaProvider iniciarAssinatura =
+                        Modular.get<IniciarAssinaturaProvider>();
+                    iniciarAssinatura.IniciarAssinatura(info, context);
+                  },
+                  label: "Assinar Operação"),
+            ),
           ),
         )
       ],

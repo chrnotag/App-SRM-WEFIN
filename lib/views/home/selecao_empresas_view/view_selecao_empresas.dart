@@ -188,26 +188,22 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                       );
                     }
 
-                    return Container(
-                      height: 40.h,
-                      decoration: BoxDecoration(
-                        borderRadius: borderRadius,
-                        color: Colors.white,
-                      ),
-                      child: InkWell(
-                        onTap: () async {
-                          setState(() {
-                            OverlayApp.iniciaOverlay(context);
-                          });
-                          authProviderAtt.RelogarTrocarCedente(
-                              _searchResults![index].identificador);
-                        },
-                        child: ListTile(
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(
+                    return InkWell(
+                      onTap: () async {
+                        setState(() {
+                          OverlayApp.iniciaOverlay(context);
+                        });
+                        authProviderAtt.RelogarTrocarCedente(
+                            _searchResults![index].identificador);
+                      },
+                      child: ListTile(
+                        title: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   RichText(
@@ -249,8 +245,8 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     );

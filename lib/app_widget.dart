@@ -86,26 +86,6 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
     final ThemeProvider themeProvider = context.watch<ThemeProvider>();
     final ConnectivityProvider connectivityProvider =
         context.watch<ConnectivityProvider>();
-    return ScreenUtilInit(
-      designSize: const Size(540, 960),
-      minTextAdapt: true,
-      builder: (context, child) => StreamBuilder<bool>(
-        stream: connectivityProvider.connectionStatusStream,
-        initialData: true,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData || !snapshot.data!) {
-            return const MaterialApp(
-              home: SemConexaoScreen(),
-            );
-          } else {
-            return widgetPrincipal(context, themeProvider);
-          }
-        },
-      ),
-    );
-  }
-
-  Widget widgetPrincipal(BuildContext context, ThemeProvider themeProvider) {
     return Listener(
       onPointerDown: (event) {
         if (!listaExessaoTimeOut.contains(Modular.to.path)) {
@@ -123,9 +103,21 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
             sessionProvider.resetListening();
           }
         },
-        child: MaterialApp.router(
-          routerConfig: Modular.routerConfig,
-          theme: themeProvider.temaAtual,
+        child: StreamBuilder<bool>(
+          stream: connectivityProvider.connectionStatusStream,
+          initialData: true,
+          builder: (context, snapshot) {
+            if (!snapshot.hasData || !snapshot.data!) {
+              return const MaterialApp(
+                home: SemConexaoScreen(),
+              );
+            } else {
+              return MaterialApp.router(
+                routerConfig: Modular.routerConfig,
+                theme: themeProvider.temaAtual,
+              );
+            }
+          },
         ),
       ),
     );

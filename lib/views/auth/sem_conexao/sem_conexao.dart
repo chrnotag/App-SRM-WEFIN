@@ -55,7 +55,7 @@ class _SemConexaoScreenState extends State<SemConexaoScreen> {
                   child: Text(
                     'Sem conexão com a internet',
                     style: context.textTheme.bodyLarge!
-                        .copyWith(color: context.onSecondary),
+                        .copyWith(color: Colors.black),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -64,7 +64,7 @@ class _SemConexaoScreenState extends State<SemConexaoScreen> {
                   child: Text(
                     'Verifique sua conexão e tente novamente',
                     style: context.textTheme.bodyMedium!
-                        .copyWith(color: context.onSecondary),
+                        .copyWith(color: Colors.black),
                     textAlign: TextAlign.center,
                   ),
                 ),

@@ -23,7 +23,6 @@ class SessionProvider with ChangeNotifier {
     }
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       _timeout -= 1;
-      log('TEMPO RESTANTE: $_timeout');
       if (_timeout == 0) {
         mostrarAlerta();
         timer.cancel();
@@ -44,7 +43,7 @@ class SessionProvider with ChangeNotifier {
     if (_timer!.isActive) {
       _timer!.cancel();
     }
-    _timeout = 60;
+    _timeout = 99999;
     startListening();
   }
 
