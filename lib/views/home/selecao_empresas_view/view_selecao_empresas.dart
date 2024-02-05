@@ -145,7 +145,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
 
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: AppBar().preferredSize,child: const AppBarLogo()),
+          preferredSize: AppBar().preferredSize, child: const AppBarLogo()),
       body: Padding(
         padding: EdgeInsets.all(8.r),
         child: Center(
@@ -190,11 +190,8 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
 
                     return InkWell(
                       onTap: () async {
-                        setState(() {
-                          OverlayApp.iniciaOverlay(context);
-                        });
                         authProviderAtt.RelogarTrocarCedente(
-                            _searchResults![index].identificador);
+                            _searchResults![index].identificador, context);
                       },
                       child: ListTile(
                         title: Column(
@@ -225,22 +222,29 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                                   ),
                                   Spacer(),
                                   Visibility(
-                                    visible:
-                                    _searchResults![index].assinaturaPendente > 0,
+                                    visible: _searchResults![index]
+                                            .assinaturaPendente >
+                                        0,
                                     child: CircleAvatar(
-                                        backgroundColor: AppColors.vermelho,
+                                        backgroundColor: Colors.red,
                                         radius: 10.r,
                                         child: Center(
                                           child: Text(
-                                              _searchResults![index]
-                                                  .assinaturaPendente >=
-                                                  10
+                                              authProvider
+                                                          .dataUser!
+                                                          .listaCedente[index]
+                                                          .assinaturaPendente >=
+                                                      10
                                                   ? '9+'
-                                                  : _searchResults![index]
-                                                  .assinaturaPendente
-                                                  .toString(),
-                                              style: context.textTheme.labelSmall!
-                                                  .copyWith(color: Colors.white)),
+                                                  : authProvider
+                                                      .dataUser!
+                                                      .listaCedente[index]
+                                                      .assinaturaPendente
+                                                      .toString(),
+                                              style: context
+                                                  .textTheme.labelSmall!
+                                                  .copyWith(
+                                                      color: Colors.white)),
                                         )),
                                   ),
                                 ],

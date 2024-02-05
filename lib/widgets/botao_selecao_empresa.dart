@@ -10,13 +10,13 @@ import 'package:modular_study/core/providers/auth_provider_config/logar/auth_pro
 import '../generated/assets.dart';
 
 class SelecaoEmpresa extends StatelessWidget {
-  final String nomeEmpresa;
+  final String? nomeEmpresa;
   final String tituloPagina;
   final bool changeble;
 
   const SelecaoEmpresa({
     super.key,
-    required this.nomeEmpresa,
+    this.nomeEmpresa,
     this.tituloPagina = '',
     this.changeble = true,
   });
@@ -61,7 +61,7 @@ class SelecaoEmpresa extends StatelessWidget {
                       child: SizedBox(
                         width: context.width * 0.4,
                         child: Text(
-                          nomeEmpresa,
+                          nomeEmpresa ?? "Nenhuma Empresa Selecionada",
                           style: context.textTheme.bodySmall!
                               .copyWith(color: context.onSecondary),
                           overflow: TextOverflow.ellipsis,

@@ -10,6 +10,9 @@ import 'package:modular_study/views/home/assinaturas/widgets/mensagem_lista_vazi
 import 'package:modular_study/widgets/appbar_logo_perfil.dart';
 import 'package:modular_study/widgets/botao_selecao_empresa.dart';
 import 'package:modular_study/widgets/card_monitor_assinaturas/card_monitor_assinaturas.dart';
+import 'package:modular_study/widgets/loader_widget.dart';
+
+import '../../../core/implementations_config/api_response.dart';
 
 class MonitorAssinaturas extends StatefulWidget {
   const MonitorAssinaturas({super.key});
@@ -21,6 +24,7 @@ class MonitorAssinaturas extends StatefulWidget {
 class _MonitorAssinaturasState extends State<MonitorAssinaturas>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  late Future<ApiResponse<dynamic>> _assinaturasFuture;
 
   final AssinaturaProvider assinaturaProvider =
       Modular.get<AssinaturaProvider>();
@@ -28,10 +32,18 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas>
   @override
   void initState() {
     super.initState();
+    _carregarDados();
     _tabController = TabController(vsync: this, length: 2);
     if (Modular.args.data['tab'] != null) {
       _tabController.animateTo(Modular.args.data['tab']);
     }
+  }
+
+  Future<void> _carregarDados() async {
+    setState(() {
+      _assinaturasFuture =
+          Modular.get<AssinaturaProvider>().carregarAssinaturas();
+    });
   }
 
   @override
@@ -44,10 +56,13 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas>
   @override
   Widget build(BuildContext context) {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
+    final AssinaturaProvider assinaturaProvider =
+        context.watch<AssinaturaProvider>();
     final args = Modular.args.data;
     final List<MonitorAssinaturasModel> assinaturasPendentes =
-        args['assinaturasPendentes'];
-    final List<MonitorAssinaturasModel> assinaturas = args['assinaturas'];
+        assinaturaProvider.assinaturasPendentes;
+    final List<MonitorAssinaturasModel> assinaturas =
+        assinaturaProvider.todasAssinaturas;
     final bool? destacar = args['destacar'];
     return Scaffold(
       appBar: PreferredSize(
@@ -60,7 +75,7 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas>
           child: Column(
             children: [
               SelecaoEmpresa(
-                nomeEmpresa: authProvider.empresaSelecionada!.nome,
+                nomeEmpresa: authProvider.empresaSelecionada?.nome,
                 changeble: true,
                 tituloPagina: 'Assinatura Digital',
               ),
@@ -89,36 +104,73 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas>
                 child: TabBarView(
                   controller: _tabController,
                   children: [
-                    assinaturasPendentes.isNotEmpty
-                        ? ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: assinaturasPendentes.length,
-                            itemBuilder: (context, index) =>
-                                CardMonitorAssinaturas(
-                              assinarDocumento: true,
-                              assinatura: assinaturasPendentes[index],
-                            ),
-                          )
-                        : const MensagemListaVazia(
-                      icon: Icons.check_circle_outline,
-                            mensagem:
-                                "Nada pendente!\nTodas as assinaturas estão em dia."),
-                    assinaturas.isNotEmpty
-                        ? ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: assinaturas.length,
-                            itemBuilder: (context, index) =>
-                                CardMonitorAssinaturas(
-                              assinatura: assinaturas[index],
-                              destacar: index == 0 &&
-                                  destacar != null &&
-                                  destacar &&
-                                  !assinaturaProvider.isDestacado,
-                            ),
-                          )
-                        : const MensagemListaVazia(
-                      icon: LineIcons.clipboardWithCheck,
-                            mensagem: 'Não há operações para acompanhamento.'),
+                    FutureBuilder(
+                      future: _assinaturasFuture,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Loader();
+                        } else {
+                          return assinaturasPendentes.isNotEmpty
+                              ? RefreshIndicator(
+                                  backgroundColor: Colors.white,
+                                  color: context.primaryColor,
+                                  onRefresh: () => _carregarDados(),
+                                  child: SizedBox(
+                                    height: double.maxFinite,
+                                    child: ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: assinaturasPendentes.length,
+                                      itemBuilder: (context, index) =>
+                                          CardMonitorAssinaturas(
+                                        assinarDocumento: true,
+                                        assinatura: assinaturasPendentes[index],
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : const MensagemListaVazia(
+                                  icon: Icons.check_circle_outline,
+                                  mensagem:
+                                      "Nada pendente!\nTodas as assinaturas estão em dia.");
+                        }
+                      },
+                    ),
+                    FutureBuilder(
+                      future: _assinaturasFuture,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Loader();
+                        } else {
+                          return RefreshIndicator(
+                            backgroundColor: Colors.white,
+                            color: context.primaryColor,
+                            onRefresh: () => _carregarDados(),
+                            child: assinaturas.isNotEmpty
+                                ? SizedBox(
+                              height: double.maxFinite,
+                                  child: ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: assinaturas.length,
+                                      itemBuilder: (context, index) =>
+                                          CardMonitorAssinaturas(
+                                        assinatura: assinaturas[index],
+                                        destacar: index == 0 &&
+                                            destacar != null &&
+                                            destacar &&
+                                            !assinaturaProvider.isDestacado,
+                                      ),
+                                    ),
+                                )
+                                : const MensagemListaVazia(
+                                    icon: LineIcons.clipboardWithCheck,
+                                    mensagem:
+                                        'Não há operações para acompanhamento.'),
+                          );
+                        }
+                      },
+                    )
                   ],
                 ),
               ),

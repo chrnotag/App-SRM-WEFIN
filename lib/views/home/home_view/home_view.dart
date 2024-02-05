@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -35,6 +37,7 @@ class _HomeViewState extends State<HomeView> {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     final AssinaturaProvider assinaturaProvider =
         Modular.get<AssinaturaProvider>();
+    log('notificação: ${authProvider.empresaSelecionada!.assinaturaPendente}');
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
@@ -79,7 +82,8 @@ class _HomeViewState extends State<HomeView> {
                               padding: EdgeInsets.all(6.r),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Row(
                                     mainAxisAlignment:
@@ -92,19 +96,19 @@ class _HomeViewState extends State<HomeView> {
                                         color: context.primaryColor,
                                         width: 41.w,
                                       ),
-                                      if (assinaturaProvider
-                                          .assinaturasPendentes.isNotEmpty)
+                                      if (authProvider.empresaSelecionada!.assinaturaPendente > 0)
                                         CircleAvatar(
                                           radius: 13.r,
                                           backgroundColor: Colors.red,
                                           child: Text(
-                                            assinaturaProvider
-                                                        .assinaturasPendentes
-                                                        .length >
+                                            authProvider.empresaSelecionada!
+                                                        .assinaturaPendente >
                                                     9
                                                 ? '9+'
-                                                : assinaturaProvider
-                                                    .notificacaoPendentes(),
+                                                : authProvider
+                                                    .empresaSelecionada!
+                                                    .assinaturaPendente
+                                                    .toString(),
                                             style: context.textTheme.bodySmall!
                                                 .copyWith(color: Colors.white),
                                           ),
@@ -119,7 +123,8 @@ class _HomeViewState extends State<HomeView> {
                                     child: Text(
                                       'Assinatura Digital',
                                       style: context.textTheme.bodyMedium!
-                                          .copyWith(fontWeight: FontWeight.bold),
+                                          .copyWith(
+                                              fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ],
@@ -139,7 +144,8 @@ class _HomeViewState extends State<HomeView> {
                               padding: EdgeInsets.all(8.r),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Icon(
                                     LineIcons.areaChart,
@@ -170,7 +176,8 @@ class _HomeViewState extends State<HomeView> {
                             child: Padding(
                               padding: EdgeInsets.all(8.r),
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
