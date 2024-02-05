@@ -62,10 +62,12 @@ class AuthProvider extends ChangeNotifier {
         .firstWhere((cedente) => cedente.identificador == identificadorCedente);
   }
 
-  Future<void> RelogarTrocarCedente(String identificadorCedente) async {
+  Future<void> RelogarTrocarCedente(
+      String identificadorCedente, BuildContext context) async {
     final AssinaturaProvider assinaturaProvider =
         Modular.get<AssinaturaProvider>();
     if (empresaSelecionada!.identificador != identificadorCedente) {
+      OverlayApp.iniciaOverlay(context);
       final credenciaisLogin = UserModel(
           usuario: credenciaisUsuario.usuario,
           senha: credenciaisUsuario.senha,
@@ -76,29 +78,19 @@ class AuthProvider extends ChangeNotifier {
       if (respostaLogin != null && respostaLogin.error != null) {
         _erroTrocaCedente(respostaLogin);
       } else {
-        final respostaAssinatura = await assinaturaProvider.pegarAssinaturas();
+        final respostaAssinatura =
+            await assinaturaProvider.carregarAssinaturas();
         if (respostaAssinatura.error != null) {
           _erroTrocaCedente(respostaAssinatura);
         } else {
-          try{
+          try {
             OverlayApp.terminaOverlay();
-          }catch(_){
-          }
+          } catch (_) {}
           Modular.to.pushNamed(AppRoutes.homeAppRoute);
         }
       }
     } else {
-      final respostaAssinatura = await assinaturaProvider.pegarAssinaturas();
-      if (respostaAssinatura.error != null) {
-        _erroTrocaCedente(respostaAssinatura);
-      } else {
-        try{
-          OverlayApp.terminaOverlay();
-        }catch(_){
-        }
-        notifyListeners();
-        Modular.to.pushNamed(AppRoutes.homeAppRoute);
-      }
+      Modular.to.pushNamed(AppRoutes.homeAppRoute);
     }
   }
 

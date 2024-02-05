@@ -139,7 +139,7 @@ class _AuthFormState extends State<AuthForm> {
           Modular.to.navigate(AppRoutes.listaSelecaoEmpresasRoute);
         } else {
           authProvider.RelogarTrocarCedente(
-              authProvider.dataUser!.identificadorCedente);
+              authProvider.dataUser!.identificadorCedente, context);
         }
       }
     }

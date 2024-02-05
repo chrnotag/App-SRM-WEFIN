@@ -72,7 +72,7 @@ class _MonitorOperacoesState extends State<MonitorOperacoes> {
                   padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 0),
                   child: RefreshIndicator(
                     backgroundColor: Colors.white,
-                    color: AppColors.azulPrimarioSRM,
+                    color: context.primaryColor,
                     onRefresh: () => _carregarDados(),
                     child: ListView.builder(
                       itemCount: operacoesProvider.operacoes.length,
