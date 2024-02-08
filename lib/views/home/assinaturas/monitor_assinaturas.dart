@@ -98,87 +98,36 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas>
                             style: context.textTheme.bodyMedium),
                         height: 40.h),
                   ],
-                  indicatorColor: context.primaryColor,
-                  indicatorSize: TabBarIndicatorSize.label,
-                ),
-              ),
-              Expanded(
-                child: TabBarView(
-                  controller: _tabController,
-                  children: [
-                    FutureBuilder(
-                      future: _assinaturasFuture,
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const Loader();
-                        } else {
-                          return assinaturasPendentes.isNotEmpty
-                              ? RefreshIndicator(
-                                  backgroundColor: Colors.white,
-                                  color: context.primaryColor,
-                                  onRefresh: () => _carregarDados(),
-                                  child: SizedBox(
-                                    height: double.maxFinite,
-                                    child: ListView.builder(
-                                      shrinkWrap: true,
-                                      itemCount: assinaturasPendentes.length,
-                                      itemBuilder: (context, index) =>
-                                          CardMonitorAssinaturas(
-                                        assinarDocumento: true,
-                                        assinatura: assinaturasPendentes[index],
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              : MensagemListaVazia(
-                                  icon: Icons.check_circle_outline,
-                                  mensagem:
-                                      "Nada pendente!\nTodas as assinaturas estão em dia.");
-                        }
-                      },
+                  indicatorColor: context.primaryColor),
+            ),
+            Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: assinaturasPendentes.length,
+                    itemBuilder: (context, index) => CardMonitorAssinaturas(
+                      assinarDocumento: true,
+                      assinatura: assinaturasPendentes[index],
                     ),
-                    FutureBuilder(
-                      future: _assinaturasFuture,
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const Loader();
-                        } else {
-                          log(assinaturas.length.toString());
-                          return RefreshIndicator(
-                            backgroundColor: Colors.white,
-                            color: context.primaryColor,
-                            onRefresh: () => _carregarDados(),
-                            child: assinaturas.isNotEmpty
-                                ? SizedBox(
-                                    height: double.maxFinite,
-                                    child: ListView.builder(
-                                      shrinkWrap: true,
-                                      itemCount: assinaturas.length,
-                                      itemBuilder: (context, index) =>
-                                          CardMonitorAssinaturas(
-                                        assinatura: assinaturas[index],
-                                        destacar: index == 0 &&
-                                            destacar != null &&
-                                            destacar &&
-                                            !assinaturaProvider.isDestacado,
-                                      ),
-                                    ),
-                                  )
-                                : MensagemListaVazia(
-                                    icon: LineIcons.clipboardWithCheck,
-                                    mensagem:
-                                        'Não há operações para acompanhamento.'),
-                          );
-                        }
-                      },
-                    )
-                  ],
-                ),
+                  ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: assinaturas.length,
+                    itemBuilder: (context, index) => CardMonitorAssinaturas(
+                      assinatura: assinaturas[index],
+                      destacar: index == 0 &&
+                          destacar != null &&
+                          destacar &&
+                          !assinaturaProvider.isDestacado,
+                      visualizarDocumento: true,
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

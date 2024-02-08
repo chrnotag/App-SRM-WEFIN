@@ -83,9 +83,7 @@ class AssinaturaProvider extends ChangeNotifier {
                     info.statusAssinatura != "Assinado";
               }));
       if (naoAssinadoPeloUsuario) {
-        log('logico: ${naoAssinadoPeloUsuario}');
         _assinaturasPendentes.add(assinatura);
-        log('listagem: ${_assinaturasPendentes.length}');
       }
     }
   }
