@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:line_icons/line_icons.dart';
@@ -109,7 +111,7 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas>
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return Loader();
+                          return const Loader();
                         } else {
                           return assinaturasPendentes.isNotEmpty
                               ? RefreshIndicator(
@@ -129,7 +131,7 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas>
                                     ),
                                   ),
                                 )
-                              : const MensagemListaVazia(
+                              : MensagemListaVazia(
                                   icon: Icons.check_circle_outline,
                                   mensagem:
                                       "Nada pendente!\nTodas as assinaturas estão em dia.");
@@ -141,16 +143,17 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas>
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return Loader();
+                          return const Loader();
                         } else {
+                          log(assinaturas.length.toString());
                           return RefreshIndicator(
                             backgroundColor: Colors.white,
                             color: context.primaryColor,
                             onRefresh: () => _carregarDados(),
                             child: assinaturas.isNotEmpty
                                 ? SizedBox(
-                              height: double.maxFinite,
-                                  child: ListView.builder(
+                                    height: double.maxFinite,
+                                    child: ListView.builder(
                                       shrinkWrap: true,
                                       itemCount: assinaturas.length,
                                       itemBuilder: (context, index) =>
@@ -162,8 +165,8 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas>
                                             !assinaturaProvider.isDestacado,
                                       ),
                                     ),
-                                )
-                                : const MensagemListaVazia(
+                                  )
+                                : MensagemListaVazia(
                                     icon: LineIcons.clipboardWithCheck,
                                     mensagem:
                                         'Não há operações para acompanhamento.'),

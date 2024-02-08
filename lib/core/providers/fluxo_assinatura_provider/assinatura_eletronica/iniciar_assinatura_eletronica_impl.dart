@@ -25,8 +25,10 @@ class IniciarAssinaturaEletronicaImpl {
     };
     final body = json.encode(codigoOperacaoModel);
     final url = Uri.parse(EndPoints.iniciarAssinaturaEletronica);
+
     try {
       final response = await http.post(url, body: body, headers: headers);
+      log('teste: ${response.body}');
       switch (response.statusCode) {
         case 200:
           final responseBody = ResponseInicAssinaturaEletronica.fromJson(

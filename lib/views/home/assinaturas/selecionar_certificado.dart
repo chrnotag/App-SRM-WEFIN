@@ -128,9 +128,13 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                                                                   index])
                                                       .popUp);
                                         },
-                                        child: Icon(
-                                          Icons.close,
-                                          size: 20.r,
+                                        child: Container(
+                                          width: 40.w,
+                                          height: 40.h,
+                                          child: Icon(
+                                            Icons.close,
+                                            size: 20.r,
+                                          ),
                                         ))
                                   ],
                                 ),
