@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:modular_study/core/constants/enuns/theme_enum.dart';
@@ -129,11 +131,7 @@ class _AuthFormState extends State<AuthForm> {
       if (response != null && response.error != null) {
         final error = response.error as ExceptionModel;
         setState(() {
-          if (error.codigo != '500') {
-            _mensagemErro = error.mensagem;
-          } else {
-            _mensagemErro = "Usuário ou senha Incorretos";
-          }
+          _mensagemErro = error.mensagem;
         });
       } else {
         if (authProvider.listaCedente!.length > 1) {

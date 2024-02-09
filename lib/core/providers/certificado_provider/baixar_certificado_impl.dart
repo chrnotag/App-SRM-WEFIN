@@ -17,12 +17,10 @@ class BaixarCertificadoImpl {
     };
     final url =
         Uri.parse("${EndPoints.baixarArquivo}/${Uri.encodeComponent(token)}");
-    log('url: $url');
     final ImportarCertificadoProvider provider =
         Modular.get<ImportarCertificadoProvider>();
     try {
       final content = await http.get(url, headers: header);
-      log('statuscode: ${content.statusCode}');
       if (content.statusCode == 200) {
         provider.pkcs12 = content.bodyBytes;
         showDialog(
@@ -41,7 +39,6 @@ class BaixarCertificadoImpl {
       );
       return SucessResponse(null);
     } catch (e) {
-      log('error');
       final data = ExceptionModel(
           codigo: '500',
           dataHora: DateTime.now(),

@@ -74,10 +74,8 @@ class AssinaturaProvider extends ChangeNotifier {
     _assinaturasPendentes.clear();
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     for (var assinatura in assinaturas) {
-      log('assinatura codigo: ${assinatura.codigoOperacao}');
       bool naoAssinadoPeloUsuario = assinatura.assinantes
           .any((assinante) => assinante.informacoesAssinante.any((info) {
-                log('status assinatura: ${info.statusAssinatura}');
                 return info.identificadorAssinador ==
                         authProvider.dataUser!.identificadorUsuario &&
                     info.statusAssinatura != "Assinado";

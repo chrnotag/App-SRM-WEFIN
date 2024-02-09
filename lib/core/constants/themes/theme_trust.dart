@@ -14,6 +14,7 @@ class ThemeTRUST {
 
   static ThemeData get theme => ThemeData(
         primaryColor: AppColors.verdePrimarioTRUST,
+        indicatorColor: AppColors.verde,
         searchBarTheme: SearchBarThemeData(
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(

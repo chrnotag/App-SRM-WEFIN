@@ -161,11 +161,11 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                     onPressed: certificadoProvider.certificadoSelecionado !=
                             null
                         ? () async {
-                            Modular.to.pop();
+                            OverlayApp.iniciaOverlay(context);
                             FinalizarAssinaturaProvider finalizarAssinatura =
                                 Modular.get<FinalizarAssinaturaProvider>();
-                            finalizarAssinatura.finalizarAssinatura();
-                            OverlayApp.iniciaOverlay(context);
+                            await finalizarAssinatura.finalizarAssinatura();
+                            OverlayApp.terminaOverlay();
                           }
                         : null,
                     label: "Assinar Documento",

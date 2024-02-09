@@ -15,6 +15,7 @@ import 'package:modular_study/main.dart';
 import 'package:modular_study/models/fluxo_assinatura_model/finalizar_assinatura_eletronica/finalizar_assinatura_eletronica_model.dart';
 import 'package:modular_study/models/fluxo_assinatura_model/iniciar_assinatura_eletronica/iniciar_assinatura_eletronica_model.dart';
 import 'package:modular_study/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
+import 'package:modular_study/widgets/popup_assinatura_feita.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_textfield.dart';
 import 'package:validatorless/validatorless.dart';
@@ -157,7 +158,7 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
                             if (sucess) {
                               _overlayLoader.remove();
                               Modular.to.pop();
-                              operacaoAssinada();
+                              showDialog(context: context, builder: (context) => AssinaturaCompletaPopUp(codigoOperacao: codigoOperacao));
                             } else {
                               _overlayLoader.remove();
                               Fluttertoast.showToast(
@@ -234,76 +235,5 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
         ],
       ),
     );
-  }
-
-  operacaoAssinada() {
-    showDialog(
-        context: myNavigatorKey.currentContext!,
-        builder: (context) => AlertDialog(
-              icon: Icon(
-                Icons.check_circle_outline,
-                color: myNavigatorKey.currentState!.context.primaryColor,
-                size: 50,
-              ),
-              title: Column(
-                children: [
-                  Text(
-                    "Assinatura Digital Confirmada Com Sucesso!",
-                    style: myNavigatorKey.currentContext!.textTheme.labelMedium,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(children: [
-                        TextSpan(
-                          text:
-                              'Quando sua operação possuir o numero de assinaturas necessárias, ela passará para o status de ',
-                          style: myNavigatorKey
-                              .currentContext!.textTheme.bodyMedium,
-                        ),
-                        TextSpan(
-                            text: '\"Assinada\". ',
-                            style: myNavigatorKey
-                                .currentContext!.textTheme.labelMedium),
-                      ]),
-                    ),
-                  ),
-                  Text(
-                      'Você pode acompanhar o status da sua assinatura clicando no botão abaixo.',
-                      style:
-                          myNavigatorKey.currentContext!.textTheme.bodyMedium),
-                  BotaoPadrao(
-                      label: 'Acompanhar Assinaturas',
-                      onPressed: () {
-                        final MonitorOperacoesProvider operacaoProvider =
-                            Modular.get<MonitorOperacoesProvider>();
-                        final AssinaturaProvider assinaturaProvider =
-                            Modular.get<AssinaturaProvider>();
-                        List<MonitorAssinaturasModel> assinaturasPendentes =
-                            assinaturaProvider.assinaturasPendentes;
-                        Modular.to.pushNamed(AppRoutes.assinaturaDigitalRoute,
-                            arguments: {
-                              'assinaturas':
-                                  operacaoProvider.aconragemAssinatura(
-                                      assinaturaProvider.todasAssinaturas,
-                                      codigoOperacao),
-                              'assinaturasPendentes': assinaturasPendentes,
-                              'tab': 1,
-                              'destacar': true,
-                            });
-                      }),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    child: BotaoPadrao(
-                        label: 'Realizar nova assinatura',
-                        filled: false,
-                        onPressed: () {
-                          Modular.to.pop();
-                        }),
-                  ),
-                ],
-              ),
-            ));
   }
 }

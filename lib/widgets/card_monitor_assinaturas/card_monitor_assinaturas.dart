@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
-import 'package:modular_study/core/constants/extensions/size_screen_extensions.dart';
+import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
 import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
@@ -28,6 +28,7 @@ class CardMonitorAssinaturas extends StatefulWidget {
   final MonitorAssinaturasModel assinatura;
   final bool assinarDocumento;
   bool destacar;
+  bool visualizarDocumento;
 
   CardMonitorAssinaturas(
       {super.key,
@@ -227,9 +228,13 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                   widget.visualizarDocumento
                       ? FooterFixed(
                           onToggle: () {
-                            showDialog(context: context, builder: (context) => ModalListDocuments(
-                              context: context,
-                            ).popUp);
+                            showDialog(
+                                context: context,
+                                builder: (context) => ModalListDocumento(
+                                      assinantes: widget.assinatura.assinantes,
+                                      codigoOperacao:
+                                          widget.assinatura.codigoOperacao,
+                                    ));
 
                             setState(() {
                               assinaturaProvider.assinaturaSelecionada =
@@ -238,6 +243,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                           },
                         )
                       : FooterExpansible(
+                          showInfo: _showInfo,
                           onToggle: () {
                             setState(() {
                               assinaturaProvider.assinaturaSelecionada =

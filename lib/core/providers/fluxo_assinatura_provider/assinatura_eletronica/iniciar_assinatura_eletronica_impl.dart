@@ -28,7 +28,6 @@ class IniciarAssinaturaEletronicaImpl {
 
     try {
       final response = await http.post(url, body: body, headers: headers);
-      log('teste: ${response.body}');
       switch (response.statusCode) {
         case 200:
           final responseBody = ResponseInicAssinaturaEletronica.fromJson(
@@ -46,7 +45,6 @@ class IniciarAssinaturaEletronicaImpl {
           return ErrorResponse(data);
       }
     } catch (e) {
-      log('fatal error $e');
       final data = ExceptionModel(
           codigo: '500',
           dataHora: DateTime.now(),

@@ -37,7 +37,6 @@ class _HomeViewState extends State<HomeView> {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     final AssinaturaProvider assinaturaProvider =
         Modular.get<AssinaturaProvider>();
-    log('notificação: ${authProvider.empresaSelecionada!.assinaturaPendente}');
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
