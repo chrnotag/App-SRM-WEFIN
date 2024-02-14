@@ -10,6 +10,7 @@ import 'package:modular_study/core/providers/monitor_assinatura_provider/assinat
 import 'package:modular_study/core/utils/overlay.dart';
 import 'package:modular_study/main.dart';
 import 'package:modular_study/models/fluxo_assinatura_model/finalizar_assinatura/finalizar_assinatura.dart';
+import 'package:modular_study/widgets/popup_assinatura_feita.dart';
 import '../../../../models/fluxo_assinatura_model/iniciar_assinatura/iniciar_assinatura.dart';
 import '../../../../models/fluxo_assinatura_model/iniciar_assinatura/resposta_iniciar_assinatura.dart';
 import '../../certificado_provider/importar_certificado_provider.dart';
@@ -34,15 +35,18 @@ class FinalizarAssinaturaProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<List<FinalizarAssinaturaModel>> _assinarHashs(PKCertificate cert) async {
+  Future<List<FinalizarAssinaturaModel>> _assinarHashs(
+      PKCertificate cert) async {
     List<RespostaIniciarAssinaturaModel> hashs =
         _assinaturaProvider.hashsParaAssinar;
     List<FinalizarAssinaturaModel> hashAssinados = [];
     PKCertificate certificado = cert;
     for (var hash in hashs) {
-      final hashAssinado = base64Encode((await CrossPki.signHash(certificado.thumbprint,
-          DigestAlgorithm.sha256, base64Decode(hash.hashParaAssinar))).toList());
-      log('hashAssinado: $hashAssinado}');
+      final hashAssinado = base64Encode((await CrossPki.signHash(
+              certificado.thumbprint,
+              DigestAlgorithm.sha256,
+              base64Decode(hash.hashParaAssinar)))
+          .toList());
       hashAssinados.add(FinalizarAssinaturaModel(
           codigoOperacao:
               assinaturaProvider.assinaturaSelecionada!.codigoOperacao,
@@ -64,19 +68,22 @@ class FinalizarAssinaturaProvider extends ChangeNotifier {
             assinaturaProvider.assinaturaSelecionada!.codigoOperacao);
     final hashs = await iniciarAssinaturaProvider.obterHashs(data);
     BuildContext context = myNavigatorKey.currentContext!;
+    log('error: ${hashs.error}');
     if (hashs.error == null) {
       final hashAssinados = await _assinarHashs(certificado);
       for (var documento in hashAssinados) {
-        final result = await FinalizarAssinaturaImpl(assinaturaFinalizada: documento).finalizarAssinatura();
-          OverlayApp.terminaOverlay();
-          AssinaturaEletronicaProvider provider =
-              Modular.get<AssinaturaEletronicaProvider>();
-          showDialog(
-            context: context,
-            builder: (context) => provider.operacaoAssinada(),
-          );
-          break;
-        }
+        final result =
+            await FinalizarAssinaturaImpl(assinaturaFinalizada: documento)
+                .finalizarAssinatura();
+        AssinaturaEletronicaProvider provider =
+            Modular.get<AssinaturaEletronicaProvider>();
+        showDialog(
+          context: context,
+          builder: (context) =>
+              AssinaturaCompletaPopUp(codigoOperacao: provider.codigoOperacao),
+        );
+        break;
       }
+    }
   }
 }

@@ -9,12 +9,12 @@ class MensagemListaVazia extends StatelessWidget {
   final String mensagem;
   final IconData icon;
 
-  const MensagemListaVazia({super.key, required this.mensagem, required this.icon});
+  const MensagemListaVazia(
+      {super.key, required this.mensagem, required this.icon});
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: Center(
+    return Center(
       child: Row(
         children: [
           Expanded(
@@ -48,6 +48,6 @@ class MensagemListaVazia extends StatelessWidget {
           ),
         ],
       ),
-    ));
+    );
   }
 }

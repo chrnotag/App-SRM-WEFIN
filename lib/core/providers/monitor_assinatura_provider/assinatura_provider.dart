@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
@@ -15,7 +17,7 @@ class AssinaturaProvider extends ChangeNotifier {
 
   factory AssinaturaProvider() => _instance;
 
-  Future<ApiResponse<dynamic>>carregarAssinaturas() async {
+  Future<ApiResponse<dynamic>> carregarAssinaturas() async {
     final response = await AssinaturaImpl().assinaturas();
     notifyListeners();
     return response;
@@ -41,7 +43,6 @@ class AssinaturaProvider extends ChangeNotifier {
 
   set assinaturaSelecionada(MonitorAssinaturasModel? assinatura) {
     _assinaturaSelecionada = assinatura;
-    
   }
 
   List<MonitorAssinaturasModel> _assinaturas = [];
@@ -70,15 +71,16 @@ class AssinaturaProvider extends ChangeNotifier {
   }
 
   void separaAssinaturas(List<MonitorAssinaturasModel> assinaturas) {
+    _assinaturasPendentes.clear();
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     for (var assinatura in assinaturas) {
-      bool naoAssinadoPeloUsuario = assinatura.assinantes.any((assinante) =>
-          assinante.informacoesAssinante.any((info) =>
-              info.identificadorAssinador ==
-                  authProvider.dataUser!.identificadorUsuario &&
-              info.statusAssinatura != "Assinado"));
+      bool naoAssinadoPeloUsuario = assinatura.assinantes
+          .any((assinante) => assinante.informacoesAssinante.any((info) {
+                return info.identificadorAssinador ==
+                        authProvider.dataUser!.identificadorUsuario &&
+                    info.statusAssinatura != "Assinado";
+              }));
       if (naoAssinadoPeloUsuario) {
-        _assinaturasPendentes.clear();
         _assinaturasPendentes.add(assinatura);
       }
     }

@@ -32,6 +32,7 @@ class VerificarSessao {
         title: 'Sessão Expirada',
         msg: 'Sua sessão expirou, faça o login novamente',
         onPressed: () {
+          Modular.to.pop();
           Modular.to.navigate(Modular.initialRoute);
         },
       ),

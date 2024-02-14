@@ -6,8 +6,10 @@ import 'package:modular_study/core/constants/enuns/theme_enum.dart';
 import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
 import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/core/constants/themes/theme_configs.dart';
+import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:modular_study/core/providers/theme_provider.dart';
 import 'package:modular_study/widgets/appbar_logo_perfil.dart';
+import 'package:modular_study/widgets/pdfview.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../generated/assets.dart';
 
@@ -58,14 +60,17 @@ class Ajuda extends StatelessWidget {
                             style: context.textTheme.bodyMedium!
                                 .copyWith(color: context.onSecondary)),
                         TextSpan(
-                          text: isSRM ? Contatos.telefoneSrm : Contatos.telefoneTrust,
+                          text: isSRM
+                              ? Contatos.telefoneSrm
+                              : Contatos.telefoneTrust,
                           style: context.textTheme.bodyMedium!.copyWith(
                               color: context.onSecondary,
                               decoration: TextDecoration.underline,
                               fontWeight: FontWeight.bold),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () async {
-                              final phoneUrl = Uri.parse('tel:${isSRM ? Contatos.telefoneSrm.replaceAll(' ', '') : Contatos.telefoneTrust.replaceAll(' ', '')}');
+                              final phoneUrl = Uri.parse(
+                                  'tel:${isSRM ? Contatos.telefoneSrm.replaceAll(' ', '') : Contatos.telefoneTrust.replaceAll(' ', '')}');
                               if (await canLaunchUrl(phoneUrl)) {
                                 await launchUrl(phoneUrl);
                               } else {
@@ -89,15 +94,16 @@ class Ajuda extends StatelessWidget {
                             ),
                           ),
                           TextSpan(
-                            text: isSRM ? Contatos.emailSrm : Contatos.emailTrust,
+                            text:
+                                isSRM ? Contatos.emailSrm : Contatos.emailTrust,
                             style: context.textTheme.bodyMedium!.copyWith(
                                 color: context.onSecondary,
                                 fontWeight: FontWeight.bold,
                                 decoration: TextDecoration.underline),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () async {
-                                final phoneUrl =
-                                    Uri.parse('mailto:${isSRM ? Contatos.emailSrm : Contatos.emailTrust}');
+                                final phoneUrl = Uri.parse(
+                                    'mailto:${isSRM ? Contatos.emailSrm : Contatos.emailTrust}');
                                 if (await canLaunchUrl(phoneUrl)) {
                                   await launchUrl(phoneUrl);
                                 } else {
@@ -125,14 +131,15 @@ class Ajuda extends StatelessWidget {
                               fontWeight: FontWeight.bold),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () async {
-                              final filePath =
-                                  'assets/Politica-de-privacidade.pdf'; // Substitua isso pelo caminho do seu arquivo
-                              final fileUrl = Uri.file(filePath);
-                              if (await canLaunchUrl(fileUrl)) {
-                                await launchUrl(fileUrl);
-                              } else {
-                                throw 'Could not launch $fileUrl';
-                              }
+                              AuthProvider provider =
+                                  Modular.get <AuthProvider>();
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PdfView(
+                                        url: provider
+                                            .dataUser!.urlPoliticaPrivacidade),
+                                  ));
                             },
                         ),
                       ],

@@ -41,8 +41,7 @@ class LoginImpl {
         final data = ExceptionModel.fromJson(responseBody);
         return ErrorResponse(data);
       }
-    } catch (e, stacktrace) {
-      log("retorno erro: $e, $stacktrace");
+    } catch (_) {
       final data = ExceptionModel(
           codigo: '500',
           dataHora: DateTime.now(),

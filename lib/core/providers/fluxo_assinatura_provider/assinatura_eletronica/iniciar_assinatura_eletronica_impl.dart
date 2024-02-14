@@ -25,6 +25,7 @@ class IniciarAssinaturaEletronicaImpl {
     };
     final body = json.encode(codigoOperacaoModel);
     final url = Uri.parse(EndPoints.iniciarAssinaturaEletronica);
+
     try {
       final response = await http.post(url, body: body, headers: headers);
       switch (response.statusCode) {
@@ -44,7 +45,6 @@ class IniciarAssinaturaEletronicaImpl {
           return ErrorResponse(data);
       }
     } catch (e) {
-      log('fatal error $e');
       final data = ExceptionModel(
           codigo: '500',
           dataHora: DateTime.now(),

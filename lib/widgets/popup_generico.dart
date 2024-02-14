@@ -4,16 +4,18 @@ import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
 
 class AlertDialogGenerico extends StatefulWidget {
-  final Icon? icon;
+  final IconData? icon;
   final String title;
   final String msg;
   final VoidCallback onPressed;
+  final Widget? onPressedSecond;
 
   const AlertDialogGenerico(
       {super.key,
       required this.title,
       required this.msg,
       required this.onPressed,
+      this.onPressedSecond,
       this.icon});
 
   @override
@@ -24,7 +26,11 @@ class _AlertDialogGenericoState extends State<AlertDialogGenerico> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      icon: widget.icon,
+      icon: Icon(
+        widget.icon,
+        size: 100.r,
+        color: context.primaryColor,
+      ),
       title: Column(
         children: [
           Text(
@@ -38,7 +44,11 @@ class _AlertDialogGenericoState extends State<AlertDialogGenerico> {
               style: context.textTheme.bodyMedium,
             ),
           ),
-          BotaoPadrao(label: 'OK', onPressed: widget.onPressed)
+          BotaoPadrao(label: 'OK', onPressed: widget.onPressed),
+          Padding(
+            padding: EdgeInsets.only(top: 10.h),
+            child: widget.onPressedSecond ?? Container(),
+          )
         ],
       ),
     );

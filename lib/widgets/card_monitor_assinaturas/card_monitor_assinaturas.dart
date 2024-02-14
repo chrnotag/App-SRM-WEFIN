@@ -15,6 +15,8 @@ import 'package:modular_study/core/providers/certificado_provider/importar_certi
 import 'package:modular_study/core/utils/money_format.dart';
 import 'package:modular_study/core/utils/valor_liquido.dart';
 import 'package:modular_study/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
+import 'package:modular_study/widgets/card_monitor_assinaturas/fixed_card.dart';
+import 'package:modular_study/widgets/card_monitor_assinaturas/modal_documents.dart';
 import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
 import '../../core/constants/themes/theme_configs.dart';
 import '../component_card.dart';
@@ -26,12 +28,14 @@ class CardMonitorAssinaturas extends StatefulWidget {
   final MonitorAssinaturasModel assinatura;
   final bool assinarDocumento;
   bool destacar;
+  bool visualizarDocumento;
 
   CardMonitorAssinaturas(
       {super.key,
       required this.assinatura,
       this.assinarDocumento = false,
-      this.destacar = false});
+      this.destacar = false,
+      this.visualizarDocumento = false});
 
   @override
   State<CardMonitorAssinaturas> createState() => _CardMonitorAssinaturasState();
@@ -221,15 +225,33 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                       codigoOperacao: assinatura.codigoOperacao,
                     ),
                   ),
-                  FooterExpansible(
-                    onToggle: () {
-                      setState(() {
-                        assinaturaProvider.assinaturaSelecionada = assinatura;
-                        _showInfo = !_showInfo;
-                      });
-                    },
-                    showInfo: _showInfo,
-                  )
+                  widget.visualizarDocumento
+                      ? FooterFixed(
+                          onToggle: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) => ModalListDocumento(
+                                      assinantes: widget.assinatura.assinantes,
+                                      codigoOperacao:
+                                          widget.assinatura.codigoOperacao,
+                                    ));
+
+                            setState(() {
+                              assinaturaProvider.assinaturaSelecionada =
+                                  assinatura;
+                            });
+                          },
+                        )
+                      : FooterExpansible(
+                          showInfo: _showInfo,
+                          onToggle: () {
+                            setState(() {
+                              assinaturaProvider.assinaturaSelecionada =
+                                  assinatura;
+                              _showInfo = !_showInfo;
+                            });
+                          },
+                        )
                 ],
               ),
             ),

@@ -16,7 +16,6 @@ class MonitorOperacaoImpl {
   Future<ApiResponse<dynamic>> carregarOperacoes() async {
     AuthProvider authProvider = Modular.get<AuthProvider>();
     ThemeProvider themeProvider = Modular.get<ThemeProvider>();
-    log('token: ${authProvider.dataUser!.token}');
     final headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -26,7 +25,6 @@ class MonitorOperacaoImpl {
     final url = Uri.parse(EndPoints.operacoes);
     try {
       final response = await http.get(url, headers: headers);
-log('status code: ${response.statusCode}');
       switch (response.statusCode) {
         case 200:
           final responseBody = json.decode(utf8.decode(response.bodyBytes));

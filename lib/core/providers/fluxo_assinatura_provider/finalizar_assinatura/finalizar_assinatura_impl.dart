@@ -22,10 +22,8 @@ class FinalizarAssinaturaImpl {
       'plataforma' : themeProvider.temaSelecionado.name,
     };
     final body = json.encode(assinaturaFinalizada);
-    log('body: $body, header: $headers');
     try {
       final response = await http.post(url, body: body, headers: headers);
-      log('finalzar assinatura code: ${response.statusCode}');
       switch (response.statusCode) {
         case 204:
           return SucessResponse(null);
@@ -40,7 +38,7 @@ class FinalizarAssinaturaImpl {
           return ErrorResponse(data);
       }
     } catch (e) {
-      log("Error: $e");
+
       final data = ExceptionModel(
           codigo: '500',
           dataHora: DateTime.now(),

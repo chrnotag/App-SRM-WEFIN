@@ -16,4 +16,20 @@ class HandlePermissions {
 
     return status.isGranted;
   }
+
+  static Future<bool> permissionStorage() async {
+    var status = await Permission.storage.status;
+    if (status.isDenied) {
+      Map<Permission, PermissionStatus> statuses = await [
+        Permission.storage,
+      ].request();
+      return statuses[Permission.storage]!.isGranted;
+    }
+
+    if (status.isPermanentlyDenied) {
+      openAppSettings();
+    }
+
+    return status.isGranted;
+  }
 }

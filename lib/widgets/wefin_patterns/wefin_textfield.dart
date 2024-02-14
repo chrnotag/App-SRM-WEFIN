@@ -11,6 +11,7 @@ class WefinTextFormField extends StatefulWidget {
   final int? maxLength;
   final VoidCallback? onTap;
   final Color? textColor;
+  final TextInputType? inputType;
 
   const WefinTextFormField(
       {Key? key,
@@ -20,7 +21,8 @@ class WefinTextFormField extends StatefulWidget {
       this.validator,
       this.maxLength,
       this.onTap,
-      this.textColor})
+      this.textColor,
+      this.inputType})
       : super(key: key);
 
   @override
@@ -42,6 +44,7 @@ class _WefinTextFormFieldState extends State<WefinTextFormField> {
       onTap: widget.onTap,
       controller: widget.controller,
       validator: widget.validator,
+      keyboardType: widget.inputType,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       maxLength: widget.maxLength,
       style: context.textTheme.bodyMedium!.copyWith(

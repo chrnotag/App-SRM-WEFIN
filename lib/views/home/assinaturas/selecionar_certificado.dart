@@ -128,9 +128,13 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                                                                   index])
                                                       .popUp);
                                         },
-                                        child: Icon(
-                                          Icons.close,
-                                          size: 20.r,
+                                        child: Container(
+                                          width: 40.w,
+                                          height: 40.h,
+                                          child: Icon(
+                                            Icons.close,
+                                            size: 20.r,
+                                          ),
                                         ))
                                   ],
                                 ),
@@ -157,11 +161,11 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                     onPressed: certificadoProvider.certificadoSelecionado !=
                             null
                         ? () async {
-                            Modular.to.pop();
+                            OverlayApp.iniciaOverlay(context);
                             FinalizarAssinaturaProvider finalizarAssinatura =
                                 Modular.get<FinalizarAssinaturaProvider>();
-                            finalizarAssinatura.finalizarAssinatura();
-                            OverlayApp.iniciaOverlay(context);
+                            await finalizarAssinatura.finalizarAssinatura();
+                            OverlayApp.terminaOverlay();
                           }
                         : null,
                     label: "Assinar Documento",

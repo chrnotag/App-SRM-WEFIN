@@ -25,7 +25,7 @@ class MonitorOperacoesProvider extends ChangeNotifier {
     return response;
   }
 
-  void aconragemAssinatura(
+  List<MonitorAssinaturasModel> aconragemAssinatura(
       List<MonitorAssinaturasModel> lista, int codigoBuscado) {
     int index =
         lista.indexWhere((element) => element.codigoOperacao == codigoBuscado);
@@ -37,6 +37,7 @@ class MonitorOperacoesProvider extends ChangeNotifier {
           Modular.get<AssinaturaProvider>();
       assinaturaProvider.todasAssinaturas = lista;
     }
+    return lista;
   }
 
   Map<String, Color> corOperacao = {

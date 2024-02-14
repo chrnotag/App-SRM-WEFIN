@@ -27,6 +27,8 @@ class IniciarAssinaturaImpl {
     final body = json.encode(iniciarAssinaturaModel.toJson());
     try {
       final response = await http.post(url, headers: headers, body: body);
+      log('statusCode obterHashs: ${response.statusCode}');
+      log('retorno: ${response.body}');
       switch (response.statusCode) {
         case 200:
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
