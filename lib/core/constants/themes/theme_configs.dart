@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 
 class AppColors {
   static const Color azul = Color(0xFF1E3870);

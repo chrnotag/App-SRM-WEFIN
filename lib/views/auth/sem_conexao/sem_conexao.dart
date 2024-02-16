@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/constants/route_labels.dart';
-import 'package:modular_study/core/providers/sessao_provider.dart';
-import 'package:modular_study/core/providers/theme_provider.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/constants/route_labels.dart';
+import 'package:Srm_Asset/core/providers/sessao_provider.dart';
+import 'package:Srm_Asset/core/providers/theme_provider.dart';
 
 import '../../../generated/assets.dart';
 

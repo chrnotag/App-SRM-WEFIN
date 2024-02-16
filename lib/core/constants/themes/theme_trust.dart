@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
-import 'package:modular_study/core/constants/themes/theme_configs.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
 
 class ThemeTRUST {
   ThemeTRUST._();

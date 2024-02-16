@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/providers/auth_provider_config/deslogar/verificar_sessao.dart';
-import 'package:modular_study/widgets/popup_generico.dart';
+import 'package:Srm_Asset/core/providers/auth_provider_config/deslogar/verificar_sessao.dart';
+import 'package:Srm_Asset/widgets/popup_generico.dart';
 import 'auth_provider_config/logar/auth_providers.dart';
 import '../../main.dart';
 
@@ -43,7 +43,7 @@ class SessionProvider with ChangeNotifier {
     if (_timer!.isActive) {
       _timer!.cancel();
     }
-    _timeout = 99999;
+    _timeout = 60;
     startListening();
   }
 

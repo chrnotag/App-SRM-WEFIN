@@ -2,9 +2,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/providers/certificado_provider/baixar_certificado_impl.dart';
-import 'package:modular_study/core/providers/certificado_provider/importar_certificado_provider.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/providers/certificado_provider/baixar_certificado_impl.dart';
+import 'package:Srm_Asset/core/providers/certificado_provider/importar_certificado_provider.dart';
 
 class LeitorQrCode extends StatefulWidget {
   const LeitorQrCode({super.key});

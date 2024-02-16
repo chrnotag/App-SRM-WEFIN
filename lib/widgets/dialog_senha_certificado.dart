@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/providers/certificado_provider/importar_certificado_provider.dart';
-import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
-import 'package:modular_study/widgets/wefin_patterns/wefin_textfield.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/providers/certificado_provider/importar_certificado_provider.dart';
+import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
+import 'package:Srm_Asset/widgets/wefin_patterns/wefin_textfield.dart';
 import 'package:validatorless/validatorless.dart';
 import '../core/constants/route_labels.dart';
 

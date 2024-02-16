@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/providers/theme_provider.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/providers/theme_provider.dart';
 import '../../core/constants/themes/theme_configs.dart';
 
 class BotaoPadrao extends StatelessWidget {

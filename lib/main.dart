@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:modular_study/app_widget.dart';
+import 'package:Srm_Asset/app_widget.dart';
 
 import 'modules/app_module.dart';
 

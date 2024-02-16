@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 
 import '../core/constants/route_labels.dart';
 import '../core/providers/monitor_assinatura_provider/assinatura_provider.dart';

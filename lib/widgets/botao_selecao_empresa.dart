@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
-import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/constants/route_labels.dart';
-import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/constants/route_labels.dart';
+import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
 
 import '../generated/assets.dart';
 

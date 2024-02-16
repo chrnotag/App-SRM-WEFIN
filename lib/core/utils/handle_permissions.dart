@@ -1,3 +1,4 @@
+import 'package:media_storage/media_storage.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class HandlePermissions {
@@ -18,18 +19,7 @@ class HandlePermissions {
   }
 
   static Future<bool> permissionStorage() async {
-    var status = await Permission.storage.status;
-    if (status.isDenied) {
-      Map<Permission, PermissionStatus> statuses = await [
-        Permission.storage,
-      ].request();
-      return statuses[Permission.storage]!.isGranted;
-    }
-
-    if (status.isPermanentlyDenied) {
-      openAppSettings();
-    }
-
-    return status.isGranted;
+    bool isPermission = await MediaStorage.getRequestStoragePermission();
+    return isPermission;
   }
 }

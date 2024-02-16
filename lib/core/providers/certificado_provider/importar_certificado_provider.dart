@@ -6,9 +6,9 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/constants/route_labels.dart';
-import 'package:modular_study/views/home/assinaturas/selecionar_certificado.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/constants/route_labels.dart';
+import 'package:Srm_Asset/views/home/assinaturas/selecionar_certificado.dart';
 
 class ImportarCertificadoProvider extends ChangeNotifier {
   ImportarCertificadoProvider._();

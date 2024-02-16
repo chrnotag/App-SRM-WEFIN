@@ -4,14 +4,14 @@ import 'package:crosspki/crosspki.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/constants/route_labels.dart';
-import 'package:modular_study/core/providers/fluxo_assinatura_provider/finalizar_assinatura/finalizar_assinatura_provider.dart';
-import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
-import 'package:modular_study/core/providers/certificado_provider/importar_certificado_provider.dart';
-import 'package:modular_study/core/utils/overlay.dart';
-import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/constants/route_labels.dart';
+import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/finalizar_assinatura/finalizar_assinatura_provider.dart';
+import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
+import 'package:Srm_Asset/core/providers/certificado_provider/importar_certificado_provider.dart';
+import 'package:Srm_Asset/core/utils/overlay.dart';
+import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 
 import '../../../../core/constants/themes/theme_configs.dart';
 

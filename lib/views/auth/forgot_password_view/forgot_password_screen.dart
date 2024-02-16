@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
-import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/constants/themes/theme_configs.dart';
-import 'package:modular_study/core/providers/sessao_provider.dart';
-import 'package:modular_study/widgets/form_auth.dart';
-import 'package:modular_study/widgets/transparent_appbar_empty.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
+import 'package:Srm_Asset/core/providers/sessao_provider.dart';
+import 'package:Srm_Asset/widgets/form_auth.dart';
+import 'package:Srm_Asset/widgets/transparent_appbar_empty.dart';
 
 import '../../../generated/assets.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 
 class FooterExpansible extends StatefulWidget {
   final VoidCallback onToggle;

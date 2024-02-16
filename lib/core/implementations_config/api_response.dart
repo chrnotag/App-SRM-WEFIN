@@ -1,4 +1,4 @@
-import 'package:modular_study/models/exceptions_responses/exception_model.dart';
+import 'package:Srm_Asset/models/exceptions_responses/exception_model.dart';
 
 abstract class ApiResponse<T> {
   final dynamic _data;

@@ -2,17 +2,16 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/widgets/pdfview.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import 'package:Srm_Asset/widgets/pdfview.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
-import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/constants/themes/theme_configs.dart';
-import 'package:modular_study/core/providers/documentos_provider/baixar_documentos_impl.dart';
-import 'package:modular_study/core/providers/documentos_provider/baixar_documentos_provider.dart';
-import 'package:modular_study/core/utils/overlay.dart';
-import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
+import 'package:Srm_Asset/core/providers/documentos_provider/baixar_documentos_impl.dart';
+import 'package:Srm_Asset/core/providers/documentos_provider/baixar_documentos_provider.dart';
+import 'package:Srm_Asset/core/utils/overlay.dart';
+import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 
 import '../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 
@@ -125,7 +124,7 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
                                     color: AppColors.labelText,
                                   )),
                               SizedBox(
-                                width: context.width * 0.4,
+                                width: context.width * 0.3,
                                 child: Text(
                                     "${documentosUnicos[index].nome}.pdf",
                                     style: context.textTheme.bodyMedium!
@@ -157,9 +156,8 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
                                           OverlayApp.iniciaOverlay(context);
                                           await BaixarDocumentosImpl(
                                                   documento:
-                                                      documentosUnicos[index],
-                                                  isVisualizar: true)
-                                              .baixar();
+                                                      documentosUnicos[index])
+                                              .ler();
                                           OverlayApp.terminaOverlay();
                                           log('url: ${provider.urlDocumento}');
                                           WidgetsBinding.instance
@@ -173,7 +171,7 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
                                                           documentosUnicos[
                                                               index],
                                                       url: provider
-                                                          .urlDocumento!),
+                                                          .urlDocumento ?? "https://signer.srmasset.com/api/documents/9128d0b9-fe53-4e40-ba09-e47fdc5fcc33/original?access_ticket=CfDJ8Pf-kfXXE6tAq6WYmfveFyQaRpkwMzEkqX-Dq5KNyPIrC62HaMpmpCJXkhUVCZdqwBVSy9EdexHwQ_cZDzrovgu-EXMvlPZOP1Ugpt3dNPcBEkC9PSKD1nwnkB8xFlZbQ2SclHuHB3bp1Vh6sQ99k68ebuK6ynKysbMwP6eN22IcGslcxYuHZvcXpcb8mpcOR0DfUzO__ggDqJ21tP4CJJc&culture=pt"),
                                                 ));
                                           });
                                         },
@@ -197,7 +195,6 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
                                                     .copyWith(
                                                   color: AppColors.azul,
                                                   fontWeight: FontWeight.w500,
-                                                  fontSize: 12,
                                                 ),
                                               ),
                                             ),
@@ -216,8 +213,7 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
                                           OverlayApp.iniciaOverlay(context);
                                          await BaixarDocumentosImpl(
                                                   documento:
-                                                      documentosUnicos[index],
-                                                  isVisualizar: false)
+                                                      documentosUnicos[index])
                                               .baixar();
                                          OverlayApp.terminaOverlay();
                                         },
@@ -239,9 +235,7 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
                                                       .textTheme.labelSmall!
                                                       .copyWith(
                                                     color: AppColors.azul,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 12,
-                                                  )),
+                                                    fontWeight: FontWeight.w500,)),
                                             ),
                                           ],
                                         ),
@@ -279,7 +273,7 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
   }
 
   double calcularAlturaLista(int itemCount) {
-    double alturaTotal = (65 * itemCount).toDouble();
+    double alturaTotal = (80 * itemCount).toDouble();
     if (alturaTotal > 500) {
       return 500;
     }

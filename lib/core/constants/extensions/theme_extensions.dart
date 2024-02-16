@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:modular_study/core/constants/themes/theme_configs.dart';
+import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
 
 
 extension ThemeExtension on BuildContext {

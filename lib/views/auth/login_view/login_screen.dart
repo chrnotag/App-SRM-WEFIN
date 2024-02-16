@@ -1,11 +1,14 @@
+import 'package:Srm_Asset/core/constants/route_labels.dart';
+import 'package:Srm_Asset/widgets/dialog_politica_privacidade.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
-import 'package:modular_study/core/providers/sessao_provider.dart';
-import 'package:modular_study/core/providers/theme_provider.dart';
-import 'package:modular_study/widgets/form_auth.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
+import 'package:Srm_Asset/core/providers/sessao_provider.dart';
+import 'package:Srm_Asset/core/providers/theme_provider.dart';
+import 'package:Srm_Asset/widgets/form_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/constants/themes/theme_configs.dart';
 import '../../../generated/assets.dart';
@@ -18,13 +21,34 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool? politicaAceita;
+
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       final sessionProvider = Modular.get<SessionProvider>();
       sessionProvider.stopListening();
       final AuthProvider authProvider = Modular.get<AuthProvider>();
       authProvider.limparDadosUsuario();
+      final SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      politicaAceita = await sharedPreferences.getBool('politica-aceita');
+      if (politicaAceita == null || !politicaAceita!) {
+        showDialog(
+          context: context,
+          builder: (context) => PopScope(
+              canPop: false,
+              onPopInvoked: (didPop) async {
+               final bool? statusPolitica = await sharedPreferences.getBool('politica-aceita');
+                if (statusPolitica == null || !statusPolitica) {
+                  Modular.to.navigate(Modular.initialRoute);
+                }
+              },
+              child: AlertPoliticaPrivacidade()),
+          barrierDismissible: false,
+          useSafeArea: true,
+        );
+      }
     });
     super.initState();
   }
@@ -51,9 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       Image.asset(
                         themeProvider.logoTema,
-                        width: isKeyboardVisible
-                            ? 80.w
-                            : 190.w,
+                        width: isKeyboardVisible ? 80.w : 190.w,
                         fit: BoxFit.fill,
                       ),
                       SizedBox(

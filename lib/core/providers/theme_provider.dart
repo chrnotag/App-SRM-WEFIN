@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:modular_study/core/constants/enuns/theme_enum.dart';
-import 'package:modular_study/core/constants/themes/theme_srm.dart';
-import 'package:modular_study/core/constants/themes/theme_trust.dart';
+import 'package:Srm_Asset/core/constants/enuns/theme_enum.dart';
+import 'package:Srm_Asset/core/constants/themes/theme_srm.dart';
+import 'package:Srm_Asset/core/constants/themes/theme_trust.dart';
 import '../../generated/assets.dart';
 
 class ThemeProvider extends ChangeNotifier {

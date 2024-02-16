@@ -1,14 +1,14 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/route_labels.dart';
-import 'package:modular_study/views/auth/menu_user/menu.dart';
-import 'package:modular_study/views/home/ajuda/ajuda_screen.dart';
-import 'package:modular_study/views/home/assinaturas/monitor_assinaturas.dart';
-import 'package:modular_study/views/home/home_view/home_view.dart';
-import 'package:modular_study/views/home/importar_certificado/guia_certificado.dart';
-import 'package:modular_study/views/home/importar_certificado/importar_certificado.dart';
-import 'package:modular_study/views/home/importar_certificado/leitor_qrcode.dart';
-import 'package:modular_study/views/home/monitor_operacoes/monitor_operacoes.dart';
-import 'package:modular_study/views/home/selecao_empresas_view/view_selecao_empresas.dart';
+import 'package:Srm_Asset/core/constants/route_labels.dart';
+import 'package:Srm_Asset/views/auth/menu_user/menu.dart';
+import 'package:Srm_Asset/views/home/ajuda/ajuda_screen.dart';
+import 'package:Srm_Asset/views/home/assinaturas/monitor_assinaturas.dart';
+import 'package:Srm_Asset/views/home/home_view/home_view.dart';
+import 'package:Srm_Asset/views/home/importar_certificado/guia_certificado.dart';
+import 'package:Srm_Asset/views/home/importar_certificado/importar_certificado.dart';
+import 'package:Srm_Asset/views/home/importar_certificado/leitor_qrcode.dart';
+import 'package:Srm_Asset/views/home/monitor_operacoes/monitor_operacoes.dart';
+import 'package:Srm_Asset/views/home/selecao_empresas_view/view_selecao_empresas.dart';
 
 class HomeModule extends Module {
   @override

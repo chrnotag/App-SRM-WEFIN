@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
-import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/constants/route_labels.dart';
-import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
-import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
-import 'package:modular_study/generated/assets.dart';
-import 'package:modular_study/widgets/appbar_logo_perfil.dart';
-import 'package:modular_study/widgets/botao_selecao_empresa.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/constants/route_labels.dart';
+import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
+import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
+import 'package:Srm_Asset/generated/assets.dart';
+import 'package:Srm_Asset/widgets/appbar_logo_perfil.dart';
+import 'package:Srm_Asset/widgets/botao_selecao_empresa.dart';
 
 import '../../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 

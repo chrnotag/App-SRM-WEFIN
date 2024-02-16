@@ -3,12 +3,12 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
-import 'package:modular_study/core/providers/auth_provider_config/logar/login_implementation.dart';
-import 'package:modular_study/core/utils/overlay.dart';
-import 'package:modular_study/models/auth_login_models/SRM/cedente_model.dart';
-import 'package:modular_study/models/auth_login_models/SRM/usuario_logado_model.dart';
-import 'package:modular_study/models/user_model.dart';
+import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
+import 'package:Srm_Asset/core/providers/auth_provider_config/logar/login_implementation.dart';
+import 'package:Srm_Asset/core/utils/overlay.dart';
+import 'package:Srm_Asset/models/auth_login_models/SRM/cedente_model.dart';
+import 'package:Srm_Asset/models/auth_login_models/SRM/usuario_logado_model.dart';
+import 'package:Srm_Asset/models/user_model.dart';
 import '../../../constants/route_labels.dart';
 
 class AuthProvider extends ChangeNotifier {

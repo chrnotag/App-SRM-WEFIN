@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:modular_study/core/constants/endpoints.dart';
+import 'package:Srm_Asset/core/constants/endpoints.dart';
 import 'package:http/http.dart' as http;
-import 'package:modular_study/core/constants/route_labels.dart';
-import 'package:modular_study/core/implementations_config/export_impl.dart';
-import 'package:modular_study/core/providers/certificado_provider/importar_certificado_provider.dart';
-import 'package:modular_study/main.dart';
-import 'package:modular_study/widgets/popup_generico.dart';
+import 'package:Srm_Asset/core/constants/route_labels.dart';
+import 'package:Srm_Asset/core/implementations_config/export_impl.dart';
+import 'package:Srm_Asset/core/providers/certificado_provider/importar_certificado_provider.dart';
+import 'package:Srm_Asset/main.dart';
+import 'package:Srm_Asset/widgets/popup_generico.dart';
 import '../../../widgets/dialog_senha_certificado.dart';
 import '../../implementations_config/api_response.dart';
 

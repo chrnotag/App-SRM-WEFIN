@@ -1,15 +1,15 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/contatos.dart';
-import 'package:modular_study/core/constants/enuns/theme_enum.dart';
-import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/constants/themes/theme_configs.dart';
-import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
-import 'package:modular_study/core/providers/theme_provider.dart';
-import 'package:modular_study/widgets/appbar_logo_perfil.dart';
-import 'package:modular_study/widgets/pdfview.dart';
+import 'package:Srm_Asset/core/constants/contatos.dart';
+import 'package:Srm_Asset/core/constants/enuns/theme_enum.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
+import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
+import 'package:Srm_Asset/core/providers/theme_provider.dart';
+import 'package:Srm_Asset/widgets/appbar_logo_perfil.dart';
+import 'package:Srm_Asset/widgets/pdfview.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../generated/assets.dart';
 

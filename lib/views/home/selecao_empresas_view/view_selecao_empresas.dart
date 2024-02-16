@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
-import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/constants/themes/theme_configs.dart';
-import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
-import 'package:modular_study/core/providers/sessao_provider.dart';
-import 'package:modular_study/core/utils/overlay.dart';
-import 'package:modular_study/models/auth_login_models/SRM/cedente_model.dart';
-import 'package:modular_study/widgets/appbar_logo_perfil.dart';
-import 'package:modular_study/widgets/botao_selecao_empresa.dart';
-import 'package:modular_study/widgets/searchbar_person.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
+import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
+import 'package:Srm_Asset/core/providers/sessao_provider.dart';
+import 'package:Srm_Asset/core/utils/overlay.dart';
+import 'package:Srm_Asset/models/auth_login_models/SRM/cedente_model.dart';
+import 'package:Srm_Asset/widgets/appbar_logo_perfil.dart';
+import 'package:Srm_Asset/widgets/botao_selecao_empresa.dart';
+import 'package:Srm_Asset/widgets/searchbar_person.dart';
 
 class ListaSelecaoEmpresas extends StatefulWidget {
   const ListaSelecaoEmpresas({super.key});
@@ -33,95 +33,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final SessionProvider sessionProvider = Modular.get<SessionProvider>();
       sessionProvider.startListening();
-      // verificarPolitica();
     });
-  }
-
-  void verificarPolitica() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(12.r),
-              child: Text('Política de privacidade',
-                  style: context.textTheme.bodyLarge!.copyWith(
-                    color: AppColors.azulPrimarioSRM,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 20.sp,
-                    letterSpacing: 1.5.sp,
-                  )),
-            ),
-            Padding(
-              padding: EdgeInsets.all(12.r),
-              child: GestureDetector(
-                onTap: () {
-                  Modular.to.pop();
-                },
-                child: Text('Clique aqui para vizualizar',
-                    style: context.textTheme.labelMedium!
-                        .copyWith(color: AppColors.labelText)),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 12.r),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                        onPressed: () {
-                          authProvider.limparDadosUsuario();
-                          Modular.to.navigate(Modular.initialRoute);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              const Color.fromARGB(255, 204, 91, 91),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8.h),
-                          child: Padding(
-                            padding: EdgeInsets.all(8.r),
-                            child: const Text(
-                              'Recusar',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        )),
-                  )
-                ],
-              ),
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: () {
-                        Modular.to.pop();
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.azul,
-                          shadowColor: const Color.fromARGB(0, 255, 255, 255),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4.r),
-                              side: const BorderSide(
-                                  color: AppColors.azul, width: 1))),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8.h),
-                        child: Padding(
-                          padding: EdgeInsets.all(8.r),
-                          child: Text('Aceitar',
-                              style: context.textTheme.labelSmall!
-                                  .copyWith(color: Colors.white)),
-                        ),
-                      )),
-                )
-              ],
-            )
-          ],
-        ),
-      ),
-    );
   }
 
   _onSearchChanged() {

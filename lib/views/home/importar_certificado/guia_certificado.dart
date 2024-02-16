@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/enuns/import_certificado_enum.dart';
-import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/providers/certificado_provider/importar_certificado_provider.dart';
-import 'package:modular_study/views/home/importar_certificado/pagina_carrossel_qrcode.dart';
-import 'package:modular_study/views/home/importar_certificado/pagina_importar_certificado.dart';
-import 'package:modular_study/widgets/transparent_appbar_empty.dart';
+import 'package:Srm_Asset/core/constants/enuns/import_certificado_enum.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/providers/certificado_provider/importar_certificado_provider.dart';
+import 'package:Srm_Asset/views/home/importar_certificado/pagina_carrossel_qrcode.dart';
+import 'package:Srm_Asset/views/home/importar_certificado/pagina_importar_certificado.dart';
+import 'package:Srm_Asset/widgets/transparent_appbar_empty.dart';
 
 class GuiaImportCertificado extends StatefulWidget {
   const GuiaImportCertificado({super.key});

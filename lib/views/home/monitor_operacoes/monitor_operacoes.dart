@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/constants/route_labels.dart';
-import 'package:modular_study/core/implementations_config/api_response.dart';
-import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
-import 'package:modular_study/core/providers/monitor_operacao_provider/monitor_operacoes_provider.dart';
-import 'package:modular_study/widgets/appbar_logo_perfil.dart';
-import 'package:modular_study/widgets/botao_selecao_empresa.dart';
-import 'package:modular_study/widgets/card_monitor_operacoes/card_monitor_operacoes.dart';
-import 'package:modular_study/widgets/loader_widget.dart';
-import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/constants/route_labels.dart';
+import 'package:Srm_Asset/core/implementations_config/api_response.dart';
+import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
+import 'package:Srm_Asset/core/providers/monitor_operacao_provider/monitor_operacoes_provider.dart';
+import 'package:Srm_Asset/widgets/appbar_logo_perfil.dart';
+import 'package:Srm_Asset/widgets/botao_selecao_empresa.dart';
+import 'package:Srm_Asset/widgets/card_monitor_operacoes/card_monitor_operacoes.dart';
+import 'package:Srm_Asset/widgets/loader_widget.dart';
+import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 
 import '../../../core/constants/themes/theme_configs.dart';
 

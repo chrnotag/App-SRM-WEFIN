@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:http/http.dart' as http;
-import 'package:modular_study/core/constants/endpoints.dart';
-import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
-import 'package:modular_study/core/providers/theme_provider.dart';
+import 'package:Srm_Asset/core/constants/endpoints.dart';
+import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
+import 'package:Srm_Asset/core/providers/theme_provider.dart';
 
 import '../../../../models/auth_login_models/SRM/usuario_logado_model.dart';
 import '../../../../models/exceptions_responses/exception_model.dart';

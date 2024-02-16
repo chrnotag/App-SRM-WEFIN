@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/providers/sessao_provider.dart';
+import 'package:Srm_Asset/core/providers/sessao_provider.dart';
 
 import '../../widgets/loader_widget.dart';
 

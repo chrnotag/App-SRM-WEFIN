@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:modular_study/core/constants/route_labels.dart';
-import 'package:modular_study/core/providers/internet_provider.dart';
-import 'package:modular_study/core/providers/sessao_provider.dart';
-import 'package:modular_study/core/providers/theme_provider.dart';
-import 'package:modular_study/views/auth/sem_conexao/sem_conexao.dart';
+import 'package:Srm_Asset/core/constants/route_labels.dart';
+import 'package:Srm_Asset/core/providers/internet_provider.dart';
+import 'package:Srm_Asset/core/providers/sessao_provider.dart';
+import 'package:Srm_Asset/core/providers/theme_provider.dart';
+import 'package:Srm_Asset/views/auth/sem_conexao/sem_conexao.dart';
 
 class AppWidget extends StatefulWidget {
   const AppWidget({super.key});
@@ -109,10 +108,12 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
           builder: (context, snapshot) {
             if (!snapshot.hasData || !snapshot.data!) {
               return const MaterialApp(
+                debugShowCheckedModeBanner: false,
                 home: SemConexaoScreen(),
               );
             } else {
               return MaterialApp.router(
+                debugShowCheckedModeBanner: false,
                 routerConfig: Modular.routerConfig,
                 theme: themeProvider.temaAtual,
               );
