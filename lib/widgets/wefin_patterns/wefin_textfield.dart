@@ -53,7 +53,7 @@ class _WefinTextFormFieldState extends State<WefinTextFormField> {
       cursorColor: context.primaryColor,
       decoration: InputDecoration(
         labelText: widget.label,
-        labelStyle: context.textTheme.bodyMedium!.copyWith(color: Colors.grey),
+        labelStyle: context.textTheme.bodyMedium!.copyWith(color: context.onPrimaryColor),
         border: UnderlineInputBorder(
           borderRadius: BorderRadius.circular(4.r),
         ),

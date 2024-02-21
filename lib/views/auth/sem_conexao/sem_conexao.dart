@@ -78,7 +78,7 @@ class _SemConexaoScreenState extends State<SemConexaoScreen> {
                   Expanded(
                       child: ElevatedButton(
                           onPressed: () {
-                            Modular.to.pushNamed(AppRoutes.loginSRMAuthRoute);
+                            Modular.to.pushNamed(AppRoutes.loginAuthRoute);
                           },
                           child: Padding(
                             padding: EdgeInsets.all(10.r),

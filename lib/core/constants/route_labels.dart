@@ -1,3 +1,5 @@
+import 'package:flutter_modular/flutter_modular.dart';
+
 class AppRoutes {
   AppRoutes._();
 
@@ -9,8 +11,7 @@ class AppRoutes {
 
   //Escopo AUT
   static get forgetPassAuthRoute => '/forgot_password';
-  static get loginSRMAuthRoute => '/login_srm';
-  static get loginTRUSTAuthRoute => '/login_trust';
+  static get loginAuthRoute => Modular.initialRoute;
 
   //Escopo HOME
   static get homeRoute => '/home';

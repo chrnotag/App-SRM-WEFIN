@@ -4,7 +4,9 @@ class _MenuItem extends StatefulWidget {
   final String title;
   final IconData icon;
   final VoidCallback onTap;
-  const _MenuItem({Key? key, required this.title, required this.icon, required this.onTap})
+
+  const _MenuItem(
+      {Key? key, required this.title, required this.icon, required this.onTap})
       : super(key: key);
 
   @override
@@ -24,12 +26,16 @@ class _MenuItemState extends State<_MenuItem> {
             child: Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(right:5.w),
-                  child: Icon(widget.icon,color: context.primaryColor,size: 25.r),
+                  padding: EdgeInsets.only(right: 5.w),
+                  child: Icon(widget.icon,
+                      color: context.primaryColor, size: 25.r),
                 ),
-                Text(widget.title,style:context.textTheme.bodyMedium),
+                Text(widget.title,
+                    style: context.textTheme.bodyMedium!
+                        .copyWith(fontWeight: FontWeight.bold)),
                 Expanded(child: Container()),
-                Icon(Icons.arrow_forward_ios, color: context.primaryColor, size: 18.r)
+                Icon(Icons.arrow_forward_ios,
+                    color: context.primaryColor, size: 14.r)
               ],
             ),
           ),

@@ -11,7 +11,7 @@ class ThemeProvider extends ChangeNotifier {
 
   factory ThemeProvider() => _instance;
 
-  TemaSelecionado _temaSelecionado = TemaSelecionado.TRUST;
+  TemaSelecionado _temaSelecionado = TemaSelecionado.SRM;
 
   ThemeData get temaAtual => _temaSelecionado == TemaSelecionado.SRM ? ThemeSRM.theme : ThemeTRUST.theme;
 
@@ -25,8 +25,4 @@ class ThemeProvider extends ChangeNotifier {
   bool get isTemaSRM => temaSelecionado == TemaSelecionado.SRM;
 
   String get logoTema => isTemaSRM ? Assets.logoSRM : Assets.logoTRUST;
-
-  void limparDadosTema(){
-    _temaSelecionado = TemaSelecionado.TRUST;
-  }
 }

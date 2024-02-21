@@ -24,11 +24,11 @@ class ThemeTRUST {
                 BoxConstraints.expand(width: double.infinity, height: 35.h),
             hintStyle: MaterialStateProperty.all<TextStyle>(
                 GoogleFonts.montserrat(
-                    fontSize: AppSizes().fontSizeMedium,
+                    fontSize: AppSizes().bodyMedium,
                     color: AppColors.labelText)),
             textStyle:
                 MaterialStateProperty.all<TextStyle>(GoogleFonts.montserrat(
-              fontSize: AppSizes().fontSizeSmall,
+              fontSize: AppSizes().bodySmall,
             ))),
         colorScheme: ColorScheme(
             brightness: Brightness.light,
@@ -49,55 +49,15 @@ class ThemeTRUST {
             iconTheme: IconThemeData(color: AppColors.verdePrimarioTRUST)),
         scaffoldBackgroundColor: Color(0xfff1f1f1),
         backgroundColor: Colors.white,
-        textTheme: TextTheme(
-          bodySmall: GoogleFonts.montserrat(
-            fontSize: AppSizes().fontSizeSmall,
-          ),
-          labelSmall: GoogleFonts.montserrat(
-              fontSize: AppSizes().fontSizeVerySmall,
-              fontWeight: FontWeight.bold,
-              color: TrustShades.primaryColor[900]),
-          labelMedium: GoogleFonts.montserrat(
-              fontSize: AppSizes().fontSizeMedium,
-              fontWeight: FontWeight.bold,
-              color: TrustShades.primaryColor[900]),
-          labelLarge: GoogleFonts.montserrat(
-              fontSize: AppSizes().fontSizeLarge,
-              fontWeight: FontWeight.bold,
-              color: TrustShades.primaryColor[900]),
-          bodyLarge: GoogleFonts.montserrat(
-              fontSize: AppSizes().fontSizeLarge,
-              color: TrustShades.primaryColor[900]),
-          bodyMedium: GoogleFonts.montserrat(
-              fontSize: AppSizes().fontSizeMedium,
-              color: TrustShades.primaryColor[900]),
-          displayMedium: GoogleFonts.montserrat(
-              fontSize: AppSizes().fontSizeLarge,
-              color: TrustShades.primaryColor[900]),
-          displayLarge: GoogleFonts.montserrat(
-              fontSize: AppSizes().fontSizeExtraLarge,
-              color: TrustShades.primaryColor[900]),
-        ),
-        primaryTextTheme: TextTheme(
-          bodySmall: GoogleFonts.montserrat(
-              fontSize: AppSizes().fontSizeSmall,
-              color: TrustShades.primaryColor[900]),
-          labelSmall: GoogleFonts.montserrat(
-              fontSize: AppSizes().fontSizeVerySmall,
-              fontWeight: FontWeight.w300,
-              color: TrustShades.primaryColor[900]),
-          bodyLarge: GoogleFonts.montserrat(
-              fontSize: AppSizes().fontSizeLarge,
-              color: TrustShades.primaryColor[900]),
-          bodyMedium: GoogleFonts.montserrat(
-              fontSize: AppSizes().fontSizeMedium,
-              color: TrustShades.primaryColor[900]),
-          displayMedium: GoogleFonts.montserrat(
-              fontSize: AppSizes().fontSizeLarge,
-              color: TrustShades.primaryColor[900]),
-          displayLarge: GoogleFonts.montserrat(
-              fontSize: AppSizes().fontSizeExtraLarge,
-              color: TrustShades.primaryColor[900]),
-        ),
+    textTheme: TextTheme(
+      bodySmall: GoogleFonts.montserrat(fontSize: AppSizes().bodySmall),
+      bodyMedium: GoogleFonts.montserrat(fontSize: AppSizes().bodyMedium),
+      bodyLarge: GoogleFonts.montserrat(fontSize: AppSizes().bodyLarge),
+      labelMedium: GoogleFonts.montserrat(fontSize: AppSizes().labelMedium),
+      displaySmall:
+      GoogleFonts.montserrat(fontSize: AppSizes().displaySmall),
+      displayMedium:
+      GoogleFonts.montserrat(fontSize: AppSizes().displayMedium),
+    ),
       );
 }

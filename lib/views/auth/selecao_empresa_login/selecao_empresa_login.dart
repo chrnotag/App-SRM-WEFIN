@@ -74,7 +74,7 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
                             onTap: () {
                               themeProvider.temaSelecionado =
                                   TemaSelecionado.SRM;
-                              Modular.to.pushNamed(AppRoutes.loginSRMAuthRoute);
+                              Modular.to.pushNamed(AppRoutes.loginAuthRoute);
                             },
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -109,7 +109,7 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
                             onTap: () {
                               themeProvider.temaSelecionado =
                                   TemaSelecionado.TRUST;
-                              Modular.to.pushNamed(AppRoutes.loginSRMAuthRoute);
+                              Modular.to.pushNamed(AppRoutes.loginAuthRoute);
                             },
                             child: Image.asset(
                               Assets.logoTRUST,

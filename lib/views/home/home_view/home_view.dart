@@ -95,7 +95,9 @@ class _HomeViewState extends State<HomeView> {
                                         color: context.primaryColor,
                                         width: 41.w,
                                       ),
-                                      if (authProvider.empresaSelecionada!.assinaturaPendente > 0)
+                                      if (authProvider.empresaSelecionada!
+                                              .assinaturaPendente >
+                                          0)
                                         CircleAvatar(
                                           radius: 13.r,
                                           backgroundColor: Colors.red,

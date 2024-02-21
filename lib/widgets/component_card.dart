@@ -21,8 +21,8 @@ class ComponentCardOperacoes extends StatelessWidget {
         children: [
           Text(
             title,
-            style: context.textTheme.bodyMedium!
-                .copyWith(color: Colors.black),
+            style: context.textTheme.labelMedium!
+                .copyWith(color: Colors.black, fontWeight: FontWeight.w600),
             textAlign: TextAlign.start,
           ),
           SizedBox(
@@ -31,8 +31,8 @@ class ComponentCardOperacoes extends StatelessWidget {
           Text(
             label,
             style: textStyle ??
-                context.textTheme.bodySmall!
-                    .copyWith(color: AppColors.labelText),
+                context.textTheme.labelMedium!
+                    .copyWith(color: AppColors.labelText, fontWeight: FontWeight.w300),
             textAlign: TextAlign.start,
           ),
         ],

@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
@@ -124,47 +125,55 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('Ver Assinaturas'),
+                              Text(
+                                'Assinaturas Pendentes',
+                                style: context.textTheme.bodySmall!.copyWith(
+                                    color: AppColors.vermelho,
+                                    fontWeight: FontWeight.w300),
+                              ),
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 8.0),
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: context.primaryColor,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(Radius.circular(5.r))
-                                    )
+                                      backgroundColor: context.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(5.r)))),
+                                  onPressed: () {
+                                    final MonitorOperacoesProvider
+                                        operacaoProvider =
+                                        Modular.get<MonitorOperacoesProvider>();
+                                    final AssinaturaProvider
+                                        assinaturaProvider =
+                                        Modular.get<AssinaturaProvider>();
+                                    List<MonitorAssinaturasModel>
+                                        assinaturasPendentes =
+                                        assinaturaProvider.assinaturasPendentes;
+                                    operacaoProvider.aconragemAssinatura(
+                                        assinaturaProvider.todasAssinaturas,
+                                        operacao.codigoOperacao);
+                                    Modular.to.pushNamed(
+                                        AppRoutes.assinaturaDigitalRoute,
+                                        arguments: {
+                                          'assinaturas': assinaturaProvider
+                                              .todasAssinaturas,
+                                          'assinaturasPendentes':
+                                              assinaturasPendentes,
+                                          'tab': 1,
+                                          'destacar': true,
+                                        });
+                                  },
+                                  child: Padding(
+                                    padding: EdgeInsets.all(4.r),
+                                    child: Text(
+                                      'VER ASSINATURAS',
+                                      style: context.textTheme.labelMedium!
+                                          .copyWith(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w600),
+                                    ),
                                   ),
-                                    onPressed: () {
-                                      final MonitorOperacoesProvider
-                                          operacaoProvider =
-                                          Modular.get<MonitorOperacoesProvider>();
-                                      final AssinaturaProvider assinaturaProvider =
-                                          Modular.get<AssinaturaProvider>();
-                                      List<MonitorAssinaturasModel>
-                                          assinaturasPendentes =
-                                          assinaturaProvider.assinaturasPendentes;
-                                      operacaoProvider.aconragemAssinatura(
-                                          assinaturaProvider.todasAssinaturas,
-                                          operacao.codigoOperacao);
-                                      Modular.to.pushNamed(
-                                          AppRoutes.assinaturaDigitalRoute,
-                                          arguments: {
-                                            'assinaturas':
-                                                assinaturaProvider.todasAssinaturas,
-                                            'assinaturasPendentes':
-                                                assinaturasPendentes,
-                                            'tab': 1,
-                                            'destacar': true,
-                                          });
-                                    },
-                                    child: Padding(
-                                      padding: EdgeInsets.all(4.r),
-                                      child: Text(
-                                        'Assinaturas',
-                                        style: context.textTheme.bodyMedium!
-                                            .copyWith(color: Colors.white),
-                                      ),
-                                    )),
+                                ),
                               )
                             ],
                           ),

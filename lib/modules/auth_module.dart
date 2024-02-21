@@ -12,16 +12,11 @@ class AuthModule extends Module {
   @override
   void routes(RouteManager r) {
     r.wildcard(
-      child: (context) => const SelecaoEmpresaLogin(),
+      child: (context) => const LoginScreen(),
     );
     r.child(
       AppRoutes.forgetPassAuthRoute,
       child: (context) => const ForgotPasswordScreen(),
-    );
-
-    r.child(
-      AppRoutes.loginSRMAuthRoute,
-      child: (context) => const LoginScreen(),
     );
   }
 }

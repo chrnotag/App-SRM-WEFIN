@@ -21,8 +21,7 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
   final List<String> listaExessaoTimeOut = [
     Modular.initialRoute,
     AppRoutes.forgetPassAuthRoute,
-    AppRoutes.loginSRMAuthRoute,
-    AppRoutes.loginTRUSTAuthRoute
+    AppRoutes.loginAuthRoute,
   ];
 
   @override

@@ -36,8 +36,7 @@ class Menu extends StatelessWidget {
               padding: EdgeInsets.only(bottom: 15.h),
               child: Text('Visualize seus dados e tire suas dúvidas',
                   style: context.textTheme.bodyMedium!.copyWith(
-                    color: context.onSecondary,
-                      fontWeight: FontWeight.w200)),
+                    color: context.onSecondary)),
             ),
             Expanded(
               child: Card(

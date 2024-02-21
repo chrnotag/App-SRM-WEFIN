@@ -18,7 +18,6 @@ class VerificarSessao {
         Modular.get<IniciarAssinaturaProvider>();
     AssinaturaProvider assinaturaProvider = Modular.get<AssinaturaProvider>();
     authProvider.limparDadosUsuario();
-    themeProvider.limparDadosTema();
     certificadoProvider.limparDadosCertificados();
     iniciarAssinaturaProvider.limparHashs();
     assinaturaProvider.limparAssinaturas();

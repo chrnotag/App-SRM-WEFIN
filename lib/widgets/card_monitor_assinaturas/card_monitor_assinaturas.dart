@@ -155,8 +155,8 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                                         title: 'Status',
                                         label:
                                             assinatura.statusAssinaturaDigital,
-                                        textStyle: context.textTheme.bodySmall!
-                                            .copyWith(color: corAssinatura)),
+                                        textStyle: context.textTheme.labelMedium!
+                                            .copyWith(color: corAssinatura, fontWeight: FontWeight.w500)),
                                   ],
                                 ),
                                 Column(

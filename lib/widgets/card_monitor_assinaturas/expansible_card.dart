@@ -25,8 +25,8 @@ class _FooterExpansibleState extends State<FooterExpansible> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(widget.showInfo ? 'Menos Detalhes' : 'Mais Detalhes',
-              style: context.textTheme.bodyMedium!
-                  .copyWith(fontWeight: FontWeight.w400),
+              style: context.textTheme.bodySmall!
+                  .copyWith(fontWeight: FontWeight.w600),
             ),
           ],
         ),

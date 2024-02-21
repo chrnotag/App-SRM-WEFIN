@@ -88,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Text(
                             "Seja bem vindo\nao seu app de gestão",
                             style: context.textTheme.bodyLarge!
-                                .copyWith(color: AppColors.labelText),
+                                .copyWith(color: context.onPrimaryColor),
                             textAlign: TextAlign.center,
                           ),
                         ),

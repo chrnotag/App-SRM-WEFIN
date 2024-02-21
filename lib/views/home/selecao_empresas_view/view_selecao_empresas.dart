@@ -3,10 +3,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
-import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
-import 'package:Srm_Asset/core/utils/overlay.dart';
 import 'package:Srm_Asset/models/auth_login_models/SRM/cedente_model.dart';
 import 'package:Srm_Asset/widgets/appbar_logo_perfil.dart';
 import 'package:Srm_Asset/widgets/botao_selecao_empresa.dart';
@@ -77,7 +75,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
               ),
               Container(
                 constraints: BoxConstraints(
-                    maxHeight: context.height * 0.7, minHeight: 80.h),
+                    maxHeight: context.height * 0.7, minHeight: 85.h),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.r),
                   color: Colors.white,
@@ -115,23 +113,19 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  RichText(
-                                    textAlign: TextAlign.start,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    text: TextSpan(children: [
-                                      TextSpan(
-                                        text: _searchResults![index].nome,
-                                        style: context.textTheme.bodyMedium,
-                                      ),
-                                      TextSpan(
-                                        text:
-                                            ' CNPJ:${_searchResults![index].identificador}',
-                                        style: context.textTheme.bodyMedium!
-                                            .copyWith(color: Colors.grey),
-                                      ),
-                                    ]),
-                                  ),
+                                  Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                    Text(
+                                      _searchResults![index].nome,
+                                      style: context.textTheme.bodySmall,
+                                    ),
+                                    Text(
+                                      'CNPJ:${_searchResults![index].identificador}',
+                                      style: context.textTheme.bodySmall!
+                                          .copyWith(color: Colors.grey),
+                                    ),
+                                  ]),
                                   Spacer(),
                                   Visibility(
                                     visible: _searchResults![index]
@@ -139,7 +133,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                                         0,
                                     child: CircleAvatar(
                                         backgroundColor: Colors.red,
-                                        radius: 10.r,
+                                        radius: 15.r,
                                         child: Center(
                                           child: Text(
                                               authProvider
@@ -154,7 +148,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                                                       .assinaturaPendente
                                                       .toString(),
                                               style: context
-                                                  .textTheme.labelSmall!
+                                                  .textTheme.bodyMedium!
                                                   .copyWith(
                                                       color: Colors.white)),
                                         )),

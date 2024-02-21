@@ -1,7 +1,6 @@
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
-import '../core/constants/themes/theme_configs.dart';
 
 class LinkComponent extends StatelessWidget {
   final String label;
@@ -17,7 +16,7 @@ class LinkComponent extends StatelessWidget {
       },
       child: Text(
         label,
-        style: const TextStyle(color: AppColors.labelText),
+        style: context.textTheme.bodySmall!.copyWith(color: context.onPrimaryColor),
       ),
     );
   }
