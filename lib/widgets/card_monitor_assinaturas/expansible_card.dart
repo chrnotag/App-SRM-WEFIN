@@ -19,17 +19,21 @@ class _FooterExpansibleState extends State<FooterExpansible> {
       decoration: BoxDecoration(
           color: const Color(0xffFAFAFA),
           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5.r))),
-      child: TextButton(
-        onPressed: widget.onToggle,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(widget.showInfo ? 'Menos Detalhes' : 'Mais Detalhes',
-              style: context.textTheme.bodySmall!
-                  .copyWith(fontWeight: FontWeight.w600),
+      child: Column(
+        children: [
+          Divider(),
+          TextButton(
+            onPressed: widget.onToggle,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(widget.showInfo ? 'Menos Detalhes' : 'Mais Detalhes',
+                  style: context.textTheme.bodyMedium,
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

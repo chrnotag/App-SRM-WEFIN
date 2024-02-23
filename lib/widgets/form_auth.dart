@@ -1,5 +1,8 @@
 import 'dart:ffi';
 
+import 'package:Srm_Asset/core/constants/urls-uteis.dart';
+import 'package:Srm_Asset/core/utils/abrir_url_externo.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
@@ -15,6 +18,7 @@ import 'package:Srm_Asset/models/recuperar_senha_model/recuperar_senha_model.dar
 import 'package:Srm_Asset/models/user_model.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_textfield.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:validatorless/validatorless.dart';
 import '../generated/assets.dart';
 import 'link_component.dart';
@@ -35,6 +39,11 @@ class _AuthFormState extends State<AuthForm> {
   final _passwordEC = TextEditingController();
   String? _mensagemErro;
 
+  final MaskTextInputFormatter _cnpjFormatter = MaskTextInputFormatter(
+    mask: '##.###.###/####-##',
+    filter: {"#": RegExp(r'[0-9]')},
+  );
+
   @override
   void dispose() {
     _loginEC.dispose();
@@ -47,51 +56,92 @@ class _AuthFormState extends State<AuthForm> {
     return Form(
       key: _formKey,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          WefinTextFormField(
-            onTap: () => setState(() {
-              _mensagemErro = null;
-            }),
-            label: 'Digite seu email',
-            controller: _loginEC,
-            validator: Validatorless.multiple([
-              Validatorless.email('Email inválido!'),
-              Validatorless.required('Email Obrigatório'),
-              (value) => _mensagemErro
-            ]),
-          ),
           SizedBox(height: 20.h),
-          WefinTextFormField(
-            onTap: () => _mensagemErro = null,
-            maxLength: widget.visible ? 10 : null,
-            label: widget.visible ? 'Digite sua Senha' : 'Digite seu CNPJ',
-            obscureText: widget.visible,
-            controller: _passwordEC,
-            validator: Validatorless.multiple([
-              Validatorless.required(
-                  widget.visible ? 'Senha obrigatória' : 'CNPJ Obrigatório'),
-              if (!widget.visible) Validatorless.cnpj('CNPJ Inválido!'),
-              if (widget.visible)
-                Validatorless.min(
-                    3, 'Senha com no mínimo 3 e máximo 10 caracteres.'),
-              (value) => _mensagemErro
-            ]),
+          Column(
+            children: [
+              WefinTextFormField(
+                onTap: () => setState(() {
+                  _mensagemErro = null;
+                }),
+                label: 'Digite seu email',
+                controller: _loginEC,
+                validator: Validatorless.multiple([
+                  Validatorless.email('Email inválido!'),
+                  Validatorless.required('Email Obrigatório'),
+                  (value) => _mensagemErro
+                ]),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 50.h),
+                child: WefinTextFormField(
+                  inputFormatters: !widget.visible ? _cnpjFormatter : null,
+                  onTap: () => _mensagemErro = null,
+                  label:
+                      widget.visible ? 'Digite sua Senha' : 'Digite seu CNPJ',
+                  obscureText: widget.visible,
+                  controller: _passwordEC,
+                  validator: Validatorless.multiple([
+                    Validatorless.required(!widget.visible
+                        ? 'Senha obrigatória'
+                        : 'CNPJ Obrigatório'),
+                    if (widget.visible)
+                      Validatorless.max(10, 'Maximo de 10 caracteres.'),
+                    if (!widget.visible) Validatorless.cnpj('CNPJ Inválido!'),
+                    if (widget.visible)
+                      Validatorless.min(
+                          3, 'Senha com no mínimo 3 e máximo 10 caracteres.'),
+                    (value) => _mensagemErro
+                  ]),
+                ),
+              ),
+            ],
           ),
-          SizedBox(height: 20.h),
           Visibility(
             visible: widget.visible,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end, // Alinha à direita
-              children: [
-                LinkComponent(
-                  label: 'Esqueci minha senha!',
-                  route: AppRoutes.forgetPassAuthRoute,
-                ),
-              ],
+            child: LinkComponent(
+              label: 'Esqueci minha senha!',
+              route: AppRoutes.forgetPassAuthRoute,
             ),
           ),
-          SizedBox(height: 50.h),
+          Visibility(
+            visible: widget.visible,
+            child: RichText(
+              text: TextSpan(children: [
+                TextSpan(
+                    text: 'Ao continuar você concorda com as nossas ',
+                    style: context.textTheme.bodySmall!
+                        .copyWith(color: context.onPrimaryColor)),
+                TextSpan(
+                    text: 'Politicas de Privacidade ',
+                    style: context.textTheme.bodySmall!.copyWith(
+                        color: context.onPrimaryColor,
+                        decoration: TextDecoration.underline,
+                        fontWeight: FontWeight.w600),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () async {
+                        const String url = Urls.politicaPrivacidade;
+                        await AbrirUrl.launchURL(url);
+                      }),
+                TextSpan(
+                    text: 'e os nossos ',
+                    style: context.textTheme.bodySmall!
+                        .copyWith(color: context.onPrimaryColor)),
+                TextSpan(
+                    text: 'Termos de uso',
+                    style: context.textTheme.bodySmall!.copyWith(
+                        color: context.onPrimaryColor,
+                        decoration: TextDecoration.underline,
+                        fontWeight: FontWeight.w600),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () async {
+                        const String url = Urls.termosDeUso;
+                        await AbrirUrl.launchURL(url);
+                      }),
+              ]),
+            ),
+          ),
           BotaoPadrao(
             label: widget.label,
             onPressed: () async {

@@ -58,7 +58,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             width: 100.w,
                             child: SvgPicture.asset(
                               Assets.imagesCadeado,
-                            color: context.onSecondary,
+                              color: context.onSecondary,
                             ),
                           ),
                         ),
@@ -69,7 +69,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             textAlign: TextAlign.center,
                             style: context.textTheme.bodyLarge!.copyWith(
                                 fontWeight: FontWeight.w400,
-                            color: context.onSecondary),
+                                color: context.onSecondary),
                           ),
                         ),
                         SizedBox(
@@ -87,11 +87,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 30.w),
-                      child: const AuthForm(
-                        label: 'Enviar',
-                        visible: false,
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 30.w),
+                        child: const AuthForm(
+                          label: 'Enviar',
+                          visible: false,
+                        ),
                       ),
                     ),
                   ],

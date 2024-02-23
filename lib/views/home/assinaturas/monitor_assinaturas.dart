@@ -1,7 +1,10 @@
 import 'dart:developer';
 
+import 'package:Srm_Asset/generated/assets.dart';
+import 'package:Srm_Asset/views/home/assinaturas/widgets/popup_erro_carregar_dados.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
@@ -84,49 +87,156 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas>
                   changeble: true,
                   tituloPagina: 'Assinatura Digital',
                 ),
-                Card(
-                  child: TabBar(
-                      dividerColor: Colors.transparent,
-                      controller: _tabController,
-                      tabs: [
-                        Tab(
-                          child: Text("Assinaturas Pendentes",
-                              textAlign: TextAlign.center,
-                              style: context.textTheme.bodyMedium),
-                          height: 40.h,
-                        ),
-                        Tab(
-                            child: Text("Acompanhar Assinaturas",
+                Padding(
+                  padding: EdgeInsets.only(top: 16.h),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(5.r),
+                      ),
+                    ),
+                    child: TabBar(
+                        dividerColor: Colors.transparent,
+                        controller: _tabController,
+                        indicatorSize: TabBarIndicatorSize.tab,
+                        indicator: UnderlineTabIndicator(
+                            borderSide: BorderSide(
+                                color: context.indicatorColor, width: 7.h)),
+                        tabs: [
+                          Tab(
+                            child: Text("Assinaturas Pendentes",
                                 textAlign: TextAlign.center,
-                                style: context.textTheme.bodyMedium),
-                            height: 40.h),
-                      ],
-                      indicatorColor: context.primaryColor),
+                                style: context.textTheme.bodyMedium!
+                                    .copyWith(fontWeight: FontWeight.w600)),
+                            height: 50.h,
+                          ),
+                          Tab(
+                              child: Text("Acompanhar Assinaturas",
+                                  textAlign: TextAlign.center,
+                                  style: context.textTheme.bodyMedium!
+                                      .copyWith(fontWeight: FontWeight.w600)),
+                              height: 50.h),
+                        ],
+                        indicatorColor: context.primaryColor),
+                  ),
                 ),
                 Expanded(
                   child: TabBarView(
                     controller: _tabController,
                     children: [
-                      ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: assinaturasPendentes.length,
-                        itemBuilder: (context, index) => CardMonitorAssinaturas(
-                          assinarDocumento: true,
-                          assinatura: assinaturasPendentes[index],
-                        ),
+                      FutureBuilder(
+                        future: _assinaturasFuture,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Loader();
+                          } else if (snapshot.hasError) {
+                            showDialog(
+                              context: context,
+                              builder: (context) => PopUpErroCarregarDados(),
+                            );
+                          }
+                          if (assinaturasPendentes.isEmpty) {
+                            return Card(
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 116.h),
+                                    child: Icon(LineIcons.checkCircle,
+                                        color: context.primaryColor,
+                                        size: 137.r),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 25.h),
+                                    child: Text(
+                                      "Nada pendente!\nTodas as assinaturas estão em dia.",
+                                      textAlign: TextAlign.center,
+                                      style: context.textTheme.bodyLarge!
+                                          .copyWith(
+                                              color: context.indicatorColor,
+                                              fontWeight: FontWeight.w600),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }
+                          return RefreshIndicator(
+                            backgroundColor: Colors.white,
+                            color: context.primaryColor,
+                            onRefresh: () => _carregarDados(),
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: assinaturasPendentes.length,
+                              itemBuilder: (context, index) =>
+                                  CardMonitorAssinaturas(
+                                assinarDocumento: true,
+                                assinatura: assinaturasPendentes[index],
+                              ),
+                            ),
+                          );
+                        },
                       ),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: assinaturas.length,
-                        itemBuilder: (context, index) => CardMonitorAssinaturas(
-                          assinatura: assinaturas[index],
-                          destacar: index == 0 &&
-                              destacar != null &&
-                              destacar &&
-                              !assinaturaProvider.isDestacado,
-                          visualizarDocumento: true,
-                        ),
-                      ),
+                      FutureBuilder(
+                          future: _assinaturasFuture,
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Loader();
+                            } else if (snapshot.hasError) {
+                              showDialog(
+                                context: context,
+                                builder: (context) => PopUpErroCarregarDados(),
+                              );
+                            }
+                            if (assinaturas.isEmpty) {
+                              return Card(
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 137.h),
+                                      child: Icon(
+                                        LineIcons.clipboardWithCheck,
+                                        color: context.primaryColor,
+                                        size: 116.r,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 25.h),
+                                      child: Text(
+                                        "Não há assinaturas para\nacompanhamento.",
+                                        textAlign: TextAlign.center,
+                                        style: context.textTheme.bodyLarge!
+                                            .copyWith(
+                                                color: context.indicatorColor,
+                                                fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
+                            return RefreshIndicator(
+                              backgroundColor: Colors.white,
+                              color: context.primaryColor,
+                              onRefresh: () => _carregarDados(),
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: assinaturas.length,
+                                itemBuilder: (context, index) =>
+                                    CardMonitorAssinaturas(
+                                  assinatura: assinaturas[index],
+                                  destacar: index == 0 &&
+                                      destacar != null &&
+                                      destacar &&
+                                      !assinaturaProvider.isDestacado,
+                                  visualizarDocumento: true,
+                                ),
+                              ),
+                            );
+                          }),
                     ],
                   ),
                 ),

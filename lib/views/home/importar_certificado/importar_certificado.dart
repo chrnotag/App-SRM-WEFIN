@@ -29,7 +29,7 @@ class ImportarCertificado extends StatelessWidget {
               children: [
                 Text(
                   'Escolha a forma desejada para importar o certificado.',
-                  style: context.textTheme.labelLarge,
+                  style: context.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600, color: context.onPrimaryColor),
                   textAlign: TextAlign.center,
                 ),
                 Padding(

@@ -32,6 +32,7 @@ class LoginImpl {
       final response =
           await http.post(Uri.parse(url), headers: headers, body: body);
       if (response.statusCode == 200) {
+        log('status code ${response.statusCode}');
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = LoginResponse.fromJson(responseBody);
         authProvider.setDataUser = data;

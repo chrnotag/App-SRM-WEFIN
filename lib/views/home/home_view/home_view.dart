@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -76,7 +77,7 @@ class _HomeViewState extends State<HomeView> {
                         child: Card(
                           child: Container(
                             height: 144.h,
-                            width: 140.w,
+                            width: 120.w,
                             child: Padding(
                               padding: EdgeInsets.all(6.r),
                               child: Column(
@@ -99,8 +100,8 @@ class _HomeViewState extends State<HomeView> {
                                               .assinaturaPendente >
                                           0)
                                         CircleAvatar(
-                                          radius: 13.r,
-                                          backgroundColor: Colors.red,
+                                          radius: 15.r,
+                                          backgroundColor: Color(0xffF29146),
                                           child: Text(
                                             authProvider.empresaSelecionada!
                                                         .assinaturaPendente >
@@ -110,8 +111,8 @@ class _HomeViewState extends State<HomeView> {
                                                     .empresaSelecionada!
                                                     .assinaturaPendente
                                                     .toString(),
-                                            style: context.textTheme.bodySmall!
-                                                .copyWith(color: Colors.white),
+                                            style: context.textTheme.bodyMedium!
+                                                .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
                                           ),
                                         ),
                                     ],
@@ -125,7 +126,7 @@ class _HomeViewState extends State<HomeView> {
                                       'Assinatura Digital',
                                       style: context.textTheme.bodyMedium!
                                           .copyWith(
-                                              fontWeight: FontWeight.bold),
+                                              fontWeight: FontWeight.bold,color: context.indicatorColor),
                                     ),
                                   ),
                                 ],
@@ -140,7 +141,7 @@ class _HomeViewState extends State<HomeView> {
                         child: Card(
                           child: Container(
                             height: 144.h,
-                            width: 140.w,
+                            width: 120.w,
                             child: Padding(
                               padding: EdgeInsets.all(8.r),
                               child: Column(
@@ -159,7 +160,8 @@ class _HomeViewState extends State<HomeView> {
                                   Text(
                                     'Monitor de Operações',
                                     style: context.textTheme.bodyMedium!
-                                        .copyWith(fontWeight: FontWeight.bold),
+                                        .copyWith(
+                                        fontWeight: FontWeight.bold,color: context.indicatorColor),
                                   )
                                 ],
                               ),
@@ -173,7 +175,7 @@ class _HomeViewState extends State<HomeView> {
                         child: Card(
                           child: Container(
                             height: 144.h,
-                            width: 140.w,
+                            width: 120.w,
                             child: Padding(
                               padding: EdgeInsets.all(8.r),
                               child: Column(
@@ -201,7 +203,8 @@ class _HomeViewState extends State<HomeView> {
                                   Text(
                                     'Central de Atendimento',
                                     style: context.textTheme.bodyMedium!
-                                        .copyWith(fontWeight: FontWeight.bold),
+                                        .copyWith(
+                                        fontWeight: FontWeight.bold,color: context.indicatorColor),
                                   )
                                 ],
                               ),

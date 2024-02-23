@@ -72,16 +72,21 @@ class AssinaturaProvider extends ChangeNotifier {
 
   void separaAssinaturas(List<MonitorAssinaturasModel> assinaturas) {
     _assinaturasPendentes.clear();
+
     final AuthProvider authProvider = Modular.get<AuthProvider>();
+    bool naoAssinadoPeloUsuario = false;
     for (var assinatura in assinaturas) {
-      bool naoAssinadoPeloUsuario = assinatura.assinantes
-          .any((assinante) => assinante.informacoesAssinante.any((info) {
-                return info.identificadorAssinador ==
-                        authProvider.dataUser!.identificadorUsuario &&
-                    info.statusAssinatura != "Assinado";
-              }));
-      if (naoAssinadoPeloUsuario) {
-        _assinaturasPendentes.add(assinatura);
+      if (assinatura.statusAssinaturaDigital.toLowerCase() != "assinado") {
+        log('operacao ${assinatura.codigoOperacao} tem o status ${assinatura.statusOperacao} e tambpem o status assinatura ${assinatura.statusAssinaturaDigital}');
+        naoAssinadoPeloUsuario = assinatura.assinantes
+            .any((assinante) => assinante.informacoesAssinante.any((info) {
+                  return info.identificadorAssinador ==
+                          authProvider.dataUser!.identificadorUsuario &&
+                      info.statusAssinatura.toLowerCase() != "assinado";
+                }));
+        if (naoAssinadoPeloUsuario) {
+          _assinaturasPendentes.add(assinatura);
+        }
       }
     }
   }

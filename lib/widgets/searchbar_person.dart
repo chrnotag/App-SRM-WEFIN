@@ -21,7 +21,7 @@ class SearchBarPersonalizada extends StatelessWidget {
       trailing: [
         Icon(
           Icons.search,
-          size: 25.r,
+          size: 35.r,
           color: Colors.grey,
         )
       ],

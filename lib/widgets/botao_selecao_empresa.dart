@@ -57,7 +57,7 @@ class SelecaoEmpresa extends StatelessWidget {
                     width: context.width * 0.8,
                     child: Text(
                       nomeEmpresa ?? "Nenhuma Empresa Selecionada",
-                      style: context.textTheme.displayLarge!
+                      style: context.textTheme.displaySmall!
                           .copyWith(color: context.onSecondary, fontWeight: FontWeight.w300),
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,

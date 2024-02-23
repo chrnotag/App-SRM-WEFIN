@@ -17,7 +17,6 @@ import 'package:Srm_Asset/widgets/popup_generico.dart';
 import 'package:path/path.dart' as path;
 import 'package:Srm_Asset/models/documento_model.dart';
 import '../../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
-import '../../constants/endpoints.dart';
 import '../../implementations_config/api_response.dart';
 
 class BaixarDocumentosImpl {
@@ -39,8 +38,7 @@ class BaixarDocumentosImpl {
     return header;
   }
 
-  Uri get url => Uri.parse(
-      "https://signer.srmasset.com/api/documents/9128d0b9-fe53-4e40-ba09-e47fdc5fcc33/original?access_ticket=CfDJ8Pf-kfXXE6tAq6WYmfveFyQaRpkwMzEkqX-Dq5KNyPIrC62HaMpmpCJXkhUVCZdqwBVSy9EdexHwQ_cZDzrovgu-EXMvlPZOP1Ugpt3dNPcBEkC9PSKD1nwnkB8xFlZbQ2SclHuHB3bp1Vh6sQ99k68ebuK6ynKysbMwP6eN22IcGslcxYuHZvcXpcb8mpcOR0DfUzO__ggDqJ21tP4CJJc&culture=pt");
+  Uri get url => Uri.parse("${EndPoints.assinatura}/${documento.idAssinaturaDigital}/arquivo");
 
   Future<ApiResponse<dynamic>> ler() async {
     BaixarDocumentosProvider baixarDocumentosProvider =
@@ -50,7 +48,7 @@ class BaixarDocumentosImpl {
       if (response.statusCode == 200) {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = DocumentoModel.fromJson(responseBody);
-        baixarDocumentosProvider.urlDocumento = url.toString();
+        baixarDocumentosProvider.urlDocumento = "${data.url}.pdf";
         return SucessResponse(data);
       } else {
         return MensagemErroPadrao.erroResponse(response.bodyBytes);
@@ -68,18 +66,20 @@ class BaixarDocumentosImpl {
           MediaStorage.DIRECTORY_DOWNLOADS);
       try {
         var response = await http.get(url, headers: header());
-        File file = File('$path/documento-baixado.pdf');
+        File file = File('$path/${documento.nome}.pdf');
         await file.writeAsBytes(response.bodyBytes);
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          showDialog(
-            context: myNavigatorKey.currentState!.context,
-            builder: (context) => AlertDialogGenerico(
-              title: 'Download Concluido',
-              msg: 'Seu arquivo foi salvo em \"$path/${documento.nome}.pdf\"',
-              onPressed: () => Modular.to.pop(),
-            ),
-          );
-        });
+        WidgetsBinding.instance.addPostFrameCallback(
+          (_) {
+            showDialog(
+              context: myNavigatorKey.currentState!.context,
+              builder: (context) => AlertDialogGenerico(
+                title: 'Download Concluido',
+                msg: 'Seu arquivo foi salvo em \"$path/${documento.nome}.pdf\"',
+                onPressed: () => Modular.to.pop(),
+              ),
+            );
+          },
+        );
         return SucessResponse(null);
       } catch (e, s) {
         log('erro ao baixar: $e \n $s');

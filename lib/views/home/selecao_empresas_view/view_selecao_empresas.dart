@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/widgets/mascara_texto_cnpj.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
@@ -75,7 +76,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
               ),
               Container(
                 constraints: BoxConstraints(
-                    maxHeight: context.height * 0.7, minHeight: 85.h),
+                    maxHeight: context.height * 0.7, minHeight: 0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.r),
                   color: Colors.white,
@@ -114,25 +115,25 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                    Text(
-                                      _searchResults![index].nome,
-                                      style: context.textTheme.bodySmall,
-                                    ),
-                                    Text(
-                                      'CNPJ:${_searchResults![index].identificador}',
-                                      style: context.textTheme.bodySmall!
-                                          .copyWith(color: Colors.grey),
-                                    ),
-                                  ]),
+                                        Text(
+                                          _searchResults![index].nome,
+                                          style: context.textTheme.bodyMedium,
+                                        ),
+                                        CNPJText(
+                                          cnpjOuCpf: _searchResults![index]
+                                              .identificador,
+                                        ),
+                                      ]),
                                   Spacer(),
                                   Visibility(
                                     visible: _searchResults![index]
                                             .assinaturaPendente >
                                         0,
                                     child: CircleAvatar(
-                                        backgroundColor: Colors.red,
+                                        backgroundColor: Color(0xffF29146),
                                         radius: 15.r,
                                         child: Center(
                                           child: Text(

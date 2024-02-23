@@ -18,6 +18,7 @@ class Assets {
   static const String iconsIcCadeado = 'assets/icons/ic_cadeado.svg';
   static const String iconsIcCampoInvalido =
       'assets/icons/ic_campo_invalido.svg';
+  static const String iconsIconePlanilha = "assets/icons/planilha.png";
   static const String logoTRUST = 'assets/images/logo_trust.png';
   static const String iconsIcCampoValido = 'assets/icons/ic_campo_valido.svg';
   static const String iconsIcCanetaAssinatura =

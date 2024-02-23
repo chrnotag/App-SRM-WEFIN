@@ -69,15 +69,18 @@ class _GuiaImportCertificadoState extends State<GuiaImportCertificado> {
               child: Visibility(
                 visible:
                     _paginaAtual < PaginaImportarCertificado.pagina(context).length - 1,
-                child: FloatingActionButton(
-                  onPressed: () {
+                child: InkWell(
+                  onTap: () {
                     _carrousselControler.nextPage(
                         duration: const Duration(milliseconds: 300),
                         curve: Curves.linear);
                   },
-                  backgroundColor: context.primaryColor,
-                  mini: true,
-                  child: const Icon(Icons.arrow_forward),
+                  borderRadius: BorderRadius.circular(25.r),
+                  child: CircleAvatar(
+                    radius: 25.r,
+                    backgroundColor: context.primaryColor,
+                    child: Icon(Icons.arrow_forward, size: 25.r,),
+                  ),
                 ),
               )),
           Positioned(
@@ -85,15 +88,18 @@ class _GuiaImportCertificadoState extends State<GuiaImportCertificado> {
             left: 16,
             child: Visibility(
               visible: _paginaAtual > 0,
-              child: FloatingActionButton(
-                onPressed: () {
+              child: InkWell(
+                onTap: () {
                   _carrousselControler.previousPage(
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.linear);
                 },
-                backgroundColor: context.primaryColor,
-                mini: true,
-                child: const Icon(Icons.arrow_back),
+                borderRadius: BorderRadius.circular(25.r),
+                child: CircleAvatar(
+                  radius: 25.r,
+                  backgroundColor: context.primaryColor,
+                  child: Icon(Icons.arrow_back, size: 25.r,),
+                ),
               ),
             ),
           ),

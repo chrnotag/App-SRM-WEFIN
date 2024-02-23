@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/core/constants/urls-uteis.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -62,12 +63,12 @@ class PaginaQrCodeCarrossel {
                   ),
                   TextSpan(
                       text: 'nosso site',
-                      style: context.textTheme.bodyMedium!.copyWith(
+                      style: context.textTheme.bodyLarge!.copyWith(
                           color: context.onSecondary,
-                          decoration: TextDecoration.underline),
+                          decoration: TextDecoration.underline, fontWeight: FontWeight.w600),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () async {
-                          const String url = EndPoints.siteQrCode;
+                          const String url = Urls.siteQrCode;
                           await Share.share(url);
                         }),
                   TextSpan(

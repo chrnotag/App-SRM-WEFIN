@@ -23,14 +23,14 @@ class ThemeSRM {
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     side: BorderSide.none)),
             constraints:
-                BoxConstraints.expand(width: double.infinity, height: 35.h),
+                BoxConstraints.expand(width: double.infinity, height: 50.h),
             hintStyle: MaterialStateProperty.all<TextStyle>(
                 GoogleFonts.montserrat(
-                    fontSize: AppSizes().bodyMedium,
+                    fontSize: AppSizes().bodyLarge,
                     color: AppColors.labelText)),
             textStyle:
                 MaterialStateProperty.all<TextStyle>(GoogleFonts.montserrat(
-              fontSize: AppSizes().bodySmall,
+              fontSize: AppSizes().bodyLarge,
             ))),
         dialogBackgroundColor: Colors.white,
         colorScheme: ColorScheme(

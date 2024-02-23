@@ -26,7 +26,7 @@ class BotaoPadrao extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4.r),
                 ),
-                backgroundColor: context.primaryColor),
+                backgroundColor: AppColors.laranjaSRM),
             child: Padding(
               padding: EdgeInsets.all(AppSizes.paddingMedium),
               child: Row(
@@ -37,6 +37,7 @@ class BotaoPadrao extends StatelessWidget {
                     child: Icon(
                       icon,
                       size: 40.r,
+                      color: context.onPrimaryColor,
                     ),
                   ),
                   Text(label,
@@ -52,7 +53,7 @@ class BotaoPadrao extends StatelessWidget {
               backgroundColor: context.onPrimaryColor,
               shadowColor: Colors.black,
               shape: RoundedRectangleBorder(
-                side: BorderSide(color: context.primaryColor, width: 2.w),
+                side: BorderSide(color: AppColors.laranjaSRM, width: 2.w),
                 borderRadius: BorderRadius.circular(4.r),
               ),
             ),
@@ -65,13 +66,13 @@ class BotaoPadrao extends StatelessWidget {
                     visible: icon != null,
                     child: Icon(
                       icon,
-                      color: context.primaryColor,
+                      color: AppColors.laranjaSRM,
                       size: 40.r,
                     ),
                   ),
                   Text(label,
                       style: context.textTheme.bodyMedium!
-                          .copyWith(color: context.primaryColor))
+                          .copyWith(color: AppColors.laranjaSRM))
                 ],
               ),
             ),

@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/views/home/assinaturas/widgets/popup_erro_carregar_dados.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:line_icons/line_icons.dart';
@@ -49,28 +50,29 @@ class _MonitorOperacoesState extends State<MonitorOperacoes> {
         preferredSize: AppBar().preferredSize,
         child: AppBarLogo(),
       ),
-      body: Column(
-        children: [
-          SelecaoEmpresa(
-            nomeEmpresa: authProvider.empresaSelecionada!.nome,
-            changeble: true,
-            tituloPagina: 'Monitor de Operações',
-          ),
-          Expanded(
-            child: FutureBuilder(
-              future: _operacoesFuture,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Loader();
-                } else if (snapshot.hasError) {
-                  showDialog(
-                    context: context,
-                    builder: (context) => mostrarErroCarregarDados(),
-                  );
-                }
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 0),
-                  child: RefreshIndicator(
+      body: Padding(
+        padding: EdgeInsets.all(16.r),
+        child: Column(
+          children: [
+            SelecaoEmpresa(
+              nomeEmpresa: authProvider.empresaSelecionada!.nome,
+              changeble: true,
+              tituloPagina: 'Monitor de Operações',
+            ),
+            SizedBox(height: 20.h,),
+            Expanded(
+              child: FutureBuilder(
+                future: _operacoesFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Loader();
+                  } else if (snapshot.hasError) {
+                    showDialog(
+                      context: context,
+                      builder: (context) => PopUpErroCarregarDados(),
+                    );
+                  }
+                  return RefreshIndicator(
                     backgroundColor: Colors.white,
                     color: context.primaryColor,
                     onRefresh: () => _carregarDados(),
@@ -81,38 +83,12 @@ class _MonitorOperacoesState extends State<MonitorOperacoes> {
                           CardMonitorOperacoes(
                               operacoes: operacoesProvider.operacoes[index]),
                     ),
-                  ),
-                );
-              },
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget mostrarErroCarregarDados() {
-    return AlertDialog(
-      icon: Icon(
-        LineIcons.exclamationCircle,
-        color: context.primaryColor,
-        size: 20.r,
-      ),
-      title: Column(
-        children: [
-          Text(
-            "Erro ao carregar operações.",
-            style: context.textTheme.labelMedium,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 10.h),
-            child: Text("Tente novamente mais tarde."),
-          ),
-          BotaoPadrao(
-              label: 'Ok',
-              onPressed: () =>
-                  Modular.to.navigate(AppRoutes.homeAppRoute))
-        ],
+                  );
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

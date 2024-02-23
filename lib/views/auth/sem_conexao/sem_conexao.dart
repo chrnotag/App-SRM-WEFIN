@@ -29,6 +29,7 @@ class _SemConexaoScreenState extends State<SemConexaoScreen> {
   Widget build(BuildContext context) {
     ThemeProvider themeProvider = Modular.get<ThemeProvider>();
     return Scaffold(
+      backgroundColor: context.indicatorColor,
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(

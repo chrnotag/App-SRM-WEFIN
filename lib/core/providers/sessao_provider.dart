@@ -43,7 +43,7 @@ class SessionProvider with ChangeNotifier {
     if (_timer!.isActive) {
       _timer!.cancel();
     }
-    _timeout = 60;
+    _timeout = 999999999;
     startListening();
   }
 
