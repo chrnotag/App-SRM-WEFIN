@@ -40,7 +40,9 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
     if (query.isNotEmpty) {
       setState(() {
         _searchResults = authProvider.listaCedente
-            ?.where((item) => item.nome.toLowerCase().contains(query))
+            ?.where((item) =>
+        item.nome.toLowerCase().contains(query) ||
+            item.identificador.contains(query)) // Considera CNPJ
             .toList();
       });
     } else {
@@ -114,19 +116,24 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          _searchResults![index].nome,
-                                          style: context.textTheme.bodyMedium,
-                                        ),
-                                        CNPJText(
-                                          cnpjOuCpf: _searchResults![index]
-                                              .identificador,
-                                        ),
-                                      ]),
+                                  SizedBox(
+                                    width: context.width * 0.8,
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            _searchResults![index].nome,
+                                            style: context.textTheme.bodyMedium,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                          ),
+                                          CNPJText(
+                                            cnpjOuCpf: _searchResults![index]
+                                                .identificador,
+                                          ),
+                                        ]),
+                                  ),
                                   Spacer(),
                                   Visibility(
                                     visible: _searchResults![index]

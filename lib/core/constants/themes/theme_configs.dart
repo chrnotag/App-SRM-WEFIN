@@ -5,8 +5,9 @@ class AppColors {
   static const Color azul = Color(0xFF1E3870);
   static const Color azulPrimarioSRM = Color(0xFF5B95CC);
   static const Color laranjaSRM = Color(0xFFF18820);
-  static const Color verdePrimarioTRUST = Color(0xff0EAC58);
+  static const Color verdePrimarioTRUST = Color(0xFF0EAC58);
   static const Color labelText = Color(0xFF8A8A8A);
+  static const Color cinzaEscuro = Color(0xff838383);
   static const Color branco = Color(0xFFFFFFFF);
   static const Color laranja = Color(0xFFF29046);
   static const Color vermelho = Color(0xFFA74D4D);

@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
 
 import '../../widgets/loader_widget.dart';
+import 'lista_execao_tempo_sessao.dart';
 
 class OverlayApp {
   static final _overlayLoader = OverlayEntry(
@@ -20,7 +21,9 @@ class OverlayApp {
 
   static terminaOverlay() {
     final SessionProvider sessaoProvider = Modular.get<SessionProvider>();
-    sessaoProvider.startListening();
+    if (!ListaExecaoTimeOut.routes.contains(Modular.to.path)) {
+      sessaoProvider.startListening();
+    }
     _overlayLoader.remove();
   }
 }

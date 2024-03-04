@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:convert';
+import 'dart:developer';
+import 'package:Srm_Asset/core/utils/handle_permissions.dart';
 import 'package:crosspki/crosspki.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -137,7 +139,6 @@ class ImportarCertificadoProvider extends ChangeNotifier {
       Fluttertoast.showToast(msg: "Nenhum arquivo foi selecionado.");
       return false;
     }
-
     PlatformFile file = result.files.first;
 
     if (file.path == null) {

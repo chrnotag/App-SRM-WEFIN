@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:Srm_Asset/core/implementations_config/api_response.dart';
+import 'package:Srm_Asset/widgets/popup_generico.dart';
 import 'package:crosspki/crosspki.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +41,7 @@ class FinalizarAssinaturaProvider extends ChangeNotifier {
       PKCertificate cert) async {
     List<RespostaIniciarAssinaturaModel> hashs =
         _assinaturaProvider.hashsParaAssinar;
+    log("hashs para assinar: ${_assinaturaProvider.hashsParaAssinar}");
     List<FinalizarAssinaturaModel> hashAssinados = [];
     PKCertificate certificado = cert;
     for (var hash in hashs) {
@@ -68,21 +71,34 @@ class FinalizarAssinaturaProvider extends ChangeNotifier {
             assinaturaProvider.assinaturaSelecionada!.codigoOperacao);
     final hashs = await iniciarAssinaturaProvider.obterHashs(data);
     BuildContext context = myNavigatorKey.currentContext!;
-    log('error: ${hashs.error}');
+    log('hashs do metodo finalizar: ${hashs.data}');
     if (hashs.error == null) {
       final hashAssinados = await _assinarHashs(certificado);
+      ApiResponse<dynamic>? resultado;
       for (var documento in hashAssinados) {
-        final result =
+        resultado =
             await FinalizarAssinaturaImpl(assinaturaFinalizada: documento)
                 .finalizarAssinatura();
-        AssinaturaEletronicaProvider provider =
-            Modular.get<AssinaturaEletronicaProvider>();
+        if (resultado.error != null) {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialogGenerico(
+                title: 'Erro ao concluir assinatura}',
+                msg:
+                    'Houve um erro ao assinar o documento, tente novamente mais tarde',
+                onPressed: () => Modular.to.pop()),
+          );
+          break;
+        }
+      }
+      AssinaturaEletronicaProvider provider =
+          Modular.get<AssinaturaEletronicaProvider>();
+      if (resultado!.error == null) {
         showDialog(
           context: context,
           builder: (context) =>
               AssinaturaCompletaPopUp(codigoOperacao: provider.codigoOperacao),
         );
-        break;
       }
     }
   }

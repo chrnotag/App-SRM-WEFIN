@@ -41,7 +41,6 @@ class IniciarAssinaturaProvider extends ChangeNotifier {
         showDialog(
           context: myNavigatorKey.currentContext!,
           builder: (context) => SelecionarCertificado(),
-          useSafeArea: true,
         );
       }
     }

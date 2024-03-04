@@ -72,8 +72,7 @@ class _AlertPoliticaPrivacidadeState extends State<AlertPoliticaPrivacidade> {
         OverlayApp.terminaOverlay();
         Modular.to.pop();
       }
-    } catch (e, s) {
-      log('erro: $e, $s');
+    } catch (_) {
     }
   }
 }

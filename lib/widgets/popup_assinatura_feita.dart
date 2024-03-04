@@ -18,7 +18,7 @@ class AssinaturaCompletaPopUp extends StatelessWidget {
     return AlertDialog(
       icon: Icon(
         Icons.check_circle_outline,
-        color: context.primaryColor,
+        color: context.focusColor,
         size: 50,
       ),
       title: Column(
@@ -56,7 +56,7 @@ class AssinaturaCompletaPopUp extends StatelessWidget {
                 List<MonitorAssinaturasModel> assinaturasPendentes =
                     assinaturaProvider.assinaturasPendentes;
                 Modular.to
-                    .pushNamed(AppRoutes.assinaturaDigitalRoute, arguments: {
+                    .popAndPushNamed(AppRoutes.assinaturaDigitalRoute, arguments: {
                   'assinaturas': operacaoProvider.aconragemAssinatura(
                       assinaturaProvider.todasAssinaturas, codigoOperacao),
                   'assinaturasPendentes': assinaturasPendentes,

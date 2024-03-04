@@ -14,7 +14,7 @@ class PopUpErroCarregarDados extends StatelessWidget {
     return AlertDialog(
       icon: Icon(
         LineIcons.exclamationCircle,
-        color: context.primaryColor,
+        color: context.focusColor,
         size: 20.r,
       ),
       title: Column(

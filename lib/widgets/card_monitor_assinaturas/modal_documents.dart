@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:Srm_Asset/widgets/popup_generico.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/widgets/pdfview.dart';
@@ -55,17 +56,15 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
       titlePadding: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(5.r))),
-      title: SizedBox(
+      title: Container(
         width: context.width,
+        color: Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(5.r),
-                    topRight: Radius.circular(5.r)),
                 color: context.indicatorColor,
               ),
               child: Padding(
@@ -114,146 +113,144 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
                         shrinkWrap: true,
                         itemCount: documentosUnicos.length,
                         itemBuilder: (context, index) => Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text('Documento',
-                                    style: context.textTheme.bodySmall!.copyWith(
+                                    style:
+                                        context.textTheme.bodySmall!.copyWith(
                                       color: AppColors.labelText,
                                     )),
                                 SizedBox(
                                   width: context.width * 0.3,
                                   child: Text(
-                                      "${documentosUnicos[index].nome}.pdf",
-                                      style: context.textTheme.bodyMedium!
-                                          .copyWith(
-                                              color: AppColors.azul),
-                                  maxLines: 1, overflow: TextOverflow.ellipsis,),
+                                    "${documentosUnicos[index].nome}.pdf",
+                                    style: context.textTheme.bodyMedium!
+                                        .copyWith(color: AppColors.azul),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                 ),
                               ],
                             ),
-                            const Spacer(),
-                            Column(
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Row(
-                                  children: [
-                                    ButtonBar(
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                    padding: EdgeInsets.zero,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5.r))),
+                                    backgroundColor: AppColors.brancoGelo,
+                                  ),
+                                  onPressed: () async {
+                                    BaixarDocumentosProvider provider =
+                                        Modular.get<BaixarDocumentosProvider>();
+                                    OverlayApp.iniciaOverlay(context);
+                                    await BaixarDocumentosImpl(
+                                            documento: documentosUnicos[index])
+                                        .ler();
+                                    OverlayApp.terminaOverlay();
+                                    WidgetsBinding.instance
+                                        .addPostFrameCallback((_) {
+                                      if (provider.urlDocumento != null) {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => PdfView(
+                                                  documento:
+                                                      documentosUnicos[index],
+                                                  url: provider.urlDocumento),
+                                            ));
+                                      } else {
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) => AlertDialogGenerico(
+                                                title:
+                                                    'Documento não encontrado',
+                                                msg:
+                                                    'O documento solicitado não foi encontrado.',
+                                                onPressed: () {Modular.to.pop();}));
+                                      }
+                                    });
+                                  },
+                                  child: Padding(
+                                    padding: EdgeInsets.all(4.r),
+                                    child: Row(
                                       children: [
-                                        TextButton(
-                                          style: TextButton.styleFrom(
-                                            padding: EdgeInsets.zero,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(5.r))),
-                                            backgroundColor: AppColors.brancoGelo,
-                                          ),
-                                          onPressed: () async {
-                                            BaixarDocumentosProvider provider =
-                                                Modular.get<
-                                                    BaixarDocumentosProvider>();
-                                            OverlayApp.iniciaOverlay(context);
-                                            await BaixarDocumentosImpl(
-                                                    documento:
-                                                        documentosUnicos[index])
-                                                .ler();
-                                            OverlayApp.terminaOverlay();
-                                            log('url: ${provider.urlDocumento}');
-                                            WidgetsBinding.instance
-                                                .addPostFrameCallback(
-                                                    (timeStamp) {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) => PdfView(
-                                                        documento:
-                                                            documentosUnicos[
-                                                                index],
-                                                        url: provider
-                                                            .urlDocumento),
-                                                  ));
-                                            });
-                                          },
-                                          child: Padding(
-                                            padding: EdgeInsets.all(4.r),
-                                            child: Row(
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 8.w),
-                                                  child: Icon(
-                                                    Icons.visibility,
-                                                    color: context.indicatorColor,
-                                                    size: 16.r,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      EdgeInsets.only(right: 8.w),
-                                                  child: Text(
-                                                    'Ver',
-                                                    style: context
-                                                        .textTheme.bodySmall!
-                                                        .copyWith(
-                                                      color: AppColors.azul,
-                                                      fontWeight: FontWeight.w500,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 8.w),
+                                          child: Icon(
+                                            Icons.visibility,
+                                            color: context.indicatorColor,
+                                            size: 16.r,
                                           ),
                                         ),
-                                        TextButton(
-                                          style: TextButton.styleFrom(
-                                              padding: EdgeInsets.zero,
-                                              backgroundColor:
-                                                  AppColors.brancoGelo,
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(5.r)))),
-                                          onPressed: () async {
-                                            OverlayApp.iniciaOverlay(context);
-                                           await BaixarDocumentosImpl(
-                                                    documento:
-                                                        documentosUnicos[index])
-                                                .baixar();
-                                           OverlayApp.terminaOverlay();
-                                          },
-                                          child: Padding(
-                                            padding: EdgeInsets.all(4.r),
-                                            child: Row(
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 8.w),
-                                                  child: Icon(
-                                                    Icons.download,
-                                                    color: context.indicatorColor,
-                                                    size: 16.r,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      EdgeInsets.only(right: 8.w),
-                                                  child: Text('Baixar',
-                                                      style: context
-                                                          .textTheme.bodySmall!
-                                                          .copyWith(
-                                                        color: AppColors.azul,
-                                                        fontWeight: FontWeight.w500,)),
-                                                ),
-                                              ],
+                                        Padding(
+                                          padding: EdgeInsets.only(right: 8.w),
+                                          child: Text(
+                                            'Ver',
+                                            style: context.textTheme.bodySmall!
+                                                .copyWith(
+                                              color: AppColors.azul,
+                                              fontWeight: FontWeight.w500,
                                             ),
                                           ),
                                         ),
                                       ],
                                     ),
-                                  ],
-                                )
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10.w,
+                                ),
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                      padding: EdgeInsets.zero,
+                                      backgroundColor: AppColors.brancoGelo,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(5.r)))),
+                                  onPressed: () async {
+                                    OverlayApp.iniciaOverlay(context);
+                                    await BaixarDocumentosImpl(
+                                            documento: documentosUnicos[index])
+                                        .baixar();
+                                    OverlayApp.terminaOverlay();
+                                  },
+                                  child: Padding(
+                                    padding: EdgeInsets.all(4.r),
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 8.w),
+                                          child: Icon(
+                                            Icons.download,
+                                            color: context.indicatorColor,
+                                            size: 16.r,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(right: 8.w),
+                                          child: Text('Baixar',
+                                              style: context
+                                                  .textTheme.bodySmall!
+                                                  .copyWith(
+                                                color: AppColors.azul,
+                                                fontWeight: FontWeight.w500,
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           ],

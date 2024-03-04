@@ -86,11 +86,11 @@ class AuthProvider extends ChangeNotifier {
           try {
             OverlayApp.terminaOverlay();
           } catch (_) {}
-          Modular.to.pushNamed(AppRoutes.homeAppRoute);
+          Modular.to.navigate(AppRoutes.homeAppRoute);
         }
       }
     } else {
-      Modular.to.pushNamed(AppRoutes.homeAppRoute);
+      Modular.to.navigate(AppRoutes.homeAppRoute);
     }
   }
 

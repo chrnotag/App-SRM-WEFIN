@@ -73,7 +73,7 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
                           InkWell(
                             onTap: () {
                               themeProvider.temaSelecionado =
-                                  TemaSelecionado.SRM;
+                                  TemaSelecionado.TRUST;
                               Modular.to.pushNamed(AppRoutes.loginAuthRoute);
                             },
                             child: Column(

@@ -77,7 +77,6 @@ class AssinaturaProvider extends ChangeNotifier {
     bool naoAssinadoPeloUsuario = false;
     for (var assinatura in assinaturas) {
       if (assinatura.statusAssinaturaDigital.toLowerCase() != "assinado") {
-        log('operacao ${assinatura.codigoOperacao} tem o status ${assinatura.statusOperacao} e tambpem o status assinatura ${assinatura.statusAssinaturaDigital}');
         naoAssinadoPeloUsuario = assinatura.assinantes
             .any((assinante) => assinante.informacoesAssinante.any((info) {
                   return info.identificadorAssinador ==

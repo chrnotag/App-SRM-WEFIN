@@ -121,15 +121,20 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                       Text(
                         'Procurador',
                         style: context.textTheme.bodyMedium,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                       Row(
                         children: [
-                          Text(
-                            info.nomeProcurador ?? "",
-                            style: context.textTheme.bodySmall,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
+                          SizedBox(
+                            width: context.width * 0.3,
+                            child: Text(
+                              info.nomeProcurador ?? "",
+                              style: context.textTheme.bodySmall,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
 
+                            ),
                           ),
                           if(info.statusAssinatura.toLowerCase() == "assinado" && info.nomeProcurador != null)
                             Icon(Icons.check_circle, color: Colors.green,size: 15.r,)

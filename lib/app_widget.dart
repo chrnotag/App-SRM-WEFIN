@@ -1,12 +1,10 @@
-import 'package:flutter/cupertino.dart';
+import 'package:Srm_Asset/core/utils/lista_execao_tempo_sessao.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/providers/internet_provider.dart';
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
 import 'package:Srm_Asset/core/providers/theme_provider.dart';
-import 'package:Srm_Asset/views/auth/sem_conexao/sem_conexao.dart';
 
 class AppWidget extends StatefulWidget {
   const AppWidget({super.key});
@@ -18,24 +16,18 @@ class AppWidget extends StatefulWidget {
 class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
   final SessionProvider sessionProvider = Modular.get<SessionProvider>();
 
-  final List<String> listaExessaoTimeOut = [
-    Modular.initialRoute,
-    AppRoutes.forgetPassAuthRoute,
-    AppRoutes.loginAuthRoute,
-  ];
-
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.detached) {
       sessionProvider.stopListening();
     }
     if (state == AppLifecycleState.paused) {
-      if (!listaExessaoTimeOut.contains(Modular.to.path)) {
+      if (!ListaExecaoTimeOut.routes.contains(Modular.to.path)) {
         sessionProvider.resetListening();
       }
     }
     if (state == AppLifecycleState.resumed) {
-      if (!listaExessaoTimeOut.contains(Modular.to.path)) {
+      if (!ListaExecaoTimeOut.routes.contains(Modular.to.path)) {
         sessionProvider.resetListening();
       }
     }
@@ -53,7 +45,7 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
       if (isKeyboardOpen) {
         sessionProvider.stopListening();
       } else {
-        if (!listaExessaoTimeOut.contains(Modular.to.path)) {
+        if (!ListaExecaoTimeOut.routes.contains(Modular.to.path)) {
           sessionProvider.resetListening();
         }
       }
@@ -82,42 +74,27 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     final ThemeProvider themeProvider = context.watch<ThemeProvider>();
-    final ConnectivityProvider connectivityProvider =
-        context.watch<ConnectivityProvider>();
     return Listener(
       onPointerDown: (event) {
-        if (!listaExessaoTimeOut.contains(Modular.to.path)) {
+        if (!ListaExecaoTimeOut.routes.contains(Modular.to.path)) {
           sessionProvider.resetListening();
         }
       },
       child: GestureDetector(
         onLongPress: () {
-          if (!listaExessaoTimeOut.contains(Modular.to.path)) {
+          if (!ListaExecaoTimeOut.routes.contains(Modular.to.path)) {
             sessionProvider.stopListening();
           }
         },
         onLongPressUp: () {
-          if (!listaExessaoTimeOut.contains(Modular.to.path)) {
+          if (!ListaExecaoTimeOut.routes.contains(Modular.to.path)) {
             sessionProvider.resetListening();
           }
         },
-        child: StreamBuilder<bool>(
-          stream: connectivityProvider.connectionStatusStream,
-          initialData: true,
-          builder: (context, snapshot) {
-            if (!snapshot.hasData || !snapshot.data!) {
-              return const MaterialApp(
-                debugShowCheckedModeBanner: false,
-                home: SemConexaoScreen(),
-              );
-            } else {
-              return MaterialApp.router(
-                debugShowCheckedModeBanner: false,
-                routerConfig: Modular.routerConfig,
-                theme: themeProvider.temaAtual,
-              );
-            }
-          },
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          routerConfig: Modular.routerConfig,
+          theme: themeProvider.temaAtual,
         ),
       ),
     );

@@ -11,7 +11,6 @@ import 'package:Srm_Asset/widgets/popup_generico.dart';
 class VerificarSessao {
   static limparDadosSessao() {
     AuthProvider authProvider = Modular.get<AuthProvider>();
-    ThemeProvider themeProvider = Modular.get<ThemeProvider>();
     ImportarCertificadoProvider certificadoProvider =
         Modular.get<ImportarCertificadoProvider>();
     IniciarAssinaturaProvider iniciarAssinaturaProvider =

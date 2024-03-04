@@ -78,7 +78,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         SizedBox(
                           width: 220.w,
                           child: Text(
-                            'Para recuperar sua senha por favor, digite o seu CPF e e-mail',
+                            'Para recuperar sua senha por favor, digite o seu CNPJ e e-mail',
                             textAlign: TextAlign.center,
                             style: context.textTheme.bodyMedium!.copyWith(
                                 fontWeight: FontWeight.w200,

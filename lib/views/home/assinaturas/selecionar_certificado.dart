@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'dart:developer' as log;
+import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:crosspki/crosspki.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -81,6 +82,7 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                                   .alterarCorItemListaCertificado(
                                       index, context),
                               height: 40.h,
+                              width: context.width,
                               child: InkWell(
                                 onTap: () {
                                   certificadoProvider
@@ -88,8 +90,6 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                                           certificadoProvider
                                               .listaCertificados[index],
                                           context);
-                                  log.log(
-                                      "certificado selecionado: ${certificadoProvider.certificadoSelecionado!.subjectDisplayName}");
                                 },
                                 child: Row(
                                   mainAxisAlignment:
@@ -99,9 +99,7 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                                       padding:
                                           EdgeInsets.symmetric(horizontal: 8.r),
                                       child: SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.6,
+                                        width: context.width * 0.6,
                                         child: Text(
                                           certificadoProvider
                                                   .listaCertificados[index]
@@ -116,26 +114,27 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                                       ),
                                     ),
                                     InkWell(
-                                        onTap: () async {
-                                          showDialog(
-                                              context: context,
-                                              builder: (context) =>
-                                                  PopUpDeletarCertificado(
-                                                          context: context,
-                                                          certificado:
-                                                              certificadoProvider
-                                                                      .listaCertificados[
-                                                                  index])
-                                                      .popUp);
-                                        },
-                                        child: Container(
-                                          width: 40.w,
-                                          height: 40.h,
-                                          child: Icon(
-                                            Icons.close,
-                                            size: 20.r,
-                                          ),
-                                        ))
+                                      onTap: () async {
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) =>
+                                                PopUpDeletarCertificado(
+                                                        context: context,
+                                                        certificado:
+                                                            certificadoProvider
+                                                                    .listaCertificados[
+                                                                index])
+                                                    .popUp);
+                                      },
+                                      child: Container(
+                                        width: 40.w,
+                                        height: 40.h,
+                                        child: Icon(
+                                          Icons.close,
+                                          size: 20.r,
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),

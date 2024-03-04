@@ -14,7 +14,7 @@ class PopUpDeslogarApp {
           children: [
             Icon(
               LineIcons.exclamationCircle,
-              color: context.primaryColor,
+              color: context.focusColor,
               size: 137.r,
             ),
             Padding(

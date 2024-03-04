@@ -1,7 +1,10 @@
 import 'dart:async';
-
+import 'package:Srm_Asset/core/constants/route_labels.dart';
+import 'package:Srm_Asset/core/providers/sessao_provider.dart';
+import 'package:Srm_Asset/main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class ConnectivityProvider with ChangeNotifier {
@@ -23,8 +26,21 @@ class ConnectivityProvider with ChangeNotifier {
     InternetConnectionChecker().onStatusChange.listen((status) {
       isOnline = (status == InternetConnectionStatus.connected);
       _connectionStatusController.add(isOnline);
-      notifyListeners();
+      if (!isOnline) {
+        _showNoConnectionScreen();
+      } else {
+        Modular.to.navigate(Modular.initialRoute);
+      }
     });
+  }
+
+  void _showNoConnectionScreen() {
+    final SessionProvider sessionProvider = Modular.get<SessionProvider>();
+    final context = myNavigatorKey.currentContext;
+    if (context != null) {
+      sessionProvider.stopListening();
+      Modular.to.navigate(AppRoutes.semConexaoRoute);
+    }
   }
 
   @override

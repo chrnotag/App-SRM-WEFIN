@@ -16,6 +16,7 @@ class _MenuItem extends StatefulWidget {
 class _MenuItemState extends State<_MenuItem> {
   @override
   Widget build(BuildContext context) {
+    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
     return InkWell(
       onTap: widget.onTap,
       child: Column(
@@ -28,11 +29,12 @@ class _MenuItemState extends State<_MenuItem> {
                 Padding(
                   padding: EdgeInsets.only(right: 5.w),
                   child: Icon(widget.icon,
-                      color: context.primaryColor, size: 25.r),
+                      color: context.focusColor, size: 25.r),
                 ),
                 Text(widget.title,
                     style: context.textTheme.bodyMedium!
-                        .copyWith(fontWeight: FontWeight.bold)),
+                        .copyWith(fontWeight: FontWeight.bold,
+                        color: themeProvider.isTemaSRM ? AppColors.azul : Colors.black)),
                 Expanded(child: Container()),
                 Icon(Icons.arrow_forward_ios,
                     color: context.primaryColor, size: 14.r)

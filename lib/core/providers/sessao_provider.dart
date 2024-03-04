@@ -10,7 +10,7 @@ import '../../main.dart';
 class SessionProvider with ChangeNotifier {
   bool _isShowingDialog = false;
   Timer? _timer;
-  int _timeout = 60;
+  int _timeout = 120;
   final AuthProvider authProvider = Modular.get<AuthProvider>();
 
   SessionProvider() {
@@ -18,6 +18,7 @@ class SessionProvider with ChangeNotifier {
   }
 
   void startListening() {
+
     if (_timer?.isActive ?? false) {
       return;
     }
@@ -43,7 +44,7 @@ class SessionProvider with ChangeNotifier {
     if (_timer!.isActive) {
       _timer!.cancel();
     }
-    _timeout = 999999999;
+    _timeout = 120;
     startListening();
   }
 

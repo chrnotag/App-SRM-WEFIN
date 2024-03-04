@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/modules/sem_conexao_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/recuperar_senha/recuperar_senha_provider.dart';
@@ -37,5 +38,6 @@ class AppModule extends Module {
   void routes(RouteManager r) {
     r.module(Modular.initialRoute, module: AuthModule());
     r.module(AppRoutes.homeRoute, module: HomeModule());
+    r.module(AppRoutes.semConexaoMainRoute, module: SemConexaoModule());
   }
 }

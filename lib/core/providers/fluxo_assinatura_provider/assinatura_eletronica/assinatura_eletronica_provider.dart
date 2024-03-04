@@ -2,7 +2,9 @@
 
 import 'dart:developer';
 
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
@@ -123,7 +125,7 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
       builder: (context) => AlertDialog(
         icon: Icon(
           LineIcons.exclamationCircle,
-          color: Colors.yellow.shade700,
+          color: context.focusColor,
           size: 50,
         ),
         title: Column(
@@ -136,17 +138,27 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
                 key: _formKey,
                 child: Column(
                   children: [
-                    WefinTextFormField(
-                      controller: codigoEmail,
-                      label: 'Informe o Codigo',
-                      inputType: TextInputType.number,
-                      textColor: Colors.black,
-                      validator: Validatorless.multiple([
-                        Validatorless.required(
-                            'Por favor, informe o codigo do email.'),
-                        Validatorless.number(
-                            'O codigo deve ser composto por numeros.')
-                      ]),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.h),
+                      child: TextFormField(
+                        keyboardType: TextInputType.number,
+                        controller: codigoEmail,
+                        decoration: const InputDecoration(
+                          labelText: 'Informe o Codigo',
+                          hintText: 'Informe o codigo',
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black, width: 1),
+                          ),
+                        ),
+                        validator: Validatorless.multiple(
+                          [
+                            Validatorless.required(
+                                'Por favor, informe o codigo do email.'),
+                            Validatorless.number(
+                                'O codigo deve ser composto por numeros.')
+                          ],
+                        ),
+                      ),
                     ),
                     BotaoPadrao(
                         label: 'Confirmar',
@@ -158,7 +170,10 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
                             if (sucess) {
                               _overlayLoader.remove();
                               Modular.to.pop();
-                              showDialog(context: context, builder: (context) => AssinaturaCompletaPopUp(codigoOperacao: codigoOperacao));
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => AssinaturaCompletaPopUp(
+                                      codigoOperacao: codigoOperacao));
                             } else {
                               _overlayLoader.remove();
                               Fluttertoast.showToast(
@@ -169,9 +184,11 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
                         }),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 10),
-                      child: BotaoPadrao(label: 'Cancelar', onPressed: () {
-                        Modular.to.pop();
-                      }),
+                      child: BotaoPadrao(
+                          label: 'Cancelar',
+                          onPressed: () {
+                            Modular.to.pop();
+                          }),
                     )
                   ],
                 ),
@@ -194,7 +211,7 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
     return AlertDialog(
       icon: Icon(
         LineIcons.exclamationCircle,
-        color: Colors.yellow.shade700,
+        color: context.focusColor,
         size: 50,
       ),
       title: Column(

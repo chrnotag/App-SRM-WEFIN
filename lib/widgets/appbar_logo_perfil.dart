@@ -21,7 +21,7 @@ class AppBarLogo extends StatelessWidget {
       backgroundColor: Colors.transparent,
       shadowColor: Colors.transparent,
       centerTitle: true,
-      title: Image.asset(themeProvider.logoTema, width: 70.w),
+      title: Image.asset(themeProvider.logoTemaAppBar, width: 70.w),
       actions: [
         Padding(
           padding: EdgeInsets.only(right: 16.h),
@@ -32,6 +32,7 @@ class AppBarLogo extends StatelessWidget {
               child: Image.asset(
                 Assets.iconPerson,
                 fit: BoxFit.cover,
+                color: themeProvider.isTemaSRM ? Colors.white : AppColors.verdePrimarioTRUST,
                 width: 27.r,
               ),
             ),

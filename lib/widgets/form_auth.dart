@@ -20,6 +20,7 @@ import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_textfield.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:validatorless/validatorless.dart';
+import '../core/providers/theme_provider.dart';
 import '../generated/assets.dart';
 import 'link_component.dart';
 
@@ -53,6 +54,9 @@ class _AuthFormState extends State<AuthForm> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
+    String politicaPrivacidade = themeProvider.isTemaSRM ? Urls.politicaPrivacidadeSRM : Urls.politicaPrivacidadeTRUST;
+    String termosDeUso = themeProvider.isTemaSRM ? Urls.termosDeUsoSRM : Urls.termoDeUsoTRUST;
     return Form(
       key: _formKey,
       child: Column(
@@ -84,8 +88,8 @@ class _AuthFormState extends State<AuthForm> {
                   controller: _passwordEC,
                   validator: Validatorless.multiple([
                     Validatorless.required(!widget.visible
-                        ? 'Senha obrigatória'
-                        : 'CNPJ Obrigatório'),
+                        ? 'CNPJ Obrigatório'
+                        : 'Senha obrigatória'),
                     if (widget.visible)
                       Validatorless.max(10, 'Maximo de 10 caracteres.'),
                     if (!widget.visible) Validatorless.cnpj('CNPJ Inválido!'),
@@ -112,32 +116,34 @@ class _AuthFormState extends State<AuthForm> {
                 TextSpan(
                     text: 'Ao continuar você concorda com as nossas ',
                     style: context.textTheme.bodySmall!
-                        .copyWith(color: context.onPrimaryColor)),
+                        .copyWith(color: context.surface)),
                 TextSpan(
                     text: 'Politicas de Privacidade ',
                     style: context.textTheme.bodySmall!.copyWith(
-                        color: context.onPrimaryColor,
+                        color: context.surface,
                         decoration: TextDecoration.underline,
+                        decorationColor: context.surface,
                         fontWeight: FontWeight.w600),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () async {
-                        const String url = Urls.politicaPrivacidade;
-                        await AbrirUrl.launchURL(url);
+                      String url = politicaPrivacidade;
+                        AbrirUrl().launchURL(url);
                       }),
                 TextSpan(
                     text: 'e os nossos ',
                     style: context.textTheme.bodySmall!
-                        .copyWith(color: context.onPrimaryColor)),
+                        .copyWith(color: context.surface)),
                 TextSpan(
                     text: 'Termos de uso',
                     style: context.textTheme.bodySmall!.copyWith(
-                        color: context.onPrimaryColor,
+                        color: context.surface,
                         decoration: TextDecoration.underline,
+                        decorationColor: context.surface,
                         fontWeight: FontWeight.w600),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () async {
-                        const String url = Urls.termosDeUso;
-                        await AbrirUrl.launchURL(url);
+                      String url = termosDeUso;
+                        await AbrirUrl().launchURL(url);
                       }),
               ]),
             ),
@@ -200,7 +206,7 @@ class _AuthFormState extends State<AuthForm> {
         OverlayApp.iniciaOverlay(context);
       });
       recuperarSenhaProvider.dadosUsuario = RecuperarSenhaModel(
-          identificadorCedente: _passwordEC.text, usuario: _loginEC.text);
+          identificadorCedente: removerMascaraCNPJ(_passwordEC.text), usuario: _loginEC.text);
       final response = await recuperarSenhaProvider.recuperarSenha();
       OverlayApp.terminaOverlay();
       if (response != null && response.error != null) {
@@ -215,6 +221,11 @@ class _AuthFormState extends State<AuthForm> {
       }
     }
   }
+
+  String removerMascaraCNPJ(String cnpj) {
+    return cnpj.replaceAll(".", "").replaceAll("/", "").replaceAll("-", "");
+  }
+
 
   Widget confirmarRecuperarSenha() {
     return AlertDialog(

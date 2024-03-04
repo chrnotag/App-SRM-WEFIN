@@ -7,6 +7,7 @@ import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
 
+import '../core/providers/theme_provider.dart';
 import '../generated/assets.dart';
 
 class SelecaoEmpresa extends StatelessWidget {
@@ -21,6 +22,14 @@ class SelecaoEmpresa extends StatelessWidget {
     this.changeble = true,
   });
 
+  bool mostrarIconeTrocarCedente(){
+    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
+    if(changeble && themeProvider.isTemaSRM){
+      return true;
+    }
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
@@ -31,7 +40,7 @@ class SelecaoEmpresa extends StatelessWidget {
           child: Text(
             tituloPagina,
             style: context.textTheme.bodyLarge!.copyWith(
-                color: context.onSecondary, fontWeight: FontWeight.w100),
+                color:  context.surface, fontWeight: FontWeight.w100),
           ),
         ),
         SizedBox(height: 8.h),
@@ -58,14 +67,14 @@ class SelecaoEmpresa extends StatelessWidget {
                     child: Text(
                       nomeEmpresa ?? "Nenhuma Empresa Selecionada",
                       style: context.textTheme.displaySmall!
-                          .copyWith(color: context.onSecondary, fontWeight: FontWeight.w300),
+                          .copyWith(color: context.surface, fontWeight: FontWeight.w300),
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
 
                     ),
                   ),
                   Visibility(
-                    visible: changeble,
+                    visible: mostrarIconeTrocarCedente(),
                     child: Padding(
                         padding: EdgeInsets.only(right: 8.w),
                         child: SvgPicture.asset(

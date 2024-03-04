@@ -25,10 +25,9 @@ class IniciarAssinaturaImpl {
       'plataforma' : themeProvider.temaSelecionado.name
     };
     final body = json.encode(iniciarAssinaturaModel.toJson());
+    log('Certificado base64: ${iniciarAssinaturaModel.certificadoBase64}');
     try {
       final response = await http.post(url, headers: headers, body: body);
-      log('statusCode obterHashs: ${response.statusCode}');
-      log('retorno: ${response.body}');
       switch (response.statusCode) {
         case 200:
         final responseBody = json.decode(utf8.decode(response.bodyBytes));

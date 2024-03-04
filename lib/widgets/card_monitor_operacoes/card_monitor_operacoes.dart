@@ -30,7 +30,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
     final MonitorOperacoesProvider operacaoProvider =
         Modular.get<MonitorOperacoesProvider>();
     return SizedBox(
-      height: isVisivel(operacao) ? 210.h : 140.h,
+      height: isVisivel(operacao) ? 211.h : 142.h,
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(5.r)),
@@ -135,7 +135,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                 padding: const EdgeInsets.only(bottom: 8.0),
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                      backgroundColor: context.primaryColor,
+                                      backgroundColor: context.focusColor,
                                       shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(5.r)))),

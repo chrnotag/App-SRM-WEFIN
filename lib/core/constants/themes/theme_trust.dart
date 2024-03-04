@@ -15,11 +15,13 @@ class ThemeTRUST {
   static ThemeData get theme => ThemeData(
         primaryColor: AppColors.verdePrimarioTRUST,
         indicatorColor: AppColors.verde,
+        focusColor: AppColors.verdePrimarioTRUST,
         searchBarTheme: SearchBarThemeData(
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10.r)),
-                    side: const BorderSide(color: AppColors.verdePrimarioTRUST))),
+                    side:
+                        const BorderSide(color: AppColors.verdePrimarioTRUST))),
             constraints:
                 BoxConstraints.expand(width: double.infinity, height: 35.h),
             hintStyle: MaterialStateProperty.all<TextStyle>(
@@ -34,7 +36,7 @@ class ThemeTRUST {
             brightness: Brightness.light,
             primary: AppColors.verdePrimarioTRUST,
             onPrimary: Colors.white,
-            secondary: Colors.white,
+            secondary: AppColors.verdePrimarioTRUST,
             onSecondary: AppColors.verdePrimarioTRUST,
             error: AppColors.vermelho,
             onError: Colors.redAccent.shade200,
@@ -42,22 +44,22 @@ class ThemeTRUST {
             onBackground: AppColors.verdePrimarioTRUST,
             surface: Colors.white,
             onSurface: Colors.black,
-        inverseSurface: Colors.black),
+            inverseSurface: Colors.black),
         appBarTheme: const AppBarTheme(
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
             iconTheme: IconThemeData(color: AppColors.verdePrimarioTRUST)),
         scaffoldBackgroundColor: Color(0xfff1f1f1),
         backgroundColor: Colors.white,
-    textTheme: TextTheme(
-      bodySmall: GoogleFonts.montserrat(fontSize: AppSizes().bodySmall),
-      bodyMedium: GoogleFonts.montserrat(fontSize: AppSizes().bodyMedium),
-      bodyLarge: GoogleFonts.montserrat(fontSize: AppSizes().bodyLarge),
-      labelMedium: GoogleFonts.montserrat(fontSize: AppSizes().labelMedium),
-      displaySmall:
-      GoogleFonts.montserrat(fontSize: AppSizes().displaySmall),
-      displayMedium:
-      GoogleFonts.montserrat(fontSize: AppSizes().displayMedium),
-    ),
+        textTheme: TextTheme(
+          bodySmall: GoogleFonts.montserrat(fontSize: AppSizes().bodySmall),
+          bodyMedium: GoogleFonts.montserrat(fontSize: AppSizes().bodyMedium),
+          bodyLarge: GoogleFonts.montserrat(fontSize: AppSizes().bodyLarge),
+          labelMedium: GoogleFonts.montserrat(fontSize: AppSizes().labelMedium),
+          displaySmall:
+              GoogleFonts.montserrat(fontSize: AppSizes().displaySmall),
+          displayMedium:
+              GoogleFonts.montserrat(fontSize: AppSizes().displayMedium),
+        ),
       );
 }

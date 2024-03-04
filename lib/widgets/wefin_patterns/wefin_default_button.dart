@@ -26,7 +26,7 @@ class BotaoPadrao extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4.r),
                 ),
-                backgroundColor: AppColors.laranjaSRM),
+                backgroundColor: context.focusColor),
             child: Padding(
               padding: EdgeInsets.all(AppSizes.paddingMedium),
               child: Row(
@@ -42,7 +42,7 @@ class BotaoPadrao extends StatelessWidget {
                   ),
                   Text(label,
                       style: context.textTheme.bodyMedium!
-                          .copyWith(color: context.onPrimaryColor))
+                          .copyWith(color: Colors.white))
                 ],
               ),
             ),
@@ -50,10 +50,10 @@ class BotaoPadrao extends StatelessWidget {
         : ElevatedButton(
             onPressed: onPressed,
             style: ElevatedButton.styleFrom(
-              backgroundColor: context.onPrimaryColor,
+              backgroundColor: Colors.white,
               shadowColor: Colors.black,
               shape: RoundedRectangleBorder(
-                side: BorderSide(color: AppColors.laranjaSRM, width: 2.w),
+                side: BorderSide(color: context.focusColor, width: 2.w),
                 borderRadius: BorderRadius.circular(4.r),
               ),
             ),
@@ -66,13 +66,13 @@ class BotaoPadrao extends StatelessWidget {
                     visible: icon != null,
                     child: Icon(
                       icon,
-                      color: AppColors.laranjaSRM,
+                      color: context.focusColor,
                       size: 40.r,
                     ),
                   ),
                   Text(label,
                       style: context.textTheme.bodyMedium!
-                          .copyWith(color: AppColors.laranjaSRM))
+                          .copyWith(color: context.focusColor))
                 ],
               ),
             ),

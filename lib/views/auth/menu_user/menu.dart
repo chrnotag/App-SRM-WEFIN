@@ -12,6 +12,8 @@ import 'package:Srm_Asset/generated/assets.dart';
 import 'package:Srm_Asset/widgets/appbar_logo_perfil.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 
+import '../../../core/providers/theme_provider.dart';
+
 part 'widgets/menu_item.dart';
 
 part 'widgets/popup_sair.dart';
@@ -22,6 +24,7 @@ class Menu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
+    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: AppBar().preferredSize, child: const AppBarLogo(isPerfilVisivel: false,)),
@@ -31,12 +34,12 @@ class Menu extends StatelessWidget {
           
           children: [
             Text('Meu Perfil',
-                style: context.textTheme.bodyLarge!.copyWith(color: context.onSecondary)),
+                style: context.textTheme.bodyLarge!.copyWith(color: context.surface)),
             Padding(
               padding: EdgeInsets.only(bottom: 15.h),
               child: Text('Visualize seus dados e tire suas dúvidas',
                   style: context.textTheme.bodyMedium!.copyWith(
-                    color: context.onSecondary)),
+                    color: context.surface)),
             ),
             Expanded(
               child: Card(
@@ -53,7 +56,7 @@ class Menu extends StatelessWidget {
                             child: SvgPicture.asset(
                               Assets.empresaIcon,
                               width: 70.w,
-                              color: context.primaryColor,
+                              color: context.focusColor,
                             ),
                           ),
                           Text(
@@ -62,6 +65,7 @@ class Menu extends StatelessWidget {
                             style: context.textTheme.bodyLarge!.copyWith(
                               fontWeight: FontWeight.w600,
                               letterSpacing: 1.5,
+                              color: themeProvider.isTemaSRM ? AppColors.azul : Colors.black
                             ),
                             textAlign: TextAlign.center,
                           ),

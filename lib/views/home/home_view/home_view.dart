@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
+import 'package:Srm_Asset/core/providers/sessao_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -31,6 +32,13 @@ class _HomeViewState extends State<HomeView> {
         Modular.get<AssinaturaProvider>();
     assinaturaProvider.limparAssinaturas();
     super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final SessionProvider sessaoProvider = Modular.get<SessionProvider>();
+    sessaoProvider.resetListening();
   }
 
   @override
@@ -101,7 +109,7 @@ class _HomeViewState extends State<HomeView> {
                                           0)
                                         CircleAvatar(
                                           radius: 15.r,
-                                          backgroundColor: Color(0xffF29146),
+                                          backgroundColor: AppColors.laranjaSRM,
                                           child: Text(
                                             authProvider.empresaSelecionada!
                                                         .assinaturaPendente >
@@ -126,7 +134,7 @@ class _HomeViewState extends State<HomeView> {
                                       'Assinatura Digital',
                                       style: context.textTheme.bodyMedium!
                                           .copyWith(
-                                              fontWeight: FontWeight.bold,color: context.indicatorColor),
+                                              fontWeight: FontWeight.bold,color: context.onSurface),
                                     ),
                                   ),
                                 ],
@@ -161,7 +169,7 @@ class _HomeViewState extends State<HomeView> {
                                     'Monitor de Operações',
                                     style: context.textTheme.bodyMedium!
                                         .copyWith(
-                                        fontWeight: FontWeight.bold,color: context.indicatorColor),
+                                        fontWeight: FontWeight.bold,color: context.onSurface),
                                   )
                                 ],
                               ),
@@ -204,7 +212,7 @@ class _HomeViewState extends State<HomeView> {
                                     'Central de Atendimento',
                                     style: context.textTheme.bodyMedium!
                                         .copyWith(
-                                        fontWeight: FontWeight.bold,color: context.indicatorColor),
+                                        fontWeight: FontWeight.bold,color: context.onSurface),
                                   )
                                 ],
                               ),

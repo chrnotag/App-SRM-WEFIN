@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/core/constants/urls-uteis.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -10,7 +11,9 @@ import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_provide
 import 'package:Srm_Asset/core/providers/theme_provider.dart';
 import 'package:Srm_Asset/widgets/appbar_logo_perfil.dart';
 import 'package:Srm_Asset/widgets/pdfview.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../core/utils/abrir_url_externo.dart';
 import '../../../generated/assets.dart';
 
 class Ajuda extends StatelessWidget {
@@ -28,24 +31,22 @@ class Ajuda extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              Assets.imagesIcAjuda,
-              width: 150.w,
-              color: context.onSecondary,
-            ),
+            Image.asset(isSRM ? Assets.iconsIcCellCheck : Assets.imagesIcAjuda,
+                width: 176.w,
+                color: isSRM ? null : AppColors.verdePrimarioTRUST),
             Padding(
               padding: EdgeInsets.symmetric(vertical: AppSizes.paddingMedium.h),
               child: Text(
                 'Precisa de ajuda?',
                 style: context.textTheme.bodyLarge!
-                    .copyWith(color: context.onSecondary),
+                    .copyWith(color: context.surface),
               ),
             ),
             Text(
               'Pode contar conosco através de um dos nossos canais de atendimento:',
               textAlign: TextAlign.center,
               style: context.textTheme.bodyMedium!
-                  .copyWith(color: context.onSecondary),
+                  .copyWith(color: context.surface),
               softWrap: true,
             ),
             Padding(
@@ -58,14 +59,15 @@ class Ajuda extends StatelessWidget {
                         TextSpan(
                             text: 'Telefone: ',
                             style: context.textTheme.bodyMedium!
-                                .copyWith(color: context.onSecondary)),
+                                .copyWith(color: context.surface)),
                         TextSpan(
                           text: isSRM
                               ? Contatos.telefoneSrm
                               : Contatos.telefoneTrust,
                           style: context.textTheme.bodyMedium!.copyWith(
-                              color: context.onSecondary,
+                              color: context.surface,
                               decoration: TextDecoration.underline,
+                              decorationColor: context.surface,
                               fontWeight: FontWeight.bold),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () async {
@@ -90,16 +92,18 @@ class Ajuda extends StatelessWidget {
                           TextSpan(
                             text: 'E-mail: ',
                             style: context.textTheme.bodyMedium!.copyWith(
-                              color: context.onSecondary,
+                              color: context.surface,
                             ),
                           ),
                           TextSpan(
                             text:
                                 isSRM ? Contatos.emailSrm : Contatos.emailTrust,
                             style: context.textTheme.bodyMedium!.copyWith(
-                                color: context.onSecondary,
-                                fontWeight: FontWeight.bold,
-                                decoration: TextDecoration.underline),
+                              color: context.surface,
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline,
+                              decorationColor: context.surface,
+                            ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () async {
                                 final phoneUrl = Uri.parse(
@@ -121,25 +125,21 @@ class Ajuda extends StatelessWidget {
                         TextSpan(
                             text: 'Politica de privacidade:',
                             style: context.textTheme.bodyMedium!.copyWith(
-                              color: context.onSecondary,
+                              color: context.surface,
                             )),
                         TextSpan(
                           text: 'Toque aqui',
                           style: context.textTheme.bodyMedium!.copyWith(
-                              color: context.onSecondary,
+                              color: context.surface,
                               decoration: TextDecoration.underline,
+                              decorationColor: context.surface,
                               fontWeight: FontWeight.bold),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () async {
-                              AuthProvider provider =
-                                  Modular.get <AuthProvider>();
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => PdfView(
-                                        url: provider
-                                            .dataUser!.urlPoliticaPrivacidade),
-                                  ));
+                              String url = themeProvider.isTemaSRM
+                                  ? Urls.politicaPrivacidadeSRM
+                                  : Urls.politicaPrivacidadeTRUST;
+                              AbrirUrl().launchURL(url);
                             },
                         ),
                       ],

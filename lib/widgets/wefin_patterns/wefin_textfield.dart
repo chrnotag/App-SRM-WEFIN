@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/core/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
@@ -41,6 +42,7 @@ class _WefinTextFormFieldState extends State<WefinTextFormField> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isSRM = ThemeProvider().isTemaSRM;
     List<TextInputFormatter>? formatters =
     widget.inputFormatters != null ? [widget.inputFormatters!] : null;
     return TextFormField(
@@ -51,18 +53,19 @@ class _WefinTextFormFieldState extends State<WefinTextFormField> {
       keyboardType: widget.inputType,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       style: context.textTheme.bodyMedium!.copyWith(
-        color: widget.textColor ?? context.inverseSurface,
+        color: widget.textColor ?? context.surface,
       ),
-      cursorColor: AppColors.laranjaSRM,
+      cursorColor: context.focusColor,
       decoration: InputDecoration(
+        errorStyle: context.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w900, color: AppColors.vermelho, fontSize: 12.sp),
         labelText: widget.label,
         labelStyle: context.textTheme.bodyMedium!
-            .copyWith(color: context.onPrimaryColor),
+            .copyWith(color: context.surface),
         focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColors.laranjaSRM, width: 2.w),
+          borderSide: BorderSide(color: context.focusColor, width: 2.w),
         ),
         enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: context.onPrimaryColor, width: 1.w)),
+            borderSide: BorderSide(color: isSRM ? context.focusColor : AppColors.cinzaEscuro, width: 1.w)),
         errorBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: Color(0xff874A58), width: 1.w)),
         suffixIcon: widget.obscureText

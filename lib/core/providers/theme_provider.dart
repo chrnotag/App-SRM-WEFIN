@@ -25,4 +25,5 @@ class ThemeProvider extends ChangeNotifier {
   bool get isTemaSRM => temaSelecionado == TemaSelecionado.SRM;
 
   String get logoTema => isTemaSRM ? Assets.logoSRM : Assets.logoTRUST;
+  String get logoTemaAppBar => isTemaSRM ? Assets.logoSRM : Assets.logoTRUSTAppBar;
 }

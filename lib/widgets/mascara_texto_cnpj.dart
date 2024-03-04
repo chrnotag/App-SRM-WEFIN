@@ -12,7 +12,7 @@ class CNPJText extends StatelessWidget {
 
     return Text(
       cnpjFormatado,
-      style: TextStyle(fontSize: 18.0),
+      style: context.textTheme.bodySmall,
     );
   }
 

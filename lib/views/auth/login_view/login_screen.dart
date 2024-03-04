@@ -1,5 +1,6 @@
+import 'dart:developer';
+
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
-import 'package:Srm_Asset/widgets/dialog_politica_privacidade.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
@@ -8,7 +9,6 @@ import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_provide
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
 import 'package:Srm_Asset/core/providers/theme_provider.dart';
 import 'package:Srm_Asset/widgets/form_auth.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../generated/assets.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -86,7 +86,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: Text(
                                   "Seja bem vindo\nao seu app de gestão",
                                   style: context.textTheme.bodyLarge!
-                                      .copyWith(color: context.onPrimaryColor),
+                                      .copyWith(color: context.surface, fontWeight: FontWeight
+                                  .w400),
                                   textAlign: TextAlign.center,
                                 ),
                               ),

@@ -29,7 +29,7 @@ class _AlertDialogGenericoState extends State<AlertDialogGenerico> {
       icon: widget.icon != null ? Icon(
         widget.icon,
         size: 100.r,
-        color: context.primaryColor,
+        color: context.focusColor,
       ) : Container(),
       title: Column(
         children: [

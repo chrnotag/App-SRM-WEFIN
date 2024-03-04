@@ -17,6 +17,7 @@ class ThemeSRM {
   static ThemeData get theme => ThemeData(
         primaryColor: AppColors.azulPrimarioSRM,
         indicatorColor: AppColors.azul,
+        focusColor: AppColors.laranjaSRM,
         searchBarTheme: SearchBarThemeData(
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 const RoundedRectangleBorder(
