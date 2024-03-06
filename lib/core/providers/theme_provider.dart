@@ -11,7 +11,7 @@ class ThemeProvider extends ChangeNotifier {
 
   factory ThemeProvider() => _instance;
 
-  TemaSelecionado _temaSelecionado = TemaSelecionado.SRM;
+  TemaSelecionado _temaSelecionado = TemaSelecionado.TRUST;
 
   ThemeData get temaAtual => _temaSelecionado == TemaSelecionado.SRM ? ThemeSRM.theme : ThemeTRUST.theme;
 
