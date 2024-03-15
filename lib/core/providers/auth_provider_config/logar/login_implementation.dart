@@ -31,8 +31,7 @@ class LoginImpl {
     try {
       final response =
           await http.post(Uri.parse(url), headers: headers, body: body);
-      log('statuscode: ${response.statusCode}');
-      log('body: ${response.body}');
+log('data: ${response.body}');
       if (response.statusCode == 200) {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = LoginResponse.fromJson(responseBody);
@@ -43,7 +42,8 @@ class LoginImpl {
         final data = ExceptionModel.fromJson(responseBody);
         return ErrorResponse(data);
       }
-    } catch (_) {
+    } catch (e, s) {
+      log('Erro ao realizar login: $e, $s');
       final data = ExceptionModel(
           codigo: '500',
           dataHora: DateTime.now(),
