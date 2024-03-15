@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:Srm_Asset/core/constants/urls-uteis.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -153,10 +155,24 @@ class PaginaQrCodeCarrossel {
             SizedBox(
               width: context.width * 0.5,
               child: BotaoPadrao(
-                  onPressed: () async {
+                onPressed: () async {
+                  if(Platform.isIOS) {
+                    String barcodeScanRes;
+                    try {
+                      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+                        '#ff6666',
+                        'Cancelar',
+                        true,
+                        ScanMode.QR,
+                      );
+                      BaixarCertificadoImpl.baixar(barcodeScanRes);
+                    } on Exception catch (_) {}
+                  }else{
                     Modular.to.pushNamed(AppRoutes.leitorQrCodeRoute);
-                  },
-                  label: 'Ler QrCode'),
+                  }
+                },
+                label: 'Ler QrCode',
+              ),
             )
           ]),
     ];
