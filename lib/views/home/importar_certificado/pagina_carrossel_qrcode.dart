@@ -9,8 +9,10 @@ import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 import '../../../core/constants/endpoints.dart';
+import '../../../core/providers/certificado_provider/baixar_certificado_impl.dart';
 import '../../../widgets/wefin_patterns/wefin_default_button.dart';
 import 'leitor_qrcode.dart';
 
