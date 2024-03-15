@@ -78,7 +78,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
               ),
               Container(
                 constraints: BoxConstraints(
-                    maxHeight: context.height * 0.7, minHeight: 0),
+                    maxHeight: _searchResults!.length * 70.h, minHeight: 0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.r),
                   color: Colors.white,
@@ -107,64 +107,41 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                             _searchResults![index].identificador, context);
                       },
                       child: ListTile(
-                        title: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: context.width * 0.8,
-                                    child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            _searchResults![index].nome,
-                                            style: context.textTheme.bodyMedium,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                          ),
-                                          CNPJText(
-                                            cnpjOuCpf: _searchResults![index]
-                                                .identificador,
-                                          ),
-                                        ]),
-                                  ),
-                                  Spacer(),
-                                  Visibility(
-                                    visible: _searchResults![index]
-                                            .assinaturaPendente >
-                                        0,
-                                    child: CircleAvatar(
-                                        backgroundColor: Color(0xffF29146),
-                                        radius: 15.r,
-                                        child: Center(
-                                          child: Text(
-                                              authProvider
-                                                          .dataUser!
-                                                          .listaCedente[index]
-                                                          .assinaturaPendente >=
-                                                      10
-                                                  ? '9+'
-                                                  : authProvider
-                                                      .dataUser!
-                                                      .listaCedente[index]
-                                                      .assinaturaPendente
-                                                      .toString(),
-                                              style: context
-                                                  .textTheme.bodyMedium!
-                                                  .copyWith(
-                                                      color: Colors.white)),
-                                        )),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+                        title:  Text(
+                          _searchResults![index].nome,
+                          style: context.textTheme.bodyMedium,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
+                        subtitle:  CNPJText(
+                          cnpjOuCpf: _searchResults![index]
+                              .identificador,
+                        ),
+                        trailing: Visibility(
+                          visible: _searchResults![index]
+                              .assinaturaPendente >
+                              0,
+                          child: CircleAvatar(
+                              backgroundColor: Color(0xffF29146),
+                              radius: 15.r,
+                              child: Center(
+                                child: Text(
+                                    authProvider
+                                        .dataUser!
+                                        .listaCedente[index]
+                                        .assinaturaPendente >=
+                                        10
+                                        ? '9+'
+                                        : authProvider
+                                        .dataUser!
+                                        .listaCedente[index]
+                                        .assinaturaPendente
+                                        .toString(),
+                                    style: context
+                                        .textTheme.bodyMedium!
+                                        .copyWith(
+                                        color: Colors.white)),
+                              )),
                         ),
                       ),
                     );

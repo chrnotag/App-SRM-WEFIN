@@ -6,21 +6,8 @@
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-<key>NSPhotoLibraryUsageDescription</key>
-<string>This app needs to access your photo library to import certificates.</string>
-
-<key>NSCameraUsageDescription</key>
-<string>This app uses the camera to read QR codes to import certificates.</string>
-
-<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-<string>This app needs to access your location to sign operations.</string>
-
-<key>NSLocationWhenInUseUsageDescription</key>
-<string>This app needs to access your location to sign operations.</string>
-
-
 	<key>CFBundleDisplayName</key>
-	<string>TRUST</string>
+	<string>SRM</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -37,6 +24,14 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>This app uses the camera to read QR codes to import certificates.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>This app needs to access your location to sign operations.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app needs to access your location to sign operations.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app needs to access your photo library to import certificates.</string>
 	<key>SRM Asset</key>
 	<string>modular_study</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>

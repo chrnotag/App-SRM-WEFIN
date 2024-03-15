@@ -2,8 +2,11 @@ import 'dart:ffi';
 
 import 'package:Srm_Asset/core/constants/urls-uteis.dart';
 import 'package:Srm_Asset/core/utils/abrir_url_externo.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
@@ -46,6 +49,15 @@ class _AuthFormState extends State<AuthForm> {
   );
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _loadSavedLoginData();
+    });
+  }
+
+  @override
   void dispose() {
     _loginEC.dispose();
     _passwordEC.dispose();
@@ -55,113 +67,142 @@ class _AuthFormState extends State<AuthForm> {
   @override
   Widget build(BuildContext context) {
     final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
-    String politicaPrivacidade = themeProvider.isTemaSRM ? Urls.politicaPrivacidadeSRM : Urls.politicaPrivacidadeTRUST;
-    String termosDeUso = themeProvider.isTemaSRM ? Urls.termosDeUsoSRM : Urls.termoDeUsoTRUST;
+    String politicaPrivacidade = themeProvider.isTemaSRM
+        ? Urls.politicaPrivacidadeSRM
+        : Urls.politicaPrivacidadeTRUST;
+    String termosDeUso =
+        themeProvider.isTemaSRM ? Urls.termosDeUsoSRM : Urls.termoDeUsoTRUST;
     return Form(
       key: _formKey,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          SizedBox(height: 20.h),
-          Column(
-            children: [
-              WefinTextFormField(
-                onTap: () => setState(() {
-                  _mensagemErro = null;
-                }),
-                label: 'Digite seu email',
-                controller: _loginEC,
-                validator: Validatorless.multiple([
-                  Validatorless.email('Email inválido!'),
-                  Validatorless.required('Email Obrigatório'),
-                  (value) => _mensagemErro
-                ]),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 50.h),
-                child: WefinTextFormField(
-                  inputFormatters: !widget.visible ? _cnpjFormatter : null,
-                  onTap: () => _mensagemErro = null,
-                  label:
-                      widget.visible ? 'Digite sua Senha' : 'Digite seu CNPJ',
-                  obscureText: widget.visible,
-                  controller: _passwordEC,
+      child: AutofillGroup(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            SizedBox(height: 20.h),
+            Column(
+              children: [
+                WefinTextFormField(
+                  onTap: () => setState(() {
+                    _mensagemErro = null;
+                  }),
+                  label: 'Digite seu email',
+                  autofillHint: AutofillHints.email,
+                  controller: _loginEC,
                   validator: Validatorless.multiple([
-                    Validatorless.required(!widget.visible
-                        ? 'CNPJ Obrigatório'
-                        : 'Senha obrigatória'),
-                    if (widget.visible)
-                      Validatorless.max(10, 'Maximo de 10 caracteres.'),
-                    if (!widget.visible) Validatorless.cnpj('CNPJ Inválido!'),
-                    if (widget.visible)
-                      Validatorless.min(
-                          3, 'Senha com no mínimo 3 e máximo 10 caracteres.'),
+                    Validatorless.email('Email inválido!'),
+                    Validatorless.required('Email Obrigatório'),
                     (value) => _mensagemErro
                   ]),
                 ),
+                Padding(
+                  padding: EdgeInsets.only(top: 50.h),
+                  child: WefinTextFormField(
+                    autofillHint: AutofillHints.password,
+                    inputFormatters: !widget.visible ? _cnpjFormatter : null,
+                    onTap: () => _mensagemErro = null,
+                    label:
+                        widget.visible ? 'Digite sua Senha' : 'Digite seu CNPJ',
+                    obscureText: widget.visible,
+                    controller: _passwordEC,
+                    validator: Validatorless.multiple([
+                      Validatorless.required(!widget.visible
+                          ? 'CNPJ Obrigatório'
+                          : 'Senha obrigatória'),
+                      if (widget.visible)
+                        Validatorless.max(10, 'Maximo de 10 caracteres.'),
+                      if (!widget.visible) Validatorless.cnpj('CNPJ Inválido!'),
+                      if (widget.visible)
+                        Validatorless.min(
+                            3, 'Senha com no mínimo 3 e máximo 10 caracteres.'),
+                      (value) => _mensagemErro
+                    ]),
+                  ),
+                ),
+              ],
+            ),
+            Visibility(
+              visible: widget.visible,
+              child: LinkComponent(
+                label: 'Esqueci minha senha!',
+                route: AppRoutes.forgetPassAuthRoute,
               ),
-            ],
-          ),
-          Visibility(
-            visible: widget.visible,
-            child: LinkComponent(
-              label: 'Esqueci minha senha!',
-              route: AppRoutes.forgetPassAuthRoute,
             ),
-          ),
-          Visibility(
-            visible: widget.visible,
-            child: RichText(
-              text: TextSpan(children: [
-                TextSpan(
-                    text: 'Ao continuar você concorda com as nossas ',
-                    style: context.textTheme.bodySmall!
-                        .copyWith(color: context.surface)),
-                TextSpan(
-                    text: 'Politicas de Privacidade ',
-                    style: context.textTheme.bodySmall!.copyWith(
-                        color: context.surface,
-                        decoration: TextDecoration.underline,
-                        decorationColor: context.surface,
-                        fontWeight: FontWeight.w600),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () async {
-                      String url = politicaPrivacidade;
-                        AbrirUrl().launchURL(url);
-                      }),
-                TextSpan(
-                    text: 'e os nossos ',
-                    style: context.textTheme.bodySmall!
-                        .copyWith(color: context.surface)),
-                TextSpan(
-                    text: 'Termos de uso',
-                    style: context.textTheme.bodySmall!.copyWith(
-                        color: context.surface,
-                        decoration: TextDecoration.underline,
-                        decorationColor: context.surface,
-                        fontWeight: FontWeight.w600),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () async {
-                      String url = termosDeUso;
-                        await AbrirUrl().launchURL(url);
-                      }),
-              ]),
+            Visibility(
+              visible: widget.visible,
+              child: RichText(
+                text: TextSpan(children: [
+                  TextSpan(
+                      text: 'Ao continuar você concorda com as nossas ',
+                      style: context.textTheme.bodySmall!
+                          .copyWith(color: context.surface)),
+                  TextSpan(
+                      text: 'Politicas de Privacidade ',
+                      style: context.textTheme.bodySmall!.copyWith(
+                          color: context.surface,
+                          decoration: TextDecoration.underline,
+                          decorationColor: context.surface,
+                          fontWeight: FontWeight.w600),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () async {
+                          String url = politicaPrivacidade;
+                          AbrirUrl().launchURL(url);
+                        }),
+                  TextSpan(
+                      text: 'e os nossos ',
+                      style: context.textTheme.bodySmall!
+                          .copyWith(color: context.surface)),
+                  TextSpan(
+                      text: 'Termos de uso',
+                      style: context.textTheme.bodySmall!.copyWith(
+                          color: context.surface,
+                          decoration: TextDecoration.underline,
+                          decorationColor: context.surface,
+                          fontWeight: FontWeight.w600),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () async {
+                          String url = termosDeUso;
+                          await AbrirUrl().launchURL(url);
+                        }),
+                ]),
+              ),
             ),
-          ),
-          BotaoPadrao(
-            label: widget.label,
-            onPressed: () async {
-              if (widget.visible) {
-                await login();
-              } else {
-                await resetPassword();
-              }
-            },
-          ),
-        ],
+            BotaoPadrao(
+              label: widget.label,
+              onPressed: () async {
+                TextInput.finishAutofillContext();
+                if (widget.visible) {
+                  await login();
+                } else {
+                  await resetPassword();
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
+
+  final FlutterSecureStorage _storage = FlutterSecureStorage();
+
+// Função para salvar os dados de login (email e senha) se o usuário optar por isso
+  void _saveLoginDataIfNeeded() async {
+      await _storage.write(key: 'email', value: _loginEC.text);
+      await _storage.write(key: 'password', value: _passwordEC.text);
+  }
+
+  void _loadSavedLoginData() async {
+    String? savedEmail = await _storage.read(key: 'email');
+    String? savedPassword = await _storage.read(key: 'password');
+
+    if (savedEmail != null && savedPassword != null) {
+      setState(() {
+        _loginEC.text = savedEmail;
+        _passwordEC.text = savedPassword;
+      });
+    }
+  }
+
 
   Future<void> login() async {
     final authProvider = Modular.get<AuthProvider>();
@@ -187,8 +228,9 @@ class _AuthFormState extends State<AuthForm> {
           _mensagemErro = error.mensagem;
         });
       } else {
+        _saveLoginDataIfNeeded();
         if (authProvider.listaCedente!.length > 1) {
-          Modular.to.navigate(AppRoutes.listaSelecaoEmpresasRoute);
+          Modular.to.pushReplacementNamed(AppRoutes.listaSelecaoEmpresasRoute);
         } else {
           authProvider.RelogarTrocarCedente(
               authProvider.dataUser!.identificadorCedente, context);
@@ -206,7 +248,8 @@ class _AuthFormState extends State<AuthForm> {
         OverlayApp.iniciaOverlay(context);
       });
       recuperarSenhaProvider.dadosUsuario = RecuperarSenhaModel(
-          identificadorCedente: removerMascaraCNPJ(_passwordEC.text), usuario: _loginEC.text);
+          identificadorCedente: removerMascaraCNPJ(_passwordEC.text),
+          usuario: _loginEC.text);
       final response = await recuperarSenhaProvider.recuperarSenha();
       OverlayApp.terminaOverlay();
       if (response != null && response.error != null) {
@@ -225,7 +268,6 @@ class _AuthFormState extends State<AuthForm> {
   String removerMascaraCNPJ(String cnpj) {
     return cnpj.replaceAll(".", "").replaceAll("/", "").replaceAll("-", "");
   }
-
 
   Widget confirmarRecuperarSenha() {
     return AlertDialog(
