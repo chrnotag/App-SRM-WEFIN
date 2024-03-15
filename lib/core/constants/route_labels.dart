@@ -53,8 +53,6 @@ class AppRoutes {
 
   static get importarCertificadoRoute => '$homeRoute$importarCertificadoHomeRoute';
   static get guiaImportarCertificadoRoute => '$homeRoute$guiaImportarCertificadoHomeRoute';
-  static get leitorQrCodeRoute => '$homeRoute$leitorQrCodeHomeRoute';
-
   // ESCOPO SEM CONEXÃO
 static get semConexaoMainRoute => '/sem-conexao';
 static get semConexaoRoute => '$semConexaoMainRoute/sem-conexao';

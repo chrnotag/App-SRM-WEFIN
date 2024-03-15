@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/enuns/import_certificado_enum.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
@@ -11,6 +12,7 @@ import 'package:crosspki/crosspki.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 
 import '../../../core/constants/enuns/theme_enum.dart';
+import '../../../core/providers/certificado_provider/baixar_certificado_impl.dart';
 import '../../../core/providers/certificado_provider/importar_certificado_provider.dart';
 import '../../../core/providers/theme_provider.dart';
 import '../../../widgets/dialog_senha_certificado.dart';
@@ -104,7 +106,16 @@ class ImportarCertificado extends StatelessWidget {
                               AppRoutes.guiaImportarCertificadoRoute,
                               arguments: {ImportarVia.QrCode});
                         }else {
-                          Modular.to.pushNamed(AppRoutes.leitorQrCodeRoute);
+                          String barcodeScanRes;
+                          try {
+                            barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+                              '#ff6666',
+                              'Cancelar',
+                              true,
+                              ScanMode.QR,
+                            );
+                            BaixarCertificadoImpl.baixar(barcodeScanRes);
+                          } on Exception catch (_) {}
                         }
                       },
                       label: 'Importar Via QRCode',

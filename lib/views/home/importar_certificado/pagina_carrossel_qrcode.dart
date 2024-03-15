@@ -14,7 +14,6 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import '../../../core/constants/endpoints.dart';
 import '../../../core/providers/certificado_provider/baixar_certificado_impl.dart';
 import '../../../widgets/wefin_patterns/wefin_default_button.dart';
-import 'leitor_qrcode.dart';
 
 class PaginaQrCodeCarrossel {
   static List<Widget> pagina(BuildContext context) {
@@ -158,7 +157,6 @@ class PaginaQrCodeCarrossel {
               width: context.width * 0.5,
               child: BotaoPadrao(
                 onPressed: () async {
-                  if(Platform.isIOS) {
                     String barcodeScanRes;
                     try {
                       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
@@ -169,9 +167,6 @@ class PaginaQrCodeCarrossel {
                       );
                       BaixarCertificadoImpl.baixar(barcodeScanRes);
                     } on Exception catch (_) {}
-                  }else{
-                    Modular.to.pushNamed(AppRoutes.leitorQrCodeRoute);
-                  }
                 },
                 label: 'Ler QrCode',
               ),
