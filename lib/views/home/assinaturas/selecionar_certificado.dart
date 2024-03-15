@@ -34,6 +34,8 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
     super.dispose();
   }
 
+  bool certificadoSelecionado = false;
+
   @override
   Widget build(BuildContext context) {
     final ImportarCertificadoProvider certificadoProvider =
@@ -75,70 +77,53 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                         children: List.generate(
                             certificadoProvider.listaCertificados.length,
                             (index) {
-                          return Padding(
-                            padding: EdgeInsets.all(1.r),
-                            child: Container(
-                              color: certificadoProvider
-                                  .alterarCorItemListaCertificado(
-                                      index, context),
-                              height: 40.h,
-                              width: context.width,
-                              child: InkWell(
-                                onTap: () {
-                                  certificadoProvider
-                                      .selecionarCertificadoAssinar(
-                                          certificadoProvider
-                                              .listaCertificados[index],
-                                          context);
-                                },
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 8.r),
-                                      child: SizedBox(
-                                        width: context.width * 0.6,
-                                        child: Text(
-                                          certificadoProvider
-                                                  .listaCertificados[index]
-                                                  .subjectDisplayName ??
-                                              "Certificado Sem Nome",
-                                          style: context.textTheme.bodySmall!
-                                              .copyWith(color: Colors.white),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 1,
-                                          softWrap: true,
-                                        ),
-                                      ),
-                                    ),
-                                    InkWell(
-                                      onTap: () async {
-                                        showDialog(
-                                            context: context,
-                                            builder: (context) =>
-                                                PopUpDeletarCertificado(
-                                                        context: context,
-                                                        certificado:
-                                                            certificadoProvider
-                                                                    .listaCertificados[
-                                                                index])
-                                                    .popUp);
-                                      },
-                                      child: Container(
-                                        width: 40.w,
-                                        height: 40.h,
-                                        child: Icon(
-                                          Icons.close,
-                                          size: 20.r,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                          return ListTile(
+                            selectedTileColor: context.primaryColor,
+                            tileColor: Colors.grey.shade400,
+                            selected: certificadoSelecionado,
+                            onTap: () {
+                              if (certificadoSelecionado == false) {
+                                setState(() {
+                                  log.log(
+                                      'certificado da lista: ${certificadoProvider.listaCertificados[index].thumbprint}');
+                                  certificadoProvider.certificadoSelecionado =
+                                      certificadoProvider
+                                          .listaCertificados[index];
+                                  certificadoSelecionado = certificadoProvider
+                                      .alterarCorItemListaCertificado(
+                                          index, context);
+                                });
+                              } else {
+                                setState(() {
+                                  certificadoSelecionado = false;
+                                });
+                              }
+                              log.log('estado: $certificadoSelecionado');
+                            },
+                            title: Text(
+                              certificadoProvider.listaCertificados[index]
+                                      .subjectDisplayName ??
+                                  "Certificado Sem Nome",
+                              style: context.textTheme.bodySmall!
+                                  .copyWith(color: Colors.white),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              softWrap: true,
                             ),
+                            trailing: InkWell(
+                                onTap: () async {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) =>
+                                          PopUpDeletarCertificado(
+                                                  context: context,
+                                                  certificado:
+                                                      certificadoProvider
+                                                              .listaCertificados[
+                                                          index])
+                                              .popUp);
+                                },
+                                child: Icon(Icons.close, color: Colors.black,)),
                           );
                         }),
                       ),
@@ -157,8 +142,7 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
               children: [
                 Expanded(
                   child: BotaoPadrao(
-                    onPressed: certificadoProvider.certificadoSelecionado !=
-                            null
+                    onPressed: certificadoProvider.certificadoSelecionado != null
                         ? () async {
                             OverlayApp.iniciaOverlay(context);
                             FinalizarAssinaturaProvider finalizarAssinatura =

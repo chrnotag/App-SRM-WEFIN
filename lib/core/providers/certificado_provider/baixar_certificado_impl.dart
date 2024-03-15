@@ -16,11 +16,13 @@ class BaixarCertificadoImpl {
       'Content-Type': 'application/json'
     };
     final url =
-        Uri.parse("${EndPoints.baixarArquivo}/${Uri.encodeComponent(token)}");
+        Uri.parse("${EndPoints.baixarArquivo}/$token");
+    log('link: ${url}');
     final ImportarCertificadoProvider provider =
         Modular.get<ImportarCertificadoProvider>();
     try {
       final content = await http.get(url, headers: header);
+      log('status code: ${content.statusCode}\nbody ${content.body}');
       if (content.statusCode == 200) {
         provider.pkcs12 = content.bodyBytes;
         showDialog(

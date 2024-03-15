@@ -27,8 +27,8 @@
 
     <application
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher"
-        android:label="TRUST"
+        android:icon="@mipmap/launcher_icon"
+        android:label="SRM"
         android:requestLegacyExternalStorage="true">
         <activity
             android:name=".MainActivity"

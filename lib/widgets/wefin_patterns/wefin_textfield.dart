@@ -14,6 +14,7 @@ class WefinTextFormField extends StatefulWidget {
   final Color? textColor;
   final TextInputType? inputType;
   final TextInputFormatter? inputFormatters;
+  final String? autofillHint;
 
   const WefinTextFormField(
       {Key? key,
@@ -24,7 +25,8 @@ class WefinTextFormField extends StatefulWidget {
       this.onTap,
       this.textColor,
       this.inputFormatters,
-      this.inputType})
+      this.inputType,
+      this.autofillHint})
       : super(key: key);
 
   @override
@@ -44,8 +46,10 @@ class _WefinTextFormFieldState extends State<WefinTextFormField> {
   Widget build(BuildContext context) {
     final bool isSRM = ThemeProvider().isTemaSRM;
     List<TextInputFormatter>? formatters =
-    widget.inputFormatters != null ? [widget.inputFormatters!] : null;
+        widget.inputFormatters != null ? [widget.inputFormatters!] : null;
     return TextFormField(
+      autofillHints:
+          widget.autofillHint != null ? [widget.autofillHint!] : null,
       inputFormatters: formatters,
       onTap: widget.onTap,
       controller: widget.controller,
@@ -57,15 +61,20 @@ class _WefinTextFormFieldState extends State<WefinTextFormField> {
       ),
       cursorColor: context.focusColor,
       decoration: InputDecoration(
-        errorStyle: context.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w900, color: AppColors.vermelho, fontSize: 12.sp),
+        errorStyle: context.textTheme.bodySmall!.copyWith(
+            fontWeight: FontWeight.w900,
+            color: AppColors.vermelho,
+            fontSize: 12.sp),
         labelText: widget.label,
-        labelStyle: context.textTheme.bodyMedium!
-            .copyWith(color: context.surface),
+        labelStyle:
+            context.textTheme.bodyMedium!.copyWith(color: context.surface),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: context.focusColor, width: 2.w),
         ),
         enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: isSRM ? context.focusColor : AppColors.cinzaEscuro, width: 1.w)),
+            borderSide: BorderSide(
+                color: isSRM ? context.focusColor : AppColors.cinzaEscuro,
+                width: 1.w)),
         errorBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: Color(0xff874A58), width: 1.w)),
         suffixIcon: widget.obscureText

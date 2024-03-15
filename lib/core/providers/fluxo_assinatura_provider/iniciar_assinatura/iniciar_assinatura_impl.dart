@@ -22,20 +22,21 @@ class IniciarAssinaturaImpl {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': authProvider.dataUser!.token,
-      'plataforma' : themeProvider.temaSelecionado.name
+      'plataforma': themeProvider.temaSelecionado.name
     };
     final body = json.encode(iniciarAssinaturaModel.toJson());
-    log('Certificado base64: ${iniciarAssinaturaModel.certificadoBase64}');
+    log('body: $body');
     try {
       final response = await http.post(url, headers: headers, body: body);
+      log("status code: ${response.body}");
       switch (response.statusCode) {
         case 200:
-        final responseBody = json.decode(utf8.decode(response.bodyBytes));
-        List<RespostaIniciarAssinaturaModel> data = [];
-        data = List<RespostaIniciarAssinaturaModel>.from(responseBody
-            .map((model) => RespostaIniciarAssinaturaModel.fromJson(model)));
-        iniciarAssinaturaProvider.hashsParaAssinar = data;
-        return SucessResponse(data);
+          final responseBody = json.decode(utf8.decode(response.bodyBytes));
+          List<RespostaIniciarAssinaturaModel> data = [];
+          data = List<RespostaIniciarAssinaturaModel>.from(responseBody
+              .map((model) => RespostaIniciarAssinaturaModel.fromJson(model)));
+          iniciarAssinaturaProvider.hashsParaAssinar = data;
+          return SucessResponse(data);
         case 401:
           VerificarSessao.sessaoExpirada();
           final responseBody = json.decode(utf8.decode(response.bodyBytes));

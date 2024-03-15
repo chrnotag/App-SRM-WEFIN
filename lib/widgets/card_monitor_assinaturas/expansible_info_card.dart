@@ -268,7 +268,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
             child: Visibility(
               visible: widget.assinarDocumento && filtroBotaoAssinar(),
               child: BotaoPadrao(
-                  onPressed: () async {
+                  onPressed: () async  {
                     AssinaturaEletronicaProvider assinaturaEletronicaProvider =
                         Modular.get<AssinaturaEletronicaProvider>();
                     assinaturaEletronicaProvider.codigoOperacao = widget.codigoOperacao;

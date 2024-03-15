@@ -21,19 +21,22 @@ class IniciarAssinaturaProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<dynamic> obterHashs(IniciarAssinaturaModel model) => IniciarAssinaturaImpl(iniciarAssinaturaModel: model).obterHashParaAssinar();
+  Future<dynamic> obterHashs(IniciarAssinaturaModel model) =>
+      IniciarAssinaturaImpl(iniciarAssinaturaModel: model)
+          .obterHashParaAssinar();
 
-  void IniciarAssinatura(InformacaoAssinante assinante, BuildContext context) async {
+  void IniciarAssinatura(
+      InformacaoAssinante assinante, BuildContext context) async {
     if (!assinante.eCPFAssinador) {
       AssinaturaEletronicaProvider assinaturaEletronicaProvider =
           Modular.get<AssinaturaEletronicaProvider>();
       showDialog(
           context: myNavigatorKey.currentState!.context,
           builder: (context) => assinaturaEletronicaProvider
-              .confirmarAssinaturaDialog(assinante ,context));
+              .confirmarAssinaturaDialog(assinante, context));
     } else {
       ImportarCertificadoProvider certificadoProvider =
-          Modular.get<ImportarCertificadoProvider>();
+          context.watch<ImportarCertificadoProvider>();
       await certificadoProvider.listaCertificadosFuture();
       if (certificadoProvider.listaCertificados.isEmpty) {
         Modular.to.pushNamed(AppRoutes.importarCertificadoRoute);

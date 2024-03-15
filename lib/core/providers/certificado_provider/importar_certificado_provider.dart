@@ -1,8 +1,7 @@
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:convert';
-import 'dart:developer';
-import 'package:Srm_Asset/core/utils/handle_permissions.dart';
 import 'package:crosspki/crosspki.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -53,14 +52,15 @@ class ImportarCertificadoProvider extends ChangeNotifier {
     _certificadoSelecionado = null;
   }
 
-  Color alterarCorItemListaCertificado(int index, BuildContext context) {
+  bool alterarCorItemListaCertificado(int index, BuildContext context) {
     PKCertificate certificado = listaCertificados[index];
-
     if (_certificadoSelecionado != null &&
         _certificadoSelecionado!.thumbprint == certificado.thumbprint) {
-      return context.primaryColor;
+      log('ok');
+      return true;
     } else {
-      return Colors.grey.shade400;
+      log('não ok');
+      return false;
     }
   }
 

@@ -18,6 +18,8 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
   final formKey = GlobalKey<FormState>();
   TextEditingController textController = TextEditingController();
 
+  String? _erroMsg;
+
   @override
   Widget build(BuildContext context) {
     final ImportarCertificadoProvider provider =
@@ -31,7 +33,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
       title: Form(
         key: formKey,
         child: TextFormField(
-          onTap: () => provider.limparErro(),
+          onTap: () => _erroMsg = null,
           decoration: const InputDecoration(
               hintText: "Senha do certificado",
               labelText: "Senha do Certificado",
@@ -40,7 +42,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
           validator: Validatorless.multiple([
             Validatorless.required(
                 'Por favor, informe a senha do certificado.'),
-            (value) => provider.errorMsg
+            (value) => _erroMsg
           ]),
           obscureText: true,
           controller: textController,
@@ -54,6 +56,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
                 Expanded(
                   child: BotaoPadrao(
                     onPressed: () async {
+                      _erroMsg = null;
                       if (formKey.currentState!.validate()) {
                         provider.senhaCertificado = textController.text;
                         provider.importarCertificado();

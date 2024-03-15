@@ -73,9 +73,15 @@ dependencies:
 dependency_overrides:
   permission_handler: ^11.0.1
 
+
+#Cor SRM:#2E477E
+#Cor Trust:#4AC64E
+#Imagem SRM: assets/images/splash_screen.png
+#Imagem Trust: assets/icons/logo_trust.png
+
 flutter_native_splash:
-  color: "#4AC64E"
-  image: "assets/icons/logo_trust.png"
+  color: "#2E477E"
+  image: "assets/images/splash_screen.png"
   android: true
   ios: true
   fullscreen: true

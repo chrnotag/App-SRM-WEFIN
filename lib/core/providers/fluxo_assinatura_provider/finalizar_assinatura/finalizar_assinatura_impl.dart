@@ -24,6 +24,7 @@ class FinalizarAssinaturaImpl {
     final body = json.encode(assinaturaFinalizada);
     try {
       final response = await http.post(url, body: body, headers: headers);
+      log("status code: ${response.body}");
       switch (response.statusCode) {
         case 204:
           return SucessResponse(null);

@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:developer' as logg;
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
@@ -19,31 +20,34 @@ class _LeitorQrCodeState extends State<LeitorQrCode> {
 
   @override
   Widget build(BuildContext context) {
-    ImportarCertificadoProvider provider =
-        context.watch<ImportarCertificadoProvider>();
 
-    return Scaffold(
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: MobileScanner(
-              onDetect: (capture) async {
-                if (_isProcessing) return;
-                _isProcessing = true;
-                final List<Barcode> barcodes = capture.barcodes;
-                if (barcodes.isNotEmpty) {
-                  BaixarCertificadoImpl.baixar(barcodes.first.rawValue!);
-                  _controller.stop();
-                }
-                _isProcessing = false;
-              },
+    return PopScope(
+      onPopInvoked: (didPop) => Modular.to.pop(),
+      canPop: true,
+      child: Scaffold(
+        body: Stack(
+          children: [
+            Positioned.fill(
+              child: MobileScanner(
+                onDetect: (capture) async {
+                  if (_isProcessing) return;
+                  _isProcessing = true;
+                  final List<Barcode> barcodes = capture.barcodes;
+                  if (barcodes.isNotEmpty) {
+                    logg.log('string pega: ${barcodes.first.rawValue!}');
+                    BaixarCertificadoImpl.baixar(barcodes.first.rawValue!);
+                    _controller.stop();
+                  }
+                  _isProcessing = false;
+                },
+              ),
             ),
-          ),
-          CustomPaint(
-            size: Size.infinite,
-            painter: ExpandedCornerBorderedHolePainter(context: context),
-          ),
-        ],
+            CustomPaint(
+              size: Size.infinite,
+              painter: ExpandedCornerBorderedHolePainter(context: context),
+            ),
+          ],
+        ),
       ),
     );
   }
