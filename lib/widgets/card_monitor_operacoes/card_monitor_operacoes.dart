@@ -1,9 +1,9 @@
 import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
+import 'package:Srm_Asset/core/utils/mostrar_botao_ver_assinatura.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
-import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/providers/monitor_operacao_provider/monitor_operacoes_provider.dart';
@@ -30,7 +30,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
     final MonitorOperacoesProvider operacaoProvider =
         Modular.get<MonitorOperacoesProvider>();
     return SizedBox(
-      height: isVisivel(operacao) ? 211.h : 142.h,
+      height: ExibirVerAssinatura.isVisivel(operacao) ? 211.h : 142.h,
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(5.r)),
@@ -116,7 +116,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                     ],
                   ),
                   Visibility(
-                    visible: isVisivel(operacao),
+                    visible: ExibirVerAssinatura.isVisivel(operacao),
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 8.w),
                       child: Column(
@@ -199,20 +199,5 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
         ),
       ),
     );
-  }
-
-  bool isVisivel(MonitorOperacoesModel operacao) {
-    AssinaturaProvider assinaturaProvider = Modular.get<AssinaturaProvider>();
-    final mapaAssinaturas = assinaturaProvider.assinaturasMapeadas;
-    if (mapaAssinaturas.containsKey(operacao.codigoOperacao)) {
-      var assinatura = mapaAssinaturas[operacao.codigoOperacao];
-      if ((operacao.statusOperacao.trim() == 'Aguardando Assinatura' ||
-              operacao.statusOperacao.trim() == 'Assinada') &&
-          (assinatura?.statusAssinaturaDigital == 'Assinada' ||
-              assinatura?.statusAssinaturaDigital == 'Aguardando Assinatura')) {
-        return true;
-      }
-    }
-    return false;
   }
 }

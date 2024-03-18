@@ -58,7 +58,7 @@ class SessionProvider with ChangeNotifier {
           builder: (context) => AlertDialogGenerico(
               title: 'Atenção!',
               msg:
-                  'Nenhuma ação foi realizada nos últimos $_timeout segundos. Você será direcionado para realizar o login novamente.',
+                  'Nenhuma ação foi realizada nos últimos 120 segundos. Você será direcionado para realizar o login novamente.',
               onPressed: () {
                 _isShowingDialog = false;
                 VerificarSessao.limparDadosSessao();
