@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:Srm_Asset/core/constants/urls-uteis.dart';
 import 'package:Srm_Asset/core/utils/abrir_url_externo.dart';
 import 'package:flutter/cupertino.dart';
