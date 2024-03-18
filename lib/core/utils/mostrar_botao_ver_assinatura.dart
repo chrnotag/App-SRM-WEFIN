@@ -5,17 +5,11 @@ import '../providers/monitor_assinatura_provider/assinatura_provider.dart';
 
 class ExibirVerAssinatura {
   static bool isVisivel(MonitorOperacoesModel operacao) {
-    AssinaturaProvider assinaturaProvider = Modular.get<AssinaturaProvider>();
-    final mapaAssinaturas = assinaturaProvider.assinaturasMapeadas;
-    if (mapaAssinaturas.containsKey(operacao.codigoOperacao)) {
-      var assinatura = mapaAssinaturas[operacao.codigoOperacao];
-      if ((operacao.statusOperacao.trim() == 'Aguardando Assinatura' ||
-              operacao.statusOperacao.trim() == 'Assinada') &&
-          (assinatura?.statusAssinaturaDigital == 'Assinada' ||
-              assinatura?.statusAssinaturaDigital == 'Aguardando Assinatura')) {
-        return true;
-      }
+    if (operacao.statusOperacao.trim().toLowerCase() == 'aguardando assinatura' ||
+        operacao.statusOperacao.trim().toLowerCase() == 'assinada') {
+      return true;
+    } else {
+      return false;
     }
-    return false;
   }
 }
