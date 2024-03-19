@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/core/constants/enuns/ambiente.dart';
 import 'package:flutter/material.dart';
 import 'package:Srm_Asset/core/constants/enuns/theme_enum.dart';
 import 'package:Srm_Asset/core/constants/themes/theme_srm.dart';
@@ -10,6 +11,11 @@ class ThemeProvider extends ChangeNotifier {
   static final _instance = ThemeProvider._();
 
   factory ThemeProvider() => _instance;
+
+  //Trocar entre homol e prod aqui.
+  Ambiente _ambienteSelecionado = Ambiente.Homologacao;
+
+  Ambiente get ambienteSelecionado => _ambienteSelecionado;
 
   TemaSelecionado _temaSelecionado = TemaSelecionado.SRM;
 

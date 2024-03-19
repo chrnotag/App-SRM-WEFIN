@@ -1,4 +1,3 @@
-import 'package:Srm_Asset/core/constants/urls-uteis.dart';
 import 'package:Srm_Asset/core/utils/abrir_url_externo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -66,10 +65,10 @@ class _AuthFormState extends State<AuthForm> {
   Widget build(BuildContext context) {
     final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
     String politicaPrivacidade = themeProvider.isTemaSRM
-        ? Urls.politicaPrivacidadeSRM
-        : Urls.politicaPrivacidadeTRUST;
+        ? EndPoints.politicaPrivacidadeSRM
+        : EndPoints.politicaPrivacidadeTRUST;
     String termosDeUso =
-        themeProvider.isTemaSRM ? Urls.termosDeUsoSRM : Urls.termoDeUsoTRUST;
+        themeProvider.isTemaSRM ? EndPoints.termosDeUsoSRM : EndPoints.termoDeUsoTRUST;
     return Form(
       key: _formKey,
       child: AutofillGroup(

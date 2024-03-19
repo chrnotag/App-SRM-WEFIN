@@ -24,10 +24,7 @@ class SelecaoEmpresa extends StatelessWidget {
 
   bool mostrarIconeTrocarCedente(){
     final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
-    if(changeble && themeProvider.isTemaSRM){
-      return true;
-    }
-    return false;
+    return changeble && themeProvider.isTemaSRM;
   }
 
   @override
