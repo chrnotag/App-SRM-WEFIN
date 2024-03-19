@@ -16,7 +16,7 @@ class BaixarCertificadoImpl {
       'Content-Type': 'application/json'
     };
     final url =
-        Uri.parse("${EndPoints.baixarArquivo}/$token");
+        Uri.parse("${EndPoints.baixarCertificadoQrCode}/$token");
     log('link: ${url}');
     final ImportarCertificadoProvider provider =
         Modular.get<ImportarCertificadoProvider>();

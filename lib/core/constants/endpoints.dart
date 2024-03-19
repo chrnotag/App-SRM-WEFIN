@@ -1,3 +1,5 @@
+import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
+
 class EndPoints {
   EndPoints._();
 
@@ -13,5 +15,10 @@ class EndPoints {
   static const operacoes = "$baseURL/operacoes";
   static const iniciarAssinaturaEletronica =
       "$assinatura/iniciar-assinatura-eletronica";
-  static const baixarArquivo = "$baseURL/arquivos";
+
+  static montarUrlBaixarDocumento(int idAssinaturaDigital, bool visualizar) {
+    return Uri.parse("${EndPoints.assinatura}/$idAssinaturaDigital/arquivo?visualizar=$visualizar");
+  }
+
+  static const baixarCertificadoQrCode = "$baseURL/arquivos";
 }
