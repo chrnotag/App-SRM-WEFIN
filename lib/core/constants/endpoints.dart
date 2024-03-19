@@ -1,5 +1,3 @@
-import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
-
 class EndPoints {
   EndPoints._();
 
