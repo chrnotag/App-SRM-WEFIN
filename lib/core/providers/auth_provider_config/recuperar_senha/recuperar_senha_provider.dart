@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:modular_study/core/providers/auth_provider_config/recuperar_senha/recuperar_senha_impl.dart';
-import 'package:modular_study/models/recuperar_senha_model/recuperar_senha_model.dart';
+import 'package:Srm_Asset/core/providers/auth_provider_config/recuperar_senha/recuperar_senha_impl.dart';
+import 'package:Srm_Asset/models/recuperar_senha_model/recuperar_senha_model.dart';
 
 class RecuperarSenhaProvider extends ChangeNotifier{
 

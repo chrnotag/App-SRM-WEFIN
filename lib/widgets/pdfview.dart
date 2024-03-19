@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/providers/documentos_provider/baixar_documentos_impl.dart';
-import 'package:modular_study/core/utils/overlay.dart';
-import 'package:modular_study/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/providers/documentos_provider/baixar_documentos_impl.dart';
+import 'package:Srm_Asset/core/utils/overlay.dart';
+import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class PdfView extends StatefulWidget {
@@ -29,7 +29,7 @@ class _PdfViewState extends State<PdfView> {
             onTap: () async {
               OverlayApp.iniciaOverlay(context);
               await BaixarDocumentosImpl(
-                      documento: widget.documento!, isVisualizar: false)
+                      documento: widget.documento!)
                   .baixar();
               OverlayApp.terminaOverlay();
             },

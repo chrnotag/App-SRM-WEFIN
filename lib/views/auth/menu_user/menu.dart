@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/constants/route_labels.dart';
-import 'package:modular_study/core/constants/themes/theme_configs.dart';
-import 'package:modular_study/core/providers/auth_provider_config/deslogar/deslogar_controller.dart';
-import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
-import 'package:modular_study/generated/assets.dart';
-import 'package:modular_study/widgets/appbar_logo_perfil.dart';
-import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/constants/route_labels.dart';
+import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
+import 'package:Srm_Asset/core/providers/auth_provider_config/deslogar/deslogar_controller.dart';
+import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
+import 'package:Srm_Asset/generated/assets.dart';
+import 'package:Srm_Asset/widgets/appbar_logo_perfil.dart';
+import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
+
+import '../../../core/providers/theme_provider.dart';
 
 part 'widgets/menu_item.dart';
 
@@ -22,6 +24,7 @@ class Menu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
+    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: AppBar().preferredSize, child: const AppBarLogo(isPerfilVisivel: false,)),
@@ -31,13 +34,12 @@ class Menu extends StatelessWidget {
           
           children: [
             Text('Meu Perfil',
-                style: context.textTheme.bodyLarge!.copyWith(color: context.onSecondary)),
+                style: context.textTheme.bodyLarge!.copyWith(color: context.surface)),
             Padding(
               padding: EdgeInsets.only(bottom: 15.h),
               child: Text('Visualize seus dados e tire suas dúvidas',
                   style: context.textTheme.bodyMedium!.copyWith(
-                    color: context.onSecondary,
-                      fontWeight: FontWeight.w200)),
+                    color: context.surface)),
             ),
             Expanded(
               child: Card(
@@ -54,7 +56,7 @@ class Menu extends StatelessWidget {
                             child: SvgPicture.asset(
                               Assets.empresaIcon,
                               width: 70.w,
-                              color: context.primaryColor,
+                              color: context.focusColor,
                             ),
                           ),
                           Text(
@@ -63,6 +65,7 @@ class Menu extends StatelessWidget {
                             style: context.textTheme.bodyLarge!.copyWith(
                               fontWeight: FontWeight.w600,
                               letterSpacing: 1.5,
+                              color: themeProvider.isTemaSRM ? AppColors.azul : Colors.black
                             ),
                             textAlign: TextAlign.center,
                           ),

@@ -1,6 +1,6 @@
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:modular_study/core/implementations_config/export_impl.dart';
-import 'package:modular_study/core/providers/theme_provider.dart';
+import 'package:Srm_Asset/core/implementations_config/export_impl.dart';
+import 'package:Srm_Asset/core/providers/theme_provider.dart';
 import 'package:http/http.dart' as http;
 
 class DeslogarImpl {

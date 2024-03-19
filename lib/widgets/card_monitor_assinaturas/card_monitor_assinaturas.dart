@@ -4,20 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
-import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
-import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
-import 'package:modular_study/core/providers/fluxo_assinatura_provider/assinatura_eletronica/assinatura_eletronica_provider.dart';
-import 'package:modular_study/core/providers/fluxo_assinatura_provider/iniciar_assinatura/iniciar_assinatura_provider.dart';
-import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
-import 'package:modular_study/core/providers/certificado_provider/importar_certificado_provider.dart';
-import 'package:modular_study/core/utils/money_format.dart';
-import 'package:modular_study/core/utils/valor_liquido.dart';
-import 'package:modular_study/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
-import 'package:modular_study/widgets/card_monitor_assinaturas/fixed_card.dart';
-import 'package:modular_study/widgets/card_monitor_assinaturas/modal_documents.dart';
-import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
+import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/assinatura_eletronica/assinatura_eletronica_provider.dart';
+import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/iniciar_assinatura/iniciar_assinatura_provider.dart';
+import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
+import 'package:Srm_Asset/core/providers/certificado_provider/importar_certificado_provider.dart';
+import 'package:Srm_Asset/core/utils/money_format.dart';
+import 'package:Srm_Asset/core/utils/valor_liquido.dart';
+import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
+import 'package:Srm_Asset/widgets/card_monitor_assinaturas/fixed_card.dart';
+import 'package:Srm_Asset/widgets/card_monitor_assinaturas/modal_documents.dart';
+import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 import '../../core/constants/themes/theme_configs.dart';
 import '../component_card.dart';
 import 'expansible_card.dart';
@@ -155,8 +155,8 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                                         title: 'Status',
                                         label:
                                             assinatura.statusAssinaturaDigital,
-                                        textStyle: context.textTheme.bodySmall!
-                                            .copyWith(color: corAssinatura)),
+                                        textStyle: context.textTheme.labelMedium!
+                                            .copyWith(color: corAssinatura, fontWeight: FontWeight.w500)),
                                   ],
                                 ),
                                 Column(

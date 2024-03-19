@@ -2,22 +2,24 @@
 
 import 'dart:developer';
 
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/providers/fluxo_assinatura_provider/assinatura_eletronica/assinatura_eletronica_impl.dart';
-import 'package:modular_study/core/providers/fluxo_assinatura_provider/assinatura_eletronica/iniciar_assinatura_eletronica_impl.dart';
-import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
-import 'package:modular_study/main.dart';
-import 'package:modular_study/models/fluxo_assinatura_model/finalizar_assinatura_eletronica/finalizar_assinatura_eletronica_model.dart';
-import 'package:modular_study/models/fluxo_assinatura_model/iniciar_assinatura_eletronica/iniciar_assinatura_eletronica_model.dart';
-import 'package:modular_study/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
-import 'package:modular_study/widgets/popup_assinatura_feita.dart';
-import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
-import 'package:modular_study/widgets/wefin_patterns/wefin_textfield.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/assinatura_eletronica/assinatura_eletronica_impl.dart';
+import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/assinatura_eletronica/iniciar_assinatura_eletronica_impl.dart';
+import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
+import 'package:Srm_Asset/main.dart';
+import 'package:Srm_Asset/models/fluxo_assinatura_model/finalizar_assinatura_eletronica/finalizar_assinatura_eletronica_model.dart';
+import 'package:Srm_Asset/models/fluxo_assinatura_model/iniciar_assinatura_eletronica/iniciar_assinatura_eletronica_model.dart';
+import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
+import 'package:Srm_Asset/widgets/popup_assinatura_feita.dart';
+import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
+import 'package:Srm_Asset/widgets/wefin_patterns/wefin_textfield.dart';
 import 'package:validatorless/validatorless.dart';
 
 import '../../../../models/fluxo_assinatura_model/iniciar_assinatura_eletronica/response/resposta_inic_ass_eletronica.dart';
@@ -73,7 +75,7 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
   bool isErroAssinatura = false;
   int contador = 0;
 
-  void teste(String codEmail) async {
+  void montarRequisicao(String codEmail) async {
     final geolocalizacao = await _pegarGeolocalizacao();
     var model = FinalizarAssinaturaEletronicaModel(
         codigoEmail: codEmail,
@@ -123,7 +125,7 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
       builder: (context) => AlertDialog(
         icon: Icon(
           LineIcons.exclamationCircle,
-          color: Colors.yellow.shade700,
+          color: context.focusColor,
           size: 50,
         ),
         title: Column(
@@ -136,17 +138,27 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
                 key: _formKey,
                 child: Column(
                   children: [
-                    WefinTextFormField(
-                      controller: codigoEmail,
-                      label: 'Informe o Codigo',
-                      inputType: TextInputType.number,
-                      textColor: Colors.black,
-                      validator: Validatorless.multiple([
-                        Validatorless.required(
-                            'Por favor, informe o codigo do email.'),
-                        Validatorless.number(
-                            'O codigo deve ser composto por numeros.')
-                      ]),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.h),
+                      child: TextFormField(
+                        keyboardType: TextInputType.number,
+                        controller: codigoEmail,
+                        decoration: const InputDecoration(
+                          labelText: 'Informe o Codigo',
+                          hintText: 'Informe o codigo',
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black, width: 1),
+                          ),
+                        ),
+                        validator: Validatorless.multiple(
+                          [
+                            Validatorless.required(
+                                'Por favor, informe o codigo do email.'),
+                            Validatorless.number(
+                                'O codigo deve ser composto por numeros.')
+                          ],
+                        ),
+                      ),
                     ),
                     BotaoPadrao(
                         label: 'Confirmar',
@@ -158,7 +170,10 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
                             if (sucess) {
                               _overlayLoader.remove();
                               Modular.to.pop();
-                              showDialog(context: context, builder: (context) => AssinaturaCompletaPopUp(codigoOperacao: codigoOperacao));
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => AssinaturaCompletaPopUp(
+                                      codigoOperacao: codigoOperacao));
                             } else {
                               _overlayLoader.remove();
                               Fluttertoast.showToast(
@@ -169,9 +184,11 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
                         }),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 10),
-                      child: BotaoPadrao(label: 'Cancelar', onPressed: () {
-                        Modular.to.pop();
-                      }),
+                      child: BotaoPadrao(
+                          label: 'Cancelar',
+                          onPressed: () {
+                            Modular.to.pop();
+                          }),
                     )
                   ],
                 ),
@@ -194,7 +211,7 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
     return AlertDialog(
       icon: Icon(
         LineIcons.exclamationCircle,
-        color: Colors.yellow.shade700,
+        color: context.focusColor,
         size: 50,
       ),
       title: Column(

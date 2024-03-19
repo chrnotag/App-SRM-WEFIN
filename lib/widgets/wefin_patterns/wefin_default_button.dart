@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/providers/theme_provider.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import '../../core/constants/themes/theme_configs.dart';
 
 class BotaoPadrao extends StatelessWidget {
@@ -28,7 +26,7 @@ class BotaoPadrao extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4.r),
                 ),
-                backgroundColor: context.primaryColor),
+                backgroundColor: context.focusColor),
             child: Padding(
               padding: EdgeInsets.all(AppSizes.paddingMedium),
               child: Row(
@@ -39,11 +37,12 @@ class BotaoPadrao extends StatelessWidget {
                     child: Icon(
                       icon,
                       size: 40.r,
+                      color: context.onPrimaryColor,
                     ),
                   ),
                   Text(label,
                       style: context.textTheme.bodyMedium!
-                          .copyWith(color: context.onPrimaryColor))
+                          .copyWith(color: Colors.white))
                 ],
               ),
             ),
@@ -51,10 +50,10 @@ class BotaoPadrao extends StatelessWidget {
         : ElevatedButton(
             onPressed: onPressed,
             style: ElevatedButton.styleFrom(
-              backgroundColor: context.onPrimaryColor,
+              backgroundColor: Colors.white,
               shadowColor: Colors.black,
               shape: RoundedRectangleBorder(
-                side: BorderSide(color: context.primaryColor, width: 2.w),
+                side: BorderSide(color: context.focusColor, width: 2.w),
                 borderRadius: BorderRadius.circular(4.r),
               ),
             ),
@@ -67,13 +66,13 @@ class BotaoPadrao extends StatelessWidget {
                     visible: icon != null,
                     child: Icon(
                       icon,
-                      color: context.primaryColor,
+                      color: context.focusColor,
                       size: 40.r,
                     ),
                   ),
                   Text(label,
                       style: context.textTheme.bodyMedium!
-                          .copyWith(color: context.primaryColor))
+                          .copyWith(color: context.focusColor))
                 ],
               ),
             ),

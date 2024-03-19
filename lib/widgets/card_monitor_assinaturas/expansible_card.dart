@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 
 class FooterExpansible extends StatefulWidget {
   final VoidCallback onToggle;
@@ -19,17 +19,21 @@ class _FooterExpansibleState extends State<FooterExpansible> {
       decoration: BoxDecoration(
           color: const Color(0xffFAFAFA),
           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5.r))),
-      child: TextButton(
-        onPressed: widget.onToggle,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(widget.showInfo ? 'Menos Detalhes' : 'Mais Detalhes',
-              style: context.textTheme.bodyMedium!
-                  .copyWith(fontWeight: FontWeight.w400),
+      child: Column(
+        children: [
+          Divider(),
+          TextButton(
+            onPressed: widget.onToggle,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(widget.showInfo ? 'Menos Detalhes' : 'Mais Detalhes',
+                  style: context.textTheme.bodyMedium,
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

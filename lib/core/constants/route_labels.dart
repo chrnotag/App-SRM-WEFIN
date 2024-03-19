@@ -1,3 +1,5 @@
+import 'package:flutter_modular/flutter_modular.dart';
+
 class AppRoutes {
   AppRoutes._();
 
@@ -9,8 +11,7 @@ class AppRoutes {
 
   //Escopo AUT
   static get forgetPassAuthRoute => '/forgot_password';
-  static get loginSRMAuthRoute => '/login_srm';
-  static get loginTRUSTAuthRoute => '/login_trust';
+  static get loginAuthRoute => Modular.initialRoute;
 
   //Escopo HOME
   static get homeRoute => '/home';
@@ -52,5 +53,7 @@ class AppRoutes {
 
   static get importarCertificadoRoute => '$homeRoute$importarCertificadoHomeRoute';
   static get guiaImportarCertificadoRoute => '$homeRoute$guiaImportarCertificadoHomeRoute';
-  static get leitorQrCodeRoute => '$homeRoute$leitorQrCodeHomeRoute';
+  // ESCOPO SEM CONEXÃO
+static get semConexaoMainRoute => '/sem-conexao';
+static get semConexaoRoute => '$semConexaoMainRoute/sem-conexao';
 }

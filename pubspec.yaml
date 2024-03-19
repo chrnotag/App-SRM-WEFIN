@@ -1,4 +1,4 @@
-name: modular_study
+name: Srm_Asset
 description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 1.0.2+1
 
 environment:
   sdk: '>=3.1.0 <4.0.0'
@@ -37,13 +37,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   provider: ^6.0.5
   flutter_modular: ^6.1.0+1
-  google_fonts: ^5.1.0
+  google_fonts: ^6.1.0
   validatorless: ^1.2.3
   flutter_svg: ^2.0.7
   flutter_native_splash: ^2.3.2
   flutter_launcher_icons: ^0.13.1
   device_info_plus: ^9.0.3
-  faker: ^2.1.0
   intl: ^0.18.1
   json_serializable: ^6.7.1
   build_runner: ^2.4.6
@@ -56,30 +55,43 @@ dependencies:
   file_picker: ^6.1.1
   fluttertoast: ^8.2.4
   share_plus: ^7.2.1
-  mobile_scanner: ^3.5.4
   json_annotation: ^4.8.1
   http: ^1.1.0
-  geolocator: ^10.1.0
+  geolocator: ^11.0.0
   timezone: ^0.9.2
   permission_handler: ^11.0.1
   flutter_screenutil: ^5.9.0
   connectivity_plus: ^5.0.2
   flutter_pdfview: ^1.3.2
   syncfusion_flutter_pdfviewer: ^23.1.39
-  external_path: ^1.0.3
-  android_intent_plus: ^4.0.3
+  shared_preferences: ^2.2.2
+  mask_text_input_formatter: ^2.9.0
+  flutter_custom_tabs: ^2.0.0+1
+  saf: ^1.0.3+4
+  flutter_barcode_scanner: ^2.0.0
+  flutter_secure_storage: ^9.0.0
+
+dependency_overrides:
+  permission_handler: ^11.0.1
+
+
+#Cor SRM:#2E477E
+#Cor Trust:#4AC64E
+#Imagem SRM: assets/images/splash_screen.png
+#Imagem Trust: assets/icons/logo_trust.png
 
 flutter_native_splash:
-  color: "#1E3870"
-  image: "assets/images/logo_srm.png"
+  color: "#2E477E"
+  image: "assets/images/splash_screen.png"
   android: true
   ios: true
   fullscreen: true
 
-flutter_icons:
+flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/icons/icon_main.png"
+  image_path: "assets/images/splash_screen.png"
+  min_sdk_android: 21
 
 dev_dependencies:
   flutter_test:
@@ -90,7 +102,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 
 class AlertDialogGenerico extends StatefulWidget {
   final IconData? icon;
@@ -26,11 +26,11 @@ class _AlertDialogGenericoState extends State<AlertDialogGenerico> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      icon: Icon(
+      icon: widget.icon != null ? Icon(
         widget.icon,
         size: 100.r,
-        color: context.primaryColor,
-      ),
+        color: context.focusColor,
+      ) : Container(),
       title: Column(
         children: [
           Text(

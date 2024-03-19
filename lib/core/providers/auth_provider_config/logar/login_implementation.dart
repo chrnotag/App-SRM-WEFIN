@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:http/http.dart' as http;
-import 'package:modular_study/core/constants/endpoints.dart';
-import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
-import 'package:modular_study/core/providers/theme_provider.dart';
+import 'package:Srm_Asset/core/constants/endpoints.dart';
+import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
+import 'package:Srm_Asset/core/providers/theme_provider.dart';
 
 import '../../../../models/auth_login_models/SRM/usuario_logado_model.dart';
 import '../../../../models/exceptions_responses/exception_model.dart';
@@ -31,6 +31,7 @@ class LoginImpl {
     try {
       final response =
           await http.post(Uri.parse(url), headers: headers, body: body);
+log('data: ${response.body}');
       if (response.statusCode == 200) {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = LoginResponse.fromJson(responseBody);
@@ -41,7 +42,8 @@ class LoginImpl {
         final data = ExceptionModel.fromJson(responseBody);
         return ErrorResponse(data);
       }
-    } catch (_) {
+    } catch (e, s) {
+      log('Erro ao realizar login: $e, $s');
       final data = ExceptionModel(
           codigo: '500',
           dataHora: DateTime.now(),

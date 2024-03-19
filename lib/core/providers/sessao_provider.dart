@@ -2,15 +2,15 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/providers/auth_provider_config/deslogar/verificar_sessao.dart';
-import 'package:modular_study/widgets/popup_generico.dart';
+import 'package:Srm_Asset/core/providers/auth_provider_config/deslogar/verificar_sessao.dart';
+import 'package:Srm_Asset/widgets/popup_generico.dart';
 import 'auth_provider_config/logar/auth_providers.dart';
 import '../../main.dart';
 
 class SessionProvider with ChangeNotifier {
   bool _isShowingDialog = false;
   Timer? _timer;
-  int _timeout = 60;
+  int _timeout = 120;
   final AuthProvider authProvider = Modular.get<AuthProvider>();
 
   SessionProvider() {
@@ -18,6 +18,7 @@ class SessionProvider with ChangeNotifier {
   }
 
   void startListening() {
+
     if (_timer?.isActive ?? false) {
       return;
     }
@@ -43,7 +44,7 @@ class SessionProvider with ChangeNotifier {
     if (_timer!.isActive) {
       _timer!.cancel();
     }
-    _timeout = 99999;
+    _timeout = 120;
     startListening();
   }
 
@@ -57,7 +58,7 @@ class SessionProvider with ChangeNotifier {
           builder: (context) => AlertDialogGenerico(
               title: 'Atenção!',
               msg:
-                  'Nenhuma ação foi realizada nos últimos 60 segundos. Você será direcionado para realizar o login novamente.',
+                  'Nenhuma ação foi realizada nos últimos $_timeout segundos. Você será direcionado para realizar o login novamente.',
               onPressed: () {
                 _isShowingDialog = false;
                 VerificarSessao.limparDadosSessao();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:modular_study/core/constants/enuns/theme_enum.dart';
-import 'package:modular_study/core/constants/themes/theme_srm.dart';
-import 'package:modular_study/core/constants/themes/theme_trust.dart';
+import 'package:Srm_Asset/core/constants/enuns/theme_enum.dart';
+import 'package:Srm_Asset/core/constants/themes/theme_srm.dart';
+import 'package:Srm_Asset/core/constants/themes/theme_trust.dart';
 import '../../generated/assets.dart';
 
 class ThemeProvider extends ChangeNotifier {
@@ -11,7 +11,7 @@ class ThemeProvider extends ChangeNotifier {
 
   factory ThemeProvider() => _instance;
 
-  TemaSelecionado _temaSelecionado = TemaSelecionado.TRUST;
+  TemaSelecionado _temaSelecionado = TemaSelecionado.SRM;
 
   ThemeData get temaAtual => _temaSelecionado == TemaSelecionado.SRM ? ThemeSRM.theme : ThemeTRUST.theme;
 
@@ -25,8 +25,5 @@ class ThemeProvider extends ChangeNotifier {
   bool get isTemaSRM => temaSelecionado == TemaSelecionado.SRM;
 
   String get logoTema => isTemaSRM ? Assets.logoSRM : Assets.logoTRUST;
-
-  void limparDadosTema(){
-    _temaSelecionado = TemaSelecionado.TRUST;
-  }
+  String get logoTemaAppBar => isTemaSRM ? Assets.logoSRM : Assets.logoTRUSTAppBar;
 }

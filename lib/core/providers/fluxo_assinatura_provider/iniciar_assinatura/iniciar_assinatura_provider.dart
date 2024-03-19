@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/providers/fluxo_assinatura_provider/assinatura_eletronica/assinatura_eletronica_provider.dart';
-import 'package:modular_study/core/providers/fluxo_assinatura_provider/iniciar_assinatura/iniciar_assinatura_impl.dart';
-import 'package:modular_study/models/fluxo_assinatura_model/iniciar_assinatura/iniciar_assinatura.dart';
-import 'package:modular_study/models/fluxo_assinatura_model/iniciar_assinatura/resposta_iniciar_assinatura.dart';
-import 'package:modular_study/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
+import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/assinatura_eletronica/assinatura_eletronica_provider.dart';
+import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/iniciar_assinatura/iniciar_assinatura_impl.dart';
+import 'package:Srm_Asset/models/fluxo_assinatura_model/iniciar_assinatura/iniciar_assinatura.dart';
+import 'package:Srm_Asset/models/fluxo_assinatura_model/iniciar_assinatura/resposta_iniciar_assinatura.dart';
+import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import '../../../../main.dart';
 import '../../../../views/home/assinaturas/selecionar_certificado.dart';
 import '../../../constants/route_labels.dart';
@@ -21,19 +21,22 @@ class IniciarAssinaturaProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<dynamic> obterHashs(IniciarAssinaturaModel model) => IniciarAssinaturaImpl(iniciarAssinaturaModel: model).obterHashParaAssinar();
+  Future<dynamic> obterHashs(IniciarAssinaturaModel model) =>
+      IniciarAssinaturaImpl(iniciarAssinaturaModel: model)
+          .obterHashParaAssinar();
 
-  void IniciarAssinatura(InformacaoAssinante assinante, BuildContext context) async {
+  void IniciarAssinatura(
+      InformacaoAssinante assinante, BuildContext context) async {
     if (!assinante.eCPFAssinador) {
       AssinaturaEletronicaProvider assinaturaEletronicaProvider =
           Modular.get<AssinaturaEletronicaProvider>();
       showDialog(
           context: myNavigatorKey.currentState!.context,
           builder: (context) => assinaturaEletronicaProvider
-              .confirmarAssinaturaDialog(assinante ,context));
+              .confirmarAssinaturaDialog(assinante, context));
     } else {
       ImportarCertificadoProvider certificadoProvider =
-          Modular.get<ImportarCertificadoProvider>();
+          context.watch<ImportarCertificadoProvider>();
       await certificadoProvider.listaCertificadosFuture();
       if (certificadoProvider.listaCertificados.isEmpty) {
         Modular.to.pushNamed(AppRoutes.importarCertificadoRoute);
@@ -41,7 +44,6 @@ class IniciarAssinaturaProvider extends ChangeNotifier {
         showDialog(
           context: myNavigatorKey.currentContext!,
           builder: (context) => SelecionarCertificado(),
-          useSafeArea: true,
         );
       }
     }

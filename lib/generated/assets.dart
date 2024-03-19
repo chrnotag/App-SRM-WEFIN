@@ -13,12 +13,15 @@ class Assets {
   static const String iconsIcAssinatura = 'assets/icons/ic_assinatura.svg';
   static const String iconsIcAtendimento = 'assets/icons/ic_atendimento.svg';
   static const String iconsIcBloqueado = 'assets/icons/ic_bloqueado.svg';
+  static const String iconsIcCellCheck = 'assets/icons/cellphone_check.png';
   static const String iconsIcBloqueioPermisao =
       'assets/icons/ic_bloqueio_permisao.svg';
   static const String iconsIcCadeado = 'assets/icons/ic_cadeado.svg';
   static const String iconsIcCampoInvalido =
       'assets/icons/ic_campo_invalido.svg';
+  static const String iconsIconePlanilha = "assets/icons/planilha.png";
   static const String logoTRUST = 'assets/images/logo_trust.png';
+  static const String logoTRUSTAppBar = 'assets/images/logo_appbar_trust.png';
   static const String iconsIcCampoValido = 'assets/icons/ic_campo_valido.svg';
   static const String iconsIcCanetaAssinatura =
       'assets/icons/ic_caneta_assinatura.svg';

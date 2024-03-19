@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 
 class SearchBarPersonalizada extends StatelessWidget {
   final TextEditingController searchController;
@@ -21,7 +21,7 @@ class SearchBarPersonalizada extends StatelessWidget {
       trailing: [
         Icon(
           Icons.search,
-          size: 25.r,
+          size: 35.r,
           color: Colors.grey,
         )
       ],

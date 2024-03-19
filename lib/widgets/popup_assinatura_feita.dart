@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 
 import '../core/constants/route_labels.dart';
 import '../core/providers/monitor_assinatura_provider/assinatura_provider.dart';
@@ -18,7 +18,7 @@ class AssinaturaCompletaPopUp extends StatelessWidget {
     return AlertDialog(
       icon: Icon(
         Icons.check_circle_outline,
-        color: context.primaryColor,
+        color: context.focusColor,
         size: 50,
       ),
       title: Column(
@@ -56,7 +56,7 @@ class AssinaturaCompletaPopUp extends StatelessWidget {
                 List<MonitorAssinaturasModel> assinaturasPendentes =
                     assinaturaProvider.assinaturasPendentes;
                 Modular.to
-                    .pushNamed(AppRoutes.assinaturaDigitalRoute, arguments: {
+                    .popAndPushNamed(AppRoutes.assinaturaDigitalRoute, arguments: {
                   'assinaturas': operacaoProvider.aconragemAssinatura(
                       assinaturaProvider.todasAssinaturas, codigoOperacao),
                   'assinaturasPendentes': assinaturasPendentes,

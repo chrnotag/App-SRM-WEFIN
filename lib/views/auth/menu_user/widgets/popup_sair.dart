@@ -14,8 +14,8 @@ class PopUpDeslogarApp {
           children: [
             Icon(
               LineIcons.exclamationCircle,
-              color: context.primaryColor,
-              size: 80.r,
+              color: context.focusColor,
+              size: 137.r,
             ),
             Padding(
               padding: EdgeInsets.all(12.r),
@@ -29,7 +29,7 @@ class PopUpDeslogarApp {
             Padding(
               padding: EdgeInsets.all(12.r),
               child: Text('Deseja encerrar o aplicativo?',
-                  style: context.textTheme.labelSmall!
+                  style: context.textTheme.bodyMedium!
                       .copyWith(color: AppColors.labelText)),
             ),
             Padding(

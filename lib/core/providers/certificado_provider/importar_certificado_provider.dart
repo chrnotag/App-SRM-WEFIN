@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:convert';
@@ -6,9 +7,9 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/constants/route_labels.dart';
-import 'package:modular_study/views/home/assinaturas/selecionar_certificado.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/constants/route_labels.dart';
+import 'package:Srm_Asset/views/home/assinaturas/selecionar_certificado.dart';
 
 class ImportarCertificadoProvider extends ChangeNotifier {
   ImportarCertificadoProvider._();
@@ -51,14 +52,15 @@ class ImportarCertificadoProvider extends ChangeNotifier {
     _certificadoSelecionado = null;
   }
 
-  Color alterarCorItemListaCertificado(int index, BuildContext context) {
+  bool alterarCorItemListaCertificado(int index, BuildContext context) {
     PKCertificate certificado = listaCertificados[index];
-
     if (_certificadoSelecionado != null &&
         _certificadoSelecionado!.thumbprint == certificado.thumbprint) {
-      return context.primaryColor;
+      log('ok');
+      return true;
     } else {
-      return Colors.grey.shade400;
+      log('não ok');
+      return false;
     }
   }
 
@@ -137,7 +139,6 @@ class ImportarCertificadoProvider extends ChangeNotifier {
       Fluttertoast.showToast(msg: "Nenhum arquivo foi selecionado.");
       return false;
     }
-
     PlatformFile file = result.files.first;
 
     if (file.path == null) {

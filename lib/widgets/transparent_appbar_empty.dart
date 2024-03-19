@@ -1,3 +1,5 @@
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:flutter/material.dart';
 
 class TransparentAppBarEmpty extends StatelessWidget {
@@ -8,6 +10,7 @@ class TransparentAppBarEmpty extends StatelessWidget {
     return AppBar(
       backgroundColor: Colors.transparent,
       shadowColor: Colors.transparent,
+      iconTheme: IconThemeData(color: context.onSecondary, size: 25.r),
     );
   }
 }

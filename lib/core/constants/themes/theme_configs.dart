@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 
 class AppColors {
   static const Color azul = Color(0xFF1E3870);
   static const Color azulPrimarioSRM = Color(0xFF5B95CC);
-  static const Color verdePrimarioTRUST = Color(0xff0EAC58);
+  static const Color laranjaSRM = Color(0xFFF18820);
+  static const Color verdePrimarioTRUST = Color(0xFF0EAC58);
   static const Color labelText = Color(0xFF8A8A8A);
+  static const Color cinzaEscuro = Color(0xff838383);
   static const Color branco = Color(0xFFFFFFFF);
   static const Color laranja = Color(0xFFF29046);
   static const Color vermelho = Color(0xFFA74D4D);
@@ -20,11 +22,13 @@ class AppSizes {
   static const double paddingLarge = 24;
   static const double paddingExtraLarge = 32;
 
-  double fontSizeVerySmall = 10.sp;
-  double fontSizeSmall = 12.sp;
-  double fontSizeMedium = 14.sp;
-  double fontSizeLarge = 20.sp;
-  double fontSizeExtraLarge = 32.sp;
+  double bodySmall = 10.sp;
+  double bodyMedium = 14.sp;
+  double bodyLarge = 16.sp;
+  double labelMedium = 12.sp;
+  double displaySmall = 18.sp;
+  double displayMedium = 22.sp;
+  double displayLarge = 24.sp;
 }
 
 class BorderRadiusBotaoEnvio {
@@ -46,7 +50,7 @@ class TrustShades {
   };
 }
 
-class SRMShaders{
+class SRMShaders {
   static const primaryColor = <int, Color>{
     50: Color(0xFFE1E8F4), // Azul (50)
     100: Color(0xFFB4C3E0), // Azul (100)

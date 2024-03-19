@@ -1,4 +1,4 @@
-package com.example.modular_study
+package com.srm.app_srm
 
 import io.flutter.embedding.android.FlutterActivity
 

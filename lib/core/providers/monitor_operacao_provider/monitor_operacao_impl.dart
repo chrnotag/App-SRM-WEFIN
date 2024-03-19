@@ -2,13 +2,13 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/endpoints.dart';
-import 'package:modular_study/core/implementations_config/export_impl.dart';
-import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
-import 'package:modular_study/core/providers/monitor_operacao_provider/monitor_operacoes_provider.dart';
-import 'package:modular_study/core/providers/theme_provider.dart';
+import 'package:Srm_Asset/core/constants/endpoints.dart';
+import 'package:Srm_Asset/core/implementations_config/export_impl.dart';
+import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
+import 'package:Srm_Asset/core/providers/monitor_operacao_provider/monitor_operacoes_provider.dart';
+import 'package:Srm_Asset/core/providers/theme_provider.dart';
 import 'package:http/http.dart' as http;
-import 'package:modular_study/models/monitor_operacoes_model/monitor_operacoes_model.dart';
+import 'package:Srm_Asset/models/monitor_operacoes_model/monitor_operacoes_model.dart';
 import '../../implementations_config/api_response.dart';
 import '../auth_provider_config/deslogar/verificar_sessao.dart';
 

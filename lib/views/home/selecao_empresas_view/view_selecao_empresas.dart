@@ -1,16 +1,15 @@
+import 'package:Srm_Asset/widgets/mascara_texto_cnpj.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
-import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/constants/themes/theme_configs.dart';
-import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
-import 'package:modular_study/core/providers/sessao_provider.dart';
-import 'package:modular_study/core/utils/overlay.dart';
-import 'package:modular_study/models/auth_login_models/SRM/cedente_model.dart';
-import 'package:modular_study/widgets/appbar_logo_perfil.dart';
-import 'package:modular_study/widgets/botao_selecao_empresa.dart';
-import 'package:modular_study/widgets/searchbar_person.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
+import 'package:Srm_Asset/core/providers/sessao_provider.dart';
+import 'package:Srm_Asset/models/auth_login_models/SRM/cedente_model.dart';
+import 'package:Srm_Asset/widgets/appbar_logo_perfil.dart';
+import 'package:Srm_Asset/widgets/botao_selecao_empresa.dart';
+import 'package:Srm_Asset/widgets/searchbar_person.dart';
 
 class ListaSelecaoEmpresas extends StatefulWidget {
   const ListaSelecaoEmpresas({super.key});
@@ -33,95 +32,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final SessionProvider sessionProvider = Modular.get<SessionProvider>();
       sessionProvider.startListening();
-      // verificarPolitica();
     });
-  }
-
-  void verificarPolitica() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(12.r),
-              child: Text('Política de privacidade',
-                  style: context.textTheme.bodyLarge!.copyWith(
-                    color: AppColors.azulPrimarioSRM,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 20.sp,
-                    letterSpacing: 1.5.sp,
-                  )),
-            ),
-            Padding(
-              padding: EdgeInsets.all(12.r),
-              child: GestureDetector(
-                onTap: () {
-                  Modular.to.pop();
-                },
-                child: Text('Clique aqui para vizualizar',
-                    style: context.textTheme.labelMedium!
-                        .copyWith(color: AppColors.labelText)),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 12.r),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                        onPressed: () {
-                          authProvider.limparDadosUsuario();
-                          Modular.to.navigate(Modular.initialRoute);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              const Color.fromARGB(255, 204, 91, 91),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8.h),
-                          child: Padding(
-                            padding: EdgeInsets.all(8.r),
-                            child: const Text(
-                              'Recusar',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        )),
-                  )
-                ],
-              ),
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: () {
-                        Modular.to.pop();
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.azul,
-                          shadowColor: const Color.fromARGB(0, 255, 255, 255),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4.r),
-                              side: const BorderSide(
-                                  color: AppColors.azul, width: 1))),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8.h),
-                        child: Padding(
-                          padding: EdgeInsets.all(8.r),
-                          child: Text('Aceitar',
-                              style: context.textTheme.labelSmall!
-                                  .copyWith(color: Colors.white)),
-                        ),
-                      )),
-                )
-              ],
-            )
-          ],
-        ),
-      ),
-    );
   }
 
   _onSearchChanged() {
@@ -129,7 +40,9 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
     if (query.isNotEmpty) {
       setState(() {
         _searchResults = authProvider.listaCedente
-            ?.where((item) => item.nome.toLowerCase().contains(query))
+            ?.where((item) =>
+        item.nome.toLowerCase().contains(query) ||
+            item.identificador.contains(query)) // Considera CNPJ
             .toList();
       });
     } else {
@@ -165,7 +78,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
               ),
               Container(
                 constraints: BoxConstraints(
-                    maxHeight: context.height * 0.7, minHeight: 80.h),
+                    maxHeight: _searchResults!.length * 70.h, minHeight: 0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.r),
                   color: Colors.white,
@@ -194,63 +107,41 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                             _searchResults![index].identificador, context);
                       },
                       child: ListTile(
-                        title: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  RichText(
-                                    textAlign: TextAlign.start,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    text: TextSpan(children: [
-                                      TextSpan(
-                                        text: _searchResults![index].nome,
-                                        style: context.textTheme.bodyMedium,
-                                      ),
-                                      TextSpan(
-                                        text:
-                                            ' CNPJ:${_searchResults![index].identificador}',
-                                        style: context.textTheme.bodyMedium!
-                                            .copyWith(color: Colors.grey),
-                                      ),
-                                    ]),
-                                  ),
-                                  Spacer(),
-                                  Visibility(
-                                    visible: _searchResults![index]
-                                            .assinaturaPendente >
-                                        0,
-                                    child: CircleAvatar(
-                                        backgroundColor: Colors.red,
-                                        radius: 10.r,
-                                        child: Center(
-                                          child: Text(
-                                              authProvider
-                                                          .dataUser!
-                                                          .listaCedente[index]
-                                                          .assinaturaPendente >=
-                                                      10
-                                                  ? '9+'
-                                                  : authProvider
-                                                      .dataUser!
-                                                      .listaCedente[index]
-                                                      .assinaturaPendente
-                                                      .toString(),
-                                              style: context
-                                                  .textTheme.labelSmall!
-                                                  .copyWith(
-                                                      color: Colors.white)),
-                                        )),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+                        title:  Text(
+                          _searchResults![index].nome,
+                          style: context.textTheme.bodyMedium,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
+                        subtitle:  CNPJText(
+                          cnpjOuCpf: _searchResults![index]
+                              .identificador,
+                        ),
+                        trailing: Visibility(
+                          visible: _searchResults![index]
+                              .assinaturaPendente >
+                              0,
+                          child: CircleAvatar(
+                              backgroundColor: Color(0xffF29146),
+                              radius: 15.r,
+                              child: Center(
+                                child: Text(
+                                    authProvider
+                                        .dataUser!
+                                        .listaCedente[index]
+                                        .assinaturaPendente >=
+                                        10
+                                        ? '9+'
+                                        : authProvider
+                                        .dataUser!
+                                        .listaCedente[index]
+                                        .assinaturaPendente
+                                        .toString(),
+                                    style: context
+                                        .textTheme.bodyMedium!
+                                        .copyWith(
+                                        color: Colors.white)),
+                              )),
                         ),
                       ),
                     );

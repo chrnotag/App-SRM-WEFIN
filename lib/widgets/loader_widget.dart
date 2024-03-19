@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+
+import '../core/constants/themes/theme_configs.dart';
 
 class Loader extends StatelessWidget {
   const Loader({super.key});
@@ -10,10 +12,7 @@ class Loader extends StatelessWidget {
     return Container(
       color: Colors.black.withOpacity(0.5),
       child: Center(
-        child: SizedBox(
-          height: 40.h,
-            width: 40.w,
-            child: CircularProgressIndicator(color: context.primaryColor, strokeWidth: 2.w,)),
+        child: CircularProgressIndicator(color: context.focusColor, strokeWidth: 2.w,),
       ),
     );
   }

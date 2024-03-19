@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/enuns/theme_enum.dart';
-import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/constants/route_labels.dart';
-import 'package:modular_study/core/constants/themes/theme_configs.dart';
-import 'package:modular_study/core/providers/theme_provider.dart';
-import 'package:modular_study/generated/assets.dart';
+import 'package:Srm_Asset/core/constants/enuns/theme_enum.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/constants/route_labels.dart';
+import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
+import 'package:Srm_Asset/core/providers/theme_provider.dart';
+import 'package:Srm_Asset/generated/assets.dart';
 
 import '../../../core/providers/auth_provider_config/logar/auth_providers.dart';
 import '../../../core/providers/sessao_provider.dart';
@@ -73,8 +73,8 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
                           InkWell(
                             onTap: () {
                               themeProvider.temaSelecionado =
-                                  TemaSelecionado.SRM;
-                              Modular.to.pushNamed(AppRoutes.loginSRMAuthRoute);
+                                  TemaSelecionado.TRUST;
+                              Modular.to.pushNamed(AppRoutes.loginAuthRoute);
                             },
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -109,7 +109,7 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
                             onTap: () {
                               themeProvider.temaSelecionado =
                                   TemaSelecionado.TRUST;
-                              Modular.to.pushNamed(AppRoutes.loginSRMAuthRoute);
+                              Modular.to.pushNamed(AppRoutes.loginAuthRoute);
                             },
                             child: Image.asset(
                               Assets.logoTRUST,

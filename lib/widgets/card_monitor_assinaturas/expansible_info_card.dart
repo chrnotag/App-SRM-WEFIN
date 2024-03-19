@@ -77,7 +77,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
           authProvider.dataUser!.identificadorUsuario ==
           element.identificadorAssinador);
     }
-
+    bool documentoAssinado = info.statusAssinatura.toLowerCase() == "assinado";
     AssinaturaProvider assinaturaProvider = Modular.get<AssinaturaProvider>();
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -121,12 +121,24 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                       Text(
                         'Procurador',
                         style: context.textTheme.bodyMedium,
-                      ),
-                      Text(
-                        info.nomeProcurador ?? "",
-                        style: context.textTheme.bodySmall,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: context.width * 0.3,
+                            child: Text(
+                              info.nomeProcurador ?? "",
+                              style: context.textTheme.bodySmall,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+
+                            ),
+                          ),
+                          if(info.statusAssinatura.toLowerCase() == "assinado" && info.nomeProcurador != null)
+                            Icon(Icons.check_circle, color: Colors.green,size: 15.r,)
+                        ],
                       )
                     ],
                   ),
@@ -160,12 +172,24 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                         'Assinante',
                         style: context.textTheme.bodyMedium,
                       ),
-                      Text(
-                        assinante.nomeAssinante
-                            .replaceAll(RegExp(r'[\[\],]'), ''),
-                        style: context.textTheme.bodySmall,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: documentoAssinado ? context.width * 0.2 : context.width * 0.3,
+                            child: Text(
+                              assinante.nomeAssinante
+                                  .replaceAll(RegExp(r'[\[\],]'), ''),
+                              style: context.textTheme.bodySmall,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          if(documentoAssinado)
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 4.w),
+                              child: Icon(Icons.check_circle, color: Colors.green,size: 15.r,),
+                            )
+                        ],
                       )
                     ],
                   ),
@@ -244,7 +268,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
             child: Visibility(
               visible: widget.assinarDocumento && filtroBotaoAssinar(),
               child: BotaoPadrao(
-                  onPressed: () async {
+                  onPressed: () async  {
                     AssinaturaEletronicaProvider assinaturaEletronicaProvider =
                         Modular.get<AssinaturaEletronicaProvider>();
                     assinaturaEletronicaProvider.codigoOperacao = widget.codigoOperacao;

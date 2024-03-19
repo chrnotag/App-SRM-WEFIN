@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
-import 'package:modular_study/core/providers/theme_provider.dart';
-import 'package:modular_study/models/fluxo_assinatura_model/finalizar_assinatura/finalizar_assinatura.dart';
+import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
+import 'package:Srm_Asset/core/providers/theme_provider.dart';
+import 'package:Srm_Asset/models/fluxo_assinatura_model/finalizar_assinatura/finalizar_assinatura.dart';
 import 'package:http/http.dart' as http;
 import '../../../implementations_config/export_impl.dart';
 import '../../auth_provider_config/deslogar/verificar_sessao.dart';
@@ -24,6 +24,7 @@ class FinalizarAssinaturaImpl {
     final body = json.encode(assinaturaFinalizada);
     try {
       final response = await http.post(url, body: body, headers: headers);
+      log("status code: ${response.body}");
       switch (response.statusCode) {
         case 204:
           return SucessResponse(null);

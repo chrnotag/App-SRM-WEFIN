@@ -1,18 +1,18 @@
 import 'dart:developer';
 
+import 'package:Srm_Asset/widgets/popup_generico.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/widgets/pdfview.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import 'package:Srm_Asset/widgets/pdfview.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
-import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/constants/themes/theme_configs.dart';
-import 'package:modular_study/core/providers/documentos_provider/baixar_documentos_impl.dart';
-import 'package:modular_study/core/providers/documentos_provider/baixar_documentos_provider.dart';
-import 'package:modular_study/core/utils/overlay.dart';
-import 'package:modular_study/widgets/wefin_patterns/wefin_default_button.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
+import 'package:Srm_Asset/core/providers/documentos_provider/baixar_documentos_impl.dart';
+import 'package:Srm_Asset/core/providers/documentos_provider/baixar_documentos_provider.dart';
+import 'package:Srm_Asset/core/utils/overlay.dart';
+import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 
 import '../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 
@@ -56,17 +56,15 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
       titlePadding: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(5.r))),
-      title: SizedBox(
+      title: Container(
         width: context.width,
+        color: Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(5.r),
-                    topRight: Radius.circular(5.r)),
                 color: context.indicatorColor,
               ),
               child: Padding(
@@ -107,152 +105,156 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
                           )),
                     ],
                   ),
-                  SizedBox(
-                    height: calcularAlturaLista(documentosUnicos.length),
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: documentosUnicos.length,
-                      itemBuilder: (context, index) => Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text('Documento',
-                                  style: context.textTheme.bodySmall!.copyWith(
-                                    color: AppColors.labelText,
-                                  )),
-                              SizedBox(
-                                width: context.width * 0.4,
-                                child: Text(
+                  Padding(
+                    padding: EdgeInsets.only(top: 21.h),
+                    child: SizedBox(
+                      height: calcularAlturaLista(documentosUnicos.length),
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: documentosUnicos.length,
+                        itemBuilder: (context, index) => Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text('Documento',
+                                    style:
+                                        context.textTheme.bodySmall!.copyWith(
+                                      color: AppColors.labelText,
+                                    )),
+                                SizedBox(
+                                  width: context.width * 0.3,
+                                  child: Text(
                                     "${documentosUnicos[index].nome}.pdf",
                                     style: context.textTheme.bodyMedium!
-                                        .copyWith(
-                                            color: AppColors.azul,
-                                            fontWeight: FontWeight.bold)),
-                              ),
-                            ],
-                          ),
-                          const Spacer(),
-                          Column(
-                            children: [
-                              Row(
-                                children: [
-                                  ButtonBar(
-                                    children: [
-                                      TextButton(
-                                        style: TextButton.styleFrom(
-                                          padding: EdgeInsets.zero,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(5.r))),
-                                          backgroundColor: AppColors.brancoGelo,
-                                        ),
-                                        onPressed: () async {
-                                          BaixarDocumentosProvider provider =
-                                              Modular.get<
-                                                  BaixarDocumentosProvider>();
-                                          OverlayApp.iniciaOverlay(context);
-                                          await BaixarDocumentosImpl(
-                                                  documento:
-                                                      documentosUnicos[index],
-                                                  isVisualizar: true)
-                                              .baixar();
-                                          OverlayApp.terminaOverlay();
-                                          log('url: ${provider.urlDocumento}');
-                                          WidgetsBinding.instance
-                                              .addPostFrameCallback(
-                                                  (timeStamp) {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) => PdfView(
-                                                      documento:
-                                                          documentosUnicos[
-                                                              index],
-                                                      url: provider
-                                                          .urlDocumento!),
-                                                ));
-                                          });
-                                        },
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 8.w),
-                                              child: Icon(
-                                                Icons.visibility,
-                                                color: context.indicatorColor,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(right: 8.w),
-                                              child: Text(
-                                                'Ver',
-                                                style: context
-                                                    .textTheme.labelSmall!
-                                                    .copyWith(
-                                                  color: AppColors.azul,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 12,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      TextButton(
-                                        style: TextButton.styleFrom(
-                                            padding: EdgeInsets.zero,
-                                            backgroundColor:
-                                                AppColors.brancoGelo,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(5.r)))),
-                                        onPressed: () async {
-                                          OverlayApp.iniciaOverlay(context);
-                                         await BaixarDocumentosImpl(
-                                                  documento:
-                                                      documentosUnicos[index],
-                                                  isVisualizar: false)
-                                              .baixar();
-                                         OverlayApp.terminaOverlay();
-                                        },
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 8.w),
-                                              child: Icon(
-                                                Icons.download,
-                                                color: context.indicatorColor,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(right: 8.w),
-                                              child: Text('Baixar',
-                                                  style: context
-                                                      .textTheme.labelSmall!
-                                                      .copyWith(
-                                                    color: AppColors.azul,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 12,
-                                                  )),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
+                                        .copyWith(color: AppColors.azul),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ],
+                                ),
+                              ],
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                    padding: EdgeInsets.zero,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5.r))),
+                                    backgroundColor: AppColors.brancoGelo,
+                                  ),
+                                  onPressed: () async {
+                                    BaixarDocumentosProvider provider =
+                                        Modular.get<BaixarDocumentosProvider>();
+                                    OverlayApp.iniciaOverlay(context);
+                                    await BaixarDocumentosImpl(
+                                            documento: documentosUnicos[index])
+                                        .ler();
+                                    OverlayApp.terminaOverlay();
+                                    WidgetsBinding.instance
+                                        .addPostFrameCallback((_) {
+                                      if (provider.urlDocumento != null) {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => PdfView(
+                                                  documento:
+                                                      documentosUnicos[index],
+                                                  url: provider.urlDocumento),
+                                            ));
+                                      } else {
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) => AlertDialogGenerico(
+                                                title:
+                                                    'Documento não encontrado',
+                                                msg:
+                                                    'O documento solicitado não foi encontrado.',
+                                                onPressed: () {Modular.to.pop();}));
+                                      }
+                                    });
+                                  },
+                                  child: Padding(
+                                    padding: EdgeInsets.all(4.r),
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 8.w),
+                                          child: Icon(
+                                            Icons.visibility,
+                                            color: context.indicatorColor,
+                                            size: 16.r,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(right: 8.w),
+                                          child: Text(
+                                            'Ver',
+                                            style: context.textTheme.bodySmall!
+                                                .copyWith(
+                                              color: AppColors.azul,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10.w,
+                                ),
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                      padding: EdgeInsets.zero,
+                                      backgroundColor: AppColors.brancoGelo,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(5.r)))),
+                                  onPressed: () async {
+                                    OverlayApp.iniciaOverlay(context);
+                                    await BaixarDocumentosImpl(
+                                            documento: documentosUnicos[index])
+                                        .baixar();
+                                    OverlayApp.terminaOverlay();
+                                  },
+                                  child: Padding(
+                                    padding: EdgeInsets.all(4.r),
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 8.w),
+                                          child: Icon(
+                                            Icons.download,
+                                            color: context.indicatorColor,
+                                            size: 16.r,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(right: 8.w),
+                                          child: Text('Baixar',
+                                              style: context
+                                                  .textTheme.bodySmall!
+                                                  .copyWith(
+                                                color: AppColors.azul,
+                                                fontWeight: FontWeight.w500,
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -279,7 +281,7 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
   }
 
   double calcularAlturaLista(int itemCount) {
-    double alturaTotal = (65 * itemCount).toDouble();
+    double alturaTotal = (85 * itemCount).toDouble();
     if (alturaTotal > 500) {
       return 500;
     }

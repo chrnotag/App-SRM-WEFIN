@@ -1,18 +1,20 @@
 import 'dart:developer';
 
+import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
+import 'package:Srm_Asset/core/providers/sessao_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
-import 'package:modular_study/core/constants/extensions/size_screen_media_query.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/constants/route_labels.dart';
-import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
-import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
-import 'package:modular_study/generated/assets.dart';
-import 'package:modular_study/widgets/appbar_logo_perfil.dart';
-import 'package:modular_study/widgets/botao_selecao_empresa.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/constants/route_labels.dart';
+import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
+import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
+import 'package:Srm_Asset/generated/assets.dart';
+import 'package:Srm_Asset/widgets/appbar_logo_perfil.dart';
+import 'package:Srm_Asset/widgets/botao_selecao_empresa.dart';
 
 import '../../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 
@@ -30,6 +32,13 @@ class _HomeViewState extends State<HomeView> {
         Modular.get<AssinaturaProvider>();
     assinaturaProvider.limparAssinaturas();
     super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final SessionProvider sessaoProvider = Modular.get<SessionProvider>();
+    sessaoProvider.resetListening();
   }
 
   @override
@@ -76,7 +85,7 @@ class _HomeViewState extends State<HomeView> {
                         child: Card(
                           child: Container(
                             height: 144.h,
-                            width: 140.w,
+                            width: 120.w,
                             child: Padding(
                               padding: EdgeInsets.all(6.r),
                               child: Column(
@@ -95,10 +104,12 @@ class _HomeViewState extends State<HomeView> {
                                         color: context.primaryColor,
                                         width: 41.w,
                                       ),
-                                      if (authProvider.empresaSelecionada!.assinaturaPendente > 0)
+                                      if (authProvider.empresaSelecionada!
+                                              .assinaturaPendente >
+                                          0)
                                         CircleAvatar(
-                                          radius: 13.r,
-                                          backgroundColor: Colors.red,
+                                          radius: 15.r,
+                                          backgroundColor: AppColors.laranjaSRM,
                                           child: Text(
                                             authProvider.empresaSelecionada!
                                                         .assinaturaPendente >
@@ -108,8 +119,8 @@ class _HomeViewState extends State<HomeView> {
                                                     .empresaSelecionada!
                                                     .assinaturaPendente
                                                     .toString(),
-                                            style: context.textTheme.bodySmall!
-                                                .copyWith(color: Colors.white),
+                                            style: context.textTheme.bodyMedium!
+                                                .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
                                           ),
                                         ),
                                     ],
@@ -123,7 +134,7 @@ class _HomeViewState extends State<HomeView> {
                                       'Assinatura Digital',
                                       style: context.textTheme.bodyMedium!
                                           .copyWith(
-                                              fontWeight: FontWeight.bold),
+                                              fontWeight: FontWeight.bold,color: context.onSurface),
                                     ),
                                   ),
                                 ],
@@ -138,7 +149,7 @@ class _HomeViewState extends State<HomeView> {
                         child: Card(
                           child: Container(
                             height: 144.h,
-                            width: 140.w,
+                            width: 120.w,
                             child: Padding(
                               padding: EdgeInsets.all(8.r),
                               child: Column(
@@ -157,7 +168,8 @@ class _HomeViewState extends State<HomeView> {
                                   Text(
                                     'Monitor de Operações',
                                     style: context.textTheme.bodyMedium!
-                                        .copyWith(fontWeight: FontWeight.bold),
+                                        .copyWith(
+                                        fontWeight: FontWeight.bold,color: context.onSurface),
                                   )
                                 ],
                               ),
@@ -171,7 +183,7 @@ class _HomeViewState extends State<HomeView> {
                         child: Card(
                           child: Container(
                             height: 144.h,
-                            width: 140.w,
+                            width: 120.w,
                             child: Padding(
                               padding: EdgeInsets.all(8.r),
                               child: Column(
@@ -199,7 +211,8 @@ class _HomeViewState extends State<HomeView> {
                                   Text(
                                     'Central de Atendimento',
                                     style: context.textTheme.bodyMedium!
-                                        .copyWith(fontWeight: FontWeight.bold),
+                                        .copyWith(
+                                        fontWeight: FontWeight.bold,color: context.onSurface),
                                   )
                                 ],
                               ),

@@ -2,11 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/themes/theme_configs.dart';
-import 'package:modular_study/core/implementations_config/api_response.dart';
-import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_implementation.dart';
-import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
-import 'package:modular_study/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
+import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
+import 'package:Srm_Asset/core/implementations_config/api_response.dart';
+import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_implementation.dart';
+import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
+import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 
 import '../../utils/money_format.dart';
 
@@ -72,16 +72,20 @@ class AssinaturaProvider extends ChangeNotifier {
 
   void separaAssinaturas(List<MonitorAssinaturasModel> assinaturas) {
     _assinaturasPendentes.clear();
+
     final AuthProvider authProvider = Modular.get<AuthProvider>();
+    bool naoAssinadoPeloUsuario = false;
     for (var assinatura in assinaturas) {
-      bool naoAssinadoPeloUsuario = assinatura.assinantes
-          .any((assinante) => assinante.informacoesAssinante.any((info) {
-                return info.identificadorAssinador ==
-                        authProvider.dataUser!.identificadorUsuario &&
-                    info.statusAssinatura != "Assinado";
-              }));
-      if (naoAssinadoPeloUsuario) {
-        _assinaturasPendentes.add(assinatura);
+      if (assinatura.statusAssinaturaDigital.toLowerCase() != "assinado") {
+        naoAssinadoPeloUsuario = assinatura.assinantes
+            .any((assinante) => assinante.informacoesAssinante.any((info) {
+                  return info.identificadorAssinador ==
+                          authProvider.dataUser!.identificadorUsuario &&
+                      info.statusAssinatura.toLowerCase() != "assinado";
+                }));
+        if (naoAssinadoPeloUsuario) {
+          _assinaturasPendentes.add(assinatura);
+        }
       }
     }
   }

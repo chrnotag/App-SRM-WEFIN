@@ -1,13 +1,14 @@
+import 'dart:developer';
+
+import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/extensions/screen_util_extension.dart';
-import 'package:modular_study/core/constants/extensions/theme_extensions.dart';
-import 'package:modular_study/core/providers/auth_provider_config/logar/auth_providers.dart';
-import 'package:modular_study/core/providers/sessao_provider.dart';
-import 'package:modular_study/core/providers/theme_provider.dart';
-import 'package:modular_study/widgets/form_auth.dart';
-
-import '../../../core/constants/themes/theme_configs.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
+import 'package:Srm_Asset/core/providers/sessao_provider.dart';
+import 'package:Srm_Asset/core/providers/theme_provider.dart';
+import 'package:Srm_Asset/widgets/form_auth.dart';
 import '../../../generated/assets.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -18,9 +19,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool? politicaAceita;
+
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       final sessionProvider = Modular.get<SessionProvider>();
       sessionProvider.stopListening();
       final AuthProvider authProvider = Modular.get<AuthProvider>();
@@ -40,49 +43,67 @@ class _LoginScreenState extends State<LoginScreen> {
             image: DecorationImage(
                 image: AssetImage(Assets.imagesBackgroundImage),
                 fit: BoxFit.cover)),
-        child: CustomScrollView(
-          slivers: [
-            SliverFillRemaining(
-              hasScrollBody: false,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Column(
-                    children: [
-                      Image.asset(
-                        themeProvider.logoTema,
-                        width: isKeyboardVisible
-                            ? 80.w
-                            : 190.w,
-                        fit: BoxFit.fill,
-                      ),
-                      SizedBox(
-                        height: 8.h,
-                      ),
-                      AnimatedOpacity(
-                        duration: const Duration(milliseconds: 300),
-                        opacity: isKeyboardVisible ? 0.0 : 1.0,
-                        child: SizedBox(
-                          child: Text(
-                            "Seja bem vindo\nao seu app de gestão",
-                            style: context.textTheme.bodyLarge!
-                                .copyWith(color: AppColors.labelText),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15.w),
+        child: Column(
+          children: [
+            if (isKeyboardVisible)
+              AppBar(
+                title: Image.asset(
+                  themeProvider.logoTema,
+                  width: 80.w,
+                  fit: BoxFit.fill,
+                ),
+                centerTitle: true,
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+              ),
+            Expanded(
+              child: CustomScrollView(
+                slivers: [
+                  SliverFillRemaining(
+                    hasScrollBody: false,
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(height: 15.h), // Espaço após a AppBar
-                        const AuthForm(),
+                        Spacer(),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Visibility(
+                              visible: !isKeyboardVisible,
+                              child: Image.asset(
+                                themeProvider.logoTema,
+                                width: 190.w,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 100.h,
+                            ),
+                            AnimatedOpacity(
+                              duration: const Duration(milliseconds: 300),
+                              opacity: isKeyboardVisible ? 0.0 : 1.0,
+                              child: SizedBox(
+                                child: Text(
+                                  "Seja bem vindo\nao seu app de gestão",
+                                  style: context.textTheme.bodyLarge!
+                                      .copyWith(color: context.surface, fontWeight: FontWeight
+                                  .w400),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Spacer(),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.w),
+                          child: SizedBox(
+                              height: context.height * 0.6,
+                              child: const AuthForm()),
+                        )
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

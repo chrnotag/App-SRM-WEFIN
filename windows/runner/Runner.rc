@@ -93,13 +93,13 @@ BEGIN
 "040904e4"
 BEGIN
         VALUE
-"CompanyName", "com.example" "\0"
-VALUE "FileDescription", "modular_study" "\0"
+"CompanyName", "SRM Asset" "\0"
+VALUE "FileDescription", "SRM Asset" "\0"
 VALUE "FileVersion", VERSION_AS_STRING "\0"
-VALUE "InternalName", "modular_study" "\0"
-VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-VALUE "OriginalFilename", "modular_study.exe" "\0"
-VALUE "ProductName", "modular_study" "\0"
+VALUE "InternalName", "SRM Asset" "\0"
+VALUE "LegalCopyright", "Copyright (C) 2023 SRM Asset. All rights reserved." "\0"
+VALUE "OriginalFilename", "SRM Asset.exe" "\0"
+VALUE "ProductName", "SRM Asset" "\0"
 VALUE "ProductVersion", VERSION_AS_STRING "\0"
 END
         END

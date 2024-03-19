@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_study/core/constants/themes/theme_configs.dart';
-import 'package:modular_study/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
-import 'package:modular_study/core/providers/monitor_operacao_provider/monitor_operacao_impl.dart';
+import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
+import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
+import 'package:Srm_Asset/core/providers/monitor_operacao_provider/monitor_operacao_impl.dart';
 
 import '../../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import '../../../models/monitor_operacoes_model/monitor_operacoes_model.dart';
