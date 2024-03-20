@@ -17,12 +17,12 @@ class BaixarCertificadoImpl {
     };
     final url =
         Uri.parse("${EndPoints.baixarCertificadoQrCode}/$token");
-    log('link: ${url}');
     final ImportarCertificadoProvider provider =
         Modular.get<ImportarCertificadoProvider>();
+    log('CURL baixar certificado via QrCode:\nheader: $header\nbody: $url ');
     try {
       final content = await http.get(url, headers: header);
-      log('status code: ${content.statusCode}\nbody ${content.body}');
+      log('Response baixar certificado QrCode: ${content.body}');
       if (content.statusCode == 200) {
         provider.pkcs12 = content.bodyBytes;
         showDialog(
