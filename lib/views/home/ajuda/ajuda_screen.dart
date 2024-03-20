@@ -136,9 +136,7 @@ class Ajuda extends StatelessWidget {
                               fontWeight: FontWeight.bold),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () async {
-                              String url = themeProvider.isTemaSRM
-                                  ? EndPoints.politicaPrivacidadeSRM
-                                  : EndPoints.politicaPrivacidadeTRUST;
+                              String url = EndPoints.politicaPrivacidade;
                               AbrirUrl().launchURL(url);
                             },
                         ),

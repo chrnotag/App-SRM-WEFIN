@@ -63,12 +63,8 @@ class _AuthFormState extends State<AuthForm> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
-    String politicaPrivacidade = themeProvider.isTemaSRM
-        ? EndPoints.politicaPrivacidadeSRM
-        : EndPoints.politicaPrivacidadeTRUST;
-    String termosDeUso =
-        themeProvider.isTemaSRM ? EndPoints.termosDeUsoSRM : EndPoints.termoDeUsoTRUST;
+    String politicaPrivacidade = EndPoints.politicaPrivacidade;
+    String termosDeUso = EndPoints.termosDeUso;
     return Form(
       key: _formKey,
       child: AutofillGroup(
@@ -184,8 +180,8 @@ class _AuthFormState extends State<AuthForm> {
 
 // Função para salvar os dados de login (email e senha) se o usuário optar por isso
   void _saveLoginDataIfNeeded() async {
-      await _storage.write(key: 'email', value: _loginEC.text);
-      await _storage.write(key: 'password', value: _passwordEC.text);
+    await _storage.write(key: 'email', value: _loginEC.text);
+    await _storage.write(key: 'password', value: _passwordEC.text);
   }
 
   void _loadSavedLoginData() async {
@@ -199,7 +195,6 @@ class _AuthFormState extends State<AuthForm> {
       });
     }
   }
-
 
   Future<void> login() async {
     final authProvider = Modular.get<AuthProvider>();

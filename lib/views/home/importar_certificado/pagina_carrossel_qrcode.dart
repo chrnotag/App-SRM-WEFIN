@@ -70,7 +70,7 @@ class PaginaQrCodeCarrossel {
                           decoration: TextDecoration.underline, fontWeight: FontWeight.w600),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () async {
-                          const String url = EndPoints.siteQrCode;
+                          final String url = EndPoints.siteQrCode;
                           await Share.share(url);
                         }),
                   TextSpan(
