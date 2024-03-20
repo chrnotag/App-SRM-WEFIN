@@ -48,7 +48,7 @@ class _SemConexaoScreenState extends State<SemConexaoScreen> {
               shadowColor: Colors.transparent,
             ),
             Image.asset(Assets.imagesNoNetwork,
-                scale: 0.6.r, color: context.onSecondary),
+                scale: 3.r, color: context.onSecondary),
             Column(
               children: [
                 Padding(

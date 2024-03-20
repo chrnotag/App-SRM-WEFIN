@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/deslogar/verificar_sessao.dart';
@@ -10,7 +9,8 @@ import '../../main.dart';
 class SessionProvider with ChangeNotifier {
   bool _isShowingDialog = false;
   Timer? _timer;
-  int _timeout = 120;
+  static const int _tempoLimite = 120;
+  int _timeout = _tempoLimite;
   final AuthProvider authProvider = Modular.get<AuthProvider>();
 
   SessionProvider() {
@@ -44,7 +44,7 @@ class SessionProvider with ChangeNotifier {
     if (_timer!.isActive) {
       _timer!.cancel();
     }
-    _timeout = 120;
+    _timeout = _tempoLimite;
     startListening();
   }
 
@@ -58,7 +58,7 @@ class SessionProvider with ChangeNotifier {
           builder: (context) => AlertDialogGenerico(
               title: 'Atenção!',
               msg:
-                  'Nenhuma ação foi realizada nos últimos $_timeout segundos. Você será direcionado para realizar o login novamente.',
+                  'Nenhuma ação foi realizada nos últimos $_tempoLimite segundos. Você será direcionado para realizar o login novamente.',
               onPressed: () {
                 _isShowingDialog = false;
                 VerificarSessao.limparDadosSessao();

@@ -21,7 +21,7 @@ class LoginImpl {
   Future<ApiResponse<dynamic>> login() async {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
-    const url = EndPoints.login;
+    final url = EndPoints.login;
     final headers = {
       'Content-Type': 'application/json; charset=utf-8',
       'accept': 'application/json',

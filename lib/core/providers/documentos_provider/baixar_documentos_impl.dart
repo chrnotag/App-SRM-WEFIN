@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:developer';
 
 import 'package:Srm_Asset/main.dart';
 import 'package:flutter/material.dart';
@@ -36,9 +35,8 @@ class BaixarDocumentosImpl {
     return header;
   }
 
-  Uri get url => Uri.parse("${EndPoints.assinatura}/${documento.idAssinaturaDigital}/arquivo");
-
   Future<ApiResponse<dynamic>> ler() async {
+    Uri url = EndPoints.montarUrlBaixarDocumento(documento.idAssinaturaDigital, true);
     BaixarDocumentosProvider baixarDocumentosProvider =
     Modular.get<BaixarDocumentosProvider>();
     try {
@@ -46,21 +44,21 @@ class BaixarDocumentosImpl {
       if (response.statusCode == 200) {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = DocumentoModel.fromJson(responseBody);
-        baixarDocumentosProvider.urlDocumento = "${data.url}.pdf";
+        baixarDocumentosProvider.urlDocumento = data.url;
         return SucessResponse(data);
       } else {
         baixarDocumentosProvider.urlDocumento = null;
         return MensagemErroPadrao.erroResponse(response.bodyBytes);
       }
-    } catch (e) {
+    } catch (_) {
       baixarDocumentosProvider.urlDocumento = null;
       return MensagemErroPadrao.codigo_500();
     }
   }
 
   Future<ApiResponse<dynamic>> baixar() async {
+    Uri url = EndPoints.montarUrlBaixarDocumento(documento.idAssinaturaDigital, false);
     try {
-
       var downloadsDirectory = await getExternalStorageDirectory();
       if (downloadsDirectory == null) {
         return MensagemErroPadrao.codigo_500();
@@ -74,17 +72,19 @@ class BaixarDocumentosImpl {
       File file = File('${downloadsDirectory.path}/${documento.nome}.pdf');
       await file.writeAsBytes(response.bodyBytes);
 
-      showDialog(
-        context: myNavigatorKey.currentState!.context,
-        builder: (context) => AlertDialogGenerico(
-          title: 'Download Concluído',
-          msg: 'Seu arquivo foi salvo em "${downloadsDirectory.path}/${documento.nome}.pdf"',
-          onPressed: () => Modular.to.pop(),
-        ),
-      );
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        showDialog(
+          context: myNavigatorKey.currentState!.context,
+          builder: (context) => AlertDialogGenerico(
+            title: 'Download Concluído',
+            msg: 'Seu arquivo foi salvo em "${downloadsDirectory.path}/${documento.nome}.pdf"',
+            onPressed: () => Modular.to.pop(),
+          ),
+        );
+      });
 
       return SucessResponse(null);
-    } catch (e, s) {
+    } catch (_) {
       return MensagemErroPadrao.codigo_500();
     }
   }

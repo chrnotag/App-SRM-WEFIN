@@ -1,0 +1,4 @@
+enum Ambiente{
+  Producao,
+  Homologacao
+}

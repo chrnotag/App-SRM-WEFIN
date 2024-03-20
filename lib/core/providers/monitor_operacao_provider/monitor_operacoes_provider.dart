@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/core/utils/mostrar_botao_ver_assinatura.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
@@ -7,7 +8,6 @@ import 'package:Srm_Asset/core/providers/monitor_operacao_provider/monitor_opera
 import '../../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import '../../../models/monitor_operacoes_model/monitor_operacoes_model.dart';
 import '../../implementations_config/api_response.dart';
-import '../../utils/money_format.dart';
 
 class MonitorOperacoesProvider extends ChangeNotifier {
   List<MonitorOperacoesModel> _operacoes = [];
@@ -15,8 +15,17 @@ class MonitorOperacoesProvider extends ChangeNotifier {
   List<MonitorOperacoesModel> get operacoes => _operacoes;
 
   set operacoes(List<MonitorOperacoesModel> data) {
-    _operacoes = data;
+    _operacoes = ordenarLista(data);
     notifyListeners();
+  }
+
+  List<MonitorOperacoesModel> ordenarLista(List<MonitorOperacoesModel> lista) {
+    lista.sort((a, b) {
+      var visivelA = ExibirVerAssinatura.isVisivel(a) ? 1 : 0;
+      var visivelB = ExibirVerAssinatura.isVisivel(b) ? 1 : 0;
+      return visivelB.compareTo(visivelA);
+    });
+    return lista;
   }
 
   Future<ApiResponse<dynamic>> carregarOperacoes() async {
@@ -36,6 +45,7 @@ class MonitorOperacoesProvider extends ChangeNotifier {
       final AssinaturaProvider assinaturaProvider =
           Modular.get<AssinaturaProvider>();
       assinaturaProvider.todasAssinaturas = lista;
+      notifyListeners();
     }
     return lista;
   }

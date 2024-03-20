@@ -56,7 +56,6 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
                 Expanded(
                   child: BotaoPadrao(
                     onPressed: () async {
-                      _erroMsg = null;
                       if (formKey.currentState!.validate()) {
                         provider.senhaCertificado = textController.text;
                         provider.importarCertificado();

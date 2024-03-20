@@ -1,4 +1,3 @@
-import 'package:Srm_Asset/core/constants/urls-uteis.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -13,6 +12,7 @@ import 'package:Srm_Asset/widgets/appbar_logo_perfil.dart';
 import 'package:Srm_Asset/widgets/pdfview.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../core/constants/endpoints.dart';
 import '../../../core/utils/abrir_url_externo.dart';
 import '../../../generated/assets.dart';
 
@@ -137,8 +137,8 @@ class Ajuda extends StatelessWidget {
                           recognizer: TapGestureRecognizer()
                             ..onTap = () async {
                               String url = themeProvider.isTemaSRM
-                                  ? Urls.politicaPrivacidadeSRM
-                                  : Urls.politicaPrivacidadeTRUST;
+                                  ? EndPoints.politicaPrivacidadeSRM
+                                  : EndPoints.politicaPrivacidadeTRUST;
                               AbrirUrl().launchURL(url);
                             },
                         ),
