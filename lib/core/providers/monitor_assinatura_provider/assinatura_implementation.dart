@@ -23,6 +23,7 @@ class AssinaturaImpl {
         'Authorization': authProvider.dataUser!.token,
         'plataforma' : themeProvider.temaSelecionado.name
       });
+      log('response: ${response.body}');
       switch (response.statusCode) {
         case 200:
           final responseBody = json.decode(utf8.decode(response.bodyBytes));

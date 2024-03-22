@@ -7,7 +7,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/views/home/assinaturas/selecionar_certificado.dart';
 
@@ -157,49 +156,62 @@ class ImportarCertificadoProvider extends ChangeNotifier {
     return true;
   }
 
-  Future<bool> importarCertificado() async {
+  Future<bool> importarCertificado(BuildContext context) async {
+    limparErro();
     try {
+      log('try');
       await CrossPki.importPkcs12(pkcs12, senhaCertificado!);
       var certs = await CrossPki.listCertificatesWithKey();
       if (isExpirado(certs.first)) {
+        log('verificando validade');
         deletarCertificado(certs.first.thumbprint);
         Fluttertoast.showToast(
             msg:
                 'Certificado ${certs.first.subjectDisplayName} EXPIRADO! A importação foi cancelada.');
       } else {
+        log('importado');
         Fluttertoast.showToast(
             msg:
                 'Certificado ${certs.first.subjectDisplayName} importado com sucesso!');
         Modular.to.navigate(AppRoutes.assinaturaDigitalRoute);
       }
+      log('terminando');
       Modular.to.pop();
       return true;
     } on CrossPkiException catch (e) {
+      log('caiu nas exeções');
       switch (e.code) {
         case CrossPkiErrorCodes.wrongPassword:
+          log('1');
           errorMsg =
               'Senha Incorreta. Por favor, verifique a senha do certificado e tente novamente.';
           break;
         case CrossPkiErrorCodes.invalidLicense:
+          log('2');
           errorMsg =
               'Licença Inválida. Certifique-se de que possui uma licença válida para usar este recurso.';
           break;
         case CrossPkiErrorCodes.certificateNotFound:
+          log('3');
           errorMsg =
               'Certificado Não Encontrado. Verifique se o certificado está correto e disponível.';
           break;
         case CrossPkiErrorCodes.keyNotFound:
+          log('4');
           errorMsg =
               'Chave Não Encontrada. Não foi possível encontrar a chave correspondente ao certificado fornecido.';
           break;
         default:
+          log('4');
           errorMsg =
               'Erro Desconhecido. Ocorreu um problema não identificado. Por favor, entre em contato com o suporte técnico.';
           break;
       }
     } catch (e) {
+      log('5');
       errorMsg =
           'Erro Desconhecido. Ocorreu um problema não identificado. Por favor, entre em contato com o suporte técnico.';
+      notifyListeners();
     }
     return false;
   }

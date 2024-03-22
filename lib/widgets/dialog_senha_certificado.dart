@@ -1,4 +1,6 @@
+import 'package:Srm_Asset/core/utils/overlay.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
@@ -18,8 +20,6 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
   final formKey = GlobalKey<FormState>();
   TextEditingController textController = TextEditingController();
 
-  String? _erroMsg;
-
   @override
   Widget build(BuildContext context) {
     final ImportarCertificadoProvider provider =
@@ -31,9 +31,10 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
         size: 50.r,
       ),
       title: Form(
+        onChanged: () => provider.limparErro(),
         key: formKey,
         child: TextFormField(
-          onTap: () => _erroMsg = null,
+          onChanged: (_) => provider.limparErro(),
           decoration: const InputDecoration(
               hintText: "Senha do certificado",
               labelText: "Senha do Certificado",
@@ -42,7 +43,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
           validator: Validatorless.multiple([
             Validatorless.required(
                 'Por favor, informe a senha do certificado.'),
-            (value) => _erroMsg
+            (value) => provider.errorMsg
           ]),
           obscureText: true,
           controller: textController,
@@ -58,7 +59,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
                     onPressed: () async {
                       if (formKey.currentState!.validate()) {
                         provider.senhaCertificado = textController.text;
-                        provider.importarCertificado();
+                        provider.importarCertificado(context);
                       }
                     },
                     label: "Confirmar",
@@ -74,7 +75,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
                 Expanded(
                   child: BotaoPadrao(
                     onPressed: () {
-                      Modular.to.navigate(AppRoutes.assinaturaDigitalRoute);
+                      Modular.to.pop();
                     },
                     label: "Cancelar",
                     filled: false,
