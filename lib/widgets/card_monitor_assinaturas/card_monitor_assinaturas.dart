@@ -137,7 +137,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                           child: Padding(
                             padding: EdgeInsets.all(8.r),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Column(
                                   mainAxisAlignment:
@@ -165,39 +165,18 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     ComponentCardOperacoes(
-                                        title: 'Data',
-                                        label: DateFormat("dd/MM/yyyy").format(
-                                            DateTime.parse(
-                                                assinatura.dataOperacao))),
+                                        title: 'Produto',
+                                        label: assinatura.siglaProduto,
+                                    crossAxisAligment: CrossAxisAlignment.end,),
                                     SizedBox(
                                       height: 10.h,
                                     ),
                                     ComponentCardOperacoes(
                                       title: 'Valor Bruto',
+                                      crossAxisAligment: CrossAxisAlignment.end,
                                       label: FormatarDinheiro.BR(
-                                          assinatura.valorBruto),
+                                          assinatura.valorBruto,),
                                     ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    ComponentCardOperacoes(
-                                        title: 'Produto',
-                                        label: assinatura.siglaProduto),
-                                    SizedBox(
-                                      height: 10.h,
-                                    ),
-                                    ComponentCardOperacoes(
-                                        title: 'Valor Liquido',
-                                        label: ValorLiquido
-                                            .regraExibirValorLiquido(
-                                                statusOperacao:
-                                                    assinatura.statusOperacao,
-                                                valor:
-                                                    assinatura.valorLiquido)),
                                   ],
                                 ),
                               ],

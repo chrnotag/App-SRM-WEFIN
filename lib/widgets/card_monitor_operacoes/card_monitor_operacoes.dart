@@ -49,7 +49,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                         child: Padding(
                           padding: EdgeInsets.all(8.r),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Column(
                                 mainAxisAlignment:
@@ -75,38 +75,18 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   ComponentCardOperacoes(
-                                      title: 'Data',
-                                      label: DateFormat("dd/MM/yyyy").format(
-                                          DateTime.parse(
-                                              operacao.dataOperacao))),
-                                  SizedBox(
-                                    height: 10.h,
-                                  ),
-                                  ComponentCardOperacoes(
-                                    title: 'Valor Bruto',
-                                    label: FormatarDinheiro.BR(
-                                        operacao.valorBruto),
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ComponentCardOperacoes(
+                                    crossAxisAligment: CrossAxisAlignment.end,
                                       title: 'Produto',
                                       label: operacao.siglaProduto),
                                   SizedBox(
                                     height: 10.h,
                                   ),
                                   ComponentCardOperacoes(
-                                      title: 'Valor Liquido',
-                                      label:
-                                          ValorLiquido.regraExibirValorLiquido(
-                                              statusOperacao:
-                                                  operacao.statusOperacao,
-                                              valor: operacao.valorLiquido)),
+                                    crossAxisAligment: CrossAxisAlignment.end,
+                                    title: 'Valor Bruto',
+                                    label: FormatarDinheiro.BR(
+                                        operacao.valorBruto),
+                                  ),
                                 ],
                               ),
                             ],
