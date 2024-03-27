@@ -106,42 +106,45 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                         authProviderAtt.RelogarTrocarCedente(
                             _searchResults![index].identificador, context);
                       },
-                      child: ListTile(
-                        title:  Text(
-                          _searchResults![index].nome,
-                          style: context.textTheme.bodyMedium,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                        ),
-                        subtitle:  CNPJText(
-                          cnpjOuCpf: _searchResults![index]
-                              .identificador,
-                        ),
-                        trailing: Visibility(
-                          visible: _searchResults![index]
-                              .assinaturaPendente >
-                              0,
-                          child: CircleAvatar(
-                              backgroundColor: Color(0xffF29146),
-                              radius: 15.r,
-                              child: Center(
-                                child: Text(
-                                    authProvider
-                                        .dataUser!
-                                        .listaCedente[index]
-                                        .assinaturaPendente >=
-                                        10
-                                        ? '9+'
-                                        : authProvider
-                                        .dataUser!
-                                        .listaCedente[index]
-                                        .assinaturaPendente
-                                        .toString(),
-                                    style: context
-                                        .textTheme.bodyMedium!
-                                        .copyWith(
-                                        color: Colors.white)),
-                              )),
+                      child: SizedBox(
+                        height: 70.h,
+                        child: ListTile(
+                          title:  Text(
+                            _searchResults![index].nome,
+                            style: context.textTheme.bodyMedium,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                          subtitle:  CNPJText(
+                            cnpjOuCpf: _searchResults![index]
+                                .identificador,
+                          ),
+                          trailing: Visibility(
+                            visible: _searchResults![index]
+                                .assinaturaPendente >
+                                0,
+                            child: CircleAvatar(
+                                backgroundColor: Color(0xffF29146),
+                                radius: 15.r,
+                                child: Center(
+                                  child: Text(
+                                      authProvider
+                                          .dataUser!
+                                          .listaCedente[index]
+                                          .assinaturaPendente >=
+                                          10
+                                          ? '9+'
+                                          : authProvider
+                                          .dataUser!
+                                          .listaCedente[index]
+                                          .assinaturaPendente
+                                          .toString(),
+                                      style: context
+                                          .textTheme.bodyMedium!
+                                          .copyWith(
+                                          color: Colors.white)),
+                                )),
+                          ),
                         ),
                       ),
                     );

@@ -7,9 +7,10 @@ class ComponentCardOperacoes extends StatelessWidget {
   final String title;
   final String label;
   final TextStyle? textStyle;
+  final CrossAxisAlignment? crossAxisAligment;
 
   const ComponentCardOperacoes(
-      {super.key, required this.title, required this.label, this.textStyle});
+      {super.key, required this.title, required this.label, this.textStyle, this.crossAxisAligment});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class ComponentCardOperacoes extends StatelessWidget {
       width: 110.w,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: crossAxisAligment ?? CrossAxisAlignment.start,
         children: [
           Text(
             title,
