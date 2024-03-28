@@ -15,18 +15,9 @@ final GlobalKey<NavigatorState> myNavigatorKey = GlobalKey<NavigatorState>();
 
 void main() {
   FlavorConfig flavorConfig = FlavorConfig();
-  String flavorSelecionado = flavorConfig.name ?? Ambiente.SRM_HOMOLOGACAO.name;
-  Environment environment = SrmHomologacaoEnvironment();
+  Ambiente ambienteSelecionado = Ambiente.values.firstWhere((e) => e.toString() == flavorConfig.name, orElse: () => Ambiente.SRM_HOMOLOGACAO);
+  Environment environment = ambienteSelecionado.getEnvironment();
 
-  if (flavorSelecionado == Ambiente.SRM_HOMOLOGACAO.name) {
-    environment = SrmHomologacaoEnvironment();
-  } else if (flavorSelecionado == Ambiente.SRM_PRODUCAO.name) {
-    environment = SrmProducaoEnvironment();
-  } else if (flavorSelecionado == Ambiente.TRUST_HOMOLOGACAO.name) {
-    environment = TrustHomologacaoEnvironment();
-  } else if (flavorSelecionado == Ambiente.TRUST_PRODUCAO.name) {
-    environment = TrustProducaoEnvironment();
-  }
 
   Modular.setNavigatorKey(myNavigatorKey);
   runApp(
