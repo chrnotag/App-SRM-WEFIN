@@ -1,56 +1,57 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
-import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
 
-class ThemeTRUST {
-  ThemeTRUST._();
+import 'tema_configs.dart';
 
-  static final ThemeTRUST _instance = ThemeTRUST._();
+class ThemeSRM {
+  ThemeSRM._();
 
-  factory ThemeTRUST() {
+  static final ThemeSRM _instance = ThemeSRM._();
+
+  factory ThemeSRM() {
     return _instance;
   }
 
   static ThemeData get theme => ThemeData(
-        primaryColor: AppColors.verdePrimarioTRUST,
-        indicatorColor: AppColors.verde,
-        focusColor: AppColors.verdePrimarioTRUST,
+        primaryColor: AppColors.azulPrimarioSRM,
+        indicatorColor: AppColors.azul,
+        focusColor: AppColors.laranjaSRM,
         searchBarTheme: SearchBarThemeData(
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.r)),
-                    side:
-                        const BorderSide(color: AppColors.verdePrimarioTRUST))),
+                const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    side: BorderSide.none)),
             constraints:
-                BoxConstraints.expand(width: double.infinity, height: 35.h),
+                BoxConstraints.expand(width: double.infinity, height: 50.h),
             hintStyle: MaterialStateProperty.all<TextStyle>(
                 GoogleFonts.montserrat(
-                    fontSize: AppSizes().bodyMedium,
+                    fontSize: AppSizes().bodyLarge,
                     color: AppColors.labelText)),
             textStyle:
                 MaterialStateProperty.all<TextStyle>(GoogleFonts.montserrat(
-              fontSize: AppSizes().bodySmall,
+              fontSize: AppSizes().bodyLarge,
             ))),
+        dialogBackgroundColor: Colors.white,
         colorScheme: ColorScheme(
             brightness: Brightness.light,
-            primary: AppColors.verdePrimarioTRUST,
+            primary: AppColors.azulPrimarioSRM,
             onPrimary: Colors.white,
-            secondary: AppColors.verdePrimarioTRUST,
-            onSecondary: AppColors.verdePrimarioTRUST,
+            secondary: Colors.white,
+            onSecondary: Colors.white,
             error: AppColors.vermelho,
             onError: Colors.redAccent.shade200,
-            background: Colors.white,
-            onBackground: AppColors.verdePrimarioTRUST,
+            background: AppColors.azulPrimarioSRM,
+            onBackground: AppColors.azulPrimarioSRM,
             surface: Colors.white,
             onSurface: Colors.black,
-            inverseSurface: Colors.black),
+            inverseSurface: Colors.white),
         appBarTheme: const AppBarTheme(
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
-            iconTheme: IconThemeData(color: AppColors.verdePrimarioTRUST)),
-        scaffoldBackgroundColor: Color(0xfff1f1f1),
-        backgroundColor: Colors.white,
+            iconTheme: IconThemeData(color: Colors.white)),
+        scaffoldBackgroundColor: AppColors.azul,
         textTheme: TextTheme(
           bodySmall: GoogleFonts.montserrat(fontSize: AppSizes().bodySmall),
           bodyMedium: GoogleFonts.montserrat(fontSize: AppSizes().bodyMedium),

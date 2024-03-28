@@ -1,4 +1,6 @@
 enum Ambiente{
-  Producao,
-  Homologacao
+  SRM_HOMOLOGACAO,
+  SRM_PRODUCAO,
+  TRUST_HOMOLOGACAO,
+  TRUST_PRODUCAO
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
-import '../core/constants/themes/theme_configs.dart';
+import '../core/constants/environment/homologacao/srm/tema_configs.dart';
 
 class ComponentCardOperacoes extends StatelessWidget {
   final String title;

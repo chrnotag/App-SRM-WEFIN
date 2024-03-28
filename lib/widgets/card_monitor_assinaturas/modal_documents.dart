@@ -8,7 +8,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
-import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
+import 'package:Srm_Asset/core/constants/environment/homologacao/srm/tema_configs.dart';
 import 'package:Srm_Asset/core/providers/documentos_provider/baixar_documentos_impl.dart';
 import 'package:Srm_Asset/core/providers/documentos_provider/baixar_documentos_provider.dart';
 import 'package:Srm_Asset/core/utils/overlay.dart';

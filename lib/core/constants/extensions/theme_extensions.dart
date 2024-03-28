@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
+import 'package:Srm_Asset/core/constants/environment/homologacao/srm/tema_configs.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../providers/theme_provider.dart';

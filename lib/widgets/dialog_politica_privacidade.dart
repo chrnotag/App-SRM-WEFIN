@@ -11,7 +11,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
-import '../core/constants/themes/theme_configs.dart';
+import '../core/constants/environment/homologacao/srm/tema_configs.dart';
 
 class AlertPoliticaPrivacidade extends StatefulWidget {
   const AlertPoliticaPrivacidade({super.key});

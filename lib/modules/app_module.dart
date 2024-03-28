@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/envirioment.dart';
 import 'package:Srm_Asset/modules/sem_conexao_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
@@ -18,6 +19,10 @@ import 'package:Srm_Asset/modules/home_module.dart';
 
 //Não há necessidade de mecher nesse código
 class AppModule extends Module {
+  final Environment environment;
+
+  AppModule(this.environment);
+
   @override
   void binds(Injector i) {
     i.addSingleton(SessionProvider.new);
@@ -32,6 +37,7 @@ class AppModule extends Module {
     i.addSingleton(AssinaturaEletronicaProvider.new);
     i.addSingleton(MonitorOperacoesProvider.new);
     i.addSingleton(BaixarDocumentosProvider.new);
+    i.addInstance(environment);
   }
 
   @override

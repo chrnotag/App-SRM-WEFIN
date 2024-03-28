@@ -1,7 +1,7 @@
 import 'package:Srm_Asset/core/utils/mostrar_botao_ver_assinatura.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
+import 'package:Srm_Asset/core/constants/environment/homologacao/srm/tema_configs.dart';
 import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:Srm_Asset/core/providers/monitor_operacao_provider/monitor_operacao_impl.dart';
 

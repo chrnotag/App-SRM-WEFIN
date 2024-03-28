@@ -1,8 +1,8 @@
 import 'package:Srm_Asset/core/constants/enuns/ambiente.dart';
 import 'package:flutter/material.dart';
 import 'package:Srm_Asset/core/constants/enuns/theme_enum.dart';
-import 'package:Srm_Asset/core/constants/themes/theme_srm.dart';
-import 'package:Srm_Asset/core/constants/themes/theme_trust.dart';
+import 'package:Srm_Asset/core/constants/environment/homologacao/srm/tema.dart';
+import 'package:Srm_Asset/core/constants/environment/homologacao/trust/tema.dart';
 import '../../generated/assets.dart';
 
 class ThemeProvider extends ChangeNotifier {
@@ -17,7 +17,7 @@ class ThemeProvider extends ChangeNotifier {
 
   Ambiente get ambienteSelecionado => _ambienteSelecionado;
 
-  TemaSelecionado _temaSelecionado = TemaSelecionado.SRM;
+  TemaSelecionado _temaSelecionado = TemaSelecionado.TRUST;
 
   ThemeData get temaAtual => _temaSelecionado == TemaSelecionado.SRM ? ThemeSRM.theme : ThemeTRUST.theme;
 

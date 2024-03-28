@@ -6,7 +6,7 @@ import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/providers/theme_provider.dart';
 import 'package:Srm_Asset/generated/assets.dart';
 
-import '../core/constants/themes/theme_configs.dart';
+import '../core/constants/environment/homologacao/srm/tema_configs.dart';
 
 class AppBarLogo extends StatelessWidget {
   final bool isPerfilVisivel;
