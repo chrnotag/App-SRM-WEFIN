@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:developer';
-
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,9 +18,8 @@ import 'package:Srm_Asset/models/fluxo_assinatura_model/iniciar_assinatura_eletr
 import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import 'package:Srm_Asset/widgets/popup_assinatura_feita.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
-import 'package:Srm_Asset/widgets/wefin_patterns/wefin_textfield.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:validatorless/validatorless.dart';
-
 import '../../../../models/fluxo_assinatura_model/iniciar_assinatura_eletronica/response/resposta_inic_ass_eletronica.dart';
 import '../../../../widgets/loader_widget.dart';
 import '../../../constants/route_labels.dart';
@@ -64,12 +62,21 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
   }
 
   Future<Geolocalizacao?> _pegarGeolocalizacao() async {
-    final posicao = await Geolocator.getCurrentPosition();
-
-    return Geolocalizacao(
-        latitude: posicao.latitude.toString(),
-        longitude: posicao.longitude.toString(),
-        precisao: posicao.accuracy.toString());
+    final permission = await Geolocator.requestPermission();
+    if(permission == PermissionStatus.denied){
+      log('permissao negada');
+      return null;
+    }
+    try {
+      final posicao = await Geolocator.getCurrentPosition();
+      log("localizacao: ${posicao.longitude}");
+      return Geolocalizacao(
+          latitude: posicao.latitude.toString(),
+          longitude: posicao.longitude.toString(),
+          precisao: posicao.accuracy.toString());
+    }catch (e, s){
+      log("Erro ao pegar localizacao $e, $s");
+    }
   }
 
   bool isErroAssinatura = false;
@@ -89,25 +96,27 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
   }
 
   Future<bool> _finalizarAssinatura(String codEmail) async {
-    bool permissaoConcedida = await HandlePermissions.permissaoLocalizacao();
-    if (permissaoConcedida) {
-      final geolocalizacao = await _pegarGeolocalizacao();
-      var model = FinalizarAssinaturaEletronicaModel(
-          codigoEmail: codEmail,
-          deslocamentoFusoHorarioUsuario:
-              DateTime.now().timeZoneOffset.inMinutes.toString(),
-          evidencias: Evidencias(geolocalizacao: geolocalizacao!),
-          chaveDocumento: respostaAssinaturaEletronica.chaveDocumento,
-          codigoOperacao: codigoOperacao,
-          idDocumentoLacuna: respostaAssinaturaEletronica.idDocumentoLacuna,
-          ticket: respostaAssinaturaEletronica.ticket);
-      final result =
-          await AssinaturaEletronicaImpl(assinaturaEletronicaModel: model)
-              .finalizarAssinatura();
-      if (result.error != null) {
-        return false;
-      }
-      return true;
+    try{
+        final geolocalizacao = await _pegarGeolocalizacao();
+        var model = FinalizarAssinaturaEletronicaModel(
+            codigoEmail: codEmail,
+            deslocamentoFusoHorarioUsuario:
+            DateTime.now().timeZoneOffset.inMinutes.toString(),
+            evidencias: Evidencias(geolocalizacao: geolocalizacao!),
+            chaveDocumento: respostaAssinaturaEletronica.chaveDocumento,
+            codigoOperacao: codigoOperacao,
+            idDocumentoLacuna: respostaAssinaturaEletronica.idDocumentoLacuna,
+            ticket: respostaAssinaturaEletronica.ticket);
+        final result =
+        await AssinaturaEletronicaImpl(assinaturaEletronicaModel: model)
+            .finalizarAssinatura();
+        if (result.error != null) {
+          return false;
+        }
+        return true;
+    }catch(e,s){
+      log("$e,$s");
+      return false;
     }
     return false;
   }
