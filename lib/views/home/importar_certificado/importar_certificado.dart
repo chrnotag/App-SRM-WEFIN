@@ -11,7 +11,7 @@ import 'package:Srm_Asset/widgets/transparent_appbar_empty.dart';
 import 'package:crosspki/crosspki.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 
-import '../../../core/constants/enuns/theme_enum.dart';
+import '../../../core/constants/enuns/plataforma_enum.dart';
 import '../../../core/providers/certificado_provider/baixar_certificado_impl.dart';
 import '../../../core/providers/certificado_provider/importar_certificado_provider.dart';
 import '../../../core/providers/theme_provider.dart';

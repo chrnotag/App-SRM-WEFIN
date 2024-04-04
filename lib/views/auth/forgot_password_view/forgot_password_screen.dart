@@ -4,11 +4,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
-import 'package:Srm_Asset/core/constants/environment/homologacao/srm/tema_configs.dart';
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
 import 'package:Srm_Asset/widgets/form_auth.dart';
 import 'package:Srm_Asset/widgets/transparent_appbar_empty.dart';
 
+import '../../../core/constants/tema_configs.dart';
 import '../../../generated/assets.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {

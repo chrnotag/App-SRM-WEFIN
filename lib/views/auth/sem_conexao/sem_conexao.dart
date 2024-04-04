@@ -1,12 +1,10 @@
+import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
-import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
-import 'package:Srm_Asset/core/providers/theme_provider.dart';
-
 import '../../../generated/assets.dart';
 
 class SemConexaoScreen extends StatefulWidget {
@@ -28,7 +26,7 @@ class _SemConexaoScreenState extends State<SemConexaoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeProvider themeProvider = Modular.get<ThemeProvider>();
+    Environment ambiente = Modular.get<Environment>();
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -41,7 +39,7 @@ class _SemConexaoScreenState extends State<SemConexaoScreen> {
             AppBar(
               centerTitle: true,
               title: Image.asset(
-                themeProvider.logoTemaAppBar,
+                ambiente.logoAppBar,
                 width: 70.w,
               ),
               backgroundColor: Colors.transparent,

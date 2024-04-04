@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
-
-import 'tema_configs.dart';
+import '../../../../../generated/assets.dart';
+import '../../../tema_configs.dart';
 
 class ThemeSRM {
   ThemeSRM._();
@@ -54,13 +53,20 @@ class ThemeSRM {
         scaffoldBackgroundColor: AppColors.azul,
         textTheme: TextTheme(
           bodySmall: GoogleFonts.montserrat(fontSize: AppSizes().bodySmall),
-          bodyMedium: GoogleFonts.montserrat(fontSize: AppSizes().bodyMedium),
+          bodyMedium: GoogleFonts.montserrat(fontSize: AppSizes().bodyMedium, color: Colors.white),
           bodyLarge: GoogleFonts.montserrat(fontSize: AppSizes().bodyLarge),
-          labelMedium: GoogleFonts.montserrat(fontSize: AppSizes().labelMedium),
+          labelMedium: GoogleFonts.montserrat(fontSize: AppSizes().labelMedium, color: AppColors.azul),
           displaySmall:
               GoogleFonts.montserrat(fontSize: AppSizes().displaySmall),
           displayMedium:
               GoogleFonts.montserrat(fontSize: AppSizes().displayMedium),
         ),
       );
+
+  static String get logo => 'assets/images/logo_srm.png';
+
+  static String get logoAppBar => 'assets/images/logo_srm.png';
+
+  static Widget get imagemAjuda =>
+      Image.asset(Assets.iconsIcCellCheck, width: 176.w, color: null);
 }

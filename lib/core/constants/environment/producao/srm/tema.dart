@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
-import 'package:Srm_Asset/core/constants/environment/homologacao/srm/tema_configs.dart';
+import 'package:Srm_Asset/core/constants/tema_configs.dart';
 
-class ThemeTRUST {
-  ThemeTRUST._();
+import '../../../../../generated/assets.dart';
 
-  static final ThemeTRUST _instance = ThemeTRUST._();
+class ThemeSRM {
+  ThemeSRM._();
 
-  factory ThemeTRUST() {
+  static final ThemeSRM _instance = ThemeSRM._();
+
+  factory ThemeSRM() {
     return _instance;
   }
 
@@ -62,4 +64,8 @@ class ThemeTRUST {
               GoogleFonts.montserrat(fontSize: AppSizes().displayMedium),
         ),
       );
+  static String get logo => 'assets/images/logo_srm.png';
+  static String get logoAppBar => 'assets/images/logo_srm.png';
+  static Widget get imagemAjuda =>
+      Image.asset(Assets.iconsIcCellCheck, width: 176.w, color: null);
 }

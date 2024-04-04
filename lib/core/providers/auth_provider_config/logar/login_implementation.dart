@@ -2,13 +2,11 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:http/http.dart' as http;
-import 'package:Srm_Asset/core/constants/endpoints.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
-import 'package:Srm_Asset/core/providers/theme_provider.dart';
-
 import '../../../../models/auth_login_models/SRM/usuario_logado_model.dart';
 import '../../../../models/exceptions_responses/exception_model.dart';
 import '../../../../models/user_model.dart';
+import '../../../constants/classes_abstratas/envirioment.dart';
 import '../../../implementations_config/api_response.dart';
 import '../../../implementations_config/error_response.dart';
 import '../../../implementations_config/sucess_response.dart';
@@ -17,15 +15,14 @@ class LoginImpl {
   final UserModel userModel;
 
   LoginImpl({required this.userModel});
-
+  Environment ambiente = Modular.get<Environment>();
   Future<ApiResponse<dynamic>> login() async {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
-    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
-    final url = EndPoints.login;
+    final url = ambiente.endpoints.login;
     final headers = {
       'Content-Type': 'application/json; charset=utf-8',
       'accept': 'application/json',
-      'plataforma': themeProvider.temaSelecionado.name
+      'plataforma': ambiente.plataforma.name
     };
     final body = json.encode(userModel.toJson());
     try {

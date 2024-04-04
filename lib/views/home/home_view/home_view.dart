@@ -109,7 +109,7 @@ class _HomeViewState extends State<HomeView> {
                                           0)
                                         CircleAvatar(
                                           radius: 15.r,
-                                          backgroundColor: AppColors.laranjaSRM,
+                                          backgroundColor: AppColors.destaque,
                                           child: Text(
                                             authProvider.empresaSelecionada!
                                                         .assinaturaPendente >

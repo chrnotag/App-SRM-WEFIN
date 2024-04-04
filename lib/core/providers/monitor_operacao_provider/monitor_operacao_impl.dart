@@ -1,28 +1,25 @@
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:Srm_Asset/core/constants/endpoints.dart';
 import 'package:Srm_Asset/core/implementations_config/export_impl.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:Srm_Asset/core/providers/monitor_operacao_provider/monitor_operacoes_provider.dart';
-import 'package:Srm_Asset/core/providers/theme_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:Srm_Asset/models/monitor_operacoes_model/monitor_operacoes_model.dart';
+import '../../constants/classes_abstratas/envirioment.dart';
 import '../../implementations_config/api_response.dart';
 import '../auth_provider_config/deslogar/verificar_sessao.dart';
 
 class MonitorOperacaoImpl {
   Future<ApiResponse<dynamic>> carregarOperacoes() async {
+    Environment ambiente = Modular.get<Environment>();
     AuthProvider authProvider = Modular.get<AuthProvider>();
-    ThemeProvider themeProvider = Modular.get<ThemeProvider>();
     final headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': authProvider.dataUser!.token,
-      'plataforma': themeProvider.temaSelecionado.name,
+      'plataforma': ambiente.plataforma.name,
     };
-    final url = Uri.parse(EndPoints.operacoes);
+    final url = Uri.parse(ambiente.endpoints.operacoes);
     try {
       final response = await http.get(url, headers: headers);
       switch (response.statusCode) {

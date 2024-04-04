@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
-import 'package:Srm_Asset/core/constants/environment/homologacao/srm/tema_configs.dart';
+import 'package:Srm_Asset/core/constants/tema_configs.dart';
+
+import '../../../../../generated/assets.dart';
 
 class ThemeTRUST {
   ThemeTRUST._();
@@ -16,6 +18,7 @@ class ThemeTRUST {
         primaryColor: AppColors.verdePrimarioTRUST,
         indicatorColor: AppColors.verde,
         focusColor: AppColors.verdePrimarioTRUST,
+
         searchBarTheme: SearchBarThemeData(
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
@@ -53,13 +56,17 @@ class ThemeTRUST {
         backgroundColor: Colors.white,
         textTheme: TextTheme(
           bodySmall: GoogleFonts.montserrat(fontSize: AppSizes().bodySmall),
-          bodyMedium: GoogleFonts.montserrat(fontSize: AppSizes().bodyMedium),
+          bodyMedium: GoogleFonts.montserrat(fontSize: AppSizes().bodyMedium, color: Colors.black),
           bodyLarge: GoogleFonts.montserrat(fontSize: AppSizes().bodyLarge),
-          labelMedium: GoogleFonts.montserrat(fontSize: AppSizes().labelMedium),
+          labelMedium: GoogleFonts.montserrat(fontSize: AppSizes().labelMedium, color: Colors.black),
           displaySmall:
               GoogleFonts.montserrat(fontSize: AppSizes().displaySmall),
           displayMedium:
               GoogleFonts.montserrat(fontSize: AppSizes().displayMedium),
         ),
       );
+  static String get logo => 'assets/images/logo_trust.png';
+  static String get logoAppBar => 'assets/images/logo_appbar_trust.png';
+  static Widget get imagemAjuda => Image.asset(Assets.imagesIcAjuda,
+      width: 176.w, color: AppColors.verdePrimarioTRUST);
 }

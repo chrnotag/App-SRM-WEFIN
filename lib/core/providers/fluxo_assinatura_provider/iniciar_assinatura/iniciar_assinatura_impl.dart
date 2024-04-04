@@ -1,9 +1,9 @@
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/iniciar_assinatura/iniciar_assinatura_provider.dart';
 import 'package:http/http.dart' as http;
-import 'package:Srm_Asset/core/providers/theme_provider.dart';
 import 'package:Srm_Asset/models/fluxo_assinatura_model/iniciar_assinatura/iniciar_assinatura.dart';
 import 'package:Srm_Asset/models/fluxo_assinatura_model/iniciar_assinatura/resposta_iniciar_assinatura.dart';
+import '../../../constants/classes_abstratas/envirioment.dart';
 import '../../../implementations_config/export_impl.dart';
 import '../../auth_provider_config/deslogar/verificar_sessao.dart';
 
@@ -13,16 +13,16 @@ class IniciarAssinaturaImpl {
   IniciarAssinaturaImpl({required this.iniciarAssinaturaModel});
 
   Future<ApiResponse<dynamic>> obterHashParaAssinar() async {
+    Environment ambiente = Modular.get<Environment>();
     AuthProvider authProvider = Modular.get<AuthProvider>();
     final IniciarAssinaturaProvider iniciarAssinaturaProvider =
         Modular.get<IniciarAssinaturaProvider>();
-    ThemeProvider themeProvider = Modular.get<ThemeProvider>();
-    final url = Uri.parse(EndPoints.iniciarAssinatura);
+    final url = Uri.parse(ambiente.endpoints.iniciarAssinatura);
     final headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': authProvider.dataUser!.token,
-      'plataforma': themeProvider.temaSelecionado.name
+      'plataforma': ambiente.plataforma.name
     };
     final body = json.encode(iniciarAssinaturaModel.toJson());
     log('body: $body');

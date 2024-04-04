@@ -1,5 +1,6 @@
 import 'dart:developer';
-
+import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
+import 'package:Srm_Asset/core/constants/enuns/ambiente.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -7,7 +8,6 @@ import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
-import 'package:Srm_Asset/core/providers/theme_provider.dart';
 import 'package:Srm_Asset/widgets/form_auth.dart';
 import '../../../generated/assets.dart';
 
@@ -34,9 +34,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Environment ambiente = Modular.get<Environment>();
     final bool isKeyboardVisible =
         MediaQuery.of(context).viewInsets.bottom != 0;
-    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
             if (isKeyboardVisible)
               AppBar(
                 title: Image.asset(
-                  themeProvider.logoTema,
+                  ambiente.logo,
                   width: 80.w,
                   fit: BoxFit.fill,
                 ),
@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Visibility(
                               visible: !isKeyboardVisible,
                               child: Image.asset(
-                                themeProvider.logoTema,
+                                ambiente.logo,
                                 width: 190.w,
                                 fit: BoxFit.fill,
                               ),
@@ -86,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: Text(
                                   "Seja bem vindo\nao seu app de gestão",
                                   style: context.textTheme.bodyLarge!
-                                      .copyWith(color: context.surface, fontWeight: FontWeight
+                                      .copyWith(color: context.inverseSurface, fontWeight: FontWeight
                                   .w400),
                                   textAlign: TextAlign.center,
                                 ),

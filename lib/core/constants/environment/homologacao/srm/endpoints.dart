@@ -1,50 +1,63 @@
-import 'package:Srm_Asset/core/constants/enuns/ambiente.dart';
-import 'package:Srm_Asset/core/providers/theme_provider.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:Srm_Asset/core/constants/classes_abstratas/abstract_endpoint.dart';
 
-class EndPoints {
-  EndPoints._();
+class EndPoints extends Endpoint{
 
-  static final ThemeProvider _themeProvider = Modular.get<ThemeProvider>();
+  @override
+  // TODO: implement assinatura
+  String get assinaturas => '$baseURL/assinaturas';
 
-  //EndPoints
-  static const baseURLProd = ' https://zuul.srmasset.com/direct/core-app-bff';
-  static const baseURLHomol =
-      'https://proxy-web-routers-homologacao.srmasset.com/direct/core-app-bff-homologacao/core-app-bff/v1';
+  @override
+  // TODO: implement baixarCertificadoQrCode
+  String get baixarCertificadoQrCode => "$baseURL/arquivos";
 
-  static final String baseURL =
-      _themeProvider.ambienteSelecionado == Ambiente.Homologacao
-          ? baseURLHomol
-          : baseURLProd;
+  @override
+  // TODO: implement baseURL
+  String get baseURL => 'https://proxy-web-routers-homologacao.srmasset.com/direct/core-app-bff-homologacao/core-app-bff/v1';
 
-  static final String login = '$baseURL/autenticacoes';
-  static final String assinatura = '$baseURL/assinaturas';
-  static final iniciarAssinatura = "$assinatura/iniciar-assinatura";
-  static final finalizarAssinatura = "$assinatura/finalizar-assinatura";
-  static final finalizarAssinaturaEletronica =
-      "$assinatura/finalizar-assinatura-eletronica";
-  static final recuperarSenha = "$login/recuperar-senha";
-  static final operacoes = "$baseURL/operacoes";
-  static final iniciarAssinaturaEletronica =
-      "$assinatura/iniciar-assinatura-eletronica";
+  @override
+  // TODO: implement finalizarAssinatura
+  String get finalizarAssinatura => "$assinaturas/finalizar-assinatura";
 
-  static montarUrlBaixarDocumento(int idAssinaturaDigital, bool visualizar) {
-    return Uri.parse(
-        "${EndPoints.assinatura}/$idAssinaturaDigital/arquivo?visualizar=$visualizar");
+  @override
+  // TODO: implement finalizarAssinaturaEletronica
+  String get finalizarAssinaturaEletronica => "$assinaturas/finalizar-assinatura-eletronica";
+
+  @override
+  // TODO: implement iniciarAssinatura
+  String get iniciarAssinatura => "$assinaturas/iniciar-assinatura";
+
+  @override
+  // TODO: implement iniciarAssinaturaEletronica
+  String get iniciarAssinaturaEletronica => "$assinaturas/iniciar-assinatura-eletronica";
+
+  @override
+  // TODO: implement login
+  String get login => '$baseURL/autenticacoes';
+
+  @override
+  Uri montarUrlBaixarDocumento(int idAssinaturaDigital, bool visualizar) {
+        return Uri.parse(
+            "$assinaturas/$idAssinaturaDigital/arquivo?visualizar=$visualizar");
   }
 
-  static final baixarCertificadoQrCode = "$baseURL/arquivos";
+  @override
+  // TODO: implement operacoes
+  String get operacoes => "$baseURL/operacoes";
 
-  //Urls Uteis
-  static final siteQrCode = _themeProvider.ambienteSelecionado ==
-          Ambiente.Homologacao
-      ? "https://srm-web-homebanking-homologacao.interno.srmasset.com/envio-certificado"
-      : 'https://homebanking.srmasset.com/envio-certificado';
-  static final politicaPrivacidade = _themeProvider.isTemaSRM
-      ? "https://srmasset.com/app/SRM_Politica-de-Privacidade-e-Tratamento-de-Dados-Pessoais.html"
-      : "https://trusthub.com.br/new/assets/documents/Trust-Politica-de-Privacidade-e-Tratamento-de-Dados-Pessoais.html";
+  @override
+  // TODO: implement politicaPrivacidade
+  String get politicaPrivacidade => "https://srmasset.com/app/SRM_Politica-de-Privacidade-e-Tratamento-de-Dados-Pessoais.html";
 
-  static final termosDeUso = _themeProvider.isTemaSRM
-      ? "https://www.srmasset.com/app/SRM_-_Termos_e_Condicoes_de_Uso.html"
-      : "https://trusthub.com.br/new/assets/documents/Trust_-_Termos_e_Condicoes_de_Uso_para_abertura_da_Conta_Digital.html";
+  @override
+  // TODO: implement recuperarSenha
+  String get recuperarSenha => "$login/recuperar-senha";
+
+  @override
+  // TODO: implement siteQrCode
+  String get siteQrCode => "https://srm-web-homebanking-homologacao.interno.srmasset.com/envio-certificado";
+
+  @override
+  // TODO: implement termosDeUso
+  String get termosDeUso => "https://www.srmasset.com/app/SRM_-_Termos_e_Condicoes_de_Uso.html";
+
 }

@@ -98,7 +98,7 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
                     children: [
                       Text('Lista de Documentos',
                           style: context.textTheme.bodyMedium!
-                              .copyWith(color: AppColors.azul)),
+                              .copyWith(color: AppColors.primario)),
                       Text('Operação ${widget.codigoOperacao}',
                           style: context.textTheme.bodySmall!.copyWith(
                             color: AppColors.labelText,
@@ -130,7 +130,7 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
                                   child: Text(
                                     "${documentosUnicos[index].nome}.pdf",
                                     style: context.textTheme.bodyMedium!
-                                        .copyWith(color: AppColors.azul),
+                                        .copyWith(color: AppColors.primario),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -198,7 +198,7 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
                                             'Ver',
                                             style: context.textTheme.bodySmall!
                                                 .copyWith(
-                                              color: AppColors.azul,
+                                              color: AppColors.primario,
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ),
@@ -243,7 +243,7 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
                                               style: context
                                                   .textTheme.bodySmall!
                                                   .copyWith(
-                                                color: AppColors.azul,
+                                                color: AppColors.primario,
                                                 fontWeight: FontWeight.w500,
                                               )),
                                         ),

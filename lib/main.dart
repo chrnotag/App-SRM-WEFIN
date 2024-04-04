@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:Srm_Asset/app_widget.dart';
-import 'envirioment.dart';
+import 'core/constants/classes_abstratas/envirioment.dart';
 import 'package:flutter_flavor/flutter_flavor.dart';
 import 'modules/app_module.dart';
 
@@ -11,9 +11,8 @@ final GlobalKey<NavigatorState> myNavigatorKey = GlobalKey<NavigatorState>();
 
 void main() {
   FlavorConfig flavorConfig = FlavorConfig();
-  Ambiente ambienteSelecionado = Ambiente.values.firstWhere((e) => e.toString() == flavorConfig.name, orElse: () => Ambiente.SRM_HOMOLOGACAO);
-  Environment environment = ambienteSelecionado.getEnvironment();
-
+  Ambiente ambienteSelecionado = Ambiente.values.firstWhere((ambiente) => ambiente.name == flavorConfig.name, orElse: () => Ambiente.SRM_HOMOLOGACAO);
+  Environment environment = ambienteSelecionado.getEnvironment;
   Modular.setNavigatorKey(myNavigatorKey);
   runApp(
     ScreenUtilInit(

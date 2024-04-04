@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/utils/abrir_url_externo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -63,8 +64,9 @@ class _AuthFormState extends State<AuthForm> {
 
   @override
   Widget build(BuildContext context) {
-    String politicaPrivacidade = EndPoints.politicaPrivacidade;
-    String termosDeUso = EndPoints.termosDeUso;
+    Environment ambiente = Modular.get<Environment>();
+    String politicaPrivacidade = ambiente.endpoints.politicaPrivacidade;
+    String termosDeUso = ambiente.endpoints.termosDeUso;
     return Form(
       key: _formKey,
       child: AutofillGroup(
