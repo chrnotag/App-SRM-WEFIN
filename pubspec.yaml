@@ -71,6 +71,7 @@ dependencies:
   flutter_barcode_scanner: ^2.0.0
   flutter_secure_storage: ^9.0.0
   flutter_flavor: ^3.1.3
+  flutter_flavorizr: ^2.2.3
 
 dependency_overrides:
   permission_handler: ^11.0.1
@@ -93,6 +94,55 @@ flutter_launcher_icons:
   ios: true
   image_path: "assets/images/splash_screen.png"
   min_sdk_android: 21
+
+flavorizr:
+  flavors:
+    SRM_PRODUCAO:
+      app:
+        name: "SRM_PRODUCAO"
+
+      android:
+        applicationId: "com.app.srm"
+        icon: "assets/images/splash_screen.png"
+        color: "#4AC64E"
+      ios:
+        bundleId: "com.srm.appsrm"
+        icon: "assets/images/splash_screen.png"
+        color: "#4AC64E"
+    SRM_HOMOLOGACAO:
+      app:
+        name: "SRM_HOMOLOGACAO"
+
+      android:
+        applicationId: "com.app.srm"
+        icon: "assets/images/splash_screen.png"
+        color: "#4AC64E"
+      ios:
+        bundleId: "com.srm.appsrm"
+        icon: "assets/images/splash_screen.png"
+        color: "#4AC64E"
+    TRUST_PRODUCAO:
+      app:
+        name: "TRUST_PRODUCAO"
+
+      android:
+        applicationId: "com.trust.trust_app"
+        icon: "assets/images/splash_screen.png"
+      ios:
+        bundleId: "com.app.apptrust"
+        icon: "assets/icons/logo_trust.png"
+        color: "#4AC64E"
+    TRUST_HOMOLOGACAO:
+      app:
+        name: "TRUST_HOMOLOGACAO"
+
+      android:
+        applicationId: "com.trust.trust_app"
+        icon: "assets/images/splash_screen.png"
+      ios:
+        bundleId: "com.app.apptrust"
+        icon: "assets/icons/logo_trust.png"
+        color: "#4AC64E"
 
 dev_dependencies:
   flutter_test:

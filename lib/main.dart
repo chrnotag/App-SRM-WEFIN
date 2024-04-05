@@ -1,28 +1,11 @@
-import 'package:Srm_Asset/core/constants/enuns/ambiente.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:Srm_Asset/app_widget.dart';
-import 'core/constants/classes_abstratas/envirioment.dart';
-import 'package:flutter_flavor/flutter_flavor.dart';
-import 'modules/app_module.dart';
+import 'app.dart';
+import 'package:Srm_Asset/flavors.dart';
 
-final GlobalKey<NavigatorState> myNavigatorKey = GlobalKey<NavigatorState>();
-
-void main() {
+FutureOr<void> main() async {
   FlavorConfig flavorConfig = FlavorConfig();
   Ambiente ambienteSelecionado = Ambiente.values.firstWhere((ambiente) => ambiente.name == flavorConfig.name, orElse: () => Ambiente.SRM_HOMOLOGACAO);
   Environment environment = ambienteSelecionado.getEnvironment;
-  Modular.setNavigatorKey(myNavigatorKey);
-  runApp(
-    ScreenUtilInit(
-      designSize: const Size(430, 932),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, child) => ModularApp(
-        module: AppModule(environment),
-        child: const AppWidget(),
-      ),
-    ),
-  );
+  runApp(const App());
 }
