@@ -1,15 +1,13 @@
-import 'package:Srm_Asset/core/constants/environment/homologacao/srm/tema_configs.dart';
 import 'package:Srm_Asset/core/utils/mostrar_botao_ver_assinatura.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:intl/intl.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/providers/monitor_operacao_provider/monitor_operacoes_provider.dart';
 import 'package:Srm_Asset/core/utils/money_format.dart';
-import 'package:Srm_Asset/core/utils/valor_liquido.dart';
 import 'package:Srm_Asset/models/monitor_operacoes_model/monitor_operacoes_model.dart';
+import '../../core/constants/tema_configs.dart';
 import '../../core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import '../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import '../component_card.dart';

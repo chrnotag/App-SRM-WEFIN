@@ -3,6 +3,6 @@ import 'flavors.dart';
 import 'main.dart' as runner;
 
 Future<void> main() async {
-  F.appFlavor = Flavor.srm_homologacao;
+  F.appFlavor = Flavor.SRM_HOMOLOGACAO;
   await runner.main();
 }

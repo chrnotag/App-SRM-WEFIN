@@ -1,4 +1,3 @@
-import 'package:Srm_Asset/core/constants/environment/homologacao/srm/tema_configs.dart';
 import 'package:Srm_Asset/views/home/assinaturas/widgets/popup_erro_carregar_dados.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -13,6 +12,7 @@ import 'package:Srm_Asset/widgets/botao_selecao_empresa.dart';
 import 'package:Srm_Asset/widgets/card_monitor_assinaturas/card_monitor_assinaturas.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
 
+import '../../../core/constants/tema_configs.dart';
 import '../../../core/implementations_config/api_response.dart';
 
 class MonitorAssinaturas extends StatefulWidget {

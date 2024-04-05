@@ -1,13 +1,9 @@
-import 'dart:developer';
-
-import 'package:Srm_Asset/core/constants/environment/homologacao/srm/tema_configs.dart';
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
-import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
@@ -15,7 +11,7 @@ import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_provide
 import 'package:Srm_Asset/generated/assets.dart';
 import 'package:Srm_Asset/widgets/appbar_logo_perfil.dart';
 import 'package:Srm_Asset/widgets/botao_selecao_empresa.dart';
-
+import '../../../core/constants/tema_configs.dart';
 import '../../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 
 class HomeView extends StatefulWidget {
@@ -109,7 +105,7 @@ class _HomeViewState extends State<HomeView> {
                                           0)
                                         CircleAvatar(
                                           radius: 15.r,
-                                          backgroundColor: AppColors.destaque,
+                                          backgroundColor: AppColors.laranjaSRM,
                                           child: Text(
                                             authProvider.empresaSelecionada!
                                                         .assinaturaPendente >

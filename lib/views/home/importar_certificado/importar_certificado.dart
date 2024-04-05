@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -10,11 +8,8 @@ import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/widgets/transparent_appbar_empty.dart';
 import 'package:crosspki/crosspki.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
-
-import '../../../core/constants/enuns/plataforma_enum.dart';
 import '../../../core/providers/certificado_provider/baixar_certificado_impl.dart';
 import '../../../core/providers/certificado_provider/importar_certificado_provider.dart';
-import '../../../core/providers/theme_provider.dart';
 import '../../../widgets/dialog_senha_certificado.dart';
 
 class ImportarCertificado extends StatelessWidget {

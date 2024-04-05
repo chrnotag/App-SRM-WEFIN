@@ -69,8 +69,6 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
                         children: [
                           InkWell(
                             onTap: () {
-                              themeProvider.temaSelecionado =
-                                  Plataforma.TRUST;
                               Modular.to.pushNamed(AppRoutes.loginAuthRoute);
                             },
                             child: Column(
@@ -104,8 +102,6 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
                           ),
                           InkWell(
                             onTap: () {
-                              themeProvider.temaSelecionado =
-                                  Plataforma.TRUST;
                               Modular.to.pushNamed(AppRoutes.loginAuthRoute);
                             },
                             child: Image.asset(

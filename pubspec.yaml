@@ -76,73 +76,40 @@ dependencies:
 dependency_overrides:
   permission_handler: ^11.0.1
 
-
-#Cor SRM:#2E477E
-#Cor Trust:#4AC64E
-#Imagem SRM: assets/images/splash_screen.png
-#Imagem Trust: assets/icons/logo_trust.png
-
-flutter_native_splash:
-  color: "#2E477E"
-  image: "assets/images/splash_screen.png"
-  android: true
-  ios: true
-  fullscreen: true
-
-flutter_launcher_icons:
-  android: "launcher_icon"
-  ios: true
-  image_path: "assets/images/splash_screen.png"
-  min_sdk_android: 21
-
 flavorizr:
   flavors:
     SRM_PRODUCAO:
       app:
-        name: "SRM_PRODUCAO"
+        name: "SRM"
 
       android:
         applicationId: "com.app.srm"
-        icon: "assets/images/splash_screen.png"
-        color: "#4AC64E"
       ios:
         bundleId: "com.srm.appsrm"
-        icon: "assets/images/splash_screen.png"
-        color: "#4AC64E"
     SRM_HOMOLOGACAO:
       app:
-        name: "SRM_HOMOLOGACAO"
+        name: "SRM"
 
       android:
         applicationId: "com.app.srm"
-        icon: "assets/images/splash_screen.png"
-        color: "#4AC64E"
       ios:
         bundleId: "com.srm.appsrm"
-        icon: "assets/images/splash_screen.png"
-        color: "#4AC64E"
     TRUST_PRODUCAO:
       app:
-        name: "TRUST_PRODUCAO"
+        name: "TRUST"
 
       android:
         applicationId: "com.trust.trust_app"
-        icon: "assets/images/splash_screen.png"
       ios:
         bundleId: "com.app.apptrust"
-        icon: "assets/icons/logo_trust.png"
-        color: "#4AC64E"
     TRUST_HOMOLOGACAO:
       app:
-        name: "TRUST_HOMOLOGACAO"
+        name: "TRUST"
 
       android:
         applicationId: "com.trust.trust_app"
-        icon: "assets/images/splash_screen.png"
       ios:
         bundleId: "com.app.apptrust"
-        icon: "assets/icons/logo_trust.png"
-        color: "#4AC64E"
 
 dev_dependencies:
   flutter_test:
@@ -201,7 +168,6 @@ flutter:
     - assets/images/
     - assets/images/2.0x/
     - assets/images/3.0x/
-    - assets/images/readme/
     - assets/img/
     - assets/icons/
 

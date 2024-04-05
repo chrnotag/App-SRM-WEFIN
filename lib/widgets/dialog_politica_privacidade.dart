@@ -1,17 +1,11 @@
-import 'dart:developer';
-
-import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/utils/overlay.dart';
-import 'package:Srm_Asset/widgets/pdfview.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-
-import '../core/constants/environment/homologacao/srm/tema_configs.dart';
 
 class AlertPoliticaPrivacidade extends StatefulWidget {
   const AlertPoliticaPrivacidade({super.key});

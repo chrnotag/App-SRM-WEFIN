@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:Srm_Asset/widgets/popup_generico.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -8,12 +6,12 @@ import 'package:line_icons/line_icons.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
-import 'package:Srm_Asset/core/constants/environment/homologacao/srm/tema_configs.dart';
 import 'package:Srm_Asset/core/providers/documentos_provider/baixar_documentos_impl.dart';
 import 'package:Srm_Asset/core/providers/documentos_provider/baixar_documentos_provider.dart';
 import 'package:Srm_Asset/core/utils/overlay.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 
+import '../../core/constants/tema_configs.dart';
 import '../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 
 class ModalListDocumento extends StatefulWidget {
@@ -98,7 +96,7 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
                     children: [
                       Text('Lista de Documentos',
                           style: context.textTheme.bodyMedium!
-                              .copyWith(color: AppColors.primario)),
+                              .copyWith(color: AppColors.azul)),
                       Text('Operação ${widget.codigoOperacao}',
                           style: context.textTheme.bodySmall!.copyWith(
                             color: AppColors.labelText,
@@ -130,7 +128,7 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
                                   child: Text(
                                     "${documentosUnicos[index].nome}.pdf",
                                     style: context.textTheme.bodyMedium!
-                                        .copyWith(color: AppColors.primario),
+                                        .copyWith(color: AppColors.azul),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -198,7 +196,7 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
                                             'Ver',
                                             style: context.textTheme.bodySmall!
                                                 .copyWith(
-                                              color: AppColors.primario,
+                                              color: AppColors.azul,
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ),
@@ -243,7 +241,7 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
                                               style: context
                                                   .textTheme.bodySmall!
                                                   .copyWith(
-                                                color: AppColors.primario,
+                                                color: AppColors.azul,
                                                 fontWeight: FontWeight.w500,
                                               )),
                                         ),

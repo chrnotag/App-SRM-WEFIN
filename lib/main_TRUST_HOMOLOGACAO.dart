@@ -3,6 +3,6 @@ import 'flavors.dart';
 import 'main.dart' as runner;
 
 Future<void> main() async {
-  F.appFlavor = Flavor.trust_homologacao;
+  F.appFlavor = Flavor.TRUST_HOMOLOGACAO;
   await runner.main();
 }

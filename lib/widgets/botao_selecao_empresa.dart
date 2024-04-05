@@ -6,8 +6,7 @@ import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
-
-import '../core/providers/theme_provider.dart';
+import '../flavors.dart';
 import '../generated/assets.dart';
 
 class SelecaoEmpresa extends StatelessWidget {
@@ -23,8 +22,7 @@ class SelecaoEmpresa extends StatelessWidget {
   });
 
   bool mostrarIconeTrocarCedente(){
-    final ThemeProvider themeProvider = Modular.get<ThemeProvider>();
-    return changeble && themeProvider.isTemaSRM;
+    return changeble && F.name == Flavor.SRM_PRODUCAO.name || F.name == Flavor.SRM_HOMOLOGACAO.name;
   }
 
   @override
@@ -37,7 +35,7 @@ class SelecaoEmpresa extends StatelessWidget {
           child: Text(
             tituloPagina,
             style: context.textTheme.bodyLarge!.copyWith(
-                color:  context.surface, fontWeight: FontWeight.w100),
+                color:  context.inverseSurface, fontWeight: FontWeight.w100),
           ),
         ),
         SizedBox(height: 8.h),
@@ -64,7 +62,7 @@ class SelecaoEmpresa extends StatelessWidget {
                     child: Text(
                       nomeEmpresa ?? "Nenhuma Empresa Selecionada",
                       style: context.textTheme.displaySmall!
-                          .copyWith(color: context.surface, fontWeight: FontWeight.w300),
+                          .copyWith(color: context.inverseSurface, fontWeight: FontWeight.w300),
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
 
