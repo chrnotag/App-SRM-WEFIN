@@ -19,6 +19,7 @@ class LoginImpl {
   Future<ApiResponse<dynamic>> login() async {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     final url = ambiente.endpoints.login;
+    print('teste plataforma: ${ambiente.plataforma.name}');
     final headers = {
       'Content-Type': 'application/json; charset=utf-8',
       'accept': 'application/json',
@@ -28,6 +29,7 @@ class LoginImpl {
     try {
       final response =
           await http.post(Uri.parse(url), headers: headers, body: body);
+      print('Response body: ${response.body}');
 log('data: ${response.body}');
       if (response.statusCode == 200) {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));

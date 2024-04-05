@@ -1,41 +1,132 @@
 @echo off
-:menu
+:build_or_emulate_menu
 cls
 echo.
+echo Escolha uma opção:
+echo 1 - Buildar o projeto (APK ou IPA)
+echo 2 - Emular o projeto
+echo.
+
+set /p build_or_emulate=Escolha uma opcao (1 ou 2) e pressione Enter:
+if "%build_or_emulate%"=="1" goto build_menu
+if "%build_or_emulate%"=="2" goto emulate_menu
+goto build_or_emulate_menu
+
+:build_menu
+cls
+echo.
+echo Escolha uma opcao de build:
+echo 1 - APK
+echo 2 - IPA
+echo.
+
+set /p build_option=Escolha uma opcao de build (1 ou 2) e pressione Enter:
+if "%build_option%"=="1" goto environment_menu
+if "%build_option%"=="2" goto environment_menu
+goto build_menu
+
+:emulate_menu
+cls
+echo.
+echo Escolha uma opcao de emulacao:
 echo 1 - SRM Homologacao
 echo 2 - SRM Producao
 echo 3 - TRUST Homologacao
 echo 4 - TRUST Producao
 echo.
-set /p opcao=Escolha uma opcao (1-4) e pressione Enter:
-if "%opcao%"=="1" goto SRM_HOMOLOGACAO
-if "%opcao%"=="2" goto SRM_PRODUCAO
-if "%opcao%"=="3" goto TRUST_HOMOLOGACAO
-if "%opcao%"=="4" goto TRUST_PRODUCAO
-goto menu
 
-:SRM_HOMOLOGACAO
+set /p emulate_option=Escolha uma opcao de emulacao (1-4) e pressione Enter (Padrão SRM Homologacao):
+if "%emulate_option%"=="" (
+    set emulate_option=1
+)
+
+if "%emulate_option%"=="1" goto SRM_HOMOLOGACAO_EMULATE
+if "%emulate_option%"=="2" goto SRM_PRODUCAO_EMULATE
+if "%emulate_option%"=="3" goto TRUST_HOMOLOGACAO_EMULATE
+if "%emulate_option%"=="4" goto TRUST_PRODUCAO_EMULATE
+goto emulate_menu
+
+:SRM_HOMOLOGACAO_EMULATE
 call flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_srm.yaml
 call dart run flutter_native_splash:create --path=configuracao_icone_splash_srm.yaml
 call flutter run --flavor SRM_HOMOLOGACAO -t lib/main_SRM_HOMOLOGACAO.dart
 goto end
 
-:SRM_PRODUCAO
+:SRM_PRODUCAO_EMULATE
 call flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_srm.yaml
 call dart run flutter_native_splash:create --path=configuracao_icone_splash_srm.yaml
 call flutter run --flavor SRM_PRODUCAO -t lib/main_SRM_PRODUCAO.dart
 goto end
 
-:TRUST_HOMOLOGACAO
+:TRUST_HOMOLOGACAO_EMULATE
 call flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_trust.yaml
 call dart run flutter_native_splash:create --path=configuracao_icone_splash_trust.yaml
 call flutter run --flavor TRUST_HOMOLOGACAO -t lib/main_TRUST_HOMOLOGACAO.dart
 goto end
 
-:TRUST_PRODUCAO
+:TRUST_PRODUCAO_EMULATE
 call flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_trust.yaml
 call dart run flutter_native_splash:create --path=configuracao_icone_splash_trust.yaml
 call flutter run --flavor TRUST_PRODUCAO -t lib/main_TRUST_PRODUCAO.dart
 goto end
 
-:end
+:environment_menu
+cls
+echo.
+echo Escolha uma opcao de ambiente:
+echo 1 - SRM Homologacao
+echo 2 - SRM Producao
+echo 3 - TRUST Homologacao
+echo 4 - TRUST Producao
+echo.
+
+set /p environment_option=Escolha uma opcao de ambiente (1-4) e pressione Enter (Padrão SRM Homologacao):
+if "%environment_option%"=="" (
+    set environment_option=1
+)
+
+if "%environment_option%"=="1" goto SRM_HOMOLOGACAO
+if "%environment_option%"=="2" goto SRM_PRODUCAO
+if "%environment_option%"=="3" goto TRUST_HOMOLOGACAO
+if "%environment_option%"=="4" goto TRUST_PRODUCAO
+goto environment_menu
+
+:SRM_HOMOLOGACAO
+call flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_srm.yaml
+call dart run flutter_native_splash:create --path=configuracao_icone_splash_srm.yaml
+if "%build_option%"=="1" (
+    call flutter build apk --flavor SRM_HOMOLOGACAO -t lib/main_SRM_HOMOLOGACAO.dart
+) else (
+    call flutter build ios --flavor SRM_HOMOLOGACAO -t lib/main_SRM_HOMOLOGACAO.dart
+)
+goto end
+
+:SRM_PRODUCAO
+call flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_srm.yaml
+call dart run flutter_native_splash:create --path=configuracao_icone_splash_srm.yaml
+if "%build_option%"=="1" (
+    call flutter build apk --flavor SRM_PRODUCAO -t lib/main_SRM_PRODUCAO.dart
+) else (
+    call flutter build ios --flavor SRM_PRODUCAO -t lib/main_SRM_PRODUCAO.dart
+)
+goto end
+
+:TRUST_HOMOLOGACAO
+call flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_trust.yaml
+call dart run flutter_native_splash:create --path=configuracao_icone_splash_trust.yaml
+if "%build_option%"=="1" (
+    call flutter build apk --flavor TRUST_HOMOLOGACAO -t lib/main_TRUST_HOMOLOGACAO.dart
+) else (
+    call flutter build ios --flavor TRUST_HOMOLOGACAO -t lib/main_TRUST_HOMOLOGACAO.dart
+)
+goto end
+
+:TRUST_PRODUCAO
+call flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_trust.yaml
+call dart run flutter_native_splash:create --path=configuracao_icone_splash_trust.yaml
+if "%build_option%"=="1" (
+    call flutter build apk --flavor TRUST_PRODUCAO -t lib/main_TRUST_PRODUCAO.dart
+) else (
+    call flutter build ios --flavor TRUST_PRODUCAO -t lib/main_TRUST_PRODUCAO.dart
+)
+goto end

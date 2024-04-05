@@ -53,9 +53,9 @@ class ThemeSRM {
         scaffoldBackgroundColor: AppColors.azul,
         textTheme: TextTheme(
           bodySmall: GoogleFonts.montserrat(fontSize: AppSizes().bodySmall),
-          bodyMedium: GoogleFonts.montserrat(fontSize: AppSizes().bodyMedium, color: Colors.white),
+          bodyMedium: GoogleFonts.montserrat(fontSize: AppSizes().bodyMedium),
           bodyLarge: GoogleFonts.montserrat(fontSize: AppSizes().bodyLarge),
-          labelMedium: GoogleFonts.montserrat(fontSize: AppSizes().labelMedium, color: AppColors.azul),
+          labelMedium: GoogleFonts.montserrat(fontSize: AppSizes().labelMedium),
           displaySmall:
               GoogleFonts.montserrat(fontSize: AppSizes().displaySmall),
           displayMedium:

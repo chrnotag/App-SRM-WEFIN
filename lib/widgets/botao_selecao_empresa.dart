@@ -6,6 +6,7 @@ import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
+import 'package:line_icons/line_icons.dart';
 import '../flavors.dart';
 import '../generated/assets.dart';
 
@@ -72,10 +73,10 @@ class SelecaoEmpresa extends StatelessWidget {
                     visible: mostrarIconeTrocarCedente(),
                     child: Padding(
                         padding: EdgeInsets.only(right: 8.w),
-                        child: SvgPicture.asset(
-                          Assets.iconsIcChangeCnpj,
+                        child: Icon(
+                          LineIcons.alternateExchange,
                           color: context.onSecondary,
-                          width: 22.w,
+                          size: 22.w,
                         )),
                   ),
                 ],
