@@ -87,28 +87,28 @@ class _AuthFormState extends State<AuthForm> {
                     (value) => _mensagemErro
                   ]),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 50.h),
-                  child: WefinTextFormField(
-                    autofillHint: AutofillHints.password,
-                    inputFormatters: !widget.visible ? _cnpjFormatter : null,
-                    onTap: () => _mensagemErro = null,
-                    label:
-                        widget.visible ? 'Digite sua Senha' : 'Digite seu CNPJ',
-                    obscureText: widget.visible,
-                    controller: _passwordEC,
-                    validator: Validatorless.multiple([
-                      Validatorless.required(!widget.visible
-                          ? 'CNPJ Obrigatório'
-                          : 'Senha obrigatória'),
-                      if (widget.visible)
-                        Validatorless.max(10, 'Maximo de 10 caracteres.'),
-                      if (!widget.visible) Validatorless.cnpj('CNPJ Inválido!'),
-                      if (widget.visible)
-                        Validatorless.min(
-                            3, 'Senha com no mínimo 3 e máximo 10 caracteres.'),
-                      (value) => _mensagemErro
-                    ]),
+                Visibility(
+                  visible: widget.visible,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 50.h),
+                    child: WefinTextFormField(
+                      autofillHint: AutofillHints.password,
+                      inputFormatters: !widget.visible ? _cnpjFormatter : null,
+                      onTap: () => _mensagemErro = null,
+                      label:
+                          'Digite sua Senha',
+                      obscureText: widget.visible,
+                      controller: _passwordEC,
+                      validator: Validatorless.multiple([
+                        Validatorless.required('Senha obrigatória'),
+                        if (widget.visible)
+                          Validatorless.max(10, 'Maximo de 10 caracteres.'),
+                        if (widget.visible)
+                          Validatorless.min(
+                              3, 'Senha com no mínimo 3 e máximo 10 caracteres.'),
+                        (value) => _mensagemErro
+                      ]),
+                    ),
                   ),
                 ),
               ],
@@ -240,7 +240,6 @@ class _AuthFormState extends State<AuthForm> {
         OverlayApp.iniciaOverlay(context);
       });
       recuperarSenhaProvider.dadosUsuario = RecuperarSenhaModel(
-          identificadorCedente: removerMascaraCNPJ(_passwordEC.text),
           usuario: _loginEC.text);
       final response = await recuperarSenhaProvider.recuperarSenha();
       OverlayApp.terminaOverlay();
