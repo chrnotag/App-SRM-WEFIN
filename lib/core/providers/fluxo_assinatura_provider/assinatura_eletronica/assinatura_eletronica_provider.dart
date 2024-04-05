@@ -110,10 +110,7 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
         final result =
         await AssinaturaEletronicaImpl(assinaturaEletronicaModel: model)
             .finalizarAssinatura();
-        if (result.error != null) {
-          return false;
-        }
-        return true;
+        return result.error == null;
     }catch(e,s){
       log("$e,$s");
       return false;
