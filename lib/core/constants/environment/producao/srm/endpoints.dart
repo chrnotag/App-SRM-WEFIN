@@ -1,6 +1,6 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/abstract_endpoint.dart';
 
-class EndPoints extends Endpoint{
+class EndPointsSRM extends Endpoint{
 
   @override
   // TODO: implement assinatura
@@ -54,7 +54,7 @@ class EndPoints extends Endpoint{
 
   @override
   // TODO: implement siteQrCode
-  String get siteQrCode => "https://srm-web-homebanking-homologacao.interno.srmasset.com/envio-certificado";
+  String get siteQrCode => "https://homebanking.srmasset.com/envio-certificado";
 
   @override
   // TODO: implement termosDeUso

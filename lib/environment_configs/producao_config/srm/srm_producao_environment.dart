@@ -11,7 +11,7 @@ import '../../../core/constants/enuns/plataforma_enum.dart';
 class SrmProducaoEnvironment extends Environment {
   const SrmProducaoEnvironment();
   @override
-  Endpoint get endpoints => EndPoints();
+  Endpoint get endpoints => EndPointsSRM();
 
   @override
   ThemeData get tema => ThemeSRM.theme;
@@ -34,5 +34,5 @@ class SrmProducaoEnvironment extends Environment {
 
   @override
   // TODO: implement contatos
-  ContatosAbstract get contatos => Contatos();
+  ContatosAbstract get contatos => ContatosSRM();
 }

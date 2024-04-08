@@ -71,4 +71,7 @@ class ThemeTRUST {
 
   static Widget get imagemAjuda => Image.asset(Assets.imagesIcAjuda,
       width: 176.w, color: AppColors.verdePrimarioTRUST);
+  static Color get brancoOuVerde => AppColors.verde;
+  static Color get azulOuPreto => Colors.black;
+  static Color get verdeOuCinza => AppColors.cinzaEscuro;
 }

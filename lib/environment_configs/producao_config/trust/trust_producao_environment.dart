@@ -11,7 +11,7 @@ import '../../../core/constants/enuns/plataforma_enum.dart';
 class TrustProducaoEnvironment extends Environment {
   const TrustProducaoEnvironment();
   @override
-  Endpoint get endpoints => EndPoints();
+  Endpoint get endpoints => EndPointsTRUST();
 
   @override
   ThemeData get tema => ThemeTRUST.theme;
@@ -34,5 +34,5 @@ class TrustProducaoEnvironment extends Environment {
 
   @override
   // TODO: implement contatos
-  ContatosAbstract get contatos => Contatos();
+  ContatosAbstract get contatos => ContatosTRUST();
 }

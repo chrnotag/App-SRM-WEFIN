@@ -10,7 +10,7 @@ import '../../../core/constants/enuns/plataforma_enum.dart';
 class TrustHomologacaoEnvironment extends Environment {
   const TrustHomologacaoEnvironment();
   @override
-  Endpoint get endpoints => EndPoints();
+  Endpoint get endpoints => EndPointsTRUST();
 
   @override
   ThemeData get tema => ThemeTRUST.theme;
@@ -33,5 +33,5 @@ class TrustHomologacaoEnvironment extends Environment {
 
   @override
   // TODO: implement contatos
-  Contatos get contatos => Contatos();
+  ContatosTRUST get contatos => ContatosTRUST();
 }

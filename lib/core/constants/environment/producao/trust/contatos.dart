@@ -1,6 +1,6 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/contatos_abstract.dart';
 
-class Contatos extends ContatosAbstract{
+class ContatosTRUST extends ContatosAbstract{
   @override
   // TODO: implement email
   String get email => 'atendimento@trusthub.com.br';

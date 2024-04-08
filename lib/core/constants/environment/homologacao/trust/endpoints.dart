@@ -1,6 +1,6 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/abstract_endpoint.dart';
 
-class EndPoints extends Endpoint{
+class EndPointsTRUST extends Endpoint{
   @override
   // TODO: implement assinatura
   String get assinaturas => '$baseURL/assinaturas';

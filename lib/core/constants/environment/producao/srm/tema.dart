@@ -68,4 +68,7 @@ class ThemeSRM {
   static String get logoAppBar => 'assets/images/logo_srm.png';
   static Widget get imagemAjuda =>
       Image.asset(Assets.iconsIcCellCheck, width: 176.w, color: null);
+  static Color get brancoOuVerde => Colors.white;
+  static Color get azulOuPreto => AppColors.azul;
+  static Color get verdeOuCinza => AppColors.verdePrimarioTRUST;
 }

@@ -1,6 +1,6 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/abstract_endpoint.dart';
 
-class EndPoints extends Endpoint{
+class EndPointsSRM extends Endpoint{
 
   @override
   // TODO: implement assinatura
