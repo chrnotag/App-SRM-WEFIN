@@ -55,7 +55,7 @@ goto end
 :SRM_PRODUCAO_EMULATE
 call flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_srm.yaml
 call dart run flutter_native_splash:create --path=configuracao_icone_splash_srm.yaml
-call flutter run --flavor SRM_PRODUCAO -t lib/main_SRM_PRODUCAO.dart
+call flutter run --flavor SRM -t lib/main_SRM_PRODUCAO.dart
 goto end
 
 :TRUST_HOMOLOGACAO_EMULATE
@@ -67,7 +67,7 @@ goto end
 :TRUST_PRODUCAO_EMULATE
 call flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_trust.yaml
 call dart run flutter_native_splash:create --path=configuracao_icone_splash_trust.yaml
-call flutter run --flavor TRUST_PRODUCAO -t lib/main_TRUST_PRODUCAO.dart
+call flutter run --flavor TRUST -t lib/main_TRUST_PRODUCAO.dart
 goto end
 
 :environment_menu
@@ -105,9 +105,9 @@ goto end
 call flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_srm.yaml
 call dart run flutter_native_splash:create --path=configuracao_icone_splash_srm.yaml
 if "%build_option%"=="1" (
-    call flutter build apk --flavor SRM_PRODUCAO -t lib/main_SRM_PRODUCAO.dart
+    call flutter build apk --flavor SRM -t lib/main_SRM_PRODUCAO.dart
 ) else (
-    call flutter build ios --flavor SRM_PRODUCAO -t lib/main_SRM_PRODUCAO.dart
+    call flutter build ios --flavor SRM -t lib/main_SRM_PRODUCAO.dart
 )
 goto end
 
@@ -125,8 +125,8 @@ goto end
 call flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_trust.yaml
 call dart run flutter_native_splash:create --path=configuracao_icone_splash_trust.yaml
 if "%build_option%"=="1" (
-    call flutter build apk --flavor TRUST_PRODUCAO -t lib/main_TRUST_PRODUCAO.dart
+    call flutter build apk --flavor TRUST -t lib/main_TRUST_PRODUCAO.dart
 ) else (
-    call flutter build ios --flavor TRUST_PRODUCAO -t lib/main_TRUST_PRODUCAO.dart
+    call flutter build ios --flavor TRUST -t lib/main_TRUST_PRODUCAO.dart
 )
 goto end

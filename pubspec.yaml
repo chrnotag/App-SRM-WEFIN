@@ -78,7 +78,7 @@ dependency_overrides:
 
 flavorizr:
   flavors:
-    SRM_PRODUCAO:
+    SRM:
       app:
         name: "SRM"
 
@@ -94,7 +94,7 @@ flavorizr:
         applicationId: "com.app.srm"
       ios:
         bundleId: "com.srm.appsrm"
-    TRUST_PRODUCAO:
+    TRUST:
       app:
         name: "TRUST"
 
