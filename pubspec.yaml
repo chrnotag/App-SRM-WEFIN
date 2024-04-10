@@ -81,35 +81,34 @@ flavorizr:
     SRM:
       app:
         name: "SRM"
-
       android:
         applicationId: "com.app.srm"
       ios:
         bundleId: "com.srm.appsrm"
+
     SRM_HOMOLOGACAO:
       app:
-        name: "SRM"
-
+        name: "SRM Homologação"
       android:
-        applicationId: "com.app.srm"
+        applicationId: "com.homol.srm"
       ios:
-        bundleId: "com.srm.appsrm"
+        bundleId: "com.homol.appsrm"
+
     TRUST:
       app:
         name: "TRUST"
-
       android:
         applicationId: "com.trust.trust_app"
       ios:
         bundleId: "com.app.apptrust"
+
     TRUST_HOMOLOGACAO:
       app:
-        name: "TRUST"
-
+        name: "TRUST Homologação"
       android:
-        applicationId: "com.trust.trust_app"
+        applicationId: "com.homol.trust_app"
       ios:
-        bundleId: "com.app.apptrust"
+        bundleId: "com.homol.apptrust"
 
 dev_dependencies:
   flutter_test:

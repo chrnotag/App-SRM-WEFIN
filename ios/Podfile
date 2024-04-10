@@ -5,15 +5,15 @@
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 
 project 'Runner', {
-  'Debug-SRM_PRODUCAO' => :debug,
-  'Profile-SRM_PRODUCAO' => :release,
-  'Release-SRM_PRODUCAO' => :release,
+  'Debug-SRM' => :debug,
+  'Profile-SRM' => :release,
+  'Release-SRM' => :release,
   'Debug-SRM_HOMOLOGACAO' => :debug,
   'Profile-SRM_HOMOLOGACAO' => :release,
   'Release-SRM_HOMOLOGACAO' => :release,
-  'Debug-TRUST_PRODUCAO' => :debug,
-  'Profile-TRUST_PRODUCAO' => :release,
-  'Release-TRUST_PRODUCAO' => :release,
+  'Debug-TRUST' => :debug,
+  'Profile-TRUST' => :release,
+  'Release-TRUST' => :release,
   'Debug-TRUST_HOMOLOGACAO' => :debug,
   'Profile-TRUST_HOMOLOGACAO' => :release,
   'Release-TRUST_HOMOLOGACAO' => :release,
