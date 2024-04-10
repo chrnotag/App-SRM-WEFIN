@@ -3,9 +3,8 @@ part 'recuperar_senha_model.g.dart';
 
 @JsonSerializable()
 class RecuperarSenhaModel{
-  String identificadorCedente;
   String usuario;
-  RecuperarSenhaModel({required this.identificadorCedente, required this.usuario});
+  RecuperarSenhaModel({required this.usuario});
 
   factory RecuperarSenhaModel.fromJson(Map<String, dynamic> json) => _$RecuperarSenhaModelFromJson(json);
 

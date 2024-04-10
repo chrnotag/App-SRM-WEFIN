@@ -7,7 +7,7 @@
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>
-		<string>SRM</string>
+		<string>TRUST</string>
 		<key>CFBundleExecutable</key>
 		<string>$(EXECUTABLE_NAME)</string>
 		<key>CFBundleIdentifier</key>
@@ -26,7 +26,7 @@
 		<true/>
 		<key>NSCameraUsageDescription</key>
 		<string>This app uses the camera to read QR codes to import certificates.</string>
-		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+		<key>NSLocationAlwaysUsageDescription</key>
 		<string>This app needs to access your location to sign operations.</string>
 		<key>NSLocationWhenInUseUsageDescription</key>
 		<string>This app needs to access your location to sign operations.</string>
@@ -40,6 +40,8 @@
 		<string>LaunchScreen</string>
 		<key>UIMainStoryboardFile</key>
 		<string>Main</string>
+		<key>UIRequiresFullScreen</key>
+		<true/>
 		<key>UIStatusBarHidden</key>
 		<true/>
 		<key>UISupportedInterfaceOrientations</key>

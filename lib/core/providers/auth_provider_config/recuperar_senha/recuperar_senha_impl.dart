@@ -18,6 +18,8 @@ class RecuperarSenhaImpl {
     final url = Uri.parse(ambiente.endpoints.recuperarSenha);
     try {
       final response = await http.post(url, headers: headers, body: body);
+      log('status Code: ${response.statusCode}');
+      log('body: ${response.body}');
       switch (response.statusCode) {
         case 204:
           return SucessResponse(null);
