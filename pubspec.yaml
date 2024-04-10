@@ -78,7 +78,7 @@ dependency_overrides:
 
 flavorizr:
   flavors:
-    SRM:
+    SRM_PRODUCAO:
       app:
         name: "SRM"
       android:
@@ -94,7 +94,7 @@ flavorizr:
       ios:
         bundleId: "com.homol.appsrm"
 
-    TRUST:
+    TRUST_PRODUCAO:
       app:
         name: "TRUST"
       android:

@@ -21,7 +21,7 @@ class SelecaoEmpresa extends StatelessWidget {
   });
 
   bool mostrarIconeTrocarCedente(){
-    return changeble && F.name == Flavor.SRM.name || F.name == Flavor.SRM_HOMOLOGACAO.name;
+    return changeble && F.name == Flavor.SRM_PRODUCAO.name || F.name == Flavor.SRM_HOMOLOGACAO.name;
   }
 
   @override

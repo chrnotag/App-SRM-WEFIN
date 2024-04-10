@@ -6,9 +6,9 @@ import 'environment_configs/producao_config/trust/trust_producao_environment.dar
 
 enum Flavor {
   SRM_HOMOLOGACAO(SrmHomologacaoEnvironment()),
-  SRM(SrmProducaoEnvironment()),
+  SRM_PRODUCAO(SrmProducaoEnvironment()),
   TRUST_HOMOLOGACAO(TrustHomologacaoEnvironment()),
-  TRUST(TrustProducaoEnvironment());
+  TRUST_PRODUCAO(TrustProducaoEnvironment());
   final Environment environment;
   const Flavor(this.environment);
   Environment get getEnvironment => this.environment;
