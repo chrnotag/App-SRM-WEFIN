@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -13,12 +11,11 @@ import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/iniciar_assin
 import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:Srm_Asset/core/providers/certificado_provider/importar_certificado_provider.dart';
 import 'package:Srm_Asset/core/utils/money_format.dart';
-import 'package:Srm_Asset/core/utils/valor_liquido.dart';
 import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import 'package:Srm_Asset/widgets/card_monitor_assinaturas/fixed_card.dart';
 import 'package:Srm_Asset/widgets/card_monitor_assinaturas/modal_documents.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
-import '../../core/constants/themes/theme_configs.dart';
+import '../../core/constants/tema_configs.dart';
 import '../component_card.dart';
 import 'expansible_card.dart';
 

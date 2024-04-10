@@ -1,0 +1,4 @@
+enum Plataforma{
+  TRUST,
+  SRM
+}

@@ -1,10 +1,10 @@
 import 'package:Srm_Asset/core/utils/lista_execao_tempo_sessao.dart';
+import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:Srm_Asset/core/providers/internet_provider.dart';
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
-import 'package:Srm_Asset/core/providers/theme_provider.dart';
 
 class AppWidget extends StatefulWidget {
   const AppWidget({super.key});
@@ -73,7 +73,7 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeProvider themeProvider = context.watch<ThemeProvider>();
+    final Environment ambiente = Modular.get<Environment>();
     return Listener(
       onPointerDown: (event) {
         if (!ListaExecaoTimeOut.routes.contains(Modular.to.path)) {
@@ -94,7 +94,7 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
         child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
           routerConfig: Modular.routerConfig,
-          theme: themeProvider.temaAtual,
+          theme: ambiente.tema,
         ),
       ),
     );

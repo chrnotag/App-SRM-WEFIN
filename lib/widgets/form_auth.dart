@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/utils/abrir_url_externo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -8,7 +9,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
-import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
 import 'package:Srm_Asset/core/implementations_config/export_impl.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/recuperar_senha/recuperar_senha_provider.dart';
@@ -20,7 +20,7 @@ import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_textfield.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:validatorless/validatorless.dart';
-import '../core/providers/theme_provider.dart';
+import '../core/constants/tema_configs.dart';
 import '../generated/assets.dart';
 import 'link_component.dart';
 
@@ -63,8 +63,9 @@ class _AuthFormState extends State<AuthForm> {
 
   @override
   Widget build(BuildContext context) {
-    String politicaPrivacidade = EndPoints.politicaPrivacidade;
-    String termosDeUso = EndPoints.termosDeUso;
+    Environment ambiente = Modular.get<Environment>();
+    String politicaPrivacidade = ambiente.endpoints.politicaPrivacidade;
+    String termosDeUso = ambiente.endpoints.termosDeUso;
     return Form(
       key: _formKey,
       child: AutofillGroup(
@@ -87,28 +88,28 @@ class _AuthFormState extends State<AuthForm> {
                     (value) => _mensagemErro
                   ]),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 50.h),
-                  child: WefinTextFormField(
-                    autofillHint: AutofillHints.password,
-                    inputFormatters: !widget.visible ? _cnpjFormatter : null,
-                    onTap: () => _mensagemErro = null,
-                    label:
-                        widget.visible ? 'Digite sua Senha' : 'Digite seu CNPJ',
-                    obscureText: widget.visible,
-                    controller: _passwordEC,
-                    validator: Validatorless.multiple([
-                      Validatorless.required(!widget.visible
-                          ? 'CNPJ Obrigatório'
-                          : 'Senha obrigatória'),
-                      if (widget.visible)
-                        Validatorless.max(10, 'Maximo de 10 caracteres.'),
-                      if (!widget.visible) Validatorless.cnpj('CNPJ Inválido!'),
-                      if (widget.visible)
-                        Validatorless.min(
-                            3, 'Senha com no mínimo 3 e máximo 10 caracteres.'),
-                      (value) => _mensagemErro
-                    ]),
+                Visibility(
+                  visible: widget.visible,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 50.h),
+                    child: WefinTextFormField(
+                      autofillHint: AutofillHints.password,
+                      inputFormatters: !widget.visible ? _cnpjFormatter : null,
+                      onTap: () => _mensagemErro = null,
+                      label:
+                          'Digite sua Senha',
+                      obscureText: widget.visible,
+                      controller: _passwordEC,
+                      validator: Validatorless.multiple([
+                        Validatorless.required('Senha obrigatória'),
+                        if (widget.visible)
+                          Validatorless.max(10, 'Maximo de 10 caracteres.'),
+                        if (widget.visible)
+                          Validatorless.min(
+                              3, 'Senha com no mínimo 3 e máximo 10 caracteres.'),
+                        (value) => _mensagemErro
+                      ]),
+                    ),
                   ),
                 ),
               ],
@@ -127,13 +128,13 @@ class _AuthFormState extends State<AuthForm> {
                   TextSpan(
                       text: 'Ao continuar você concorda com as nossas ',
                       style: context.textTheme.bodySmall!
-                          .copyWith(color: context.surface)),
+                          .copyWith(color: context.inverseSurface)),
                   TextSpan(
                       text: 'Politicas de Privacidade ',
                       style: context.textTheme.bodySmall!.copyWith(
-                          color: context.surface,
+                          color: context.inverseSurface,
                           decoration: TextDecoration.underline,
-                          decorationColor: context.surface,
+                          decorationColor: context.inverseSurface,
                           fontWeight: FontWeight.w600),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () async {
@@ -143,13 +144,13 @@ class _AuthFormState extends State<AuthForm> {
                   TextSpan(
                       text: 'e os nossos ',
                       style: context.textTheme.bodySmall!
-                          .copyWith(color: context.surface)),
+                          .copyWith(color: context.inverseSurface)),
                   TextSpan(
                       text: 'Termos de uso',
                       style: context.textTheme.bodySmall!.copyWith(
-                          color: context.surface,
+                          color: context.inverseSurface,
                           decoration: TextDecoration.underline,
-                          decorationColor: context.surface,
+                          decorationColor: context.inverseSurface,
                           fontWeight: FontWeight.w600),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () async {
@@ -240,7 +241,6 @@ class _AuthFormState extends State<AuthForm> {
         OverlayApp.iniciaOverlay(context);
       });
       recuperarSenhaProvider.dadosUsuario = RecuperarSenhaModel(
-          identificadorCedente: removerMascaraCNPJ(_passwordEC.text),
           usuario: _loginEC.text);
       final response = await recuperarSenhaProvider.recuperarSenha();
       OverlayApp.terminaOverlay();

@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/modules/sem_conexao_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
@@ -12,12 +13,15 @@ import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/iniciar_assin
 import 'package:Srm_Asset/core/providers/internet_provider.dart';
 import 'package:Srm_Asset/core/providers/monitor_operacao_provider/monitor_operacoes_provider.dart';
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
-import 'package:Srm_Asset/core/providers/theme_provider.dart';
 import 'package:Srm_Asset/modules/auth_module.dart';
 import 'package:Srm_Asset/modules/home_module.dart';
 
 //Não há necessidade de mecher nesse código
 class AppModule extends Module {
+  final Environment environment;
+
+  AppModule(this.environment);
+
   @override
   void binds(Injector i) {
     i.addSingleton(SessionProvider.new);
@@ -25,13 +29,13 @@ class AppModule extends Module {
     i.addSingleton(AssinaturaProvider.new);
     i.addSingleton(ConnectivityProvider.new);
     i.addSingleton(ImportarCertificadoProvider.new);
-    i.addSingleton(ThemeProvider.new);
     i.addSingleton(IniciarAssinaturaProvider.new);
     i.addSingleton(RecuperarSenhaProvider.new);
     i.addSingleton(FinalizarAssinaturaProvider.new);
     i.addSingleton(AssinaturaEletronicaProvider.new);
     i.addSingleton(MonitorOperacoesProvider.new);
     i.addSingleton(BaixarDocumentosProvider.new);
+    i.addInstance(environment);
   }
 
   @override

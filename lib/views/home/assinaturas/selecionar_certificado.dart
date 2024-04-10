@@ -13,9 +13,7 @@ import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_
 import 'package:Srm_Asset/core/providers/certificado_provider/importar_certificado_provider.dart';
 import 'package:Srm_Asset/core/utils/overlay.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
-
-import '../../../../core/constants/themes/theme_configs.dart';
-
+import '../../../core/constants/tema_configs.dart';
 part 'widgets/popup_deletar_certificado.dart';
 
 class SelecionarCertificado extends StatefulWidget {

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -9,13 +10,12 @@ import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-
-import '../../../core/constants/endpoints.dart';
 import '../../../core/providers/certificado_provider/baixar_certificado_impl.dart';
 import '../../../widgets/wefin_patterns/wefin_default_button.dart';
 
 class PaginaQrCodeCarrossel {
   static List<Widget> pagina(BuildContext context) {
+    Environment ambiente = Modular.get<Environment>();
     return [
       Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -70,7 +70,7 @@ class PaginaQrCodeCarrossel {
                           decoration: TextDecoration.underline, fontWeight: FontWeight.w600),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () async {
-                          final String url = EndPoints.siteQrCode;
+                          final String url = ambiente.endpoints.siteQrCode;
                           await Share.share(url);
                         }),
                   TextSpan(

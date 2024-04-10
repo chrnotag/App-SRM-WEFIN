@@ -4,7 +4,6 @@ import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_provide
 import 'package:Srm_Asset/core/providers/certificado_provider/importar_certificado_provider.dart';
 import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/iniciar_assinatura/iniciar_assinatura_provider.dart';
 import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
-import 'package:Srm_Asset/core/providers/theme_provider.dart';
 import 'package:Srm_Asset/main.dart';
 import 'package:Srm_Asset/widgets/popup_generico.dart';
 

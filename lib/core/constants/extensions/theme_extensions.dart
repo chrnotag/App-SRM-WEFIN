@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-
-import '../../providers/theme_provider.dart';
-
+import 'package:Srm_Asset/core/constants/tema_configs.dart';
 
 extension ThemeExtension on BuildContext {
   Color get primaryColor => Theme.of(this).primaryColor;
@@ -11,7 +7,6 @@ extension ThemeExtension on BuildContext {
   Color get onPrimaryColor => Theme.of(this).colorScheme.onPrimary;
   Color get secondary => Theme.of(this).colorScheme.secondary;
   Color get onSecondary => Theme.of(this).colorScheme.onSecondary;
-  Color get surface => ThemeProvider().isTemaSRM ? Colors.white : Colors.black;
   Color get onSurface => Theme.of(this).colorScheme.onSurface;
   Color get background => Theme.of(this).colorScheme.background;
   Color get inverseSurface => Theme.of(this).colorScheme.inverseSurface;
