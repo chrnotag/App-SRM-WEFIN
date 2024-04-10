@@ -10,13 +10,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/views/home/assinaturas/selecionar_certificado.dart';
 
-class ImportarCertificadoProvider extends ChangeNotifier {
-  ImportarCertificadoProvider._();
+class CertificadoProvider extends ChangeNotifier {
+  CertificadoProvider._();
 
-  static final ImportarCertificadoProvider _instance =
-      ImportarCertificadoProvider._();
+  static final CertificadoProvider _instance = CertificadoProvider._();
 
-  factory ImportarCertificadoProvider() {
+  factory CertificadoProvider() {
     return _instance;
   }
 
@@ -38,29 +37,18 @@ class ImportarCertificadoProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  PKCertificate? _certificadoSelecionado;
+  Future<void> pegarCertificado() async {
+    List<PKCertificate> certificados = await CrossPki.listCertificatesWithKey();
+    certificadoAtual = certificados.last;
+  }
 
-  PKCertificate? get certificadoSelecionado => _certificadoSelecionado;
+  PKCertificate? _certificadoAtual;
 
-  set certificadoSelecionado(PKCertificate? certificate) {
-    _certificadoSelecionado = certificate;
+  PKCertificate? get certificadoAtual => _certificadoAtual;
+
+  set certificadoAtual(PKCertificate? certificate) {
+    _certificadoAtual = certificate;
     notifyListeners();
-  }
-
-  void desselecionarCertificado() {
-    _certificadoSelecionado = null;
-  }
-
-  bool alterarCorItemListaCertificado(int index, BuildContext context) {
-    PKCertificate certificado = listaCertificados[index];
-    if (_certificadoSelecionado != null &&
-        _certificadoSelecionado!.thumbprint == certificado.thumbprint) {
-      log('ok');
-      return true;
-    } else {
-      log('não ok');
-      return false;
-    }
   }
 
   bool isExpirado(PKCertificate certificado) {
@@ -76,17 +64,17 @@ class ImportarCertificadoProvider extends ChangeNotifier {
                 context: context,
                 certificado: certificado,
                 title: "Certificado Expirado",
-                label: "Deseja deletar o certificado?")
+                label: "O certificado precisa ser substituído")
             .popUp,
       );
       listaCertificados = await listaCertificadosFuture();
       notifyListeners();
     } else {
-      if (certificadoSelecionado != null &&
-          certificadoSelecionado!.thumbprint == certificado.thumbprint) {
-        certificadoSelecionado = null;
+      if (certificadoAtual != null &&
+          certificadoAtual!.thumbprint == certificado.thumbprint) {
+        certificadoAtual = null;
       } else {
-        certificadoSelecionado = certificado;
+        certificadoAtual = certificado;
       }
     }
   }
@@ -111,8 +99,8 @@ class ImportarCertificadoProvider extends ChangeNotifier {
   }
 
   String converterCertificadoBase64() {
-    if (certificadoSelecionado != null) {
-      return base64Encode(certificadoSelecionado!.encoded);
+    if (certificadoAtual != null) {
+      return base64Encode(certificadoAtual!.encoded);
     } else {
       return "erro";
     }
@@ -157,6 +145,11 @@ class ImportarCertificadoProvider extends ChangeNotifier {
   }
 
   Future<bool> importarCertificado(BuildContext context) async {
+    try {
+      if (certificadoAtual != null) {
+        deletarCertificado(certificadoAtual!.thumbprint);
+      }
+    } catch (_) {}
     limparErro();
     try {
       log('try');
@@ -218,7 +211,7 @@ class ImportarCertificadoProvider extends ChangeNotifier {
 
   void limparDadosCertificados() {
     listaCertificados = [];
-    _certificadoSelecionado = null;
+    _certificadoAtual = null;
     _pkcs12 = Uint8List(0);
     _senhaCertificado = null;
     _errorMsg = null;

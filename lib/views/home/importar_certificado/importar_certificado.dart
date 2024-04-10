@@ -9,7 +9,7 @@ import 'package:Srm_Asset/widgets/transparent_appbar_empty.dart';
 import 'package:crosspki/crosspki.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 import '../../../core/providers/certificado_provider/baixar_certificado_impl.dart';
-import '../../../core/providers/certificado_provider/importar_certificado_provider.dart';
+import '../../../core/providers/certificado_provider/certificado_provider.dart';
 import '../../../widgets/dialog_senha_certificado.dart';
 
 class ImportarCertificado extends StatelessWidget {
@@ -23,8 +23,8 @@ class ImportarCertificado extends StatelessWidget {
       return certificadosImportados.isEmpty;
     }
 
-    ImportarCertificadoProvider provider =
-        Modular.get<ImportarCertificadoProvider>();
+    CertificadoProvider provider =
+        Modular.get<CertificadoProvider>();
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: AppBar().preferredSize,

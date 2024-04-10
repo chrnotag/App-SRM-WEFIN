@@ -5,14 +5,14 @@ import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 
-import '../../../core/providers/certificado_provider/importar_certificado_provider.dart';
+import '../../../core/providers/certificado_provider/certificado_provider.dart';
 import '../../../widgets/dialog_senha_certificado.dart';
 import '../../../widgets/wefin_patterns/wefin_default_button.dart';
 
 class PaginaImportarCertificado {
   static List<Widget> pagina(BuildContext context) {
-    ImportarCertificadoProvider provider =
-        Modular.get<ImportarCertificadoProvider>();
+    CertificadoProvider provider =
+        Modular.get<CertificadoProvider>();
     return [
       Column(
           crossAxisAlignment: CrossAxisAlignment.center,

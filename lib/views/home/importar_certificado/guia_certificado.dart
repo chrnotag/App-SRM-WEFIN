@@ -4,7 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/enuns/import_certificado_enum.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
-import 'package:Srm_Asset/core/providers/certificado_provider/importar_certificado_provider.dart';
+import 'package:Srm_Asset/core/providers/certificado_provider/certificado_provider.dart';
 import 'package:Srm_Asset/views/home/importar_certificado/pagina_carrossel_qrcode.dart';
 import 'package:Srm_Asset/views/home/importar_certificado/pagina_importar_certificado.dart';
 import 'package:Srm_Asset/widgets/transparent_appbar_empty.dart';
@@ -20,8 +20,8 @@ class _GuiaImportCertificadoState extends State<GuiaImportCertificado> {
   CarouselController _carrousselControler = CarouselController();
   int _paginaAtual = 0;
   var viaImport = Modular.args.data;
-  ImportarCertificadoProvider provider =
-      Modular.get<ImportarCertificadoProvider>();
+  CertificadoProvider provider =
+      Modular.get<CertificadoProvider>();
 
   @override
   Widget build(BuildContext context) {

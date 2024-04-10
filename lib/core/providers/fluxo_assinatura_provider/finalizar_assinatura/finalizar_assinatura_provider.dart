@@ -15,15 +15,15 @@ import 'package:Srm_Asset/models/fluxo_assinatura_model/finalizar_assinatura/fin
 import 'package:Srm_Asset/widgets/popup_assinatura_feita.dart';
 import '../../../../models/fluxo_assinatura_model/iniciar_assinatura/iniciar_assinatura.dart';
 import '../../../../models/fluxo_assinatura_model/iniciar_assinatura/resposta_iniciar_assinatura.dart';
-import '../../certificado_provider/importar_certificado_provider.dart';
+import '../../certificado_provider/certificado_provider.dart';
 import '../iniciar_assinatura/iniciar_assinatura_provider.dart';
 
 class FinalizarAssinaturaProvider extends ChangeNotifier {
   final IniciarAssinaturaProvider _assinaturaProvider =
       Modular.get<IniciarAssinaturaProvider>();
 
-  ImportarCertificadoProvider certificadoProvider =
-      Modular.get<ImportarCertificadoProvider>();
+  CertificadoProvider certificadoProvider =
+      Modular.get<CertificadoProvider>();
   AssinaturaProvider assinaturaProvider = Modular.get<AssinaturaProvider>();
   IniciarAssinaturaProvider iniciarAssinatura =
       Modular.get<IniciarAssinaturaProvider>();
@@ -62,7 +62,7 @@ class FinalizarAssinaturaProvider extends ChangeNotifier {
   }
 
   finalizarAssinatura() async {
-    PKCertificate certificado = certificadoProvider.certificadoSelecionado!;
+    PKCertificate certificado = certificadoProvider.certificadoAtual!;
     IniciarAssinaturaProvider iniciarAssinaturaProvider =
         Modular.get<IniciarAssinaturaProvider>();
     IniciarAssinaturaModel data = IniciarAssinaturaModel(

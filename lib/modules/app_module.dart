@@ -8,7 +8,7 @@ import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/assinatura_el
 import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/finalizar_assinatura/finalizar_assinatura_provider.dart';
 import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
-import 'package:Srm_Asset/core/providers/certificado_provider/importar_certificado_provider.dart';
+import 'package:Srm_Asset/core/providers/certificado_provider/certificado_provider.dart';
 import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/iniciar_assinatura/iniciar_assinatura_provider.dart';
 import 'package:Srm_Asset/core/providers/internet_provider.dart';
 import 'package:Srm_Asset/core/providers/monitor_operacao_provider/monitor_operacoes_provider.dart';
@@ -28,7 +28,7 @@ class AppModule extends Module {
     i.addSingleton(AuthProvider.new);
     i.addSingleton(AssinaturaProvider.new);
     i.addSingleton(ConnectivityProvider.new);
-    i.addSingleton(ImportarCertificadoProvider.new);
+    i.addSingleton(CertificadoProvider.new);
     i.addSingleton(IniciarAssinaturaProvider.new);
     i.addSingleton(RecuperarSenhaProvider.new);
     i.addSingleton(FinalizarAssinaturaProvider.new);

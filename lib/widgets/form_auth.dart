@@ -21,6 +21,7 @@ import 'package:Srm_Asset/widgets/wefin_patterns/wefin_textfield.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:validatorless/validatorless.dart';
 import '../core/constants/tema_configs.dart';
+import '../core/providers/certificado_provider/certificado_provider.dart';
 import '../generated/assets.dart';
 import 'link_component.dart';
 
@@ -188,7 +189,6 @@ class _AuthFormState extends State<AuthForm> {
   void _loadSavedLoginData() async {
     String? savedEmail = await _storage.read(key: 'email');
     String? savedPassword = await _storage.read(key: 'password');
-
     if (savedEmail != null && savedPassword != null) {
       setState(() {
         _loginEC.text = savedEmail;
@@ -198,6 +198,7 @@ class _AuthFormState extends State<AuthForm> {
   }
 
   Future<void> login() async {
+    CertificadoProvider certificadoProvider = Modular.get<CertificadoProvider>();
     final authProvider = Modular.get<AuthProvider>();
     _mensagemErro = null;
 
@@ -221,10 +222,12 @@ class _AuthFormState extends State<AuthForm> {
           _mensagemErro = error.mensagem;
         });
       } else {
+        certificadoProvider.pegarCertificado();
         _saveLoginDataIfNeeded();
         if (authProvider.listaCedente!.length > 1) {
           Modular.to.pushReplacementNamed(AppRoutes.listaSelecaoEmpresasRoute);
         } else {
+          certificadoProvider.pegarCertificado();
           authProvider.RelogarTrocarCedente(
               authProvider.dataUser!.identificadorCedente, context);
         }

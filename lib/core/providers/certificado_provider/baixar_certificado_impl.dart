@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/implementations_config/export_impl.dart';
-import 'package:Srm_Asset/core/providers/certificado_provider/importar_certificado_provider.dart';
+import 'package:Srm_Asset/core/providers/certificado_provider/certificado_provider.dart';
 import 'package:Srm_Asset/main.dart';
 import 'package:Srm_Asset/widgets/popup_generico.dart';
 import '../../../widgets/dialog_senha_certificado.dart';
@@ -18,8 +18,8 @@ class BaixarCertificadoImpl {
     };
     final url =
         Uri.parse("${ambiente.endpoints.baixarCertificadoQrCode}/$token");
-    final ImportarCertificadoProvider provider =
-        Modular.get<ImportarCertificadoProvider>();
+    final CertificadoProvider provider =
+        Modular.get<CertificadoProvider>();
     log('CURL baixar certificado via QrCode:\nheader: $header\nbody: $url ');
     try {
       final content = await http.get(url, headers: header);
