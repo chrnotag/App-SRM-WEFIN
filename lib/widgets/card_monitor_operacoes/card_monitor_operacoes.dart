@@ -49,6 +49,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                         child: Padding(
                           padding: EdgeInsets.all(8.r),
                           child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Column(
@@ -69,6 +70,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                                       textStyle: context.textTheme.bodySmall)
                                 ],
                               ),
+                              ComponentCardOperacoes(title: 'Data', label: operacao.dataOperacao, centralizar: true,),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment:
