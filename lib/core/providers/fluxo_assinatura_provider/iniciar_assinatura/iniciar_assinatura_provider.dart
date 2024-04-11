@@ -8,7 +8,7 @@ import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_m
 import '../../../../main.dart';
 import '../../../../views/home/assinaturas/selecionar_certificado.dart';
 import '../../../constants/route_labels.dart';
-import '../../certificado_provider/importar_certificado_provider.dart';
+import '../../certificado_provider/certificado_provider.dart';
 
 class IniciarAssinaturaProvider extends ChangeNotifier {
   List<RespostaIniciarAssinaturaModel> _hashsParaAssinar = [];
@@ -35,8 +35,8 @@ class IniciarAssinaturaProvider extends ChangeNotifier {
           builder: (context) => assinaturaEletronicaProvider
               .confirmarAssinaturaDialog(assinante, context));
     } else {
-      ImportarCertificadoProvider certificadoProvider =
-          context.watch<ImportarCertificadoProvider>();
+      CertificadoProvider certificadoProvider =
+          context.watch<CertificadoProvider>();
       await certificadoProvider.listaCertificadosFuture();
       if (certificadoProvider.listaCertificados.isEmpty) {
         Modular.to.pushNamed(AppRoutes.importarCertificadoRoute);

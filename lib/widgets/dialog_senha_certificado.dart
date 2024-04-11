@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
-import 'package:Srm_Asset/core/providers/certificado_provider/importar_certificado_provider.dart';
+import 'package:Srm_Asset/core/providers/certificado_provider/certificado_provider.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:validatorless/validatorless.dart';
 import '../core/constants/route_labels.dart';
@@ -22,8 +22,8 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
 
   @override
   Widget build(BuildContext context) {
-    final ImportarCertificadoProvider provider =
-        context.watch<ImportarCertificadoProvider>();
+    final CertificadoProvider provider =
+        context.watch<CertificadoProvider>();
     return AlertDialog(
       icon: Icon(
         Icons.lock_outline_rounded,
