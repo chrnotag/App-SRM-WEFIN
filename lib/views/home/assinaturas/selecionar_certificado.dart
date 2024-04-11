@@ -22,17 +22,33 @@ class SelecionarCertificado extends StatefulWidget {
 }
 
 class _SelecionarCertificadoState extends State<SelecionarCertificado> {
+  late Future<List<PKCertificate>> _certificadoFuture;
+
+  @override
+  void initState() {
+    _carregarCertificado();
+    super.initState();
+  }
+
+  Future<void> _carregarCertificado() async {
+    final certificados = CrossPki.listCertificatesWithKey();
+    setState(() {
+      _certificadoFuture = certificados;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final CertificadoProvider certificadoProvider =
-        context.watch<CertificadoProvider>();
+    context.watch<CertificadoProvider>();
     final AssinaturaProvider assinaturaProvider =
-        context.watch<AssinaturaProvider>();
+    context.watch<AssinaturaProvider>();
     return AlertDialog(
       title: Column(
         children: [
           Text(
-              'Assinar Operação ${assinaturaProvider.assinaturaSelecionada!.codigoOperacao}',
+              'Assinar Operação ${assinaturaProvider.assinaturaSelecionada!
+                  .codigoOperacao}',
               style: context.textTheme.bodyLarge!.copyWith(
                 fontWeight: FontWeight.w300,
                 letterSpacing: 1.5.sp,
@@ -46,19 +62,61 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
           ),
           Padding(
             padding:
-                const EdgeInsets.symmetric(vertical: AppSizes.paddingMedium),
-            child: ListTile(
-              title: Column(
-                children: [
-                  Divider(),
-                  Text(
-                    "${certificadoProvider.certificadoAtual?.subjectDisplayName ?? "Certificado sem nome"}",
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+            const EdgeInsets.symmetric(vertical: AppSizes.paddingMedium),
+            child: Column(
+              children: [
+                Divider(),
+                ListTile(
+                  title: FutureBuilder(
+                    future: _certificadoFuture,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(
+                            child: CircularProgressIndicator(
+                              color: context.focusColor,
+                              strokeWidth: 2.w,
+                            ));
+                      }
+                      if (snapshot.hasError) {
+                        return const Text(
+                            "Houve um erro ao carregar os certificados.");
+                      }
+                      return Text(
+                        "${snapshot.data!.first.subjectDisplayName}",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      );
+                      ;
+                    },
                   ),
-                  Divider(),
-                ],
-              ),
+                  trailing: FloatingActionButton.small(
+                      onPressed: () {
+                        if(certificadoProvider.certificadoAtual != null) {
+                          showDialog(
+                              context: context,
+                              builder: (context) =>
+                              PopUpDeletarCertificado(
+                                  context: context,
+                                  certificado: certificadoProvider
+                                      .certificadoAtual!,
+                                  title: "Excluir Certificado",
+                                  label:
+                                  "Deseja excluir o certificado ${certificadoProvider
+                                      .certificadoAtual!.subjectDisplayName}?")
+                                  .popUp).then((_) => Modular.to.pop());
+                        }else{
+                          Modular.to.pop();
+                        }
+                      },
+                      backgroundColor: AppColors.vermelho,
+                      elevation: 0,
+                      child: const Icon(
+                        Icons.delete_forever,
+                        color: Colors.white,
+                      )),
+                ),
+                Divider()
+              ],
             ),
           ),
           Padding(
@@ -67,15 +125,13 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
               children: [
                 Expanded(
                   child: BotaoPadrao(
-                    onPressed: certificadoProvider.certificadoAtual != null
-                        ? () async {
-                            OverlayApp.iniciaOverlay(context);
-                            FinalizarAssinaturaProvider finalizarAssinatura =
-                                Modular.get<FinalizarAssinaturaProvider>();
-                            await finalizarAssinatura.finalizarAssinatura();
-                            OverlayApp.terminaOverlay();
-                          }
-                        : null,
+                    onPressed: () async {
+                      OverlayApp.iniciaOverlay(context);
+                      FinalizarAssinaturaProvider finalizarAssinatura =
+                      Modular.get<FinalizarAssinaturaProvider>();
+                      await finalizarAssinatura.finalizarAssinatura();
+                      OverlayApp.terminaOverlay();
+                    },
                     label: "Assinar Documento",
                   ),
                 )

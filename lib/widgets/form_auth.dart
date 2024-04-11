@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
@@ -50,9 +49,9 @@ class _AuthFormState extends State<AuthForm> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _loadSavedLoginData();
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   _loadSavedLoginData();
+    // });
   }
 
   @override
@@ -178,24 +177,24 @@ class _AuthFormState extends State<AuthForm> {
     );
   }
 
-  final FlutterSecureStorage _storage = FlutterSecureStorage();
+//   final FlutterSecureStorage _storage = FlutterSecureStorage();
+//
+// // Função para salvar os dados de login (email e senha) se o usuário optar por isso
+//   void _saveLoginDataIfNeeded() async {
+//     await _storage.write(key: 'email', value: _loginEC.text);
+//     await _storage.write(key: 'password', value: _passwordEC.text);
+//   }
 
-// Função para salvar os dados de login (email e senha) se o usuário optar por isso
-  void _saveLoginDataIfNeeded() async {
-    await _storage.write(key: 'email', value: _loginEC.text);
-    await _storage.write(key: 'password', value: _passwordEC.text);
-  }
-
-  void _loadSavedLoginData() async {
-    String? savedEmail = await _storage.read(key: 'email');
-    String? savedPassword = await _storage.read(key: 'password');
-    if (savedEmail != null && savedPassword != null) {
-      setState(() {
-        _loginEC.text = savedEmail;
-        _passwordEC.text = savedPassword;
-      });
-    }
-  }
+  // void _loadSavedLoginData() async {
+  //   // String? savedEmail = await _storage.read(key: 'email');
+  //   // String? savedPassword = await _storage.read(key: 'password');
+  //   if (savedEmail != null && savedPassword != null) {
+  //     setState(() {
+  //       _loginEC.text = savedEmail;
+  //       _passwordEC.text = savedPassword;
+  //     });
+  //   }
+  // }
 
   Future<void> login() async {
     CertificadoProvider certificadoProvider = Modular.get<CertificadoProvider>();
@@ -223,7 +222,8 @@ class _AuthFormState extends State<AuthForm> {
         });
       } else {
         certificadoProvider.pegarCertificado();
-        _saveLoginDataIfNeeded();
+        print('certificado: ${certificadoProvider.certificadoAtual?.subjectDisplayName}');
+        // _saveLoginDataIfNeeded();
         if (authProvider.listaCedente!.length > 1) {
           Modular.to.pushReplacementNamed(AppRoutes.listaSelecaoEmpresasRoute);
         } else {

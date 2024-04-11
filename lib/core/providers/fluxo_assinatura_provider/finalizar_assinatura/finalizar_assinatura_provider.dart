@@ -9,7 +9,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/assinatura_eletronica/assinatura_eletronica_provider.dart';
 import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/finalizar_assinatura/finalizar_assinatura_impl.dart';
 import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
-import 'package:Srm_Asset/core/utils/overlay.dart';
 import 'package:Srm_Asset/main.dart';
 import 'package:Srm_Asset/models/fluxo_assinatura_model/finalizar_assinatura/finalizar_assinatura.dart';
 import 'package:Srm_Asset/widgets/popup_assinatura_feita.dart';
@@ -71,7 +70,7 @@ class FinalizarAssinaturaProvider extends ChangeNotifier {
             assinaturaProvider.assinaturaSelecionada!.codigoOperacao);
     final hashs = await iniciarAssinaturaProvider.obterHashs(data);
     BuildContext context = myNavigatorKey.currentContext!;
-    log('hashs do metodo finalizar: ${hashs.data}');
+    print('hashs do metodo finalizar: ${hashs.data}');
     if (hashs.error == null) {
       final hashAssinados = await _assinarHashs(certificado);
       ApiResponse<dynamic>? resultado;
