@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:dio/dio.dart';
 import 'package:Srm_Asset/core/implementations_config/error_response.dart';
 
 import '../../models/exceptions_responses/exception_model.dart';

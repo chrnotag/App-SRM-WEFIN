@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/core/utils/mensagem_erro_requisicao.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/deslogar/verificar_sessao.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
@@ -29,21 +30,12 @@ class AssinaturaEletronicaImpl {
           return SucessResponse(null);
         case 401:
           VerificarSessao.sessaoExpirada();
-          final responseBody = json.decode(utf8.decode(response.bodyBytes));
-          final data = ExceptionModel.fromJson(responseBody);
-          return ErrorResponse(data);
+          return MensagemErroPadrao.erroResponse(response.bodyBytes);
         default:
-          final responseBody = json.decode(utf8.decode(response.bodyBytes));
-          final data = ExceptionModel.fromJson(responseBody);
-          return ErrorResponse(data);
+          return MensagemErroPadrao.erroResponse(response.bodyBytes);
       }
     } catch (e) {
-      final data = ExceptionModel(
-          codigo: '500',
-          dataHora: DateTime.now(),
-          httpStatus: 'INTERNAL_SERVER_ERROR',
-          mensagem: 'Desculpe, algo deu errado em nosso servidor.');
-      return ErrorResponse(data);
+      return MensagemErroPadrao.codigo_500();
     }
   }
 }

@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/core/utils/mensagem_erro_requisicao.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:Srm_Asset/core/constants/route_labels.dart';
@@ -42,12 +43,7 @@ class BaixarCertificadoImpl {
       );
       return SucessResponse(null);
     } catch (e) {
-      final data = ExceptionModel(
-          codigo: '500',
-          dataHora: DateTime.now(),
-          httpStatus: 'INTERNAL_SERVER_ERROR',
-          mensagem: 'Desculpe, algo deu errado em nosso servidor.');
-      return ErrorResponse(data);
+      return MensagemErroPadrao.codigo_500();
     }
   }
 }

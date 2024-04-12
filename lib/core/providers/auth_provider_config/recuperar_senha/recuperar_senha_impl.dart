@@ -1,4 +1,5 @@
 import 'package:Srm_Asset/core/implementations_config/export_impl.dart';
+import 'package:Srm_Asset/core/utils/mensagem_erro_requisicao.dart';
 import 'package:http/http.dart' as http;
 import '../../../../models/recuperar_senha_model/recuperar_senha_model.dart';
 import '../../../constants/classes_abstratas/envirioment.dart';
@@ -24,17 +25,10 @@ class RecuperarSenhaImpl {
         case 204:
           return SucessResponse(null);
         default:
-          final responseBody = json.decode(utf8.decode(response.bodyBytes));
-          final data = ExceptionModel.fromJson(responseBody);
-          return ErrorResponse(data);
+          return MensagemErroPadrao.erroResponse(response.bodyBytes);
       }
     } catch (e) {
-      final data = ExceptionModel(
-          codigo: '500',
-          dataHora: DateTime.now(),
-          httpStatus: 'INTERNAL_SERVER_ERROR',
-          mensagem: 'Desculpe, algo deu errado em nosso servidor.');
-      return ErrorResponse(data);
+      return MensagemErroPadrao.codigo_500();
     }
   }
 }
