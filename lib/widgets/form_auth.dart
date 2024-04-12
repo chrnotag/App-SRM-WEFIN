@@ -108,13 +108,13 @@ class _AuthFormState extends State<AuthForm> {
                   inputFormatters: _cpfFormatter,
                   onChanged: (value) => atualizarMascara(),
                   maxCaracters: maximoCaracteresCPF,
-                  label: 'Digite seu email',
+                  label: 'Digite seu e-mail ou CPF',
                   autofillHint: AutofillHints.email,
                   controller: _loginEC,
                   validator: Validatorless.multiple([
                     if (temLetras) Validatorless.email('Email inválido!'),
                     if (!temLetras) Validatorless.cpf('CPF inválido!'),
-                    Validatorless.required('Email ou CPF Obrigatório'),
+                    Validatorless.required('E-mail ou CPF Obrigatório'),
                     (value) => _mensagemErro
                   ]),
                 ),
