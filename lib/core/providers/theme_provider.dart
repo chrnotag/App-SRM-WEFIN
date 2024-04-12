@@ -12,14 +12,18 @@ class ThemeProvider extends ChangeNotifier {
 
   factory ThemeProvider() => _instance;
 
-  //Trocar entre homol e prod aqui.
-  Ambiente _ambienteSelecionado = Ambiente.Homologacao;
+  final Ambiente _ambienteSelecionado = Ambiente.Homologacao;
 
-  Ambiente get ambienteSelecionado => _ambienteSelecionado;
+  Ambiente get ambienteSelecionado =>
+      _ambienteSelecionado == Ambiente.Homologacao
+          ? Ambiente.Homologacao
+          : Ambiente.Producao;
 
-    TemaSelecionado _temaSelecionado = TemaSelecionado.SRM;
+  TemaSelecionado _temaSelecionado = TemaSelecionado.SRM;
 
-  ThemeData get temaAtual => _temaSelecionado == TemaSelecionado.SRM ? ThemeSRM.theme : ThemeTRUST.theme;
+  ThemeData get temaAtual => _temaSelecionado == TemaSelecionado.SRM
+      ? ThemeSRM.theme
+      : ThemeTRUST.theme;
 
   TemaSelecionado get temaSelecionado => _temaSelecionado;
 
@@ -31,5 +35,7 @@ class ThemeProvider extends ChangeNotifier {
   bool get isTemaSRM => temaSelecionado == TemaSelecionado.SRM;
 
   String get logoTema => isTemaSRM ? Assets.logoSRM : Assets.logoTRUST;
-  String get logoTemaAppBar => isTemaSRM ? Assets.logoSRM : Assets.logoTRUSTAppBar;
+
+  String get logoTemaAppBar =>
+      isTemaSRM ? Assets.logoSRM : Assets.logoTRUSTAppBar;
 }

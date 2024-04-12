@@ -142,7 +142,7 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
               children: [
                 Expanded(
                   child: BotaoPadrao(
-                    onPressed: certificadoProvider.certificadoSelecionado != null
+                    onPressed: certificadoProvider.certificadoSelecionado != null && certificadoSelecionado
                         ? () async {
                             OverlayApp.iniciaOverlay(context);
                             FinalizarAssinaturaProvider finalizarAssinatura =
