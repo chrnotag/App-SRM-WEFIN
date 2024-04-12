@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 class SrmHomologacaoEnvironment extends Environment {
   const SrmHomologacaoEnvironment();
+
   @override
   Endpoint get endpoints => EndPointsSRM();
 
@@ -33,4 +34,16 @@ class SrmHomologacaoEnvironment extends Environment {
   @override
   // TODO: implement contatos
   ContatosSRM get contatos => ContatosSRM();
+
+  @override
+  Color get azulOuPreto => ThemeSRM.azulOuPreto;
+
+  @override
+  Color get brancoOuVerde => ThemeSRM.brancoOuVerde;
+
+  @override
+  Color get verdeOuCinza => ThemeSRM.verdeOuCinza;
+
+  @override
+  Color get laranjaOuCinza => ThemeSRM.verdeOuCinza;
 }

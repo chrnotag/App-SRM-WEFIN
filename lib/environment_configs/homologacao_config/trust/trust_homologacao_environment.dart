@@ -34,4 +34,16 @@ class TrustHomologacaoEnvironment extends Environment {
   @override
   // TODO: implement contatos
   ContatosTRUST get contatos => ContatosTRUST();
+
+  @override
+  Color get azulOuPreto => ThemeTRUST.azulOuPreto;
+
+  @override
+  Color get brancoOuVerde => ThemeTRUST.brancoOuVerde;
+
+  @override
+  Color get verdeOuCinza => ThemeTRUST.verdeOuCinza;
+
+  @override
+  Color get laranjaOuCinza => ThemeTRUST.verdeOuCinza;
 }
