@@ -35,4 +35,16 @@ class TrustProducaoEnvironment extends Environment {
   @override
   // TODO: implement contatos
   ContatosAbstract get contatos => ContatosTRUST();
+
+  @override
+  Color get azulOuPreto => ThemeTRUST.azulOuPreto;
+
+  @override
+  Color get brancoOuVerde => ThemeTRUST.brancoOuVerde;
+
+  @override
+  Color get verdeOuCinza => ThemeTRUST.verdeOuCinza;
+
+  @override
+  Color get laranjaOuCinza => ThemeTRUST.verdeOuCinza;
 }

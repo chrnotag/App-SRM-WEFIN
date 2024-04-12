@@ -156,6 +156,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                                             .copyWith(color: corAssinatura, fontWeight: FontWeight.w500)),
                                   ],
                                 ),
+                                ComponentCardOperacoes(title: 'Data', label: assinatura.dataOperacao, centralizar: true),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment:

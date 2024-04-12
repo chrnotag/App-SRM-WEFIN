@@ -239,23 +239,6 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                       ],
                     ),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Data',
-                        style: context.textTheme.bodyMedium,
-                      ),
-                      Text(
-                        info.dataAssinatura != null
-                            ? DateFormat("dd/MM/yyyy")
-                                .format(DateTime.parse(info.dataAssinatura!))
-                            : "--/--/----",
-                        style: context.textTheme.bodySmall,
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),

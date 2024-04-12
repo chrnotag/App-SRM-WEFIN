@@ -16,6 +16,8 @@ class WefinTextFormField extends StatefulWidget {
   final TextInputType? inputType;
   final TextInputFormatter? inputFormatters;
   final String? autofillHint;
+  final ValueChanged<String>? onChanged;
+  final int? maxCaracters;
 
   const WefinTextFormField(
       {Key? key,
@@ -27,7 +29,9 @@ class WefinTextFormField extends StatefulWidget {
       this.textColor,
       this.inputFormatters,
       this.inputType,
-      this.autofillHint})
+      this.autofillHint,
+      this.onChanged,
+      this.maxCaracters})
       : super(key: key);
 
   @override
@@ -50,10 +54,12 @@ class _WefinTextFormFieldState extends State<WefinTextFormField> {
     return TextFormField(
       autofillHints:
           widget.autofillHint != null ? [widget.autofillHint!] : null,
+      maxLength: widget.maxCaracters,
       inputFormatters: formatters,
       onTap: widget.onTap,
       controller: widget.controller,
       validator: widget.validator,
+      onChanged: widget.onChanged,
       keyboardType: widget.inputType,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       style: context.textTheme.bodyMedium!.copyWith(

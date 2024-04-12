@@ -35,4 +35,16 @@ class SrmProducaoEnvironment extends Environment {
   @override
   // TODO: implement contatos
   ContatosAbstract get contatos => ContatosSRM();
+
+  @override
+  Color get azulOuPreto => ThemeSRM.azulOuPreto;
+
+  @override
+  Color get brancoOuVerde => ThemeSRM.brancoOuVerde;
+
+  @override
+  Color get verdeOuCinza => ThemeSRM.verdeOuCinza;
+
+  @override
+  Color get laranjaOuCinza => ThemeSRM.verdeOuCinza;
 }

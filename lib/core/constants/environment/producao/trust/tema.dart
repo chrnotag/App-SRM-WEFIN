@@ -74,4 +74,5 @@ class ThemeTRUST {
   static Color get brancoOuVerde => AppColors.verde;
   static Color get azulOuPreto => Colors.black;
   static Color get verdeOuCinza => AppColors.cinzaEscuro;
+  static Color get laranjaOuCinza => AppColors.cinzaEscuro;
 }

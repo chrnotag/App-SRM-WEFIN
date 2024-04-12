@@ -72,4 +72,5 @@ class ThemeSRM {
   static Color get brancoOuVerde => Colors.white;
   static Color get azulOuPreto => AppColors.azul;
   static Color get verdeOuCinza => AppColors.verdePrimarioTRUST;
+  static Color get laranjaOuCinza => AppColors.laranjaSRM;
 }
