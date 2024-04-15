@@ -9,13 +9,17 @@ class BotaoPadrao extends StatelessWidget {
   final VoidCallback? onPressed;
   final IconData? icon;
   final bool filled;
+  final TextStyle? textStyleFilled;
+  final TextStyle? textStyleNoFilled;
 
   const BotaoPadrao(
       {Key? key,
       required this.label,
       required this.onPressed,
       this.icon,
-      this.filled = true})
+      this.filled = true,
+      this.textStyleFilled,
+      this.textStyleNoFilled})
       : super(key: key);
 
   @override
@@ -25,7 +29,7 @@ class BotaoPadrao extends StatelessWidget {
             onPressed: onPressed,
             style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4.r),
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
                 backgroundColor: context.focusColor),
             child: Padding(
@@ -42,24 +46,16 @@ class BotaoPadrao extends StatelessWidget {
                     ),
                   ),
                   Text(label,
-                      style: context.textTheme.bodyMedium!
+                      style: textStyleFilled ?? context.textTheme.bodyMedium!
                           .copyWith(color: Colors.white))
                 ],
               ),
             ),
           )
-        : ElevatedButton(
+        : TextButton(
             onPressed: onPressed,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.white,
-              shadowColor: Colors.black,
-              shape: RoundedRectangleBorder(
-                side: BorderSide(color: context.focusColor, width: 2.w),
-                borderRadius: BorderRadius.circular(4.r),
-              ),
-            ),
             child: Padding(
-              padding: const EdgeInsets.all(AppSizes.paddingMedium),
+              padding: const EdgeInsets.all(AppSizes.paddingSmall),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -72,7 +68,7 @@ class BotaoPadrao extends StatelessWidget {
                     ),
                   ),
                   Text(label,
-                      style: context.textTheme.bodyMedium!
+                      style: textStyleNoFilled ?? context.textTheme.bodyMedium!
                           .copyWith(color: context.focusColor))
                 ],
               ),

@@ -1,3 +1,5 @@
+import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
+import 'package:Srm_Asset/core/constants/tema_configs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -23,25 +25,30 @@ class ImportarCertificado extends StatelessWidget {
       return certificadosImportados.isEmpty;
     }
 
-    CertificadoProvider provider =
-        Modular.get<CertificadoProvider>();
+    CertificadoProvider provider = Modular.get<CertificadoProvider>();
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: AppBar().preferredSize,
-          child: TransparentAppBarEmpty()),
+      backgroundColor: Colors.transparent,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+              Icon(
+                Icons.close,
+                size: 32,
+              )
+            ]),
+          ),
           Padding(
             padding: EdgeInsets.all(20.r),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
-                  'Escolha a forma desejada para importar o certificado.',
+                  'Escolha a forma para\n importar o certificado.',
                   style: context.textTheme.bodyLarge!.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: context.onPrimaryColor),
+                      fontWeight: FontWeight.w900, color: Colors.black),
                   textAlign: TextAlign.center,
                 ),
                 Padding(
@@ -52,14 +59,14 @@ class ImportarCertificado extends StatelessWidget {
                       text: 'QRCode: ',
                       style: context.textTheme.bodyMedium!.copyWith(
                           fontWeight: FontWeight.bold,
-                          color: context.onSecondary),
+                          color: AppColors.cinzaEscuro),
                       children: [
                         TextSpan(
                           text:
                               'Selecione essa opção para importar via QRCode usando o nosso site para gerar o QRCode',
                           style: context.textTheme.bodyMedium!.copyWith(
                               fontWeight: FontWeight.normal,
-                              color: context.onSecondary),
+                              color: AppColors.labelText),
                         )
                       ],
                     ),
@@ -71,14 +78,14 @@ class ImportarCertificado extends StatelessWidget {
                     text: 'Do dispositivo: ',
                     style: context.textTheme.bodyMedium!.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: context.onSecondary),
+                        color: AppColors.cinzaEscuro),
                     children: [
                       TextSpan(
                         text:
                             'Selecione essa opção para importar o certificado diretamente de seu dispositivo.',
                         style: context.textTheme.bodyMedium!.copyWith(
                             fontWeight: FontWeight.normal,
-                            color: context.onSecondary),
+                            color: AppColors.labelText),
                       )
                     ],
                   ),
@@ -92,51 +99,60 @@ class ImportarCertificado extends StatelessWidget {
               children: [
                 Padding(
                     padding: EdgeInsets.symmetric(vertical: 20.h),
-                    child: BotaoPadrao(
-                      onPressed: () async {
-                        final bool mostraGuiaImportacao =
-                            await existeCertificadosImportados();
-                        if(mostraGuiaImportacao){
-                          Modular.to.pushNamed(
-                              AppRoutes.guiaImportarCertificadoRoute,
-                              arguments: {ImportarVia.QrCode});
-                        }else {
-                          String barcodeScanRes;
-                          try {
-                            barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-                              '#ff6666',
-                              'Cancelar',
-                              true,
-                              ScanMode.QR,
-                            );
-                            BaixarCertificadoImpl.baixar(barcodeScanRes);
-                          } on Exception catch (_) {}
-                        }
-                      },
-                      label: 'Importar Via QRCode',
-                      icon: Icons.qr_code_2_rounded,
+                    child: SizedBox(
+                      width: context.width * 0.7,
+                      child: BotaoPadrao(
+                        onPressed: () async {
+                          final bool mostraGuiaImportacao =
+                              await existeCertificadosImportados();
+                          if (mostraGuiaImportacao) {
+                            Modular.to.pushNamed(
+                                AppRoutes.guiaImportarCertificadoRoute,
+                                arguments: {ImportarVia.QrCode});
+                          } else {
+                            String barcodeScanRes;
+                            try {
+                              barcodeScanRes =
+                                  await FlutterBarcodeScanner.scanBarcode(
+                                '#ff6666',
+                                'Cancelar',
+                                true,
+                                ScanMode.QR,
+                              );
+                              BaixarCertificadoImpl.baixar(barcodeScanRes);
+                            } on Exception catch (_) {}
+                          }
+                        },
+                        label: 'QR Code',
+                        textStyleFilled: context.textTheme.bodyLarge!.copyWith(
+                            fontWeight: FontWeight.w900, color: Colors.white),
+                      ),
                     )),
-                BotaoPadrao(
-                  onPressed: () async {
-                    final bool mostraGuiaImportacao =
-                        await existeCertificadosImportados();
-                    if (mostraGuiaImportacao) {
-                      Modular.to.pushNamed(
-                          AppRoutes.guiaImportarCertificadoRoute,
-                          arguments: ImportarVia.Dispositivo);
-                    } else {
-                      bool isPegouCertificado =
-                          await provider.selecionarArquivoCertificado();
-                      if (isPegouCertificado) {
-                        await showDialog(
-                            context: context,
-                            builder: (context) => DialogSenhaCertificado());
+                SizedBox(
+                  width: context.width * 0.7,
+                  child: BotaoPadrao(
+                    onPressed: () async {
+                      final bool mostraGuiaImportacao =
+                          await existeCertificadosImportados();
+                      if (mostraGuiaImportacao) {
+                        Modular.to.pushNamed(
+                            AppRoutes.guiaImportarCertificadoRoute,
+                            arguments: ImportarVia.Dispositivo);
+                      } else {
+                        bool isPegouCertificado =
+                            await provider.selecionarArquivoCertificado();
+                        if (isPegouCertificado) {
+                          await showDialog(
+                              context: context,
+                              builder: (context) => DialogSenhaCertificado());
+                        }
                       }
-                    }
-                  },
-                  label: 'Importar Via Dispositivo',
-                  filled: false,
-                  icon: Icons.archive_rounded,
+                    },
+                    label: 'Do dispositivo',
+                    filled: false,
+                    textStyleNoFilled: context.textTheme.bodyLarge!.copyWith(
+                        fontWeight: FontWeight.w900, color: context.focusColor),
+                  ),
                 )
               ],
             ),

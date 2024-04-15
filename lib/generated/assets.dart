@@ -96,4 +96,14 @@ class Assets {
       'assets/images/readme/readme-imagem2.jpg';
   static const String empresaIcon = 'assets/icons/surface.svg';
   static const String pdfPrivacidade = 'assets/Politica-de-privacidade.pdf';
+
+  static const String importacao_concluida_svg = 'assets/images/importacao_concluida.svg';
+  static const String importe_certificado_svg = 'assets/images/importe_certificado.svg';
+  static const String informe_senha_certificado_svg = 'assets/images/informe_senha_certificado.svg';
+  static const String localizar_cetificado_svg = 'assets/images/localizar_certificado.svg';
+  static const String scanear_qrcode_svg = 'assets/images/scanear_qrcode.svg';
+  static const String selecionar_certificado_svg = 'assets/images/selecionar_certificado.svg';
+  static const String upload_certificado_svg = 'assets/images/upload_certificado.svg';
+  static const String senha_certificado_dialog = 'assets/images/senha_certificado_dialog.svg';
+
 }
