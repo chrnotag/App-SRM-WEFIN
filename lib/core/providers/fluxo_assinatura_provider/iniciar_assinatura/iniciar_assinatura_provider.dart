@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/views/home/importar_certificado/importar_certificado.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/assinatura_eletronica/assinatura_eletronica_provider.dart';
@@ -39,7 +40,7 @@ class IniciarAssinaturaProvider extends ChangeNotifier {
           context.watch<CertificadoProvider>();
       await certificadoProvider.listaCertificadosFuture();
       if (certificadoProvider.listaCertificados.isEmpty) {
-        Modular.to.pushNamed(AppRoutes.importarCertificadoRoute);
+        showModalBottomSheet(context: context, builder: (context) => BottomSheet(onClosing: () {}, builder: (context) => ImportarCertificado(),shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)))),);
       } else {
         showDialog(
           context: myNavigatorKey.currentContext!,
