@@ -33,12 +33,12 @@ class LoginImpl {
         authProvider.setDataUser = data;
         return SucessResponse(data);
       } else if(response.statusCode == 500){
-       return MensagemErroPadrao.codigo_500();
+       return MensagemErroPadrao.codigo500();
       }else{
         return MensagemErroPadrao.erroResponse(response.bodyBytes);
       }
     } catch (e, s) {
-      return MensagemErroPadrao.codigo_500();
+      return MensagemErroPadrao.codigo500();
     }
   }
 }

@@ -51,7 +51,7 @@ class BaixarDocumentosImpl {
       }
     } catch (_) {
       baixarDocumentosProvider.urlDocumento = null;
-      return MensagemErroPadrao.codigo_500();
+      return MensagemErroPadrao.codigo500();
     }
   }
 
@@ -60,7 +60,7 @@ class BaixarDocumentosImpl {
     try {
       var downloadsDirectory = await getExternalStorageDirectory();
       if (downloadsDirectory == null) {
-        return MensagemErroPadrao.codigo_500();
+        return MensagemErroPadrao.codigo500();
       }
 
       var response = await http.get(url, headers: header());
@@ -84,7 +84,7 @@ class BaixarDocumentosImpl {
 
       return SucessResponse(null);
     } catch (_) {
-      return MensagemErroPadrao.codigo_500();
+      return MensagemErroPadrao.codigo500();
     }
   }
 }

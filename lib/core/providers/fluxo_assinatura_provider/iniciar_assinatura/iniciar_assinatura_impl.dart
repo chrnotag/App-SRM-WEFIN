@@ -44,7 +44,7 @@ class IniciarAssinaturaImpl {
           return MensagemErroPadrao.erroResponse(response.bodyBytes);
       }
     } catch (e) {
-      return MensagemErroPadrao.codigo_500();
+      return MensagemErroPadrao.codigo500();
     }
   }
 }

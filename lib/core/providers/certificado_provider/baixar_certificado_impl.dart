@@ -43,7 +43,7 @@ class BaixarCertificadoImpl {
       );
       return SucessResponse(null);
     } catch (e) {
-      return MensagemErroPadrao.codigo_500();
+      return MensagemErroPadrao.codigo500();
     }
   }
 }
