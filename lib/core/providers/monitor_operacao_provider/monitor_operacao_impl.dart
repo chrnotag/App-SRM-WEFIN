@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:Srm_Asset/models/monitor_operacoes_model/monitor_operacoes_model.dart';
 import '../../constants/classes_abstratas/envirioment.dart';
 import '../../implementations_config/api_response.dart';
+import '../../utils/mensagem_erro_requisicao.dart';
 import '../auth_provider_config/deslogar/verificar_sessao.dart';
 
 class MonitorOperacaoImpl {
@@ -31,22 +32,12 @@ class MonitorOperacaoImpl {
           operacoesProvider.operacoes = data;
           return SucessResponse(data);
         case 401:
-          VerificarSessao.sessaoExpirada();
-          final responseBody = json.decode(response.body);
-          final data = ExceptionModel.fromJson(responseBody);
-          return ErrorResponse(data);
+          return MensagemErroPadrao.erroResponse(response.bodyBytes);
         default:
-          final responseBody = json.decode(response.body);
-          final data = ExceptionModel.fromJson(responseBody);
-          return ErrorResponse(data);
+          return MensagemErroPadrao.erroResponse(response.bodyBytes);
       }
     } catch (e) {
-      final data = ExceptionModel(
-          codigo: '500',
-          dataHora: DateTime.now(),
-          httpStatus: 'INTERNAL_SERVER_ERROR',
-          mensagem: 'Desculpe, algo deu errado em nosso servidor.');
-      return ErrorResponse(data);
+      return MensagemErroPadrao.codigo500();
     }
   }
 }

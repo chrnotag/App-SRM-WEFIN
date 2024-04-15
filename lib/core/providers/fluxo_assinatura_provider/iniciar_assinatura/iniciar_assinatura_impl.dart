@@ -5,6 +5,7 @@ import 'package:Srm_Asset/models/fluxo_assinatura_model/iniciar_assinatura/inici
 import 'package:Srm_Asset/models/fluxo_assinatura_model/iniciar_assinatura/resposta_iniciar_assinatura.dart';
 import '../../../constants/classes_abstratas/envirioment.dart';
 import '../../../implementations_config/export_impl.dart';
+import '../../../utils/mensagem_erro_requisicao.dart';
 import '../../auth_provider_config/deslogar/verificar_sessao.dart';
 
 class IniciarAssinaturaImpl {
@@ -38,22 +39,12 @@ class IniciarAssinaturaImpl {
           iniciarAssinaturaProvider.hashsParaAssinar = data;
           return SucessResponse(data);
         case 401:
-          VerificarSessao.sessaoExpirada();
-          final responseBody = json.decode(utf8.decode(response.bodyBytes));
-          final data = ExceptionModel.fromJson(responseBody);
-          return ErrorResponse(data);
+          return MensagemErroPadrao.erroResponse(response.bodyBytes);
         default:
-          final responseBody = json.decode(utf8.decode(response.bodyBytes));
-          final data = ExceptionModel.fromJson(responseBody);
-          return ErrorResponse(data);
+          return MensagemErroPadrao.erroResponse(response.bodyBytes);
       }
     } catch (e) {
-      final data = ExceptionModel(
-          codigo: '500',
-          dataHora: DateTime.now(),
-          httpStatus: 'INTERNAL_SERVER_ERROR',
-          mensagem: 'Desculpe, algo deu errado em nosso servidor.');
-      return ErrorResponse(data);
+      return MensagemErroPadrao.codigo500();
     }
   }
 }
