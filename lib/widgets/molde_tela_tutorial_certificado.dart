@@ -75,7 +75,7 @@ class MoldeTutorialCertificado extends StatelessWidget {
           Visibility(
             visible: isTelaFinal,
             child: SizedBox(
-              width: context.width * 0.65,
+              width: context.width * 0.8,
               child: ElevatedButton(
                   onPressed: isQrCode
                       ? () async {
@@ -110,6 +110,7 @@ class MoldeTutorialCertificado extends StatelessWidget {
                     padding: const EdgeInsets.all(AppSizes.paddingMedium),
                     child: Text(
                       'Importar Certificado',
+                      textAlign: TextAlign.center,
                       style: context.textTheme.bodyLarge!.copyWith(
                           color: Colors.white, fontWeight: FontWeight.w500),
                     ),
