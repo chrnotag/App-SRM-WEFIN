@@ -1,4 +1,5 @@
 import 'package:Srm_Asset/views/home/assinaturas/widgets/popup_erro_carregar_dados.dart';
+import 'package:Srm_Asset/widgets/transparent_appbar_empty.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
@@ -44,7 +45,7 @@ class _MonitorOperacoesState extends State<MonitorOperacoes> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,
-        child: AppBarLogo(),
+        child: TransparentAppBarEmpty(),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.r),

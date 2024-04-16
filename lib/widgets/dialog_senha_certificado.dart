@@ -1,6 +1,5 @@
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/tema_configs.dart';
-import 'package:Srm_Asset/core/utils/overlay.dart';
 import 'package:Srm_Asset/generated/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,6 +10,7 @@ import 'package:Srm_Asset/core/providers/certificado_provider/certificado_provid
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:validatorless/validatorless.dart';
+import '../core/constants/AppSizes.dart';
 
 class DialogSenhaCertificado extends StatefulWidget {
   const DialogSenhaCertificado({Key? key}) : super(key: key);

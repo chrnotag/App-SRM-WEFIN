@@ -1,15 +1,13 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
+import 'package:Srm_Asset/widgets/transparent_appbar_empty.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:Srm_Asset/core/constants/environment/homologacao/srm/contatos.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
-import 'package:Srm_Asset/widgets/appbar_logo_perfil.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/constants/AppSizes.dart';
 import '../../../core/utils/abrir_url_externo.dart';
-import '../../../generated/assets.dart';
 
 class Ajuda extends StatelessWidget {
   const Ajuda({super.key});
@@ -19,7 +17,7 @@ class Ajuda extends StatelessWidget {
     Environment ambiente = Modular.get<Environment>();
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: AppBar().preferredSize, child: const AppBarLogo()),
+          preferredSize: AppBar().preferredSize, child: const TransparentAppBarEmpty()),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 64.w),
         child: Column(

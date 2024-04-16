@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import '../../../../../generated/assets.dart';
+import '../../../AppSizes.dart';
 import '../../../tema_configs.dart';
 
 class ThemeSRM {
@@ -65,7 +66,7 @@ class ThemeSRM {
 
   static String get logo => 'assets/images/logo_srm.png';
 
-  static String get logoAppBar => 'assets/images/logo_srm.png';
+  static String get logoAppBar => Assets.icone_srm;
 
   static Widget get imagemAjuda =>
       Image.asset(Assets.iconsIcCellCheck, width: 176.w, color: null);

@@ -8,8 +8,8 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../core/providers/certificado_provider/baixar_certificado_impl.dart';
-import 'dialog_senha_certificado.dart';
+import '../../../../core/providers/certificado_provider/baixar_certificado_impl.dart';
+import '../../../../widgets/dialog_senha_certificado.dart';
 
 class MoldeTutorialCertificado extends StatelessWidget {
   final String imagemSvg;

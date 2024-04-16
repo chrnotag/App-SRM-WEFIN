@@ -7,6 +7,7 @@ import 'package:Srm_Asset/core/constants/environment/producao/trust/tema.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/enuns/plataforma_enum.dart';
+import '../../../core/constants/tema_configs.dart';
 
 class TrustProducaoEnvironment extends Environment {
   const TrustProducaoEnvironment();
@@ -47,4 +48,8 @@ class TrustProducaoEnvironment extends Environment {
 
   @override
   Color get laranjaOuCinza => ThemeTRUST.verdeOuCinza;
+
+  @override
+  // TODO: implement trustIconColor
+  Color? get trustIconColor => AppColors.verdePrimarioTRUST;
 }

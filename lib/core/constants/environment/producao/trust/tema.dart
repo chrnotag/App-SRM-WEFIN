@@ -4,6 +4,7 @@ import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/tema_configs.dart';
 
 import '../../../../../generated/assets.dart';
+import '../../../AppSizes.dart';
 
 class ThemeTRUST {
   ThemeTRUST._();
@@ -65,9 +66,9 @@ class ThemeTRUST {
         ),
       );
 
-  static String get logo => 'assets/images/logo_trust.png';
+  static String get logo => Assets.logoTRUST;
 
-  static String get logoAppBar => 'assets/images/logo_appbar_trust.png';
+  static String get logoAppBar => Assets.icone_trust;
 
   static Widget get imagemAjuda => Image.asset(Assets.imagesIcAjuda,
       width: 176.w, color: AppColors.verdePrimarioTRUST);

@@ -47,4 +47,8 @@ class SrmProducaoEnvironment extends Environment {
 
   @override
   Color get laranjaOuCinza => ThemeSRM.verdeOuCinza;
+
+  @override
+  // TODO: implement trustIconColor
+  Color? get trustIconColor => null;
 }

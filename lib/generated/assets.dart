@@ -105,5 +105,18 @@ class Assets {
   static const String selecionar_certificado_svg = 'assets/images/selecionar_certificado.svg';
   static const String upload_certificado_svg = 'assets/images/upload_certificado.svg';
   static const String senha_certificado_dialog = 'assets/images/senha_certificado_dialog.svg';
+  static const String balao_chat = 'assets/images/balao_chat.svg';
+  static const String caneta_assinando = 'assets/images/caneta_assinando.svg';
+  static const String grafico_icone = 'assets/images/grafico_icone.svg';
+  static const String grupo_pessoas = 'assets/images/grupo_pessoas.svg';
+  static const String lista_icone = 'assets/images/lista_icone.svg';
+  static const String setas_perpendiculares = 'assets/images/setas_perpendiculares.svg';
+  static const String exit_icone = 'assets/images/exit_icone.svg';
+  static const String icone_srm = 'assets/images/icone_srm.svg';
+  static const String icone_trust = 'assets/images/icone_trust.svg';
 
+  static const String home_icon = 'assets/images/home_icon.svg';
+  static const String search_icon = 'assets/images/search_icon.svg';
+  static const String menu_options_icon = 'assets/images/menu_options_icon.svg';
+  static const String dolar_icon = 'assets/images/dolar.svg';
 }
