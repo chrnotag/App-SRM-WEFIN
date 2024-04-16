@@ -11,7 +11,7 @@ class EndPointsTRUST extends Endpoint{
 
   @override
   // TODO: implement baseURL
-  String get baseURL => 'https://zuul.srmasset.com/direct/core-app-bff';
+  String get baseURL => 'https://core-app-bff.srmasset.com/core-app-bff';
 
   @override
   // TODO: implement finalizarAssinatura
