@@ -5,9 +5,18 @@
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 
 project 'Runner', {
-  'Debug' => :debug,
-  'Profile' => :release,
-  'Release' => :release,
+  'Debug-SRM' => :debug,
+  'Profile-SRM' => :release,
+  'Release-SRM' => :release,
+  'Debug-SRM_HOMOLOGACAO' => :debug,
+  'Profile-SRM_HOMOLOGACAO' => :release,
+  'Release-SRM_HOMOLOGACAO' => :release,
+  'Debug-TRUST' => :debug,
+  'Profile-TRUST' => :release,
+  'Release-TRUST' => :release,
+  'Debug-TRUST_HOMOLOGACAO' => :debug,
+  'Profile-TRUST_HOMOLOGACAO' => :release,
+  'Release-TRUST_HOMOLOGACAO' => :release,
 }
 
 def flutter_root

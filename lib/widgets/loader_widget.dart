@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
-
-import '../core/constants/themes/theme_configs.dart';
-
 class Loader extends StatelessWidget {
   const Loader({super.key});
 

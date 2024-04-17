@@ -1,12 +1,10 @@
 import 'dart:convert';
-
-import 'package:dio/dio.dart';
 import 'package:Srm_Asset/core/implementations_config/error_response.dart';
 
 import '../../models/exceptions_responses/exception_model.dart';
 
 class MensagemErroPadrao {
-  static ErrorResponse codigo_500() {
+  static ErrorResponse codigo500() {
     final data = ExceptionModel(
         codigo: '500',
         dataHora: DateTime.now(),

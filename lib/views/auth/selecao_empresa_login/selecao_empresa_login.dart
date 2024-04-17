@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:Srm_Asset/core/constants/enuns/theme_enum.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
-import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
-import 'package:Srm_Asset/core/providers/theme_provider.dart';
 import 'package:Srm_Asset/generated/assets.dart';
-
+import '../../../core/constants/tema_configs.dart';
 import '../../../core/providers/auth_provider_config/logar/auth_providers.dart';
 import '../../../core/providers/sessao_provider.dart';
+import '../../../core/constants/AppSizes.dart';
 
 class SelecaoEmpresaLogin extends StatefulWidget {
   const SelecaoEmpresaLogin({super.key});
@@ -32,7 +30,6 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeProvider themeProvider = context.watch<ThemeProvider>();
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -72,8 +69,6 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
                         children: [
                           InkWell(
                             onTap: () {
-                              themeProvider.temaSelecionado =
-                                  TemaSelecionado.TRUST;
                               Modular.to.pushNamed(AppRoutes.loginAuthRoute);
                             },
                             child: Column(
@@ -107,8 +102,6 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
                           ),
                           InkWell(
                             onTap: () {
-                              themeProvider.temaSelecionado =
-                                  TemaSelecionado.TRUST;
                               Modular.to.pushNamed(AppRoutes.loginAuthRoute);
                             },
                             child: Image.asset(

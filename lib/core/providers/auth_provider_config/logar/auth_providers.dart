@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -86,11 +84,18 @@ class AuthProvider extends ChangeNotifier {
           try {
             OverlayApp.terminaOverlay();
           } catch (_) {}
+          if(Modular.to.path != AppRoutes.homeAppRoute){
           Modular.to.navigate(AppRoutes.homeAppRoute);
+          print('teste');
+          }
         }
       }
     } else {
-      Modular.to.navigate(AppRoutes.homeAppRoute);
+      if(Modular.to.path != AppRoutes.homeAppRoute){
+        Modular.to.navigate(AppRoutes.homeAppRoute);
+        print('teste1');
+
+      }
     }
   }
 

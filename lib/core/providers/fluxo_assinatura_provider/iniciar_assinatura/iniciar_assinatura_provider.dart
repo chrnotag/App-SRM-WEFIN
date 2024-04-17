@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/views/home/importar_certificado/importar_certificado.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/assinatura_eletronica/assinatura_eletronica_provider.dart';
@@ -8,7 +9,7 @@ import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_m
 import '../../../../main.dart';
 import '../../../../views/home/assinaturas/selecionar_certificado.dart';
 import '../../../constants/route_labels.dart';
-import '../../certificado_provider/importar_certificado_provider.dart';
+import '../../certificado_provider/certificado_provider.dart';
 
 class IniciarAssinaturaProvider extends ChangeNotifier {
   List<RespostaIniciarAssinaturaModel> _hashsParaAssinar = [];
@@ -35,11 +36,11 @@ class IniciarAssinaturaProvider extends ChangeNotifier {
           builder: (context) => assinaturaEletronicaProvider
               .confirmarAssinaturaDialog(assinante, context));
     } else {
-      ImportarCertificadoProvider certificadoProvider =
-          context.watch<ImportarCertificadoProvider>();
+      CertificadoProvider certificadoProvider =
+          context.watch<CertificadoProvider>();
       await certificadoProvider.listaCertificadosFuture();
       if (certificadoProvider.listaCertificados.isEmpty) {
-        Modular.to.pushNamed(AppRoutes.importarCertificadoRoute);
+        showModalBottomSheet(context: context, builder: (context) => BottomSheet(onClosing: () {}, builder: (context) => ImportarCertificado(),shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)))),);
       } else {
         showDialog(
           context: myNavigatorKey.currentContext!,

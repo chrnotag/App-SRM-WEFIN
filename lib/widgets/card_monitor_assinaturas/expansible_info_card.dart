@@ -27,8 +27,8 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
     final assinantes = widget.assinantes;
 
     final CarouselController carouselController = CarouselController();
-    final ImportarCertificadoProvider certificadoProvider =
-        Modular.get<ImportarCertificadoProvider>();
+    final CertificadoProvider certificadoProvider =
+        Modular.get<CertificadoProvider>();
     return widget.isVisible
         ? Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -70,7 +70,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
   Widget _construirTelaInformacoesCarrossel(
       Assinante assinante,
       InformacaoAssinante info,
-      ImportarCertificadoProvider certificadoProvider) {
+      CertificadoProvider certificadoProvider) {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     bool filtroBotaoAssinar() {
       return assinante.informacoesAssinante.any((element) =>

@@ -1,14 +1,13 @@
+import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/utils/abrir_url_externo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
-import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
 import 'package:Srm_Asset/core/implementations_config/export_impl.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/recuperar_senha/recuperar_senha_provider.dart';
@@ -20,7 +19,8 @@ import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_textfield.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:validatorless/validatorless.dart';
-import '../core/providers/theme_provider.dart';
+import '../core/constants/tema_configs.dart';
+import '../core/providers/certificado_provider/certificado_provider.dart';
 import '../generated/assets.dart';
 import 'link_component.dart';
 
@@ -45,13 +45,15 @@ class _AuthFormState extends State<AuthForm> {
     filter: {"#": RegExp(r'[0-9]')},
   );
 
+  final MaskTextInputFormatter _cpfFormatter = MaskTextInputFormatter();
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _loadSavedLoginData();
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   _loadSavedLoginData();
+    // });
   }
 
   @override
@@ -63,8 +65,33 @@ class _AuthFormState extends State<AuthForm> {
 
   @override
   Widget build(BuildContext context) {
-    String politicaPrivacidade = EndPoints.politicaPrivacidade;
-    String termosDeUso = EndPoints.termosDeUso;
+    Environment ambiente = Modular.get<Environment>();
+    String politicaPrivacidade = ambiente.endpoints.politicaPrivacidade;
+    String termosDeUso = ambiente.endpoints.termosDeUso;
+    int? maximoCaracteresCPF;
+
+    void removerCaracteresEspeciais() {
+      _loginEC.text = _loginEC.text.replaceAll(RegExp(r'[.-]'), '');
+    }
+
+    final temLetras = RegExp(r'[a-zA-Z]').hasMatch(_loginEC.text);
+
+    void atualizarMascara() {
+      final mascara = temLetras ? null : '###.###.###-##';
+      final filtro = temLetras ? null : {"#": RegExp(r'[0-9A-Za-z\W]')};
+
+      if (!temLetras && _loginEC.text.length <= 1) {
+        _cpfFormatter.updateMask(mask: null);
+      } else if (_loginEC.text.length == 11) {
+        _cpfFormatter.updateMask(mask: mascara, filter: filtro);
+        _loginEC.text = _cpfFormatter.getMaskedText();
+      }
+
+      setState(() {
+        maximoCaracteresCPF = temLetras ? null : 11;
+      });
+    }
+
     return Form(
       key: _formKey,
       child: AutofillGroup(
@@ -78,12 +105,16 @@ class _AuthFormState extends State<AuthForm> {
                   onTap: () => setState(() {
                     _mensagemErro = null;
                   }),
-                  label: 'Digite seu email',
+                  inputFormatters: _cpfFormatter,
+                  onChanged: (value) => atualizarMascara(),
+                  maxCaracters: maximoCaracteresCPF,
+                  label: 'Digite seu e-mail ou CPF',
                   autofillHint: AutofillHints.email,
                   controller: _loginEC,
                   validator: Validatorless.multiple([
-                    Validatorless.email('Email inválido!'),
-                    Validatorless.required('Email Obrigatório'),
+                    if (temLetras) Validatorless.email('Email inválido!'),
+                    if (!temLetras) Validatorless.cpf('CPF inválido!'),
+                    Validatorless.required('E-mail ou CPF Obrigatório'),
                     (value) => _mensagemErro
                   ]),
                 ),
@@ -95,8 +126,7 @@ class _AuthFormState extends State<AuthForm> {
                       autofillHint: AutofillHints.password,
                       inputFormatters: !widget.visible ? _cnpjFormatter : null,
                       onTap: () => _mensagemErro = null,
-                      label:
-                          'Digite sua Senha',
+                      label: 'Digite sua Senha',
                       obscureText: widget.visible,
                       controller: _passwordEC,
                       validator: Validatorless.multiple([
@@ -104,8 +134,8 @@ class _AuthFormState extends State<AuthForm> {
                         if (widget.visible)
                           Validatorless.max(10, 'Maximo de 10 caracteres.'),
                         if (widget.visible)
-                          Validatorless.min(
-                              3, 'Senha com no mínimo 3 e máximo 10 caracteres.'),
+                          Validatorless.min(3,
+                              'Senha com no mínimo 3 e máximo 10 caracteres.'),
                         (value) => _mensagemErro
                       ]),
                     ),
@@ -127,13 +157,13 @@ class _AuthFormState extends State<AuthForm> {
                   TextSpan(
                       text: 'Ao continuar você concorda com as nossas ',
                       style: context.textTheme.bodySmall!
-                          .copyWith(color: context.surface)),
+                          .copyWith(color: context.inverseSurface)),
                   TextSpan(
                       text: 'Politicas de Privacidade ',
                       style: context.textTheme.bodySmall!.copyWith(
-                          color: context.surface,
+                          color: context.inverseSurface,
                           decoration: TextDecoration.underline,
-                          decorationColor: context.surface,
+                          decorationColor: context.inverseSurface,
                           fontWeight: FontWeight.w600),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () async {
@@ -143,13 +173,13 @@ class _AuthFormState extends State<AuthForm> {
                   TextSpan(
                       text: 'e os nossos ',
                       style: context.textTheme.bodySmall!
-                          .copyWith(color: context.surface)),
+                          .copyWith(color: context.inverseSurface)),
                   TextSpan(
                       text: 'Termos de uso',
                       style: context.textTheme.bodySmall!.copyWith(
-                          color: context.surface,
+                          color: context.inverseSurface,
                           decoration: TextDecoration.underline,
-                          decorationColor: context.surface,
+                          decorationColor: context.inverseSurface,
                           fontWeight: FontWeight.w600),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () async {
@@ -162,6 +192,10 @@ class _AuthFormState extends State<AuthForm> {
             BotaoPadrao(
               label: widget.label,
               onPressed: () async {
+                if (maximoCaracteresCPF != null && maximoCaracteresCPF! < 11) {
+                  removerCaracteresEspeciais();
+                }
+                print('teste: ${_loginEC.text}');
                 TextInput.finishAutofillContext();
                 if (widget.visible) {
                   await login();
@@ -176,27 +210,28 @@ class _AuthFormState extends State<AuthForm> {
     );
   }
 
-  final FlutterSecureStorage _storage = FlutterSecureStorage();
+//   final FlutterSecureStorage _storage = FlutterSecureStorage();
+//
+// // Função para salvar os dados de login (email e senha) se o usuário optar por isso
+//   void _saveLoginDataIfNeeded() async {
+//     await _storage.write(key: 'email', value: _loginEC.text);
+//     await _storage.write(key: 'password', value: _passwordEC.text);
+//   }
 
-// Função para salvar os dados de login (email e senha) se o usuário optar por isso
-  void _saveLoginDataIfNeeded() async {
-    await _storage.write(key: 'email', value: _loginEC.text);
-    await _storage.write(key: 'password', value: _passwordEC.text);
-  }
-
-  void _loadSavedLoginData() async {
-    String? savedEmail = await _storage.read(key: 'email');
-    String? savedPassword = await _storage.read(key: 'password');
-
-    if (savedEmail != null && savedPassword != null) {
-      setState(() {
-        _loginEC.text = savedEmail;
-        _passwordEC.text = savedPassword;
-      });
-    }
-  }
+  // void _loadSavedLoginData() async {
+  //   // String? savedEmail = await _storage.read(key: 'email');
+  //   // String? savedPassword = await _storage.read(key: 'password');
+  //   if (savedEmail != null && savedPassword != null) {
+  //     setState(() {
+  //       _loginEC.text = savedEmail;
+  //       _passwordEC.text = savedPassword;
+  //     });
+  //   }
+  // }
 
   Future<void> login() async {
+    CertificadoProvider certificadoProvider =
+        Modular.get<CertificadoProvider>();
     final authProvider = Modular.get<AuthProvider>();
     _mensagemErro = null;
 
@@ -220,10 +255,14 @@ class _AuthFormState extends State<AuthForm> {
           _mensagemErro = error.mensagem;
         });
       } else {
-        _saveLoginDataIfNeeded();
+        certificadoProvider.pegarCertificado();
+        print(
+            'certificado: ${certificadoProvider.certificadoAtual?.subjectDisplayName}');
+        // _saveLoginDataIfNeeded();
         if (authProvider.listaCedente!.length > 1) {
           Modular.to.pushReplacementNamed(AppRoutes.listaSelecaoEmpresasRoute);
         } else {
+          certificadoProvider.pegarCertificado();
           authProvider.RelogarTrocarCedente(
               authProvider.dataUser!.identificadorCedente, context);
         }
@@ -239,8 +278,8 @@ class _AuthFormState extends State<AuthForm> {
       setState(() {
         OverlayApp.iniciaOverlay(context);
       });
-      recuperarSenhaProvider.dadosUsuario = RecuperarSenhaModel(
-          usuario: _loginEC.text);
+      recuperarSenhaProvider.dadosUsuario =
+          RecuperarSenhaModel(usuario: _loginEC.text);
       final response = await recuperarSenhaProvider.recuperarSenha();
       OverlayApp.terminaOverlay();
       if (response != null && response.error != null) {

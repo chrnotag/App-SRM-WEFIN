@@ -1,33 +1,32 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:Srm_Asset/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:http/http.dart' as http;
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
-import 'package:Srm_Asset/core/providers/theme_provider.dart';
 import 'package:Srm_Asset/core/utils/mensagem_erro_requisicao.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../../models/documento_model.dart';
 import '../../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import '../../../widgets/popup_generico.dart';
+import '../../constants/classes_abstratas/envirioment.dart';
 import '../../implementations_config/api_response.dart';
 import '../../implementations_config/export_impl.dart';
 import '../../providers/documentos_provider/baixar_documentos_provider.dart';
 
 class BaixarDocumentosImpl {
   final Documento documento;
+    Environment ambiente = Modular.get<Environment>();
 
   BaixarDocumentosImpl({required this.documento});
 
   Map<String, String> header() {
-    ThemeProvider themeProvider = Modular.get<ThemeProvider>();
     AuthProvider authProvider = Modular.get<AuthProvider>();
     final header = {
       'accept': 'application/json',
-      'plataforma': themeProvider.temaSelecionado.name,
+      'plataforma': ambiente.plataforma.name,
       'Authorization': authProvider.dataUser!.token,
       'Content-Type': 'application/json',
     };
@@ -36,7 +35,7 @@ class BaixarDocumentosImpl {
   }
 
   Future<ApiResponse<dynamic>> ler() async {
-    Uri url = EndPoints.montarUrlBaixarDocumento(documento.idAssinaturaDigital, true);
+    Uri url = ambiente.endpoints.montarUrlBaixarDocumento(documento.idAssinaturaDigital, true);
     BaixarDocumentosProvider baixarDocumentosProvider =
     Modular.get<BaixarDocumentosProvider>();
     try {
@@ -52,16 +51,16 @@ class BaixarDocumentosImpl {
       }
     } catch (_) {
       baixarDocumentosProvider.urlDocumento = null;
-      return MensagemErroPadrao.codigo_500();
+      return MensagemErroPadrao.codigo500();
     }
   }
 
   Future<ApiResponse<dynamic>> baixar() async {
-    Uri url = EndPoints.montarUrlBaixarDocumento(documento.idAssinaturaDigital, false);
+    Uri url = ambiente.endpoints.montarUrlBaixarDocumento(documento.idAssinaturaDigital, false);
     try {
       var downloadsDirectory = await getExternalStorageDirectory();
       if (downloadsDirectory == null) {
-        return MensagemErroPadrao.codigo_500();
+        return MensagemErroPadrao.codigo500();
       }
 
       var response = await http.get(url, headers: header());
@@ -85,7 +84,7 @@ class BaixarDocumentosImpl {
 
       return SucessResponse(null);
     } catch (_) {
-      return MensagemErroPadrao.codigo_500();
+      return MensagemErroPadrao.codigo500();
     }
   }
 }

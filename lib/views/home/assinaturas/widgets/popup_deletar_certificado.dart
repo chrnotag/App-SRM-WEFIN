@@ -9,8 +9,8 @@ class PopUpDeletarCertificado {
   PopUpDeletarCertificado({required this.context, required this.certificado, this.label, this.title});
 
   Widget get popUp {
-    final ImportarCertificadoProvider certificadoProvider =
-        Modular.get<ImportarCertificadoProvider>();
+    final CertificadoProvider certificadoProvider =
+        Modular.get<CertificadoProvider>();
     return AlertDialog(
       title: Column(
         children: [
@@ -33,8 +33,8 @@ class PopUpDeletarCertificado {
                 Expanded(
                   child: BotaoPadrao(
                     onPressed: () {
-                      certificadoProvider.deletarCertificado(certificado.thumbprint);
-                      certificadoProvider.certificadoSelecionado = null;
+                      certificadoProvider.deletarCertificado();
+                      certificadoProvider.certificadoAtual = null;
                       Fluttertoast.showToast(
                           msg: 'Certificado removido com sucesso');
                       Modular.to.pop();

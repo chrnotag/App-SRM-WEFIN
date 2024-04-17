@@ -1,5 +1,5 @@
-import 'package:Srm_Asset/core/constants/themes/theme_configs.dart';
 import 'package:Srm_Asset/views/home/assinaturas/widgets/popup_erro_carregar_dados.dart';
+import 'package:Srm_Asset/widgets/transparent_appbar_empty.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:line_icons/line_icons.dart';
@@ -8,11 +8,11 @@ import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
-import 'package:Srm_Asset/widgets/appbar_logo_perfil.dart';
 import 'package:Srm_Asset/widgets/botao_selecao_empresa.dart';
 import 'package:Srm_Asset/widgets/card_monitor_assinaturas/card_monitor_assinaturas.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
 
+import '../../../core/constants/tema_configs.dart';
 import '../../../core/implementations_config/api_response.dart';
 
 class MonitorAssinaturas extends StatefulWidget {
@@ -71,7 +71,7 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas>
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: AppBar().preferredSize,
-          child: const AppBarLogo(),
+          child: const TransparentAppBarEmpty(),
         ),
         body: Center(
           child: Padding(

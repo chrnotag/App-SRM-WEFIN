@@ -1,24 +1,26 @@
+import 'package:Srm_Asset/core/utils/mensagem_erro_requisicao.dart';
 import 'package:flutter/material.dart';
-import 'package:Srm_Asset/core/constants/endpoints.dart';
 import 'package:http/http.dart' as http;
 import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/implementations_config/export_impl.dart';
-import 'package:Srm_Asset/core/providers/certificado_provider/importar_certificado_provider.dart';
+import 'package:Srm_Asset/core/providers/certificado_provider/certificado_provider.dart';
 import 'package:Srm_Asset/main.dart';
 import 'package:Srm_Asset/widgets/popup_generico.dart';
 import '../../../widgets/dialog_senha_certificado.dart';
+import '../../constants/classes_abstratas/envirioment.dart';
 import '../../implementations_config/api_response.dart';
 
 class BaixarCertificadoImpl {
   static Future<ApiResponse<dynamic>> baixar(String token) async {
+  Environment ambiente = Modular.get<Environment>();
     final header = {
       'accept': 'application/octet-stream',
       'Content-Type': 'application/json'
     };
     final url =
-        Uri.parse("${EndPoints.baixarCertificadoQrCode}/$token");
-    final ImportarCertificadoProvider provider =
-        Modular.get<ImportarCertificadoProvider>();
+        Uri.parse("${ambiente.endpoints.baixarCertificadoQrCode}/$token");
+    final CertificadoProvider provider =
+        Modular.get<CertificadoProvider>();
     log('CURL baixar certificado via QrCode:\nheader: $header\nbody: $url ');
     try {
       final content = await http.get(url, headers: header);
@@ -41,12 +43,7 @@ class BaixarCertificadoImpl {
       );
       return SucessResponse(null);
     } catch (e) {
-      final data = ExceptionModel(
-          codigo: '500',
-          dataHora: DateTime.now(),
-          httpStatus: 'INTERNAL_SERVER_ERROR',
-          mensagem: 'Desculpe, algo deu errado em nosso servidor.');
-      return ErrorResponse(data);
+      return MensagemErroPadrao.codigo500();
     }
   }
 }
