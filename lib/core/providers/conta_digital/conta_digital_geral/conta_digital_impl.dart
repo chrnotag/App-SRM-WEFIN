@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
+import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:Srm_Asset/models/conta_digital/geral/conta_digital.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:http/http.dart' as http;
@@ -9,15 +10,17 @@ import '../../../utils/mensagem_erro_requisicao.dart';
 
 class ContaDigitalImpl {
   static Future<ApiResponse<dynamic>> pegarDadosContaDigital() async {
+    final authProvider = Modular.get<AuthProvider>();
       final ambiente = Modular.get<Environment>();
-      final Uri url = Uri.parse("ambiente.endpoints.contaDigital");
+      final Uri url = Uri.parse(ambiente.endpoints.contaDigital);
       final headers = {
         'Content-Type': 'application/json; charset=utf-8',
         'accept': 'application/json',
+        'Authorization': authProvider.dataUser!.token,
         'plataforma': ambiente.plataforma.name
       };
       try {
-        final response = await http.post(url, headers: headers);
+        final response = await http.get(url, headers: headers);
         print('Resposta  da requisição: ${response.body}');
         print('statusCode: ${response.statusCode}');
         if (response.statusCode == 200) {

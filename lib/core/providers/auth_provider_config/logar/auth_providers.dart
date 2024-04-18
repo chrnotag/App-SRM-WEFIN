@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -84,6 +85,9 @@ class AuthProvider extends ChangeNotifier {
           try {
             OverlayApp.terminaOverlay();
           } catch (_) {}
+          final contaDigitalProvider = Modular.get<ContaDigitalProvider>();
+          contaDigitalProvider.obterDadosContaDigital();
+          contaDigitalProvider.obterSaldoContaDigital();
           Modular.to.navigate(AppRoutes.homeAppRoute);
         }
       }

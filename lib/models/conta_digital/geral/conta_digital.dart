@@ -5,7 +5,7 @@ part 'conta_digital.g.dart';
 @JsonSerializable()
 class ContaDigitalModel {
   String documentoTitular;
-  int idConta;
+  int? idConta;
   String agencia;
   String conta;
   String tipoConta;
