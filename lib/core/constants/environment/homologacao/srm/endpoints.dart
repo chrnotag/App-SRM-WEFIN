@@ -60,4 +60,12 @@ class EndPointsSRM extends Endpoint{
   // TODO: implement termosDeUso
   String get termosDeUso => "https://www.srmasset.com/app/SRM_-_Termos_e_Condicoes_de_Uso.html";
 
+  @override
+  // TODO: implement contaDigital
+  String get contaDigital => "$baseURL/conta-digital";
+
+  @override
+  // TODO: implement saldoContaDigital
+  String get saldoContaDigital => "$contaDigital/saldo";
+
 }

@@ -13,4 +13,6 @@ abstract class Endpoint{
   String get siteQrCode;
   String get politicaPrivacidade;
   String get termosDeUso;
+  String get contaDigital;
+  String get saldoContaDigital;
 }

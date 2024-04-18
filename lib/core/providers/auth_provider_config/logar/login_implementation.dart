@@ -13,7 +13,9 @@ class LoginImpl {
   final UserModel userModel;
 
   LoginImpl({required this.userModel});
+
   Environment ambiente = Modular.get<Environment>();
+
   Future<ApiResponse<dynamic>> login() async {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     final url = ambiente.endpoints.login;
@@ -27,17 +29,22 @@ class LoginImpl {
     try {
       final response =
           await http.post(Uri.parse(url), headers: headers, body: body);
+      print('statusCode: ${response.statusCode}');
+      print('response: ${response.body}');
       if (response.statusCode == 200) {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = LoginResponse.fromJson(responseBody);
         authProvider.setDataUser = data;
         return SucessResponse(data);
-      } else if(response.statusCode == 500){
-       return MensagemErroPadrao.codigo500();
-      }else{
+      } else if (response.statusCode == 500) {
+        print('teste2');
+        return MensagemErroPadrao.codigo500();
+      } else {
+        print('teste1');
         return MensagemErroPadrao.erroResponse(response.bodyBytes);
       }
     } catch (e, s) {
+      print('teste3, $e,$s');
       return MensagemErroPadrao.codigo500();
     }
   }

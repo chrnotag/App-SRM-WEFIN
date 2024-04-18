@@ -58,4 +58,12 @@ class EndPointsTRUST extends Endpoint{
   @override
   // TODO: implement termosDeUso
   String get termosDeUso => "https://trusthub.com.br/new/assets/documents/Trust_-_Termos_e_Condicoes_de_Uso_para_abertura_da_Conta_Digital.html";
+
+  @override
+  // TODO: implement contaDigital
+  String get contaDigital => "$baseURL/conta-digital";
+
+  @override
+  // TODO: implement saldoContaDigital
+  String get saldoContaDigital => "$contaDigital/saldo";
 }
