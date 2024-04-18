@@ -12,7 +12,7 @@ class EndPointsSRM extends Endpoint{
 
   @override
   // TODO: implement baseURL
-  String get baseURL => 'https://proxy-web-routers-homologacao.srmasset.com/direct/core-app-bff-homologacao/core-app-bff/v1';
+  String get baseURL => 'https://core-app-bff-homologacao.srmasset.com/core-app-bff/v1';
 
   @override
   // TODO: implement finalizarAssinatura

@@ -17,4 +17,5 @@ abstract class Environment {
   Color get azulOuPreto;
   Color get verdeOuCinza;
   Color get laranjaOuCinza;
+  Color? get trustIconColor;
 }

@@ -1,5 +1,5 @@
 import 'package:Srm_Asset/generated/assets.dart';
-import 'package:Srm_Asset/widgets/molde_tela_tutorial_certificado.dart';
+import 'package:Srm_Asset/views/home/importar_certificado/widgets/molde_tela_tutorial_certificado.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';

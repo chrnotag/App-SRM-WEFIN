@@ -12,23 +12,7 @@ class AppColors {
   static const Color laranja = Color(0xFFF29046);
   static const Color vermelho = Color(0xFFA74D4D);
   static const Color verde = Color(0xFF84B38A);
-  static const Color brancoGelo = Color(0xFFECECEC);
-}
-
-class AppSizes {
-  static const double paddingSmall = 8;
-  static const double paddingLigth = 14;
-  static const double paddingMedium = 16;
-  static const double paddingLarge = 24;
-  static const double paddingExtraLarge = 32;
-
-  double bodySmall = 10.sp;
-  double bodyMedium = 14.sp;
-  double bodyLarge = 20.sp;
-  double labelMedium = 14.sp;
-  double displaySmall = 18.sp;
-  double displayMedium = 22.sp;
-  double displayLarge = 24.sp;
+  static const Color brancoGelo = Color(0XFFF8F9FB);
 }
 
 class BorderRadiusBotaoEnvio {

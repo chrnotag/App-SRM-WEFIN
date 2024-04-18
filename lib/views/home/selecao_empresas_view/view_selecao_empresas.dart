@@ -57,8 +57,6 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
     final AuthProvider authProviderAtt = context.watch<AuthProvider>();
 
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: AppBar().preferredSize, child: const AppBarLogo()),
       body: Padding(
         padding: EdgeInsets.all(8.r),
         child: Center(

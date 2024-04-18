@@ -92,7 +92,11 @@ class AuthProvider extends ChangeNotifier {
         }
       }
     } else {
-      Modular.to.navigate(AppRoutes.homeAppRoute);
+      if(Modular.to.path != AppRoutes.homeAppRoute){
+        Modular.to.navigate(AppRoutes.homeAppRoute);
+        print('teste1');
+
+      }
     }
   }
 

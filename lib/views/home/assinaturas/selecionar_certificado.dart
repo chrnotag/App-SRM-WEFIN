@@ -1,6 +1,3 @@
-import 'dart:math';
-import 'dart:developer' as log;
-import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:crosspki/crosspki.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -14,6 +11,7 @@ import 'package:Srm_Asset/core/providers/certificado_provider/certificado_provid
 import 'package:Srm_Asset/core/utils/overlay.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 import '../../../core/constants/tema_configs.dart';
+import '../../../core/constants/AppSizes.dart';
 
 part 'widgets/popup_deletar_certificado.dart';
 

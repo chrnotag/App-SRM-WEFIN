@@ -4,6 +4,7 @@ import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/tema_configs.dart';
 
 import '../../../../../generated/assets.dart';
+import '../../../AppSizes.dart';
 
 class ThemeSRM {
   ThemeSRM._();
@@ -64,7 +65,7 @@ class ThemeSRM {
     ),
   );
   static String get logo => 'assets/images/logo_srm.png';
-  static String get logoAppBar => 'assets/images/logo_srm.png';
+  static String get logoAppBar => Assets.icone_srm;
   static Widget get imagemAjuda =>
       Image.asset(Assets.iconsIcCellCheck, width: 176.w, color: null);
   static Color get brancoOuVerde => Colors.white;

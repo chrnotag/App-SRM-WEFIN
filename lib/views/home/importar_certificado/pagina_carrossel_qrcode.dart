@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/generated/assets.dart';
-import 'package:Srm_Asset/widgets/molde_tela_tutorial_certificado.dart';
+import 'package:Srm_Asset/views/home/importar_certificado/widgets/molde_tela_tutorial_certificado.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
