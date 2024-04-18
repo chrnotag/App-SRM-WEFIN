@@ -47,72 +47,72 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     final AuthProvider authProvider = context.watch<AuthProvider>();
     return Scaffold(
-      bottomNavigationBar: SafeArea(
-        child: BottomNavigationBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          onTap: (value) {
-            setState(() {
-              _index = value;
-            });
-          },
-          currentIndex: _index,
-          selectedItemColor: context.indicatorColor,
-          type: BottomNavigationBarType.fixed,
-          items: [
-            BottomNavigationBarItem(
-              icon: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        color: _index == 0 ? context.indicatorColor : null,
-                        borderRadius: const BorderRadius.all(Radius.circular(10))),
-                    height: 4,
-                    width: 30.r,
-                  ),
-                  SvgPicture.asset(Assets.home_icon,
-                      color: _index == 0 ? context.indicatorColor : null),
-                ],
-              ),
-              label: 'Início',
-            ),
-            BottomNavigationBarItem(
-              icon: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        color: _index == 1 ? context.indicatorColor : null,
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    height: 4,
-                    width: 30.r,
-                  ),
-                  SvgPicture.asset(Assets.search_icon,
-                      color: _index == 1 ? context.indicatorColor : null),
-                ],
-              ),
-              label: 'Busca',
-            ),
-            BottomNavigationBarItem(
-                icon: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          color: _index == 2 ? context.indicatorColor : null,
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      height: 4,
-                      width: 30.r,
-                    ),
-                    SvgPicture.asset(Assets.menu_options_icon,
-                        color: _index == 2 ? context.indicatorColor : null),
-                  ],
-                ),
-                label: 'Opções'),
-          ],
-        ),
-      ),
+      // bottomNavigationBar: SafeArea(
+      //   child: BottomNavigationBar(
+      //     backgroundColor: Colors.white,
+      //     elevation: 0,
+      //     onTap: (value) {
+      //       setState(() {
+      //         _index = value;
+      //       });
+      //     },
+      //     currentIndex: _index,
+      //     selectedItemColor: context.indicatorColor,
+      //     type: BottomNavigationBarType.fixed,
+      //     items: [
+      //       BottomNavigationBarItem(
+      //         icon: Column(
+      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //           children: [
+      //             Container(
+      //               decoration: BoxDecoration(
+      //                   color: _index == 0 ? context.indicatorColor : null,
+      //                   borderRadius: const BorderRadius.all(Radius.circular(10))),
+      //               height: 4,
+      //               width: 30.r,
+      //             ),
+      //             SvgPicture.asset(Assets.home_icon,
+      //                 color: _index == 0 ? context.indicatorColor : null),
+      //           ],
+      //         ),
+      //         label: 'Início',
+      //       ),
+      //       BottomNavigationBarItem(
+      //         icon: Column(
+      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //           children: [
+      //             Container(
+      //               decoration: BoxDecoration(
+      //                   color: _index == 1 ? context.indicatorColor : null,
+      //                   borderRadius: BorderRadius.all(Radius.circular(10))),
+      //               height: 4,
+      //               width: 30.r,
+      //             ),
+      //             SvgPicture.asset(Assets.search_icon,
+      //                 color: _index == 1 ? context.indicatorColor : null),
+      //           ],
+      //         ),
+      //         label: 'Busca',
+      //       ),
+      //       BottomNavigationBarItem(
+      //           icon: Column(
+      //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //             children: [
+      //               Container(
+      //                 decoration: BoxDecoration(
+      //                     color: _index == 2 ? context.indicatorColor : null,
+      //                     borderRadius: BorderRadius.all(Radius.circular(10))),
+      //                 height: 4,
+      //                 width: 30.r,
+      //               ),
+      //               SvgPicture.asset(Assets.menu_options_icon,
+      //                   color: _index == 2 ? context.indicatorColor : null),
+      //             ],
+      //           ),
+      //           label: 'Opções'),
+      //     ],
+      //   ),
+      // ),
       backgroundColor: AppColors.brancoGelo,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
