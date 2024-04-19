@@ -4,6 +4,7 @@ import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/constants/environment/producao/srm/contatos.dart';
 import 'package:Srm_Asset/core/constants/environment/producao/srm/endpoints.dart';
 import 'package:Srm_Asset/core/constants/environment/tema_srm.dart';
+import 'package:Srm_Asset/core/constants/tema_configs.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/enuns/plataforma_enum.dart';

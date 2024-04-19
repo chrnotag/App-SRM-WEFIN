@@ -1,4 +1,5 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
+import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/saldo/conta_digital_saldo_impl.dart';
 import 'package:Srm_Asset/core/utils/abrir_url_externo.dart';
 import 'package:flutter/cupertino.dart';
@@ -107,6 +108,7 @@ class _AuthFormState extends State<AuthForm> {
                   onTap: () => setState(() {
                     _mensagemErro = null;
                   }),
+                  hint: "E-mail ou CPF",
                   inputFormatters: _cpfFormatter,
                   onChanged: (value) => atualizarMascara(),
                   maxCaracters: maximoCaracteresCPF,
@@ -124,72 +126,48 @@ class _AuthFormState extends State<AuthForm> {
                   visible: widget.visible,
                   child: Padding(
                     padding: EdgeInsets.only(top: 50.h),
-                    child: WefinTextFormField(
-                      autofillHint: AutofillHints.password,
-                      inputFormatters: !widget.visible ? _cnpjFormatter : null,
-                      onTap: () => _mensagemErro = null,
-                      label: 'Digite sua Senha',
-                      obscureText: widget.visible,
-                      controller: _passwordEC,
-                      validator: Validatorless.multiple([
-                        Validatorless.required('Senha obrigatória'),
-                        if (widget.visible)
-                          Validatorless.max(10, 'Maximo de 10 caracteres.'),
-                        if (widget.visible)
-                          Validatorless.min(3,
-                              'Senha com no mínimo 3 e máximo 10 caracteres.'),
-                        (value) => _mensagemErro
-                      ]),
+                    child: Column(
+                      children: [
+                        WefinTextFormField(
+                          hint: "Senha",
+                          autofillHint: AutofillHints.password,
+                          inputFormatters:
+                              !widget.visible ? _cnpjFormatter : null,
+                          onTap: () => _mensagemErro = null,
+                          label: 'Digite sua Senha',
+                          obscureText: widget.visible,
+                          controller: _passwordEC,
+                          validator: Validatorless.multiple([
+                            Validatorless.required('Senha obrigatória'),
+                            if (widget.visible)
+                              Validatorless.max(10, 'Maximo de 10 caracteres.'),
+                            if (widget.visible)
+                              Validatorless.min(3,
+                                  'Senha com no mínimo 3 e máximo 10 caracteres.'),
+                            (value) => _mensagemErro
+                          ]),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Visibility(
+                                visible: widget.visible,
+                                child: LinkComponent(
+                                  style: context.textTheme.bodyMedium!.copyWith(color: context.secondary, fontWeight: FontWeight.bold),
+                                  label: 'Esqueci minha senha!',
+                                  route: AppRoutes.forgetPassAuthRoute,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 ),
               ],
-            ),
-            Visibility(
-              visible: widget.visible,
-              child: LinkComponent(
-                label: 'Esqueci minha senha!',
-                route: AppRoutes.forgetPassAuthRoute,
-              ),
-            ),
-            Visibility(
-              visible: widget.visible,
-              child: RichText(
-                text: TextSpan(children: [
-                  TextSpan(
-                      text: 'Ao continuar você concorda com as nossas ',
-                      style: context.textTheme.bodySmall!
-                          .copyWith(color: context.inverseSurface)),
-                  TextSpan(
-                      text: 'Politicas de Privacidade ',
-                      style: context.textTheme.bodySmall!.copyWith(
-                          color: context.inverseSurface,
-                          decoration: TextDecoration.underline,
-                          decorationColor: context.inverseSurface,
-                          fontWeight: FontWeight.w600),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () async {
-                          String url = politicaPrivacidade;
-                          AbrirUrl().launchURL(url);
-                        }),
-                  TextSpan(
-                      text: 'e os nossos ',
-                      style: context.textTheme.bodySmall!
-                          .copyWith(color: context.inverseSurface)),
-                  TextSpan(
-                      text: 'Termos de uso',
-                      style: context.textTheme.bodySmall!.copyWith(
-                          color: context.inverseSurface,
-                          decoration: TextDecoration.underline,
-                          decorationColor: context.inverseSurface,
-                          fontWeight: FontWeight.w600),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () async {
-                          String url = termosDeUso;
-                          await AbrirUrl().launchURL(url);
-                        }),
-                ]),
-              ),
             ),
             BotaoPadrao(
               label: widget.label,
@@ -205,6 +183,49 @@ class _AuthFormState extends State<AuthForm> {
                   await resetPassword();
                 }
               },
+            ),
+            Visibility(
+              visible: widget.visible,
+              child: SizedBox(
+                width: context.width * 0.8,
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(children: [
+                    TextSpan(
+                        text: 'Ao continuar concordo com os ',
+                        style: context.textTheme.bodySmall!
+                            .copyWith(color: context.secondary)),
+                    TextSpan(
+                        text: 'Termos e Condições de uso ',
+                        style: context.textTheme.bodySmall!.copyWith(
+                            color: context.secondary,
+                            decoration: TextDecoration.underline,
+                            decorationColor: context.inverseSurface,
+                            fontWeight: FontWeight.w600),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () async {
+                            String url = termosDeUso;
+                            AbrirUrl().launchURL(url);
+                          }),
+                    TextSpan(
+                        text: 'e tenho ciência da ',
+                        style: context.textTheme.bodySmall!
+                            .copyWith(color: context.secondary)),
+                    TextSpan(
+                        text: 'Declaração de Política de Privacidade.',
+                        style: context.textTheme.bodySmall!.copyWith(
+                            color: context.secondary,
+                            decoration: TextDecoration.underline,
+                            decorationColor: context.inverseSurface,
+                            fontWeight: FontWeight.w600),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () async {
+                            String url = politicaPrivacidade;
+                            await AbrirUrl().launchURL(url);
+                          }),
+                  ]),
+                ),
+              ),
             ),
           ],
         ),

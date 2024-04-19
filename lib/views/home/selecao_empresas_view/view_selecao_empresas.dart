@@ -2,12 +2,10 @@ import 'package:Srm_Asset/widgets/mascara_texto_cnpj.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
-import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
 import 'package:Srm_Asset/models/auth_login_models/SRM/cedente_model.dart';
-import 'package:Srm_Asset/widgets/appbar_logo_perfil.dart';
 import 'package:Srm_Asset/widgets/botao_selecao_empresa.dart';
 import 'package:Srm_Asset/widgets/searchbar_person.dart';
 

@@ -15,6 +15,7 @@ class ThemeSRM {
   }
 
   static ThemeData get theme => ThemeData(
+    focusColor: AppColors.laranjaSRM,
     searchBarTheme: SearchBarThemeData(
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             const RoundedRectangleBorder(
@@ -35,14 +36,14 @@ class ThemeSRM {
       brightness: Brightness.light,
       primary: AppColors.laranjaSRM,
       onPrimary: Colors.white,
-      secondary: AppColors.azulPrimarioSRM,
+      secondary: AppColors.azul,
       onSecondary: Colors.white,
       error: AppColors.vermelho,
       onError: Colors.redAccent.shade200,
       background: const Color(0XFFF8F9FB),
-      onBackground: AppColors.azulPrimarioSRM,
-      surface: Colors.white,
-      onSurface: AppColors.azulPrimarioSRM,
+      onBackground: AppColors.azul,
+      surface: Colors.black,
+      onSurface: AppColors.azul,
       inverseSurface: Colors.white,),
     appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
@@ -71,4 +72,5 @@ class ThemeSRM {
   static Color get azulOuPreto => AppColors.azul;
   static Color get verdeOuCinza => AppColors.verdePrimarioTRUST;
   static Color get laranjaOuCinza => AppColors.laranjaSRM;
+
 }

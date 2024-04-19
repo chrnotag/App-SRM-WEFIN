@@ -34,7 +34,7 @@ class SelecaoEmpresa extends StatelessWidget {
           child: Text(
             tituloPagina,
             style: context.textTheme.bodyLarge!.copyWith(
-                color:  context.inverseSurface, fontWeight: FontWeight.w100),
+                color:  context.surface, fontWeight: FontWeight.w100),
           ),
         ),
         SizedBox(height: 8.h),

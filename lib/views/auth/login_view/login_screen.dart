@@ -48,6 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 title: Image.asset(
                   ambiente.logo,
                   width: 80.w,
+                  color: context.secondary,
                   fit: BoxFit.fill,
                 ),
                 centerTitle: true,
@@ -68,10 +69,23 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [
                             Visibility(
                               visible: !isKeyboardVisible,
-                              child: Image.asset(
-                                ambiente.logo,
-                                width: 190.w,
-                                fit: BoxFit.fill,
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    ambiente.logo,
+                                    width: 190.w,
+                                    color: context.secondary,
+                                    fit: BoxFit.fill,
+                                  ),
+                                  Text(
+                                    "Capital em Movimento",
+                                    style: context.textTheme.bodyMedium!
+                                        .copyWith(
+                                            fontWeight: FontWeight.w900,
+                                            color: context.primaryColor),
+                                    textAlign: TextAlign.center,
+                                  )
+                                ],
                               ),
                             ),
                             SizedBox(
@@ -83,9 +97,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: SizedBox(
                                 child: Text(
                                   "Seja bem vindo\nao seu app de gestão",
-                                  style: context.textTheme.bodyLarge!
-                                      .copyWith(color: context.inverseSurface, fontWeight: FontWeight
-                                  .w400),
+                                  style: context.textTheme.bodyLarge!.copyWith(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400),
                                   textAlign: TextAlign.center,
                                 ),
                               ),
