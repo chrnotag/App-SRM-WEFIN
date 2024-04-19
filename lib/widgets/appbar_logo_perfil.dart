@@ -22,30 +22,20 @@ class AppBarLogo extends StatefulWidget {
 
 class _AppBarLogoState extends State<AppBarLogo> {
   late String _valorSelecionado;
-  late CedenteModel _empresaSelecionada;
-  late List<DropdownMenuItem<String>> itensDropDown;
+  List<CedenteModel> _listaItens = [];
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     final authProvider = context.watch<AuthProvider>();
-    _empresaSelecionada = authProvider.empresaSelecionada!;
-    _valorSelecionado = _empresaSelecionada.nome;
-    itensDropDown = List.of(authProvider.listaCedente!.map((e) =>
-        DropdownMenuItem(
-            value: e.nome,
-            child: Text(e.nome,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: context.textTheme.bodyMedium!
-                    .copyWith(color: Colors.black)))));
+    _valorSelecionado = authProvider.empresaSelecionada!.identificador;
+    _listaItens = authProvider.listaCedente!;
   }
 
   @override
   Widget build(BuildContext context) {
-    final authProvider = context.watch<AuthProvider>();
     Environment ambiente = Modular.get<Environment>();
-
+    final authProvider = context.watch<AuthProvider>();
     return AppBar(
       backgroundColor: context.indicatorColor,
       shadowColor: Colors.transparent,
@@ -66,47 +56,35 @@ class _AppBarLogoState extends State<AppBarLogo> {
                   border: Border.all(color: Colors.white),
                   borderRadius: const BorderRadius.all(Radius.circular(12))),
               child: DropdownButton(
-                menuMaxHeight: 300.h,
                 dropdownColor: Colors.white,
-                selectedItemBuilder: (context) {
-                  return [Center(child: Text('Olá, ${_empresaSelecionada.nome}', maxLines: 1,overflow: TextOverflow.ellipsis,))];
-                },
-                isExpanded: true,
                 value: _valorSelecionado,
-                items: itensDropDown,
-                onChanged: (value) async {
-                  setState(() {
-                    _valorSelecionado = value ?? "";
-                    _empresaSelecionada = authProvider.listaCedente!
-                        .firstWhere((item) => item.nome == _valorSelecionado);
-                    print(_empresaSelecionada.nome);
-                    print(authProvider.empresaSelecionada!.nome);
-                    itensDropDown = List.of(
-                        authProvider.listaCedente!.map((e) => DropdownMenuItem(
-                              value: e.nome,
-                              child: Text(e.nome,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: context.textTheme.bodyMedium!
-                                      .copyWith(color: Colors.black)),
-                            )));
-                    itensDropDown
-                        .removeWhere((item) => item.value == _valorSelecionado);
-                    itensDropDown.insert(
-                        0,
-                        DropdownMenuItem(
-                            value: _valorSelecionado,
-                            child: Text(
-                              _valorSelecionado,
+                selectedItemBuilder: (context) => _listaItens
+                    .map((e) => DropdownMenuItem(
+                          value: e.identificador,
+                          child: Text("Olá, ${e.nome}",
+                              style: context.textTheme.bodyMedium!
+                                  .copyWith(color: Colors.white),
                               maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                              overflow: TextOverflow.ellipsis),
+                        ))
+                    .toList(),
+                menuMaxHeight: 300.h,
+                isExpanded: true,
+                items: _listaItens
+                    .map((e) => DropdownMenuItem(
+                          value: e.identificador,
+                          child: Text(e.nome,
                               style: context.textTheme.bodyMedium!
                                   .copyWith(color: Colors.black),
-                            )));
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis),
+                        ))
+                    .toList(),
+                onChanged: (value) async {
+                  setState(() {
+                    _valorSelecionado = value!;
                   });
-                  await authProvider.RelogarTrocarCedente(
-                      _empresaSelecionada.identificador, context);
-                  authProvider.empresaSelecionada = _empresaSelecionada;
+                  await authProvider.RelogarTrocarCedente(value!, context);
                 },
                 underline: Container(),
                 style:
@@ -121,7 +99,9 @@ class _AppBarLogoState extends State<AppBarLogo> {
           ),
           Spacer(),
           IconButton(
-            onPressed: () {DeslogarUsuario(context: context).encerrarSessao();},
+            onPressed: () {
+              DeslogarUsuario(context: context).encerrarSessao();
+            },
             icon: SvgPicture.asset(Assets.exit_icone, width: 29),
           )
         ],
