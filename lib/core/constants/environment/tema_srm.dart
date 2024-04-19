@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
-import 'package:Srm_Asset/core/constants/tema_configs.dart';
-
 import '../../../../../generated/assets.dart';
-import '../../../AppSizes.dart';
+import '../AppSizes.dart';
+import '../tema_configs.dart';
 
 class ThemeSRM {
   ThemeSRM._();
@@ -16,9 +15,6 @@ class ThemeSRM {
   }
 
   static ThemeData get theme => ThemeData(
-    primaryColor: AppColors.azulPrimarioSRM,
-    indicatorColor: AppColors.azul,
-    focusColor: AppColors.laranjaSRM,
     searchBarTheme: SearchBarThemeData(
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             const RoundedRectangleBorder(
@@ -36,23 +32,23 @@ class ThemeSRM {
         ))),
     dialogBackgroundColor: Colors.white,
     colorScheme: ColorScheme(
-        brightness: Brightness.light,
-        primary: AppColors.azulPrimarioSRM,
-        onPrimary: Colors.white,
-        secondary: Colors.white,
-        onSecondary: Colors.white,
-        error: AppColors.vermelho,
-        onError: Colors.redAccent.shade200,
-        background: AppColors.azulPrimarioSRM,
-        onBackground: AppColors.azulPrimarioSRM,
-        surface: Colors.white,
-        onSurface: Colors.black,
-        inverseSurface: Colors.white),
+      brightness: Brightness.light,
+      primary: AppColors.laranjaSRM,
+      onPrimary: Colors.white,
+      secondary: AppColors.azulPrimarioSRM,
+      onSecondary: Colors.white,
+      error: AppColors.vermelho,
+      onError: Colors.redAccent.shade200,
+      background: const Color(0XFFF8F9FB),
+      onBackground: AppColors.azulPrimarioSRM,
+      surface: Colors.white,
+      onSurface: AppColors.azulPrimarioSRM,
+      inverseSurface: Colors.white,),
     appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
         iconTheme: IconThemeData(color: Colors.white)),
-    scaffoldBackgroundColor: AppColors.azul,
+    scaffoldBackgroundColor: const Color(0XFFF8F9FB),
     textTheme: TextTheme(
       bodySmall: GoogleFonts.montserrat(fontSize: AppSizes().bodySmall),
       bodyMedium: GoogleFonts.montserrat(fontSize: AppSizes().bodyMedium),
@@ -64,8 +60,11 @@ class ThemeSRM {
       GoogleFonts.montserrat(fontSize: AppSizes().displayMedium),
     ),
   );
+
   static String get logo => 'assets/images/logo_srm.png';
+
   static String get logoAppBar => Assets.icone_srm;
+
   static Widget get imagemAjuda =>
       Image.asset(Assets.iconsIcCellCheck, width: 176.w, color: null);
   static Color get brancoOuVerde => Colors.white;

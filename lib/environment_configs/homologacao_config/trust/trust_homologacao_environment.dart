@@ -2,7 +2,7 @@ import 'package:Srm_Asset/core/constants/classes_abstratas/abstract_endpoint.dar
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/constants/environment/homologacao/trust/contatos.dart';
 import 'package:Srm_Asset/core/constants/environment/homologacao/trust/endpoints.dart';
-import 'package:Srm_Asset/core/constants/environment/homologacao/trust/tema.dart';
+import 'package:Srm_Asset/core/constants/environment/tema_trust.dart';
 import 'package:Srm_Asset/core/constants/tema_configs.dart';
 import 'package:flutter/material.dart';
 

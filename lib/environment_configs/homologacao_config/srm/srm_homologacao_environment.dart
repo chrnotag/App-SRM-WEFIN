@@ -2,7 +2,7 @@ import 'package:Srm_Asset/core/constants/classes_abstratas/abstract_endpoint.dar
 import 'package:Srm_Asset/core/constants/enuns/plataforma_enum.dart';
 import 'package:Srm_Asset/core/constants/environment/homologacao/srm/contatos.dart';
 import 'package:Srm_Asset/core/constants/environment/homologacao/srm/endpoints.dart';
-import 'package:Srm_Asset/core/constants/environment/homologacao/srm/tema.dart';
+import 'package:Srm_Asset/core/constants/environment/tema_srm.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:flutter/material.dart';
 

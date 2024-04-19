@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/tema_configs.dart';
 
-import '../../../../../generated/assets.dart';
-import '../../../AppSizes.dart';
+import '../../../generated/assets.dart';
+import '../AppSizes.dart';
 
 class ThemeTRUST {
   ThemeTRUST._();
@@ -17,8 +17,9 @@ class ThemeTRUST {
 
   static ThemeData get theme => ThemeData(
         primaryColor: AppColors.verdePrimarioTRUST,
-        indicatorColor: AppColors.verde,
+        indicatorColor: AppColors.verdePrimarioTRUST,
         focusColor: AppColors.verdePrimarioTRUST,
+
         searchBarTheme: SearchBarThemeData(
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
@@ -56,20 +57,17 @@ class ThemeTRUST {
         backgroundColor: Colors.white,
         textTheme: TextTheme(
           bodySmall: GoogleFonts.montserrat(fontSize: AppSizes().bodySmall),
-          bodyMedium: GoogleFonts.montserrat(fontSize: AppSizes().bodyMedium),
+          bodyMedium: GoogleFonts.montserrat(fontSize: AppSizes().bodyMedium, color: Colors.black),
           bodyLarge: GoogleFonts.montserrat(fontSize: AppSizes().bodyLarge),
-          labelMedium: GoogleFonts.montserrat(fontSize: AppSizes().labelMedium),
+          labelMedium: GoogleFonts.montserrat(fontSize: AppSizes().labelMedium, color: Colors.black),
           displaySmall:
               GoogleFonts.montserrat(fontSize: AppSizes().displaySmall),
           displayMedium:
               GoogleFonts.montserrat(fontSize: AppSizes().displayMedium),
         ),
       );
-
   static String get logo => Assets.logoTRUST;
-
   static String get logoAppBar => Assets.icone_trust;
-
   static Widget get imagemAjuda => Image.asset(Assets.imagesIcAjuda,
       width: 176.w, color: AppColors.verdePrimarioTRUST);
   static Color get brancoOuVerde => AppColors.verde;

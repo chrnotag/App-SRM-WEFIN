@@ -3,7 +3,7 @@ import 'package:Srm_Asset/core/constants/classes_abstratas/contatos_abstract.dar
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/constants/environment/producao/trust/contatos.dart';
 import 'package:Srm_Asset/core/constants/environment/producao/trust/endpoints.dart';
-import 'package:Srm_Asset/core/constants/environment/producao/trust/tema.dart';
+import 'package:Srm_Asset/core/constants/environment/tema_trust.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/enuns/plataforma_enum.dart';
