@@ -1,6 +1,7 @@
 import 'package:Srm_Asset/core/constants/AppSizes.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
+import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -46,6 +47,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     final AuthProvider authProvider = context.watch<AuthProvider>();
+    final ContaDigitalProvider contaDigitalProvider = context.watch<ContaDigitalProvider>();
     return Scaffold(
       // bottomNavigationBar: SafeArea(
       //   child: BottomNavigationBar(
@@ -149,7 +151,7 @@ class _HomeViewState extends State<HomeView> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          _isSaldoVisivel ? 'R\$ 23.678.123,87' : 'R\$ * * * * *',
+                          _isSaldoVisivel ? "R\$ ${contaDigitalProvider.saldoContaDigital?.saldoTotal ?? 0.00}" : 'R\$ * * * * *',
                           style: context.textTheme.displayMedium!.copyWith(
                               color: Colors.white, fontWeight: FontWeight.w900),
                         ),

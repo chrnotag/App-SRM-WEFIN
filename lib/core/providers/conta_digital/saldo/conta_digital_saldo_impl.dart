@@ -10,15 +10,17 @@ class ContaDigitalSaldoImpl{
   static Future<ApiResponse<dynamic>> resgatarSaldo(String numeroContaTitular) async {
     final authProvider = Modular.get<AuthProvider>();
     final ambiente = Modular.get<Environment>();
-    final Uri url = Uri.parse("${ambiente.endpoints.saldoContaDigital}/saldo?numeroContaTitular=${numeroContaTitular}");
+    final Uri url = Uri.parse("${ambiente.endpoints.saldoContaDigital}?numeroContaTitular=${numeroContaTitular}");
+    print('url: $url');
     final headers = {
-      'Content-Type': 'application/json; charset=utf-8',
+      'Content-Type': 'application/json',
       'accept': 'application/json',
       'Authorization': authProvider.dataUser!.token,
       'plataforma': ambiente.plataforma.name
     };
     try {
       final response = await http.post(url, headers: headers);
+      print('CURL:\nURL: $url\nHeaders: $headers\no que recebo: ${response.body}');
       if (response.statusCode == 200) {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = SaldoContaDigitalModel.fromJson(responseBody);
@@ -27,7 +29,6 @@ class ContaDigitalSaldoImpl{
         print('teste2');
         return MensagemErroPadrao.codigo500();
       } else {
-        print('teste1');
         return MensagemErroPadrao.erroResponse(response.bodyBytes);
       }
     } catch (e, s) {
