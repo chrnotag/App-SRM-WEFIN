@@ -259,10 +259,8 @@ class _AuthFormState extends State<AuthForm> {
       } else {
         final contaDigitalProvider = Modular.get<ContaDigitalProvider>();
         await contaDigitalProvider.obterDadosContaDigital();
+        await contaDigitalProvider.obterSaldoContaDigital();
         await certificadoProvider.pegarCertificado();
-        print(
-            'certificado: ${certificadoProvider.certificadoAtual?.subjectDisplayName}');
-        // _saveLoginDataIfNeeded();
         if (authProvider.listaCedente!.length > 1) {
           Modular.to.pushReplacementNamed(AppRoutes.listaSelecaoEmpresasRoute);
         } else {

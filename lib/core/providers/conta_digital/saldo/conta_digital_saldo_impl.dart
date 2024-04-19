@@ -1,5 +1,6 @@
 import 'package:Srm_Asset/core/implementations_config/api_response.dart';
 import 'package:Srm_Asset/core/implementations_config/export_impl.dart';
+import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
 import 'package:Srm_Asset/models/conta_digital/saldo/saldo_conta_digital.dart';
 import 'package:http/http.dart' as http;
 import '../../../constants/classes_abstratas/envirioment.dart';
@@ -9,6 +10,7 @@ import '../../auth_provider_config/logar/auth_providers.dart';
 class ContaDigitalSaldoImpl{
   static Future<ApiResponse<dynamic>> resgatarSaldo(String numeroContaTitular) async {
     final authProvider = Modular.get<AuthProvider>();
+    final contaDigitalProvider = Modular.get<ContaDigitalProvider>();
     final ambiente = Modular.get<Environment>();
     final Uri url = Uri.parse("${ambiente.endpoints.saldoContaDigital}?numeroContaTitular=${numeroContaTitular}");
     print('url: $url');
@@ -19,11 +21,12 @@ class ContaDigitalSaldoImpl{
       'plataforma': ambiente.plataforma.name
     };
     try {
-      final response = await http.post(url, headers: headers);
+      final response = await http.get(url, headers: headers);
       print('CURL:\nURL: $url\nHeaders: $headers\no que recebo: ${response.body}');
       if (response.statusCode == 200) {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = SaldoContaDigitalModel.fromJson(responseBody);
+        contaDigitalProvider.saldoContaDigital = data;
         return SucessResponse(data);
       } else if (response.statusCode == 500) {
         print('teste2');
