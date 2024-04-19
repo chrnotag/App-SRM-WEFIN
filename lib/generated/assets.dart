@@ -119,4 +119,5 @@ class Assets {
   static const String search_icon = 'assets/images/search_icon.svg';
   static const String menu_options_icon = 'assets/images/menu_options_icon.svg';
   static const String dolar_icon = 'assets/images/dolar.svg';
+  static const String trust_logo = 'assets/images/logo_trust.png';
 }

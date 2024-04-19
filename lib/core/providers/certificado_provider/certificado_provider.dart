@@ -39,7 +39,9 @@ class CertificadoProvider extends ChangeNotifier {
 
   Future<void> pegarCertificado() async {
     List<PKCertificate> certificados = await CrossPki.listCertificatesWithKey();
-    certificadoAtual = certificados.first;
+    if(certificados.isNotEmpty) {
+      certificadoAtual = certificados.first;
+    }
   }
 
   PKCertificate? _certificadoAtual;

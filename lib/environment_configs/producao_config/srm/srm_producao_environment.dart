@@ -51,5 +51,19 @@ class SrmProducaoEnvironment extends Environment {
 
   @override
   // TODO: implement trustIconColor
-  Color? get trustIconColor => null;
+  Color? get IconColor => null;
+
+  @override
+  // TODO: implement corQuadradoLogin
+  Color? get corQuadradoLogin => Colors.transparent;
+
+  @override
+  // TODO: implement fraseSloganLogin
+  String get fraseSloganLogin => 'Capital em Movimento';
+
+  @override
+  Color? get corTextoSlogan => AppColors.laranjaSRM;
+
+  @override
+  Color? get corImagemLogo => AppColors.azul;
 }

@@ -1,4 +1,5 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
+import 'package:Srm_Asset/core/constants/enuns/plataforma_enum.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -69,23 +70,34 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [
                             Visibility(
                               visible: !isKeyboardVisible,
-                              child: Column(
-                                children: [
-                                  Image.asset(
-                                    ambiente.logo,
-                                    width: 190.w,
-                                    color: context.secondary,
-                                    fit: BoxFit.fill,
+                              child: Container(
+                                height: context.width * 0.4,
+                                width: context.width,
+                                decoration: BoxDecoration(color: ambiente.corQuadradoLogin, borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
+                                child: Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        ambiente.logo,
+                                        width: 190.w,
+                                        color: ambiente.corImagemLogo,
+                                        fit: BoxFit.fill,
+                                      ),
+                                      Visibility(
+                                        visible: ambiente.plataforma == Plataforma.TRUST,
+                                        child: Text(
+                                          ambiente.fraseSloganLogin!,
+                                          style: context.textTheme.bodyMedium!
+                                              .copyWith(
+                                              fontWeight: FontWeight.w900,
+                                              color: ambiente.corTextoSlogan),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                  Text(
-                                    "Capital em Movimento",
-                                    style: context.textTheme.bodyMedium!
-                                        .copyWith(
-                                            fontWeight: FontWeight.w900,
-                                            color: context.primaryColor),
-                                    textAlign: TextAlign.center,
-                                  )
-                                ],
+                                ),
                               ),
                             ),
                             SizedBox(

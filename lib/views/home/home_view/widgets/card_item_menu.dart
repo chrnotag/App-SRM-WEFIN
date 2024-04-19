@@ -36,7 +36,7 @@ class _CardItemMenuHome extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SvgPicture.asset(icone, color: ambiente.trustIconColor,),
+                    SvgPicture.asset(icone, color: ambiente.IconColor,),
                     Visibility(
                       visible: notificacoes >= 1,
                       child: CircleAvatar(

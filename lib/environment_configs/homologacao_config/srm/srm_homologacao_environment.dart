@@ -50,5 +50,19 @@ class SrmHomologacaoEnvironment extends Environment {
 
   @override
   // TODO: implement trustIconColor
-  Color? get trustIconColor => null;
+  Color? get IconColor => null;
+
+  @override
+  // TODO: implement corQuadradoLogin
+  Color? get corQuadradoLogin => Colors.transparent;
+
+  @override
+  Color? get corImagemLogo => AppColors.azul;
+
+  @override
+  Color? get corTextoSlogan => AppColors.laranjaSRM;
+
+  @override
+  // TODO: implement fraseSloganLogin
+  String get fraseSloganLogin => 'Capital em Movimento';
 }

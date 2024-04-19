@@ -66,7 +66,7 @@ class ThemeTRUST {
               GoogleFonts.montserrat(fontSize: AppSizes().displayMedium),
         ),
       );
-  static String get logo => Assets.logoTRUST;
+  static String get logo => Assets.trust_logo;
   static String get logoAppBar => Assets.icone_trust;
   static Widget get imagemAjuda => Image.asset(Assets.imagesIcAjuda,
       width: 176.w, color: AppColors.verdePrimarioTRUST);

@@ -19,7 +19,7 @@ class ContaDigitalSaldoImpl{
       'plataforma': ambiente.plataforma.name
     };
     try {
-      final response = await http.post(url, headers: headers);
+      final response = await http.get(url, headers: headers);
       print('CURL:\nURL: $url\nHeaders: $headers\no que recebo: ${response.body}');
       if (response.statusCode == 200) {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
