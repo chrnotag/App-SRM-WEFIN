@@ -11,3 +11,7 @@ Para fazer rodar o aplicativo basta executar o comando abaixo:
 ```bash
  .\build_project.bat
 ```
+
+```bash
+./build_mac.sh
+```

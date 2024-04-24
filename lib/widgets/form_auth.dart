@@ -1,5 +1,4 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
-import 'package:Srm_Asset/core/providers/conta_digital/saldo/conta_digital_saldo_impl.dart';
 import 'package:Srm_Asset/core/utils/abrir_url_externo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -197,7 +196,6 @@ class _AuthFormState extends State<AuthForm> {
                 if (maximoCaracteresCPF != null && maximoCaracteresCPF! < 11) {
                   removerCaracteresEspeciais();
                 }
-                print('teste: ${_loginEC.text}');
                 TextInput.finishAutofillContext();
                 if (widget.visible) {
                   await login();

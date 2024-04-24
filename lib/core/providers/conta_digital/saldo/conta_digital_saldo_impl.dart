@@ -13,7 +13,6 @@ class ContaDigitalSaldoImpl{
     final contaDigitalProvider = Modular.get<ContaDigitalProvider>();
     final ambiente = Modular.get<Environment>();
     final Uri url = Uri.parse("${ambiente.endpoints.saldoContaDigital}?numeroContaTitular=${numeroContaTitular}");
-    print('url: $url');
     final headers = {
       'Content-Type': 'application/json',
       'accept': 'application/json',
@@ -22,20 +21,17 @@ class ContaDigitalSaldoImpl{
     };
     try {
       final response = await http.get(url, headers: headers);
-      print('CURL:\nURL: $url\nHeaders: $headers\no que recebo: ${response.body}');
       if (response.statusCode == 200) {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = SaldoContaDigitalModel.fromJson(responseBody);
         contaDigitalProvider.saldoContaDigital = data;
         return SucessResponse(data);
       } else if (response.statusCode == 500) {
-        print('teste2');
         return MensagemErroPadrao.codigo500();
       } else {
         return MensagemErroPadrao.erroResponse(response.bodyBytes);
       }
     } catch (e, s) {
-      print('teste3, $e,$s');
       return MensagemErroPadrao.codigo500();
     }
   }

@@ -26,10 +26,8 @@ class ContaDigitalProvider extends ChangeNotifier{
     if(dadosContaDigital != null){
       final saldoConta = await ContaDigitalSaldoImpl.resgatarSaldo(dadosContaDigital!.conta);
       if(saldoConta.error != null){
-        print('saldo: ${saldoContaDigital!.saldoTotal}');
         saldoContaDigital = saldoConta.data;
       }else{
-        print('Erro: ${saldoConta.error.mensagem}');
         Fluttertoast.showToast(msg: 'Erro ao carregar Dados da conta digital.');
       }
     }
