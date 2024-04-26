@@ -9,7 +9,7 @@ part of 'conta_digital.dart';
 ContaDigitalModel _$ContaDigitalModelFromJson(Map<String, dynamic> json) =>
     ContaDigitalModel(
       documentoTitular: json['documentoTitular'] as String,
-      idConta: json['idConta'] as int?,
+      idConta: json['idConta'] as int,
       agencia: json['agencia'] as String,
       conta: json['conta'] as String,
       tipoConta: json['tipoConta'] as String,

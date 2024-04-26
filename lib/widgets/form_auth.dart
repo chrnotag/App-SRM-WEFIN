@@ -1,5 +1,4 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
-import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/saldo/conta_digital_saldo_impl.dart';
 import 'package:Srm_Asset/core/utils/abrir_url_externo.dart';
 import 'package:flutter/cupertino.dart';
@@ -140,8 +139,6 @@ class _AuthFormState extends State<AuthForm> {
                           validator: Validatorless.multiple([
                             Validatorless.required('Senha obrigatória'),
                             if (widget.visible)
-                              Validatorless.max(10, 'Maximo de 10 caracteres.'),
-                            if (widget.visible)
                               Validatorless.min(3,
                                   'Senha com no mínimo 3 e máximo 10 caracteres.'),
                             (value) => _mensagemErro
@@ -279,6 +276,7 @@ class _AuthFormState extends State<AuthForm> {
       } else {
         final contaDigitalProvider = Modular.get<ContaDigitalProvider>();
         await contaDigitalProvider.obterDadosContaDigital();
+        await contaDigitalProvider.obterSaldoContaDigital();
         await certificadoProvider.pegarCertificado();
         // _saveLoginDataIfNeeded();
         if (authProvider.listaCedente!.length > 1) {

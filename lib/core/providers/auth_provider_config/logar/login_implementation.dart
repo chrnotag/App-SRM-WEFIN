@@ -38,7 +38,7 @@ class LoginImpl {
       } else {
         return MensagemErroPadrao.erroResponse(response.bodyBytes);
       }
-    } catch (e, s) {
+    } catch (e) {
       return MensagemErroPadrao.codigo500();
     }
   }
