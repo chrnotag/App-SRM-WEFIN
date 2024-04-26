@@ -175,7 +175,6 @@ class _AuthFormState extends State<AuthForm> {
                 if (maximoCaracteresCPF != null && maximoCaracteresCPF! < 11) {
                   removerCaracteresEspeciais();
                 }
-                print('teste: ${_loginEC.text}');
                 TextInput.finishAutofillContext();
                 if (widget.visible) {
                   await login();
@@ -281,8 +280,6 @@ class _AuthFormState extends State<AuthForm> {
         final contaDigitalProvider = Modular.get<ContaDigitalProvider>();
         await contaDigitalProvider.obterDadosContaDigital();
         await certificadoProvider.pegarCertificado();
-        print(
-            'certificado: ${certificadoProvider.certificadoAtual?.subjectDisplayName}');
         // _saveLoginDataIfNeeded();
         if (authProvider.listaCedente!.length > 1) {
           Modular.to.pushReplacementNamed(AppRoutes.listaSelecaoEmpresasRoute);

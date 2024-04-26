@@ -70,7 +70,6 @@ class FinalizarAssinaturaProvider extends ChangeNotifier {
             assinaturaProvider.assinaturaSelecionada!.codigoOperacao);
     final hashs = await iniciarAssinaturaProvider.obterHashs(data);
     BuildContext context = myNavigatorKey.currentContext!;
-    print('hashs do metodo finalizar: ${hashs.data}');
     if (hashs.error == null) {
       final hashAssinados = await _assinarHashs(certificado);
       ApiResponse<dynamic>? resultado;

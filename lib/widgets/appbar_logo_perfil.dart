@@ -79,8 +79,6 @@ class _AppBarLogoState extends State<AppBarLogo> {
                     _valorSelecionado = value ?? "";
                     _empresaSelecionada = authProvider.listaCedente!
                         .firstWhere((item) => item.nome == _valorSelecionado);
-                    print(_empresaSelecionada.nome);
-                    print(authProvider.empresaSelecionada!.nome);
                     itensDropDown = List.of(
                         authProvider.listaCedente!.map((e) => DropdownMenuItem(
                               value: e.nome,

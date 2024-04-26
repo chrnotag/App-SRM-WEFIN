@@ -23,23 +23,16 @@ class ContaDigitalImpl {
       };
       try {
         final response = await http.get(url, headers: headers);
-        print('Resposta  da requisição: ${response.body}');
-        print('statusCode: ${response.statusCode}');
         if (response.statusCode == 200) {
           final responseBody = json.decode(utf8.decode(response.bodyBytes));
           final data = ContaDigitalModel.fromJson(responseBody);
-          final saldo = await ContaDigitalSaldoImpl.resgatarSaldo(data.conta);
-          print('saldo: ${saldo.data}');
           return SucessResponse(data);
         } else if (response.statusCode == 500) {
-          print('teste2');
           return MensagemErroPadrao.codigo500();
         } else {
-          print('teste1');
           return MensagemErroPadrao.erroResponse(response.bodyBytes);
         }
       } catch (e, s) {
-        print('teste3, $e,$s');
         return MensagemErroPadrao.codigo500();
       }
   }

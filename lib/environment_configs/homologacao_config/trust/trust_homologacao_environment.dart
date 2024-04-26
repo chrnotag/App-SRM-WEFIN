@@ -49,7 +49,7 @@ class TrustHomologacaoEnvironment extends Environment {
   Color get laranjaOuCinza => ThemeTRUST.verdeOuCinza;
 
   @override
-  // TODO: implement trustIconColor
+  // TODO: implement iconColor
   Color? get IconColor => AppColors.verdePrimarioTRUST;
 
   @override
