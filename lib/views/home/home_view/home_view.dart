@@ -130,7 +130,7 @@ class _HomeViewState extends State<HomeView> {
             child: Container(
               height: context.height * 0.22,
               decoration: BoxDecoration(
-                  color: context.indicatorColor,
+                  color: AppColors.azul,
                   borderRadius:
                       BorderRadius.vertical(bottom: Radius.circular(12))),
             ),

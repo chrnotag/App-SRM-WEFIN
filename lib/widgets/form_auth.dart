@@ -1,4 +1,5 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
+import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/saldo/conta_digital_saldo_impl.dart';
 import 'package:Srm_Asset/core/utils/abrir_url_externo.dart';
 import 'package:flutter/cupertino.dart';
