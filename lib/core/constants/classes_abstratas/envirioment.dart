@@ -17,4 +17,9 @@ abstract class Environment {
   Color get azulOuPreto;
   Color get verdeOuCinza;
   Color get laranjaOuCinza;
+  Color? get IconColor;
+  Color? get corQuadradoLogin;
+  Color? get corTextoSlogan;
+  Color? get corImagemLogo;
+  String? get fraseSloganLogin;
 }

@@ -7,7 +7,6 @@ import 'package:Srm_Asset/core/constants/enuns/import_certificado_enum.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
-import 'package:Srm_Asset/widgets/transparent_appbar_empty.dart';
 import 'package:crosspki/crosspki.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 import '../../../core/providers/certificado_provider/baixar_certificado_impl.dart';
@@ -32,11 +31,11 @@ class ImportarCertificado extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(8),
             child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-              Icon(
-                Icons.close,
-                size: 32,
+              IconButton(
+                icon: Icon(Icons.close),
+                onPressed: () => Modular.to.pop(),
               )
             ]),
           ),
@@ -106,6 +105,7 @@ class ImportarCertificado extends StatelessWidget {
                           final bool mostraGuiaImportacao =
                               await existeCertificadosImportados();
                           if (mostraGuiaImportacao) {
+                            Modular.to.pop();
                             Modular.to.pushNamed(
                                 AppRoutes.guiaImportarCertificadoRoute,
                                 arguments: {ImportarVia.QrCode});
@@ -135,6 +135,7 @@ class ImportarCertificado extends StatelessWidget {
                       final bool mostraGuiaImportacao =
                           await existeCertificadosImportados();
                       if (mostraGuiaImportacao) {
+                        Modular.to.pop();
                         Modular.to.pushNamed(
                             AppRoutes.guiaImportarCertificadoRoute,
                             arguments: ImportarVia.Dispositivo);

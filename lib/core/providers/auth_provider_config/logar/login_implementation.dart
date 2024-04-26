@@ -13,11 +13,12 @@ class LoginImpl {
   final UserModel userModel;
 
   LoginImpl({required this.userModel});
+
   Environment ambiente = Modular.get<Environment>();
+
   Future<ApiResponse<dynamic>> login() async {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     final url = ambiente.endpoints.login;
-    print('teste plataforma: ${ambiente.plataforma.name}');
     final headers = {
       'Content-Type': 'application/json; charset=utf-8',
       'accept': 'application/json',
@@ -32,12 +33,12 @@ class LoginImpl {
         final data = LoginResponse.fromJson(responseBody);
         authProvider.setDataUser = data;
         return SucessResponse(data);
-      } else if(response.statusCode == 500){
-       return MensagemErroPadrao.codigo500();
-      }else{
+      } else if (response.statusCode == 500) {
+        return MensagemErroPadrao.codigo500();
+      } else {
         return MensagemErroPadrao.erroResponse(response.bodyBytes);
       }
-    } catch (e, s) {
+    } catch (e) {
       return MensagemErroPadrao.codigo500();
     }
   }

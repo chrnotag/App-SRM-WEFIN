@@ -12,6 +12,7 @@ extension ThemeExtension on BuildContext {
   Color get inverseSurface => Theme.of(this).colorScheme.inverseSurface;
   Color get indicatorColor => Theme.of(this).indicatorColor;
   Color get focusColor => Theme.of(this).focusColor;
+  Color get surface => Theme.of(this).colorScheme.surface;
   Map<int, Color> get shadersTrust => TrustShades.primaryColor;
   Map<int, Color> get shadersSRM => SRMShaders.primaryColor;
   TextTheme get textTheme => Theme.of(this).textTheme;

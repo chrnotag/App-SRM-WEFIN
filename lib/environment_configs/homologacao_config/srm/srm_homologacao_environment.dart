@@ -2,8 +2,9 @@ import 'package:Srm_Asset/core/constants/classes_abstratas/abstract_endpoint.dar
 import 'package:Srm_Asset/core/constants/enuns/plataforma_enum.dart';
 import 'package:Srm_Asset/core/constants/environment/homologacao/srm/contatos.dart';
 import 'package:Srm_Asset/core/constants/environment/homologacao/srm/endpoints.dart';
-import 'package:Srm_Asset/core/constants/environment/homologacao/srm/tema.dart';
+import 'package:Srm_Asset/core/constants/environment/tema_srm.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
+import 'package:Srm_Asset/core/constants/tema_configs.dart';
 import 'package:flutter/material.dart';
 
 class SrmHomologacaoEnvironment extends Environment {
@@ -46,4 +47,22 @@ class SrmHomologacaoEnvironment extends Environment {
 
   @override
   Color get laranjaOuCinza => ThemeSRM.verdeOuCinza;
+
+  @override
+  // TODO: implement iconColor
+  Color? get IconColor => null;
+
+  @override
+  // TODO: implement corQuadradoLogin
+  Color? get corQuadradoLogin => Colors.transparent;
+
+  @override
+  Color? get corImagemLogo => AppColors.azul;
+
+  @override
+  Color? get corTextoSlogan => AppColors.laranjaSRM;
+
+  @override
+  // TODO: implement fraseSloganLogin
+  String get fraseSloganLogin => 'Capital em Movimento';
 }

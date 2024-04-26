@@ -39,7 +39,9 @@ class CertificadoProvider extends ChangeNotifier {
 
   Future<void> pegarCertificado() async {
     List<PKCertificate> certificados = await CrossPki.listCertificatesWithKey();
-    certificadoAtual = certificados.first;
+    if (certificados.isNotEmpty) {
+      certificadoAtual = certificados.first;
+    }
   }
 
   PKCertificate? _certificadoAtual;
@@ -93,8 +95,8 @@ class CertificadoProvider extends ChangeNotifier {
 
   Future<void> deletarCertificado() async {
     await CrossPki.removeCertificate(_certificadoAtual!.thumbprint);
-    listaCertificados
-        .removeWhere((element) => element.thumbprint == _certificadoAtual?.thumbprint);
+    listaCertificados.removeWhere(
+        (element) => element.thumbprint == _certificadoAtual?.thumbprint);
     notifyListeners();
   }
 

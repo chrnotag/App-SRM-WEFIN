@@ -1,5 +1,6 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/utils/ambiente_atual.dart';
+import 'package:Srm_Asset/widgets/transparent_appbar_empty.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -26,7 +27,7 @@ class Menu extends StatelessWidget {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: AppBar().preferredSize, child: const AppBarLogo(isPerfilVisivel: false,)),
+          preferredSize: AppBar().preferredSize, child: const TransparentAppBarEmpty()),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
         child: Column(

@@ -8,8 +8,8 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../core/providers/certificado_provider/baixar_certificado_impl.dart';
-import 'dialog_senha_certificado.dart';
+import '../../../../core/providers/certificado_provider/baixar_certificado_impl.dart';
+import '../../../../widgets/dialog_senha_certificado.dart';
 
 class MoldeTutorialCertificado extends StatelessWidget {
   final String imagemSvg;
@@ -75,7 +75,7 @@ class MoldeTutorialCertificado extends StatelessWidget {
           Visibility(
             visible: isTelaFinal,
             child: SizedBox(
-              width: context.width * 0.65,
+              width: context.width * 0.8,
               child: ElevatedButton(
                   onPressed: isQrCode
                       ? () async {
@@ -110,6 +110,7 @@ class MoldeTutorialCertificado extends StatelessWidget {
                     padding: const EdgeInsets.all(AppSizes.paddingMedium),
                     child: Text(
                       'Importar Certificado',
+                      textAlign: TextAlign.center,
                       style: context.textTheme.bodyLarge!.copyWith(
                           color: Colors.white, fontWeight: FontWeight.w500),
                     ),

@@ -3,7 +3,8 @@ import 'package:Srm_Asset/core/constants/classes_abstratas/contatos_abstract.dar
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/constants/environment/producao/srm/contatos.dart';
 import 'package:Srm_Asset/core/constants/environment/producao/srm/endpoints.dart';
-import 'package:Srm_Asset/core/constants/environment/producao/srm/tema.dart';
+import 'package:Srm_Asset/core/constants/environment/tema_srm.dart';
+import 'package:Srm_Asset/core/constants/tema_configs.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/enuns/plataforma_enum.dart';
@@ -47,4 +48,22 @@ class SrmProducaoEnvironment extends Environment {
 
   @override
   Color get laranjaOuCinza => ThemeSRM.verdeOuCinza;
+
+  @override
+  // TODO: implement iconColor
+  Color? get IconColor => null;
+
+  @override
+  // TODO: implement corQuadradoLogin
+  Color? get corQuadradoLogin => Colors.transparent;
+
+  @override
+  // TODO: implement fraseSloganLogin
+  String get fraseSloganLogin => 'Capital em Movimento';
+
+  @override
+  Color? get corTextoSlogan => AppColors.laranjaSRM;
+
+  @override
+  Color? get corImagemLogo => AppColors.azul;
 }
