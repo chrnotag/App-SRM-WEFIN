@@ -1,31 +1,34 @@
 part of '../tela_extrato.dart';
 
 class _ItemListaExtrato extends StatelessWidget {
-  final String tituloTransferencia;
-  final String autor;
-  final String valor;
-  final String data;
+  final String dataDia;
+  final String saldoDia;
 
-  const _ItemListaExtrato(
-      {super.key,
-      required this.tituloTransferencia,
-      required this.autor,
-      required this.valor,
-      required this.data});
+  const _ItemListaExtrato({
+    super.key,
+    required this.dataDia,
+    required this.saldoDia,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Row(
-        children: [
-          Text(tituloTransferencia),
-          Text(valor)
-        ],
-      ),
+      title: Text(dataDia),
       subtitle: Row(
         children: [
-          Text(autor),
-          Text(data)
+          Text('Saldo do dia:'),
+          Container(
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(5.r),
+                ),
+                color: Colors.grey.shade300
+              ),
+              child: Text(
+                saldoDia,
+                style: TextStyle(color: Colors.black),
+              ))
         ],
       ),
     );
