@@ -14,21 +14,26 @@ class _ItemListaExtrato extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(dataDia),
-      subtitle: Row(
+      subtitle: Column(
         children: [
-          Text('Saldo do dia:'),
-          Container(
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(5.r),
-                ),
-                color: Colors.grey.shade300
-              ),
-              child: Text(
-                saldoDia,
-                style: TextStyle(color: Colors.black),
-              ))
+          Row(
+            children: [
+              Text('Saldo do dia:'),
+              Container(
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(5.r),
+                    ),
+                    color: Colors.grey.shade300
+                  ),
+                  child: Text(
+                    saldoDia,
+                    style: TextStyle(color: Colors.black),
+                  )),
+            ],
+          ),
+          Divider()
         ],
       ),
     );

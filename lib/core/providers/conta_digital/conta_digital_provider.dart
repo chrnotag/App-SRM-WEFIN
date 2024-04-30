@@ -5,9 +5,17 @@ import 'package:Srm_Asset/models/conta_digital/saldo/saldo_conta_digital.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../../implementations_config/api_response.dart';
+
 class ContaDigitalProvider extends ChangeNotifier{
 
   Future<dynamic> obterDadosContaDigital() async => await ContaDigitalImpl.pegarDadosContaDigital();
+
+  Future<ApiResponse<dynamic>> carregarSaldo(String conta) async {
+    final response = await ContaDigitalSaldoImpl.resgatarSaldo(conta);
+    notifyListeners();
+    return response;
+  }
 
   ContaDigitalModel? _dadosContaDigital;
   ContaDigitalModel? get dadosContaDigital => _dadosContaDigital;
@@ -27,8 +35,6 @@ class ContaDigitalProvider extends ChangeNotifier{
       final saldoConta = await ContaDigitalSaldoImpl.resgatarSaldo(dadosContaDigital!.conta);
       if(saldoConta.error != null){
         saldoContaDigital = saldoConta.data;
-      }else{
-        Fluttertoast.showToast(msg: 'Erro ao carregar Dados da conta digital.');
       }
     }
   }
