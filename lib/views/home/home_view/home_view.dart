@@ -81,7 +81,7 @@ class _HomeViewState extends State<HomeView> {
             });
           },
           currentIndex: _index,
-          selectedItemColor: context.primaryColor,
+          selectedItemColor: AppColors.azul,
           type: BottomNavigationBarType.fixed,
           items: [
             BottomNavigationBarItem(
@@ -90,14 +90,14 @@ class _HomeViewState extends State<HomeView> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                        color: _index == 0 ? context.primaryColor : null,
+                        color: _index == 0 ? AppColors.azul : null,
                         borderRadius:
                             const BorderRadius.all(Radius.circular(10))),
                     height: 4,
                     width: 30.r,
                   ),
                   SvgPicture.asset(Assets.home_icon,
-                      color: _index == 0 ? context.primaryColor : null),
+                      color: _index == 0 ? AppColors.azul : null),
                 ],
               ),
               label: 'Início',
@@ -108,13 +108,13 @@ class _HomeViewState extends State<HomeView> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                        color: _index == 1 ? context.primaryColor : null,
+                        color: _index == 1 ? AppColors.azul : null,
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     height: 4,
                     width: 30.r,
                   ),
                   SvgPicture.asset(Assets.search_icon,
-                      color: _index == 1 ? context.primaryColor : null),
+                      color: _index == 1 ? AppColors.azul : null),
                 ],
               ),
               label: 'Busca',
@@ -125,13 +125,13 @@ class _HomeViewState extends State<HomeView> {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                          color: _index == 2 ? context.primaryColor : null,
+                          color: _index == 2 ? AppColors.azul : null,
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       height: 4,
                       width: 30.r,
                     ),
                     SvgPicture.asset(Assets.menu_options_icon,
-                        color: _index == 2 ? context.primaryColor : null),
+                        color: _index == 2 ? AppColors.azul : null),
                   ],
                 ),
                 label: 'Opções'),
