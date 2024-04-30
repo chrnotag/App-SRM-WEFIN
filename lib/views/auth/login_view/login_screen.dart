@@ -55,7 +55,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 centerTitle: true,
                 backgroundColor: Colors.transparent,
                 shadowColor: Colors.transparent,
-              ),
+              )
+            else
+              AppBar(backgroundColor: ambiente.corQuadradoLogin,),
             Expanded(
               child: CustomScrollView(
                 slivers: [
@@ -64,38 +66,40 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Spacer(),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Visibility(
                               visible: !isKeyboardVisible,
-                              child: Container(
-                                height: context.width * 0.4,
-                                width: context.width,
-                                decoration: BoxDecoration(color: ambiente.corQuadradoLogin, borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
-                                child: Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        ambiente.logo,
-                                        width: 190.w,
-                                        color: ambiente.corImagemLogo,
-                                        fit: BoxFit.fill,
-                                      ),
-                                      Visibility(
-                                        visible: ambiente.plataforma == Plataforma.TRUST,
-                                        child: Text(
-                                          ambiente.fraseSloganLogin!,
-                                          style: context.textTheme.bodyMedium!
-                                              .copyWith(
-                                              fontWeight: FontWeight.w900,
-                                              color: ambiente.corTextoSlogan),
-                                          textAlign: TextAlign.center,
+                              child: Padding(
+                                padding: EdgeInsets.zero,
+                                child: Container(
+                                  height: context.width * 0.3,
+                                  width: context.width,
+                                  decoration: BoxDecoration(color: ambiente.corQuadradoLogin, borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Image.asset(
+                                          ambiente.logo,
+                                          width: 190.w,
+                                          color: ambiente.corImagemLogo,
+                                          fit: BoxFit.fill,
                                         ),
-                                      )
-                                    ],
+                                        Visibility(
+                                          visible: ambiente.plataforma == Plataforma.TRUST,
+                                          child: Text(
+                                            ambiente.fraseSloganLogin!,
+                                            style: context.textTheme.bodyMedium!
+                                                .copyWith(
+                                                fontWeight: FontWeight.w900,
+                                                color: ambiente.corTextoSlogan),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),

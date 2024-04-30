@@ -4,8 +4,6 @@ import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart
 import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
 import 'package:Srm_Asset/core/utils/money_format.dart';
-import 'package:Srm_Asset/models/conta_digital/saldo/saldo_conta_digital.dart';
-import 'package:Srm_Asset/widgets/loader_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';

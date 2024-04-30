@@ -14,6 +14,7 @@ class _AppBarExtrato extends StatelessWidget {
       actions: [
         IconButton(onPressed: (){}, icon: Image.asset(Assets.imagesIconePdf),)
       ],
+      bottom: PreferredSize(preferredSize: TabBar(tabs: [],).preferredSize, child: _TabBarMeses()),
     );
   }
 }

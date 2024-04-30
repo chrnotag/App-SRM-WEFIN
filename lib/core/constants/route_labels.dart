@@ -11,6 +11,7 @@ class AppRoutes {
 
   //Escopo AUT
   static get forgetPassAuthRoute => '/forgot_password';
+
   static get loginAuthRoute => Modular.initialRoute;
 
   //Escopo HOME
@@ -45,15 +46,27 @@ class AppRoutes {
   static get helpScreenRoute => '$homeRoute$helpScreenHomeRoute';
 
   static get monitorOperacoesRoute => '$homeRoute$monitorOperacoesHomeRoute';
+
   static get assinaturaDigitalRoute => '$homeRoute$assinaturaDigitalHomeRoute';
 
   static get menuAppRoute => '$homeRoute$menuAppHomeRoute';
 
   static get homeAppRoute => '$homeRoute$homeAppHomeRoute';
 
-  static get importarCertificadoRoute => '$homeRoute$importarCertificadoHomeRoute';
-  static get guiaImportarCertificadoRoute => '$homeRoute$guiaImportarCertificadoHomeRoute';
+  static get importarCertificadoRoute =>
+      '$homeRoute$importarCertificadoHomeRoute';
+
+  static get guiaImportarCertificadoRoute =>
+      '$homeRoute$guiaImportarCertificadoHomeRoute';
+
   // ESCOPO SEM CONEXÃO
-static get semConexaoMainRoute => '/sem-conexao';
-static get semConexaoRoute => '$semConexaoMainRoute/sem-conexao';
+  static get semConexaoMainRoute => '/sem-conexao';
+
+  static get semConexaoRoute => '$semConexaoMainRoute/sem-conexao';
+
+  //CONTA DIGITAL ROUTE
+static get ContaDigitalRoute => '/conta-digital';
+
+  //ESCOPO CONTA DIGITAL
+static get extratoScreenRoute => '$ContaDigitalRoute/tela-extrato';
 }
