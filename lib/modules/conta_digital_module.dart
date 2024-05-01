@@ -3,14 +3,10 @@ import 'package:Srm_Asset/views/conta_digital/tela_extrato/tela_extrato.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class ContaDigitalModule extends Module{
-
   @override
-  void binds(Injector i) {
-    
-  }
-
+  void binds(Injector i) {}
   @override
   void routes(RouteManager r) {
-    r.child(AppRoutes.extratoScreenRoute, child: (context) => TelaExtrato());
+    r.child(AppRoutes.extratoScreenContaDigitalRoute, child: (context) => const TelaExtrato());
   }
 }

@@ -258,7 +258,10 @@ class _HomeViewState extends State<HomeView> {
                             _CardItemMenuHome(
                                 icone: Assets.lista_icone,
                                 titulo: 'Extrato',
-                                onTap: () {}),
+                                onTap: () {
+                                      Modular.to.pushNamed(
+                                          AppRoutes.extratoScreenRoute);
+                                    }),
                           ],
                         ),
                         Column(

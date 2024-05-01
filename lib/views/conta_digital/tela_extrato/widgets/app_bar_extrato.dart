@@ -6,15 +6,12 @@ class _AppBarExtrato extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: AppColors.azul,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(bottomLeft: Radius.circular(12), bottomRight: Radius.circular(12)),
       ),
-      title: Text('Extrato'),
+      title: Text('Extrato', style: context.textTheme.displaySmall!.copyWith(color: Colors.white),),
       centerTitle: true,
-      actions: [
-        IconButton(onPressed: (){}, icon: Image.asset(Assets.imagesIconePdf),)
-      ],
-      bottom: PreferredSize(preferredSize: TabBar(tabs: [],).preferredSize, child: _TabBarMeses()),
     );
   }
 }

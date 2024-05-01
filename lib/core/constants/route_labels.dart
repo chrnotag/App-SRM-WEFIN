@@ -68,5 +68,7 @@ class AppRoutes {
 static get ContaDigitalRoute => '/conta-digital';
 
   //ESCOPO CONTA DIGITAL
-static get extratoScreenRoute => '$ContaDigitalRoute/tela-extrato';
+static get extratoScreenContaDigitalRoute => '/conta-digital';
+
+static get extratoScreenRoute => '$ContaDigitalRoute$extratoScreenContaDigitalRoute';
 }

@@ -17,6 +17,7 @@ class _ItemListaExtrato extends StatelessWidget {
       subtitle: Column(
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('Saldo do dia:'),
               Container(
@@ -33,7 +34,7 @@ class _ItemListaExtrato extends StatelessWidget {
                   )),
             ],
           ),
-          Divider()
+          Divider(color: AppColors.labelText, thickness: 0.2)
         ],
       ),
     );
