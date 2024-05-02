@@ -87,16 +87,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                           color: ambiente.corImagemLogo,
                                           fit: BoxFit.fill,
                                         ),
-                                        Visibility(
-                                          visible: ambiente.plataforma == Plataforma.TRUST,
-                                          child: Text(
-                                            ambiente.fraseSloganLogin!,
-                                            style: context.textTheme.bodyMedium!
-                                                .copyWith(
-                                                fontWeight: FontWeight.w900,
-                                                color: ambiente.corTextoSlogan),
-                                            textAlign: TextAlign.center,
-                                          ),
+                                        Text(
+                                          ambiente.fraseSloganLogin ?? '',
+                                          style: context.textTheme.bodyMedium!
+                                              .copyWith(
+                                              fontWeight: FontWeight.w900,
+                                              color: ambiente.corTextoSlogan),
+                                          textAlign: TextAlign.center,
                                         )
                                       ],
                                     ),
