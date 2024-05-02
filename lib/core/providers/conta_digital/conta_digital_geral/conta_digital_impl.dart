@@ -23,7 +23,6 @@ class ContaDigitalImpl {
       final contaDigitalProvider = Modular.get<ContaDigitalProvider>();
       try {
         final response = await http.get(url, headers: headers);
-        print('dados conta digital ${response.body}');
         if (response.statusCode == 200) {
           final responseBody = json.decode(utf8.decode(response.bodyBytes));
           final data = ContaDigitalModel.fromJson(responseBody);

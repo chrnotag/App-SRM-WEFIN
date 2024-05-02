@@ -1,7 +1,9 @@
-part of '../tela_extrato.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:flutter/material.dart';
 
-class _AppBarExtrato extends StatelessWidget {
-  const _AppBarExtrato({super.key});
+import '../../../core/constants/tema_configs.dart';
+class AppBarExtrato extends StatelessWidget {
+  const AppBarExtrato({super.key});
 
   @override
   Widget build(BuildContext context) {

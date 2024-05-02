@@ -29,7 +29,8 @@ build_menu() {
     echo "Escolha uma opcao de build:"
     echo "1 - APK"
     echo "2 - IPA"
-    echo "3 - Voltar"
+    echo "3 - BUNDLE"
+    echo "4 - Voltar"
     echo ""
 
     read -p "Escolha uma opcao de build (1 ou 2) e pressione Enter: " build_option
@@ -37,6 +38,8 @@ build_menu() {
     if [ "$build_option" == "1" ] || [ "$build_option" == "2" ]; then
         environment_menu
     elif [ "$build_option" == "3" ]; then
+      build_bundle
+    elif [ "$build_option" == "4" ]; then
         build_or_emulate_menu
     else
         build_menu
@@ -164,6 +167,40 @@ TRUST_PRODUCAO() {
     else
         flutter build ios --flavor TRUST -t lib/main_TRUST.dart
     fi
+    end
+}
+
+build_bundle() {
+    clear
+    echo ""
+    echo "Escolha uma versao:"
+    echo "1 - SRM Producao"
+    echo "2 - TRUST Producao"
+    echo "3 - Voltar"
+    echo ""
+
+    read -p "Escolha uma versao do aplicativo para buildar: " environment_option
+    environment_option=${environment_option:-1}
+
+    case $environment_option in
+        1) SRM_PRODUCAO_BUNDLE ;;
+        2) TRUST_PRODUCAO_BUNDLE ;;
+        3) build_menu ;;
+        *) environment_menu ;;
+    esac
+}
+
+SRM_PRODUCAO_BUNDLE() {
+    flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_srm.yaml
+    dart run flutter_native_splash:create --path=configuracao_icone_splash_srm.yaml
+        flutter build appbundle --flavor SRM -t lib/main_SRM.dart
+    end
+}
+
+TRUST_PRODUCAO_BUNDLE() {
+    flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_trust.yaml
+    dart run flutter_native_splash:create --path=configuracao_icone_splash_trust.yaml
+        flutter build appbundle --flavor TRUST -t lib/main_TRUST.dart
     end
 }
 

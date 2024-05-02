@@ -4,9 +4,11 @@ import 'package:Srm_Asset/core/constants/enuns/tipo_operacao_enum.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/constants/tema_configs.dart';
 import 'package:Srm_Asset/core/utils/money_format.dart';
 import 'package:Srm_Asset/generated/assets.dart';
+import 'package:Srm_Asset/views/conta_digital/widgets/app_bar_conta_digital.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/scheduler/ticker.dart';
@@ -18,8 +20,6 @@ import '../../../core/providers/conta_digital/tabbar_meses_provider.dart';
 part 'widgets/item_lista_extrato.dart';
 
 part 'widgets/item_lista_operacao.dart';
-
-part 'widgets/app_bar_extrato.dart';
 
 part 'widgets/tabbar_meses.dart';
 
@@ -65,7 +65,7 @@ class _TelaExtratoState extends State<TelaExtrato>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: AppBar().preferredSize, child: _AppBarExtrato()),
+          preferredSize: AppBar().preferredSize, child: AppBarExtrato()),
       body: Column(
         children: [
           _TabBarMeses(controller: _tabController!),

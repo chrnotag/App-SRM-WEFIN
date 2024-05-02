@@ -21,7 +21,6 @@ class ContaDigitalSaldoImpl{
     };
     try {
       final response = await http.get(url, headers: headers);
-      print('saldo: ${response.body}');
       if (response.statusCode == 200) {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = SaldoContaDigitalModel.fromJson(responseBody);
