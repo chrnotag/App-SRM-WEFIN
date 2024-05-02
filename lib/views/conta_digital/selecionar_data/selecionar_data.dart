@@ -88,6 +88,11 @@ class _SelecionarDataScreenState extends State<SelecionarDataScreen> {
                                         BorderSide(color: AppColors.labelText),
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(12)))),
+                            onChanged: (value) {
+                              setState(() {
+                                _controllerDataInicial.text = value;
+                              });
+                            },
                           ),
                         ),
                         IconButton(
@@ -101,10 +106,12 @@ class _SelecionarDataScreenState extends State<SelecionarDataScreen> {
                                             firstDate: DateTime(2000),
                                             lastDate: DateTime.now(),
                                             onDateChanged: (time) {
-                                              _dataInicialSelecionada = time;
-                                              _controllerDataInicial.text =
-                                                  dateFormatter(time);
-                                              ultimaData(time);
+                                              setState(() {
+                                                _dataInicialSelecionada = time;
+                                                _controllerDataInicial.text =
+                                                    dateFormatter(time);
+                                                ultimaData(time);
+                                              });
                                               Modular.to.pop();
                                             }),
                                       ));
@@ -144,6 +151,11 @@ class _SelecionarDataScreenState extends State<SelecionarDataScreen> {
                                         BorderSide(color: AppColors.labelText),
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(12)))),
+                            onChanged: (value) {
+                              setState(() {
+                                _controllerDataFinal.text = value;
+                              });
+                            },
                           ),
                         ),
                         IconButton(
@@ -155,11 +167,13 @@ class _SelecionarDataScreenState extends State<SelecionarDataScreen> {
                                         child: CalendarDatePicker(
                                           firstDate: _ultimaData,
                                           initialDate: _ultimaData,
-                                          lastDate: DateTime.now(),
+                                          lastDate: _dataInicialSelecionada!,
                                           onDateChanged: (time) {
-                                            _dataFinalSelecionada = time;
-                                            _controllerDataFinal.text =
-                                                dateFormatter(time);
+                                            setState(() {
+                                              _dataFinalSelecionada = time;
+                                              _controllerDataFinal.text =
+                                                  dateFormatter(time);
+                                            });
                                             Modular.to.pop();
                                           },
                                         ),
@@ -174,7 +188,12 @@ class _SelecionarDataScreenState extends State<SelecionarDataScreen> {
                   ],
                 ),
               ),
-              BotaoPadrao(label: 'Pesquisar', onPressed: () {})
+              BotaoPadrao(
+                  label: 'Pesquisar',
+                  onPressed: _controllerDataInicial.text.isNotEmpty &&
+                          _controllerDataFinal.text.isNotEmpty
+                      ? () {}
+                      : null)
             ],
           ),
         ),
@@ -188,12 +207,7 @@ class _SelecionarDataScreenState extends State<SelecionarDataScreen> {
   }
 
   void ultimaData(DateTime dataInicial) {
-    DateTime lastDate =
-        DateTime(dataInicial.year, dataInicial.month - 3, dataInicial.day);
-
-    if (lastDate.day != dataInicial.day) {
-      lastDate = DateTime(dataInicial.year, dataInicial.month - 2 + 1, 0);
-    }
+    DateTime lastDate = dataInicial.subtract(Duration(days: 90));
     setState(() {
       _ultimaData = lastDate;
     });

@@ -41,7 +41,7 @@ class _TelaExtratoState extends State<TelaExtrato>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 3, vsync: this, initialIndex: 2);
   }
 
   List<Widget> _buildOperacoes() {

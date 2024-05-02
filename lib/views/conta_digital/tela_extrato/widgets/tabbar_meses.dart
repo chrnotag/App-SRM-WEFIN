@@ -24,7 +24,7 @@ class _TabBarMesesState extends State<_TabBarMeses> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(
             bottomRight: Radius.circular(5), bottomLeft: Radius.circular(5))),
         margin: EdgeInsets.zero,
-        elevation: 2,
+        elevation: 1,
         surfaceTintColor: Colors.white,
         child: TabBar(
           indicatorColor: AppColors.azul,
@@ -35,6 +35,8 @@ class _TabBarMesesState extends State<_TabBarMeses> {
               .map((meses) => Text(meses, style: context.textTheme.bodyLarge,))
               .toList(),
           dividerColor: Colors.transparent,
+          isScrollable: true,
+          tabAlignment: TabAlignment.start,
         ),
       ),
     );
