@@ -27,7 +27,10 @@ class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               _ItemMenuFiltro(quantidadeDias: 7),
-              _ItemMenuFiltro(quantidadeDias: 15),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.w),
+                child: _ItemMenuFiltro(quantidadeDias: 15),
+              ),
               _ItemMenuFiltro(quantidadeDias: 30),
               IconButton(
                 onPressed: () => Modular.to.pushNamed(AppRoutes.selecionarDataScreenRoute),
