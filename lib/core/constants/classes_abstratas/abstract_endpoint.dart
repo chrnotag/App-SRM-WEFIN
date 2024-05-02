@@ -15,4 +15,6 @@ abstract class Endpoint{
   String get termosDeUso;
   String get contaDigital;
   String get saldoContaDigital;
+  String get extratoContaDigital;
+  Uri montarUrlPegarExtrato(String numeroConta, String dataInicial, String dataFinal);
 }

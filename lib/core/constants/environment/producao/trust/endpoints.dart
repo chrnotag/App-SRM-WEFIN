@@ -66,4 +66,13 @@ class EndPointsTRUST extends Endpoint{
   @override
   // TODO: implement saldoContaDigital
   String get saldoContaDigital => "$contaDigital/saldo";
+
+  @override
+  String get extratoContaDigital => "$contaDigital/extrato";
+
+
+  @override
+  Uri montarUrlPegarExtrato(String numeroConta, String dataInicial, String dataFinal) {
+    return Uri.parse("$extratoContaDigital?numeroConta=$numeroConta&dataInicial=$dataInicial&dataFinal=$dataFinal");
+  }
 }
