@@ -31,6 +31,7 @@ class _SelecionarDataScreenState extends State<SelecionarDataScreen> {
     _controllerDataFinal.text = '';
     _controllerDataInicial.text = '';
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,18 +151,19 @@ class _SelecionarDataScreenState extends State<SelecionarDataScreen> {
                               showDialog(
                                   context: context,
                                   builder: (context) => Dialog(
-                                    surfaceTintColor: Colors.white,
-                                    child: CalendarDatePicker(
-                                      firstDate: _ultimaData,
-                                      initialDate: _ultimaData,
-                                      lastDate: DateTime.now(),
-                                      onDateChanged: (time){
-                                        _dataFinalSelecionada = time;
-                                        _controllerDataFinal.text = dateFormatter(time);
-                                        Modular.to.pop();
-                                      },
-                                    ),
-                                  ));
+                                        surfaceTintColor: Colors.white,
+                                        child: CalendarDatePicker(
+                                          firstDate: _ultimaData,
+                                          initialDate: _ultimaData,
+                                          lastDate: DateTime.now(),
+                                          onDateChanged: (time) {
+                                            _dataFinalSelecionada = time;
+                                            _controllerDataFinal.text =
+                                                dateFormatter(time);
+                                            Modular.to.pop();
+                                          },
+                                        ),
+                                      ));
                             },
                             icon: Icon(
                               Icons.calendar_month,
@@ -186,13 +188,10 @@ class _SelecionarDataScreenState extends State<SelecionarDataScreen> {
   }
 
   void ultimaData(DateTime dataInicial) {
-    // Subtrai 2 meses da data inicial
     DateTime lastDate =
         DateTime(dataInicial.year, dataInicial.month - 3, dataInicial.day);
 
-    // Verifica se a data resultante é válida
     if (lastDate.day != dataInicial.day) {
-      // Se não for, ajusta para o último dia do mês anterior
       lastDate = DateTime(dataInicial.year, dataInicial.month - 2 + 1, 0);
     }
     setState(() {
