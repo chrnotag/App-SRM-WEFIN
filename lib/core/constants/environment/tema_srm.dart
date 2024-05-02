@@ -42,7 +42,7 @@ class ThemeSRM {
       onError: Colors.redAccent.shade200,
       background: const Color(0XFFF8F9FB),
       onBackground: AppColors.azul,
-      surface: Colors.black,
+      surface: Colors.white,
       onSurface: AppColors.azul,
       inverseSurface: Colors.white,),
     appBarTheme: const AppBarTheme(

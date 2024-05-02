@@ -1,5 +1,7 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
+import 'package:Srm_Asset/core/providers/conta_digital/tabbar_meses_provider.dart';
+import 'package:Srm_Asset/modules/conta_digital_module.dart';
 import 'package:Srm_Asset/modules/sem_conexao_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
@@ -37,6 +39,7 @@ class AppModule extends Module {
     i.addSingleton(MonitorOperacoesProvider.new);
     i.addSingleton(BaixarDocumentosProvider.new);
     i.addSingleton(ContaDigitalProvider.new);
+    i.addSingleton(TabMesesProvider.new);
     i.addInstance(environment);
   }
 
@@ -45,5 +48,6 @@ class AppModule extends Module {
     r.module(Modular.initialRoute, module: AuthModule());
     r.module(AppRoutes.homeRoute, module: HomeModule());
     r.module(AppRoutes.semConexaoMainRoute, module: SemConexaoModule());
+    r.module(AppRoutes.ContaDigitalRoute, module: ContaDigitalModule());
   }
 }

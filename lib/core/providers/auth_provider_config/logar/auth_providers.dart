@@ -84,7 +84,8 @@ class AuthProvider extends ChangeNotifier {
         } else {
           try {
             OverlayApp.terminaOverlay();
-          } catch (_) {}
+          } catch (_) {
+          }
           final contaDigitalProvider = Modular.get<ContaDigitalProvider>();
           contaDigitalProvider.obterDadosContaDigital();
           contaDigitalProvider.obterSaldoContaDigital();
@@ -92,9 +93,9 @@ class AuthProvider extends ChangeNotifier {
         }
       }
     } else {
-      // if(Modular.to.path != AppRoutes.homeAppRoute){
-      //   Modular.to.navigate(AppRoutes.homeAppRoute);
-      // }
+      if(Modular.to.path != AppRoutes.homeAppRoute){
+        Modular.to.navigate(AppRoutes.homeAppRoute);
+      }
     }
   }
 

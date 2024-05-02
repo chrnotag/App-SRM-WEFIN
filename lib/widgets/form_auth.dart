@@ -283,7 +283,7 @@ class _AuthFormState extends State<AuthForm> {
         if (authProvider.listaCedente!.length > 1) {
           Modular.to.pushReplacementNamed(AppRoutes.listaSelecaoEmpresasRoute);
         } else {
-          certificadoProvider.pegarCertificado();
+          //certificadoProvider.pegarCertificado();
           authProvider.RelogarTrocarCedente(
               authProvider.dataUser!.identificadorCedente, context);
         }

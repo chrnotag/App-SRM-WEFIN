@@ -18,7 +18,7 @@ class _CardItemMenuHome extends StatelessWidget {
   Widget build(BuildContext context) {
     final ambiente = Modular.get<Environment>();
     return SizedBox(
-      width: 130.w,
+      width: 135.w,
       height: 120.h,
       child: InkWell(
         borderRadius: const BorderRadius.all(Radius.circular(15)),
@@ -36,7 +36,7 @@ class _CardItemMenuHome extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SvgPicture.asset(icone, color: ambiente.IconColor,),
+                    SvgPicture.asset(icone, color: ambiente.IconColor, width: 35.w,),
                     Visibility(
                       visible: notificacoes >= 1,
                       child: CircleAvatar(
@@ -55,7 +55,7 @@ class _CardItemMenuHome extends StatelessWidget {
                 Text(
                   titulo,
                   style: context.textTheme.bodyMedium!
-                      .copyWith(fontWeight: FontWeight.bold, fontSize: 16),
+                      .copyWith(fontWeight: FontWeight.bold, fontSize: 13.sp),
                 )
               ],
             ),

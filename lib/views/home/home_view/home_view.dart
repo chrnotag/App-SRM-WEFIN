@@ -4,6 +4,7 @@ import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart
 import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
 import 'package:Srm_Asset/core/utils/money_format.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,6 +16,7 @@ import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_provide
 import 'package:Srm_Asset/generated/assets.dart';
 import 'package:Srm_Asset/widgets/appbar_logo_perfil.dart';
 import '../../../core/constants/tema_configs.dart';
+import '../../../core/implementations_config/api_response.dart';
 import '../../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 
 part 'widgets/card_item_menu.dart';
@@ -27,6 +29,22 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  late Future<ApiResponse<dynamic>> _saldoFuture;
+  final contaDigital = Modular.get<ContaDigitalProvider>();
+
+  @override
+  void initState() {
+    super.initState();
+    _carregarDados();
+  }
+
+  Future<void> _carregarDados() async {
+    setState(() {
+      _saldoFuture =
+          contaDigital.carregarSaldo(contaDigital.dadosContaDigital!.conta);
+    });
+  }
+
   @override
   void dispose() {
     final AssinaturaProvider assinaturaProvider =
@@ -48,7 +66,8 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     final AuthProvider authProvider = context.watch<AuthProvider>();
-    final ContaDigitalProvider contaDigitalProvider = context.watch<ContaDigitalProvider>();
+    final ContaDigitalProvider contaDigitalProvider =
+        context.watch<ContaDigitalProvider>();
     return Scaffold(
       bottomNavigationBar: SafeArea(
         child: BottomNavigationBar(
@@ -60,7 +79,7 @@ class _HomeViewState extends State<HomeView> {
             });
           },
           currentIndex: _index,
-          selectedItemColor: context.indicatorColor,
+          selectedItemColor: AppColors.azul,
           type: BottomNavigationBarType.fixed,
           items: [
             BottomNavigationBarItem(
@@ -69,13 +88,14 @@ class _HomeViewState extends State<HomeView> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                        color: _index == 0 ? context.indicatorColor : null,
-                        borderRadius: const BorderRadius.all(Radius.circular(10))),
+                        color: _index == 0 ? AppColors.azul : null,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10))),
                     height: 4,
                     width: 30.r,
                   ),
                   SvgPicture.asset(Assets.home_icon,
-                      color: _index == 0 ? context.indicatorColor : null),
+                      color: _index == 0 ? AppColors.azul : null),
                 ],
               ),
               label: 'Início',
@@ -86,13 +106,13 @@ class _HomeViewState extends State<HomeView> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                        color: _index == 1 ? context.indicatorColor : null,
+                        color: _index == 1 ? AppColors.azul : null,
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     height: 4,
                     width: 30.r,
                   ),
                   SvgPicture.asset(Assets.search_icon,
-                      color: _index == 1 ? context.indicatorColor : null),
+                      color: _index == 1 ? AppColors.azul : null),
                 ],
               ),
               label: 'Busca',
@@ -103,13 +123,13 @@ class _HomeViewState extends State<HomeView> {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                          color: _index == 2 ? context.indicatorColor : null,
+                          color: _index == 2 ? AppColors.azul : null,
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       height: 4,
                       width: 30.r,
                     ),
                     SvgPicture.asset(Assets.menu_options_icon,
-                        color: _index == 2 ? context.indicatorColor : null),
+                        color: _index == 2 ? AppColors.azul : null),
                   ],
                 ),
                 label: 'Opções'),
@@ -157,11 +177,35 @@ class _HomeViewState extends State<HomeView> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(
-                            _isSaldoVisivel ? FormatarDinheiro.BR(contaDigitalProvider.saldoContaDigital!.saldoTotal) : 'R\$ * * * * *',
-                            style: context.textTheme.displayMedium!.copyWith(
-                                color: Colors.white, fontWeight: FontWeight.w900),
-                          ),
+                          FutureBuilder(
+                              future: _saldoFuture,
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return CircularProgressIndicator(
+                                    color: context.primaryColor,
+                                  );
+                                } else if (snapshot.hasError) {
+                                  return Text(
+                                      'Houve um erro ao carregar o saldo!');
+                                } else {
+                                  print(
+                                      'saldo: ${contaDigitalProvider.saldoContaDigital}');
+                                  return Text(
+                                    _isSaldoVisivel
+                                        ? FormatarDinheiro.BR(
+                                            contaDigitalProvider
+                                                    .saldoContaDigital
+                                                    ?.saldoTotal ??
+                                                0.0)
+                                        : 'R\$ * * * * *',
+                                    style: context.textTheme.displayMedium!
+                                        .copyWith(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w900),
+                                  );
+                                }
+                              }),
                           IconButton(
                               onPressed: () => setState(() {
                                     _isSaldoVisivel = !_isSaldoVisivel;
@@ -209,12 +253,15 @@ class _HomeViewState extends State<HomeView> {
                             _CardItemMenuHome(
                                 icone: Assets.grafico_icone,
                                 titulo: 'Monitor de Operações',
-                                onTap: () => Modular.to
-                                    .pushNamed(AppRoutes.monitorOperacoesRoute)),
+                                onTap: () => Modular.to.pushNamed(
+                                    AppRoutes.monitorOperacoesRoute)),
                             _CardItemMenuHome(
                                 icone: Assets.lista_icone,
                                 titulo: 'Extrato',
-                                onTap: () {}),
+                                onTap: () {
+                                      Modular.to.pushNamed(
+                                          AppRoutes.extratoScreenRoute);
+                                    }),
                           ],
                         ),
                         Column(
@@ -223,7 +270,10 @@ class _HomeViewState extends State<HomeView> {
                             _CardItemMenuHome(
                                 icone: Assets.balao_chat,
                                 titulo: 'Fale com seu gerente',
-                                onTap: () {Modular.to.pushNamed(AppRoutes.helpScreenRoute);}),
+                                onTap: () {
+                                  Modular.to
+                                      .pushNamed(AppRoutes.helpScreenRoute);
+                                }),
                             _CardItemMenuHome(
                                 icone: Assets.setas_perpendiculares,
                                 titulo: 'Transferências',

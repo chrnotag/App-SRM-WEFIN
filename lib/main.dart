@@ -16,8 +16,6 @@ FutureOr<void> main() async {
   runApp(
     ScreenUtilInit(
       designSize: const Size(430, 932),
-      minTextAdapt: true,
-      splitScreenMode: true,
       builder: (context, child) => ModularApp(
         module: AppModule(environment),
         child: const AppWidget(),
