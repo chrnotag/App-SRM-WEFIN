@@ -29,10 +29,10 @@ class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
               _ItemMenuFiltro(quantidadeDias: 7),
               _ItemMenuFiltro(quantidadeDias: 15),
               _ItemMenuFiltro(quantidadeDias: 30),
-              Icon(
-                Icons.calendar_month,
+              IconButton(
+                onPressed: () => Modular.to.pushNamed(AppRoutes.selecionarDataScreenRoute),
+                icon: Icon(Icons.calendar_month, size: 45.r,),
                 color: AppColors.azul,
-                size: 45.r,
               ),
               Image.asset(
                 Assets.imagesIconePdf,

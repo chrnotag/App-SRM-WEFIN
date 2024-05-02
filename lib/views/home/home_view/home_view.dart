@@ -189,8 +189,6 @@ class _HomeViewState extends State<HomeView> {
                                   return Text(
                                       'Houve um erro ao carregar o saldo!');
                                 } else {
-                                  print(
-                                      'saldo: ${contaDigitalProvider.saldoContaDigital}');
                                   return Text(
                                     _isSaldoVisivel
                                         ? FormatarDinheiro.BR(
