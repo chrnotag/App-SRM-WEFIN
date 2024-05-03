@@ -80,6 +80,7 @@ class _SelecionarDataScreenState extends State<SelecionarDataScreen> {
                         SizedBox(
                           width: 320.w,
                           child: TextField(
+                            enabled: false,
                             controller: _controllerDataInicial,
                             decoration: const InputDecoration(
                                 hintText: 'Selecionar período',
@@ -111,6 +112,7 @@ class _SelecionarDataScreenState extends State<SelecionarDataScreen> {
                                                 _controllerDataInicial.text =
                                                     dateFormatter(time);
                                                 ultimaData(time);
+                                                _controllerDataFinal.text = '';
                                               });
                                               Modular.to.pop();
                                             }),
@@ -143,6 +145,7 @@ class _SelecionarDataScreenState extends State<SelecionarDataScreen> {
                         SizedBox(
                           width: 320.w,
                           child: TextField(
+                            enabled: false,
                             controller: _controllerDataFinal,
                             decoration: const InputDecoration(
                                 hintText: 'Selecionar período',
@@ -165,9 +168,9 @@ class _SelecionarDataScreenState extends State<SelecionarDataScreen> {
                                   builder: (context) => Dialog(
                                         surfaceTintColor: Colors.white,
                                         child: CalendarDatePicker(
-                                          firstDate: _ultimaData,
-                                          initialDate: _ultimaData,
-                                          lastDate: _dataInicialSelecionada!,
+                                          firstDate: _dataInicialSelecionada!,
+                                          initialDate: _dataInicialSelecionada!,
+                                          lastDate: _ultimaData,
                                           onDateChanged: (time) {
                                             setState(() {
                                               _dataFinalSelecionada = time;
@@ -207,7 +210,7 @@ class _SelecionarDataScreenState extends State<SelecionarDataScreen> {
   }
 
   void ultimaData(DateTime dataInicial) {
-    DateTime lastDate = dataInicial.subtract(Duration(days: 90));
+    DateTime lastDate = dataInicial.add(Duration(days: 90));
     setState(() {
       _ultimaData = lastDate;
     });
