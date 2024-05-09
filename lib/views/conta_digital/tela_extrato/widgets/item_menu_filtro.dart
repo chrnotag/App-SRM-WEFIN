@@ -12,7 +12,7 @@ class _ItemMenuFiltroState extends State<_ItemMenuFiltro> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 87.w,
+      width: 80.w,
       height: 36.h,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(
