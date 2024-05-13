@@ -91,19 +91,19 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                     },
                   ),
                   trailing: FloatingActionButton.small(
-                      onPressed: () {
-                        if(certificadoProvider.certificadoAtual != null) {
+                      onPressed: () async {
+                        final listaCertificados = await CrossPki.listCertificatesWithKey();
+                        PKCertificate certificadoAtual = listaCertificados.first;
+                        if(listaCertificados.isNotEmpty) {
                           showDialog(
                               context: context,
                               builder: (context) =>
                               PopUpDeletarCertificado(
                                   context: context,
-                                  certificado: certificadoProvider
-                                      .certificadoAtual!,
+                                  certificado: certificadoAtual,
                                   title: "Excluir Certificado",
                                   label:
-                                  "Deseja excluir o certificado ${certificadoProvider
-                                      .certificadoAtual!.subjectDisplayName}?")
+                                  "Deseja excluir o certificado ${certificadoAtual.subjectDisplayName}?")
                                   .popUp).then((_) => Modular.to.pop());
                         }else{
                           Modular.to.pop();

@@ -33,7 +33,7 @@ class PopUpDeletarCertificado {
                 Expanded(
                   child: BotaoPadrao(
                     onPressed: () {
-                      certificadoProvider.deletarCertificado();
+                      certificadoProvider.deletarCertificado(certificadoProvider.certificadoAtual!);
                       certificadoProvider.certificadoAtual = null;
                       Fluttertoast.showToast(
                           msg: 'Certificado removido com sucesso');
