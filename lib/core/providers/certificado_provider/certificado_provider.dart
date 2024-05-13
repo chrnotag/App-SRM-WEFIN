@@ -93,10 +93,11 @@ class CertificadoProvider extends ChangeNotifier {
     return listaCertificados;
   }
 
-  Future<void> deletarCertificado() async {
-    await CrossPki.removeCertificate(_certificadoAtual!.thumbprint);
+  Future<void> deletarCertificado(PKCertificate certificado) async {
+    print("thumb: ${certificadoAtual?.subjectDisplayName}");
+    await CrossPki.removeCertificate(certificado.thumbprint);
     listaCertificados.removeWhere(
-        (element) => element.thumbprint == _certificadoAtual?.thumbprint);
+        (element) => element.thumbprint == certificado.thumbprint);
     notifyListeners();
   }
 
@@ -147,9 +148,10 @@ class CertificadoProvider extends ChangeNotifier {
   }
 
   Future<bool> importarCertificado(BuildContext context) async {
+    final listaCertificados = await CrossPki.listCertificatesWithKey();
     try {
-      if (certificadoAtual != null) {
-        deletarCertificado();
+      if(listaCertificados.isNotEmpty){
+        deletarCertificado(listaCertificados.first);
       }
     } catch (_) {}
     limparErro();
@@ -158,8 +160,8 @@ class CertificadoProvider extends ChangeNotifier {
       await CrossPki.importPkcs12(pkcs12, senhaCertificado!);
       var certs = await CrossPki.listCertificatesWithKey();
       if (isExpirado(certs.first)) {
-        log('verificando validade');
-        deletarCertificado();
+        log('verificando validade: ${certs.first.subjectDisplayName}');
+        deletarCertificado(certs.first);
         Fluttertoast.showToast(
             msg:
                 'Certificado ${certs.first.subjectDisplayName} EXPIRADO! A importação foi cancelada.');
