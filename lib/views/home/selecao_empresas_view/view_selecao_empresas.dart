@@ -9,6 +9,9 @@ import 'package:Srm_Asset/models/auth_login_models/SRM/cedente_model.dart';
 import 'package:Srm_Asset/widgets/botao_selecao_empresa.dart';
 import 'package:Srm_Asset/widgets/searchbar_person.dart';
 
+import '../../../core/providers/conta_digital/conta_digital_provider.dart';
+import '../../../core/providers/conta_digital/extrato/extrato_provider.dart';
+
 class ListaSelecaoEmpresas extends StatefulWidget {
   const ListaSelecaoEmpresas({super.key});
 
@@ -101,6 +104,10 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                       onTap: () async {
                         authProviderAtt.RelogarTrocarCedente(
                             _searchResults![index].identificador, context);
+                        final extratoProvider = Modular.get<ExtratoProvider>();
+                        final contaProvider = Modular.get<ContaDigitalProvider>();
+                        final dados = await extratoProvider.pegarExtratos(contaProvider.dadosContaDigital!.conta, DateTime.now().toIso8601String(), DateTime.now().toIso8601String());
+
                       },
                       child: SizedBox(
                         height: 70.h,
