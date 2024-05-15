@@ -12,8 +12,9 @@ class _ItemListaExtrato extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateFormat formatar = DateFormat('dd/MM/yyyy');
     return ListTile(
-      title: Text(dataDia),
+      title: Text(formatar.format(DateTime.parse(dataDia))),
       subtitle: Column(
         children: [
           Row(

@@ -1,33 +1,26 @@
-
 import 'package:json_annotation/json_annotation.dart';
 part 'conta_extrato_model.g.dart';
+
 @JsonSerializable()
 class ContaExtratoModel {
-  DateTime data;
-  DateTime rangeInicial;
-  DateTime rangeFinal;
   String numeroConta;
   List<Item> itens;
 
   ContaExtratoModel({
-    required this.data,
-    required this.rangeInicial,
-    required this.rangeFinal,
     required this.numeroConta,
     required this.itens,
   });
 
   factory ContaExtratoModel.fromJson(Map<String, dynamic> json) => _$ContaExtratoModelFromJson(json);
 
-  Map<String,dynamic> toJson() => _$ContaExtratoModelToJson(this);
-
+  Map<String, dynamic> toJson() => _$ContaExtratoModelToJson(this);
 }
 
 @JsonSerializable()
 class Item {
   DateTime dataReferencia;
-  int saldoNaData;
-  int saldoAnterior;
+  double saldoNaData;
+  double saldoAnterior;
   List<Lancamento> lancamentos;
 
   Item({
@@ -39,8 +32,7 @@ class Item {
 
   factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
 
-  Map<String,dynamic> toJson() => _$ItemToJson(this);
-
+  Map<String, dynamic> toJson() => _$ItemToJson(this);
 }
 
 @JsonSerializable()
@@ -48,16 +40,15 @@ class Lancamento {
   int id;
   Status status;
   Evento evento;
-  int valor;
+  double valor;
   String conta;
   String transacao;
-  String controleExterno;
+  String? controleExterno;
   DateTime data;
-  DateTime dataHora;
-  Adicionais adicionais;
+  DateTime dataCompleta;
   bool possuiFalha;
-  Detalhe detalhe;
   List<Marcador> marcadores;
+  Adicionais? adicionais;
 
   Lancamento({
     required this.id,
@@ -66,62 +57,30 @@ class Lancamento {
     required this.valor,
     required this.conta,
     required this.transacao,
-    required this.controleExterno,
+    this.controleExterno,
     required this.data,
-    required this.dataHora,
-    required this.adicionais,
+    required this.dataCompleta,
     required this.possuiFalha,
-    required this.detalhe,
     required this.marcadores,
+    this.adicionais,
   });
 
   factory Lancamento.fromJson(Map<String, dynamic> json) => _$LancamentoFromJson(json);
 
-  Map<String,dynamic> toJson() => _$LancamentoToJson(this);
-
+  Map<String, dynamic> toJson() => _$LancamentoToJson(this);
 }
 
 @JsonSerializable()
 class Adicionais {
   String codigoEvento;
-  int codigoEmpresa;
 
   Adicionais({
     required this.codigoEvento,
-    required this.codigoEmpresa,
   });
 
   factory Adicionais.fromJson(Map<String, dynamic> json) => _$AdicionaisFromJson(json);
 
-  Map<String,dynamic> toJson() => _$AdicionaisToJson(this);
-
-}
-
-@JsonSerializable()
-class Detalhe {
-  AdditionalProp additionalProp1;
-  AdditionalProp additionalProp2;
-  AdditionalProp additionalProp3;
-
-  Detalhe({
-    required this.additionalProp1,
-    required this.additionalProp2,
-    required this.additionalProp3,
-  });
-
-  factory Detalhe.fromJson(Map<String, dynamic> json) => _$DetalheFromJson(json);
-
-  Map<String,dynamic> toJson() => _$DetalheToJson(this);
-
-}
-
-@JsonSerializable()
-class AdditionalProp {
-  AdditionalProp();
-
-  factory AdditionalProp.fromJson(Map<String, dynamic> json) => _$AdditionalPropFromJson(json);
-
-  Map<String,dynamic> toJson() => _$AdditionalPropToJson(this);
+  Map<String, dynamic> toJson() => _$AdicionaisToJson(this);
 }
 
 @JsonSerializable()
@@ -140,8 +99,7 @@ class Evento {
 
   factory Evento.fromJson(Map<String, dynamic> json) => _$EventoFromJson(json);
 
-  Map<String,dynamic> toJson() => _$EventoToJson(this);
-
+  Map<String, dynamic> toJson() => _$EventoToJson(this);
 }
 
 @JsonSerializable()
@@ -153,9 +111,10 @@ class Marcador {
     required this.chave,
     required this.valor,
   });
-      factory Marcador.fromJson(Map<String, dynamic> json) => _$MarcadorFromJson(json);
 
-    Map<String,dynamic> toJson() => _$MarcadorToJson(this);
+  factory Marcador.fromJson(Map<String, dynamic> json) => _$MarcadorFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MarcadorToJson(this);
 }
 
 @JsonSerializable()
@@ -170,6 +129,5 @@ class Status {
 
   factory Status.fromJson(Map<String, dynamic> json) => _$StatusFromJson(json);
 
-  Map<String,dynamic> toJson() => _$StatusToJson(this);
-
+  Map<String, dynamic> toJson() => _$StatusToJson(this);
 }

@@ -73,7 +73,7 @@ class EndPointsSRM extends Endpoint{
 
   @override
   Uri montarUrlPegarExtrato(String numeroConta, String dataInicial, String dataFinal) {
-    return Uri.parse("$extratoContaDigital?numeroConta=$numeroConta&dataInicial=$dataInicial&dataFinal=$dataFinal");
+    return Uri.parse("$extratoContaDigital?numeroContaTitular=$numeroConta&dataInicialExtrato=$dataInicial&dataFinalExtrato=$dataFinal");
   }
 
 }

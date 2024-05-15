@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:math';
 
 import 'package:Srm_Asset/core/constants/enuns/tipo_operacao_enum.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
@@ -7,7 +8,9 @@ import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/constants/tema_configs.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
+import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_impl.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_provider.dart';
+import 'package:Srm_Asset/core/utils/data_format.dart';
 import 'package:Srm_Asset/core/utils/money_format.dart';
 import 'package:Srm_Asset/generated/assets.dart';
 import 'package:Srm_Asset/models/conta_digital/extrato/conta_extrato_model.dart';
@@ -19,9 +22,11 @@ import 'package:flutter/src/scheduler/ticker.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
+import 'package:line_icons/line_icon.dart';
 
 import '../../../core/implementations_config/api_response.dart';
 import '../../../core/providers/conta_digital/tabbar_meses_provider.dart';
+import '../../../core/utils/ultimo_dia_mes.dart';
 
 part 'widgets/item_lista_extrato.dart';
 
@@ -40,47 +45,37 @@ class TelaExtrato extends StatefulWidget {
   State<TelaExtrato> createState() => _TelaExtratoState();
 }
 
+int tamanhoLista = 7;
+
 class _TelaExtratoState extends State<TelaExtrato>
     with TickerProviderStateMixin {
   TabController? _tabController;
-  late Future<ApiResponse<dynamic>> _extrato;
   final contaDigitalProvider = Modular.get<ContaDigitalProvider>();
-  final extratoProvider = Modular.get<ExtratoProvider>();
+  final extratoProviderInit = Modular.get<ExtratoProvider>();
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this, initialIndex: 2);
-    _carregarDados();
-  }
-
-  Future<void> _carregarDados() async {
-    setState(() {
-      _extrato = Modular.get<ExtratoProvider>().pegarExtratos(
-          contaDigitalProvider.dadosContaDigital!.conta,
-          extratoProvider.dataInicial,
-          extratoProvider.dataFinal);
-    });
-  }
-
-  List<Widget> _operacoes = [];
-
-  List<Widget> _buildOperacoes() {
-    List<ContaExtratoModel> extratos = Modular.get<ExtratoProvider>().extrato;
-    print(extratos.length);
-    final dataFormat = DateFormat('dd/MM/yyyy');
-    for (var extrato in extratos) {
-      print('extrato: ${extrato.data}');
-      _operacoes.add(_ItemListaExtrato(
-          dataDia: dataFormat.format(extrato.data),
-          saldoDia: extrato.itens[0].saldoNaData.toString()));
-    }
-    return _operacoes;
+    extratoProviderInit.carregarDados();
   }
 
   @override
   Widget build(BuildContext context) {
-    _buildOperacoes();
+    final extratoProvider = context.watch<ExtratoProvider>();
+    List<Widget> buildOperacoes(int index) {
+      List<Widget> lista = [];
+      print('tamanho lista: ${extratoProvider.itensExtrato.length}\nindex: $index');
+      List<Lancamento> lancamentos = extratoProvider.itensExtrato[index].lancamentos;
+        for (var lancamento in lancamentos) {
+          lista.add(_ItemListaOperacao(
+              tipoTED: TipoTED.fromCodigo(lancamento.evento.codigo),
+              descricao: lancamento.evento.descricao,
+              valorOperacao: lancamento.valor));
+        }
+      return lista;
+    }
+
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: AppBar().preferredSize, child: AppBarExtrato()),
@@ -104,18 +99,32 @@ class _TelaExtratoState extends State<TelaExtrato>
                     _MenuFiltroTelaExtrato(),
                     Expanded(
                         child: RefreshIndicator(
-                      onRefresh: _carregarDados,
+                      onRefresh: extratoProvider.carregarDados,
                       child: FutureBuilder(
-                        future: _extrato,
+                        future: extratoProvider.extratoFuture,
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
                             return Loader();
                           }
+                          if (!snapshot.hasData) {
+                            print("nao ha data");
+                          }
                           return ListView.builder(
-                            itemCount: extratoProvider.intervaloDias,
-                            itemBuilder: (context, index) => Container(),
-                          );
+                              itemCount: tamanhoLista,
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  children: [
+                                    _ItemListaExtrato(
+                                      dataDia: FormatarData.formatar(extratoProvider.itensExtrato[index].dataReferencia
+                                          .toIso8601String()),
+                                      saldoDia: FormatarDinheiro.BR(
+                                          extratoProvider.itensExtrato[index].saldoNaData),
+                                    ),
+                                    ...buildOperacoes(index)
+                                  ],
+                                );
+                              });
                         },
                       ),
                     ))

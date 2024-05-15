@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 
 class ExtratoImpl {
   static Future<ApiResponse<dynamic>> pegarExtrato(
-      String numeroConta, String dataInicial, String dataFinal) async {
+      String numeroContaTitular, String dataInicial, String dataFinal) async {
     final authProvider = Modular.get<AuthProvider>();
     final ambiente = Modular.get<Environment>();
     final extratoProvider = Modular.get<ExtratoProvider>();
@@ -20,14 +20,13 @@ class ExtratoImpl {
       'plataforma': ambiente.plataforma.name
     };
     final Uri url = ambiente.endpoints
-        .montarUrlPegarExtrato(numeroConta, dataInicial, dataFinal);
+        .montarUrlPegarExtrato(numeroContaTitular, dataInicial, dataFinal);
     try {
       final response = await http.get(url, headers: headers);
       if (response.statusCode == 200) {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
-        List<ContaExtratoModel> data = [];
-        data = List<ContaExtratoModel>.from(
-            responseBody.map((model) => ContaExtratoModel.fromJson(model)));
+        ContaExtratoModel data = ContaExtratoModel.fromJson(responseBody);
+        print('response: $responseBody');
         extratoProvider.extrato = data;
         return SucessResponse(data);
       } else if (response.statusCode == 500) {
@@ -35,7 +34,7 @@ class ExtratoImpl {
       } else {
         return MensagemErroPadrao.erroResponse(response.bodyBytes);
       }
-    } catch (e) {
+    } catch (e, s) {
       return MensagemErroPadrao.codigo500();
     }
   }

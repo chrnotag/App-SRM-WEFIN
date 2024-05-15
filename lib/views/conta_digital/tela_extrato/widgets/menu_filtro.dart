@@ -8,8 +8,30 @@ class _MenuFiltroTelaExtrato extends StatefulWidget {
 }
 
 class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
+  int filtroSelecionado = 7;
+  Map<String, Color> corSelecionado(int indicie) {
+    if(filtroSelecionado == indicie){
+      return {
+        'borda': AppColors.azul,
+        'fundo': AppColors.azulPrimarioSRM,
+        'texto': Colors.white,
+      };
+    }else{
+      return {
+        'borda': Colors.black,
+        'fundo': Colors.white,
+        'texto': AppColors.azul
+      };
+    }
+  }
+
+ final int MES = 30;
+ final int QUINZENA = 15;
+ final int SEMANA = 7;
+
   @override
   Widget build(BuildContext context) {
+    final extratoProvider = context.watch<ExtratoProvider>();
     return Padding(
       padding: const EdgeInsets.all(8),
       child: Column(
@@ -19,29 +41,60 @@ class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
             padding: EdgeInsets.only(left: 13.w),
             child: Text(
               'Movimentações',
-              style: context.textTheme.bodyLarge!
-                  .copyWith(fontWeight: FontWeight.w900, color: Color(0XFF696969)),
+              style: context.textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.w900, color: Color(0XFF696969)),
             ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              _ItemMenuFiltro(quantidadeDias: 7),
+              InkWell(
+                radius: 12.r,
+                child: _ItemMenuFiltro(quantidadeDias: SEMANA, corSelecionado: corSelecionado(SEMANA),),
+                onTap: () => setState(() {
+                  tamanhoLista = SEMANA;
+                  extratoProvider.intervaloDias = SEMANA;
+                  filtroSelecionado = SEMANA;
+                  extratoProvider.carregarDados();
+                }),
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.w),
-                child: _ItemMenuFiltro(quantidadeDias: 15),
+                child: InkWell(
+                  radius: 12.r,
+                  child: _ItemMenuFiltro(quantidadeDias: QUINZENA, corSelecionado: corSelecionado(QUINZENA),),
+                  onTap: () => setState(() {
+                    tamanhoLista = QUINZENA;
+                    extratoProvider.intervaloDias = QUINZENA;
+                    filtroSelecionado = QUINZENA;
+                    extratoProvider.carregarDados();
+                  }),
+                ),
               ),
-              _ItemMenuFiltro(quantidadeDias: 30),
+              InkWell(
+                radius: 12.r,
+                child: _ItemMenuFiltro(quantidadeDias: MES,corSelecionado: corSelecionado(MES),),
+                onTap: () => setState(() {
+                  tamanhoLista = MES;
+                  extratoProvider.intervaloDias = MES;
+                  filtroSelecionado = MES;
+                  extratoProvider.carregarDados();
+                }),
+              ),
               IconButton(
-                onPressed: () => Modular.to.pushNamed(AppRoutes.selecionarDataScreenRoute),
-                icon: Icon(Icons.calendar_month, size: 45.r,),
+                onPressed: () =>
+                    Modular.to.pushNamed(AppRoutes.selecionarDataScreenRoute),
+                icon: Icon(
+                  Icons.calendar_month,
+                  size: 45.r,
+                ),
                 color: AppColors.azul,
               ),
               Image.asset(
                 Assets.imagesIconePdf,
                 color: AppColors.azul,
                 scale: 0.9,
-              )
+              ),
             ],
           )
         ],

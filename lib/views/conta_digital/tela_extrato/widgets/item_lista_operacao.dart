@@ -2,13 +2,13 @@ part of '../tela_extrato.dart';
 
 class _ItemListaOperacao extends StatelessWidget {
   final TipoTED tipoTED;
-  final String nome;
+  final String descricao;
   final double valorOperacao;
 
   const _ItemListaOperacao({
     super.key,
     required this.tipoTED,
-    required this.nome,
+    required this.descricao,
     required this.valorOperacao,
   });
 
@@ -54,7 +54,9 @@ class _ItemListaOperacao extends StatelessWidget {
                   ],
                 ),
               ),
-              Text(nome),
+              SizedBox(
+                  width: context.width * 0.7,
+                  child: Text(descricao)),
             ],
           )
         ],

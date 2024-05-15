@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_impl.dart';
 import 'package:Srm_Asset/widgets/mascara_texto_cnpj.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -11,6 +12,7 @@ import 'package:Srm_Asset/widgets/searchbar_person.dart';
 
 import '../../../core/providers/conta_digital/conta_digital_provider.dart';
 import '../../../core/providers/conta_digital/extrato/extrato_provider.dart';
+import '../../../core/utils/data_format.dart';
 
 class ListaSelecaoEmpresas extends StatefulWidget {
   const ListaSelecaoEmpresas({super.key});
@@ -42,8 +44,8 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
       setState(() {
         _searchResults = authProvider.listaCedente
             ?.where((item) =>
-        item.nome.toLowerCase().contains(query) ||
-            item.identificador.contains(query)) // Considera CNPJ
+                item.nome.toLowerCase().contains(query) ||
+                item.identificador.contains(query)) // Considera CNPJ
             .toList();
       });
     } else {
@@ -105,47 +107,45 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                         authProviderAtt.RelogarTrocarCedente(
                             _searchResults![index].identificador, context);
                         final extratoProvider = Modular.get<ExtratoProvider>();
-                        final contaProvider = Modular.get<ContaDigitalProvider>();
-                        final dados = await extratoProvider.pegarExtratos(contaProvider.dadosContaDigital!.conta, DateTime.now().toIso8601String(), DateTime.now().toIso8601String());
-
+                        final contaProvider =
+                            Modular.get<ContaDigitalProvider>();
+                        final dados = await ExtratoImpl.pegarExtrato(
+                            contaProvider.dadosContaDigital!.conta,
+                            FormatarData.formatar(extratoProvider.dataFinal().toIso8601String()),
+                            FormatarData.formatar(
+                                extratoProvider.dataInicial.toIso8601String()));
                       },
                       child: SizedBox(
                         height: 70.h,
                         child: ListTile(
-                          title:  Text(
+                          title: Text(
                             _searchResults![index].nome,
                             style: context.textTheme.bodyMedium,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                           ),
-                          subtitle:  CNPJText(
-                            cnpjOuCpf: _searchResults![index]
-                                .identificador,
+                          subtitle: CNPJText(
+                            cnpjOuCpf: _searchResults![index].identificador,
                           ),
                           trailing: Visibility(
-                            visible: _searchResults![index]
-                                .assinaturaPendente >
-                                0,
+                            visible:
+                                _searchResults![index].assinaturaPendente > 0,
                             child: CircleAvatar(
                                 backgroundColor: Color(0xffF29146),
                                 radius: 15.r,
                                 child: Center(
                                   child: Text(
-                                      authProvider
-                                          .dataUser!
-                                          .listaCedente[index]
-                                          .assinaturaPendente >=
-                                          10
+                                      authProvider.dataUser!.listaCedente[index]
+                                                  .assinaturaPendente >=
+                                              10
                                           ? '9+'
                                           : authProvider
-                                          .dataUser!
-                                          .listaCedente[index]
-                                          .assinaturaPendente
-                                          .toString(),
-                                      style: context
-                                          .textTheme.bodyMedium!
-                                          .copyWith(
-                                          color: Colors.white)),
+                                              .dataUser!
+                                              .listaCedente[index]
+                                              .assinaturaPendente
+                                              .toString(),
+                                      style: context.textTheme.bodyMedium!
+                                          .copyWith(color: Colors.white)),
                                 )),
                           ),
                         ),
