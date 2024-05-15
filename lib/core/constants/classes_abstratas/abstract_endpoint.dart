@@ -1,3 +1,5 @@
+import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_impl.dart';
+
 abstract class Endpoint{
   String get baseURL;
   String get login;
@@ -16,5 +18,6 @@ abstract class Endpoint{
   String get contaDigital;
   String get saldoContaDigital;
   String get extratoContaDigital;
-  Uri montarUrlPegarExtrato(String numeroConta, String dataInicial, String dataFinal);
+  String get downloadExtratoContaDigital;
+  Uri montarUrlPegarExtrato(String numeroConta, String dataInicial, String dataFinal, TipoConsultaExtrato tipoConsulta);
 }

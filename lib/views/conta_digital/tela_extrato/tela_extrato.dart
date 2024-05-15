@@ -14,8 +14,10 @@ import 'package:Srm_Asset/core/utils/data_format.dart';
 import 'package:Srm_Asset/core/utils/money_format.dart';
 import 'package:Srm_Asset/generated/assets.dart';
 import 'package:Srm_Asset/models/conta_digital/extrato/conta_extrato_model.dart';
+import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import 'package:Srm_Asset/views/conta_digital/widgets/app_bar_conta_digital.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
+import 'package:Srm_Asset/widgets/pdfview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/scheduler/ticker.dart';
@@ -23,6 +25,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 import 'package:line_icons/line_icon.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 import '../../../core/implementations_config/api_response.dart';
 import '../../../core/providers/conta_digital/tabbar_meses_provider.dart';
@@ -65,14 +68,14 @@ class _TelaExtratoState extends State<TelaExtrato>
     final extratoProvider = context.watch<ExtratoProvider>();
     List<Widget> buildOperacoes(int index) {
       List<Widget> lista = [];
-      print('tamanho lista: ${extratoProvider.itensExtrato.length}\nindex: $index');
-      List<Lancamento> lancamentos = extratoProvider.itensExtrato[index].lancamentos;
-        for (var lancamento in lancamentos) {
-          lista.add(_ItemListaOperacao(
-              tipoTED: TipoTED.fromCodigo(lancamento.evento.codigo),
-              descricao: lancamento.evento.descricao,
-              valorOperacao: lancamento.valor));
-        }
+      List<Lancamento> lancamentos =
+          extratoProvider.itensExtrato[index].lancamentos;
+      for (var lancamento in lancamentos) {
+        lista.add(_ItemListaOperacao(
+            tipoTED: TipoTED.fromCodigo(lancamento.evento.codigo),
+            descricao: lancamento.evento.descricao,
+            valorOperacao: lancamento.valor));
+      }
       return lista;
     }
 
@@ -116,10 +119,13 @@ class _TelaExtratoState extends State<TelaExtrato>
                                 return Column(
                                   children: [
                                     _ItemListaExtrato(
-                                      dataDia: FormatarData.formatar(extratoProvider.itensExtrato[index].dataReferencia
-                                          .toIso8601String()),
+                                      dataDia: FormatarData.formatar(
+                                          extratoProvider.itensExtrato[index]
+                                              .dataReferencia
+                                              .toIso8601String()),
                                       saldoDia: FormatarDinheiro.BR(
-                                          extratoProvider.itensExtrato[index].saldoNaData),
+                                          extratoProvider
+                                              .itensExtrato[index].saldoNaData),
                                     ),
                                     ...buildOperacoes(index)
                                   ],

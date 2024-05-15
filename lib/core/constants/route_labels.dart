@@ -70,10 +70,12 @@ static get ContaDigitalRoute => '/conta-digital';
   //ESCOPO CONTA DIGITAL ROUTE
 static get extratoScreenContaDigitalRoute => '/tela-extrato';
 static get selecionarDataScreenContaDigitalRoute => '/selecionar-data';
+static get visualizarPdfScreenContaDigitalRoute => '/visualizar-pdf';
 
 
   //ESCOPO CONTA DIGITAL NAVIGATOR ROUTE
 static get extratoScreenRoute => '$ContaDigitalRoute$extratoScreenContaDigitalRoute';
 static get selecionarDataScreenRoute => '$ContaDigitalRoute$selecionarDataScreenContaDigitalRoute';
+static get visualizarPdfScreenRoute => '$ContaDigitalRoute$visualizarPdfScreenContaDigitalRoute';
 
 }

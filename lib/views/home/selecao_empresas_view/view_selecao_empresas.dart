@@ -106,14 +106,6 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                       onTap: () async {
                         authProviderAtt.RelogarTrocarCedente(
                             _searchResults![index].identificador, context);
-                        final extratoProvider = Modular.get<ExtratoProvider>();
-                        final contaProvider =
-                            Modular.get<ContaDigitalProvider>();
-                        final dados = await ExtratoImpl.pegarExtrato(
-                            contaProvider.dadosContaDigital!.conta,
-                            FormatarData.formatar(extratoProvider.dataFinal().toIso8601String()),
-                            FormatarData.formatar(
-                                extratoProvider.dataInicial.toIso8601String()));
                       },
                       child: SizedBox(
                         height: 70.h,

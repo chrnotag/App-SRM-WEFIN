@@ -1,3 +1,6 @@
+import 'dart:typed_data';
+
+import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/implementations_config/api_response.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_impl.dart';
@@ -13,6 +16,15 @@ class ExtratoProvider extends ChangeNotifier {
 
   set extrato(ContaExtratoModel? listaExtrato) {
     _extrato = listaExtrato;
+    notifyListeners();
+  }
+
+  Uint8List? _extratoDownloadBites;
+
+  Uint8List? get extratoDownloadBites => _extratoDownloadBites;
+
+  set extratoDownloadBites(Uint8List? bites) {
+    _extratoDownloadBites = bites;
     notifyListeners();
   }
 
@@ -47,14 +59,32 @@ class ExtratoProvider extends ChangeNotifier {
 
   set extratoFuture(Future<ApiResponse<dynamic>>? extrato) {
     _extratoFuture = extrato;
-    notifyListeners();
+  }
+
+  Future<ApiResponse<dynamic>>? _downloadExtratoFuture;
+
+  Future<ApiResponse<dynamic>>? get downloadExtratoFuture =>
+      _downloadExtratoFuture;
+
+  set downloadExtratoFuture(Future<ApiResponse<dynamic>>? extrato) {
+    _downloadExtratoFuture = extrato;
   }
 
   Future<void> carregarDados() async {
     final contaDigitalProvider = Modular.get<ContaDigitalProvider>();
-    extratoFuture = ExtratoImpl.pegarExtrato(
-        contaDigitalProvider.dadosContaDigital!.conta,
-        FormatarData.formatar(dataFinal().toIso8601String()),
-        FormatarData.formatar(dataInicial.toIso8601String()));
+    extratoFuture = ExtratoImpl(tipoConsulta: TipoConsultaExtrato.VISUALIZAR)
+        .pegarExtrato(
+            contaDigitalProvider.dadosContaDigital!.conta,
+            FormatarData.formatar(dataFinal().toIso8601String()),
+            FormatarData.formatar(dataInicial.toIso8601String()));
+  }
+
+  Future<void> baixarDados() async {
+    final contaDigitalProvider = Modular.get<ContaDigitalProvider>();
+    downloadExtratoFuture =
+        ExtratoImpl(tipoConsulta: TipoConsultaExtrato.BAIXAR).pegarExtrato(
+            contaDigitalProvider.dadosContaDigital!.conta,
+            FormatarData.formatar(dataFinal().toIso8601String()),
+            FormatarData.formatar(dataInicial.toIso8601String()));
   }
 }

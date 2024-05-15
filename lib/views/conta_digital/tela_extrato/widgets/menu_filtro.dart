@@ -90,10 +90,17 @@ class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
                 ),
                 color: AppColors.azul,
               ),
-              Image.asset(
-                Assets.imagesIconePdf,
-                color: AppColors.azul,
-                scale: 0.9,
+              InkWell(
+                radius: 100.r,
+                onTap: (){
+                  Modular.to.pushNamed(AppRoutes.visualizarPdfScreenRoute);
+                  extratoProvider.baixarDados();
+                },
+                child: Image.asset(
+                  Assets.imagesIconePdf,
+                  color: AppColors.azul,
+                  scale: 0.9,
+                ),
               ),
             ],
           )
