@@ -13,19 +13,19 @@ enum TipoTED {
   Color get getCor => this.cor;
   String get getStringTED => this.stringTED;
 
-  // static TipoTED fromCodigo(String codigo) {
-  //   switch (codigo) {
-  //     case 'EFT':
-  //     case 'DEV':
-  //     case 'TEDC':
-  //       return TipoTED.RECEBIMENTO_TED;
-  //     case 'TEDD':
-  //     case 'TARTED':
-  //     case 'ENV':
-  //     case 'TID':
-  //       return TipoTED.ENVIO_TED;
-  //     default:
-  //       throw ArgumentError('Código TED inválido: $codigo');
-  //   }
-  // }
+  static TipoTED fromCodigo(String codigo) {
+    switch (codigo) {
+      case 'EFT':
+      case 'DEV':
+      case 'TEDC':
+        return TipoTED.RECEBIMENTO_TED;
+      case 'TEDD':
+      case 'TARTED':
+      case 'ENV':
+      case 'TID':
+        return TipoTED.ENVIO_TED;
+      default:
+        throw ArgumentError('Código TED inválido: $codigo');
+    }
+  }
 }

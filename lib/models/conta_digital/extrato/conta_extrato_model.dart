@@ -1,4 +1,3 @@
-import 'package:Srm_Asset/core/constants/enuns/codigos_extrato.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'conta_extrato_model.g.dart';
 
@@ -86,7 +85,7 @@ class Adicionais {
 
 @JsonSerializable()
 class Evento {
-  CodigosExtratoEnum codigo;
+  String codigo;
   String nome;
   String descricao;
   String natureza;
