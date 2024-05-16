@@ -68,14 +68,14 @@ class _TelaExtratoState extends State<TelaExtrato>
     final extratoProvider = context.watch<ExtratoProvider>();
     List<Widget> buildOperacoes(int index) {
       List<Widget> lista = [];
-      List<Lancamento> lancamentos =
-          extratoProvider.itensExtrato[index].lancamentos;
-      for (var lancamento in lancamentos) {
-        lista.add(_ItemListaOperacao(
-            tipoTED: TipoTED.fromCodigo(lancamento.evento.codigo),
-            descricao: lancamento.evento.descricao,
-            valorOperacao: lancamento.valor));
-      }
+      print('tamanho lista: ${extratoProvider.itensExtrato.length}\nindex: $index');
+      List<Lancamento> lancamentos = extratoProvider.itensExtrato[index].lancamentos;
+        for (var lancamento in lancamentos) {
+          lista.add(_ItemListaOperacao(
+              tipoTED: lancamento.evento.codigo.tipoTed,
+              descricao: lancamento.evento.descricao,
+              valorOperacao: lancamento.valor));
+        }
       return lista;
     }
 
