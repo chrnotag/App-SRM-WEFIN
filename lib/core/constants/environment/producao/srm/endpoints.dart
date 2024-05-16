@@ -1,4 +1,8 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/abstract_endpoint.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
+import '../../../../providers/conta_digital/extrato/extrato_impl.dart';
+import '../../../classes_abstratas/envirioment.dart';
 
 class EndPointsSRM extends Endpoint{
 
@@ -67,5 +71,18 @@ class EndPointsSRM extends Endpoint{
   @override
   // TODO: implement saldoContaDigital
   String get saldoContaDigital => "$contaDigital/saldo";
+
+  @override
+  String get extratoContaDigital => "$contaDigital/extrato";
+
+  @override
+  String get downloadExtratoContaDigital => "$extratoContaDigital/download";
+
+
+  @override
+  Uri montarUrlPegarExtrato(String numeroConta, String dataInicial, String dataFinal, TipoConsultaExtrato tipoConsulta) {
+    final ambiente = Modular.get<Environment>();
+    return Uri.parse("${TipoConsultaExtrato.retornarEndpoint(tipoConsulta, ambiente)}?numeroContaTitular=$numeroConta&dataInicialExtrato=$dataInicial&dataFinalExtrato=$dataFinal");
+  }
 
   }

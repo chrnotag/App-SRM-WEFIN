@@ -1,5 +1,6 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
+import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/tabbar_meses_provider.dart';
 import 'package:Srm_Asset/modules/conta_digital_module.dart';
 import 'package:Srm_Asset/modules/sem_conexao_module.dart';
@@ -40,6 +41,7 @@ class AppModule extends Module {
     i.addSingleton(BaixarDocumentosProvider.new);
     i.addSingleton(ContaDigitalProvider.new);
     i.addSingleton(TabMesesProvider.new);
+    i.addSingleton(ExtratoProvider.new);
     i.addInstance(environment);
   }
 

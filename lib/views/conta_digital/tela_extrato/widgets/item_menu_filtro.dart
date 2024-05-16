@@ -2,12 +2,12 @@ part of '../tela_extrato.dart';
 
 class _ItemMenuFiltro extends StatefulWidget {
   final int quantidadeDias;
-  const _ItemMenuFiltro({super.key, required this.quantidadeDias});
+  final Map<String, Color> corSelecionado;
+  const _ItemMenuFiltro({super.key, required this.quantidadeDias, required this.corSelecionado});
 
   @override
   State<_ItemMenuFiltro> createState() => _ItemMenuFiltroState();
 }
-
 class _ItemMenuFiltroState extends State<_ItemMenuFiltro> {
   @override
   Widget build(BuildContext context) {
@@ -18,9 +18,13 @@ class _ItemMenuFiltroState extends State<_ItemMenuFiltro> {
           borderRadius: BorderRadius.all(
             Radius.circular(12.r),
           ),
-          border: Border.all(color: Colors.black)
-      ),
-      child: Center(child: Text('${widget.quantidadeDias} dias', style: context.textTheme.bodyMedium,)),
+          border: Border.all(color: widget.corSelecionado['borda']!),
+          color: widget.corSelecionado['fundo']),
+      child: Center(
+          child: Text(
+        '${widget.quantidadeDias} dias',
+        style: context.textTheme.bodyMedium!.copyWith(color: widget.corSelecionado['texto']),
+      )),
     );
   }
 }
