@@ -69,7 +69,7 @@ class _TelaExtratoState extends State<TelaExtrato>
       List<Lancamento> lancamentos = extratoProvider.itensExtrato[index].lancamentos;
         for (var lancamento in lancamentos) {
           lista.add(_ItemListaOperacao(
-              tipoTED: TipoTED.fromCodigo(lancamento.evento.codigo),
+              tipoTED: lancamento.evento.codigo.tipoTed,
               descricao: lancamento.evento.descricao,
               valorOperacao: lancamento.valor));
         }

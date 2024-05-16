@@ -81,7 +81,7 @@ Map<String, dynamic> _$AdicionaisToJson(Adicionais instance) =>
     };
 
 Evento _$EventoFromJson(Map<String, dynamic> json) => Evento(
-      codigo: json['codigo'] as String,
+      codigo: json['codigo'] as CodigosExtratoEnum,
       nome: json['nome'] as String,
       descricao: json['descricao'] as String,
       natureza: json['natureza'] as String,
