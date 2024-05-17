@@ -85,4 +85,11 @@ class EndPointsSRM extends Endpoint{
     return Uri.parse("${TipoConsultaExtrato.retornarEndpoint(tipoConsulta, ambiente)}?numeroContaTitular=$numeroConta&dataInicialExtrato=$dataInicial&dataFinalExtrato=$dataFinal");
   }
 
+  @override
+  String get transacoes => '$baseURL/transacao';
+
+  @override
+  Uri montarUrlDownloadComprovanteTED(String codigoTransacao){
+    return Uri.parse('$transacoes/comprovante/download?codigoTransacao=$codigoTransacao');
+  }
   }

@@ -16,8 +16,6 @@ class LoginResponse {
     required this.dataExpiraSessao,
     required this.idDevice,
     required this.listaCedente,
-    required this.urlTermoUso,
-    required this.urlPoliticaPrivacidade,
   });
 
   late final String nome;
@@ -29,8 +27,6 @@ class LoginResponse {
   late final DateTime dataExpiraSessao;
   late final String idDevice;
   late final List<CedenteModel> listaCedente;
-  late final String urlTermoUso;
-  late final String urlPoliticaPrivacidade;
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) =>
       _$LoginResponseFromJson(json);

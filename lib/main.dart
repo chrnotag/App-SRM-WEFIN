@@ -6,6 +6,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/constants/classes_abstratas/envirioment.dart';
 import 'flavors.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'modules/app_module.dart';
 
 final GlobalKey<NavigatorState> myNavigatorKey = GlobalKey<NavigatorState>();
@@ -13,14 +14,16 @@ final GlobalKey<NavigatorState> myNavigatorKey = GlobalKey<NavigatorState>();
 FutureOr<void> main() async {
   Environment environment = F.appFlavor?.getEnvironment ?? SrmHomologacaoEnvironment();
   Modular.setNavigatorKey(myNavigatorKey);
-  runApp(
-    ScreenUtilInit(
-      designSize: const Size(430, 932),
-      builder: (context, child) => ModularApp(
-        module: AppModule(environment),
-        child: const AppWidget(),
+  initializeDateFormatting('pt_BR', null).then((_) {
+    runApp(
+      ScreenUtilInit(
+        designSize: const Size(430, 932),
+        builder: (context, child) => ModularApp(
+          module: AppModule(environment),
+          child: const AppWidget(),
+        ),
       ),
-    ),
-  );
+    );
+  });
 
 }

@@ -4,17 +4,22 @@ class _ItemListaOperacao extends StatelessWidget {
   final TipoTED tipoTED;
   final String descricao;
   final double valorOperacao;
+  final String codigoTransacao;
+  final String dataComprovante;
 
   const _ItemListaOperacao({
     super.key,
     required this.tipoTED,
     required this.descricao,
     required this.valorOperacao,
+    required this.codigoTransacao,
+    required this.dataComprovante,
   });
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: () => Modular.to.pushNamed(AppRoutes.visualizarComprovanteTEDScreenRoute + '/$codigoTransacao' + '/$dataComprovante'),
       title: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

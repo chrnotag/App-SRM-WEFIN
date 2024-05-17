@@ -127,9 +127,12 @@ SRM_HOMOLOGACAO() {
     dart run flutter_native_splash:create --path=configuracao_icone_splash_srm.yaml
 
     if [ "$build_option" == "1" ]; then
+        flutter pub run  rename setAppName --targets android --value "SRM"
         flutter build apk --flavor SRM_HOMOLOGACAO -t lib/main_SRM_HOMOLOGACAO.dart
     else
-        flutter build ios --flavor SRM_HOMOLOGACAO -t lib/main_SRM_HOMOLOGACAO.dart
+        flutter pub run  rename setAppName --targets ios --value "SRM"
+        flutter pub run  rename setBundleId --targets ios --value "com.srm.appsrm"
+        flutter build ipa --flavor SRM_HOMOLOGACAO -t lib/main_SRM_HOMOLOGACAO.dart
     fi
     end
 }
@@ -139,9 +142,12 @@ SRM_PRODUCAO() {
     dart run flutter_native_splash:create --path=configuracao_icone_splash_srm.yaml
 
     if [ "$build_option" == "1" ]; then
+        flutter pub run  rename setAppName --targets android --value "SRM"
         flutter build apk --flavor SRM -t lib/main_SRM.dart
     else
-        flutter build ios --flavor SRM -t lib/main_SRM.dart
+        flutter pub run  rename setAppName --targets ios --value "SRM"
+        flutter pub run  rename setBundleId --targets ios --value "com.srm.appsrm"
+        flutter build ipa --flavor SRM -t lib/main_SRM.dart
     fi
     end
 }
@@ -151,9 +157,12 @@ TRUST_HOMOLOGACAO() {
     dart run flutter_native_splash:create --path=configuracao_icone_splash_trust.yaml
 
     if [ "$build_option" == "1" ]; then
+        flutter pub run  rename setAppName --targets android --value "TRUST"
         flutter build apk --flavor TRUST_HOMOLOGACAO -t lib/main_TRUST_HOMOLOGACAO.dart
     else
-        flutter build ios --flavor TRUST_HOMOLOGACAO -t lib/main_TRUST_HOMOLOGACAO.dart
+        flutter pub run  rename setAppName --targets ios --value "TRUST"
+        flutter pub run  rename setBundleId --targets ios --value "com.app.apptrust"
+        flutter build ipa --flavor TRUST_HOMOLOGACAO -t lib/main_TRUST_HOMOLOGACAO.dart
     fi
     end
 }
@@ -163,9 +172,12 @@ TRUST_PRODUCAO() {
     dart run flutter_native_splash:create --path=configuracao_icone_splash_trust.yaml
 
     if [ "$build_option" == "1" ]; then
+        flutter pub run  rename setAppName --targets android --value "TRUST"
         flutter build apk --flavor TRUST -t lib/main_TRUST.dart
     else
-        flutter build ios --flavor TRUST -t lib/main_TRUST.dart
+        flutter pub run  rename setAppName --targets ios --value "TRUST"
+        flutter pub run  rename setBundleId --targets ios --value "com.app.apptrust"
+        flutter build ipa --flavor TRUST -t lib/main_TRUST.dart
     fi
     end
 }

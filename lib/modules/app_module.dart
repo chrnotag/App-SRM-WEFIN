@@ -1,4 +1,5 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
+import 'package:Srm_Asset/core/providers/conta_digital/comprovante_ted/comprovante_ted_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/tabbar_meses_provider.dart';
@@ -42,6 +43,7 @@ class AppModule extends Module {
     i.addSingleton(ContaDigitalProvider.new);
     i.addSingleton(TabMesesProvider.new);
     i.addSingleton(ExtratoProvider.new);
+    i.addSingleton(ComprovanteTEDProvider.new);
     i.addInstance(environment);
   }
 

@@ -65,17 +65,27 @@ class AppRoutes {
   static get semConexaoRoute => '$semConexaoMainRoute/sem-conexao';
 
   //CONTA DIGITAL ROUTE
-static get ContaDigitalRoute => '/conta-digital';
+  static get ContaDigitalRoute => '/conta-digital';
 
   //ESCOPO CONTA DIGITAL ROUTE
-static get extratoScreenContaDigitalRoute => '/tela-extrato';
-static get selecionarDataScreenContaDigitalRoute => '/selecionar-data';
-static get visualizarPdfScreenContaDigitalRoute => '/visualizar-pdf';
+  static get extratoScreenContaDigitalRoute => '/tela-extrato';
 
+  static get selecionarDataScreenContaDigitalRoute => '/selecionar-data';
+
+  static get visualizarPdfScreenContaDigitalRoute => '/visualizar-pdf';
+
+  static get comprovanteTEDScreenContaDigitalRoute => '/comprovante-ted/:codigoTransacao/:dataComprovante';
 
   //ESCOPO CONTA DIGITAL NAVIGATOR ROUTE
-static get extratoScreenRoute => '$ContaDigitalRoute$extratoScreenContaDigitalRoute';
-static get selecionarDataScreenRoute => '$ContaDigitalRoute$selecionarDataScreenContaDigitalRoute';
-static get visualizarPdfScreenRoute => '$ContaDigitalRoute$visualizarPdfScreenContaDigitalRoute';
+  static get extratoScreenRoute =>
+      '$ContaDigitalRoute$extratoScreenContaDigitalRoute';
 
+  static get selecionarDataScreenRoute =>
+      '$ContaDigitalRoute$selecionarDataScreenContaDigitalRoute';
+
+  static get visualizarPdfScreenRoute =>
+      '$ContaDigitalRoute$visualizarPdfScreenContaDigitalRoute';
+
+  static get visualizarComprovanteTEDScreenRoute =>
+      '$ContaDigitalRoute$comprovanteTEDScreenContaDigitalRoute';
 }
