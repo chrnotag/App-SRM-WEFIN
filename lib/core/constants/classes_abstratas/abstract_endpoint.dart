@@ -20,4 +20,6 @@ abstract class Endpoint{
   String get extratoContaDigital;
   String get downloadExtratoContaDigital;
   Uri montarUrlPegarExtrato(String numeroConta, String dataInicial, String dataFinal, TipoConsultaExtrato tipoConsulta);
+  String get transacoes;
+  Uri montarUrlDownloadComprovanteTED(String codigoTransacao);
 }

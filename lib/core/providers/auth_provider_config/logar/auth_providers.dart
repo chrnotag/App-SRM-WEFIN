@@ -87,8 +87,8 @@ class AuthProvider extends ChangeNotifier {
           } catch (_) {
           }
           final contaDigitalProvider = Modular.get<ContaDigitalProvider>();
-          contaDigitalProvider.obterDadosContaDigital();
-          contaDigitalProvider.obterSaldoContaDigital();
+          await contaDigitalProvider.obterDadosContaDigital();
+          await contaDigitalProvider.obterSaldoContaDigital();
           Modular.to.navigate(AppRoutes.homeAppRoute);
         }
       }

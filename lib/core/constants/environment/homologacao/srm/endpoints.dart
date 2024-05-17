@@ -3,8 +3,7 @@ import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_impl.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class EndPointsSRM extends Endpoint{
-
+class EndPointsSRM extends Endpoint {
   @override
   // TODO: implement assinatura
   String get assinaturas => '$baseURL/assinaturas';
@@ -15,7 +14,8 @@ class EndPointsSRM extends Endpoint{
 
   @override
   // TODO: implement baseURL
-  String get baseURL => 'https://core-app-bff-homologacao.srmasset.com/core-app-bff/v1';
+  String get baseURL =>
+      'https://core-app-bff-homologacao.srmasset.com/core-app-bff/v1';
 
   @override
   // TODO: implement finalizarAssinatura
@@ -23,7 +23,8 @@ class EndPointsSRM extends Endpoint{
 
   @override
   // TODO: implement finalizarAssinaturaEletronica
-  String get finalizarAssinaturaEletronica => "$assinaturas/finalizar-assinatura-eletronica";
+  String get finalizarAssinaturaEletronica =>
+      "$assinaturas/finalizar-assinatura-eletronica";
 
   @override
   // TODO: implement iniciarAssinatura
@@ -31,7 +32,8 @@ class EndPointsSRM extends Endpoint{
 
   @override
   // TODO: implement iniciarAssinaturaEletronica
-  String get iniciarAssinaturaEletronica => "$assinaturas/iniciar-assinatura-eletronica";
+  String get iniciarAssinaturaEletronica =>
+      "$assinaturas/iniciar-assinatura-eletronica";
 
   @override
   // TODO: implement login
@@ -39,8 +41,8 @@ class EndPointsSRM extends Endpoint{
 
   @override
   Uri montarUrlBaixarDocumento(int idAssinaturaDigital, bool visualizar) {
-        return Uri.parse(
-            "$assinaturas/$idAssinaturaDigital/arquivo?visualizar=$visualizar");
+    return Uri.parse(
+        "$assinaturas/$idAssinaturaDigital/arquivo?visualizar=$visualizar");
   }
 
   @override
@@ -49,7 +51,8 @@ class EndPointsSRM extends Endpoint{
 
   @override
   // TODO: implement politicaPrivacidade
-  String get politicaPrivacidade => "https://srmasset.com/app/SRM_Politica-de-Privacidade-e-Tratamento-de-Dados-Pessoais.html";
+  String get politicaPrivacidade =>
+      "https://srmasset.com/app/SRM_Politica-de-Privacidade-e-Tratamento-de-Dados-Pessoais.html";
 
   @override
   // TODO: implement recuperarSenha
@@ -57,11 +60,13 @@ class EndPointsSRM extends Endpoint{
 
   @override
   // TODO: implement siteQrCode
-  String get siteQrCode => "https://srm-web-homebanking-homologacao.interno.srmasset.com/envio-certificado";
+  String get siteQrCode =>
+      "https://srm-web-homebanking-homologacao.interno.srmasset.com/envio-certificado";
 
   @override
   // TODO: implement termosDeUso
-  String get termosDeUso => "https://www.srmasset.com/app/SRM_-_Termos_e_Condicoes_de_Uso.html";
+  String get termosDeUso =>
+      "https://www.srmasset.com/app/SRM_-_Termos_e_Condicoes_de_Uso.html";
 
   @override
   // TODO: implement contaDigital
@@ -78,9 +83,18 @@ class EndPointsSRM extends Endpoint{
   String get downloadExtratoContaDigital => "$extratoContaDigital/download";
 
   @override
-  Uri montarUrlPegarExtrato(String numeroConta, String dataInicial, String dataFinal, TipoConsultaExtrato tipoConsulta) {
+  Uri montarUrlPegarExtrato(String numeroConta, String dataInicial,
+      String dataFinal, TipoConsultaExtrato tipoConsulta) {
     final ambiente = Modular.get<Environment>();
-    return Uri.parse("${TipoConsultaExtrato.retornarEndpoint(tipoConsulta, ambiente)}?numeroContaTitular=$numeroConta&dataInicialExtrato=$dataInicial&dataFinalExtrato=$dataFinal");
+    return Uri.parse(
+        "${TipoConsultaExtrato.retornarEndpoint(tipoConsulta, ambiente)}?numeroContaTitular=$numeroConta&dataInicialExtrato=$dataInicial&dataFinalExtrato=$dataFinal");
   }
 
+  @override
+  String get transacoes => '$baseURL/transacao';
+
+  @override
+  Uri montarUrlDownloadComprovanteTED(String codigoTransacao){
+    return Uri.parse('$transacoes/comprovante/download?codigoTransacao=$codigoTransacao');
+  }
 }
