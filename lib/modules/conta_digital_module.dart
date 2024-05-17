@@ -18,7 +18,7 @@ class ContaDigitalModule extends Module {
     r.child(
         AppRoutes.visualizarPdfScreenContaDigitalRoute, child: (context) => const TelaVisualizarPdfExtrato());
     r.child(
-        AppRoutes.comprovanteTEDScreenContaDigitalRoute + "/:codigoTransacao" + "/:dataComprovante",
+        AppRoutes.comprovanteTEDScreenContaDigitalRoute,
         child: (context) => ComprovanteTed(
               codigoTransacao: r.args.params['codigoTransacao'],
             dataComprovante: r.args.params['dataComprovante'],

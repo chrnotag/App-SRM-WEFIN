@@ -19,8 +19,6 @@ LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) =>
       listaCedente: (json['listaCedente'] as List<dynamic>)
           .map((e) => CedenteModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      urlTermoUso: json['urlTermoUso'] as String,
-      urlPoliticaPrivacidade: json['urlPoliticaPrivacidade'] as String,
     );
 
 Map<String, dynamic> _$LoginResponseToJson(LoginResponse instance) =>
@@ -34,6 +32,4 @@ Map<String, dynamic> _$LoginResponseToJson(LoginResponse instance) =>
       'dataExpiraSessao': instance.dataExpiraSessao.toIso8601String(),
       'idDevice': instance.idDevice,
       'listaCedente': instance.listaCedente,
-      'urlTermoUso': instance.urlTermoUso,
-      'urlPoliticaPrivacidade': instance.urlPoliticaPrivacidade,
     };

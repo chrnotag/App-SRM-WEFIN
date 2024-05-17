@@ -36,7 +36,7 @@ class _ComprovanteTedState extends State<ComprovanteTed> {
 
   String montarNomeDocumento() {
     DateTime dataComprovante = DateTime.parse(widget.dataComprovante);
-    DateFormat format = DateFormat('dd-MM-yyyy_HH:mm');
+    DateFormat format = DateFormat('dd-MM-yyyy_HH-mm');
     String dataDocumento = format.format(dataComprovante);
     return 'comprovante_ted_$dataDocumento';
   }
