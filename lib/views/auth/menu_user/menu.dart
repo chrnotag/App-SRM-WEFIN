@@ -11,9 +11,7 @@ import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/deslogar/deslogar_controller.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:Srm_Asset/generated/assets.dart';
-import 'package:Srm_Asset/widgets/appbar_logo_perfil.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
-import '../../../core/constants/tema_configs.dart';
 
 part 'widgets/menu_item.dart';
 
@@ -34,12 +32,12 @@ class Menu extends StatelessWidget {
           
           children: [
             Text('Meu Perfil',
-                style: context.textTheme.bodyLarge!.copyWith(color: context.inverseSurface)),
+                style: context.textTheme.bodyLarge!.copyWith(color: context.inverseSurfaceColor)),
             Padding(
               padding: EdgeInsets.only(bottom: 15.h),
               child: Text('Visualize seus dados e tire suas dúvidas',
                   style: context.textTheme.bodyMedium!.copyWith(
-                    color: context.inverseSurface)),
+                    color: context.inverseSurfaceColor)),
             ),
             Expanded(
               child: Card(

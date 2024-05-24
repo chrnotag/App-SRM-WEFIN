@@ -33,12 +33,12 @@ class PaginaQrCodeCarrossel {
               TextSpan(
                 text: 'Acesse ',
                 style: context.textTheme.bodyMedium!
-                    .copyWith(color: context.onSecondary),
+                    .copyWith(color: context.onSecondaryColor),
               ),
               TextSpan(
                   text: 'nosso site',
                   style: context.textTheme.bodyMedium!.copyWith(
-                      color: context.onSecondary,
+                      color: context.onSecondaryColor,
                       decoration: TextDecoration.underline,
                       decorationColor: Colors.white,
                       fontWeight: FontWeight.w900),
@@ -51,7 +51,7 @@ class PaginaQrCodeCarrossel {
                 text:
                     ' no seu computador e faça o upload do seu certificado digital. Após o upload, um QR Code será gerado na tela para importação no aplicativo.',
                 style: context.textTheme.bodyMedium!
-                    .copyWith(color: context.onSecondary),
+                    .copyWith(color: context.onSecondaryColor),
               ),
             ]),
             textAlign: TextAlign.center,

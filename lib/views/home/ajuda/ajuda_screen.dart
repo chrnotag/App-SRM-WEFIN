@@ -29,14 +29,14 @@ class Ajuda extends StatelessWidget {
               child: Text(
                 'Precisa de ajuda?',
                 style: context.textTheme.bodyLarge!
-                    .copyWith(color: context.inverseSurface),
+                    .copyWith(color: context.inverseSurfaceColor),
               ),
             ),
             Text(
               'Pode contar conosco através de um dos nossos canais de atendimento:',
               textAlign: TextAlign.center,
               style: context.textTheme.bodyMedium!
-                  .copyWith(color: context.inverseSurface),
+                  .copyWith(color: context.inverseSurfaceColor),
               softWrap: true,
             ),
             Padding(
@@ -49,13 +49,13 @@ class Ajuda extends StatelessWidget {
                         TextSpan(
                             text: 'Telefone: ',
                             style: context.textTheme.bodyMedium!
-                                .copyWith(color: context.inverseSurface)),
+                                .copyWith(color: context.inverseSurfaceColor)),
                         TextSpan(
                           text: ambiente.contatos.telefone,
                           style: context.textTheme.bodyMedium!.copyWith(
-                              color: context.inverseSurface,
+                              color: context.inverseSurfaceColor,
                               decoration: TextDecoration.underline,
-                              decorationColor: context.inverseSurface,
+                              decorationColor: context.inverseSurfaceColor,
                               fontWeight: FontWeight.bold),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () async {
@@ -80,17 +80,17 @@ class Ajuda extends StatelessWidget {
                           TextSpan(
                             text: 'E-mail: ',
                             style: context.textTheme.bodyMedium!.copyWith(
-                              color: context.inverseSurface,
+                              color: context.inverseSurfaceColor,
                             ),
                           ),
                           TextSpan(
                             text:
                               ambiente.contatos.email,
                             style: context.textTheme.bodyMedium!.copyWith(
-                              color: context.inverseSurface,
+                              color: context.inverseSurfaceColor,
                               fontWeight: FontWeight.bold,
                               decoration: TextDecoration.underline,
-                              decorationColor: context.inverseSurface,
+                              decorationColor: context.inverseSurfaceColor,
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () async {
@@ -113,14 +113,14 @@ class Ajuda extends StatelessWidget {
                         TextSpan(
                             text: 'Politica de privacidade:',
                             style: context.textTheme.bodyMedium!.copyWith(
-                              color: context.inverseSurface,
+                              color: context.inverseSurfaceColor,
                             )),
                         TextSpan(
                           text: 'Toque aqui',
                           style: context.textTheme.bodyMedium!.copyWith(
-                              color: context.inverseSurface,
+                              color: context.inverseSurfaceColor,
                               decoration: TextDecoration.underline,
-                              decorationColor: context.inverseSurface,
+                              decorationColor: context.inverseSurfaceColor,
                               fontWeight: FontWeight.bold),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () async {

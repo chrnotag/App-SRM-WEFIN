@@ -18,7 +18,6 @@ import 'package:Srm_Asset/widgets/appbar_logo_perfil.dart';
 import '../../../core/constants/tema_configs.dart';
 import '../../../core/implementations_config/api_response.dart';
 import '../../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
-
 part 'widgets/card_item_menu.dart';
 
 class HomeView extends StatefulWidget {
@@ -71,7 +70,7 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       bottomNavigationBar: SafeArea(
         child: BottomNavigationBar(
-          backgroundColor: Colors.white,
+          backgroundColor: context.backgroundColor,
           elevation: 0,
           onTap: (value) {
             setState(() {
@@ -79,7 +78,7 @@ class _HomeViewState extends State<HomeView> {
             });
           },
           currentIndex: _index,
-          selectedItemColor: AppColors.azul,
+          selectedItemColor: context.secondaryColor,
           type: BottomNavigationBarType.fixed,
           items: [
             BottomNavigationBarItem(
@@ -136,7 +135,6 @@ class _HomeViewState extends State<HomeView> {
           ],
         ),
       ),
-      backgroundColor: AppColors.brancoGelo,
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,
         child: AppBarLogo(),
@@ -150,7 +148,7 @@ class _HomeViewState extends State<HomeView> {
             child: Container(
               height: context.height * 0.22,
               decoration: BoxDecoration(
-                  color: AppColors.azul,
+                  color: context.secondaryColor,
                   borderRadius:
                       BorderRadius.vertical(bottom: Radius.circular(12))),
             ),

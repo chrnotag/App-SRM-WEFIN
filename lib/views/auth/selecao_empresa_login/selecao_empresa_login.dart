@@ -1,10 +1,10 @@
+import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/generated/assets.dart';
-import '../../../core/constants/tema_configs.dart';
 import '../../../core/providers/auth_provider_config/logar/auth_providers.dart';
 import '../../../core/providers/sessao_provider.dart';
 import '../../../core/constants/AppSizes.dart';
@@ -52,7 +52,7 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
                         'Seja bem-vindo\nao seu app de gestão',
                         textAlign: TextAlign.center,
                         style: context.textTheme.bodyLarge!
-                            .copyWith(color: AppColors.labelText),
+                            .copyWith(color: context.labelTextColor),
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: AppSizes.paddingExtraLarge.h),
@@ -60,7 +60,7 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
                           'Em qual empresa deseja entrar?',
                           style: context.textTheme.bodyMedium!.copyWith(
                               fontWeight: FontWeight.bold,
-                              color: AppColors.labelText),
+                              color: context.labelTextColor),
                         ),
                       ),
                       Column(
@@ -78,7 +78,7 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
                                 Image.asset(
                                   Assets.logoSRM,
                                   width: 150.w,
-                                  color: AppColors.azul,
+                                  color: SRMColors.secondaryColor,
                                 ),
                                 Text(
                                   'CAPITAL EM MOVIMENTO',
@@ -97,7 +97,7 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
                             child: Text(
                               'ou',
                               style: context.textTheme.bodyMedium!
-                                  .copyWith(color: AppColors.azul),
+                                  .copyWith(color: SRMColors.secondaryColor),
                             ),
                           ),
                           InkWell(

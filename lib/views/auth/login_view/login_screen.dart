@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 title: Image.asset(
                   ambiente.logo,
                   width: 80.w,
-                  color: context.secondary,
+                  color: context.secondaryColor,
                   fit: BoxFit.fill,
                 ),
                 centerTitle: true,

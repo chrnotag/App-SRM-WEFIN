@@ -46,7 +46,7 @@ class _SemConexaoScreenState extends State<SemConexaoScreen> {
               shadowColor: Colors.transparent,
             ),
             Image.asset(Assets.imagesNoNetwork,
-                scale: 3.r, color: context.onSecondary),
+                scale: 3.r, color: context.onSecondaryColor),
             Column(
               children: [
                 Padding(
@@ -54,7 +54,7 @@ class _SemConexaoScreenState extends State<SemConexaoScreen> {
                   child: Text(
                     'Sem conexão com a internet',
                     style: context.textTheme.displayMedium!
-                        .copyWith(color: context.inverseSurface),
+                        .copyWith(color: context.inverseSurfaceColor),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -63,7 +63,7 @@ class _SemConexaoScreenState extends State<SemConexaoScreen> {
                   child: Text(
                     'Verifique sua conexão e tente novamente',
                     style: context.textTheme.displaySmall!
-                        .copyWith(color: context.inverseSurface),
+                        .copyWith(color: context.inverseSurfaceColor),
                     textAlign: TextAlign.center,
                   ),
                 ),

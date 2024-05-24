@@ -13,7 +13,11 @@ class _ItemListaExtrato extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(FormatarData.formatarExtenso(DateTime.parse(dataDia)), style: context.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w900, color: AppColors.labelText),),
+      title: Text(
+        FormatarData.formatarExtenso(DateTime.parse(dataDia)),
+        style: context.textTheme.bodyLarge!.copyWith(
+            fontWeight: FontWeight.w900, color: context.labelTextColor),
+      ),
       subtitle: Column(
         children: [
           Row(
@@ -23,18 +27,17 @@ class _ItemListaExtrato extends StatelessWidget {
               Container(
                   padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(5.r),
-                    ),
-                    color: Colors.grey.shade300
-                  ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(5.r),
+                      ),
+                      color: Colors.grey.shade300),
                   child: Text(
                     saldoDia,
                     style: TextStyle(color: Colors.black),
                   )),
             ],
           ),
-          Divider(color: AppColors.labelText, thickness: 0.2)
+          Divider(color: context.labelTextColor, thickness: 0.2)
         ],
       ),
     );

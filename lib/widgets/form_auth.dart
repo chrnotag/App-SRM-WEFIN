@@ -153,7 +153,7 @@ class _AuthFormState extends State<AuthForm> {
                               Visibility(
                                 visible: widget.visible,
                                 child: LinkComponent(
-                                  style: context.textTheme.bodyMedium!.copyWith(color: context.secondary, fontWeight: FontWeight.bold),
+                                  style: context.textTheme.bodyMedium!.copyWith(color: context.secondaryColor, fontWeight: FontWeight.bold),
                                   label: 'Esqueci minha senha!',
                                   route: AppRoutes.forgetPassAuthRoute,
                                 ),
@@ -191,13 +191,13 @@ class _AuthFormState extends State<AuthForm> {
                     TextSpan(
                         text: 'Ao continuar concordo com os ',
                         style: context.textTheme.bodySmall!
-                            .copyWith(color: context.secondary)),
+                            .copyWith(color: context.secondaryColor)),
                     TextSpan(
                         text: 'Termos e Condições de uso ',
                         style: context.textTheme.bodySmall!.copyWith(
-                            color: context.secondary,
+                            color: context.secondaryColor,
                             decoration: TextDecoration.underline,
-                            decorationColor: context.inverseSurface,
+                            decorationColor: context.inverseSurfaceColor,
                             fontWeight: FontWeight.w600),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () async {
@@ -207,13 +207,13 @@ class _AuthFormState extends State<AuthForm> {
                     TextSpan(
                         text: 'e tenho ciência da ',
                         style: context.textTheme.bodySmall!
-                            .copyWith(color: context.secondary)),
+                            .copyWith(color: context.secondaryColor)),
                     TextSpan(
                         text: 'Declaração de Política de Privacidade.',
                         style: context.textTheme.bodySmall!.copyWith(
-                            color: context.secondary,
+                            color: context.secondaryColor,
                             decoration: TextDecoration.underline,
-                            decorationColor: context.inverseSurface,
+                            decorationColor: context.inverseSurfaceColor,
                             fontWeight: FontWeight.w600),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () async {

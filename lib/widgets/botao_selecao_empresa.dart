@@ -34,14 +34,14 @@ class SelecaoEmpresa extends StatelessWidget {
           child: Text(
             tituloPagina,
             style: context.textTheme.bodyLarge!.copyWith(
-                color:  context.surface, fontWeight: FontWeight.w100),
+                color:  context.surfaceColor, fontWeight: FontWeight.w100),
           ),
         ),
         SizedBox(height: 8.h),
         Container(
           decoration: BoxDecoration(
               border: Border.all(
-                  color: context.onSecondary, width: 0.5.w, strokeAlign: 1),
+                  color: context.onSecondaryColor, width: 0.5.w, strokeAlign: 1),
               borderRadius: BorderRadius.circular(30.r)),
           child: InkWell(
             onTap: changeble && authProvider.listaCedente!.length > 1
@@ -61,7 +61,7 @@ class SelecaoEmpresa extends StatelessWidget {
                     child: Text(
                       nomeEmpresa ?? "Nenhuma Empresa Selecionada",
                       style: context.textTheme.displaySmall!
-                          .copyWith(color: context.inverseSurface, fontWeight: FontWeight.w300),
+                          .copyWith(color: context.inverseSurfaceColor, fontWeight: FontWeight.w300),
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
 
@@ -73,7 +73,7 @@ class SelecaoEmpresa extends StatelessWidget {
                         padding: EdgeInsets.only(right: 8.w),
                         child: Icon(
                           LineIcons.alternateExchange,
-                          color: context.onSecondary,
+                          color: context.onSecondaryColor,
                           size: 22.w,
                         )),
                   ),

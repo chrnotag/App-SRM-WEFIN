@@ -13,10 +13,6 @@ abstract class Environment {
   Plataforma get plataforma;
   Widget get imagemAjuda;
   ContatosAbstract get contatos;
-  Color get brancoOuVerde;
-  Color get azulOuPreto;
-  Color get verdeOuCinza;
-  Color get laranjaOuCinza;
   Color? get IconColor;
   Color? get corQuadradoLogin;
   Color? get corTextoSlogan;

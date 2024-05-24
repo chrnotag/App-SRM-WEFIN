@@ -10,7 +10,7 @@ class TransparentAppBarEmpty extends StatelessWidget {
     return AppBar(
       backgroundColor: Colors.transparent,
       shadowColor: Colors.transparent,
-      iconTheme: IconThemeData(color: context.onSecondary, size: 25.r),
+      iconTheme: IconThemeData(color: context.onSecondaryColor, size: 25.r),
     );
   }
 }

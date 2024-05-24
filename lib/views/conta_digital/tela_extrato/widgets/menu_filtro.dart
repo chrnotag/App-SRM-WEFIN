@@ -12,8 +12,8 @@ class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
   Map<String, Color> corSelecionado(int indicie) {
     if(filtroSelecionado == indicie){
       return {
-        'borda': AppColors.azul,
-        'fundo': AppColors.azulPrimarioSRM,
+        'borda': SRMColors.secondaryColor,
+        'fundo': SRMColors.secondaryColor,
         'texto': Colors.white,
       };
     }else{

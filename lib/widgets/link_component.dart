@@ -16,7 +16,7 @@ class LinkComponent extends StatelessWidget {
       },
       child: Text(
         label,
-        style: style ?? context.textTheme.bodySmall!.copyWith(color: context.secondary, fontWeight: FontWeight.bold),
+        style: style ?? context.textTheme.bodySmall!.copyWith(color: context.secondaryColor, fontWeight: FontWeight.bold),
       ),
     );
   }

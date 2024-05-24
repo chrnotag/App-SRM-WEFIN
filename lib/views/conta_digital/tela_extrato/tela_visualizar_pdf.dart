@@ -1,5 +1,5 @@
+import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
-import 'package:Srm_Asset/core/constants/tema_configs.dart';
 import 'package:Srm_Asset/core/implementations_config/export_impl.dart';
 import 'package:Srm_Asset/core/utils/pdf_manager.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +32,7 @@ class _TelaVisualizarPdfExtratoState extends State<TelaVisualizarPdfExtrato> {
     return Scaffold(
       backgroundColor: Color(0xffd6d6d6),
       appBar: AppBar(
-        backgroundColor: AppColors.azul,
+        backgroundColor: SRMColors.secondaryColor,
         shadowColor: Colors.transparent,
         centerTitle: true,
         title: Text('Extrato', style: TextStyle(color: Colors.white),),
@@ -46,7 +46,7 @@ class _TelaVisualizarPdfExtratoState extends State<TelaVisualizarPdfExtrato> {
           PDFUtils.sharePDF(extratoProvider.extratoDownloadBites!, name);
         },
         child: Icon(Icons.share, color: Colors.white),
-        backgroundColor: AppColors.azul,
+        backgroundColor: SRMColors.secondaryColor,
       ),
       body: FutureBuilder(
           future: extratoProvider.downloadExtratoFuture,

@@ -1,9 +1,10 @@
+import 'package:Srm_Asset/core/constants/configs_tema/srm/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import '../../../../../generated/assets.dart';
 import '../AppSizes.dart';
-import '../tema_configs.dart';
+import '../configs_tema/export_config_theme_srm.dart';
 
 class ThemeSRM {
   ThemeSRM._();
@@ -15,7 +16,7 @@ class ThemeSRM {
   }
 
   static ThemeData get theme => ThemeData(
-    focusColor: AppColors.laranjaSRM,
+    focusColor: SRMColors.focusColor,
     searchBarTheme: SearchBarThemeData(
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             const RoundedRectangleBorder(
@@ -26,7 +27,7 @@ class ThemeSRM {
         hintStyle: MaterialStateProperty.all<TextStyle>(
             GoogleFonts.montserrat(
                 fontSize: AppSizes().bodyLarge,
-                color: AppColors.labelText)),
+                color: SRMColors.textLabelColor)),
         textStyle:
         MaterialStateProperty.all<TextStyle>(GoogleFonts.montserrat(
           fontSize: AppSizes().bodyLarge,
@@ -34,31 +35,32 @@ class ThemeSRM {
     dialogBackgroundColor: Colors.white,
     colorScheme: ColorScheme(
       brightness: Brightness.light,
-      primary: AppColors.laranjaSRM,
-      onPrimary: Colors.white,
-      secondary: AppColors.azul,
-      onSecondary: Colors.white,
-      error: AppColors.vermelho,
-      onError: Colors.redAccent.shade200,
+      primary: SRMColors.primaryColor,
+      onPrimary: SRMColors.onPrimaryColor,
+      secondary: SRMColors.secondaryColor,
+      onSecondary: SRMColors.onSecondaryColor,
+      error: SRMColors.errorColor,
+      onError: SRMColors.onErrorColor,
       background: const Color(0XFFF8F9FB),
-      onBackground: AppColors.azul,
-      surface: Colors.white,
-      onSurface: AppColors.azul,
-      inverseSurface: Colors.white,),
-    appBarTheme: const AppBarTheme(
-        backgroundColor: Colors.transparent,
+      onBackground: SRMColors.onBackgorundColor,
+      surface: SRMColors.surfaceColor,
+      onSurface: SRMColors.onSurfaceColor,
+      surfaceTint: SRMColors.backgorundColor,
+      inverseSurface: SRMColors.inverseSurfaceColor,),
+    appBarTheme: AppBarTheme(
+        backgroundColor: SRMColors.secondaryColor,
         shadowColor: Colors.transparent,
         iconTheme: IconThemeData(color: Colors.white)),
-    scaffoldBackgroundColor: const Color(0XFFF8F9FB),
+    scaffoldBackgroundColor: SRMColors.backgorundColor,
     textTheme: TextTheme(
-      bodySmall: GoogleFonts.montserrat(fontSize: AppSizes().bodySmall),
-      bodyMedium: GoogleFonts.montserrat(fontSize: AppSizes().bodyMedium),
-      bodyLarge: GoogleFonts.montserrat(fontSize: AppSizes().bodyLarge),
-      labelMedium: GoogleFonts.montserrat(fontSize: AppSizes().labelMedium),
+      bodySmall: GoogleFonts.montserrat(fontSize: AppSizes().bodySmall, color: SRMColors.textBodyColor),
+      bodyMedium: GoogleFonts.montserrat(fontSize: AppSizes().bodyMedium, color: SRMColors.textBodyColor),
+      bodyLarge: GoogleFonts.montserrat(fontSize: AppSizes().bodyLarge, color: SRMColors.textBodyColor),
+      labelMedium: GoogleFonts.montserrat(fontSize: AppSizes().labelMedium, color: SRMColors.textLabelColor),
       displaySmall:
-      GoogleFonts.montserrat(fontSize: AppSizes().displaySmall),
+      GoogleFonts.montserrat(fontSize: AppSizes().displaySmall, color: SRMColors.textDisplayColor),
       displayMedium:
-      GoogleFonts.montserrat(fontSize: AppSizes().displayMedium),
+      GoogleFonts.montserrat(fontSize: AppSizes().displayMedium, color: SRMColors.textDisplayColor),
     ),
   );
 
@@ -68,9 +70,4 @@ class ThemeSRM {
 
   static Widget get imagemAjuda =>
       Image.asset(Assets.iconsIcCellCheck, width: 176.w, color: null);
-  static Color get brancoOuVerde => Colors.white;
-  static Color get azulOuPreto => AppColors.azul;
-  static Color get verdeOuCinza => AppColors.verdePrimarioTRUST;
-  static Color get laranjaOuCinza => AppColors.laranjaSRM;
-
 }

@@ -1,10 +1,10 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/abstract_endpoint.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/contatos_abstract.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
+import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
 import 'package:Srm_Asset/core/constants/environment/producao/srm/contatos.dart';
 import 'package:Srm_Asset/core/constants/environment/producao/srm/endpoints.dart';
 import 'package:Srm_Asset/core/constants/environment/tema_srm.dart';
-import 'package:Srm_Asset/core/constants/tema_configs.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/enuns/plataforma_enum.dart';
@@ -38,18 +38,6 @@ class SrmProducaoEnvironment extends Environment {
   ContatosAbstract get contatos => ContatosSRM();
 
   @override
-  Color get azulOuPreto => ThemeSRM.azulOuPreto;
-
-  @override
-  Color get brancoOuVerde => ThemeSRM.brancoOuVerde;
-
-  @override
-  Color get verdeOuCinza => ThemeSRM.verdeOuCinza;
-
-  @override
-  Color get laranjaOuCinza => ThemeSRM.verdeOuCinza;
-
-  @override
   // TODO: implement iconColor
   Color? get IconColor => null;
 
@@ -62,8 +50,8 @@ class SrmProducaoEnvironment extends Environment {
   String get fraseSloganLogin => 'Capital em Movimento';
 
   @override
-  Color? get corTextoSlogan => AppColors.laranjaSRM;
+  Color? get corTextoSlogan => SRMColors.secondaryColor;
 
   @override
-  Color? get corImagemLogo => AppColors.azul;
+  Color? get corImagemLogo => SRMColors.primaryColor;
 }
