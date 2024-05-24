@@ -1,6 +1,6 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
+import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
-import 'package:Srm_Asset/core/providers/conta_digital/saldo/conta_digital_saldo_impl.dart';
 import 'package:Srm_Asset/core/utils/abrir_url_externo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -21,7 +21,6 @@ import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_textfield.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:validatorless/validatorless.dart';
-import '../core/constants/tema_configs.dart';
 import '../core/providers/certificado_provider/certificado_provider.dart';
 import '../core/providers/conta_digital/conta_digital_provider.dart';
 import '../generated/assets.dart';
@@ -356,7 +355,7 @@ class _AuthFormState extends State<AuthForm> {
           ),
         ],
       ),
-      icon: SvgPicture.asset(Assets.iconsCheck, color: AppColors.verde),
+      icon: SvgPicture.asset(Assets.iconsCheck, color: TRUSTColors.primaryColor),
     );
   }
 }

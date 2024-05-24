@@ -1,4 +1,5 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
+import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
 import 'package:Srm_Asset/core/utils/ambiente_atual.dart';
 import 'package:Srm_Asset/widgets/transparent_appbar_empty.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +64,7 @@ class Menu extends StatelessWidget {
                             style: context.textTheme.bodyLarge!.copyWith(
                               fontWeight: FontWeight.w600,
                               letterSpacing: 1.5,
-                              color: VerificarAmbiente.isSRM ? AppColors.azul : Colors.black
+                              color: VerificarAmbiente.isSRM ? SRMColors.secondaryColor : Colors.black
                             ),
                             textAlign: TextAlign.center,
                           ),

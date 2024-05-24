@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
 import 'package:Srm_Asset/widgets/popup_generico.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -94,10 +95,10 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
                     children: [
                       Text('Lista de Documentos',
                           style: context.textTheme.bodyMedium!
-                              .copyWith(color: AppColors.azul)),
+                              .copyWith(color: SRMColors.secondaryColor)),
                       Text('Operação ${widget.codigoOperacao}',
                           style: context.textTheme.bodySmall!.copyWith(
-                            color: AppColors.labelText,
+                            color: context.labelTextColor,
                           )),
                     ],
                   ),
@@ -119,14 +120,14 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
                                 Text('Documento',
                                     style:
                                         context.textTheme.bodySmall!.copyWith(
-                                      color: AppColors.labelText,
+                                      color: context.labelTextColor,
                                     )),
                                 SizedBox(
                                   width: context.width * 0.3,
                                   child: Text(
                                     "${documentosUnicos[index].nome}.pdf",
                                     style: context.textTheme.bodyMedium!
-                                        .copyWith(color: AppColors.azul),
+                                        .copyWith(color: SRMColors.secondaryColor),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -142,7 +143,7 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(5.r))),
-                                    backgroundColor: AppColors.brancoGelo,
+                                    backgroundColor: context.backgroundColor,
                                   ),
                                   onPressed: () async {
                                     BaixarDocumentosProvider provider =
@@ -194,7 +195,7 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
                                             'Ver',
                                             style: context.textTheme.bodySmall!
                                                 .copyWith(
-                                              color: AppColors.azul,
+                                              color: SRMColors.secondaryColor,
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ),
@@ -209,7 +210,7 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
                                 TextButton(
                                   style: TextButton.styleFrom(
                                       padding: EdgeInsets.zero,
-                                      backgroundColor: AppColors.brancoGelo,
+                                      backgroundColor: context.backgroundColor,
                                       shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(5.r)))),
@@ -239,7 +240,7 @@ class _ModalListDocumentoState extends State<ModalListDocumento> {
                                               style: context
                                                   .textTheme.bodySmall!
                                                   .copyWith(
-                                                color: AppColors.azul,
+                                                color: SRMColors.secondaryColor,
                                                 fontWeight: FontWeight.w500,
                                               )),
                                         ),

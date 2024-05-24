@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 
-import '../core/constants/tema_configs.dart';
-
 class ComponentCardOperacoes extends StatelessWidget {
   final String title;
   final String label;
@@ -43,7 +41,7 @@ class ComponentCardOperacoes extends StatelessWidget {
                     label,
                     style: textStyle ??
                         context.textTheme.labelMedium!.copyWith(
-                            color: AppColors.labelText,
+                            color: context.labelTextColor,
                             fontWeight: FontWeight.w300),
                     textAlign: TextAlign.start,
                   ),
@@ -70,7 +68,7 @@ class ComponentCardOperacoes extends StatelessWidget {
                   label,
                   style: textStyle ??
                       context.textTheme.labelMedium!.copyWith(
-                          color: AppColors.labelText,
+                          color: context.labelTextColor,
                           fontWeight: FontWeight.w300),
                   textAlign: TextAlign.start,
                 ),

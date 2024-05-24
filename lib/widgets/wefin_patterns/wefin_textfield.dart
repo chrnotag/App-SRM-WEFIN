@@ -1,12 +1,7 @@
-import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
-import 'package:Srm_Asset/core/utils/ambiente_atual.dart';
 import 'package:flutter/material.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-
-import '../../core/constants/tema_configs.dart';
 
 class WefinTextFormField extends StatefulWidget {
   final TextEditingController? controller;
@@ -88,7 +83,7 @@ class _WefinTextFormFieldState extends State<WefinTextFormField> {
           decoration: InputDecoration(
             errorStyle: context.textTheme.bodySmall!.copyWith(
                 fontWeight: FontWeight.w900,
-                color: AppColors.vermelho,
+                color: context.errorColor,
                 fontSize: 12.sp),
             hintText: widget.hint,
             labelStyle: context.textTheme.bodyMedium!
@@ -97,13 +92,13 @@ class _WefinTextFormFieldState extends State<WefinTextFormField> {
                 borderSide: BorderSide(color: context.focusColor, width: 2.w),
                 borderRadius: const BorderRadius.all(Radius.circular(12))),
             enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: AppColors.labelText, width: 2.w),
+                borderSide: BorderSide(color: context.labelTextColor, width: 2.w),
                 borderRadius: const BorderRadius.all(Radius.circular(12))),
             errorBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: AppColors.vermelho, width: 2.w),
+                borderSide: BorderSide(color: context.errorColor, width: 2.w),
                 borderRadius: const BorderRadius.all(Radius.circular(12))),
             focusedErrorBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: AppColors.vermelho, width: 2.w),
+                borderSide: BorderSide(color: context.errorColor, width: 2.w),
                 borderRadius: const BorderRadius.all(Radius.circular(12))),
             suffixIcon: widget.obscureText
                 ? IconButton(
@@ -114,7 +109,7 @@ class _WefinTextFormFieldState extends State<WefinTextFormField> {
                     },
                     icon: Icon(
                       _isObscured ? Icons.visibility : Icons.visibility_off,
-                      color: AppColors.labelText,
+                      color: context.labelTextColor,
                       size: 25.r,
                     ),
                   )
