@@ -53,6 +53,14 @@ class _TelaExtratoState extends State<TelaExtrato>
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    final provider = Modular.get<ExtratoProvider>();
+    provider.extratoFuture = null;
+  }
+
+  @override
   Widget build(BuildContext context) {
     final extratoProvider = context.watch<ExtratoProvider>();
     List<Widget> buildOperacoes(int index) {
