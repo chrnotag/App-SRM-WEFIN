@@ -10,7 +10,6 @@ import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_
 import 'package:Srm_Asset/core/providers/certificado_provider/certificado_provider.dart';
 import 'package:Srm_Asset/core/utils/overlay.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
-import '../../../core/constants/tema_configs.dart';
 import '../../../core/constants/AppSizes.dart';
 
 part 'widgets/popup_deletar_certificado.dart';
@@ -59,7 +58,7 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
             child: Text(
                 'Confirme se está tudo correto. Então aperte o botão \"Assinar Operação\" para prosseguir.',
                 style: context.textTheme.bodyMedium!
-                    .copyWith(color: AppColors.labelText)),
+                    .copyWith(color: context.labelTextColor)),
           ),
           Padding(
             padding:
@@ -109,7 +108,7 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                           Modular.to.pop();
                         }
                       },
-                      backgroundColor: AppColors.vermelho,
+                      backgroundColor: context.errorColor,
                       elevation: 0,
                       child: const Icon(
                         Icons.delete_forever,
@@ -144,7 +143,7 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
             child: Text(
               'Ou',
               style: context.textTheme.bodyMedium!
-                  .copyWith(color: AppColors.labelText),
+                  .copyWith(color: context.labelTextColor),
             ),
           ),
           Row(

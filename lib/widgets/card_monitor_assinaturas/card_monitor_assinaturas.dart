@@ -1,7 +1,7 @@
+import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:intl/intl.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
@@ -15,7 +15,6 @@ import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_m
 import 'package:Srm_Asset/widgets/card_monitor_assinaturas/fixed_card.dart';
 import 'package:Srm_Asset/widgets/card_monitor_assinaturas/modal_documents.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
-import '../../core/constants/tema_configs.dart';
 import '../component_card.dart';
 import 'expansible_card.dart';
 
@@ -66,13 +65,13 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
       _borderColor = TweenSequence<Color?>([
         TweenSequenceItem(
           tween: ColorTween(
-              begin: AppColors.verdePrimarioTRUST,
-              end: AppColors.verdePrimarioTRUST),
+              begin: TRUSTColors.primaryColor,
+              end: TRUSTColors.primaryColor),
           weight: 99, // 50% da animação para aparecer
         ),
         TweenSequenceItem(
           tween: ColorTween(
-              begin: AppColors.verdePrimarioTRUST, end: Colors.transparent),
+              begin: TRUSTColors.primaryColor, end: Colors.transparent),
           weight: 1, // 50% da animação para desaparecer
         ),
       ]).animate(_controller)

@@ -30,7 +30,7 @@ class PopUpDeslogarApp {
               padding: EdgeInsets.all(12.r),
               child: Text('Deseja encerrar o aplicativo?',
                   style: context.textTheme.bodyMedium!
-                      .copyWith(color: AppColors.labelText)),
+                      .copyWith(color: context.labelTextColor)),
             ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 12.r),

@@ -1,5 +1,4 @@
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
-import 'package:Srm_Asset/core/constants/tema_configs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -58,14 +57,14 @@ class ImportarCertificado extends StatelessWidget {
                       text: 'QRCode: ',
                       style: context.textTheme.bodyMedium!.copyWith(
                           fontWeight: FontWeight.bold,
-                          color: AppColors.cinzaEscuro),
+                          color: context.labelTextColor),
                       children: [
                         TextSpan(
                           text:
                               'Selecione essa opção para importar via QRCode usando o nosso site para gerar o QRCode',
                           style: context.textTheme.bodyMedium!.copyWith(
                               fontWeight: FontWeight.normal,
-                              color: AppColors.labelText),
+                              color: context.labelTextColor),
                         )
                       ],
                     ),
@@ -77,14 +76,14 @@ class ImportarCertificado extends StatelessWidget {
                     text: 'Do dispositivo: ',
                     style: context.textTheme.bodyMedium!.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: AppColors.cinzaEscuro),
+                        color: context.labelTextColor),
                     children: [
                       TextSpan(
                         text:
                             'Selecione essa opção para importar o certificado diretamente de seu dispositivo.',
                         style: context.textTheme.bodyMedium!.copyWith(
                             fontWeight: FontWeight.normal,
-                            color: AppColors.labelText),
+                            color: context.labelTextColor),
                       )
                     ],
                   ),

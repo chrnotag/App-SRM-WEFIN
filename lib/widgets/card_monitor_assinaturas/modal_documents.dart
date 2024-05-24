@@ -10,8 +10,6 @@ import 'package:Srm_Asset/core/providers/documentos_provider/baixar_documentos_i
 import 'package:Srm_Asset/core/providers/documentos_provider/baixar_documentos_provider.dart';
 import 'package:Srm_Asset/core/utils/overlay.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
-
-import '../../core/constants/tema_configs.dart';
 import '../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 
 class ModalListDocumento extends StatefulWidget {

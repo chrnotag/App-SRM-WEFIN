@@ -20,7 +20,7 @@ class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
       return {
         'borda': Colors.black,
         'fundo': Colors.white,
-        'texto': AppColors.azul
+        'texto': SRMColors.secondaryColor
       };
     }
   }
@@ -88,7 +88,7 @@ class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
                   Icons.calendar_month,
                   size: 45.r,
                 ),
-                color: AppColors.azul,
+                color: SRMColors.secondaryColor,
               ),
               InkWell(
                 radius: 100.r,
@@ -98,7 +98,7 @@ class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
                 },
                 child: Image.asset(
                   Assets.imagesIconePdf,
-                  color: AppColors.azul,
+                  color: SRMColors.secondaryColor,
                   scale: 0.9,
                 ),
               ),
