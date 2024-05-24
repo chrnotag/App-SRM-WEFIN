@@ -87,4 +87,11 @@ class ExtratoProvider extends ChangeNotifier {
             FormatarData.formatar(dataFinal().toIso8601String()),
             FormatarData.formatar(dataInicial.toIso8601String()));
   }
+
+  void limparDados(){
+    dataInicial = DateTime.now();
+    intervaloDias = 7;
+    extratoFuture = null;
+    extrato = null;
+  }
 }

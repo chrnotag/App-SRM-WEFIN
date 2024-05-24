@@ -57,7 +57,7 @@ class _TelaExtratoState extends State<TelaExtrato>
     // TODO: implement dispose
     super.dispose();
     final provider = Modular.get<ExtratoProvider>();
-    provider.extratoFuture = null;
+    provider.limparDados();
   }
 
   @override
