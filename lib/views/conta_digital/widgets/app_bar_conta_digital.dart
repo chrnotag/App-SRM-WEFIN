@@ -7,7 +7,7 @@ class AppBarExtrato extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: SRMColors.secondaryColor,
+      backgroundColor: context.secondaryColor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(bottomLeft: Radius.circular(12), bottomRight: Radius.circular(12)),
       ),

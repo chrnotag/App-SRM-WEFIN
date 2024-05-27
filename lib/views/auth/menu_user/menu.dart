@@ -33,12 +33,11 @@ class Menu extends StatelessWidget {
           
           children: [
             Text('Meu Perfil',
-                style: context.textTheme.bodyLarge!.copyWith(color: context.inverseSurfaceColor)),
+                style: context.textTheme.bodyLarge),
             Padding(
               padding: EdgeInsets.only(bottom: 15.h),
               child: Text('Visualize seus dados e tire suas dúvidas',
-                  style: context.textTheme.bodyMedium!.copyWith(
-                    color: context.inverseSurfaceColor)),
+                  style: context.textTheme.bodyMedium),
             ),
             Expanded(
               child: Card(

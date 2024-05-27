@@ -104,7 +104,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
     final AssinaturaProvider assinaturaProvider =
         context.watch<AssinaturaProvider>();
     final Color corAssinatura = assinaturaProvider
-        .definirCorStatusAssinatura(assinatura.statusAssinaturaDigital);
+        .definirCorStatusAssinatura(assinatura.statusAssinaturaDigital, context);
 
     return AnimatedContainer(
       duration: const Duration(seconds: 1),

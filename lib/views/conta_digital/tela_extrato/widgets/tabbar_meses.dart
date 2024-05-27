@@ -31,7 +31,7 @@ class _TabBarMesesState extends State<_TabBarMeses> {
         elevation: 1,
         surfaceTintColor: Colors.white,
         child: TabBar(
-          indicatorColor: SRMColors.secondaryColor,
+          indicatorColor: context.secondaryColor,
           controller: widget.controller,
           tabs: Modular.get<TabMesesProvider>()
               .nomeDosMeses

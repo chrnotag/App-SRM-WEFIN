@@ -50,6 +50,14 @@ class _TelaExtratoState extends State<TelaExtrato>
     super.initState();
     _tabController = TabController(length: 3, vsync: this, initialIndex: 2);
     extratoProviderInit.carregarDados();
+    tamanhoLista = 7;
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    tamanhoLista = 7;
   }
 
   @override
@@ -57,7 +65,6 @@ class _TelaExtratoState extends State<TelaExtrato>
     final extratoProvider = context.watch<ExtratoProvider>();
     List<Widget> buildOperacoes(int index) {
       List<Widget> lista = [];
-      print('tamanho lista: ${extratoProvider.itensExtrato.length}\nindex: $index');
       List<Lancamento> lancamentos = extratoProvider.itensExtrato[index].lancamentos;
         for (var lancamento in lancamentos) {
           lista.add(_ItemListaOperacao(
@@ -102,7 +109,6 @@ class _TelaExtratoState extends State<TelaExtrato>
                             return Loader();
                           }
                           if (!snapshot.hasData) {
-                            print("nao ha data");
                           }
                           return ListView.builder(
                               itemCount: tamanhoLista,

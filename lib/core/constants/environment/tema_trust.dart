@@ -43,22 +43,22 @@ class ThemeTRUST {
             onError: TRUSTColors.onErrorColor,
             background: TRUSTColors.backgorundColor,
             onBackground: TRUSTColors.onBackgorundColor,
-            surface: TRUSTColors.surfaceColor,
+            surface: Colors.white,
             onSurface: TRUSTColors.onSurfaceColor,
             inverseSurface: TRUSTColors.inverseSurfaceColor,
-            surfaceTint: TRUSTColors.secondaryColor),
+            surfaceTint: Colors.white),
         appBarTheme: AppBarTheme(
-            backgroundColor: Colors.transparent,
+            backgroundColor: TRUSTColors.secondaryColor,
             shadowColor: Colors.transparent,
-            iconTheme: IconThemeData(color: TRUSTColors.primaryColor)),
+            iconTheme: IconThemeData(color: Colors.white)),
         scaffoldBackgroundColor: TRUSTColors.backgorundColor,
         textTheme: TextTheme(
           bodySmall: GoogleFonts.montserrat(fontSize: AppSizes().bodySmall),
           bodyMedium: GoogleFonts.montserrat(
               fontSize: AppSizes().bodyMedium, color: Colors.black),
-          bodyLarge: GoogleFonts.montserrat(fontSize: AppSizes().bodyLarge),
+          bodyLarge: GoogleFonts.montserrat(fontSize: AppSizes().bodyLarge, color: TRUSTColors.textLabelColor),
           labelMedium: GoogleFonts.montserrat(
-              fontSize: AppSizes().labelMedium, color: Colors.black),
+              fontSize: AppSizes().labelMedium, color: TRUSTColors.textLabelColor),
           displaySmall:
               GoogleFonts.montserrat(fontSize: AppSizes().displaySmall),
           displayMedium:

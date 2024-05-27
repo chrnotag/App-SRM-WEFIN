@@ -20,8 +20,6 @@ class AssinaturaProvider extends ChangeNotifier {
     return response;
   }
 
-  final BuildContext context = myNavigatorKey.currentContext!;
-
   set assinaturas(List<MonitorAssinaturasModel> assinaturasModel) {
     separaAssinaturas(assinaturasModel);
     mapearAssinaturas = assinaturasModel;
@@ -65,7 +63,7 @@ class AssinaturaProvider extends ChangeNotifier {
     return assinaturasPendentes.length.toString();
   }
 
-  Color definirCorStatusAssinatura(String status) {
+  Color definirCorStatusAssinatura(String status, BuildContext context) {
     return status == "Assinado" ? context.successColor : context.waitingColor;
   }
 
@@ -89,7 +87,7 @@ class AssinaturaProvider extends ChangeNotifier {
     }
   }
 
-  Color corStatusAssinatura(String status) {
+  Color corStatusAssinatura(String status, BuildContext context) {
     if (status.toLowerCase().trim() == "aguardando assinatura") {
       return context.waitingColor;
     }

@@ -37,7 +37,7 @@ class _AppBarLogoState extends State<AppBarLogo> {
     Environment ambiente = Modular.get<Environment>();
     final authProvider = context.watch<AuthProvider>();
     return AppBar(
-      backgroundColor: SRMColors.secondaryColor,
+      backgroundColor: context.secondaryColor,
       shadowColor: Colors.transparent,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.start,

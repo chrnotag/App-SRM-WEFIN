@@ -1,6 +1,5 @@
 import 'package:Srm_Asset/core/constants/AppSizes.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
-import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
@@ -87,14 +86,14 @@ class _HomeViewState extends State<HomeView> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                        color: _index == 0 ? SRMColors.secondaryColor : null,
+                        color: _index == 0 ? context.secondaryColor : null,
                         borderRadius:
                             const BorderRadius.all(Radius.circular(10))),
                     height: 4,
                     width: 30.r,
                   ),
                   SvgPicture.asset(Assets.home_icon,
-                      color: _index == 0 ? SRMColors.secondaryColor : null),
+                      color: _index == 0 ? context.secondaryColor : null),
                 ],
               ),
               label: 'Início',
@@ -105,13 +104,13 @@ class _HomeViewState extends State<HomeView> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                        color: _index == 1 ? SRMColors.secondaryColor : null,
+                        color: _index == 1 ? context.secondaryColor : null,
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     height: 4,
                     width: 30.r,
                   ),
                   SvgPicture.asset(Assets.search_icon,
-                      color: _index == 1 ? SRMColors.secondaryColor : null),
+                      color: _index == 1 ? context.secondaryColor : null),
                 ],
               ),
               label: 'Busca',
@@ -122,13 +121,13 @@ class _HomeViewState extends State<HomeView> {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                          color: _index == 2 ? SRMColors.secondaryColor : null,
+                          color: _index == 2 ? context.secondaryColor : null,
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       height: 4,
                       width: 30.r,
                     ),
                     SvgPicture.asset(Assets.menu_options_icon,
-                        color: _index == 2 ? SRMColors.secondaryColor : null),
+                        color: _index == 2 ? context.secondaryColor : null),
                   ],
                 ),
                 label: 'Opções'),

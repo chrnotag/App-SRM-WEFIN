@@ -78,7 +78,7 @@ class _WefinTextFormFieldState extends State<WefinTextFormField> {
           keyboardType: widget.inputType,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           style: context.textTheme.bodyMedium!
-              .copyWith(color: context.secondaryColor, fontWeight: FontWeight.w600),
+              .copyWith(fontWeight: FontWeight.w600),
           cursorColor: context.focusColor,
           decoration: InputDecoration(
             errorStyle: context.textTheme.bodySmall!.copyWith(
@@ -86,8 +86,7 @@ class _WefinTextFormFieldState extends State<WefinTextFormField> {
                 color: context.errorColor,
                 fontSize: 12.sp),
             hintText: widget.hint,
-            labelStyle: context.textTheme.bodyMedium!
-                .copyWith(color: context.inverseSurfaceColor),
+            labelStyle: context.textTheme.bodyMedium,
             focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: context.focusColor, width: 2.w),
                 borderRadius: const BorderRadius.all(Radius.circular(12))),

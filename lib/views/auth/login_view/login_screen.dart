@@ -57,7 +57,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 shadowColor: Colors.transparent,
               )
             else
-              AppBar(backgroundColor: ambiente.corQuadradoLogin,),
+              AppBar(
+                backgroundColor: ambiente.corQuadradoLogin,
+              ),
             Expanded(
               child: CustomScrollView(
                 slivers: [
@@ -76,10 +78,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: Container(
                                   height: context.width * 0.3,
                                   width: context.width,
-                                  decoration: BoxDecoration(color: ambiente.corQuadradoLogin, borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
+                                  decoration: BoxDecoration(
+                                      color: ambiente.corQuadradoLogin,
+                                      borderRadius: BorderRadius.vertical(
+                                          bottom: Radius.circular(12))),
                                   child: Center(
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
                                         Image.asset(
                                           ambiente.logo,
@@ -91,8 +97,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                           ambiente.fraseSloganLogin ?? '',
                                           style: context.textTheme.bodyMedium!
                                               .copyWith(
-                                              fontWeight: FontWeight.w900,
-                                              color: ambiente.corTextoSlogan),
+                                            fontSize: 15.sp,
+                                                  fontWeight: FontWeight.w900,
+                                                  color: context.primaryColor),
                                           textAlign: TextAlign.center,
                                         )
                                       ],

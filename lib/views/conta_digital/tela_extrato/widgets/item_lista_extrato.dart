@@ -16,7 +16,7 @@ class _ItemListaExtrato extends StatelessWidget {
       title: Text(
         FormatarData.formatarExtenso(DateTime.parse(dataDia)),
         style: context.textTheme.bodyLarge!.copyWith(
-            fontWeight: FontWeight.w900, color: context.labelTextColor),
+            fontWeight: FontWeight.w900),
       ),
       subtitle: Column(
         children: [

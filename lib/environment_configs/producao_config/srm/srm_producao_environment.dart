@@ -50,7 +50,7 @@ class SrmProducaoEnvironment extends Environment {
   String get fraseSloganLogin => 'Capital em Movimento';
 
   @override
-  Color? get corTextoSlogan => SRMColors.secondaryColor;
+  Color? get corTextoSlogan => SRMColors.primaryColor;
 
   @override
   Color? get corImagemLogo => SRMColors.primaryColor;

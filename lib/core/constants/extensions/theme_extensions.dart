@@ -17,6 +17,7 @@ extension ThemeExtension on BuildContext {
   Color get successColor => TRUSTColors.primaryColor;
   Color get waitingColor => SRMColors.primaryColor;
   Color get labelTextColor => SRMColors.textLabelColor;
+  Color get onBackgroundColor => Theme.of(this).colorScheme.onBackground;
   TextTheme get textTheme => Theme.of(this).textTheme;
   SearchBarThemeData get searchBarTheme  => Theme.of(this).searchBarTheme;
 }
