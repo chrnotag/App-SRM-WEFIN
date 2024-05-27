@@ -57,15 +57,9 @@ class _TelaExtratoState extends State<TelaExtrato>
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    tamanhoLista = 7;
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
     final provider = Modular.get<ExtratoProvider>();
     provider.limparDados();
+    tamanhoLista = 7;
   }
 
   @override

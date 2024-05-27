@@ -1,4 +1,5 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/abstract_endpoint.dart';
+import 'package:Srm_Asset/core/constants/classes_abstratas/imagens_guia_certificado.dart';
 import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
 import 'package:Srm_Asset/core/constants/enuns/plataforma_enum.dart';
 import 'package:Srm_Asset/core/constants/environment/homologacao/srm/contatos.dart';
@@ -53,4 +54,8 @@ class SrmHomologacaoEnvironment extends Environment {
   @override
   // TODO: implement fraseSloganLogin
   String get fraseSloganLogin => 'Capital em Movimento';
+
+  @override
+  // TODO: implement imagensGuiaCertificado
+  ImagensGuiaImportarCertificado get imagensGuiaCertificado => ThemeSRM();
 }

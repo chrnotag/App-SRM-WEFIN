@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/generated/assets.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
   @override
   Widget build(BuildContext context) {
     final CertificadoProvider provider = context.watch<CertificadoProvider>();
+    final ambiente = Modular.get<Environment>();
     return SingleChildScrollView(
         child: AlertDialog(
           title: SizedBox(
@@ -47,7 +49,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
                     ),
                   ],
                 ),
-                SvgPicture.asset(Assets.senha_certificado_dialog),
+                SvgPicture.asset(ambiente.imagensGuiaCertificado.senhaCertificado),
                 Text('Senha do Certificado Digital',
                     style: context.textTheme.bodyLarge!.copyWith(
                         fontWeight: FontWeight.w900, color: Colors.black)),

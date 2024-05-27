@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/core/constants/classes_abstratas/imagens_guia_certificado.dart';
 import 'package:Srm_Asset/core/constants/configs_tema/srm/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,7 +7,7 @@ import '../../../../../generated/assets.dart';
 import '../AppSizes.dart';
 import '../configs_tema/export_config_theme_srm.dart';
 
-class ThemeSRM {
+class ThemeSRM implements ImagensGuiaImportarCertificado{
   ThemeSRM._();
 
   static final ThemeSRM _instance = ThemeSRM._();
@@ -70,4 +71,48 @@ class ThemeSRM {
 
   static Widget get imagemAjuda =>
       Image.asset(Assets.iconsIcCellCheck, width: 176.w, color: null);
+
+  @override
+  // TODO: implement primeiroSlideDispositivo
+  String get primeiroSlideDispositivo => Assets.importe_certificado_svg;
+
+  @override
+  // TODO: implement primeiroSlideQrCode
+  String get primeiroSlideQrCode => Assets.importe_certificado_svg;
+
+  @override
+  // TODO: implement quartoSlideDispositivo
+  String get quartoSlideDispositivo => Assets.informe_senha_certificado_svg;
+
+  @override
+  // TODO: implement quartoSlideQrCode
+  String get quartoSlideQrCode => Assets.informe_senha_certificado_svg;
+
+  @override
+  // TODO: implement quintoSlideDispositivo
+  String get quintoSlideDispositivo => Assets.importacao_concluida_svg;
+
+  @override
+  // TODO: implement quintoSlideQrCode
+  String get quintoSlideQrCode => Assets.importacao_concluida_svg;
+
+  @override
+  // TODO: implement segundoSlideDispositivo
+  String get segundoSlideDispositivo => Assets.selecionar_certificado_svg;
+
+  @override
+  // TODO: implement segundoSlideQrCode
+  String get segundoSlideQrCode => Assets.upload_certificado_svg;
+
+  @override
+  // TODO: implement terceiroSlideDispositivo
+  String get terceiroSlideDispositivo => Assets.localizar_cetificado_svg;
+
+  @override
+  // TODO: implement terceiroSlideQrCode
+  String get terceiroSlideQrCode => Assets.scanear_qrcode_svg;
+
+  @override
+  // TODO: implement senhaCertificado
+  String get senhaCertificado => Assets.senha_certificado_dialog;
 }

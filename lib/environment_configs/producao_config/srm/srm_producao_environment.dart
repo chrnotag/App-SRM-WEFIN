@@ -7,6 +7,7 @@ import 'package:Srm_Asset/core/constants/environment/producao/srm/endpoints.dart
 import 'package:Srm_Asset/core/constants/environment/tema_srm.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/constants/classes_abstratas/imagens_guia_certificado.dart';
 import '../../../core/constants/enuns/plataforma_enum.dart';
 
 class SrmProducaoEnvironment extends Environment {
@@ -54,4 +55,8 @@ class SrmProducaoEnvironment extends Environment {
 
   @override
   Color? get corImagemLogo => SRMColors.primaryColor;
+
+  @override
+  // TODO: implement imagensGuiaCertificado
+  ImagensGuiaImportarCertificado get imagensGuiaCertificado => ThemeSRM();
 }

@@ -6,6 +6,7 @@ import 'package:Srm_Asset/core/constants/environment/producao/trust/contatos.dar
 import 'package:Srm_Asset/core/constants/environment/producao/trust/endpoints.dart';
 import 'package:Srm_Asset/core/constants/environment/tema_trust.dart';
 import 'package:flutter/material.dart';
+import '../../../core/constants/classes_abstratas/imagens_guia_certificado.dart';
 import '../../../core/constants/enuns/plataforma_enum.dart';
 
 class TrustProducaoEnvironment extends Environment {
@@ -53,4 +54,8 @@ class TrustProducaoEnvironment extends Environment {
 
   @override
   Color? get corImagemLogo => Colors.white;
+
+  @override
+  // TODO: implement imagensGuiaCertificado
+  ImagensGuiaImportarCertificado get imagensGuiaCertificado => ThemeTRUST();
 }
