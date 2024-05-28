@@ -1,9 +1,8 @@
+import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
-import 'package:Srm_Asset/core/constants/tema_configs.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/comprovante_ted/comprovante_ted_provider.dart';
-import 'package:Srm_Asset/core/utils/data_format.dart';
 import 'package:Srm_Asset/core/utils/pdf_manager.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
@@ -52,7 +51,7 @@ class _ComprovanteTedState extends State<ComprovanteTed> {
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
-        backgroundColor: AppColors.azul,
+        backgroundColor: context.secondaryColor,
         shadowColor: Colors.transparent,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(bottomRight: Radius.circular(12.r), bottomLeft: Radius.circular(12.r))),
       ),

@@ -52,7 +52,6 @@ class MoldeTutorialCertificado extends StatelessWidget {
                       tituloPagina,
                       textAlign: TextAlign.center,
                       style: context.textTheme.bodyLarge!.copyWith(
-                          color: context.onSecondary,
                           fontWeight: FontWeight.w600),
                     ),
                   ),
@@ -63,7 +62,6 @@ class MoldeTutorialCertificado extends StatelessWidget {
                         Text(
                           descricaoPagina!,
                           style: context.textTheme.bodyMedium!.copyWith(
-                              color: context.onSecondary,
                               fontWeight: FontWeight.w400),
                           textAlign: TextAlign.center,
                         ),

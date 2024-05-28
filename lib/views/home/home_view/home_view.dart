@@ -15,10 +15,8 @@ import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:Srm_Asset/generated/assets.dart';
 import 'package:Srm_Asset/widgets/appbar_logo_perfil.dart';
-import '../../../core/constants/tema_configs.dart';
 import '../../../core/implementations_config/api_response.dart';
 import '../../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
-
 part 'widgets/card_item_menu.dart';
 
 class HomeView extends StatefulWidget {
@@ -71,7 +69,7 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       bottomNavigationBar: SafeArea(
         child: BottomNavigationBar(
-          backgroundColor: Colors.white,
+          backgroundColor: context.backgroundColor,
           elevation: 0,
           onTap: (value) {
             setState(() {
@@ -79,7 +77,7 @@ class _HomeViewState extends State<HomeView> {
             });
           },
           currentIndex: _index,
-          selectedItemColor: AppColors.azul,
+          selectedItemColor: context.secondaryColor,
           type: BottomNavigationBarType.fixed,
           items: [
             BottomNavigationBarItem(
@@ -88,14 +86,14 @@ class _HomeViewState extends State<HomeView> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                        color: _index == 0 ? AppColors.azul : null,
+                        color: _index == 0 ? context.secondaryColor : null,
                         borderRadius:
                             const BorderRadius.all(Radius.circular(10))),
                     height: 4,
                     width: 30.r,
                   ),
                   SvgPicture.asset(Assets.home_icon,
-                      color: _index == 0 ? AppColors.azul : null),
+                      color: _index == 0 ? context.secondaryColor : null),
                 ],
               ),
               label: 'Início',
@@ -106,13 +104,13 @@ class _HomeViewState extends State<HomeView> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                        color: _index == 1 ? AppColors.azul : null,
+                        color: _index == 1 ? context.secondaryColor : null,
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     height: 4,
                     width: 30.r,
                   ),
                   SvgPicture.asset(Assets.search_icon,
-                      color: _index == 1 ? AppColors.azul : null),
+                      color: _index == 1 ? context.secondaryColor : null),
                 ],
               ),
               label: 'Busca',
@@ -123,20 +121,19 @@ class _HomeViewState extends State<HomeView> {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                          color: _index == 2 ? AppColors.azul : null,
+                          color: _index == 2 ? context.secondaryColor : null,
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       height: 4,
                       width: 30.r,
                     ),
                     SvgPicture.asset(Assets.menu_options_icon,
-                        color: _index == 2 ? AppColors.azul : null),
+                        color: _index == 2 ? context.secondaryColor : null),
                   ],
                 ),
                 label: 'Opções'),
           ],
         ),
       ),
-      backgroundColor: AppColors.brancoGelo,
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,
         child: AppBarLogo(),
@@ -150,7 +147,7 @@ class _HomeViewState extends State<HomeView> {
             child: Container(
               height: context.height * 0.22,
               decoration: BoxDecoration(
-                  color: AppColors.azul,
+                  color: context.secondaryColor,
                   borderRadius:
                       BorderRadius.vertical(bottom: Radius.circular(12))),
             ),
@@ -212,7 +209,7 @@ class _HomeViewState extends State<HomeView> {
                                 _isSaldoVisivel
                                     ? Icons.visibility
                                     : Icons.visibility_off,
-                                color: AppColors.brancoGelo,
+                                color: context.backgroundColor,
                               ))
                         ],
                       )

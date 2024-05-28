@@ -1,6 +1,6 @@
+import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
-import 'package:Srm_Asset/core/constants/tema_configs.dart';
 import 'package:Srm_Asset/views/conta_digital/widgets/app_bar_conta_digital.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:flutter/cupertino.dart';
@@ -53,14 +53,14 @@ class _SelecionarDataScreenState extends State<SelecionarDataScreen> {
                   'Selecione o período:',
                   style: context.textTheme.bodyLarge!.copyWith(
                       fontWeight: FontWeight.bold,
-                      color: AppColors.labelText,
+                      color: context.labelTextColor,
                       fontSize: 18.sp),
                 ),
               ),
               Text(
                 "A selação por período está limitada a três meses.",
                 style: context.textTheme.bodyMedium!
-                    .copyWith(color: AppColors.cinzaEscuro),
+                    .copyWith(color: SRMColors.onBackgorundColor),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 64.h, bottom: 16.h),
@@ -71,7 +71,7 @@ class _SelecionarDataScreenState extends State<SelecionarDataScreen> {
                       'Data inicial',
                       style: context.textTheme.bodyLarge!.copyWith(
                           fontWeight: FontWeight.w900,
-                          color: AppColors.cinzaEscuro),
+                          color: SRMColors.onBackgorundColor),
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -82,11 +82,11 @@ class _SelecionarDataScreenState extends State<SelecionarDataScreen> {
                           child: TextField(
                             enabled: false,
                             controller: _controllerDataInicial,
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                                 hintText: 'Selecionar período',
                                 border: OutlineInputBorder(
                                     borderSide:
-                                        BorderSide(color: AppColors.labelText),
+                                        BorderSide(color: context.labelTextColor),
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(12)))),
                             onChanged: (value) {
@@ -136,7 +136,7 @@ class _SelecionarDataScreenState extends State<SelecionarDataScreen> {
                       'Data final',
                       style: context.textTheme.bodyLarge!.copyWith(
                           fontWeight: FontWeight.w900,
-                          color: AppColors.cinzaEscuro),
+                          color: SRMColors.onBackgorundColor),
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -147,11 +147,11 @@ class _SelecionarDataScreenState extends State<SelecionarDataScreen> {
                           child: TextField(
                             enabled: false,
                             controller: _controllerDataFinal,
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                                 hintText: 'Selecionar período',
                                 border: OutlineInputBorder(
                                     borderSide:
-                                        BorderSide(color: AppColors.labelText),
+                                        BorderSide(color: context.labelTextColor),
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(12)))),
                             onChanged: (value) {

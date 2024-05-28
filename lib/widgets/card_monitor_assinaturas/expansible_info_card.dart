@@ -157,7 +157,7 @@ class __ExpansibleInfoCardState extends State<_ExpansibleInfoCard> {
                         info.statusAssinatura,
                         style: context.textTheme.bodySmall!.copyWith(
                             color: assinaturaProvider
-                                .corStatusAssinatura(info.statusAssinatura)),
+                                .corStatusAssinatura(info.statusAssinatura, context)),
                       ),
                     ],
                   ),

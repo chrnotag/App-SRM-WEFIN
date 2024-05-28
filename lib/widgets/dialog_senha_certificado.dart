@@ -1,5 +1,5 @@
+import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
-import 'package:Srm_Asset/core/constants/tema_configs.dart';
 import 'package:Srm_Asset/generated/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -33,6 +33,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
   @override
   Widget build(BuildContext context) {
     final CertificadoProvider provider = context.watch<CertificadoProvider>();
+    final ambiente = Modular.get<Environment>();
     return SingleChildScrollView(
         child: AlertDialog(
           title: SizedBox(
@@ -48,7 +49,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
                     ),
                   ],
                 ),
-                SvgPicture.asset(Assets.senha_certificado_dialog),
+                SvgPicture.asset(ambiente.imagensGuiaCertificado.senhaCertificado),
                 Text('Senha do Certificado Digital',
                     style: context.textTheme.bodyLarge!.copyWith(
                         fontWeight: FontWeight.w900, color: Colors.black)),
@@ -57,7 +58,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
                   child: Text(
                       'No campo abaixo, Insira a senha do seu Certificado Digital.',
                       style: context.textTheme.bodyMedium!.copyWith(
-                          color: AppColors.cinzaEscuro,
+                          color: context.labelTextColor,
                           fontWeight: FontWeight.w900),
                       textAlign: TextAlign.center),
                 ),
@@ -85,7 +86,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
                         hintStyle: TextStyle(
                             fontSize: 17.sp,
                             fontWeight: FontWeight.w400,
-                            color: AppColors.labelText),
+                            color: context.labelTextColor),
                         focusColor: context.focusColor,
                         border: const OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black, width: 1),
@@ -102,7 +103,7 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
                           },
                           icon: Icon(
                             _isObscured ? Icons.visibility : Icons.visibility_off,
-                            color: AppColors.labelText,
+                            color: context.labelTextColor,
                             size: 25.r,
                           ),
                         )),

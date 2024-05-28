@@ -7,7 +7,6 @@ import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/providers/monitor_operacao_provider/monitor_operacoes_provider.dart';
 import 'package:Srm_Asset/core/utils/money_format.dart';
 import 'package:Srm_Asset/models/monitor_operacoes_model/monitor_operacoes_model.dart';
-import '../../core/constants/tema_configs.dart';
 import '../../core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import '../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import '../component_card.dart';
@@ -108,7 +107,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
                               Text(
                                 'Assinaturas Pendentes',
                                 style: context.textTheme.bodySmall!.copyWith(
-                                    color: AppColors.vermelho,
+                                    color: context.errorColor,
                                     fontWeight: FontWeight.w300),
                               ),
                               Padding(
@@ -168,8 +167,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes> {
               width: 30.w,
               height: double.maxFinite,
               decoration: BoxDecoration(
-                color: operacaoProvider
-                    .corOperacao[operacao.statusOperacao.toUpperCase().trim()],
+                color: context.errorColor,
                 borderRadius: BorderRadius.only(
                     topRight: Radius.circular(5.r),
                     bottomRight: Radius.circular(5.r)),

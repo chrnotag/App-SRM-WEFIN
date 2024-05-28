@@ -12,15 +12,15 @@ class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
   Map<String, Color> corSelecionado(int indicie) {
     if(filtroSelecionado == indicie){
       return {
-        'borda': AppColors.azul,
-        'fundo': AppColors.azulPrimarioSRM,
+        'borda': context.secondaryColor,
+        'fundo': context.secondaryColor,
         'texto': Colors.white,
       };
     }else{
       return {
-        'borda': Colors.black,
+        'borda': context.secondaryColor,
         'fundo': Colors.white,
-        'texto': AppColors.azul
+        'texto': context.secondaryColor
       };
     }
   }
@@ -88,7 +88,7 @@ class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
                   Icons.calendar_month,
                   size: 45.r,
                 ),
-                color: AppColors.azul,
+                color: context.secondaryColor,
               ),
               InkWell(
                 radius: 100.r,
@@ -98,7 +98,7 @@ class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
                 },
                 child: Image.asset(
                   Assets.imagesIconePdf,
-                  color: AppColors.azul,
+                  color: context.secondaryColor,
                   scale: 0.9,
                 ),
               ),

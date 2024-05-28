@@ -1,14 +1,11 @@
-import 'dart:developer';
-
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/implementations_config/api_response.dart';
 import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_implementation.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
-
-import '../../constants/tema_configs.dart';
-import '../../utils/money_format.dart';
 
 class AssinaturaProvider extends ChangeNotifier {
   AssinaturaProvider._();
@@ -66,8 +63,8 @@ class AssinaturaProvider extends ChangeNotifier {
     return assinaturasPendentes.length.toString();
   }
 
-  Color definirCorStatusAssinatura(String status) {
-    return status == "Assinado" ? AppColors.verde : AppColors.azulPrimarioSRM;
+  Color definirCorStatusAssinatura(String status, BuildContext context) {
+    return status == "Assinado" ? context.successColor : context.waitingColor;
   }
 
   void separaAssinaturas(List<MonitorAssinaturasModel> assinaturas) {
@@ -90,11 +87,11 @@ class AssinaturaProvider extends ChangeNotifier {
     }
   }
 
-  Color corStatusAssinatura(String status) {
+  Color corStatusAssinatura(String status, BuildContext context) {
     if (status.toLowerCase().trim() == "aguardando assinatura") {
-      return AppColors.azulPrimarioSRM;
+      return context.waitingColor;
     }
-    return AppColors.verdePrimarioTRUST;
+    return context.successColor;
   }
 
   Map<int, MonitorAssinaturasModel> _mapaAssinaturas = {};

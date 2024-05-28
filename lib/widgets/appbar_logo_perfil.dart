@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
@@ -8,7 +9,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:Srm_Asset/core/constants/AppSizes.dart';
 import '../core/constants/classes_abstratas/envirioment.dart';
 import '../core/constants/route_labels.dart';
-import '../core/constants/tema_configs.dart';
 import '../core/providers/auth_provider_config/logar/auth_providers.dart';
 import '../generated/assets.dart';
 import '../models/auth_login_models/SRM/cedente_model.dart';
@@ -37,7 +37,7 @@ class _AppBarLogoState extends State<AppBarLogo> {
     Environment ambiente = Modular.get<Environment>();
     final authProvider = context.watch<AuthProvider>();
     return AppBar(
-      backgroundColor: AppColors.azul,
+      backgroundColor: context.secondaryColor,
       shadowColor: Colors.transparent,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.start,

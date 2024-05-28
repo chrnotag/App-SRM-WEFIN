@@ -1,11 +1,12 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/abstract_endpoint.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
+import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
 import 'package:Srm_Asset/core/constants/environment/homologacao/trust/contatos.dart';
 import 'package:Srm_Asset/core/constants/environment/homologacao/trust/endpoints.dart';
 import 'package:Srm_Asset/core/constants/environment/tema_trust.dart';
-import 'package:Srm_Asset/core/constants/tema_configs.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/constants/classes_abstratas/imagens_guia_certificado.dart';
 import '../../../core/constants/enuns/plataforma_enum.dart';
 
 class TrustHomologacaoEnvironment extends Environment {
@@ -37,24 +38,12 @@ class TrustHomologacaoEnvironment extends Environment {
   ContatosTRUST get contatos => ContatosTRUST();
 
   @override
-  Color get azulOuPreto => ThemeTRUST.azulOuPreto;
-
-  @override
-  Color get brancoOuVerde => ThemeTRUST.brancoOuVerde;
-
-  @override
-  Color get verdeOuCinza => ThemeTRUST.verdeOuCinza;
-
-  @override
-  Color get laranjaOuCinza => ThemeTRUST.verdeOuCinza;
-
-  @override
   // TODO: implement iconColor
-  Color? get IconColor => AppColors.verdePrimarioTRUST;
+  Color? get IconColor => TRUSTColors.primaryColor;
 
   @override
   // TODO: implement corQuadradoLogin
-  Color? get corQuadradoLogin => AppColors.verdePrimarioTRUST;
+  Color? get corQuadradoLogin => TRUSTColors.primaryColor;
 
   @override
   Color? get corImagemLogo => Colors.white;
@@ -65,4 +54,8 @@ class TrustHomologacaoEnvironment extends Environment {
   @override
   // TODO: implement fraseSloganLogin
   String? get fraseSloganLogin => '';
+
+  @override
+  // TODO: implement imagensGuiaCertificado
+  ImagensGuiaImportarCertificado get imagensGuiaCertificado => ThemeTRUST();
 }

@@ -11,8 +11,6 @@ import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_m
 import 'package:Srm_Asset/widgets/botao_selecao_empresa.dart';
 import 'package:Srm_Asset/widgets/card_monitor_assinaturas/card_monitor_assinaturas.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
-
-import '../../../core/constants/tema_configs.dart';
 import '../../../core/implementations_config/api_response.dart';
 
 class MonitorAssinaturas extends StatefulWidget {
@@ -95,7 +93,7 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas>
                         dividerColor: Colors.transparent,
                         controller: _tabController,
                         indicatorSize: TabBarIndicatorSize.tab,
-                        unselectedLabelColor: AppColors.cinzaEscuro,
+                        unselectedLabelColor: context.labelTextColor,
                         labelColor: context.focusColor,
                         labelStyle: context.textTheme.bodyMedium!
                             .copyWith(fontWeight: FontWeight.w600),

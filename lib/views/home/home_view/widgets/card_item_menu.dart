@@ -24,7 +24,6 @@ class _CardItemMenuHome extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(15)),
         onTap: onTap,
         child: Card(
-          color: Colors.white,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(12))),
           child: Padding(
