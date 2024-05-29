@@ -266,11 +266,10 @@ class _AuthFormState extends State<AuthForm> {
 
       final response = await authProvider.login(userModel);
 
-      OverlayApp.terminaOverlay();
-
       if (response != null && response.error != null) {
         final error = response.error as ExceptionModel;
         setState(() {
+          OverlayApp.terminaOverlay();
           _mensagemErro = error.mensagem;
         });
       } else {
@@ -280,11 +279,14 @@ class _AuthFormState extends State<AuthForm> {
         await certificadoProvider.pegarCertificado();
         // _saveLoginDataIfNeeded();
         if (authProvider.listaCedente!.length > 1) {
+          OverlayApp.terminaOverlay();
           Modular.to.pushReplacementNamed(AppRoutes.listaSelecaoEmpresasRoute);
         } else {
           //certificadoProvider.pegarCertificado();
+          OverlayApp.terminaOverlay();
           authProvider.RelogarTrocarCedente(
               authProvider.dataUser!.identificadorCedente, context);
+          Modular.to.navigate(AppRoutes.homeAppRoute);
         }
       }
     }

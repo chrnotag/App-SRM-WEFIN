@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_impl.dart';
 import 'package:Srm_Asset/widgets/mascara_texto_cnpj.dart';
 import 'package:flutter/material.dart';
@@ -106,6 +107,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                       onTap: () async {
                         authProviderAtt.RelogarTrocarCedente(
                             _searchResults![index].identificador, context);
+                        Modular.to.navigate(AppRoutes.homeAppRoute);
                       },
                       child: SizedBox(
                         height: 70.h,
