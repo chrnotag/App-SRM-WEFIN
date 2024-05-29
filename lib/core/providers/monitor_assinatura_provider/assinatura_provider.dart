@@ -26,14 +26,6 @@ class AssinaturaProvider extends ChangeNotifier {
     todasAssinaturas = assinaturasModel;
   }
 
-  bool _isDestacado = false;
-
-  bool get isDestacado => _isDestacado;
-
-  set isDestacado(bool destacado) {
-    _isDestacado = destacado;
-  }
-
   MonitorAssinaturasModel? _assinaturaSelecionada;
 
   MonitorAssinaturasModel? get assinaturaSelecionada => _assinaturaSelecionada;

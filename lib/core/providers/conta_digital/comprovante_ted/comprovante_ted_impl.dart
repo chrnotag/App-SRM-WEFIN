@@ -25,6 +25,7 @@ class ComprovanteTEDImpl {
     try {
       final response = await http.get(url, headers: headers);
       print('request code: ${response.statusCode}');
+      print('erroe: ${response.body}');
       if (response.statusCode == 200) {
         final Uint8List pdfBytes = response.bodyBytes;
         tedProvider.comprovanteTEDDownloadBites = pdfBytes;

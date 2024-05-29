@@ -74,7 +74,7 @@ class AppRoutes {
 
   static get visualizarPdfScreenContaDigitalRoute => '/visualizar-pdf';
 
-  static get comprovanteTEDScreenContaDigitalRoute => '/comprovante-ted/:codigoTransacao/:dataComprovante';
+  static get comprovanteTEDScreenContaDigitalRoute => '/comprovante-ted';
 
   //ESCOPO CONTA DIGITAL NAVIGATOR ROUTE
   static get extratoScreenRoute =>

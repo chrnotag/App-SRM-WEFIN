@@ -19,7 +19,11 @@ class _ItemListaOperacao extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () => Modular.to.pushNamed(AppRoutes.visualizarComprovanteTEDScreenRoute + '/$codigoTransacao' + '/$dataComprovante'),
+      onTap: () {
+          Modular.to.pushNamed(AppRoutes.visualizarComprovanteTEDScreenRoute +
+              '/$codigoTransacao' +
+              '/$dataComprovante');
+      },
       title: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
