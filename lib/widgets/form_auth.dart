@@ -286,6 +286,7 @@ class _AuthFormState extends State<AuthForm> {
           OverlayApp.terminaOverlay();
           authProvider.RelogarTrocarCedente(
               authProvider.dataUser!.identificadorCedente, context);
+          Modular.to.navigate(AppRoutes.homeAppRoute);
         }
       }
     }

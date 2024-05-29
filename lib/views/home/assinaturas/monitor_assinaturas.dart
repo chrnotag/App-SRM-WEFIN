@@ -71,7 +71,7 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
                       SliverAppBar(
                         title: Text(
                           'Assinatura Digital',
-                          style: context.textTheme.displaySmall,
+                          style: context.textTheme.displaySmall!.copyWith(color: Colors.white),
                         ),
                         centerTitle: true,
                         floating: true,
@@ -150,7 +150,7 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
                     SliverAppBar(
                       title: Text(
                         'Assinatura Digital',
-                        style: context.textTheme.displaySmall,
+                        style: context.textTheme.displaySmall!.copyWith(color: Colors.white),
                       ),
                       centerTitle: true,
                       floating: true,
