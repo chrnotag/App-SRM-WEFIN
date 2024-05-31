@@ -173,7 +173,7 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
                       itemCount: assinaturas.length,
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        return CardMonitorAssinatura(
+                        return CardMonitorAssinaturas(
                             assinatura: assinaturas[index]);
                       },
                     );

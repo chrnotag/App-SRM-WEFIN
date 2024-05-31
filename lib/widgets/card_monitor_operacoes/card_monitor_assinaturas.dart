@@ -1,7 +1,6 @@
 import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:Srm_Asset/core/utils/data_format.dart';
 import 'package:Srm_Asset/core/utils/money_format.dart';
-import 'package:Srm_Asset/generated/assets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -17,28 +16,22 @@ import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 
 part 'interior_itens/interior_assinantes.dart';
 
-part 'interior_documentos/interior_documentos.dart';
-
 part 'item_text_card.dart';
 
 part 'item_lista_interno_card.dart';
 
 part 'interior_itens/widget_assinantes.dart';
 
-part 'interior_documentos/widget_documentos.dart';
-
-part 'interior_documentos/item_lista_documentos.dart';
-
-class CardMonitorAssinaturas extends StatefulWidget {
+class CardMonitorOperacoes extends StatefulWidget {
   final MonitorAssinaturasModel assinatura;
 
-  const CardMonitorAssinaturas({super.key, required this.assinatura});
+  const CardMonitorOperacoes({super.key, required this.assinatura});
 
   @override
-  State<CardMonitorAssinaturas> createState() => _CardMonitorAssinaturasState();
+  State<CardMonitorOperacoes> createState() => _CardMonitorOperacoesState();
 }
 
-class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
+class _CardMonitorOperacoesState extends State<CardMonitorOperacoes>
     with SingleTickerProviderStateMixin {
   bool cardExpandido = false;
 
@@ -217,15 +210,6 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                                 assinatura: assinatura,
                               ),
                             ],
-                          ),
-                        ),
-                        Visibility(
-                          visible: true,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 20.h),
-                            child: _InteriorDocumentosLista(
-                              assinaturasModel: assinatura,
-                            ),
                           ),
                         ),
                         Padding(
