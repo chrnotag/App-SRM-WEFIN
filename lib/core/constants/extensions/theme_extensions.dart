@@ -22,6 +22,7 @@ extension ThemeExtension on BuildContext {
   Color get waitingColor => SRMColors.primaryColor;
   Color get labelTextColor => SRMColors.textLabelColor;
   Color get onBackgroundColor => Theme.of(this).colorScheme.onBackground;
+  Color get bordaCardColor => const Color(0XFFDDDDDD);
   ImagensGuiaImportarCertificado get imagensGuiaCertificado => _ambiente.imagensGuiaCertificado;
   TextTheme get textTheme => Theme.of(this).textTheme;
   SearchBarThemeData get searchBarTheme  => Theme.of(this).searchBarTheme;

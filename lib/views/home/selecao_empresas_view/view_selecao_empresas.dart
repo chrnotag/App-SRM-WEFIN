@@ -105,7 +105,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
 
                     return InkWell(
                       onTap: () async {
-                        authProviderAtt.RelogarTrocarCedente(
+                        await authProviderAtt.RelogarTrocarCedente(
                             _searchResults![index].identificador, context);
                         Modular.to.navigate(AppRoutes.homeAppRoute);
                       },

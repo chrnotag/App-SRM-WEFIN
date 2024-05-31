@@ -1,6 +1,7 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
-import 'package:Srm_Asset/generated/assets.dart';
+import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
+import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -11,6 +12,7 @@ import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:validatorless/validatorless.dart';
 import '../core/constants/AppSizes.dart';
+import '../core/providers/fluxo_assinatura_provider/iniciar_assinatura/iniciar_assinatura_provider.dart';
 
 class DialogSenhaCertificado extends StatefulWidget {
   const DialogSenhaCertificado({Key? key}) : super(key: key);
@@ -129,7 +131,18 @@ class _DialogSenhaCertificadoState extends State<DialogSenhaCertificado> {
                         onPressed: () async {
                           if (formKey.currentState!.validate()) {
                             provider.senhaCertificado = textController.text;
-                            provider.importarCertificado(context);
+                            await provider.importarCertificado(context);
+                            final assinaturaProvider = Modular.get<AssinaturaProvider>();
+                            IniciarAssinaturaProvider iniciarAssinatura =
+                            Modular.get<IniciarAssinaturaProvider>();
+                            final authProvider = Modular.get<AuthProvider>();
+                            iniciarAssinatura.IniciarAssinatura(
+                                iniciarAssinatura
+                                    .obterInformacoesUsuarioLogado(
+                                    assinaturaProvider.assinaturaSelecionada!,
+                                    authProvider
+                                        .dataUser!.identificadorUsuario),
+                                context);
                           }
                         },
                         label: "Confirmar",

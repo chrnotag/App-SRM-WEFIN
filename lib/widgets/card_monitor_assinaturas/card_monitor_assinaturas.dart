@@ -1,10 +1,10 @@
+import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:Srm_Asset/core/utils/data_format.dart';
 import 'package:Srm_Asset/core/utils/money_format.dart';
 import 'package:Srm_Asset/generated/assets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
@@ -12,11 +12,8 @@ import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/assinatura_eletronica/assinatura_eletronica_provider.dart';
 import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/iniciar_assinatura/iniciar_assinatura_provider.dart';
-import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
-import 'package:Srm_Asset/core/providers/certificado_provider/certificado_provider.dart';
 import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 part 'interior_itens/interior_assinantes.dart';
 
@@ -125,7 +122,7 @@ class _CardMonitorAssinaturaState extends State<CardMonitorAssinatura>
         shadowColor: Colors.transparent,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(12.r)),
-            side: const BorderSide(color: Color(0XFFDDDDDD), width: 1)),
+            side: BorderSide(color: context.bordaCardColor, width: 1)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -198,8 +195,8 @@ class _CardMonitorAssinaturaState extends State<CardMonitorAssinatura>
             ),
             Visibility(
                 visible: !cardExpandido,
-                child: const Divider(
-                  color: Color(0XFFDDDDDD),
+                child: Divider(
+                  color: context.bordaCardColor,
                 )),
             SizeTransition(
               sizeFactor: _heightAnimation,
@@ -234,7 +231,29 @@ class _CardMonitorAssinaturaState extends State<CardMonitorAssinatura>
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 20.h),
                           child: BotaoPadrao(
-                              label: 'Assinar Operação', onPressed: () {}),
+                            label: 'Assinar Operação',
+                            onPressed: () {
+                              final authProvider = Modular.get<AuthProvider>();
+                              final assinaturaProvider =
+                                  Modular.get<AssinaturaProvider>();
+                              assinaturaProvider.assinaturaSelecionada =
+                                  assinatura;
+                              AssinaturaEletronicaProvider
+                                  assinaturaEletronicaProvider =
+                                  Modular.get<AssinaturaEletronicaProvider>();
+                              assinaturaEletronicaProvider.codigoOperacao =
+                                  widget.assinatura.codigoOperacao;
+                              IniciarAssinaturaProvider iniciarAssinatura =
+                                  Modular.get<IniciarAssinaturaProvider>();
+                              iniciarAssinatura.IniciarAssinatura(
+                                  iniciarAssinatura
+                                      .obterInformacoesUsuarioLogado(
+                                          assinatura,
+                                          authProvider
+                                              .dataUser!.identificadorUsuario),
+                                  context);
+                            },
+                          ),
                         )
                       ],
                     ),

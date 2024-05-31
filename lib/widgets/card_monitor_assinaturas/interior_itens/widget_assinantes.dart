@@ -25,7 +25,7 @@ class _WidgetAssinante extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              nomeAssinante.length > 16
+              nomeAssinante.length > 20
                   ? '${nomeAssinante.substring(0, 20)}...'
                   : nomeAssinante,
               style: context.textTheme.bodyLarge!.copyWith(

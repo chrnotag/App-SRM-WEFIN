@@ -9,7 +9,6 @@ import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_provide
 import 'package:Srm_Asset/core/providers/monitor_operacao_provider/monitor_operacoes_provider.dart';
 import 'package:Srm_Asset/widgets/appbar_logo_perfil.dart';
 import 'package:Srm_Asset/widgets/botao_selecao_empresa.dart';
-import 'package:Srm_Asset/widgets/card_monitor_operacoes/card_monitor_operacoes.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -104,8 +103,7 @@ class _MonitorOperacoesState extends State<MonitorOperacoes> {
                       child: ListView.builder(
                         itemCount: operacoesProvider.operacoes.length,
                         shrinkWrap: true,
-                        itemBuilder: (context, index) => CardMonitorOperacoes(
-                            operacoes: operacoesProvider.operacoes[index]),
+                        itemBuilder: (context, index) => Container(),
                       ),
                     );
                   }
