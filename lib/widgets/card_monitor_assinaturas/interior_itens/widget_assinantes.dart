@@ -18,7 +18,7 @@ class _WidgetAssinante extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: context.width * 0.65,
+      width: context.width * 0.55,
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 3.h),
         child: Row(

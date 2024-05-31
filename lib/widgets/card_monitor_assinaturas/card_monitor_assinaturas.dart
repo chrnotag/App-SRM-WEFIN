@@ -15,6 +15,8 @@ import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/iniciar_assin
 import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 
+import '../../core/utils/capitalizar_palavras.dart';
+
 part 'interior_itens/interior_assinantes.dart';
 
 part 'interior_documentos/interior_documentos.dart';
@@ -28,6 +30,10 @@ part 'interior_itens/widget_assinantes.dart';
 part 'interior_documentos/widget_documentos.dart';
 
 part 'interior_documentos/item_lista_documentos.dart';
+
+part 'interior_procuradores/interior_procuradores.dart';
+
+part 'interior_procuradores/widget_procuradores.dart';
 
 class CardMonitorAssinaturas extends StatefulWidget {
   final MonitorAssinaturasModel assinatura;
@@ -123,44 +129,55 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(12.r)),
             side: BorderSide(color: context.bordaCardColor, width: 1)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: EdgeInsets.all(16.r),
-              child: Row(
+        child: Padding(
+          padding: EdgeInsets.all(16.r),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _ItemTextCard(
-                      titulo: 'Operação',
-                      conteudo: "${assinatura.codigoOperacao}"),
-                  _ItemTextCard(
-                      titulo: "Produto", conteudo: assinatura.siglaProduto),
-                  _ItemTextCard(
-                      titulo: "Data",
-                      conteudo:
-                          FormatarData.formatarPtBR(assinatura.dataOperacao))
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _ItemTextCard(
+                          titulo: 'Operação',
+                          conteudo: "${assinatura.codigoOperacao}"),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 16.h),
+                        child: _ItemListaInterior(
+                            titulo: "Papéis",
+                            conteudo: buildPapeisAndAssinantes(ID_PAPEL)),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      _ItemTextCard(
+                          titulo: "Produto", conteudo: assinatura.siglaProduto),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _ItemTextCard(
+                          titulo: "Data",
+                          conteudo:
+                              FormatarData.formatarPtBR(assinatura.dataOperacao)),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 16.h),
+                        child: _ItemTextCard(
+                            titulo: 'Valor Bruto',
+                            conteudo: FormatarDinheiro.BR(assinatura.valorBruto)),
+                      )
+                    ],
+                  ),
                 ],
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _ItemListaInterior(
-                      titulo: "Papéis",
-                      conteudo: buildPapeisAndAssinantes(ID_PAPEL)),
-                  _ItemTextCard(
-                      titulo: 'Valor Bruto',
-                      conteudo: FormatarDinheiro.BR(assinatura.valorBruto))
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(16.r),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -173,7 +190,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                         decoration: BoxDecoration(
                             color: Color(0XFFE1C11A),
                             borderRadius:
-                                BorderRadius.all(Radius.circular(50.r))),
+                            BorderRadius.all(Radius.circular(50.r))),
                         child: Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: 16.r, vertical: 4.r),
@@ -187,100 +204,99 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                       ),
                     ],
                   ),
-                  _ItemListaInterior(
-                      titulo: "Procurador",
-                      conteudo: buildPapeisAndAssinantes(ID_PROCURADOR))
+                  _InteriorProcuradores(
+                    assinatura: assinatura,)
                 ],
               ),
-            ),
-            Visibility(
-                visible: !cardExpandido,
-                child: Divider(
-                  color: context.bordaCardColor,
-                )),
-            SizeTransition(
-              sizeFactor: _heightAnimation,
-              axis: Axis.vertical,
-              child: Visibility(
-                  visible: cardExpandido,
-                  child: Padding(
-                    padding: EdgeInsets.all(16.r),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 20.h),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              _InteriorAssinantes(
-                                assinatura: assinatura,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Visibility(
-                          visible: true,
-                          child: Padding(
+              Visibility(
+                  visible: !cardExpandido,
+                  child: Divider(
+                    color: context.bordaCardColor,
+                  )),
+              SizeTransition(
+                sizeFactor: _heightAnimation,
+                axis: Axis.vertical,
+                child: Visibility(
+                    visible: cardExpandido,
+                    child: Padding(
+                      padding: EdgeInsets.all(16.r),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
                             padding: EdgeInsets.symmetric(vertical: 20.h),
-                            child: _InteriorDocumentosLista(
-                              assinaturasModel: assinatura,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                _InteriorAssinantes(
+                                  assinatura: assinatura,
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 20.h),
-                          child: BotaoPadrao(
-                            label: 'Assinar Operação',
-                            onPressed: () {
-                              final authProvider = Modular.get<AuthProvider>();
-                              final assinaturaProvider =
-                                  Modular.get<AssinaturaProvider>();
-                              assinaturaProvider.assinaturaSelecionada =
-                                  assinatura;
-                              AssinaturaEletronicaProvider
-                                  assinaturaEletronicaProvider =
-                                  Modular.get<AssinaturaEletronicaProvider>();
-                              assinaturaEletronicaProvider.codigoOperacao =
-                                  widget.assinatura.codigoOperacao;
-                              IniciarAssinaturaProvider iniciarAssinatura =
-                                  Modular.get<IniciarAssinaturaProvider>();
-                              iniciarAssinatura.IniciarAssinatura(
-                                  iniciarAssinatura
-                                      .obterInformacoesUsuarioLogado(
-                                          assinatura,
-                                          authProvider
-                                              .dataUser!.identificadorUsuario),
-                                  context);
-                            },
+                          Visibility(
+                            visible: true,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 20.h),
+                              child: _InteriorDocumentosLista(
+                                assinaturasModel: assinatura,
+                              ),
+                            ),
                           ),
-                        )
-                      ],
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 20.h),
+                            child: BotaoPadrao(
+                              label: 'Assinar Operação',
+                              onPressed: () {
+                                final authProvider = Modular.get<AuthProvider>();
+                                final assinaturaProvider =
+                                    Modular.get<AssinaturaProvider>();
+                                assinaturaProvider.assinaturaSelecionada =
+                                    assinatura;
+                                AssinaturaEletronicaProvider
+                                    assinaturaEletronicaProvider =
+                                    Modular.get<AssinaturaEletronicaProvider>();
+                                assinaturaEletronicaProvider.codigoOperacao =
+                                    widget.assinatura.codigoOperacao;
+                                IniciarAssinaturaProvider iniciarAssinatura =
+                                    Modular.get<IniciarAssinaturaProvider>();
+                                iniciarAssinatura.IniciarAssinatura(
+                                    iniciarAssinatura
+                                        .obterInformacoesUsuarioLogado(
+                                            assinatura,
+                                            authProvider
+                                                .dataUser!.identificadorUsuario),
+                                    context);
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+                    )),
+              ),
+              SizedBox(
+                width: context.width,
+                child: InkWell(
+                  borderRadius: const BorderRadius.only(
+                      bottomRight: Radius.circular(12),
+                      bottomLeft: Radius.circular(12)),
+                  onTap: () {
+                    _toggleExpand();
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.all(16.r),
+                    child: Text(
+                      cardExpandido ? "Menos Detalhes" : "Mais Detalhes",
+                      style: context.textTheme.displaySmall!.copyWith(
+                          color: context.primaryColor,
+                          fontWeight: FontWeight.w900),
+                      textAlign: TextAlign.center,
                     ),
-                  )),
-            ),
-            SizedBox(
-              width: context.width,
-              child: InkWell(
-                borderRadius: const BorderRadius.only(
-                    bottomRight: Radius.circular(12),
-                    bottomLeft: Radius.circular(12)),
-                onTap: () {
-                  _toggleExpand();
-                },
-                child: Padding(
-                  padding: EdgeInsets.all(16.r),
-                  child: Text(
-                    cardExpandido ? "Menos Detalhes" : "Mais Detalhes",
-                    style: context.textTheme.displaySmall!.copyWith(
-                        color: context.primaryColor,
-                        fontWeight: FontWeight.w900),
-                    textAlign: TextAlign.center,
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
