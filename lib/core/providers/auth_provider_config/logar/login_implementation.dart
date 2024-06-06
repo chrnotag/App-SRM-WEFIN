@@ -28,6 +28,7 @@ class LoginImpl {
     try {
       final response =
           await http.post(Uri.parse(url), headers: headers, body: body);
+      print(response.body);
       if (response.statusCode == 200) {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = LoginResponse.fromJson(responseBody);
