@@ -1,10 +1,11 @@
+import 'package:Srm_Asset/core/constants/extensions/string_extensions.dart';
+import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:Srm_Asset/core/utils/data_format.dart';
 import 'package:Srm_Asset/core/utils/money_format.dart';
 import 'package:Srm_Asset/generated/assets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
@@ -12,11 +13,8 @@ import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/assinatura_eletronica/assinatura_eletronica_provider.dart';
 import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/iniciar_assinatura/iniciar_assinatura_provider.dart';
-import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
-import 'package:Srm_Asset/core/providers/certificado_provider/certificado_provider.dart';
 import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 part 'interior_itens/interior_assinantes.dart';
 
@@ -32,16 +30,20 @@ part 'interior_documentos/widget_documentos.dart';
 
 part 'interior_documentos/item_lista_documentos.dart';
 
-class CardMonitorAssinatura extends StatefulWidget {
+part 'interior_procuradores/interior_procuradores.dart';
+
+part 'interior_procuradores/widget_procuradores.dart';
+
+class CardMonitorAssinaturas extends StatefulWidget {
   final MonitorAssinaturasModel assinatura;
 
-  const CardMonitorAssinatura({super.key, required this.assinatura});
+  const CardMonitorAssinaturas({super.key, required this.assinatura});
 
   @override
-  State<CardMonitorAssinatura> createState() => _CardMonitorAssinaturaState();
+  State<CardMonitorAssinaturas> createState() => _CardMonitorAssinaturasState();
 }
 
-class _CardMonitorAssinaturaState extends State<CardMonitorAssinatura>
+class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
     with SingleTickerProviderStateMixin {
   bool cardExpandido = false;
 
@@ -125,45 +127,56 @@ class _CardMonitorAssinaturaState extends State<CardMonitorAssinatura>
         shadowColor: Colors.transparent,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(12.r)),
-            side: const BorderSide(color: Color(0XFFDDDDDD), width: 1)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: EdgeInsets.all(16.r),
-              child: Row(
+            side: BorderSide(color: context.bordaCardColor, width: 1)),
+        child: Padding(
+          padding: EdgeInsets.all(16.r),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _ItemTextCard(
-                      titulo: 'Operação',
-                      conteudo: "${assinatura.codigoOperacao}"),
-                  _ItemTextCard(
-                      titulo: "Produto", conteudo: assinatura.siglaProduto),
-                  _ItemTextCard(
-                      titulo: "Data",
-                      conteudo:
-                          FormatarData.formatarPtBR(assinatura.dataOperacao))
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _ItemTextCard(
+                          titulo: 'Operação',
+                          conteudo: "${assinatura.codigoOperacao}"),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 16.h),
+                        child: _ItemListaInterior(
+                            titulo: "Papéis",
+                            conteudo: buildPapeisAndAssinantes(ID_PAPEL)),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      _ItemTextCard(
+                          titulo: "Produto", conteudo: assinatura.siglaProduto),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _ItemTextCard(
+                          titulo: "Data",
+                          conteudo:
+                              FormatarData.formatarPtBR(assinatura.dataOperacao)),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 16.h),
+                        child: _ItemTextCard(
+                            titulo: 'Valor Bruto',
+                            conteudo: FormatarDinheiro.BR(assinatura.valorBruto)),
+                      )
+                    ],
+                  ),
                 ],
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _ItemListaInterior(
-                      titulo: "Papéis",
-                      conteudo: buildPapeisAndAssinantes(ID_PAPEL)),
-                  _ItemTextCard(
-                      titulo: 'Valor Bruto',
-                      conteudo: FormatarDinheiro.BR(assinatura.valorBruto))
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(16.r),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -176,7 +189,7 @@ class _CardMonitorAssinaturaState extends State<CardMonitorAssinatura>
                         decoration: BoxDecoration(
                             color: Color(0XFFE1C11A),
                             borderRadius:
-                                BorderRadius.all(Radius.circular(50.r))),
+                            BorderRadius.all(Radius.circular(50.r))),
                         child: Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: 16.r, vertical: 4.r),
@@ -190,78 +203,99 @@ class _CardMonitorAssinaturaState extends State<CardMonitorAssinatura>
                       ),
                     ],
                   ),
-                  _ItemListaInterior(
-                      titulo: "Procurador",
-                      conteudo: buildPapeisAndAssinantes(ID_PROCURADOR))
+                  _InteriorProcuradores(
+                    assinatura: assinatura,)
                 ],
               ),
-            ),
-            Visibility(
-                visible: !cardExpandido,
-                child: const Divider(
-                  color: Color(0XFFDDDDDD),
-                )),
-            SizeTransition(
-              sizeFactor: _heightAnimation,
-              axis: Axis.vertical,
-              child: Visibility(
-                  visible: cardExpandido,
-                  child: Padding(
-                    padding: EdgeInsets.all(16.r),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 20.h),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              _InteriorAssinantes(
-                                assinatura: assinatura,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Visibility(
-                          visible: true,
-                          child: Padding(
+              Visibility(
+                  visible: !cardExpandido,
+                  child: Divider(
+                    color: context.bordaCardColor,
+                  )),
+              SizeTransition(
+                sizeFactor: _heightAnimation,
+                axis: Axis.vertical,
+                child: Visibility(
+                    visible: cardExpandido,
+                    child: Padding(
+                      padding: EdgeInsets.all(16.r),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
                             padding: EdgeInsets.symmetric(vertical: 20.h),
-                            child: _InteriorDocumentosLista(
-                              assinaturasModel: assinatura,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                _InteriorAssinantes(
+                                  assinatura: assinatura,
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 20.h),
-                          child: BotaoPadrao(
-                              label: 'Assinar Operação', onPressed: () {}),
-                        )
-                      ],
+                          Visibility(
+                            visible: true,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 20.h),
+                              child: _InteriorDocumentosLista(
+                                assinaturasModel: assinatura,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 20.h),
+                            child: BotaoPadrao(
+                              label: 'Assinar Operação',
+                              onPressed: () {
+                                final authProvider = Modular.get<AuthProvider>();
+                                final assinaturaProvider =
+                                    Modular.get<AssinaturaProvider>();
+                                assinaturaProvider.assinaturaSelecionada =
+                                    assinatura;
+                                AssinaturaEletronicaProvider
+                                    assinaturaEletronicaProvider =
+                                    Modular.get<AssinaturaEletronicaProvider>();
+                                assinaturaEletronicaProvider.codigoOperacao =
+                                    widget.assinatura.codigoOperacao;
+                                IniciarAssinaturaProvider iniciarAssinatura =
+                                    Modular.get<IniciarAssinaturaProvider>();
+                                iniciarAssinatura.IniciarAssinatura(
+                                    iniciarAssinatura
+                                        .obterInformacoesUsuarioLogado(
+                                            assinatura,
+                                            authProvider
+                                                .dataUser!.identificadorUsuario),
+                                    context);
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+                    )),
+              ),
+              SizedBox(
+                width: context.width,
+                child: InkWell(
+                  borderRadius: const BorderRadius.only(
+                      bottomRight: Radius.circular(12),
+                      bottomLeft: Radius.circular(12)),
+                  onTap: () {
+                    _toggleExpand();
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.all(16.r),
+                    child: Text(
+                      cardExpandido ? "Menos Detalhes" : "Mais Detalhes",
+                      style: context.textTheme.displaySmall!.copyWith(
+                          color: context.primaryColor,
+                          fontWeight: FontWeight.w900),
+                      textAlign: TextAlign.center,
                     ),
-                  )),
-            ),
-            SizedBox(
-              width: context.width,
-              child: InkWell(
-                borderRadius: const BorderRadius.only(
-                    bottomRight: Radius.circular(12),
-                    bottomLeft: Radius.circular(12)),
-                onTap: () {
-                  _toggleExpand();
-                },
-                child: Padding(
-                  padding: EdgeInsets.all(16.r),
-                  child: Text(
-                    cardExpandido ? "Menos Detalhes" : "Mais Detalhes",
-                    style: context.textTheme.displaySmall!.copyWith(
-                        color: context.primaryColor,
-                        fontWeight: FontWeight.w900),
-                    textAlign: TextAlign.center,
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

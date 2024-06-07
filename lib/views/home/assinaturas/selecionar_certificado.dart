@@ -47,8 +47,8 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
       title: Column(
         children: [
           Text(
-              'Assinar Operação ${assinaturaProvider.assinaturaSelecionada!
-                  .codigoOperacao}',
+              'Assinar Operação ${assinaturaProvider.assinaturaSelecionada
+                  ?.codigoOperacao ?? "Sem operacao"}',
               style: context.textTheme.bodyLarge!.copyWith(
                 fontWeight: FontWeight.w300,
                 letterSpacing: 1.5.sp,

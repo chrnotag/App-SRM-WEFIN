@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/views/home/assinaturas/monitor_assinaturas.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
@@ -49,28 +50,16 @@ class AssinaturaCompletaPopUp extends StatelessWidget {
           BotaoPadrao(
               label: 'Acompanhar Assinaturas',
               onPressed: () {
-                final MonitorOperacoesProvider operacaoProvider =
-                    Modular.get<MonitorOperacoesProvider>();
-                final AssinaturaProvider assinaturaProvider =
-                    Modular.get<AssinaturaProvider>();
-                List<MonitorAssinaturasModel> assinaturasPendentes =
-                    assinaturaProvider.assinaturasPendentes;
-                Modular.to
-                    .popAndPushNamed(AppRoutes.assinaturaDigitalRoute, arguments: {
-                  'assinaturas': operacaoProvider.aconragemAssinatura(
-                      assinaturaProvider.todasAssinaturas, codigoOperacao),
-                  'assinaturasPendentes': assinaturasPendentes,
-                  'tab': 1,
-                  'destacar': true,
-                });
+                Modular.to.pop();
               }),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10),
             child: BotaoPadrao(
                 label: 'Realizar nova assinatura',
                 filled: false,
-                onPressed: () {
+                onPressed: () async {
                   Modular.to.pop();
+                  await Modular.get<AssinaturaProvider>().carregarAssinaturas();
                 }),
           ),
         ],

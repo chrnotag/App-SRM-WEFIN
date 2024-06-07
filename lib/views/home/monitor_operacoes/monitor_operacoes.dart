@@ -1,17 +1,18 @@
-import 'package:Srm_Asset/views/home/assinaturas/widgets/popup_erro_carregar_dados.dart';
-import 'package:Srm_Asset/widgets/transparent_appbar_empty.dart';
+import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
+import 'package:Srm_Asset/widgets/card_monitor_operacoes/card_monitor_assinaturas.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/implementations_config/api_response.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
-import 'package:Srm_Asset/core/providers/monitor_operacao_provider/monitor_operacoes_provider.dart';
-import 'package:Srm_Asset/widgets/appbar_logo_perfil.dart';
-import 'package:Srm_Asset/widgets/botao_selecao_empresa.dart';
-import 'package:Srm_Asset/widgets/card_monitor_operacoes/card_monitor_operacoes.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
 import 'package:line_icons/line_icons.dart';
+
+import '../../../core/providers/monitor_assinatura_provider/assinatura_provider.dart';
+import '../../../models/auth_login_models/SRM/cedente_model.dart';
+import '../../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
+import '../../../widgets/card_monitor_assinaturas/card_monitor_assinaturas.dart';
 
 class MonitorOperacoes extends StatefulWidget {
   const MonitorOperacoes({super.key});
@@ -21,7 +22,10 @@ class MonitorOperacoes extends StatefulWidget {
 }
 
 class _MonitorOperacoesState extends State<MonitorOperacoes> {
-  late Future<ApiResponse<dynamic>> _operacoesFuture;
+  late Future<ApiResponse<dynamic>> _assinaturasFuture;
+
+  String? _valorSelecionado;
+  List<CedenteModel> _listaItens = [];
 
   @override
   void initState() {
@@ -29,92 +33,153 @@ class _MonitorOperacoesState extends State<MonitorOperacoes> {
     _carregarDados();
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
   Future<void> _carregarDados() async {
     setState(() {
-      _operacoesFuture =
-          Modular.get<MonitorOperacoesProvider>().carregarOperacoes();
+      _assinaturasFuture =
+          Modular.get<AssinaturaProvider>().carregarAssinaturas();
+      final authProvider = Modular.get<AuthProvider>();
+      _valorSelecionado = authProvider.empresaSelecionada!.identificador;
+      _listaItens = authProvider.listaCedente!;
     });
   }
 
   @override
-  Widget build(BuildContext context) {
-    final AuthProvider authProvider = Modular.get<AuthProvider>();
-    final MonitorOperacoesProvider operacoesProvider =
-        Modular.get<MonitorOperacoesProvider>();
+  void dispose() {
+    super.dispose();
+  }
 
+  @override
+  Widget build(BuildContext context) {
+    final AuthProvider authProvider = context.watch<AuthProvider>();
+    final AssinaturaProvider assinaturaProvider =
+    context.watch<AssinaturaProvider>();
+    final List<MonitorAssinaturasModel> assinaturas =
+        assinaturaProvider.assinaturasPendentes;
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: AppBar().preferredSize,
-        child: TransparentAppBarEmpty(),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(16.r),
-        child: Column(
+        appBar: AppBar(
+          title: Text(
+            'Monitor de Operações',
+            style:
+            context.textTheme.displaySmall!.copyWith(color: Colors.white),
+          ),
+          centerTitle: true,
+        ),
+        body: Column(
           children: [
-            SelecaoEmpresa(
-              nomeEmpresa: authProvider.empresaSelecionada!.nome,
-              changeble: true,
-              tituloPagina: 'Monitor de Operações',
+            Padding(
+              padding: EdgeInsets.all(8.r),
+              child: Container(
+                decoration: BoxDecoration(
+                    border: Border.all(color: context.secondaryColor),
+                    borderRadius: BorderRadius.all(Radius.circular(12.r))),
+                child: DropdownButton(
+                  dropdownColor: Colors.white,
+                  value: _valorSelecionado,
+                  selectedItemBuilder: (context) => _listaItens
+                      .map((e) => DropdownMenuItem(
+                    value: e.identificador,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(e.nome,
+                          style: context.textTheme.bodyLarge!.copyWith(
+                              color: context.labelTextColor,
+                              fontWeight: FontWeight.w900),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis),
+                    ),
+                  ))
+                      .toList(),
+                  menuMaxHeight: 300.h,
+                  isExpanded: true,
+                  items: _listaItens
+                      .map((e) => DropdownMenuItem(
+                    value: e.identificador,
+                    child: Text(e.nome,
+                        style: context.textTheme.bodyMedium!
+                            .copyWith(color: Colors.black),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis),
+                  ))
+                      .toList(),
+                  onChanged: (value) async {
+                    setState(() {
+                      _valorSelecionado = value!;
+                    });
+                    await authProvider.RelogarTrocarCedente(value!, context);
+                  },
+                  underline: Container(),
+                  style: context.textTheme.bodyMedium!
+                      .copyWith(color: Colors.white),
+                  icon: Icon(
+                    Icons.keyboard_arrow_down,
+                    size: 25,
+                    color: context.secondaryColor,
+                  ),
+                ),
+              ),
             ),
             SizedBox(
-              height: 20.h,
-            ),
-            Expanded(
-              child: FutureBuilder(
-                future: _operacoesFuture,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Loader();
-                  } else if (snapshot.hasError) {
-                    showDialog(
-                      context: context,
-                      builder: (context) => PopUpErroCarregarDados(),
-                    );
-                  }
-                  if (operacoesProvider.operacoes.isEmpty) {
-                    return Card(
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(top: 116.h),
-                            child: Icon(LineIcons.clipboardWithCheck,
-                                color: context.focusColor,
-                                size: 137.r),
-                          ),
-                          Padding(
-                            padding:
-                            EdgeInsets.symmetric(vertical: 25.h),
-                            child: Text(
-                              "Não há operações a serem mostradas no momento.",
-                              textAlign: TextAlign.center,
-                              style: context.textTheme.bodyLarge!
-                                  .copyWith(
-                                  color: context.indicatorColor,
-                                  fontWeight: FontWeight.w600),
+              height: context.height * 0.82,
+              child: RefreshIndicator(
+                onRefresh: () => _carregarDados(),
+                child: FutureBuilder(
+                  future: _assinaturasFuture,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Loader();
+                    }
+                    if (assinaturas.isEmpty) {
+                      return SizedBox(
+                        width: context.width,
+                        child: Padding(
+                          padding: EdgeInsets.all(8.r),
+                          child: Card(
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(12.r)),
+                                side: BorderSide(color: context.bordaCardColor)
+                            ),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(top: 116.h),
+                                  child: Icon(LineIcons.checkCircle,
+                                      color: context.focusColor, size: 137.r),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 25.h),
+                                  child: Text(
+                                    "Não há operações a serem apresentadas",
+                                    textAlign: TextAlign.center,
+                                    style: context.textTheme.displayMedium!.copyWith(
+                                        color: context.secondaryColor,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      );
+                    }
+                    return ListView.builder(
+                      itemCount: assinaturas.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return CardMonitorOperacoes(
+                            assinatura: assinaturas[index]);
+                      },
                     );
-                  } else {
-                    return RefreshIndicator(
-                      backgroundColor: Colors.white,
-                      color: context.primaryColor,
-                      onRefresh: () => _carregarDados(),
-                      child: ListView.builder(
-                        itemCount: operacoesProvider.operacoes.length,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) => CardMonitorOperacoes(
-                            operacoes: operacoesProvider.operacoes[index]),
-                      ),
-                    );
-                  }
-                },
+                  },
+                ),
               ),
-            )
+            ),
           ],
-        ),
-      ),
-    );
+        ));
   }
 }

@@ -20,6 +20,14 @@ class AssinaturaProvider extends ChangeNotifier {
     return response;
   }
 
+  bool _existemProcuradores = true;
+
+  bool get existemProcuradores => _existemProcuradores;
+
+  set existemProcuradores(bool existe){
+    _existemProcuradores = existe;
+  }
+
   set assinaturas(List<MonitorAssinaturasModel> assinaturasModel) {
     separaAssinaturas(assinaturasModel);
     mapearAssinaturas = assinaturasModel;
