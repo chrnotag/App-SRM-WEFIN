@@ -21,11 +21,7 @@ class _InteriorProcuradoresState extends State<_InteriorProcuradores> {
         }
       }
     }
-    if(listaAssinantes.isEmpty){
-      assinaturaProvider.existemProcuradores = false;
-    }else{
-      assinaturaProvider.existemProcuradores = true;
-    }
+    assinaturaProvider.existemProcuradores = listaAssinantes.isNotEmpty;
     return listaAssinantes;
   }
 
