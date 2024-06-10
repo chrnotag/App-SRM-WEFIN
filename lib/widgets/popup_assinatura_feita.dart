@@ -59,6 +59,7 @@ class AssinaturaCompletaPopUp extends StatelessWidget {
                 filled: false,
                 onPressed: () async {
                   Modular.to.pop();
+                  Modular.to.pop();
                   await Modular.get<AssinaturaProvider>().carregarAssinaturas();
                 }),
           ),
