@@ -16,7 +16,7 @@ class _InteriorAssinantesState extends State<_InteriorAssinantes> {
       for (var infoAssinante in assinante.informacoesAssinante) {
         listaAssinantes.add(_WidgetAssinante(
             infoAssinante: infoAssinante,
-            nomeAssinante: CapitalizarPalavras.capitalizar(assinante.nomeAssinante)));
+            nomeAssinante: assinante.nomeAssinante.capitalizeCadaPalavra()));
       }
     }
     return listaAssinantes;
