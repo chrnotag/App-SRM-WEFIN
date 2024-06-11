@@ -29,7 +29,7 @@ class ExtratoImpl {
         numeroContaTitular, dataInicial, dataFinal, tipoConsulta);
     try {
       final response = await http.get(url, headers: headers);
-      print('request code: ${response.statusCode}');
+      print('response: ${response.body}');
       if (response.statusCode == 200) {
         if (tipoConsulta == TipoConsultaExtrato.BAIXAR) {
           final Uint8List pdfBytes = response.bodyBytes;
