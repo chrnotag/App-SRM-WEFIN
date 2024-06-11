@@ -25,7 +25,6 @@ class IniciarAssinaturaEletronicaImpl {
     };
     final body = json.encode(codigoOperacaoModel);
     final url = Uri.parse(ambiente.endpoints.iniciarAssinaturaEletronica);
-    log('CURL da requisição: \nheader: $headers \nbody: $body \nurl: $url');
     try {
       final response = await http.post(url, body: body, headers: headers);
       log('status code: ${response.statusCode}');

@@ -95,7 +95,7 @@ class FinalizarAssinaturaProvider extends ChangeNotifier {
         showDialog(
           context: context,
           builder: (context) =>
-              AssinaturaCompletaPopUp(codigoOperacao: provider.codigoOperacao),
+              AssinaturaCompletaPopUp(codigoOperacao: provider.codigoOperacao!),
         );
       }
     }

@@ -65,16 +65,16 @@ class _AuthFormState extends State<AuthForm> {
     super.dispose();
   }
 
+  void removerCaracteresEspeciais() {
+    _loginEC.text = _loginEC.text.replaceAll(RegExp(r'[.-]'), '');
+  }
+
   @override
   Widget build(BuildContext context) {
     Environment ambiente = Modular.get<Environment>();
     String politicaPrivacidade = ambiente.endpoints.politicaPrivacidade;
     String termosDeUso = ambiente.endpoints.termosDeUso;
     int? maximoCaracteresCPF;
-
-    void removerCaracteresEspeciais() {
-      _loginEC.text = _loginEC.text.replaceAll(RegExp(r'[.-]'), '');
-    }
 
     final temLetras = RegExp(r'[a-zA-Z]').hasMatch(_loginEC.text);
 
@@ -174,7 +174,7 @@ class _AuthFormState extends State<AuthForm> {
                 }
                 TextInput.finishAutofillContext();
                 if (widget.visible) {
-                  await login();
+                  await login(temLetras);
                 } else {
                   await resetPassword();
                 }
@@ -248,7 +248,7 @@ class _AuthFormState extends State<AuthForm> {
   //   }
   // }
 
-  Future<void> login() async {
+  Future<void> login(bool temLetras) async {
     CertificadoProvider certificadoProvider =
         Modular.get<CertificadoProvider>();
     final authProvider = Modular.get<AuthProvider>();
@@ -258,6 +258,10 @@ class _AuthFormState extends State<AuthForm> {
       setState(() {
         OverlayApp.iniciaOverlay(context);
       });
+
+      if(!temLetras){
+        removerCaracteresEspeciais();
+      }
 
       final userModel = UserModel(
           usuario: _loginEC.text,

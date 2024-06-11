@@ -34,11 +34,11 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
 
   final _formKey = GlobalKey<FormState>();
 
-  late int _codigoOperacao;
+  int? _codigoOperacao;
 
-  int get codigoOperacao => _codigoOperacao;
+  int? get codigoOperacao => _codigoOperacao;
 
-  set codigoOperacao(int cod) {
+  set codigoOperacao(int? cod) {
     _codigoOperacao = cod;
     notifyListeners();
   }
@@ -90,7 +90,7 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
             DateTime.now().timeZoneOffset.inMinutes.toString(),
         evidencias: Evidencias(geolocalizacao: geolocalizacao!),
         chaveDocumento: respostaAssinaturaEletronica.chaveDocumento,
-        codigoOperacao: codigoOperacao,
+        codigoOperacao: codigoOperacao!,
         idDocumentoLacuna: respostaAssinaturaEletronica.idDocumentoLacuna,
         ticket: respostaAssinaturaEletronica.ticket);
   }
@@ -104,7 +104,7 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
             DateTime.now().timeZoneOffset.inMinutes.toString(),
             evidencias: Evidencias(geolocalizacao: geolocalizacao!),
             chaveDocumento: respostaAssinaturaEletronica.chaveDocumento,
-            codigoOperacao: codigoOperacao,
+            codigoOperacao: codigoOperacao!,
             idDocumentoLacuna: respostaAssinaturaEletronica.idDocumentoLacuna,
             ticket: respostaAssinaturaEletronica.ticket);
         final result =
@@ -118,7 +118,7 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
     return false;
   }
 
-  _informarCodigoEmail(BuildContext context) {
+  informarCodigoEmail(BuildContext context) {
     final _overlayLoader = OverlayEntry(
       builder: (context) => const Material(
         color: Colors.transparent,
@@ -179,7 +179,7 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
                               showDialog(
                                   context: context,
                                   builder: (context) => AssinaturaCompletaPopUp(
-                                      codigoOperacao: codigoOperacao));
+                                      codigoOperacao: codigoOperacao!));
                             } else {
                               _overlayLoader.remove();
                               Fluttertoast.showToast(
@@ -202,60 +202,6 @@ class AssinaturaEletronicaProvider extends ChangeNotifier {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget confirmarAssinaturaDialog(
-      InformacaoAssinante assinante, BuildContext context) {
-    final _overlayLoader = OverlayEntry(
-      builder: (context) => const Material(
-        color: Colors.transparent,
-        child: Loader(),
-      ),
-    );
-    return AlertDialog(
-      icon: Icon(
-        LineIcons.exclamationCircle,
-        color: context.focusColor,
-        size: 50,
-      ),
-      title: Column(
-        children: [
-          Text(
-            'Você confirma a assinatura de todos os documentos da operação ${assinaturaProvider.assinaturaSelecionada!.siglaProduto} nº${codigoOperacao}',
-            style: myNavigatorKey.currentContext!.textTheme.bodyMedium,
-            textAlign: TextAlign.center,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 10),
-            child: BotaoPadrao(
-                label: 'Confirmar',
-                onPressed: () async {
-                  Overlay.of(context).insert(_overlayLoader);
-                  final response = await IniciarAssinaturaEletronicaImpl(
-                          codigoOperacaoModel: IniciarAssinaturaEletronicaModel(
-                              codigoOperacao: codigoOperacao))
-                      .iniciarAssinaturaEletronica();
-                  if (response.error != null) {
-                    _overlayLoader.remove();
-                    Fluttertoast.showToast(
-                        msg:
-                            'Erro ao iniciar assinatura, tente novamente mais tarde.');
-                  } else {
-                    _overlayLoader.remove();
-                    Modular.to.pop();
-                    _informarCodigoEmail(context);
-                  }
-                }),
-          ),
-          BotaoPadrao(
-              label: 'Cancelar',
-              filled: false,
-              onPressed: () {
-                Modular.to.pop();
-              })
-        ],
       ),
     );
   }

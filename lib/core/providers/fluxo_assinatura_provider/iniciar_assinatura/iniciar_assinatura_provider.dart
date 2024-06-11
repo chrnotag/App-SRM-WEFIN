@@ -1,4 +1,5 @@
 import 'package:Srm_Asset/views/home/importar_certificado/importar_certificado.dart';
+import 'package:Srm_Asset/widgets/card_monitor_assinaturas/confirmar_assinatura_dialog.dart';
 import 'package:Srm_Asset/widgets/popup_generico.dart';
 import 'package:crosspki/crosspki.dart';
 import 'package:flutter/material.dart';
@@ -60,8 +61,7 @@ class IniciarAssinaturaProvider extends ChangeNotifier {
             Modular.get<AssinaturaEletronicaProvider>();
         showDialog(
             context: myNavigatorKey.currentState!.context,
-            builder: (context) => assinaturaEletronicaProvider
-                .confirmarAssinaturaDialog(assinante, context));
+            builder: (context) => ConfirmarAssinaturaDialog(assinante: assinante));
       } else {
         CertificadoProvider certificadoProvider =
             context.watch<CertificadoProvider>();
