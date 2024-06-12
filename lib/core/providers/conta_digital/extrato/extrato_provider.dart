@@ -1,6 +1,4 @@
 import 'dart:typed_data';
-
-import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/implementations_config/api_response.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_impl.dart';
