@@ -26,11 +26,11 @@ class ThemeSRM implements ImagensGuiaImportarCertificado{
         constraints:
         BoxConstraints.expand(width: double.infinity, height: 50.h),
         hintStyle: MaterialStateProperty.all<TextStyle>(
-            GoogleFonts.montserrat(
+            GoogleFonts.inter(
                 fontSize: AppSizes().bodyLarge,
                 color: SRMColors.textLabelColor)),
         textStyle:
-        MaterialStateProperty.all<TextStyle>(GoogleFonts.montserrat(
+        MaterialStateProperty.all<TextStyle>(GoogleFonts.inter(
           fontSize: AppSizes().bodyLarge,
         ))),
     dialogBackgroundColor: Colors.white,
@@ -54,14 +54,14 @@ class ThemeSRM implements ImagensGuiaImportarCertificado{
         iconTheme: IconThemeData(color: Colors.white)),
     scaffoldBackgroundColor: SRMColors.backgorundColor,
     textTheme: TextTheme(
-      bodySmall: GoogleFonts.montserrat(fontSize: AppSizes().bodySmall, color: SRMColors.textBodyColor),
-      bodyMedium: GoogleFonts.montserrat(fontSize: AppSizes().bodyMedium, color: SRMColors.textBodyColor),
-      bodyLarge: GoogleFonts.montserrat(fontSize: AppSizes().bodyLarge, color: SRMColors.textBodyColor),
-      labelMedium: GoogleFonts.montserrat(fontSize: AppSizes().labelMedium, color: SRMColors.textLabelColor),
+      bodySmall: GoogleFonts.inter(fontSize: AppSizes().bodySmall, color: SRMColors.textBodyColor),
+      bodyMedium: GoogleFonts.inter(fontSize: AppSizes().bodyMedium, color: SRMColors.textBodyColor),
+      bodyLarge: GoogleFonts.inter(fontSize: AppSizes().bodyLarge, color: SRMColors.textBodyColor),
+      labelMedium: GoogleFonts.inter(fontSize: AppSizes().labelMedium, color: SRMColors.textLabelColor),
       displaySmall:
-      GoogleFonts.montserrat(fontSize: AppSizes().displaySmall, color: SRMColors.textDisplayColor),
+      GoogleFonts.inter(fontSize: AppSizes().displaySmall, color: SRMColors.textDisplayColor),
       displayMedium:
-      GoogleFonts.montserrat(fontSize: AppSizes().displayMedium, color: SRMColors.textDisplayColor),
+      GoogleFonts.inter(fontSize: AppSizes().displayMedium, color: SRMColors.textDisplayColor),
     ),
   );
 

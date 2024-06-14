@@ -1,8 +1,10 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
+import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/geral_carteira/geral_carteira_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/comprovante_ted/comprovante_ted_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/tabbar_meses_provider.dart';
+import 'package:Srm_Asset/modules/carteira_consolidada_module.dart';
 import 'package:Srm_Asset/modules/conta_digital_module.dart';
 import 'package:Srm_Asset/modules/sem_conexao_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -44,6 +46,7 @@ class AppModule extends Module {
     i.addSingleton(TabMesesProvider.new);
     i.addSingleton(ExtratoProvider.new);
     i.addSingleton(ComprovanteTEDProvider.new);
+    i.addSingleton(GeralCarteiraProvider.new);
     i.addInstance(environment);
   }
 
@@ -53,5 +56,7 @@ class AppModule extends Module {
     r.module(AppRoutes.homeRoute, module: HomeModule());
     r.module(AppRoutes.semConexaoMainRoute, module: SemConexaoModule());
     r.module(AppRoutes.ContaDigitalRoute, module: ContaDigitalModule());
+    r.module(AppRoutes.carteiraConsolidadaRoute,
+        module: CarteiraConsolidadaModule());
   }
 }

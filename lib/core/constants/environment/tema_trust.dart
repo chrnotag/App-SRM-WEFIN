@@ -28,11 +28,11 @@ class ThemeTRUST implements ImagensGuiaImportarCertificado{
             constraints:
                 BoxConstraints.expand(width: double.infinity, height: 35.h),
             hintStyle: MaterialStateProperty.all<TextStyle>(
-                GoogleFonts.montserrat(
+                GoogleFonts.inter(
                     fontSize: AppSizes().bodyMedium,
                     color: TRUSTColors.textLabelColor)),
             textStyle:
-                MaterialStateProperty.all<TextStyle>(GoogleFonts.montserrat(
+                MaterialStateProperty.all<TextStyle>(GoogleFonts.inter(
               fontSize: AppSizes().bodySmall,
             ))),
         colorScheme: ColorScheme(
@@ -55,16 +55,16 @@ class ThemeTRUST implements ImagensGuiaImportarCertificado{
             iconTheme: IconThemeData(color: Colors.white)),
         scaffoldBackgroundColor: TRUSTColors.backgorundColor,
         textTheme: TextTheme(
-          bodySmall: GoogleFonts.montserrat(fontSize: AppSizes().bodySmall),
-          bodyMedium: GoogleFonts.montserrat(
+          bodySmall: GoogleFonts.inter(fontSize: AppSizes().bodySmall),
+          bodyMedium: GoogleFonts.inter(
               fontSize: AppSizes().bodyMedium, color: Colors.black),
-          bodyLarge: GoogleFonts.montserrat(fontSize: AppSizes().bodyLarge, color: TRUSTColors.textLabelColor),
-          labelMedium: GoogleFonts.montserrat(
+          bodyLarge: GoogleFonts.inter(fontSize: AppSizes().bodyLarge, color: TRUSTColors.textLabelColor),
+          labelMedium: GoogleFonts.inter(
               fontSize: AppSizes().labelMedium, color: TRUSTColors.textLabelColor),
           displaySmall:
-              GoogleFonts.montserrat(fontSize: AppSizes().displaySmall),
+              GoogleFonts.inter(fontSize: AppSizes().displaySmall),
           displayMedium:
-              GoogleFonts.montserrat(fontSize: AppSizes().displayMedium),
+              GoogleFonts.inter(fontSize: AppSizes().displayMedium),
         ),
       );
 

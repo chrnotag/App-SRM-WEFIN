@@ -281,7 +281,9 @@ class _HomeViewState extends State<HomeView> {
                             _CardItemMenuHome(
                                 icone: Assets.dolar_icon,
                                 titulo: 'Conta Garantia',
-                                onTap: () {}),
+                                onTap: () {
+                                  Modular.to.pushNamed(AppRoutes.carteiraConsolidadaNavigatorRoute);
+                                }),
                             _CardItemMenuHome(
                                 icone: Assets.grupo_pessoas,
                                 titulo: 'Grupo Econômico',
