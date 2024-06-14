@@ -25,6 +25,20 @@ class _ExtratosDataSelecionadaState extends State<ExtratosDataSelecionada> {
   final extratoProvider = Modular.get<ExtratoProvider>();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    extratoProvider.carregarDados();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    extratoProvider.limparDados();
+  }
+
+  @override
   Widget build(BuildContext context) {
     List<Widget> buildOperacoes(int index) {
       List<Widget> lista = [];
@@ -49,32 +63,51 @@ class _ExtratosDataSelecionadaState extends State<ExtratosDataSelecionada> {
                 context.textTheme.displaySmall!.copyWith(color: Colors.white)),
       ),
       body: SizedBox(
-        width: context.width * 0.95,
         height: context.height,
-        child: Card(
-            child: FutureBuilder(
-                future: extratoProvider.extratoFuture,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Loader();
-                  }
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Card(
+              child: FutureBuilder(
+                  future: extratoProvider.extratoFuture,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Loader();
+                    }
 
-                  if (snapshot.hasError || snapshot.data!.error != null) {
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialogGenerico(
-                            title: 'Erro ao carrgar dados',
-                            msg:
-                                ('Erro ao carregar lista de extratos, tente novamente mais tarde'),
-                            onPressed: () {
-                              Modular.to.pop();
-                              Modular.to.pop();
-                            }),
-                      );
-                    });
-                  }
-                })),
+                    if (snapshot.hasError || snapshot.data!.error != null) {
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialogGenerico(
+                              title: 'Erro ao carrgar dados',
+                              msg:
+                                  ('Erro ao carregar lista de extratos, tente novamente mais tarde'),
+                              onPressed: () {
+                                Modular.to.pop();
+                                Modular.to.pop();
+                              }),
+                        );
+                      });
+                    }
+
+                    return ListView.builder(
+                        itemCount: extratoProvider.itensExtrato.length,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              ItemListaExtrato(
+                                dataDia: FormatarData.formatar(extratoProvider
+                                    .itensExtrato[index].dataReferencia
+                                    .toIso8601String()),
+                                saldoDia: FormatarDinheiro.BR(extratoProvider
+                                    .itensExtrato[index].saldoNaData),
+                              ),
+                              ...buildOperacoes(index)
+                            ],
+                          );
+                        });
+                  })),
+        ),
       ),
     );
   }

@@ -77,70 +77,65 @@ class _TelaExtratoState extends State<TelaExtrato>
       return lista;
     }
 
-    return SafeArea(
-      bottom: true,
-      minimum: const EdgeInsets.only(bottom: 16),
-      maintainBottomViewPadding: true,
-      child: Scaffold(
-        appBar: PreferredSize(
-            preferredSize: AppBar().preferredSize, child: AppBarExtrato()),
-        body: Column(
-          children: [
-            _TabBarMeses(controller: _tabController!),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-              child: SizedBox(
-                height: context.height * 0.75,
-                child: Card(
-                  margin: const EdgeInsets.only(top: 3),
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(15),
-                          bottomRight: Radius.circular(15))),
-                  color: Colors.white,
-                  surfaceTintColor: Colors.white,
-                  child: Column(
-                    children: [
-                      _MenuFiltroTelaExtrato(),
-                      Expanded(
-                          child: RefreshIndicator(
-                        onRefresh: extratoProvider.carregarDados,
-                        child: FutureBuilder(
-                          future: extratoProvider.extratoFuture,
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return Loader();
-                            }
-                            if (!snapshot.hasData) {}
-                            return ListView.builder(
-                                itemCount: tamanhoLista,
-                                itemBuilder: (context, index) {
-                                  return Column(
-                                    children: [
-                                      ItemListaExtrato(
-                                        dataDia: FormatarData.formatar(
-                                            extratoProvider.itensExtrato[index]
-                                                .dataReferencia
-                                                .toIso8601String()),
-                                        saldoDia: FormatarDinheiro.BR(
-                                            extratoProvider
-                                                .itensExtrato[index].saldoNaData),
-                                      ),
-                                      ...buildOperacoes(index)
-                                    ],
-                                  );
-                                });
-                          },
-                        ),
-                      ))
-                    ],
-                  ),
+    return Scaffold(
+      appBar: PreferredSize(
+          preferredSize: AppBar().preferredSize, child: AppBarExtrato()),
+      body: Column(
+        children: [
+          _TabBarMeses(controller: _tabController!),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8, 0, 8, 16),
+            child: SizedBox(
+              height: context.height * 0.82,
+              child: Card(
+                margin: const EdgeInsets.only(top: 3),
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(15),
+                        bottomRight: Radius.circular(15))),
+                color: Colors.white,
+                surfaceTintColor: Colors.white,
+                child: Column(
+                  children: [
+                    _MenuFiltroTelaExtrato(),
+                    Expanded(
+                        child: RefreshIndicator(
+                      onRefresh: extratoProvider.carregarDados,
+                      child: FutureBuilder(
+                        future: extratoProvider.extratoFuture,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Loader();
+                          }
+                          if (!snapshot.hasData) {}
+                          return ListView.builder(
+                              itemCount: tamanhoLista,
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  children: [
+                                    ItemListaExtrato(
+                                      dataDia: FormatarData.formatar(
+                                          extratoProvider.itensExtrato[index]
+                                              .dataReferencia
+                                              .toIso8601String()),
+                                      saldoDia: FormatarDinheiro.BR(
+                                          extratoProvider
+                                              .itensExtrato[index].saldoNaData),
+                                    ),
+                                    ...buildOperacoes(index)
+                                  ],
+                                );
+                              });
+                        },
+                      ),
+                    ))
+                  ],
                 ),
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }
