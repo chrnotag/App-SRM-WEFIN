@@ -1,4 +1,5 @@
 import 'package:Srm_Asset/core/constants/enuns/tipo_operacao_enum.dart';
+import 'package:Srm_Asset/core/constants/extensions/date_extensions.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
@@ -62,19 +63,14 @@ class _TelaExtratoState extends State<TelaExtrato>
   Widget build(BuildContext context) {
     final extratoProvider = context.watch<ExtratoProvider>();
     List<Widget> buildOperacoes(int index) {
-      List<Widget> lista = [];
-      List<Lancamento> lancamentos =
-          extratoProvider.itensExtrato[index].lancamentos;
-      for (var lancamento in lancamentos) {
-        lista.add(ItemListaOperacao(
-          tipoTED: TipoTED.fromCodigo(lancamento.evento.codigo),
-          descricao: lancamento.evento.descricao,
-          valorOperacao: lancamento.valor,
-          codigoTransacao: lancamento.transacao,
-          dataComprovante: lancamento.data.toIso8601String(),
-        ));
-      }
-      return lista;
+      return extratoProvider.itensExtrato[index].lancamentos
+          .map((e) => ItemListaOperacao(
+          tipoTED: TipoTED.fromCodigo(e.evento.codigo),
+          descricao: e.evento.descricao,
+          valorOperacao: e.valor,
+          codigoTransacao: e.transacao,
+          dataComprovante: e.data.formatarIso8601))
+          .toList();
     }
 
     return Scaffold(
@@ -115,10 +111,9 @@ class _TelaExtratoState extends State<TelaExtrato>
                                 return Column(
                                   children: [
                                     ItemListaExtrato(
-                                      dataDia: FormatarData.formatar(
+                                      dataDia:
                                           extratoProvider.itensExtrato[index]
-                                              .dataReferencia
-                                              .toIso8601String()),
+                                              .dataReferencia.formatarIso8601,
                                       saldoDia: FormatarDinheiro.BR(
                                           extratoProvider
                                               .itensExtrato[index].saldoNaData),

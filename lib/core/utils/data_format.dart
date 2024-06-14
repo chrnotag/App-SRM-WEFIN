@@ -1,9 +1,6 @@
 import 'package:intl/intl.dart';
 
 class FormatarData {
-  static String formatar(String data) {
-    return data.substring(0, 10);
-  }
 
   static String formatarPtBR(String data) {
     final date = DateTime.parse(data);
