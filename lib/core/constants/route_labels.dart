@@ -76,6 +76,8 @@ class AppRoutes {
 
   static get comprovanteTEDScreenContaDigitalRoute => '/comprovante-ted';
 
+  static get extratoDataSelecionadaDigitalRoute => '/extrato-data-selecionada';
+
   //ESCOPO CONTA DIGITAL NAVIGATOR ROUTE
   static get extratoScreenRoute =>
       '$ContaDigitalRoute$extratoScreenContaDigitalRoute';
@@ -88,6 +90,8 @@ class AppRoutes {
 
   static get visualizarComprovanteTEDScreenRoute =>
       '$ContaDigitalRoute$comprovanteTEDScreenContaDigitalRoute';
+
+  static get extratoDataSelecionadaDigitalScreenRoute => '$ContaDigitalRoute$extratoDataSelecionadaDigitalRoute';
 
   //CARTEIRA CONSOLIDADA ROUTE
 static get carteiraConsolidadaRoute => '/carteira-consolidada';

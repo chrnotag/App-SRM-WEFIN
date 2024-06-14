@@ -1,5 +1,5 @@
-import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
 import 'package:Srm_Asset/core/constants/enuns/tipo_operacao_enum.dart';
+import 'package:Srm_Asset/core/constants/extensions/date_extensions.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
@@ -10,19 +10,17 @@ import 'package:Srm_Asset/core/utils/data_format.dart';
 import 'package:Srm_Asset/core/utils/money_format.dart';
 import 'package:Srm_Asset/generated/assets.dart';
 import 'package:Srm_Asset/models/conta_digital/extrato/conta_extrato_model.dart';
+import 'package:Srm_Asset/views/conta_digital/tela_extrato/widgets/item_lista_extrato.dart';
+import 'package:Srm_Asset/views/conta_digital/tela_extrato/widgets/item_lista_operacao.dart';
 import 'package:Srm_Asset/views/conta_digital/widgets/app_bar_conta_digital.dart';
+import 'package:Srm_Asset/views/conta_digital/widgets/lista_operacao.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import '../../../core/providers/conta_digital/tabbar_meses_provider.dart';
 import '../../../core/utils/ultimo_dia_mes.dart';
-
-part 'widgets/item_lista_extrato.dart';
-
-part 'widgets/item_lista_operacao.dart';
 
 part 'widgets/tabbar_meses.dart';
 
@@ -65,86 +63,67 @@ class _TelaExtratoState extends State<TelaExtrato>
   @override
   Widget build(BuildContext context) {
     final extratoProvider = context.watch<ExtratoProvider>();
-    List<Widget> buildOperacoes(int index) {
-      List<Widget> lista = [];
-      List<Lancamento> lancamentos =
-          extratoProvider.itensExtrato[index].lancamentos;
-      for (var lancamento in lancamentos) {
-        lista.add(_ItemListaOperacao(
-          tipoTED: TipoTED.fromCodigo(lancamento.evento.codigo),
-          descricao: lancamento.evento.descricao,
-          valorOperacao: lancamento.valor,
-          codigoTransacao: lancamento.transacao,
-          dataComprovante: lancamento.data.toIso8601String(),
-        ));
-      }
-      return lista;
-    }
 
-    return SafeArea(
-      bottom: true,
-      minimum: const EdgeInsets.only(bottom: 16),
-      maintainBottomViewPadding: true,
-      child: Scaffold(
-        appBar: PreferredSize(
-            preferredSize: AppBar().preferredSize, child: AppBarExtrato()),
-        body: Column(
-          children: [
-            _TabBarMeses(controller: _tabController!),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-              child: SizedBox(
-                height: context.height * 0.75,
-                child: Card(
-                  margin: const EdgeInsets.only(top: 3),
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(15),
-                          bottomRight: Radius.circular(15))),
-                  color: Colors.white,
-                  surfaceTintColor: Colors.white,
-                  child: Column(
-                    children: [
-                      _MenuFiltroTelaExtrato(),
-                      Expanded(
-                          child: RefreshIndicator(
-                        onRefresh: extratoProvider.carregarDados,
-                        child: FutureBuilder(
-                          future: extratoProvider.extratoFuture,
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return Loader();
-                            }
-                            if (!snapshot.hasData) {}
-                            return ListView.builder(
-                                itemCount: tamanhoLista,
-                                itemBuilder: (context, index) {
-                                  return Column(
-                                    children: [
-                                      _ItemListaExtrato(
-                                        dataDia: FormatarData.formatar(
-                                            extratoProvider.itensExtrato[index]
-                                                .dataReferencia
-                                                .toIso8601String()),
-                                        saldoDia: FormatarDinheiro.BR(
-                                            extratoProvider
-                                                .itensExtrato[index].saldoNaData),
-                                      ),
-                                      ...buildOperacoes(index)
-                                    ],
-                                  );
-                                });
-                          },
-                        ),
-                      ))
-                    ],
-                  ),
+    return Scaffold(
+      appBar: PreferredSize(
+          preferredSize: AppBar().preferredSize, child: AppBarExtrato()),
+      body: Column(
+        children: [
+          _TabBarMeses(controller: _tabController!),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8, 0, 8, 16),
+            child: SizedBox(
+              height: context.height * 0.82,
+              child: Card(
+                margin: const EdgeInsets.only(top: 3),
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(15),
+                        bottomRight: Radius.circular(15))),
+                color: Colors.white,
+                surfaceTintColor: Colors.white,
+                child: Column(
+                  children: [
+                    _MenuFiltroTelaExtrato(),
+                    Expanded(
+                        child: RefreshIndicator(
+                      onRefresh: extratoProvider.carregarDados,
+                      child: FutureBuilder(
+                        future: extratoProvider.extratoFuture,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Loader();
+                          }
+                          if (!snapshot.hasData) {}
+                          return ListView.builder(
+                              itemCount: tamanhoLista,
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  children: [
+                                    ItemListaExtrato(
+                                      dataDia: extratoProvider
+                                          .itensExtrato[index]
+                                          .dataReferencia
+                                          .formatarIso8601,
+                                      saldoDia: FormatarDinheiro.BR(
+                                          extratoProvider
+                                              .itensExtrato[index].saldoNaData),
+                                    ),
+                                    ...BuildListaOperacao.buildLista(
+                                        context: context, index: index),
+                                  ],
+                                );
+                              });
+                        },
+                      ),
+                    ))
+                  ],
                 ),
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

@@ -1,10 +1,13 @@
-part of '../tela_extrato.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:flutter/material.dart';
 
-class _ItemListaExtrato extends StatelessWidget {
+import '../../../../core/utils/data_format.dart';
+class ItemListaExtrato extends StatelessWidget {
   final String dataDia;
   final String saldoDia;
 
-  const _ItemListaExtrato({
+  const ItemListaExtrato({
     super.key,
     required this.dataDia,
     required this.saldoDia,
