@@ -37,10 +37,17 @@ class ExtratoProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  DateTime? _dataFinal;
+
+  DateTime? get dataFinal => _dataFinal;
+
+  set dataFinal(DateTime? data) => _dataFinal = data;
+
   // String _retornaDataFinal() =>
   //     mascaraData.format(DateTime.now().subtract(Duration(days: intervaloDias)));
 
-  DateTime dataFinal() => dataInicial.subtract(Duration(days: intervaloDias));
+  DateTime dataFinalFiltro() =>
+      dataInicial.subtract(Duration(days: intervaloDias));
 
   int _intervaloDias = 7;
 
@@ -70,11 +77,20 @@ class ExtratoProvider extends ChangeNotifier {
 
   Future<void> carregarDados() async {
     final contaDigitalProvider = Modular.get<ContaDigitalProvider>();
-    extratoFuture = ExtratoImpl(tipoConsulta: TipoConsultaExtrato.VISUALIZAR)
-        .pegarExtrato(
-            contaDigitalProvider.dadosContaDigital!.conta,
-            FormatarData.formatar(dataFinal().toIso8601String()),
-            FormatarData.formatar(dataInicial.toIso8601String()));
+    if (dataFinal != null) {
+      print('cafrregamndo');
+      extratoFuture = ExtratoImpl(tipoConsulta: TipoConsultaExtrato.VISUALIZAR)
+          .pegarExtrato(
+              contaDigitalProvider.dadosContaDigital!.conta,
+              FormatarData.formatar(dataFinal!.toIso8601String()),
+              FormatarData.formatar(dataInicial.toIso8601String()));
+    } else {
+      extratoFuture = ExtratoImpl(tipoConsulta: TipoConsultaExtrato.VISUALIZAR)
+          .pegarExtrato(
+              contaDigitalProvider.dadosContaDigital!.conta,
+              FormatarData.formatar(dataFinalFiltro().toIso8601String()),
+              FormatarData.formatar(dataInicial.toIso8601String()));
+    }
   }
 
   Future<void> baixarDados() async {
@@ -82,11 +98,11 @@ class ExtratoProvider extends ChangeNotifier {
     downloadExtratoFuture =
         ExtratoImpl(tipoConsulta: TipoConsultaExtrato.BAIXAR).pegarExtrato(
             contaDigitalProvider.dadosContaDigital!.conta,
-            FormatarData.formatar(dataFinal().toIso8601String()),
+            FormatarData.formatar(dataFinalFiltro().toIso8601String()),
             FormatarData.formatar(dataInicial.toIso8601String()));
   }
 
-  void limparDados(){
+  void limparDados() {
     dataInicial = DateTime.now();
     intervaloDias = 7;
     extratoFuture = null;

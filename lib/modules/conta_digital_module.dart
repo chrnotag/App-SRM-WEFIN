@@ -1,4 +1,5 @@
 import 'package:Srm_Asset/core/constants/route_labels.dart';
+import 'package:Srm_Asset/views/conta_digital/selecionar_data/extratos_data_selecionada.dart';
 import 'package:Srm_Asset/views/conta_digital/selecionar_data/selecionar_data.dart';
 import 'package:Srm_Asset/views/conta_digital/ted/comprovante-ted.dart';
 import 'package:Srm_Asset/views/conta_digital/tela_extrato/tela_extrato.dart';
@@ -23,5 +24,6 @@ class ContaDigitalModule extends Module {
               codigoTransacao: r.args.params['codigoTransacao'],
             dataComprovante: r.args.params['dataComprovante'],
             ));
+    r.child(AppRoutes.extratoDataSelecionadaDigitalRoute, child: (context) => const ExtratosDataSelecionada());
   }
 }

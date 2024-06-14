@@ -1,6 +1,9 @@
 import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/constants/route_labels.dart';
+import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_provider.dart';
+import 'package:Srm_Asset/core/utils/overlay.dart';
 import 'package:Srm_Asset/views/conta_digital/widgets/app_bar_conta_digital.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:flutter/cupertino.dart';
@@ -195,7 +198,12 @@ class _SelecionarDataScreenState extends State<SelecionarDataScreen> {
                   label: 'Pesquisar',
                   onPressed: _controllerDataInicial.text.isNotEmpty &&
                           _controllerDataFinal.text.isNotEmpty
-                      ? () {}
+                      ? () async {
+                    final extratoProvider = Modular.get<ExtratoProvider>();
+                    extratoProvider.dataInicial = _dataFinalSelecionada!;
+                    extratoProvider.dataFinal = _dataInicialSelecionada!;
+                    await extratoProvider.carregarDados();
+                  }
                       : null)
             ],
           ),

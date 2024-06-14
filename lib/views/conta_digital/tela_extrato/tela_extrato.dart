@@ -1,4 +1,3 @@
-import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
 import 'package:Srm_Asset/core/constants/enuns/tipo_operacao_enum.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
@@ -10,19 +9,16 @@ import 'package:Srm_Asset/core/utils/data_format.dart';
 import 'package:Srm_Asset/core/utils/money_format.dart';
 import 'package:Srm_Asset/generated/assets.dart';
 import 'package:Srm_Asset/models/conta_digital/extrato/conta_extrato_model.dart';
+import 'package:Srm_Asset/views/conta_digital/tela_extrato/widgets/item_lista_extrato.dart';
+import 'package:Srm_Asset/views/conta_digital/tela_extrato/widgets/item_lista_operacao.dart';
 import 'package:Srm_Asset/views/conta_digital/widgets/app_bar_conta_digital.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import '../../../core/providers/conta_digital/tabbar_meses_provider.dart';
 import '../../../core/utils/ultimo_dia_mes.dart';
-
-part 'widgets/item_lista_extrato.dart';
-
-part 'widgets/item_lista_operacao.dart';
 
 part 'widgets/tabbar_meses.dart';
 
@@ -70,7 +66,7 @@ class _TelaExtratoState extends State<TelaExtrato>
       List<Lancamento> lancamentos =
           extratoProvider.itensExtrato[index].lancamentos;
       for (var lancamento in lancamentos) {
-        lista.add(_ItemListaOperacao(
+        lista.add(ItemListaOperacao(
           tipoTED: TipoTED.fromCodigo(lancamento.evento.codigo),
           descricao: lancamento.evento.descricao,
           valorOperacao: lancamento.valor,
@@ -122,7 +118,7 @@ class _TelaExtratoState extends State<TelaExtrato>
                                 itemBuilder: (context, index) {
                                   return Column(
                                     children: [
-                                      _ItemListaExtrato(
+                                      ItemListaExtrato(
                                         dataDia: FormatarData.formatar(
                                             extratoProvider.itensExtrato[index]
                                                 .dataReferencia

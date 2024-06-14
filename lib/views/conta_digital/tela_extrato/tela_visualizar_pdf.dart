@@ -42,7 +42,7 @@ class _TelaVisualizarPdfExtratoState extends State<TelaVisualizarPdfExtrato> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           final DateFormat dateFormat = DateFormat("MM-yyyy");
-          String name = "extrato_conta_digital_${dateFormat.format(extratoProvider.dataFinal())}";
+          String name = "extrato_conta_digital_${dateFormat.format(extratoProvider.dataFinalFiltro())}";
 
           PDFUtils.sharePDF(extratoProvider.extratoDownloadBites!, name);
         },
