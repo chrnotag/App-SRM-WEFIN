@@ -13,6 +13,7 @@ import 'package:Srm_Asset/models/conta_digital/extrato/conta_extrato_model.dart'
 import 'package:Srm_Asset/views/conta_digital/tela_extrato/widgets/item_lista_extrato.dart';
 import 'package:Srm_Asset/views/conta_digital/tela_extrato/widgets/item_lista_operacao.dart';
 import 'package:Srm_Asset/views/conta_digital/widgets/app_bar_conta_digital.dart';
+import 'package:Srm_Asset/views/conta_digital/widgets/lista_operacao.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -62,16 +63,6 @@ class _TelaExtratoState extends State<TelaExtrato>
   @override
   Widget build(BuildContext context) {
     final extratoProvider = context.watch<ExtratoProvider>();
-    List<Widget> buildOperacoes(int index) {
-      return extratoProvider.itensExtrato[index].lancamentos
-          .map((e) => ItemListaOperacao(
-          tipoTED: TipoTED.fromCodigo(e.evento.codigo),
-          descricao: e.evento.descricao,
-          valorOperacao: e.valor,
-          codigoTransacao: e.transacao,
-          dataComprovante: e.data.formatarIso8601))
-          .toList();
-    }
 
     return Scaffold(
       appBar: PreferredSize(
@@ -111,14 +102,16 @@ class _TelaExtratoState extends State<TelaExtrato>
                                 return Column(
                                   children: [
                                     ItemListaExtrato(
-                                      dataDia:
-                                          extratoProvider.itensExtrato[index]
-                                              .dataReferencia.formatarIso8601,
+                                      dataDia: extratoProvider
+                                          .itensExtrato[index]
+                                          .dataReferencia
+                                          .formatarIso8601,
                                       saldoDia: FormatarDinheiro.BR(
                                           extratoProvider
                                               .itensExtrato[index].saldoNaData),
                                     ),
-                                    ...buildOperacoes(index)
+                                    ...BuildListaOperacao.buildLista(
+                                        context: context, index: index),
                                   ],
                                 );
                               });

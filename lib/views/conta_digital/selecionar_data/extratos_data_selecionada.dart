@@ -2,15 +2,14 @@ import 'package:Srm_Asset/core/constants/extensions/date_extensions.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_provider.dart';
+import 'package:Srm_Asset/views/conta_digital/widgets/lista_operacao.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
 import 'package:Srm_Asset/widgets/popup_generico.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
+import 'package:intl/intl.dart';
 import '../../../core/constants/enuns/tipo_operacao_enum.dart';
-import '../../../core/utils/data_format.dart';
 import '../../../core/utils/money_format.dart';
-import '../../../models/conta_digital/extrato/conta_extrato_model.dart';
 import '../tela_extrato/widgets/item_lista_extrato.dart';
 import '../tela_extrato/widgets/item_lista_operacao.dart';
 
@@ -41,22 +40,15 @@ class _ExtratosDataSelecionadaState extends State<ExtratosDataSelecionada> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> buildOperacoes(int index) {
-      return extratoProvider.itensExtrato[index].lancamentos
-          .map((e) => ItemListaOperacao(
-              tipoTED: TipoTED.fromCodigo(e.evento.codigo),
-              descricao: e.evento.descricao,
-              valorOperacao: e.valor,
-              codigoTransacao: e.transacao,
-              dataComprovante: e.data.toIso8601String()))
-          .toList();
-    }
+    final dateFormat = DateFormat('dd/MM/yyyy');
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('20/02/2024 - 20/05/2024',
+        title: Text(
+            '${dateFormat.format(extratoProvider.dataInicial)} - ${dateFormat.format(extratoProvider.dataFinal!)}',
             style:
                 context.textTheme.displaySmall!.copyWith(color: Colors.white)),
+        centerTitle: true,
       ),
       body: SizedBox(
         height: context.height,
@@ -97,7 +89,8 @@ class _ExtratosDataSelecionadaState extends State<ExtratosDataSelecionada> {
                                 saldoDia: FormatarDinheiro.BR(extratoProvider
                                     .itensExtrato[index].saldoNaData),
                               ),
-                              ...buildOperacoes(index)
+                              ...BuildListaOperacao.buildLista(
+                                  context: context, index: index),
                             ],
                           );
                         });
