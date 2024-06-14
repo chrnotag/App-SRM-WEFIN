@@ -18,8 +18,6 @@ part 'widgets/legenda_grafico_widget.dart';
 
 part 'widgets/titulo_list_item.dart';
 
-part 'utils/montar_legenda.dart';
-
 class CarteiraConsolidadaScreen extends StatefulWidget {
   const CarteiraConsolidadaScreen({super.key});
 
