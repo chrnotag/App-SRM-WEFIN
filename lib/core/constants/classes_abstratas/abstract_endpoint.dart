@@ -22,4 +22,6 @@ abstract class Endpoint{
   Uri montarUrlPegarExtrato(String numeroConta, String dataInicial, String dataFinal, TipoConsultaExtrato tipoConsulta);
   String get transacoes;
   Uri montarUrlDownloadComprovanteTED(String codigoTransacao);
+  String get carteiraConsolidada;
+  String get geralCarteira;
 }

@@ -88,4 +88,13 @@ class AppRoutes {
 
   static get visualizarComprovanteTEDScreenRoute =>
       '$ContaDigitalRoute$comprovanteTEDScreenContaDigitalRoute';
+
+  //CARTEIRA CONSOLIDADA ROUTE
+static get carteiraConsolidadaRoute => '/carteira-consolidada';
+
+ //ESCOPO CARTEIRA CONSOLIDADA
+static get carteiraConsolidadaScreenRoute => '/screen';
+
+  //ESCOPO CARTEIRA CONSOLIDADA NAVIGATOR ROUTE
+static get carteiraConsolidadaNavigatorRoute => '$carteiraConsolidadaRoute$carteiraConsolidadaScreenRoute';
 }

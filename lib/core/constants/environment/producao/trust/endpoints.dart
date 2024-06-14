@@ -4,7 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import '../../../../providers/conta_digital/extrato/extrato_impl.dart';
 import '../../../classes_abstratas/envirioment.dart';
 
-class EndPointsTRUST extends Endpoint{
+class EndPointsTRUST extends Endpoint {
   @override
   // TODO: implement assinatura
   String get assinaturas => '$baseURL/assinaturas';
@@ -23,7 +23,8 @@ class EndPointsTRUST extends Endpoint{
 
   @override
   // TODO: implement finalizarAssinaturaEletronica
-  String get finalizarAssinaturaEletronica => "$assinaturas/finalizar-assinatura-eletronica";
+  String get finalizarAssinaturaEletronica =>
+      "$assinaturas/finalizar-assinatura-eletronica";
 
   @override
   // TODO: implement iniciarAssinatura
@@ -31,7 +32,8 @@ class EndPointsTRUST extends Endpoint{
 
   @override
   // TODO: implement iniciarAssinaturaEletronica
-  String get iniciarAssinaturaEletronica => "$assinaturas/iniciar-assinatura-eletronica";
+  String get iniciarAssinaturaEletronica =>
+      "$assinaturas/iniciar-assinatura-eletronica";
 
   @override
   // TODO: implement login
@@ -49,7 +51,8 @@ class EndPointsTRUST extends Endpoint{
 
   @override
   // TODO: implement politicaPrivacidade
-  String get politicaPrivacidade => "https://trusthub.com.br/new/assets/documents/Trust-Politica-de-Privacidade-e-Tratamento-de-Dados-Pessoais.html";
+  String get politicaPrivacidade =>
+      "https://trusthub.com.br/new/assets/documents/Trust-Politica-de-Privacidade-e-Tratamento-de-Dados-Pessoais.html";
 
   @override
   // TODO: implement recuperarSenha
@@ -61,7 +64,8 @@ class EndPointsTRUST extends Endpoint{
 
   @override
   // TODO: implement termosDeUso
-  String get termosDeUso => "https://trusthub.com.br/new/assets/documents/Trust_-_Termos_e_Condicoes_de_Uso_para_abertura_da_Conta_Digital.html";
+  String get termosDeUso =>
+      "https://trusthub.com.br/new/assets/documents/Trust_-_Termos_e_Condicoes_de_Uso_para_abertura_da_Conta_Digital.html";
 
   @override
   // TODO: implement contaDigital
@@ -77,18 +81,24 @@ class EndPointsTRUST extends Endpoint{
   @override
   String get downloadExtratoContaDigital => "$extratoContaDigital/download";
 
-
   @override
-  Uri montarUrlPegarExtrato(String numeroConta, String dataInicial, String dataFinal, TipoConsultaExtrato tipoConsulta) {
+  Uri montarUrlPegarExtrato(String numeroConta, String dataInicial,
+      String dataFinal, TipoConsultaExtrato tipoConsulta) {
     final ambiente = Modular.get<Environment>();
-    return Uri.parse("${TipoConsultaExtrato.retornarEndpoint(tipoConsulta, ambiente)}?numeroContaTitular=$numeroConta&dataInicialExtrato=$dataInicial&dataFinalExtrato=$dataFinal");
+    return Uri.parse(
+        "${TipoConsultaExtrato.retornarEndpoint(tipoConsulta, ambiente)}?numeroContaTitular=$numeroConta&dataInicialExtrato=$dataInicial&dataFinalExtrato=$dataFinal");
   }
 
   @override
   String get transacoes => '$baseURL/transacao';
 
   @override
-  Uri montarUrlDownloadComprovanteTED(String codigoTransacao){
-    return Uri.parse('$transacoes/comprovante/download?codigoTransacao=$codigoTransacao');
+  Uri montarUrlDownloadComprovanteTED(String codigoTransacao) {
+    return Uri.parse(
+        '$transacoes/comprovante/download?codigoTransacao=$codigoTransacao');
   }
+
+  String get carteiraConsolidada => '$baseURL/carteira-consolidada';
+
+  String get geralCarteira => '$carteiraConsolidada/geral-carteira';
 }
