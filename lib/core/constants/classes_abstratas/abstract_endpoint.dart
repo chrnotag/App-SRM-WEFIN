@@ -24,4 +24,5 @@ abstract class Endpoint{
   Uri montarUrlDownloadComprovanteTED(String codigoTransacao);
   String get carteiraConsolidada;
   String get geralCarteira;
+  String get carteiraAberto;
 }

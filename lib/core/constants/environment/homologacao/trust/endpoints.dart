@@ -95,4 +95,6 @@ class EndPointsTRUST extends Endpoint{
   String get carteiraConsolidada => '$baseURL/carteira-consolidada';
 
   String get geralCarteira => '$carteiraConsolidada/geral-carteira';
+
+  String get carteiraAberto => '$carteiraConsolidada/em-aberto';
 }
