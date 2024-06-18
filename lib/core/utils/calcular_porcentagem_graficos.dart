@@ -1,7 +1,7 @@
 import '../../models/carteira_consolidada/geral_carteira/geral_carteira_model.dart';
 class CalcularPorcentagemGraficos {
   static String calcular(double valor, GeralCarteiraModel dadosCarteira) {
-    int valorTotal = 0;
+    double valorTotal = 0;
     valorTotal = dadosCarteira.valorTotalRecebiveisVencidos +
         dadosCarteira.valorTotalRecebiveisLiquidados +
         dadosCarteira.valorTotalRecebiveisEmAberto +

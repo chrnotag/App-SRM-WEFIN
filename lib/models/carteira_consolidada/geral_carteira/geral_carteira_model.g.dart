@@ -8,11 +8,11 @@ part of 'geral_carteira_model.dart';
 
 GeralCarteiraModel _$GeralCarteiraModelFromJson(Map<String, dynamic> json) =>
     GeralCarteiraModel(
-      valorTotalRecebiveisEmAberto: json['valorTotalRecebiveisEmAberto'] as int,
-      valorTotalRecebiveisAVencer: json['valorTotalRecebiveisAVencer'] as int,
-      valorTotalRecebiveisVencidos: json['valorTotalRecebiveisVencidos'] as int,
+      valorTotalRecebiveisEmAberto: json['valorTotalRecebiveisEmAberto'] as double,
+      valorTotalRecebiveisAVencer: json['valorTotalRecebiveisAVencer'] as double,
+      valorTotalRecebiveisVencidos: json['valorTotalRecebiveisVencidos'] as double,
       valorTotalRecebiveisLiquidados:
-          json['valorTotalRecebiveisLiquidados'] as int,
+          json['valorTotalRecebiveisLiquidados'] as double,
       quantidadeTotalRecebiveis: json['quantidadeTotalRecebiveis'] as int,
       quantidadeTotalRecebiveisAVencer:
           json['quantidadeTotalRecebiveisAVencer'] as int,

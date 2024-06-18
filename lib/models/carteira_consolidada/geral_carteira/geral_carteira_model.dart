@@ -3,10 +3,10 @@ part 'geral_carteira_model.g.dart';
 
 @JsonSerializable()
 class GeralCarteiraModel {
-  final int valorTotalRecebiveisEmAberto;
-  final int valorTotalRecebiveisAVencer;
-  final int valorTotalRecebiveisVencidos;
-  final int valorTotalRecebiveisLiquidados;
+  final double valorTotalRecebiveisEmAberto;
+  final double valorTotalRecebiveisAVencer;
+  final double valorTotalRecebiveisVencidos;
+  final double valorTotalRecebiveisLiquidados;
   final int quantidadeTotalRecebiveis;
   final int quantidadeTotalRecebiveisAVencer;
   final int quantidadeTotalRecebiveisVencidos;
