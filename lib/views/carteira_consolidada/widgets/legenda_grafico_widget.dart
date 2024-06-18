@@ -18,7 +18,7 @@ class _LegendaGraficoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50, // Ajuste essa altura conforme necessário
+      height: 50,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(

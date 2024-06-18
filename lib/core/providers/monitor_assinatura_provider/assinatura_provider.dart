@@ -7,6 +7,8 @@ import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 
+import '../../../models/auth_login_models/SRM/cedente_model.dart';
+
 class AssinaturaProvider extends ChangeNotifier {
   AssinaturaProvider._();
 
@@ -20,11 +22,32 @@ class AssinaturaProvider extends ChangeNotifier {
     return response;
   }
 
+  Future<ApiResponse<dynamic>>? _assinaturasFuture;
+  Future<ApiResponse<dynamic>>? get assinaturasFuture => _assinaturasFuture;
+  set assinaturasFuture(Future<ApiResponse<dynamic>>? assinaturas) => _assinaturasFuture = assinaturas;
+
+  String? _valorSelecionado;
+  String? get valorSelecionado => _valorSelecionado;
+  set valorSelecionado(String? valor) => _valorSelecionado = valor;
+
+  List<CedenteModel> _listaItens = [];
+  List<CedenteModel> get listaItens => _listaItens;
+  set listaItens(List<CedenteModel> lista) => _listaItens = lista;
+
+  Future<void> carregarDados() async {
+    assinaturasFuture =
+        Modular.get<AssinaturaProvider>().carregarAssinaturas();
+    final authProvider = Modular.get<AuthProvider>();
+    valorSelecionado = authProvider.empresaSelecionada!.identificador;
+    listaItens = authProvider.listaCedente!;
+    notifyListeners();
+  }
+
   bool _existemProcuradores = true;
 
   bool get existemProcuradores => _existemProcuradores;
 
-  set existemProcuradores(bool existe){
+  set existemProcuradores(bool existe) {
     _existemProcuradores = existe;
   }
 
