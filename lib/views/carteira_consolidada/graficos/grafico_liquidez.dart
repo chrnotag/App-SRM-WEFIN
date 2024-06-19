@@ -1,6 +1,7 @@
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/carteira_aberto/carteira_aberto_provider.dart';
+import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/prazo_liquidez/prazo_liquidez_provider.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -10,27 +11,27 @@ import '../../../core/utils/money_format.dart';
 import '../utils/dados_grafico_model.dart';
 import '../widgets/legenda_grafico_widget.dart';
 
-class GraficoCarteiraAberto extends StatefulWidget {
-  const GraficoCarteiraAberto({super.key});
+class GraficoLiquidez extends StatefulWidget {
+  const GraficoLiquidez({super.key});
 
   @override
-  State<GraficoCarteiraAberto> createState() => _GraficoCarteiraAbertoState();
+  State<GraficoLiquidez> createState() => _GraficoLiquidezState();
 }
 
-class _GraficoCarteiraAbertoState extends State<GraficoCarteiraAberto> {
+class _GraficoLiquidezState extends State<GraficoLiquidez> {
 
   @override
-  void didChangeDependencies() async{
+  void initState() {
     // TODO: implement initState
-    super.didChangeDependencies();
-    await Modular.get<CarteiraAbertoProvider>().carregarDados();
+    super.initState();
+    Modular.get<PrazoLiquidezProvider>().carregarDados();
   }
 
   @override
   Widget build(BuildContext context) {
-    final carteiraAbertoProvider = context.watch<CarteiraAbertoProvider>();
+    final liquidezProvider = context.watch<PrazoLiquidezProvider>();
     final List<DadosGraficoModel> filteredItems =
-        carteiraAbertoProvider.dadosGrafico;
+        liquidezProvider.dadosGrafico;
     final int itemCount = filteredItems.length;
     final double itemHeight = 100.h;
     final double listViewHeight = itemHeight * itemCount;
@@ -44,7 +45,7 @@ class _GraficoCarteiraAbertoState extends State<GraficoCarteiraAberto> {
     }
 
     return FutureBuilder(
-      future: carteiraAbertoProvider.futureGrafico,
+      future: liquidezProvider.futureGrafico,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SizedBox(

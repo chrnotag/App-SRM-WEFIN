@@ -25,4 +25,5 @@ abstract class Endpoint{
   String get carteiraConsolidada;
   String get geralCarteira;
   String get carteiraAberto;
+  String get prazoLiquidez;
 }

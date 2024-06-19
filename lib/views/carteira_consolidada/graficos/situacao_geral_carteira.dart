@@ -1,6 +1,7 @@
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/views/carteira_consolidada/graficos/grafico_carteira_aberto.dart';
+import 'package:Srm_Asset/views/carteira_consolidada/graficos/grafico_liquidez.dart';
 import 'package:Srm_Asset/views/carteira_consolidada/widgets/titulo_list_item.dart';
 import 'package:Srm_Asset/views/carteira_consolidada/widgets/titulo_list_item_interno.dart';
 import 'package:Srm_Asset/views/carteira_consolidada/widgets/titulo_list_item_interno.dart';
@@ -27,7 +28,7 @@ class _GraficoSituacaoGeralState extends State<GraficoSituacaoGeral> {
     final List<DadosGraficoModel> filteredItems =
         geralCarteiraProvider.dadosGraficoModel;
     final int itemCount = filteredItems.length;
-    final double itemHeight = 88.h;
+    final double itemHeight = 100.h;
     final double listViewHeight = itemHeight * itemCount;
 
     String totalOperado() {
@@ -131,11 +132,25 @@ class _GraficoSituacaoGeralState extends State<GraficoSituacaoGeral> {
               },
             ),
           ),
-          SizedBox(height: 20.h,),
-          Column(children: [Divider(),
-            TituloListItemInterno(label: 'Situação da carteira em aberto', widgetExpansivel: GraficoCarteiraAberto()),],),
-          Column(children: [Divider(),
-            TituloListItemInterno(label: 'Prazo de liquidez', widgetExpansivel: Container()),],),
+          SizedBox(
+            height: 20.h,
+          ),
+          Column(
+            children: [
+              Divider(),
+              TituloListItemInterno(
+                  label: 'Situação da carteira em aberto',
+                  widgetExpansivel: GraficoCarteiraAberto()),
+            ],
+          ),
+          Column(
+            children: [
+              Divider(),
+              TituloListItemInterno(
+                  label: 'Prazo de liquidez',
+                  widgetExpansivel: GraficoLiquidez()),
+            ],
+          ),
         ],
       ),
     );
