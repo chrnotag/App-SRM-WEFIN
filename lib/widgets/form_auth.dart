@@ -169,7 +169,7 @@ class _AuthFormState extends State<AuthForm> {
             BotaoPadrao(
               label: widget.label,
               onPressed: () async {
-                if (maximoCaracteresCPF != null && maximoCaracteresCPF! < 11) {
+                if(!temLetras){
                   removerCaracteresEspeciais();
                 }
                 TextInput.finishAutofillContext();
@@ -258,10 +258,6 @@ class _AuthFormState extends State<AuthForm> {
       setState(() {
         OverlayApp.iniciaOverlay(context);
       });
-
-      if(!temLetras){
-        removerCaracteresEspeciais();
-      }
 
       final userModel = UserModel(
           usuario: _loginEC.text,

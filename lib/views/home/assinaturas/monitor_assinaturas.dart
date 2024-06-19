@@ -1,7 +1,6 @@
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
-import 'package:Srm_Asset/core/utils/overlay.dart';
 import 'package:Srm_Asset/widgets/card_monitor_assinaturas/card_monitor_assinaturas.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,8 +11,6 @@ import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_provide
 import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import 'package:line_icons/line_icons.dart';
-import '../../../core/implementations_config/api_response.dart';
-import '../../../models/auth_login_models/SRM/cedente_model.dart';
 
 class MonitorAssinaturas extends StatefulWidget {
   const MonitorAssinaturas({super.key});
@@ -23,15 +20,13 @@ class MonitorAssinaturas extends StatefulWidget {
 }
 
 class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
-  late Future<ApiResponse<dynamic>> _assinaturasFuture;
 
-  String? _valorSelecionado;
-  List<CedenteModel> _listaItens = [];
+  final monitorProvider = Modular.get<AssinaturaProvider>();
 
   @override
   void initState() {
     super.initState();
-    _carregarDados();
+    monitorProvider.carregarDados();
   }
 
   @override
@@ -39,15 +34,6 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
     super.didChangeDependencies();
   }
 
-  Future<void> _carregarDados() async {
-    setState(() {
-      _assinaturasFuture =
-          Modular.get<AssinaturaProvider>().carregarAssinaturas();
-      final authProvider = Modular.get<AuthProvider>();
-      _valorSelecionado = authProvider.empresaSelecionada!.identificador;
-      _listaItens = authProvider.listaCedente!;
-    });
-  }
 
   @override
   void dispose() {
@@ -80,8 +66,8 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
                     borderRadius: BorderRadius.all(Radius.circular(12.r))),
                 child: DropdownButton(
                   dropdownColor: Colors.white,
-                  value: _valorSelecionado,
-                  selectedItemBuilder: (context) => _listaItens
+                  value: assinaturaProvider.valorSelecionado,
+                  selectedItemBuilder: (context) => assinaturaProvider.listaItens
                       .map((e) => DropdownMenuItem(
                             value: e.identificador,
                             child: Padding(
@@ -97,7 +83,7 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
                       .toList(),
                   menuMaxHeight: 300.h,
                   isExpanded: true,
-                  items: _listaItens
+                  items: assinaturaProvider.listaItens
                       .map((e) => DropdownMenuItem(
                             value: e.identificador,
                             child: Text(e.nome,
@@ -109,7 +95,7 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
                       .toList(),
                   onChanged: (value) async {
                     setState(() {
-                      _valorSelecionado = value!;
+                      assinaturaProvider.valorSelecionado = value!;
                     });
                     await authProvider.RelogarTrocarCedente(value!, context);
                   },
@@ -127,9 +113,9 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
             SizedBox(
               height: context.height * 0.82,
               child: RefreshIndicator(
-                onRefresh: () => _carregarDados(),
+                onRefresh: () => assinaturaProvider.carregarDados(),
                 child: FutureBuilder(
-                  future: _assinaturasFuture,
+                  future: assinaturaProvider.assinaturasFuture,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Loader();

@@ -48,19 +48,17 @@ class AssinaturaCompletaPopUp extends StatelessWidget {
               'Você pode acompanhar o status da sua assinatura clicando no botão abaixo.',
               style: context.textTheme.bodyMedium),
           BotaoPadrao(
-              label: 'Acompanhar Assinaturas',
-              onPressed: () {
+              label: 'Realizar nova assinatura',
+              onPressed: () async {
                 Modular.to.pop();
+                Modular.to.pop();
+                await Modular.get<AssinaturaProvider>().carregarDados();
               }),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10),
-            child: BotaoPadrao(
-                label: 'Realizar nova assinatura',
-                filled: false,
-                onPressed: () async {
-                  Modular.to.pop();
-                  Modular.to.pop();
-                  await Modular.get<AssinaturaProvider>().carregarAssinaturas();
+            child:
+                BotaoPadrao(label: 'Fechar', filled: false, onPressed: () {
+                  Modular.to.navigate(AppRoutes.homeAppRoute);
                 }),
           ),
         ],

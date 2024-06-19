@@ -96,4 +96,6 @@ class EndPointsSRM extends Endpoint{
 
   String get geralCarteira => '$carteiraConsolidada/geral-carteira';
 
-  }
+  String get carteiraAberto => '$carteiraConsolidada/em-aberto';
+
+}

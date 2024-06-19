@@ -42,7 +42,7 @@ class _ConfirmarAssinaturaDialogState extends State<ConfirmarAssinaturaDialog> {
       title: Column(
         children: [
           Text(
-            'Você confirma a assinatura de todos os documentos da operação ${assinaturaProvider.assinaturaSelecionada!.siglaProduto} nº${assinaturaEletronicaProvider.codigoOperacao}',
+            'Você confirma a assinatura de todos os documentos da operação ${assinaturaProvider.assinaturaSelecionada!.siglaProduto} nº${assinaturaProvider.assinaturaSelecionada!.codigoOperacao}',
             style: context.textTheme.bodyMedium,
             textAlign: TextAlign.center,
           ),
@@ -54,7 +54,7 @@ class _ConfirmarAssinaturaDialogState extends State<ConfirmarAssinaturaDialog> {
                   Overlay.of(context).insert(_overlayLoader);
                   final response = await IniciarAssinaturaEletronicaImpl(
                           codigoOperacaoModel: IniciarAssinaturaEletronicaModel(
-                              codigoOperacao: assinaturaEletronicaProvider.codigoOperacao!))
+                              codigoOperacao: assinaturaProvider.assinaturaSelecionada!.codigoOperacao))
                       .iniciarAssinaturaEletronica();
                   if (response.error != null) {
                     _overlayLoader.remove();
