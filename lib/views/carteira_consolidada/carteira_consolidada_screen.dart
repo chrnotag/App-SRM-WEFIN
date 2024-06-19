@@ -93,7 +93,7 @@ class _CarteiraConsolidadaScreenState extends State<CarteiraConsolidadaScreen> {
                   TituloListItem(
                       label: 'Distribuição de Recebíveis',
                       widgetExpansivel: Container()),
-                  TituloListItem(
+                  const TituloListItem(
                     label: 'Situação Carteira',
                     widgetExpansivel: GraficoSituacaoGeral(),
                     expandir: true,

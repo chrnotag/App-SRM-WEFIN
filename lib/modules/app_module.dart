@@ -1,4 +1,5 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
+import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/carteira_aberto/carteira_aberto_provider.dart';
 import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/geral_carteira/geral_carteira_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/comprovante_ted/comprovante_ted_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
@@ -47,6 +48,7 @@ class AppModule extends Module {
     i.addSingleton(ExtratoProvider.new);
     i.addSingleton(ComprovanteTEDProvider.new);
     i.addSingleton(GeralCarteiraProvider.new);
+    i.addSingleton(CarteiraAbertoProvider.new);
     i.addInstance(environment);
   }
 
