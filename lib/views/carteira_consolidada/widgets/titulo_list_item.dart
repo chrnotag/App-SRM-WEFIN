@@ -1,21 +1,24 @@
-part of '../carteira_consolidada_screen.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:flutter/material.dart';
 
-class _TituloListItem extends StatefulWidget {
+class TituloListItem extends StatefulWidget {
   final String label;
   final Widget widgetExpansivel;
   final bool expandir;
 
-  const _TituloListItem(
+  const TituloListItem(
       {super.key,
       required this.label,
       required this.widgetExpansivel,
       this.expandir = false});
 
   @override
-  State<_TituloListItem> createState() => _TituloListItemState();
+  State<TituloListItem> createState() => _TituloListItemState();
 }
 
-class _TituloListItemState extends State<_TituloListItem> with SingleTickerProviderStateMixin {
+class _TituloListItemState extends State<TituloListItem> with SingleTickerProviderStateMixin {
   bool cardExpandido = false;
   @override
   Widget build(BuildContext context) {

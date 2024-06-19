@@ -1,27 +1,34 @@
-part of '../carteira_consolidada_screen.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
-class _GraficoSituacaoGeral extends StatefulWidget {
-  const _GraficoSituacaoGeral({super.key});
+import '../../../core/providers/carteira_consolidada_provider/geral_carteira/geral_carteira_provider.dart';
+import '../../../core/utils/money_format.dart';
+import '../utils/dados_grafico_model.dart';
+import '../widgets/legenda_grafico_widget.dart';
+
+class GraficoSituacaoGeral extends StatefulWidget {
+  const GraficoSituacaoGeral({super.key});
 
   @override
-  State<_GraficoSituacaoGeral> createState() => _GraficoSituacaoGeralState();
+  State<GraficoSituacaoGeral> createState() => _GraficoSituacaoGeralState();
 }
 
-class _GraficoSituacaoGeralState extends State<_GraficoSituacaoGeral> {
+class _GraficoSituacaoGeralState extends State<GraficoSituacaoGeral> {
   @override
   Widget build(BuildContext context) {
     final geralCarteiraProvider = Modular.get<GeralCarteiraProvider>();
-    final List<DadosGraficoModel> filteredItems = geralCarteiraProvider.dadosGraficoModel;
+    final List<DadosGraficoModel> filteredItems =
+        geralCarteiraProvider.dadosGraficoModel;
     final int itemCount = filteredItems.length;
-    final int crossAxisCount = 2;
-    final double itemHeight = 95.0;
-    final double crossAxisSpacing = 8.0;
-    final int rowCount = (itemCount / crossAxisCount).ceil();
-    final double gridViewHeight = (itemHeight + crossAxisSpacing) * rowCount - crossAxisSpacing;
+    final double itemHeight = 88.h;
+    final double listViewHeight = itemHeight * itemCount;
 
-    String totalOperado(){
+    String totalOperado() {
       double total = 0;
-      for(var dados in filteredItems){
+      for (var dados in filteredItems) {
         total += dados.valor;
       }
       return FormatarDinheiro.BR(total);
@@ -74,10 +81,10 @@ class _GraficoSituacaoGeralState extends State<_GraficoSituacaoGeral> {
                         sectionsSpace: 0,
                         sections: filteredItems
                             .map((e) => PieChartSectionData(
-                            color: e.cor,
-                            value: e.valor,
-                            showTitle: false,
-                            radius: 16))
+                                color: e.cor,
+                                value: e.valor,
+                                showTitle: false,
+                                radius: 16))
                             .toList(),
                       ),
                     ),
@@ -85,9 +92,15 @@ class _GraficoSituacaoGeralState extends State<_GraficoSituacaoGeral> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text('Total Operado', style: context.textTheme.bodyLarge),
-                          SizedBox(height: 8.h,),
-                          Text(totalOperado(), style: context.textTheme.displayMedium!.copyWith(fontWeight: FontWeight.w600, color: context.labelTextColor)),
+                          Text('Total Operado',
+                              style: context.textTheme.bodyLarge),
+                          SizedBox(
+                            height: 8.h,
+                          ),
+                          Text(totalOperado(),
+                              style: context.textTheme.displayMedium!.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: context.labelTextColor)),
                         ],
                       ),
                     )
@@ -98,20 +111,13 @@ class _GraficoSituacaoGeralState extends State<_GraficoSituacaoGeral> {
           ),
           SizedBox(
             width: 375.w,
-            height: gridViewHeight, // Altura dinâmica do GridView
-            child: GridView.builder(
+            height: listViewHeight, // Altura dinâmica do GridView
+            child: ListView.builder(
               physics: NeverScrollableScrollPhysics(), // Desativa a rolagem
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: crossAxisCount,
-                crossAxisSpacing: crossAxisSpacing,
-                mainAxisSpacing: crossAxisSpacing,
-                childAspectRatio: (375.w / crossAxisCount) /
-                    itemHeight, // Garantir que a proporção esteja correta
-              ),
               itemCount: itemCount,
               itemBuilder: (context, index) {
                 final e = filteredItems[index];
-                return _LegendaGraficoWidget(
+                return LegendaGraficoWidget(
                   corLegenda: e.cor,
                   titulo: e.titulo,
                   porcentagem: e.porcentagem,
@@ -126,4 +132,3 @@ class _GraficoSituacaoGeralState extends State<_GraficoSituacaoGeral> {
     );
   }
 }
-

@@ -1,6 +1,7 @@
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/utils/money_format.dart';
+import 'package:Srm_Asset/views/carteira_consolidada/widgets/titulo_list_item.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
 import 'package:Srm_Asset/widgets/popup_generico.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,13 +11,8 @@ import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/geral_car
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'graficos/situacao_geral_carteira.dart';
 import 'utils/dados_grafico_model.dart';
-
-part 'graficos/situacao_geral_carteira.dart';
-
-part 'widgets/legenda_grafico_widget.dart';
-
-part 'widgets/titulo_list_item.dart';
 
 class CarteiraConsolidadaScreen extends StatefulWidget {
   const CarteiraConsolidadaScreen({super.key});
@@ -90,18 +86,20 @@ class _CarteiraConsolidadaScreenState extends State<CarteiraConsolidadaScreen> {
             });
           }
 
-          return Center(
-            child: Column(
-              children: [
-                _TituloListItem(
-                    label: 'Distribuição de Recebíveis',
-                    widgetExpansivel: Container()),
-                _TituloListItem(
-                  label: 'Situação Carteira',
-                  widgetExpansivel: _GraficoSituacaoGeral(),
-                  expandir: true,
-                ),
-              ],
+          return SingleChildScrollView(
+            child: Center(
+              child: Column(
+                children: [
+                  TituloListItem(
+                      label: 'Distribuição de Recebíveis',
+                      widgetExpansivel: Container()),
+                  TituloListItem(
+                    label: 'Situação Carteira',
+                    widgetExpansivel: GraficoSituacaoGeral(),
+                    expandir: true,
+                  ),
+                ],
+              ),
             ),
           );
         },
