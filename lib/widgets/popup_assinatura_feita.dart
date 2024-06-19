@@ -50,15 +50,15 @@ class AssinaturaCompletaPopUp extends StatelessWidget {
           BotaoPadrao(
               label: 'Realizar nova assinatura',
               onPressed: () async {
-                await Modular.get<AssinaturaProvider>().carregarDados();
                 Modular.to.pop();
+                Modular.to.pop();
+                await Modular.get<AssinaturaProvider>().carregarDados();
               }),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10),
             child:
                 BotaoPadrao(label: 'Fechar', filled: false, onPressed: () {
-                  Modular.to.pop();
-                  Modular.to.pop();
+                  Modular.to.navigate(AppRoutes.homeAppRoute);
                 }),
           ),
         ],
