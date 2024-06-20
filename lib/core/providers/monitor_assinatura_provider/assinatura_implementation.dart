@@ -6,7 +6,6 @@ import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_m
 import '../../constants/classes_abstratas/envirioment.dart';
 import '../../implementations_config/export_impl.dart';
 import '../../utils/mensagem_erro_requisicao.dart';
-import '../auth_provider_config/deslogar/verificar_sessao.dart';
 
 class AssinaturaImpl {
   const AssinaturaImpl();
@@ -24,14 +23,15 @@ class AssinaturaImpl {
         'Authorization': authProvider.dataUser!.token,
         'plataforma' : ambiente.plataforma.name
       });
-      log('response: ${response.body}');
+      print('response: ${response.body}');
       switch (response.statusCode) {
         case 200:
           final responseBody = json.decode(utf8.decode(response.bodyBytes));
           List<MonitorAssinaturasModel> data = [];
           data = List<MonitorAssinaturasModel>.from(responseBody
               .map((model) => MonitorAssinaturasModel.fromJson(model)));
-          assinaturaProvider.assinaturas = data;
+          assinaturaProvider.testeAssinaturas = data;
+          print("data: $data");
           return SucessResponse(data);
         case 401:
           return MensagemErroPadrao.erroResponse(response.bodyBytes);

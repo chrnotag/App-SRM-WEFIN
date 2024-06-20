@@ -46,7 +46,9 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
     final AssinaturaProvider assinaturaProvider =
         context.watch<AssinaturaProvider>();
     final List<MonitorAssinaturasModel> assinaturas =
-        assinaturaProvider.assinaturasPendentes;
+        assinaturaProvider.testeAssinatura;
+
+    print('assinaturas: $assinaturas');
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -121,7 +123,6 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
                       return const Loader();
                     }
                     if (assinaturas.isEmpty) {
-                      print('teste');
                       return SizedBox(
                         width: context.width,
                         child: Padding(

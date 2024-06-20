@@ -12,9 +12,9 @@ class _InteriorDocumentosLista extends StatelessWidget {
       for (var infoAssinante in assinante.informacoesAssinante) {
         if (infoAssinante.identificadorAssinador ==
             authProvider.dataUser!.identificadorUsuario) {
-          for (var documento in infoAssinante.documentos) {
+          for (var documento in infoAssinante.documentos!) {
             listaDocumentos
-                .add(_WidgetDocumentos(nomeDocumento: documento.nome));
+                .add(_WidgetDocumentos(nomeDocumento: documento.nome!));
           }
         }
       }

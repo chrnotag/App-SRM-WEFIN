@@ -43,6 +43,13 @@ class AssinaturaProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<MonitorAssinaturasModel> _testeAssinatura =[];
+  List<MonitorAssinaturasModel> get testeAssinatura => _testeAssinatura;
+  set testeAssinaturas(List<MonitorAssinaturasModel> assinaturas) {
+    _testeAssinatura = assinaturas;
+    notifyListeners();
+  }
+
   bool _existemProcuradores = true;
 
   bool get existemProcuradores => _existemProcuradores;
@@ -52,9 +59,8 @@ class AssinaturaProvider extends ChangeNotifier {
   }
 
   set assinaturas(List<MonitorAssinaturasModel> assinaturasModel) {
-    separaAssinaturas(assinaturasModel);
-    mapearAssinaturas = assinaturasModel;
     todasAssinaturas = assinaturasModel;
+    notifyListeners();
   }
 
   MonitorAssinaturasModel? _assinaturaSelecionada;
@@ -96,12 +102,12 @@ class AssinaturaProvider extends ChangeNotifier {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
     bool naoAssinadoPeloUsuario = false;
     for (var assinatura in assinaturas) {
-      if (assinatura.statusAssinaturaDigital.toLowerCase() != "assinado") {
+      if (assinatura.statusAssinaturaDigital!.toLowerCase() != "assinado") {
         naoAssinadoPeloUsuario = assinatura.assinantes
             .any((assinante) => assinante.informacoesAssinante.any((info) {
                   return info.identificadorAssinador ==
                           authProvider.dataUser!.identificadorUsuario &&
-                      info.statusAssinatura.toLowerCase() != "assinado";
+                      info.statusAssinatura!.toLowerCase() != "assinado";
                 }));
         if (naoAssinadoPeloUsuario) {
           _assinaturasPendentes.add(assinatura);
