@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
 import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/carteira_aberto/carteira_aberto_impl.dart';
 import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/prazo_liquidez/prazo_liquidez_impl.dart';
 import 'package:Srm_Asset/models/carteira_consolidada/carteira_aberto/carteira_aberto_model.dart';
@@ -103,15 +104,7 @@ class PrazoLiquidezProvider extends ChangeNotifier {
     double valorTotal = 0;
     valorTotal = dadosLiquidez.valorTotalRecebiveisLiquidados;
 
-    double porcentagem = (valor / valorTotal) * 100;
-
-    // Converte a porcentagem para String e remove zeros desnecessários
-    String porcentagemStr = porcentagem
-        .toStringAsFixed(2)
-        .replaceAll(RegExp(r'0*$'), '')
-        .replaceAll(RegExp(r'\.$'), '');
-
-    return '$porcentagemStr%';
+    return ((valor / valorTotal) * 100).toBRL;
   }
 
   void limparDados() {
