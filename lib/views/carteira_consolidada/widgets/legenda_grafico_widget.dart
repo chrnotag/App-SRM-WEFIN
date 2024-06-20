@@ -1,6 +1,8 @@
 import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LegendaGraficoWidget extends StatelessWidget {
@@ -20,41 +22,42 @@ class LegendaGraficoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String formatarTitulo(){
+      return titulo.length >= 25 ? "${titulo.substring(0,25)}..." : titulo;
+    }
     return SizedBox(
-      height: 88.h,
+      width: context.width,
+      height: 100.h,
       child: Card(
         margin: EdgeInsets.all(8),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
+              Row(
                 children: [
-                  Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 12.r,
-                        backgroundColor: corLegenda,
-                      ),
-                      SizedBox(width: 8.0),
-                      Text(titulo)
-                    ],
+                  CircleAvatar(
+                    radius: 12.r,
+                    backgroundColor: corLegenda,
                   ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        porcentagem,
-                        style: context.textTheme.displaySmall!.copyWith(
-                          fontSize: 20.sp,
-                            color: context.labelTextColor,
-                            fontWeight: FontWeight.w900),
-                      ),
-                    ],
+                  SizedBox(width: 8.0),
+                  Text(formatarTitulo())
+                ],
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 30.w),
+                    child: Text(
+                      porcentagem,
+                      style: context.textTheme.displaySmall!.copyWith(
+                        fontSize: 20.sp,
+                          color: context.labelTextColor,
+                          fontWeight: FontWeight.w900),
+                    ),
                   ),
                 ],
               ),

@@ -98,4 +98,5 @@ class EndPointsSRM extends Endpoint{
 
   String get carteiraAberto => '$carteiraConsolidada/em-aberto';
 
+  String get prazoLiquidez => '$carteiraConsolidada/prazo-liquidez';
 }
