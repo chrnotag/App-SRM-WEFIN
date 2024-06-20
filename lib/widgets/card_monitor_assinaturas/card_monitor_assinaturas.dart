@@ -1,7 +1,8 @@
+import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/string_extensions.dart';
 import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:Srm_Asset/core/utils/data_format.dart';
-import 'package:Srm_Asset/core/utils/money_format.dart';
+
 import 'package:Srm_Asset/generated/assets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -168,7 +169,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                         padding: EdgeInsets.symmetric(vertical: 16.h),
                         child: _ItemTextCard(
                             titulo: 'Valor Bruto',
-                            conteudo: FormatarDinheiro.BR(assinatura.valorBruto)),
+                            conteudo: assinatura.valorBruto.toBRL),
                       )
                     ],
                   ),

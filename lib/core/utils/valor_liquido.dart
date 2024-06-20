@@ -1,7 +1,4 @@
-import 'package:Srm_Asset/core/utils/money_format.dart';
-import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
-
-import '../../models/monitor_operacoes_model/monitor_operacoes_model.dart';
+import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
 
 class ValorLiquido {
   static String regraExibirValorLiquido(
@@ -13,7 +10,7 @@ class ValorLiquido {
       'cobrança'
     ];
     if (status.contains(statusOperacao)) {
-      return FormatarDinheiro.BR(valor);
+      return valor.toBRL;
     }
     else {
       return "---";
