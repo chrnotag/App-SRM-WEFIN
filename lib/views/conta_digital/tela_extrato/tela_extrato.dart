@@ -1,5 +1,6 @@
 import 'package:Srm_Asset/core/constants/enuns/tipo_operacao_enum.dart';
 import 'package:Srm_Asset/core/constants/extensions/date_extensions.dart';
+import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
@@ -7,7 +8,6 @@ import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_provider.dart';
 import 'package:Srm_Asset/core/utils/data_format.dart';
-import 'package:Srm_Asset/core/utils/money_format.dart';
 import 'package:Srm_Asset/generated/assets.dart';
 import 'package:Srm_Asset/models/conta_digital/extrato/conta_extrato_model.dart';
 import 'package:Srm_Asset/views/conta_digital/tela_extrato/widgets/item_lista_extrato.dart';
@@ -106,9 +106,9 @@ class _TelaExtratoState extends State<TelaExtrato>
                                           .itensExtrato[index]
                                           .dataReferencia
                                           .formatarIso8601,
-                                      saldoDia: FormatarDinheiro.BR(
+                                      saldoDia:
                                           extratoProvider
-                                              .itensExtrato[index].saldoNaData),
+                                              .itensExtrato[index].saldoNaData.toBRL,
                                     ),
                                     ...BuildListaOperacao.buildLista(
                                         context: context, index: index),

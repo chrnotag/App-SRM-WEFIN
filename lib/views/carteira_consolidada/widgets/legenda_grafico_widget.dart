@@ -1,8 +1,7 @@
+import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:flutter/material.dart';
-
-import '../../../core/utils/money_format.dart';
 
 class LegendaGraficoWidget extends StatelessWidget {
   final Color corLegenda;
@@ -64,7 +63,7 @@ class LegendaGraficoWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    FormatarDinheiro.BR(valor),
+                    valor.toBRL,
                     style: context.textTheme.bodyMedium!.copyWith(
                         color: context.labelTextColor,
                         fontWeight: FontWeight.w600),
