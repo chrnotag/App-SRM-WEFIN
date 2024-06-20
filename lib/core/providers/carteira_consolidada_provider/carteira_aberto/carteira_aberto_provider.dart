@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
 import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/carteira_aberto/carteira_aberto_impl.dart';
 import 'package:Srm_Asset/models/carteira_consolidada/carteira_aberto/carteira_aberto_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -51,18 +52,10 @@ class CarteiraAbertoProvider extends ChangeNotifier {
         dadosCarteira.valorTotalRecebiveisEmAberto +
         dadosCarteira.valorTotalRecebiveisAVencer;
 
-    double porcentagem = (valor / valorTotal) * 100;
-
-    // Converte a porcentagem para String e remove zeros desnecessários
-    String porcentagemStr = porcentagem
-        .toStringAsFixed(2)
-        .replaceAll(RegExp(r'0*$'), '')
-        .replaceAll(RegExp(r'\.$'), '');
-
-    return '$porcentagemStr%';
+    return ((valor / valorTotal) * 100).toBRL;
   }
 
-  void limparDados(){
+  void limparDados() {
     dadosCarteira = null;
   }
 }
