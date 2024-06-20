@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/carteira_aberto/carteira_aberto_provider.dart';
@@ -6,8 +7,6 @@ import 'package:Srm_Asset/widgets/loader_widget.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
-import '../../../core/utils/money_format.dart';
 import '../utils/dados_grafico_model.dart';
 import '../widgets/legenda_grafico_widget.dart';
 
@@ -41,7 +40,7 @@ class _GraficoLiquidezState extends State<GraficoLiquidez> {
       for (var dados in filteredItems) {
         total += dados.valor;
       }
-      return FormatarDinheiro.BR(total);
+      return total.toBRL;
     }
 
     return FutureBuilder(

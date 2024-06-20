@@ -1,18 +1,13 @@
-import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
-import 'package:Srm_Asset/core/utils/money_format.dart';
 import 'package:Srm_Asset/views/carteira_consolidada/widgets/titulo_list_item.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
 import 'package:Srm_Asset/widgets/popup_generico.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/geral_carteira/geral_carteira_provider.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'graficos/situacao_geral_carteira.dart';
-import 'utils/dados_grafico_model.dart';
 
 class CarteiraConsolidadaScreen extends StatefulWidget {
   const CarteiraConsolidadaScreen({super.key});

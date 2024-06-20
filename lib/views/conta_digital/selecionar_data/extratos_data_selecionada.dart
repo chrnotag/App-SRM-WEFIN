@@ -1,4 +1,5 @@
 import 'package:Srm_Asset/core/constants/extensions/date_extensions.dart';
+import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_provider.dart';
@@ -8,10 +9,7 @@ import 'package:Srm_Asset/widgets/popup_generico.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
-import '../../../core/constants/enuns/tipo_operacao_enum.dart';
-import '../../../core/utils/money_format.dart';
 import '../tela_extrato/widgets/item_lista_extrato.dart';
-import '../tela_extrato/widgets/item_lista_operacao.dart';
 
 class ExtratosDataSelecionada extends StatefulWidget {
   const ExtratosDataSelecionada({super.key});
@@ -86,8 +84,8 @@ class _ExtratosDataSelecionadaState extends State<ExtratosDataSelecionada> {
                               ItemListaExtrato(
                                 dataDia: extratoProvider.itensExtrato[index]
                                     .dataReferencia.formatarIso8601,
-                                saldoDia: FormatarDinheiro.BR(extratoProvider
-                                    .itensExtrato[index].saldoNaData),
+                                saldoDia: extratoProvider
+                                    .itensExtrato[index].saldoNaData.toBRL,
                               ),
                               ...BuildListaOperacao.buildLista(
                                   context: context, index: index),

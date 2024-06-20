@@ -1,10 +1,9 @@
+import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../../../core/utils/money_format.dart';
 
 class LegendaGraficoWidget extends StatelessWidget {
   final Color corLegenda;
@@ -60,19 +59,19 @@ class LegendaGraficoWidget extends StatelessWidget {
                           fontWeight: FontWeight.w900),
                     ),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        FormatarDinheiro.BR(valor),
-                        style: context.textTheme.bodyMedium!.copyWith(
-                            color: context.labelTextColor,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      Text('$qtdTitulos Duplicatas', textAlign: TextAlign.end,),
-                    ],
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    valor.toBRL,
+                    style: context.textTheme.bodyMedium!.copyWith(
+                        color: context.labelTextColor,
+                        fontWeight: FontWeight.w600),
                   ),
+                  Text('$qtdTitulos Duplicatas', textAlign: TextAlign.end,),
                 ],
               ),
             ],

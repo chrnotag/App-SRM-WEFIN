@@ -1,9 +1,10 @@
 import 'package:Srm_Asset/core/constants/AppSizes.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
+import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
-import 'package:Srm_Asset/core/utils/money_format.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -17,6 +18,7 @@ import 'package:Srm_Asset/generated/assets.dart';
 import 'package:Srm_Asset/widgets/appbar_logo_perfil.dart';
 import '../../../core/implementations_config/api_response.dart';
 import '../../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
+
 part 'widgets/card_item_menu.dart';
 
 class HomeView extends StatefulWidget {
@@ -188,11 +190,9 @@ class _HomeViewState extends State<HomeView> {
                                 } else {
                                   return Text(
                                     _isSaldoVisivel
-                                        ? FormatarDinheiro.BR(
-                                            contaDigitalProvider
-                                                    .saldoContaDigital
-                                                    ?.saldoTotal ??
-                                                0.0)
+                                        ? contaDigitalProvider.saldoContaDigital
+                                                ?.saldoTotal.toBRL ??
+                                            0.0.toBRL
                                         : 'R\$ * * * * *',
                                     style: context.textTheme.displayMedium!
                                         .copyWith(
@@ -254,9 +254,9 @@ class _HomeViewState extends State<HomeView> {
                                 icone: Assets.lista_icone,
                                 titulo: 'Extrato',
                                 onTap: () {
-                                      Modular.to.pushNamed(
-                                          AppRoutes.extratoScreenRoute);
-                                    }),
+                                  Modular.to
+                                      .pushNamed(AppRoutes.extratoScreenRoute);
+                                }),
                           ],
                         ),
                         Column(
@@ -282,7 +282,8 @@ class _HomeViewState extends State<HomeView> {
                                 icone: Assets.dolar_icon,
                                 titulo: 'Conta Garantia',
                                 onTap: () {
-                                  Modular.to.pushNamed(AppRoutes.carteiraConsolidadaNavigatorRoute);
+                                  Modular.to.pushNamed(AppRoutes
+                                      .carteiraConsolidadaNavigatorRoute);
                                 }),
                             _CardItemMenuHome(
                                 icone: Assets.grupo_pessoas,

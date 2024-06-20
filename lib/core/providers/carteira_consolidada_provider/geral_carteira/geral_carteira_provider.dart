@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
 import 'package:Srm_Asset/core/implementations_config/api_response.dart';
 import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/geral_carteira/geral_carteira_impl.dart';
 import 'package:Srm_Asset/models/carteira_consolidada/geral_carteira/geral_carteira_model.dart';
@@ -73,11 +74,6 @@ class GeralCarteiraProvider extends ChangeNotifier {
   dadosCarteira.valorTotalRecebiveisEmAberto +
   dadosCarteira.valorTotalRecebiveisAVencer;
 
-  double porcentagem = (valor / valorTotal) * 100;
-
-  // Converte a porcentagem para String e remove zeros desnecessários
-  String porcentagemStr = porcentagem.toStringAsFixed(2).replaceAll(RegExp(r'0*$'), '').replaceAll(RegExp(r'\.$'), '');
-
-  return '$porcentagemStr%';
+  return ((valor / valorTotal) * 100).toBRL;
   }
 }
