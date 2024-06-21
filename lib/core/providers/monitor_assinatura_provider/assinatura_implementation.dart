@@ -30,7 +30,7 @@ class AssinaturaImpl {
           List<MonitorAssinaturasModel> data = [];
           data = List<MonitorAssinaturasModel>.from(responseBody
               .map((model) => MonitorAssinaturasModel.fromJson(model)));
-          assinaturaProvider.testeAssinaturas = data;
+          assinaturaProvider.assinaturas = data;
           print("data: $data");
           return SucessResponse(data);
         case 401:

@@ -30,23 +30,16 @@ class AssinaturaProvider extends ChangeNotifier {
   String? get valorSelecionado => _valorSelecionado;
   set valorSelecionado(String? valor) => _valorSelecionado = valor;
 
-  List<CedenteModel> _listaItens = [];
-  List<CedenteModel> get listaItens => _listaItens;
-  set listaItens(List<CedenteModel> lista) => _listaItens = lista;
+  List<CedenteModel> _listaCedentes = [];
+  List<CedenteModel> get listaCedentes => _listaCedentes;
+  set listaCedentes(List<CedenteModel> lista) => _listaCedentes = lista;
 
   Future<void> carregarDados() async {
     assinaturasFuture =
         Modular.get<AssinaturaProvider>().carregarAssinaturas();
     final authProvider = Modular.get<AuthProvider>();
     valorSelecionado = authProvider.empresaSelecionada!.identificador;
-    listaItens = authProvider.listaCedente!;
-    notifyListeners();
-  }
-
-  List<MonitorAssinaturasModel> _testeAssinatura =[];
-  List<MonitorAssinaturasModel> get testeAssinatura => _testeAssinatura;
-  set testeAssinaturas(List<MonitorAssinaturasModel> assinaturas) {
-    _testeAssinatura = assinaturas;
+    listaCedentes = authProvider.listaCedente!;
     notifyListeners();
   }
 
@@ -60,6 +53,7 @@ class AssinaturaProvider extends ChangeNotifier {
 
   set assinaturas(List<MonitorAssinaturasModel> assinaturasModel) {
     todasAssinaturas = assinaturasModel;
+    separaAssinaturas(assinaturasModel);
     notifyListeners();
   }
 

@@ -46,7 +46,7 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
     final AssinaturaProvider assinaturaProvider =
         context.watch<AssinaturaProvider>();
     final List<MonitorAssinaturasModel> assinaturas =
-        assinaturaProvider.testeAssinatura;
+        assinaturaProvider.assinaturasPendentes;
 
     print('assinaturas: $assinaturas');
     return Scaffold(
@@ -69,7 +69,7 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
                 child: DropdownButton(
                   dropdownColor: Colors.white,
                   value: assinaturaProvider.valorSelecionado,
-                  selectedItemBuilder: (context) => assinaturaProvider.listaItens
+                  selectedItemBuilder: (context) => assinaturaProvider.listaCedentes
                       .map((e) => DropdownMenuItem(
                             value: e.identificador,
                             child: Padding(
@@ -85,7 +85,7 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
                       .toList(),
                   menuMaxHeight: 300.h,
                   isExpanded: true,
-                  items: assinaturaProvider.listaItens
+                  items: assinaturaProvider.listaCedentes
                       .map((e) => DropdownMenuItem(
                             value: e.identificador,
                             child: Text(e.nome,

@@ -10,21 +10,16 @@ import 'package:geolocator/geolocator.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/assinatura_eletronica/assinatura_eletronica_impl.dart';
-import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/assinatura_eletronica/iniciar_assinatura_eletronica_impl.dart';
 import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:Srm_Asset/main.dart';
 import 'package:Srm_Asset/models/fluxo_assinatura_model/finalizar_assinatura_eletronica/finalizar_assinatura_eletronica_model.dart';
-import 'package:Srm_Asset/models/fluxo_assinatura_model/iniciar_assinatura_eletronica/iniciar_assinatura_eletronica_model.dart';
-import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import 'package:Srm_Asset/widgets/popup_assinatura_feita.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:validatorless/validatorless.dart';
 import '../../../../models/fluxo_assinatura_model/iniciar_assinatura_eletronica/response/resposta_inic_ass_eletronica.dart';
 import '../../../../widgets/loader_widget.dart';
-import '../../../constants/route_labels.dart';
-import '../../../utils/handle_permissions.dart';
-import '../../monitor_operacao_provider/monitor_operacoes_provider.dart';
+
 
 class AssinaturaEletronicaProvider extends ChangeNotifier {
   FinalizarAssinaturaEletronicaModel? _assinaturaEletronicaModel;

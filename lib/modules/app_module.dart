@@ -20,7 +20,6 @@ import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_provide
 import 'package:Srm_Asset/core/providers/certificado_provider/certificado_provider.dart';
 import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/iniciar_assinatura/iniciar_assinatura_provider.dart';
 import 'package:Srm_Asset/core/providers/internet_provider.dart';
-import 'package:Srm_Asset/core/providers/monitor_operacao_provider/monitor_operacoes_provider.dart';
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
 import 'package:Srm_Asset/modules/auth_module.dart';
 import 'package:Srm_Asset/modules/home_module.dart';
@@ -42,7 +41,6 @@ class AppModule extends Module {
     i.addSingleton(RecuperarSenhaProvider.new);
     i.addSingleton(FinalizarAssinaturaProvider.new);
     i.addSingleton(AssinaturaEletronicaProvider.new);
-    i.addSingleton(MonitorOperacoesProvider.new);
     i.addSingleton(BaixarDocumentosProvider.new);
     i.addSingleton(ContaDigitalProvider.new);
     i.addSingleton(TabMesesProvider.new);
