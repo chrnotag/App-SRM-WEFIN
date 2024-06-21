@@ -1,4 +1,5 @@
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/views/carteira_consolidada/graficos/grafico_recebiveis.dart';
 import 'package:Srm_Asset/views/carteira_consolidada/widgets/titulo_list_item.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
 import 'package:Srm_Asset/widgets/popup_generico.dart';
@@ -81,17 +82,17 @@ class _CarteiraConsolidadaScreenState extends State<CarteiraConsolidadaScreen> {
             });
           }
 
-          return SingleChildScrollView(
+          return const SingleChildScrollView(
             child: Center(
               child: Column(
                 children: [
                   TituloListItem(
                       label: 'Distribuição de Recebíveis',
-                      widgetExpansivel: Container()),
-                  const TituloListItem(
+                      widgetExpansivel: GraficoRecebiveis(),
+                  expandir: true,),
+                  TituloListItem(
                     label: 'Situação Carteira',
                     widgetExpansivel: GraficoSituacaoGeral(),
-                    expandir: true,
                   ),
                 ],
               ),

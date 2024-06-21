@@ -45,7 +45,7 @@ class BotaoPadrao extends StatelessWidget {
                     ),
                   ),
                   Text(label,
-                      style: textStyleFilled ?? context.textTheme.bodyMedium!
+                      style: textStyleFilled ?? context.textTheme.bodyLarge!
                           .copyWith(color: Colors.white))
                 ],
               ),

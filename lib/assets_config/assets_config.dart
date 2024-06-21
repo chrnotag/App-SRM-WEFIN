@@ -71,6 +71,7 @@ class AssetsConfig {
   static const String imagesBalaoChat = 'assets/images/balao_chat.svg';
   static const String imagesCadeado = 'assets/images/cadeado.svg';
   static const String imagesCanetaAssinando = 'assets/images/caneta_assinando.svg';
+  static const String imagesCarteiraConsolidada = 'assets/images/carteira_consolidada.svg';
   static const String imagesCheckCertTrust = 'assets/images/check_cert_trust.svg';
   static const String imagesDocumentCertTrust = 'assets/images/document_cert_trust.svg';
   static const String imagesDolar = 'assets/images/dolar.svg';
