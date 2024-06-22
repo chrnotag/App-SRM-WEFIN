@@ -20,7 +20,7 @@ class CarteiraAbertoImpl {
     final carteiraAbertoProvider = Modular.get<CarteiraAbertoProvider>();
     try {
       final response = await http.get(url, headers: headers);
-      print('request code: ${response.statusCode}');
+      print('response: ${response.body}');
       if (response.statusCode == 200) {
         final data = CarteiraAbertoModel.fromJson(json.decode(response.body));
         carteiraAbertoProvider.dadosCarteira = data;

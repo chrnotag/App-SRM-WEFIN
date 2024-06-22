@@ -19,12 +19,10 @@ class CarteiraAbertoProvider extends ChangeNotifier {
 
   set futureGrafico(Future<ApiResponse<dynamic>>? dados) {
     _futureGrafico = dados;
-    notifyListeners();
   }
 
   Future<void> carregarDados() async {
     futureGrafico = CarteiraAbertoImpl.pegarCarteiraAberto();
-    notifyListeners();
   }
 
   List<DadosGraficoModel> get dadosGrafico => [
@@ -48,11 +46,13 @@ class CarteiraAbertoProvider extends ChangeNotifier {
 
   static String _calcular(double valor, CarteiraAbertoModel dadosCarteira) {
     double valorTotal = 0;
-    valorTotal = dadosCarteira.valorTotalRecebiveisVencidos +
-        dadosCarteira.valorTotalRecebiveisEmAberto +
-        dadosCarteira.valorTotalRecebiveisAVencer;
+    valorTotal = dadosCarteira.valorTotalRecebiveisEmAberto;
 
-    return ((valor / valorTotal) * 100).toBRL;
+    if (valorTotal == 0) {
+      return 0.toPercent;
+    }
+
+    return ((valor / valorTotal) * 100).toPercent;
   }
 
   void limparDados() {

@@ -27,7 +27,7 @@ class _GraficoSituacaoGeralState extends State<GraficoSituacaoGeral> {
     final List<DadosGraficoModel> filteredItems =
         geralCarteiraProvider.dadosGraficoModel;
     final int itemCount = filteredItems.length;
-    final double itemHeight = 100.h;
+    final double itemHeight = 85.h;
     final double listViewHeight = itemHeight * itemCount;
 
     String totalOperado() {
@@ -83,13 +83,17 @@ class _GraficoSituacaoGeralState extends State<GraficoSituacaoGeral> {
                     PieChart(
                       PieChartData(
                         sectionsSpace: 0,
-                        sections: filteredItems
-                            .map((e) => PieChartSectionData(
-                                color: e.cor,
-                                value: e.valor,
-                                showTitle: false,
-                                radius: 16))
-                            .toList(),
+                        sections: filteredItems.map((e) {
+                          // Verifica se todos os valores são zero
+                          bool todosValoresZero = filteredItems.every((item) => item.valor == 0);
+
+                          return PieChartSectionData(
+                            color: todosValoresZero ? Colors.grey : e.cor,
+                            value: todosValoresZero ? 100 : e.valor,
+                            showTitle: false,
+                            radius: 16,
+                          );
+                        }).toList(),
                       ),
                     ),
                     Center(

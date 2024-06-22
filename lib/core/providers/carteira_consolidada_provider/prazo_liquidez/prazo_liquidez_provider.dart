@@ -21,12 +21,10 @@ class PrazoLiquidezProvider extends ChangeNotifier {
 
   set futureGrafico(Future<ApiResponse<dynamic>>? dados) {
     _futureGrafico = dados;
-    notifyListeners();
   }
 
   Future<void> carregarDados() async {
     futureGrafico = PrazoLiquidezImpl.pegarDados();
-    notifyListeners();
   }
 
   List<DadosGraficoModel> get dadosGrafico => [
@@ -79,32 +77,32 @@ class PrazoLiquidezProvider extends ChangeNotifier {
                     dadosLiquidez!.valorTotalRecebiveisLiquidados45Dias +
                     dadosLiquidez!.valorTotalRecebiveisLiquidados60Dias +
                     dadosLiquidez!.valorTotalRecebiveisLiquidados90Dias +
-                    dadosLiquidez!
-                        .valorTotalRecebiveisLiquidadosMaisDe90Dias)
+                    dadosLiquidez!.valorTotalRecebiveisLiquidadosMaisDe90Dias)
                 .toDouble(),
             porcentagem: _calcular(
                 (dadosLiquidez!.valorTotalRecebiveisLiquidados30Dias +
-                    dadosLiquidez!.valorTotalRecebiveisLiquidados45Dias +
-                    dadosLiquidez!.valorTotalRecebiveisLiquidados60Dias +
-                    dadosLiquidez!.valorTotalRecebiveisLiquidados90Dias +
-                    dadosLiquidez!
-                        .valorTotalRecebiveisLiquidadosMaisDe90Dias)
+                        dadosLiquidez!.valorTotalRecebiveisLiquidados45Dias +
+                        dadosLiquidez!.valorTotalRecebiveisLiquidados60Dias +
+                        dadosLiquidez!.valorTotalRecebiveisLiquidados90Dias +
+                        dadosLiquidez!
+                            .valorTotalRecebiveisLiquidadosMaisDe90Dias)
                     .toDouble(),
                 dadosLiquidez!),
-            qtdTitulos:
-            dadosLiquidez!.quantidadeTotalRecebiveisLiquidados30Dias +
+            qtdTitulos: dadosLiquidez!
+                    .quantidadeTotalRecebiveisLiquidados30Dias +
                 dadosLiquidez!.quantidadeTotalRecebiveisLiquidados45Dias +
                 dadosLiquidez!.quantidadeTotalRecebiveisLiquidados60Dias +
                 dadosLiquidez!.quantidadeTotalRecebiveisLiquidados90Dias +
-                dadosLiquidez!
-                    .quantidadeTotalRecebiveisLiquidadosMaisDe90Dias),
+                dadosLiquidez!.quantidadeTotalRecebiveisLiquidadosMaisDe90Dias),
       ];
 
   static String _calcular(double valor, PrazoLiquidezModel dadosLiquidez) {
     double valorTotal = 0;
     valorTotal = dadosLiquidez.valorTotalRecebiveisLiquidados;
-
-    return ((valor / valorTotal) * 100).toBRL;
+    if (valorTotal == 0) {
+      return 0.toPercent;
+    }
+    return ((valor / valorTotal) * 100).toPercent;
   }
 
   void limparDados() {
