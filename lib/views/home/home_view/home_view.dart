@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/assets_config/assets_config.dart';
 import 'package:Srm_Asset/core/constants/AppSizes.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
@@ -279,8 +280,8 @@ class _HomeViewState extends State<HomeView> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             _CardItemMenuHome(
-                                icone: Assets.dolar_icon,
-                                titulo: 'Conta Garantia',
+                                icone: AssetsConfig.imagesCarteiraConsolidada,
+                                titulo: 'Carteira Consolidada',
                                 onTap: () {
                                   Modular.to.pushNamed(AppRoutes
                                       .carteiraConsolidadaNavigatorRoute);

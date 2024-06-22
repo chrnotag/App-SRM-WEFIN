@@ -3,8 +3,6 @@ import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/views/carteira_consolidada/graficos/grafico_carteira_aberto.dart';
 import 'package:Srm_Asset/views/carteira_consolidada/graficos/grafico_liquidez.dart';
-import 'package:Srm_Asset/views/carteira_consolidada/widgets/titulo_list_item.dart';
-import 'package:Srm_Asset/views/carteira_consolidada/widgets/titulo_list_item_interno.dart';
 import 'package:Srm_Asset/views/carteira_consolidada/widgets/titulo_list_item_interno.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -130,7 +128,7 @@ class _GraficoSituacaoGeralState extends State<GraficoSituacaoGeral> {
                   titulo: e.titulo,
                   porcentagem: e.porcentagem,
                   valor: e.valor,
-                  qtdTitulos: e.qtdTitulos,
+                  qtdTitulos: e.qtdTitulos!,
                 );
               },
             ),

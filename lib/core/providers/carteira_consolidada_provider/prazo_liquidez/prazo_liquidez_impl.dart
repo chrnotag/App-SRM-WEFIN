@@ -22,7 +22,6 @@ class PrazoLiquidezImpl {
     final liquidezProvider = Modular.get<PrazoLiquidezProvider>();
     try {
       final response = await http.get(url, headers: headers);
-      print('response: ${response.body}');
       if (response.statusCode == 200) {
         final data = PrazoLiquidezModel.fromJson(json.decode(response.body));
         liquidezProvider.dadosLiquidez = data;

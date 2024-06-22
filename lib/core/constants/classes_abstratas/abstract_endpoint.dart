@@ -25,4 +25,6 @@ abstract class Endpoint{
   String get geralCarteira;
   String get carteiraAberto;
   String get prazoLiquidez;
+  String get carteiraRecebiveis;
+  String get downloadRecebiveis;
 }

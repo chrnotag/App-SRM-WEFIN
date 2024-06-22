@@ -3,6 +3,7 @@ import 'package:Srm_Asset/core/implementations_config/api_response.dart';
 import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/carteira_aberto/carteira_aberto_provider.dart';
 import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/geral_carteira/geral_carteira_impl.dart';
 import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/prazo_liquidez/prazo_liquidez_provider.dart';
+import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/recebiveis/recebiveis_provider.dart';
 import 'package:Srm_Asset/models/carteira_consolidada/geral_carteira/geral_carteira_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +31,10 @@ class GeralCarteiraProvider extends ChangeNotifier {
   Future<void> carregarDados() async {
     final carteiraAbertoProvider = Modular.get<CarteiraAbertoProvider>();
     final prazoLiquidezProvider = Modular.get<PrazoLiquidezProvider>();
+    final recebiveisProvider = Modular.get<RecebiveisProvider>();
     await prazoLiquidezProvider.carregarDados();
     await carteiraAbertoProvider.carregarDados();
+    await recebiveisProvider.carregarDados();
     futureGrafico = GeralCarteiraImpl.pegarGeralCarteira();
   }
 

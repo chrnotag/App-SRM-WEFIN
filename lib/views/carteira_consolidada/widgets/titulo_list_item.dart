@@ -18,8 +18,17 @@ class TituloListItem extends StatefulWidget {
   State<TituloListItem> createState() => _TituloListItemState();
 }
 
-class _TituloListItemState extends State<TituloListItem> with SingleTickerProviderStateMixin {
-  bool cardExpandido = false;
+class _TituloListItemState extends State<TituloListItem>
+    with SingleTickerProviderStateMixin {
+  late bool cardExpandido;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    cardExpandido = widget.expandir;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -29,28 +38,35 @@ class _TituloListItemState extends State<TituloListItem> with SingleTickerProvid
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 16.w),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        widget.label,
-                        style: context.textTheme.displaySmall!
-                            .copyWith(fontWeight: FontWeight.w600, color: context.labelTextColor),
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20.h),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          widget.label,
+                          style: context.textTheme.displaySmall!.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: context.labelTextColor),
+                        ),
                       ),
-                    ),
-                    IconButton(
-                      icon: Icon(cardExpandido ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down),
-                      color: context.primaryColor,
-                      onPressed: () {
-                        setState(() {
-                          cardExpandido = !cardExpandido;
-                        });
-                      },
-                    )
-                  ],
+                      IconButton(
+                        icon: Icon(cardExpandido
+                            ? Icons.keyboard_arrow_up
+                            : Icons.keyboard_arrow_down),
+                        color: context.primaryColor,
+                        onPressed: () {
+                          setState(() {
+                            cardExpandido = !cardExpandido;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
               if (cardExpandido) widget.widgetExpansivel,
@@ -61,4 +77,3 @@ class _TituloListItemState extends State<TituloListItem> with SingleTickerProvid
     );
   }
 }
-
