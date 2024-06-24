@@ -26,56 +26,51 @@ class LegendaGraficoWidget extends StatelessWidget {
       return titulo.length >= 25 ? "${titulo.substring(0,25)}..." : titulo;
     }
     return SizedBox(
-      width: context.width,
-      height: 100.h,
-      child: Card(
-        margin: EdgeInsets.all(8),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Row(
-                children: [
-                  CircleAvatar(
-                    radius: 12.r,
-                    backgroundColor: corLegenda,
-                  ),
-                  SizedBox(width: 8.0),
-                  Text(formatarTitulo())
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 30.w),
-                    child: Text(
-                      porcentagem,
-                      style: context.textTheme.displaySmall!.copyWith(
+      height: 85.h,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Row(
+              children: [
+                CircleAvatar(
+                  radius: 12.r,
+                  backgroundColor: corLegenda,
+                ),
+                SizedBox(width: 8.0),
+                Text(formatarTitulo())
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 30.w),
+                  child: Text(
+                    porcentagem,
+                    style: context.textTheme.displaySmall!.copyWith(
                         fontSize: 20.sp,
-                          color: context.labelTextColor,
-                          fontWeight: FontWeight.w900),
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    valor.toBRL,
-                    style: context.textTheme.bodyMedium!.copyWith(
                         color: context.labelTextColor,
-                        fontWeight: FontWeight.w600),
+                        fontWeight: FontWeight.w900),
                   ),
-                  Text('$qtdTitulos Duplicatas', textAlign: TextAlign.end,),
-                ],
-              ),
-            ],
-          ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      valor.toBRL,
+                      style: context.textTheme.bodyMedium!.copyWith(
+                          color: context.labelTextColor,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    Text('$qtdTitulos Duplicatas', textAlign: TextAlign.end,),
+                  ],
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

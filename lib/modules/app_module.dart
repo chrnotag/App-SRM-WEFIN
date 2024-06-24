@@ -2,6 +2,7 @@ import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/carteira_aberto/carteira_aberto_provider.dart';
 import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/geral_carteira/geral_carteira_provider.dart';
 import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/prazo_liquidez/prazo_liquidez_provider.dart';
+import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/recebiveis/recebiveis_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/comprovante_ted/comprovante_ted_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_provider.dart';
@@ -51,6 +52,7 @@ class AppModule extends Module {
     i.addSingleton(GeralCarteiraProvider.new);
     i.addSingleton(CarteiraAbertoProvider.new);
     i.addSingleton(PrazoLiquidezProvider.new);
+    i.addSingleton(RecebiveisProvider.new);
     i.addInstance(environment);
   }
 

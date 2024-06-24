@@ -19,19 +19,12 @@ class GraficoCarteiraAberto extends StatefulWidget {
 class _GraficoCarteiraAbertoState extends State<GraficoCarteiraAberto> {
 
   @override
-  void didChangeDependencies() async{
-    // TODO: implement initState
-    super.didChangeDependencies();
-    await Modular.get<CarteiraAbertoProvider>().carregarDados();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final carteiraAbertoProvider = context.watch<CarteiraAbertoProvider>();
     final List<DadosGraficoModel> filteredItems =
         carteiraAbertoProvider.dadosGrafico;
     final int itemCount = filteredItems.length;
-    final double itemHeight = 100.h;
+    final double itemHeight = 85.h;
     final double listViewHeight = itemHeight * itemCount;
 
     String totalOperado() {
@@ -41,27 +34,6 @@ class _GraficoCarteiraAbertoState extends State<GraficoCarteiraAberto> {
       }
       return total.toBRL;
     }
-
-    return FutureBuilder(
-      future: carteiraAbertoProvider.futureGrafico,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return SizedBox(
-            height: 300.h,
-            child: const Loader(),
-          );
-        }
-        if (snapshot.hasError || snapshot.data!.error != null) {
-          SizedBox(
-            height: 300.h,
-            child: Center(
-              child: Text(
-                'Erro ao obter dados do gráfico, tente novamente mais tarde!',
-                style: context.textTheme.displaySmall!.copyWith(
-                    color: context.labelTextColor),),
-            ),
-          );
-        }
 
         return Padding(
           padding: const EdgeInsets.all(8.0),
@@ -79,13 +51,17 @@ class _GraficoCarteiraAbertoState extends State<GraficoCarteiraAberto> {
                         PieChart(
                           PieChartData(
                             sectionsSpace: 0,
-                            sections: filteredItems
-                                .map((e) => PieChartSectionData(
-                                color: e.cor,
-                                value: e.valor,
+                            sections: filteredItems.map((e) {
+                              // Verifica se todos os valores são zero
+                              bool todosValoresZero = filteredItems.every((item) => item.valor == 0);
+
+                              return PieChartSectionData(
+                                color: todosValoresZero ? Colors.grey : e.cor,
+                                value: todosValoresZero ? 100 : e.valor,
                                 showTitle: false,
-                                radius: 16))
-                                .toList(),
+                                radius: 16,
+                              );
+                            }).toList(),
                           ),
                         ),
                         Center(
@@ -122,7 +98,7 @@ class _GraficoCarteiraAbertoState extends State<GraficoCarteiraAberto> {
                       titulo: e.titulo,
                       porcentagem: e.porcentagem,
                       valor: e.valor,
-                      qtdTitulos: e.qtdTitulos,
+                      qtdTitulos: e.qtdTitulos!,
                     );
                   },
                 ),
@@ -130,8 +106,5 @@ class _GraficoCarteiraAbertoState extends State<GraficoCarteiraAberto> {
             ],
           ),
         );
-
-      },
-    );
   }
 }
