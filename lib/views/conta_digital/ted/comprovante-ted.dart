@@ -63,7 +63,6 @@ class _ComprovanteTedState extends State<ComprovanteTed> {
           return Stack(
             children: [
               SfPdfViewer.memory(
-
                   comprovanteTedProvider.comprovanteTEDDownloadBites!),
               Positioned(
                   bottom: 16,

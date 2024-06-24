@@ -111,5 +111,5 @@ class EndPointsSRM extends Endpoint {
       '$carteiraConsolidada/distribuicao-recebiveis';
 
   String get downloadRecebiveis =>
-      '$carteiraConsolidada/distribuicao-recebiveis/download';
+      '$carteiraRecebiveis/download';
 }

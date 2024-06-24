@@ -33,6 +33,12 @@ class RecebiveisProvider extends ChangeNotifier {
     recebiveisFuture = RecebiveisImpl.pegarDados();
   }
 
+  Uint8List? _pdfRecebiveis;
+
+  Uint8List? get pdfRecebiveis => _pdfRecebiveis;
+
+  set pdfRecebiveis(Uint8List? dados) => _pdfRecebiveis = dados;
+
   List<DadosGraficoModel> dadosGrafico() {
     // Definindo o mapa de cores para cada sigla
     Map<String, Color> siglaToColor = {

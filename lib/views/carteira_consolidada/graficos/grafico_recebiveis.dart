@@ -2,7 +2,10 @@ import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/recebiveis/recebiveis_download.dart';
 import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/recebiveis/recebiveis_provider.dart';
+import 'package:Srm_Asset/core/utils/overlay.dart';
+import 'package:Srm_Asset/core/utils/pdf_manager.dart';
 import 'package:Srm_Asset/views/carteira_consolidada/utils/dados_grafico_model.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -116,7 +119,12 @@ class _GraficoRecebiveisState extends State<GraficoRecebiveis> {
               Padding(
                 padding: EdgeInsets.all(16.r),
                 child: BotaoPadrao(
-                    label: 'Baixar Distribuição de Recebíveis', onPressed: () {}),
+                    label: 'Baixar Distribuição de Recebíveis', onPressed: () async {
+                      OverlayApp.iniciaOverlay(context);
+                      await DownloadRecebiveisImpl.baixar();
+                      OverlayApp.terminaOverlay();
+                      PDFUtils.sharePDF(recebiveisProvider.pdfRecebiveis!, 'Recebíveis');
+                }),
               ),
             ],
           ),
