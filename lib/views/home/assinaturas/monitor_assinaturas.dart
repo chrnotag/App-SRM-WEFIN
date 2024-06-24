@@ -20,7 +20,6 @@ class MonitorAssinaturas extends StatefulWidget {
 }
 
 class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
-
   final monitorProvider = Modular.get<AssinaturaProvider>();
 
   @override
@@ -34,7 +33,6 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
     super.didChangeDependencies();
   }
 
-
   @override
   void dispose() {
     super.dispose();
@@ -46,9 +44,8 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
     final AssinaturaProvider assinaturaProvider =
         context.watch<AssinaturaProvider>();
     final List<MonitorAssinaturasModel> assinaturas =
-        assinaturaProvider.assinaturasPendentes;
-
-    print('assinaturas: $assinaturas');
+        assinaturaProvider.ordenarOperacoes(assinaturaProvider.todasAssinaturas,
+            authProvider.dataUser!.identificadorUsuario);
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -69,20 +66,22 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
                 child: DropdownButton(
                   dropdownColor: Colors.white,
                   value: assinaturaProvider.valorSelecionado,
-                  selectedItemBuilder: (context) => assinaturaProvider.listaCedentes
-                      .map((e) => DropdownMenuItem(
-                            value: e.identificador,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(e.nome,
-                                  style: context.textTheme.bodyLarge!.copyWith(
-                                      color: context.labelTextColor,
-                                      fontWeight: FontWeight.w900),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis),
-                            ),
-                          ))
-                      .toList(),
+                  selectedItemBuilder: (context) =>
+                      assinaturaProvider.listaCedentes
+                          .map((e) => DropdownMenuItem(
+                                value: e.identificador,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(e.nome,
+                                      style: context.textTheme.bodyLarge!
+                                          .copyWith(
+                                              color: context.labelTextColor,
+                                              fontWeight: FontWeight.w900),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis),
+                                ),
+                              ))
+                          .toList(),
                   menuMaxHeight: 300.h,
                   isExpanded: true,
                   items: assinaturaProvider.listaCedentes
@@ -130,9 +129,10 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
                           child: Card(
                             elevation: 0,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(12.r)),
-                              side: BorderSide(color: context.bordaCardColor)
-                            ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12.r)),
+                                side:
+                                    BorderSide(color: context.bordaCardColor)),
                             child: Column(
                               children: [
                                 Padding(
@@ -145,9 +145,10 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
                                   child: Text(
                                     "Não há operações a serem apresentadas",
                                     textAlign: TextAlign.center,
-                                    style: context.textTheme.displayMedium!.copyWith(
-                                        color: context.secondaryColor,
-                                        fontWeight: FontWeight.w600),
+                                    style: context.textTheme.displayMedium!
+                                        .copyWith(
+                                            color: context.secondaryColor,
+                                            fontWeight: FontWeight.w600),
                                   ),
                                 ),
                               ],
