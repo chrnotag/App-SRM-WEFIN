@@ -101,4 +101,13 @@ static get carteiraConsolidadaScreenRoute => '/screen';
 
   //ESCOPO CARTEIRA CONSOLIDADA NAVIGATOR ROUTE
 static get carteiraConsolidadaNavigatorRoute => '$carteiraConsolidadaRoute$carteiraConsolidadaScreenRoute';
+
+  //TED PARA TERCEIROS ROUTE
+static get tedTerceirosRoute => '/ted-terceiros';
+
+  //ESCOPO TED PARA TERCEIROS
+static get tedTerceirosScreenRoute => '/ted-screen';
+
+ //ESCOPO TED PARA TERCEIROS  NAVIGATOR ROUTE
+static get tedTerceirosNavigatorRoute => '$tedTerceirosRoute$tedTerceirosScreenRoute';
 }

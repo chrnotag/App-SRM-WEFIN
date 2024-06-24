@@ -69,6 +69,7 @@ class _HomeViewState extends State<HomeView> {
     final AuthProvider authProvider = context.watch<AuthProvider>();
     final ContaDigitalProvider contaDigitalProvider =
         context.watch<ContaDigitalProvider>();
+    final ambiente = Modular.get<Environment>();
     return Scaffold(
       bottomNavigationBar: SafeArea(
         child: BottomNavigationBar(
@@ -252,6 +253,12 @@ class _HomeViewState extends State<HomeView> {
                                 onTap: () {
                                   Modular.to
                                       .pushNamed(AppRoutes.extratoScreenRoute);
+                                }),
+                            _CardItemMenuHome(
+                                icone: ambiente.ted_menu_icone,
+                                titulo: 'Ted para Terceiros',
+                                onTap: () {
+                                  Modular.to.pushNamed(AppRoutes.tedTerceirosNavigatorRoute);
                                 }),
                           ],
                         ),

@@ -118,4 +118,17 @@ class ThemeTRUST implements ImagensGuiaImportarCertificado{
   @override
   // TODO: implement senhaCertificado
   String get senhaCertificado => AssetsConfig.imagesSenhaCertTrust;
+
+  @override
+  // TODO: implement alerta_icone
+  String get alerta_icone => AssetsConfig.imagesAlertIconTrust;
+
+  @override
+  // TODO: implement check_icone
+  String get check_icone => AssetsConfig.imagesCheckTrustIcon;
+
+  @override
+  // TODO: implement ted_menu_icone
+  String get ted_menu_icone => AssetsConfig.imagesTedTerceiros;
+
 }

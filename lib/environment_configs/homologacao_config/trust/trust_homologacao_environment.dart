@@ -6,6 +6,7 @@ import 'package:Srm_Asset/core/constants/environment/homologacao/trust/endpoints
 import 'package:Srm_Asset/core/constants/environment/tema_trust.dart';
 import 'package:flutter/material.dart';
 
+import '../../../assets_config/assets_config.dart';
 import '../../../core/constants/classes_abstratas/imagens_guia_certificado.dart';
 import '../../../core/constants/enuns/plataforma_enum.dart';
 
@@ -58,4 +59,17 @@ class TrustHomologacaoEnvironment extends Environment {
   @override
   // TODO: implement imagensGuiaCertificado
   ImagensGuiaImportarCertificado get imagensGuiaCertificado => ThemeTRUST();
+
+  @override
+  // TODO: implement alerta_icone
+  String get alerta_icone => AssetsConfig.imagesAlertIconTrust;
+
+  @override
+  // TODO: implement check_icone
+  String get check_icone => AssetsConfig.imagesCheckTrustIcon;
+
+  @override
+  // TODO: implement ted_menu_icone
+  String get ted_menu_icone => AssetsConfig.imagesTedTerceiros;
+
 }

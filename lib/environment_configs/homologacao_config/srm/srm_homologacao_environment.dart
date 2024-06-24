@@ -8,6 +8,8 @@ import 'package:Srm_Asset/core/constants/environment/tema_srm.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:flutter/material.dart';
 
+import '../../../assets_config/assets_config.dart';
+
 class SrmHomologacaoEnvironment extends Environment {
   const SrmHomologacaoEnvironment();
 
@@ -58,4 +60,17 @@ class SrmHomologacaoEnvironment extends Environment {
   @override
   // TODO: implement imagensGuiaCertificado
   ImagensGuiaImportarCertificado get imagensGuiaCertificado => ThemeSRM();
+
+  @override
+  // TODO: implement alerta_icone
+  String get alerta_icone => AssetsConfig.imagesAlertIconSrm;
+
+  @override
+  // TODO: implement check_icone
+  String get check_icone => AssetsConfig.imagesCheckSrmIcon;
+
+  @override
+  // TODO: implement ted_menu_icone
+  String get ted_menu_icone => AssetsConfig.imagesTedTerceirosSrm;
+
 }
