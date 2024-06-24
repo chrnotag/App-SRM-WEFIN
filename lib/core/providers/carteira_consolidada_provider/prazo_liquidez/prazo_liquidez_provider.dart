@@ -1,7 +1,5 @@
 import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
-import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/carteira_aberto/carteira_aberto_impl.dart';
 import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/prazo_liquidez/prazo_liquidez_impl.dart';
-import 'package:Srm_Asset/models/carteira_consolidada/carteira_aberto/carteira_aberto_model.dart';
 import 'package:Srm_Asset/models/carteira_consolidada/prazo_liquidez/prazo_liquidez_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

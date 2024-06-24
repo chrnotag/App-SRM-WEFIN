@@ -1,8 +1,6 @@
 import 'dart:typed_data';
 import 'package:Srm_Asset/core/providers/conta_digital/comprovante_ted/comprovante_ted_provider.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import '../../../constants/classes_abstratas/envirioment.dart';
-import '../../../implementations_config/api_response.dart';
 import '../../../implementations_config/export_impl.dart';
 import '../../../utils/mensagem_erro_requisicao.dart';
 import 'package:http/http.dart' as http;
@@ -24,8 +22,6 @@ class ComprovanteTEDImpl {
     };
     try {
       final response = await http.get(url, headers: headers);
-      print('request code: ${response.statusCode}');
-      print('erroe: ${response.body}');
       if (response.statusCode == 200) {
         final Uint8List pdfBytes = response.bodyBytes;
         tedProvider.comprovanteTEDDownloadBites = pdfBytes;
@@ -35,7 +31,7 @@ class ComprovanteTEDImpl {
       } else {
         return MensagemErroPadrao.erroResponse(response.bodyBytes);
       }
-    } catch (e, s) {
+    } catch (_) {
       return MensagemErroPadrao.codigo500();
     }
   }

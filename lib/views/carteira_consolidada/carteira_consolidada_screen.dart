@@ -49,7 +49,7 @@ class _CarteiraConsolidadaScreenState extends State<CarteiraConsolidadaScreen> {
         future: carteiraProvider.futureGrafico,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Loader();
+            return const Loader();
           }
           if (snapshot.hasError) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
