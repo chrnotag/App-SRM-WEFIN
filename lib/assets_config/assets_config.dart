@@ -67,12 +67,16 @@ class AssetsConfig {
   static const String iconsLogoTrust = 'assets/icons/logo_trust.png';
   static const String iconsPlanilha = 'assets/icons/planilha.png';
   static const String iconsSurface = 'assets/icons/surface.svg';
+  static const String imagesAlertIconSrm = 'assets/images/alert_icon_srm.svg';
+  static const String imagesAlertIconTrust = 'assets/images/alert_icon_trust.svg';
   static const String imagesBackgroundImage = 'assets/images/background_image.png';
   static const String imagesBalaoChat = 'assets/images/balao_chat.svg';
   static const String imagesCadeado = 'assets/images/cadeado.svg';
   static const String imagesCanetaAssinando = 'assets/images/caneta_assinando.svg';
   static const String imagesCarteiraConsolidada = 'assets/images/carteira_consolidada.svg';
   static const String imagesCheckCertTrust = 'assets/images/check_cert_trust.svg';
+  static const String imagesCheckSrmIcon = 'assets/images/check_srm_icon.svg';
+  static const String imagesCheckTrustIcon = 'assets/images/check_trust_icon.svg';
   static const String imagesDocumentCertTrust = 'assets/images/document_cert_trust.svg';
   static const String imagesDolar = 'assets/images/dolar.svg';
   static const String imagesDollarListIcon = 'assets/images/dollar_list_icon.png';
@@ -107,6 +111,8 @@ class AssetsConfig {
   static const String imagesSetasPerpendiculares = 'assets/images/setas_perpendiculares.svg';
   static const String imagesSmrIcon = 'assets/images/smr_icon.png';
   static const String imagesSplashScreen = 'assets/images/splash_screen.png';
+  static const String imagesTedTerceiros = 'assets/images/ted_terceiros.svg';
+  static const String imagesTedTerceirosSrm = 'assets/images/ted_terceiros_srm.svg';
   static const String imagesUploadCertTrust = 'assets/images/upload_cert_trust.svg';
   static const String imagesUploadCertificado = 'assets/images/upload_certificado.svg';
   static const String imgDrawableHdpi = 'assets/img/drawable-hdpi.png';

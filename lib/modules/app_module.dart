@@ -7,9 +7,12 @@ import 'package:Srm_Asset/core/providers/conta_digital/comprovante_ted/comprovan
 import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/tabbar_meses_provider.dart';
+import 'package:Srm_Asset/core/providers/ted_terceiros/ted_terceiros_provider.dart';
 import 'package:Srm_Asset/modules/carteira_consolidada_module.dart';
 import 'package:Srm_Asset/modules/conta_digital_module.dart';
 import 'package:Srm_Asset/modules/sem_conexao_module.dart';
+import 'package:Srm_Asset/modules/ted_terceiros_module.dart';
+import 'package:Srm_Asset/views/ted_terceiros/lista_ted_screen/lista_teds_aprovacao_screen.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/recuperar_senha/recuperar_senha_provider.dart';
@@ -51,6 +54,7 @@ class AppModule extends Module {
     i.addSingleton(CarteiraAbertoProvider.new);
     i.addSingleton(PrazoLiquidezProvider.new);
     i.addSingleton(RecebiveisProvider.new);
+    i.addSingleton(TedTerceirosProvider.new);
     i.addInstance(environment);
   }
 
@@ -62,5 +66,6 @@ class AppModule extends Module {
     r.module(AppRoutes.ContaDigitalRoute, module: ContaDigitalModule());
     r.module(AppRoutes.carteiraConsolidadaRoute,
         module: CarteiraConsolidadaModule());
+    r.module(AppRoutes.tedTerceirosRoute, module: TedTerceiroModule());
   }
 }

@@ -45,16 +45,23 @@ class BotaoPadrao extends StatelessWidget {
                     ),
                   ),
                   Text(label,
-                      style: textStyleFilled ?? context.textTheme.bodyLarge!
-                          .copyWith(color: Colors.white))
+                      style: textStyleFilled ??
+                          context.textTheme.bodyLarge!
+                              .copyWith(color: Colors.white))
                 ],
               ),
             ),
           )
-        : TextButton(
+        : ElevatedButton(
             onPressed: onPressed,
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                  side: BorderSide(color: context.focusColor)),
+              backgroundColor: Colors.white,
+            ),
             child: Padding(
-              padding: const EdgeInsets.all(AppSizes.paddingSmall),
+              padding: const EdgeInsets.all(AppSizes.paddingMedium),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -67,8 +74,9 @@ class BotaoPadrao extends StatelessWidget {
                     ),
                   ),
                   Text(label,
-                      style: textStyleNoFilled ?? context.textTheme.bodyMedium!
-                          .copyWith(color: context.focusColor))
+                      style: textStyleNoFilled ??
+                          context.textTheme.bodyMedium!
+                              .copyWith(color: context.focusColor))
                 ],
               ),
             ),

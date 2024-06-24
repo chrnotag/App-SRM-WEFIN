@@ -2,10 +2,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 enum TipoTED {
-  RECEBIMENTO_TED(Color(0XFFf3f7ff), 'Recebimento TED', Color(0XFF0e6dfe)),
-  ENVIO_TED(Color(0XFFfdf7f6), 'Transferencia TED', Color(0XFFe6492d)),
-  DEVOLUCAO_TED(Color(0XFFf3f7ff), 'Devolução', Color(0XFF0e6dfe)),
-  TARIFA_TED(Color(0XFFfdf7f6), 'Transferencia TED', Color(0XFFe6492d));
+  RECEBIMENTO_TED(Color(0xfff3f7ff), 'Recebimento TED', Color(0xff0e6dfe)),
+  ENVIO_TED(Color(0xfffdf7f6), 'Transferencia TED', Color(0xffe6492d)),
+  DEVOLUCAO_TED(Color(0xfff3f7ff), 'Devolução', Color(0xff0e6dfe)),
+  TARIFA_TED(Color(0xfffdf7f6), 'Transferencia TED', Color(0xffe6492d));
 
   final Color corFundo;
   final String stringTED;
