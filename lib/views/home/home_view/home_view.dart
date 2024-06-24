@@ -226,8 +226,8 @@ class _HomeViewState extends State<HomeView> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             _CardItemMenuHome(
-                                icone: Assets.caneta_assinando,
-                                titulo: 'Assinatura Digital',
+                                icone: Assets.grafico_icone,
+                                titulo: 'Monitor de Operações',
                                 notificacoes: authProvider
                                     .empresaSelecionada!.assinaturaPendente,
                                 onTap: () {
@@ -246,11 +246,6 @@ class _HomeViewState extends State<HomeView> {
                                             assinaturasPendentes
                                       });
                                 }),
-                            _CardItemMenuHome(
-                                icone: Assets.grafico_icone,
-                                titulo: 'Monitor de Operações',
-                                onTap: () => Modular.to.pushNamed(
-                                    AppRoutes.monitorOperacoesRoute)),
                             _CardItemMenuHome(
                                 icone: Assets.lista_icone,
                                 titulo: 'Extrato',

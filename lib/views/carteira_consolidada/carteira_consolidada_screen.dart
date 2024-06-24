@@ -66,22 +66,6 @@ class _CarteiraConsolidadaScreenState extends State<CarteiraConsolidadaScreen> {
             });
           }
 
-          if (snapshot.data!.error != null) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              showDialog(
-                context: context,
-                builder: (context) => AlertDialogGenerico(
-                    title: 'Erro ao obter dados',
-                    msg:
-                        'Erro ao obter dados da carteira, tente novamente mais tarde.',
-                    onPressed: () {
-                      Modular.to.pop();
-                      Modular.to.pop();
-                    }),
-              );
-            });
-          }
-
           return const SingleChildScrollView(
             child: Center(
               child: Column(
