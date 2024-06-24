@@ -35,7 +35,7 @@ class BaixarDocumentosImpl {
   }
 
   Future<ApiResponse<dynamic>> ler() async {
-    Uri url = ambiente.endpoints.montarUrlBaixarDocumento(documento.idAssinaturaDigital, true);
+    Uri url = ambiente.endpoints.montarUrlBaixarDocumento(documento.idAssinaturaDigital!, true);
     BaixarDocumentosProvider baixarDocumentosProvider =
     Modular.get<BaixarDocumentosProvider>();
     try {
@@ -56,7 +56,7 @@ class BaixarDocumentosImpl {
   }
 
   Future<ApiResponse<dynamic>> baixar() async {
-    Uri url = ambiente.endpoints.montarUrlBaixarDocumento(documento.idAssinaturaDigital, false);
+    Uri url = ambiente.endpoints.montarUrlBaixarDocumento(documento.idAssinaturaDigital!, false);
     try {
       var downloadsDirectory = await getExternalStorageDirectory();
       if (downloadsDirectory == null) {

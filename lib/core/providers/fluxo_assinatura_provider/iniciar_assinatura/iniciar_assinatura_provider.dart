@@ -56,7 +56,7 @@ class IniciarAssinaturaProvider extends ChangeNotifier {
                 onPressed: () => Modular.to.pop(),
               ));
     } else {
-      if (!assinante.eCPFAssinador) {
+      if (!assinante.eCPFAssinador!) {
         AssinaturaEletronicaProvider assinaturaEletronicaProvider =
             Modular.get<AssinaturaEletronicaProvider>();
         showDialog(

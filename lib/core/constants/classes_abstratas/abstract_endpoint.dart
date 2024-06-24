@@ -8,7 +8,6 @@ abstract class Endpoint{
   String get finalizarAssinatura;
   String get finalizarAssinaturaEletronica;
   String get recuperarSenha;
-  String get operacoes;
   String get iniciarAssinaturaEletronica;
   Uri montarUrlBaixarDocumento(int idAssinaturaDigital, bool visualizar);
   String get baixarCertificadoQrCode;

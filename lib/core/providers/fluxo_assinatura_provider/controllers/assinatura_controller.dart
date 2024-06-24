@@ -12,8 +12,8 @@ class AssinaturaController {
     for (var info in assinantes) {
       for (var infoAssinador in info.informacoesAssinante) {
         if (infoAssinador.identificadorAssinador == identificadorUsuario) {
-          assinaComCertificado = infoAssinador.eCPFAssinador;
-          documentos = infoAssinador.documentos;
+          assinaComCertificado = infoAssinador.eCPFAssinador!;
+          documentos = infoAssinador.documentos!;
           break;
         }
       }

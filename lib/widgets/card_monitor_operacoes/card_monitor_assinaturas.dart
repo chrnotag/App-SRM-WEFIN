@@ -77,7 +77,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes>
             }
             for (var papel in infoAssinante.papeis) {
               textoPapel.add(Text(
-                papel,
+                papel!,
                 style: context.textTheme.bodyLarge!.copyWith(
                     color: Color(0XFF838383), fontWeight: FontWeight.bold),
               ));
@@ -172,7 +172,7 @@ class _CardMonitorOperacoesState extends State<CardMonitorOperacoes>
                           padding: EdgeInsets.symmetric(
                               horizontal: 16.r, vertical: 4.r),
                           child: Text(
-                            assinatura.statusAssinaturaDigital,
+                            assinatura.statusAssinaturaDigital!,
                             style: context.textTheme.bodyLarge!.copyWith(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w900),

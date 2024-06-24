@@ -5,11 +5,11 @@ part 'monitor_assinaturas_model.g.dart';
 @JsonSerializable()
 class MonitorAssinaturasModel {
   int codigoOperacao;
-  String statusAssinaturaDigital;
+  String? statusAssinaturaDigital;
   String siglaProduto;
   String statusOperacao;
   double valorBruto;
-  double valorLiquido;
+  double? valorLiquido;
   String dataOperacao;
   List<Assinante> assinantes;
 
@@ -32,13 +32,13 @@ class MonitorAssinaturasModel {
 
 @JsonSerializable()
 class Assinante {
-  String nomeAssinante;
-  String identificadorAssinante;
+  String? nomeAssinante;
+  String? identificadorAssinante;
   List<InformacaoAssinante> informacoesAssinante;
 
   Assinante({
-    required this.nomeAssinante,
-    required this.identificadorAssinante,
+    this.nomeAssinante,
+    this.identificadorAssinante,
     required this.informacoesAssinante,
   });
 
@@ -50,24 +50,24 @@ class Assinante {
 
 @JsonSerializable()
 class InformacaoAssinante {
-  List<String> papeis;
-  List<Documento> documentos;
-  String identificadorAssinador;
+  List<String?> papeis;
+  List<Documento>? documentos;
+  String? identificadorAssinador;
   String? nomeProcurador;
-  String tipoAssinatura;
+  String? tipoAssinatura;
   String? dataAssinatura;
-  String statusAssinatura;
-  bool eCPFAssinador;
+  String? statusAssinatura;
+  bool? eCPFAssinador;
 
   InformacaoAssinante({
     required this.papeis,
     required this.documentos,
-    required this.identificadorAssinador,
+    this.identificadorAssinador,
+    this.nomeProcurador,
     required this.tipoAssinatura,
-    required this.dataAssinatura,
+    this.dataAssinatura,
     required this.statusAssinatura,
     required this.eCPFAssinador,
-    this.nomeProcurador,
   });
 
   factory InformacaoAssinante.fromJson(Map<String, dynamic> json) =>
@@ -78,12 +78,12 @@ class InformacaoAssinante {
 
 @JsonSerializable()
 class Documento {
-  int idAssinaturaDigital;
-  String nome;
+  int? idAssinaturaDigital;
+  String? nome;
 
   Documento({
-    required this.idAssinaturaDigital,
-    required this.nome,
+    this.idAssinaturaDigital,
+    this.nome,
   });
 
   factory Documento.fromJson(Map<String, dynamic> json) =>

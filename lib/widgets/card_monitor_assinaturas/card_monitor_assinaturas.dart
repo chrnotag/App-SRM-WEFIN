@@ -89,7 +89,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
             }
             for (var papel in infoAssinante.papeis) {
               textoPapel.add(Text(
-                papel,
+                papel!,
                 style: context.textTheme.bodyLarge!.copyWith(
                     color: Color(0XFF838383), fontWeight: FontWeight.bold),
               ));
@@ -117,6 +117,8 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
         }
       });
     }
+
+    final assinaturaProvider = Modular.get<AssinaturaProvider>();
 
     return Container(
       padding: EdgeInsets.all(8.r),
@@ -188,14 +190,14 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                       ),
                       Container(
                         decoration: BoxDecoration(
-                            color: Color(0XFFE1C11A),
+                            color: assinaturaProvider.corStatusAssinatura(assinatura.statusAssinaturaDigital!),
                             borderRadius:
                             BorderRadius.all(Radius.circular(50.r))),
                         child: Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: 16.r, vertical: 4.r),
                           child: Text(
-                            assinatura.statusAssinaturaDigital,
+                            assinatura.statusAssinaturaDigital!,
                             style: context.textTheme.bodyLarge!.copyWith(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w900),
@@ -209,7 +211,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                 ],
               ),
               Visibility(
-                  visible: !cardExpandido,
+                  visible: !cardExpandido && assinatura.statusAssinaturaDigital != 'Nao Inicializado',
                   child: Divider(
                     color: context.bordaCardColor,
                   )),
@@ -274,23 +276,26 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                       ),
                     )),
               ),
-              SizedBox(
-                width: context.width,
-                child: InkWell(
-                  borderRadius: const BorderRadius.only(
-                      bottomRight: Radius.circular(12),
-                      bottomLeft: Radius.circular(12)),
-                  onTap: () {
-                    _toggleExpand();
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.all(16.r),
-                    child: Text(
-                      cardExpandido ? "Menos Detalhes" : "Mais Detalhes",
-                      style: context.textTheme.displaySmall!.copyWith(
-                          color: context.primaryColor,
-                          fontWeight: FontWeight.w900),
-                      textAlign: TextAlign.center,
+              Visibility(
+                visible: assinatura.statusAssinaturaDigital != 'Nao Inicializado',
+                child: SizedBox(
+                  width: context.width,
+                  child: InkWell(
+                    borderRadius: const BorderRadius.only(
+                        bottomRight: Radius.circular(12),
+                        bottomLeft: Radius.circular(12)),
+                    onTap: () {
+                      _toggleExpand();
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.all(16.r),
+                      child: Text(
+                        cardExpandido ? "Menos Detalhes" : "Mais Detalhes",
+                        style: context.textTheme.displaySmall!.copyWith(
+                            color: context.primaryColor,
+                            fontWeight: FontWeight.w900),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                 ),
