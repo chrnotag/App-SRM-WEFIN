@@ -13,7 +13,6 @@ class _InteriorProcuradoresState extends State<_InteriorProcuradores> {
   List<Widget> buildListaProcuradores() {
     final assinaturaProvider = Modular.get<AssinaturaProvider>();
     List<Widget> listaAssinantes = [];
-    print('id do megapesados: ${Modular.get<AuthProvider>().empresaSelecionada!.identificador}');
     for (var assinante in widget.assinatura.assinantes) {
       for (var infoAssinante in assinante.informacoesAssinante) {
         if(infoAssinante.nomeProcurador != null){

@@ -84,8 +84,14 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          SvgPicture.asset(ambiente.logoAppBar, width: 32.w,),
-                          SvgPicture.asset(AssetsConfig.imagesExitIcone, width: 32.w,)
+                          SvgPicture.asset(
+                            ambiente.logoAppBar,
+                            width: 32.w,
+                          ),
+                          SvgPicture.asset(
+                            AssetsConfig.imagesExitIcone,
+                            width: 32.w,
+                          )
                         ],
                       ),
                     ),
@@ -134,8 +140,9 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                       children: [
                         Text(
                           'Nome/Razão Social',
-                          style: context.textTheme.displaySmall!
-                              .copyWith(color: context.labelTextColor, fontWeight: FontWeight.w900),
+                          style: context.textTheme.displaySmall!.copyWith(
+                              color: context.labelTextColor,
+                              fontWeight: FontWeight.w900),
                         ),
                         Text('Selecione a empresa do Grupo Econômico.'),
                       ],
@@ -169,40 +176,45 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                           leading: CircleAvatar(
                             radius: 34.r,
                             backgroundColor: Color(0xffF8F9FB),
-                            child: SvgPicture.asset(AssetsConfig.imagesMaleta, color: context.primaryColor, width: 30.w,),
+                            child: SvgPicture.asset(
+                              AssetsConfig.imagesMaleta,
+                              color: context.primaryColor,
+                              width: 30.w,
+                            ),
                           ),
                           title: Text(
                             authProviderAtt.listaCedente![index].nome,
-                            style: context.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w900),
+                            style: context.textTheme.bodyLarge!
+                                .copyWith(fontWeight: FontWeight.w900),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                           ),
                           subtitle: CNPJText(
-                            cnpjOuCpf:
-                            authProviderAtt.listaCedente![index].identificador,
+                            cnpjOuCpf: authProviderAtt
+                                .listaCedente![index].identificador,
                           ),
                           trailing: Visibility(
-                            visible: authProviderAtt.listaCedente![index]
-                                .assinaturaPendente >
+                            visible: authProviderAtt
+                                    .listaCedente![index].assinaturaPendente >
                                 0,
                             child: CircleAvatar(
                               backgroundColor: Colors.red,
                               radius: 15.r,
                               child: Center(
                                 child: Text(
-                                    authProvider
-                                        .dataUser!
-                                        .listaCedente[index]
-                                        .assinaturaPendente >=
-                                        10
+                                    authProvider.dataUser!.listaCedente[index]
+                                                .assinaturaPendente >=
+                                            10
                                         ? '9+'
                                         : authProvider
-                                        .dataUser!
-                                        .listaCedente[index]
-                                        .assinaturaPendente
-                                        .toString(),
+                                            .dataUser!
+                                            .listaCedente[index]
+                                            .assinaturaPendente
+                                            .toString(),
                                     style: context.textTheme.bodyMedium!
-                                        .copyWith(color: Colors.white, fontWeight: FontWeight.w900)),
+                                        .copyWith(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w900)),
                               ),
                             ),
                           ),
@@ -214,11 +226,11 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
               },
             ),
           ),
-          Spacer(),
-          Padding(
-            padding: EdgeInsets.all(16.r),
-            child: BotaoPadrao(label: 'Ver Consolidado do grupo', onPressed: (){}),
-          ),
+          // Spacer(),
+          // Padding(
+          //   padding: EdgeInsets.all(16.r),
+          //   child: BotaoPadrao(label: 'Ver Consolidado do grupo', onPressed: (){}),
+          // ),
         ],
       ),
     );

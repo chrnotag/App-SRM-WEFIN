@@ -122,6 +122,21 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
       });
     }
 
+    bool exibirBotaoAssinar() {
+      final authProvider = Modular.get<AuthProvider>();
+      bool assinadoPeloUsuario = assinatura.assinantes.any((assinante) {
+        return assinante.identificadorAssinante ==
+            authProvider.dataUser!.identificadorUsuario &&
+            assinante.informacoesAssinante.any((info) =>
+            info.dataAssinatura != null);
+      });
+      print(assinatura.statusAssinaturaDigital != null &&
+          assinatura.statusAssinaturaDigital == 'Aguardando Assinatura'
+      );
+      return assinatura.statusAssinaturaDigital != null &&
+          assinatura.statusAssinaturaDigital == 'Aguardando Assinatura';
+    }
+
     final assinaturaProvider = Modular.get<AssinaturaProvider>();
 
     return Container(
@@ -170,7 +185,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                       _ItemTextCard(
                           titulo: "Data",
                           conteudo:
-                              FormatarData.formatarPtBR(assinatura.dataOperacao)),
+                          FormatarData.formatarPtBR(assinatura.dataOperacao)),
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 16.h),
                         child: _ItemTextCard(
@@ -194,7 +209,8 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                       ),
                       Container(
                         decoration: BoxDecoration(
-                            color: assinaturaProvider.corStatusAssinatura(assinatura.statusAssinaturaDigital!),
+                            color: assinaturaProvider.corStatusAssinatura(
+                                assinatura.statusAssinaturaDigital!),
                             borderRadius:
                             BorderRadius.all(Radius.circular(50.r))),
                         child: Padding(
@@ -215,7 +231,8 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                 ],
               ),
               Visibility(
-                  visible: !cardExpandido && assinatura.statusAssinaturaDigital != 'Nao Inicializado',
+                  visible: !cardExpandido &&
+                      assinatura.statusAssinaturaDigital != 'Nao Inicializado',
                   child: Divider(
                     color: context.bordaCardColor,
                   )),
@@ -241,7 +258,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                             ),
                           ),
                           Visibility(
-                            visible: assinatura.statusAssinaturaDigital != null && assinatura.statusAssinaturaDigital == 'Aguardando Assinatura',
+                            visible: exibirBotaoAssinar(),
                             child: Padding(
                               padding: EdgeInsets.symmetric(vertical: 20.h),
                               child: _InteriorDocumentosLista(
@@ -249,31 +266,35 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: 20.h),
-                            child: BotaoPadrao(
-                              label: 'Assinar Operação',
-                              onPressed: () {
-                                final authProvider = Modular.get<AuthProvider>();
-                                final assinaturaProvider =
-                                    Modular.get<AssinaturaProvider>();
-                                assinaturaProvider.assinaturaSelecionada =
-                                    assinatura;
-                                AssinaturaEletronicaProvider
-                                    assinaturaEletronicaProvider =
-                                    Modular.get<AssinaturaEletronicaProvider>();
-                                assinaturaEletronicaProvider.codigoOperacao =
-                                    widget.assinatura.codigoOperacao;
-                                IniciarAssinaturaProvider iniciarAssinatura =
-                                    Modular.get<IniciarAssinaturaProvider>();
-                                iniciarAssinatura.IniciarAssinatura(
-                                    iniciarAssinatura
-                                        .obterInformacoesUsuarioLogado(
-                                            assinatura,
-                                            authProvider
-                                                .dataUser!.identificadorUsuario),
-                                    context);
-                              },
+                          Visibility(
+                            visible: exibirBotaoAssinar(),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 20.h),
+                              child: BotaoPadrao(
+                                label: 'Assinar Operação',
+                                onPressed: () {
+                                  final authProvider = Modular.get<
+                                      AuthProvider>();
+                                  final assinaturaProvider =
+                                  Modular.get<AssinaturaProvider>();
+                                  assinaturaProvider.assinaturaSelecionada =
+                                      assinatura;
+                                  AssinaturaEletronicaProvider
+                                  assinaturaEletronicaProvider =
+                                  Modular.get<AssinaturaEletronicaProvider>();
+                                  assinaturaEletronicaProvider.codigoOperacao =
+                                      widget.assinatura.codigoOperacao;
+                                  IniciarAssinaturaProvider iniciarAssinatura =
+                                  Modular.get<IniciarAssinaturaProvider>();
+                                  iniciarAssinatura.IniciarAssinatura(
+                                      iniciarAssinatura
+                                          .obterInformacoesUsuarioLogado(
+                                          assinatura,
+                                          authProvider
+                                              .dataUser!.identificadorUsuario),
+                                      context);
+                                },
+                              ),
                             ),
                           )
                         ],
@@ -281,7 +302,8 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                     )),
               ),
               Visibility(
-                visible: assinatura.statusAssinaturaDigital != 'Nao Inicializado',
+                visible: assinatura.statusAssinaturaDigital !=
+                    'Nao Inicializado',
                 child: SizedBox(
                   width: context.width,
                   child: InkWell(
