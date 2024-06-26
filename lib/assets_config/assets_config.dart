@@ -97,6 +97,7 @@ class AssetsConfig {
   static const String imagesLogoAppbarTrust = 'assets/images/logo_appbar_trust.png';
   static const String imagesLogoSrm = 'assets/images/logo_srm.png';
   static const String imagesLogoTrust = 'assets/images/logo_trust.png';
+  static const String imagesMaleta = 'assets/images/maleta.svg';
   static const String imagesMenuOptionsIcon = 'assets/images/menu_options_icon.svg';
   static const String imagesNoNetwork = 'assets/images/no_network.png';
   static const String imagesProcurarCertTrust = 'assets/images/procurar_cert_trust.svg';
