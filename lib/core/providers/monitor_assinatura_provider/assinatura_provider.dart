@@ -194,7 +194,6 @@ class AssinaturaProvider extends ChangeNotifier {
   void limparAssinaturas() {
     _assinaturas = [];
     _assinaturasPendentes = [];
-    _assinaturaSelecionada = null;
     _mapaAssinaturas = {};
   }
 }

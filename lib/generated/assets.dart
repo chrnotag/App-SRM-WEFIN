@@ -13,7 +13,6 @@ class Assets {
   static const String iconsIcAssinatura = 'assets/icons/ic_assinatura.svg';
   static const String iconsIcAtendimento = 'assets/icons/ic_atendimento.svg';
   static const String iconsIcBloqueado = 'assets/icons/ic_bloqueado.svg';
-  static const String iconsIcCellCheck = 'assets/icons/cellphone_check.png';
   static const String iconsIcBloqueioPermisao =
       'assets/icons/ic_bloqueio_permisao.svg';
   static const String iconsIcCadeado = 'assets/icons/ic_cadeado.svg';

@@ -3,6 +3,7 @@ import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_impl.dart
 abstract class Endpoint{
   String get baseURL;
   String get login;
+  String get operacoes;
   String get assinaturas;
   String get iniciarAssinatura;
   String get finalizarAssinatura;

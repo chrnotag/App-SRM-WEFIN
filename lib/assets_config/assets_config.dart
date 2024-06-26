@@ -8,7 +8,6 @@ class AssetsConfig {
   static const String assetsPoliticaDePrivacidade = 'assets/Politica-de-privacidade.pdf';
   static const String assetsShapes = 'assets/shapes.svg';
   static const String fontsCuidapetIcons = 'assets/fonts/CuidapetIcons.ttf';
-  static const String iconsCellphoneCheck = 'assets/icons/cellphone_check.png';
   static const String iconsCheck = 'assets/icons/check.svg';
   static const String iconsFavicon = 'assets/icons/favicon.png';
   static const String iconsIcAjuda = 'assets/icons/ic_ajuda.svg';
@@ -74,6 +73,7 @@ class AssetsConfig {
   static const String imagesCadeado = 'assets/images/cadeado.svg';
   static const String imagesCanetaAssinando = 'assets/images/caneta_assinando.svg';
   static const String imagesCarteiraConsolidada = 'assets/images/carteira_consolidada.svg';
+  static const String imagesCellphone = 'assets/images/cellphone.svg';
   static const String imagesCheckCertTrust = 'assets/images/check_cert_trust.svg';
   static const String imagesCheckSrmIcon = 'assets/images/check_srm_icon.svg';
   static const String imagesCheckTrustIcon = 'assets/images/check_trust_icon.svg';

@@ -11,6 +11,7 @@ import 'package:Srm_Asset/core/providers/certificado_provider/certificado_provid
 import 'package:Srm_Asset/core/utils/overlay.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 import '../../../core/constants/AppSizes.dart';
+import '../importar_certificado/importar_certificado.dart';
 
 part 'widgets/popup_deletar_certificado.dart';
 
@@ -40,15 +41,14 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
   @override
   Widget build(BuildContext context) {
     final CertificadoProvider certificadoProvider =
-    context.watch<CertificadoProvider>();
+        context.watch<CertificadoProvider>();
     final AssinaturaProvider assinaturaProvider =
-    context.watch<AssinaturaProvider>();
+        context.watch<AssinaturaProvider>();
     return AlertDialog(
       title: Column(
         children: [
           Text(
-              'Assinar Operação ${assinaturaProvider.assinaturaSelecionada
-                  ?.codigoOperacao ?? "Sem operacao"}',
+              'Assinar Operação ${assinaturaProvider.assinaturaSelecionada?.codigoOperacao ?? "Sem operacao"}',
               style: context.textTheme.bodyLarge!.copyWith(
                 fontWeight: FontWeight.w300,
                 letterSpacing: 1.5.sp,
@@ -62,7 +62,7 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
           ),
           Padding(
             padding:
-            const EdgeInsets.symmetric(vertical: AppSizes.paddingMedium),
+                const EdgeInsets.symmetric(vertical: AppSizes.paddingMedium),
             child: Column(
               children: [
                 Divider(),
@@ -73,9 +73,9 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Center(
                             child: CircularProgressIndicator(
-                              color: context.focusColor,
-                              strokeWidth: 2.w,
-                            ));
+                          color: context.focusColor,
+                          strokeWidth: 2.w,
+                        ));
                       }
                       if (snapshot.hasError) {
                         return const Text(
@@ -91,20 +91,21 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                   ),
                   trailing: FloatingActionButton.small(
                       onPressed: () async {
-                        final listaCertificados = await CrossPki.listCertificatesWithKey();
-                        PKCertificate certificadoAtual = listaCertificados.first;
-                        if(listaCertificados.isNotEmpty) {
+                        final listaCertificados =
+                            await CrossPki.listCertificatesWithKey();
+                        PKCertificate certificadoAtual =
+                            listaCertificados.first;
+                        if (listaCertificados.isNotEmpty) {
                           showDialog(
                               context: context,
-                              builder: (context) =>
-                              PopUpDeletarCertificado(
-                                  context: context,
-                                  certificado: certificadoAtual,
-                                  title: "Excluir Certificado",
-                                  label:
-                                  "Deseja excluir o certificado ${certificadoAtual.subjectDisplayName}?")
+                              builder: (context) => PopUpDeletarCertificado(
+                                      context: context,
+                                      certificado: certificadoAtual,
+                                      title: "Excluir Certificado",
+                                      label:
+                                          "Deseja excluir o certificado ${certificadoAtual.subjectDisplayName}?")
                                   .popUp).then((_) => Modular.to.pop());
-                        }else{
+                        } else {
                           Modular.to.pop();
                         }
                       },
@@ -128,7 +129,7 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
                     onPressed: () async {
                       OverlayApp.iniciaOverlay(context);
                       FinalizarAssinaturaProvider finalizarAssinatura =
-                      Modular.get<FinalizarAssinaturaProvider>();
+                          Modular.get<FinalizarAssinaturaProvider>();
                       await finalizarAssinatura.finalizarAssinatura();
                       OverlayApp.terminaOverlay();
                     },
@@ -151,8 +152,16 @@ class _SelecionarCertificadoState extends State<SelecionarCertificado> {
               Expanded(
                 child: BotaoPadrao(
                   onPressed: () {
-                    Modular.to.pushNamed(AppRoutes.importarCertificadoRoute);
-                    Modular.to.pop();
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) => BottomSheet(
+                          onClosing: () {},
+                          builder: (context) => ImportarCertificado(),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(15),
+                                  topRight: Radius.circular(15)))),
+                    );
                   },
                   label: 'Substituir Certificado',
                   filled: false,

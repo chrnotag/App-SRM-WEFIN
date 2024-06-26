@@ -1,9 +1,12 @@
 import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/string_extensions.dart';
+import 'package:Srm_Asset/core/providers/documentos_provider/baixar_documentos_impl.dart';
+import 'package:Srm_Asset/core/providers/documentos_provider/baixar_documentos_provider.dart';
 import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:Srm_Asset/core/utils/data_format.dart';
 
 import 'package:Srm_Asset/generated/assets.dart';
+import 'package:Srm_Asset/widgets/pdfview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -16,6 +19,7 @@ import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/assinatura_el
 import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/iniciar_assinatura/iniciar_assinatura_provider.dart';
 import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 part 'interior_itens/interior_assinantes.dart';
 
@@ -237,7 +241,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                             ),
                           ),
                           Visibility(
-                            visible: true,
+                            visible: assinatura.statusAssinaturaDigital != null && assinatura.statusAssinaturaDigital == 'Aguardando Assinatura',
                             child: Padding(
                               padding: EdgeInsets.symmetric(vertical: 20.h),
                               child: _InteriorDocumentosLista(

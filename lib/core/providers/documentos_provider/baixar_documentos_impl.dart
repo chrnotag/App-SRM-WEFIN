@@ -18,7 +18,7 @@ import '../../providers/documentos_provider/baixar_documentos_provider.dart';
 
 class BaixarDocumentosImpl {
   final Documento documento;
-    Environment ambiente = Modular.get<Environment>();
+  Environment ambiente = Modular.get<Environment>();
 
   BaixarDocumentosImpl({required this.documento});
 
@@ -40,6 +40,7 @@ class BaixarDocumentosImpl {
     Modular.get<BaixarDocumentosProvider>();
     try {
       var response = await http.get(url, headers: header());
+      print('response: ${response.body}');
       if (response.statusCode == 200) {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = DocumentoModel.fromJson(responseBody);

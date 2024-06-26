@@ -25,16 +25,9 @@ class GeralCarteiraProvider extends ChangeNotifier {
 
   set futureGrafico(Future<ApiResponse<dynamic>>? dados) {
     _futureGrafico = dados;
-    notifyListeners();
   }
 
   Future<void> carregarDados() async {
-    final carteiraAbertoProvider = Modular.get<CarteiraAbertoProvider>();
-    final prazoLiquidezProvider = Modular.get<PrazoLiquidezProvider>();
-    final recebiveisProvider = Modular.get<RecebiveisProvider>();
-    await prazoLiquidezProvider.carregarDados();
-    await carteiraAbertoProvider.carregarDados();
-    await recebiveisProvider.carregarDados();
     futureGrafico = GeralCarteiraImpl.pegarGeralCarteira();
   }
 
@@ -77,6 +70,7 @@ class GeralCarteiraProvider extends ChangeNotifier {
 
   void limparDados() {
     dadosGeralCarteira = null;
+    futureGrafico = null;
   }
 
   static String _calcular(double valor, GeralCarteiraModel dadosCarteira) {

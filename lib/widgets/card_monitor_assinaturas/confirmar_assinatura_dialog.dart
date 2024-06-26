@@ -60,7 +60,7 @@ class _ConfirmarAssinaturaDialogState extends State<ConfirmarAssinaturaDialog> {
                     _overlayLoader.remove();
                     Fluttertoast.showToast(
                         msg:
-                            'Erro ao iniciar assinatura, tente novamente mais tarde.');
+                            'Erro ao iniciar assinatura, tente novamente mais tarde. ${response.error.mensagem}');
                   } else {
                     _overlayLoader.remove();
                     Modular.to.pop();

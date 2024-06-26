@@ -6,7 +6,6 @@ import 'package:Srm_Asset/views/home/assinaturas/monitor_assinaturas.dart';
 import 'package:Srm_Asset/views/home/home_view/home_view.dart';
 import 'package:Srm_Asset/views/home/importar_certificado/guia_certificado.dart';
 import 'package:Srm_Asset/views/home/importar_certificado/importar_certificado.dart';
-import 'package:Srm_Asset/views/home/monitor_operacoes/monitor_operacoes.dart';
 import 'package:Srm_Asset/views/home/selecao_empresas_view/view_selecao_empresas.dart';
 
 class HomeModule extends Module {
@@ -18,10 +17,6 @@ class HomeModule extends Module {
     r.child(AppRoutes.listaSelecaoEmpresasHomeRoute,
         child: (context) => const ListaSelecaoEmpresas());
     r.child(AppRoutes.helpScreenHomeRoute, child: (context) => const Ajuda());
-    r.child(
-      AppRoutes.monitorOperacoesHomeRoute,
-      child: (context) => const MonitorOperacoes(),
-    );
     r.child(
       AppRoutes.assinaturaDigitalHomeRoute,
       child: (context) => const MonitorAssinaturas(),

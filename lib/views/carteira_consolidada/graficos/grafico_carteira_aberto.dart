@@ -2,7 +2,6 @@ import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/carteira_aberto/carteira_aberto_provider.dart';
-import 'package:Srm_Asset/widgets/loader_widget.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -17,6 +16,14 @@ class GraficoCarteiraAberto extends StatefulWidget {
 }
 
 class _GraficoCarteiraAbertoState extends State<GraficoCarteiraAberto> {
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Modular.get<CarteiraAbertoProvider>().carregarDados();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +42,12 @@ class _GraficoCarteiraAbertoState extends State<GraficoCarteiraAberto> {
       return total.toBRL;
     }
 
+    return FutureBuilder(
+      future: carteiraAbertoProvider.futureGrafico,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        }
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -53,7 +66,8 @@ class _GraficoCarteiraAbertoState extends State<GraficoCarteiraAberto> {
                             sectionsSpace: 0,
                             sections: filteredItems.map((e) {
                               // Verifica se todos os valores são zero
-                              bool todosValoresZero = filteredItems.every((item) => item.valor == 0);
+                              bool todosValoresZero = filteredItems
+                                  .every((item) => item.valor == 0);
 
                               return PieChartSectionData(
                                 color: todosValoresZero ? Colors.grey : e.cor,
@@ -74,9 +88,10 @@ class _GraficoCarteiraAbertoState extends State<GraficoCarteiraAberto> {
                                 height: 8.h,
                               ),
                               Text(totalOperado(),
-                                  style: context.textTheme.displayMedium!.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      color: context.labelTextColor)),
+                                  style: context.textTheme.displayMedium!
+                                      .copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          color: context.labelTextColor)),
                             ],
                           ),
                         )
@@ -106,5 +121,7 @@ class _GraficoCarteiraAbertoState extends State<GraficoCarteiraAberto> {
             ],
           ),
         );
+      },
+    );
   }
 }

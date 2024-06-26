@@ -1,4 +1,5 @@
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/recebiveis/recebiveis_provider.dart';
 import 'package:Srm_Asset/views/carteira_consolidada/graficos/grafico_recebiveis.dart';
 import 'package:Srm_Asset/views/carteira_consolidada/widgets/titulo_list_item.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
@@ -22,21 +23,20 @@ class _CarteiraConsolidadaScreenState extends State<CarteiraConsolidadaScreen> {
   @override
   void initState() {
     super.initState();
-    final provider = Modular.get<GeralCarteiraProvider>();
-    provider.carregarDados();
+      Modular.get<RecebiveisProvider>().carregarDados();
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    Modular.get<GeralCarteiraProvider>().limparDados();
+    Modular.get<RecebiveisProvider>().limparDados();
   }
 
   @override
   Widget build(BuildContext context) {
-    GeralCarteiraProvider carteiraProvider =
-        context.watch<GeralCarteiraProvider>();
+    RecebiveisProvider recebiveisProvider =
+        context.watch<RecebiveisProvider>();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -46,7 +46,7 @@ class _CarteiraConsolidadaScreenState extends State<CarteiraConsolidadaScreen> {
         centerTitle: true,
       ),
       body: FutureBuilder(
-        future: carteiraProvider.futureGrafico,
+        future: recebiveisProvider.recebiveisFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Loader();
