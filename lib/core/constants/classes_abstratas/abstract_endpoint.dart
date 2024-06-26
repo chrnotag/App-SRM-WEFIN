@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/core/constants/enuns/aprovar_ted_enum.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_impl.dart';
 
 abstract class Endpoint{
@@ -28,4 +29,7 @@ abstract class Endpoint{
   String get prazoLiquidez;
   String get carteiraRecebiveis;
   String get downloadRecebiveis;
+  String get listaTransacoesTed;
+  Uri montarUrlAprovacaoTed(AprovarTedEnum aprovacao, String codigoTransferencia);
+  String get comprovanteDownload;
 }

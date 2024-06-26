@@ -2,9 +2,9 @@ part of '../lista_ted_screen/lista_teds_aprovacao_screen.dart';
 
 class _ItemCardTed extends StatelessWidget {
   final String title;
-  final String content;
-
-  const _ItemCardTed({super.key, required this.title, required this.content});
+  final String? content;
+  final Widget? cnpjFormatter;
+  const _ItemCardTed({super.key, required this.title, this.content, this.cnpjFormatter});
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +12,8 @@ class _ItemCardTed extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(title, style: context.textTheme.bodyMedium,),
-        Text(
-          content,
+        cnpjFormatter != null ? cnpjFormatter! : Text(
+          content!,
           style: context.textTheme.bodyLarge!.copyWith(
               color: context.labelTextColor, fontWeight: FontWeight.w900),
         )
