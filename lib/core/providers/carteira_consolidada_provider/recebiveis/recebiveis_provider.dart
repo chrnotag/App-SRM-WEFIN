@@ -1,10 +1,14 @@
 import 'dart:typed_data';
 
 import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
+import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/carteira_aberto/carteira_aberto_provider.dart';
+import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/geral_carteira/geral_carteira_provider.dart';
+import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/prazo_liquidez/prazo_liquidez_provider.dart';
 import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/recebiveis/recebiveis_impl.dart';
 import 'package:Srm_Asset/models/carteira_consolidada/recebiveis/recebiveis_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../views/carteira_consolidada/utils/dados_grafico_model.dart';
 import '../../../implementations_config/api_response.dart';
@@ -30,7 +34,15 @@ class RecebiveisProvider extends ChangeNotifier {
       _recebiveisFuture = dados;
 
   Future<void> carregarDados() async {
+    Modular.get<GeralCarteiraProvider>().carregarDados();
+    Modular.get<PrazoLiquidezProvider>().carregarDados();
+    Modular.get<CarteiraAbertoProvider>().carregarDados();
     recebiveisFuture = RecebiveisImpl.pegarDados();
+  }
+
+  void limparDados(){
+    recebiveisFuture = null;
+    recebiveis = null;
   }
 
   Uint8List? _pdfRecebiveis;

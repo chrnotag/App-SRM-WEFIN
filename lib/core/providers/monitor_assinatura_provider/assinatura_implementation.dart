@@ -15,7 +15,7 @@ class AssinaturaImpl {
     final AssinaturaProvider assinaturaProvider =
         Modular.get<AssinaturaProvider>();
     final AuthProvider authProvider = Modular.get<AuthProvider>();
-    final url = Uri.parse(ambiente.endpoints.assinaturas);
+    final url = Uri.parse(ambiente.endpoints.operacoes);
     try {
       final response = await http.get(url, headers: {
         'Accept': 'application/json',

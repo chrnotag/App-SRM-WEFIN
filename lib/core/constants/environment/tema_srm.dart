@@ -1,6 +1,8 @@
+import 'package:Srm_Asset/assets_config/assets_config.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/imagens_guia_certificado.dart';
 import 'package:Srm_Asset/core/constants/configs_tema/srm/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import '../../../../../generated/assets.dart';
@@ -70,7 +72,7 @@ class ThemeSRM implements ImagensGuiaImportarCertificado{
   static String get logoAppBar => Assets.icone_srm;
 
   static Widget get imagemAjuda =>
-      Image.asset(Assets.iconsIcCellCheck, width: 176.w, color: null);
+      SvgPicture.asset(AssetsConfig.imagesCellphone, width: 176.w, color: null);
 
   @override
   // TODO: implement primeiroSlideDispositivo

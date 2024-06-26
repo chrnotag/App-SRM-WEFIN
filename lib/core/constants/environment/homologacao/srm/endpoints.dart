@@ -6,7 +6,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 class EndPointsSRM extends Endpoint {
   @override
   // TODO: implement assinatura
-  String get assinaturas => '$baseURL/operacoes';
+  String get assinaturas => '$baseURL/assinaturas';
 
   @override
   // TODO: implement baixarCertificadoQrCode

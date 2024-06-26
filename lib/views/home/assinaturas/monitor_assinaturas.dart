@@ -49,7 +49,7 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            'Assinatura Digital',
+            'Monitor de Operações',
             style:
                 context.textTheme.displaySmall!.copyWith(color: Colors.white),
           ),

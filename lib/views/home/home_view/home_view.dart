@@ -8,6 +8,7 @@ import 'package:Srm_Asset/core/providers/sessao_provider.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
@@ -71,73 +72,73 @@ class _HomeViewState extends State<HomeView> {
         context.watch<ContaDigitalProvider>();
     final ambiente = Modular.get<Environment>();
     return Scaffold(
-      bottomNavigationBar: SafeArea(
-        child: BottomNavigationBar(
-          backgroundColor: context.backgroundColor,
-          elevation: 0,
-          onTap: (value) {
-            setState(() {
-              _index = value;
-            });
-          },
-          currentIndex: _index,
-          selectedItemColor: context.secondaryColor,
-          type: BottomNavigationBarType.fixed,
-          items: [
-            BottomNavigationBarItem(
-              icon: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        color: _index == 0 ? context.secondaryColor : null,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10))),
-                    height: 4,
-                    width: 30.r,
-                  ),
-                  SvgPicture.asset(Assets.home_icon,
-                      color: _index == 0 ? context.secondaryColor : null),
-                ],
-              ),
-              label: 'Início',
-            ),
-            BottomNavigationBarItem(
-              icon: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        color: _index == 1 ? context.secondaryColor : null,
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    height: 4,
-                    width: 30.r,
-                  ),
-                  SvgPicture.asset(Assets.search_icon,
-                      color: _index == 1 ? context.secondaryColor : null),
-                ],
-              ),
-              label: 'Busca',
-            ),
-            BottomNavigationBarItem(
-                icon: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          color: _index == 2 ? context.secondaryColor : null,
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      height: 4,
-                      width: 30.r,
-                    ),
-                    SvgPicture.asset(Assets.menu_options_icon,
-                        color: _index == 2 ? context.secondaryColor : null),
-                  ],
-                ),
-                label: 'Opções'),
-          ],
-        ),
-      ),
+      // bottomNavigationBar: SafeArea(
+      //   child: BottomNavigationBar(
+      //     backgroundColor: context.backgroundColor,
+      //     elevation: 0,
+      //     onTap: (value) {
+      //       setState(() {
+      //         _index = value;
+      //       });
+      //     },
+      //     currentIndex: _index,
+      //     selectedItemColor: context.secondaryColor,
+      //     type: BottomNavigationBarType.fixed,
+      //     items: [
+      //       BottomNavigationBarItem(
+      //         icon: Column(
+      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //           children: [
+      //             Container(
+      //               decoration: BoxDecoration(
+      //                   color: _index == 0 ? context.secondaryColor : null,
+      //                   borderRadius:
+      //                       const BorderRadius.all(Radius.circular(10))),
+      //               height: 4,
+      //               width: 30.r,
+      //             ),
+      //             SvgPicture.asset(Assets.home_icon,
+      //                 color: _index == 0 ? context.secondaryColor : null),
+      //           ],
+      //         ),
+      //         label: 'Início',
+      //       ),
+      //       BottomNavigationBarItem(
+      //         icon: Column(
+      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //           children: [
+      //             Container(
+      //               decoration: BoxDecoration(
+      //                   color: _index == 1 ? context.secondaryColor : null,
+      //                   borderRadius: BorderRadius.all(Radius.circular(10))),
+      //               height: 4,
+      //               width: 30.r,
+      //             ),
+      //             SvgPicture.asset(Assets.search_icon,
+      //                 color: _index == 1 ? context.secondaryColor : null),
+      //           ],
+      //         ),
+      //         label: 'Busca',
+      //       ),
+      //       BottomNavigationBarItem(
+      //           icon: Column(
+      //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //             children: [
+      //               Container(
+      //                 decoration: BoxDecoration(
+      //                     color: _index == 2 ? context.secondaryColor : null,
+      //                     borderRadius: BorderRadius.all(Radius.circular(10))),
+      //                 height: 4,
+      //                 width: 30.r,
+      //               ),
+      //               SvgPicture.asset(Assets.menu_options_icon,
+      //                   color: _index == 2 ? context.secondaryColor : null),
+      //             ],
+      //           ),
+      //           label: 'Opções'),
+      //     ],
+      //   ),
+      // ),
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,
         child: AppBarLogo(),
@@ -248,6 +249,27 @@ class _HomeViewState extends State<HomeView> {
                                       });
                                 }),
                             _CardItemMenuHome(
+                                icone: Assets.balao_chat,
+                                titulo: 'Fale conosco',
+                                onTap: () {
+                                  Modular.to
+                                      .pushNamed(AppRoutes.helpScreenRoute);
+                                }),
+                            Visibility(
+                              visible: false,
+                              child: _CardItemMenuHome(
+                                  icone: ambiente.ted_menu_icone,
+                                  titulo: 'Ted para Terceiros',
+                                  onTap: () {
+                                    Modular.to.pushNamed(AppRoutes.tedTerceirosNavigatorRoute);
+                                  }),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            _CardItemMenuHome(
                                 icone: Assets.lista_icone,
                                 titulo: 'Extrato',
                                 onTap: () {
@@ -255,27 +277,16 @@ class _HomeViewState extends State<HomeView> {
                                       .pushNamed(AppRoutes.extratoScreenRoute);
                                 }),
                             _CardItemMenuHome(
-                                icone: ambiente.ted_menu_icone,
-                                titulo: 'Ted para Terceiros',
-                                onTap: () {
-                                  Modular.to.pushNamed(AppRoutes.tedTerceirosNavigatorRoute);
-                                }),
-                          ],
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            _CardItemMenuHome(
-                                icone: Assets.balao_chat,
-                                titulo: 'Fale com seu gerente',
-                                onTap: () {
-                                  Modular.to
-                                      .pushNamed(AppRoutes.helpScreenRoute);
-                                }),
-                            _CardItemMenuHome(
-                                icone: Assets.setas_perpendiculares,
-                                titulo: 'Transferências',
+                                icone: Assets.grupo_pessoas,
+                                titulo: 'Grupo Econômico',
                                 onTap: () {}),
+                            Visibility(
+                              visible: false,
+                              child: _CardItemMenuHome(
+                                  icone: Assets.setas_perpendiculares,
+                                  titulo: 'Transferências',
+                                  onTap: () {}),
+                            ),
                           ],
                         ),
                         Column(
@@ -288,10 +299,6 @@ class _HomeViewState extends State<HomeView> {
                                   Modular.to.pushNamed(AppRoutes
                                       .carteiraConsolidadaNavigatorRoute);
                                 }),
-                            _CardItemMenuHome(
-                                icone: Assets.grupo_pessoas,
-                                titulo: 'Grupo Econômico',
-                                onTap: () {}),
                           ],
                         )
                       ],

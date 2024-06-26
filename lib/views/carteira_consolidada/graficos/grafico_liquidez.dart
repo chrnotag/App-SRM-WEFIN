@@ -19,10 +19,16 @@ class GraficoLiquidez extends StatefulWidget {
 class _GraficoLiquidezState extends State<GraficoLiquidez> {
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Modular.get<PrazoLiquidezProvider>().carregarDados();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final liquidezProvider = context.watch<PrazoLiquidezProvider>();
-    final List<DadosGraficoModel> filteredItems =
-        liquidezProvider.dadosGrafico;
+    final List<DadosGraficoModel> filteredItems = liquidezProvider.dadosGrafico;
     final int itemCount = filteredItems.length;
     final double itemHeight = 85.h;
     final double listViewHeight = itemHeight * itemCount;
@@ -35,6 +41,12 @@ class _GraficoLiquidezState extends State<GraficoLiquidez> {
       return total.toBRL;
     }
 
+    return FutureBuilder(
+      future: liquidezProvider.futureGrafico,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        }
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -53,7 +65,8 @@ class _GraficoLiquidezState extends State<GraficoLiquidez> {
                             sectionsSpace: 0,
                             sections: filteredItems.map((e) {
                               // Verifica se todos os valores são zero
-                              bool todosValoresZero = filteredItems.every((item) => item.valor == 0);
+                              bool todosValoresZero = filteredItems
+                                  .every((item) => item.valor == 0);
 
                               return PieChartSectionData(
                                 color: todosValoresZero ? Colors.grey : e.cor,
@@ -74,9 +87,10 @@ class _GraficoLiquidezState extends State<GraficoLiquidez> {
                                 height: 8.h,
                               ),
                               Text(totalOperado(),
-                                  style: context.textTheme.displayMedium!.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      color: context.labelTextColor)),
+                                  style: context.textTheme.displayMedium!
+                                      .copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          color: context.labelTextColor)),
                             ],
                           ),
                         )
@@ -106,5 +120,7 @@ class _GraficoLiquidezState extends State<GraficoLiquidez> {
             ],
           ),
         );
+      },
+    );
   }
 }
