@@ -1,6 +1,7 @@
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/widgets/card_monitor_assinaturas/card_monitor_assinaturas.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -54,6 +55,7 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
                 context.textTheme.displaySmall!.copyWith(color: Colors.white),
           ),
           centerTitle: true,
+          leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: () => Modular.to.navigate(AppRoutes.homeAppRoute),),
         ),
         body: Column(
           children: [

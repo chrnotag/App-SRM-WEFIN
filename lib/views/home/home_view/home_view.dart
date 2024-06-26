@@ -279,7 +279,7 @@ class _HomeViewState extends State<HomeView> {
                             _CardItemMenuHome(
                                 icone: Assets.grupo_pessoas,
                                 titulo: 'Grupo Econômico',
-                                onTap: () {}),
+                                onTap: () {Modular.to.navigate(AppRoutes.listaSelecaoEmpresasRoute);}),
                             Visibility(
                               visible: false,
                               child: _CardItemMenuHome(
