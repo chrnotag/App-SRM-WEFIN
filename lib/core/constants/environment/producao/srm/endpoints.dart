@@ -120,6 +120,6 @@ class EndPointsSRM extends Endpoint{
     }
   }
 
-  String get comprovanteDownload => '$listaTransacoesTed/comprovante/download';
+  Uri montarUrlComprovanteTed(String codigoTransacao) => Uri.parse('$listaTransacoesTed/comprovante/download?codigoTransacao=$codigoTransacao');
 
 }

@@ -127,6 +127,6 @@ class EndPointsSRM extends Endpoint {
           throw Exception('Valor enum nao existente: ${aprovacao.name}');
     }
   }
-  String get comprovanteDownload => '$listaTransacoesTed/comprovante/download';
+  Uri montarUrlComprovanteTed(String codigoTransacao) => Uri.parse('$listaTransacoesTed/comprovante/download?codigoTransacao=$codigoTransacao');
 
 }

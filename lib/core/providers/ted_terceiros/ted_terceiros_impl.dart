@@ -74,11 +74,11 @@ class TedTerceirosImpl {
     }
   }
 
-  static Future<ApiResponse<dynamic>> downloadComprovante() async {
+  static Future<ApiResponse<dynamic>> downloadComprovante(String codigoTransacao) async {
     final Environment ambiente = Modular.get<Environment>();
     final authProvider = Modular.get<AuthProvider>();
     final tedProvider = Modular.get<TedTerceirosProvider>();
-    Uri url = Uri.parse(ambiente.endpoints.comprovanteDownload);
+    Uri url = ambiente.endpoints.montarUrlDownloadComprovanteTED(codigoTransacao);
     final headers = {
       'Content-Type': 'application/json; charset=utf-8',
       'accept': 'application/json',
@@ -106,6 +106,4 @@ class TedTerceirosImpl {
       return MensagemErroPadrao.codigo500();
     }
   }
-
-
 }

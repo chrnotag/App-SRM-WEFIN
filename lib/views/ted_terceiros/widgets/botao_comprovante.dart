@@ -3,7 +3,8 @@ import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:flutter/material.dart';
 
 class BotaoComprovanteTedTerceiros extends StatelessWidget {
-  const BotaoComprovanteTedTerceiros({super.key});
+final String codigoTransacao;
+  const BotaoComprovanteTedTerceiros({super.key, required this.codigoTransacao});
 
   @override
   Widget build(BuildContext context) {

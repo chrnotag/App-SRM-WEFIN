@@ -8,10 +8,20 @@ class _CardTedTerceiros extends StatelessWidget {
   Widget build(BuildContext context) {
     print(transferencia.toJson());
     final statusTed = TedTerceirosEnum.fromStatus(transferencia.statusTransferencia);
+    Widget? botoesCard(TedTerceirosEnum statusTed){
+      switch(statusTed){
+        case TedTerceirosEnum.APROVADO:
+          return BotaoComprovanteTedTerceiros(codigoTransacao: transferencia.codigoTransacao!,);
+        case TedTerceirosEnum.PARA_APROVACAO:
+          return BotoesAprovarTedTerceiros(codigoTransferencia: transferencia.codigoTransacao!,);
+        default:
+          return Container();
+      }
+    }
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       child: SizedBox(
-        height: statusTed.botoes == null ? 250.h : 300.h,
+        height: statusTed == TedTerceirosEnum.PARA_APROVACAO || statusTed == TedTerceirosEnum.APROVADO ? 250.h : 300.h,
         child: Card(
           elevation: 4.h,
           child: Padding(
@@ -50,7 +60,7 @@ class _CardTedTerceiros extends StatelessWidget {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [statusTed.botoes ?? Container()],
+                  children: [botoesCard(statusTed) ?? Container()],
                 )
               ],
             ),

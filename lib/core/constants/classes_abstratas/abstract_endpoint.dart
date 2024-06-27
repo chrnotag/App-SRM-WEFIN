@@ -31,5 +31,5 @@ abstract class Endpoint{
   String get downloadRecebiveis;
   String get listaTransacoesTed;
   Uri montarUrlAprovacaoTed(AprovarTedEnum aprovacao, String codigoTransferencia);
-  String get comprovanteDownload;
+  Uri montarUrlComprovanteTed(String codigoTransacao);
 }

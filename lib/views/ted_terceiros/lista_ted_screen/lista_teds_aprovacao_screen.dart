@@ -10,6 +10,9 @@ import 'package:Srm_Asset/widgets/mascara_texto_cnpj.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import '../widgets/botao_comprovante.dart';
+import '../widgets/botoes_para_aprovacao.dart';
+
 part '../widgets/card_ted.dart';
 
 part '../widgets/item_card_ted.dart';
