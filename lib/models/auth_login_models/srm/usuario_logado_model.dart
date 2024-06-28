@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../core/constants/enuns/RolesAcessoEnum.dart';
 import 'cedente_model.dart';
 
 part 'usuario_logado_model.g.dart';
@@ -16,6 +17,7 @@ class LoginResponse {
     required this.dataExpiraSessao,
     required this.idDevice,
     required this.listaCedente,
+    required this.roles
   });
 
   late final String nome;
@@ -27,6 +29,7 @@ class LoginResponse {
   late final DateTime dataExpiraSessao;
   late final String idDevice;
   late final List<CedenteModel> listaCedente;
+  late final List<RolesAcessoEnum> roles;
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) =>
       _$LoginResponseFromJson(json);
