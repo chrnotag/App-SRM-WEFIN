@@ -18,6 +18,7 @@ import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:Srm_Asset/generated/assets.dart';
 import 'package:Srm_Asset/widgets/appbar_logo_perfil.dart';
+import '../../../core/constants/enuns/RolesAcessoEnum.dart';
 import '../../../core/implementations_config/api_response.dart';
 import '../../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 
@@ -62,7 +63,6 @@ class _HomeViewState extends State<HomeView> {
     sessaoProvider.resetListening();
   }
 
-  int _index = 0;
   bool _isSaldoVisivel = false;
 
   @override
@@ -71,74 +71,73 @@ class _HomeViewState extends State<HomeView> {
     final ContaDigitalProvider contaDigitalProvider =
         context.watch<ContaDigitalProvider>();
     final ambiente = Modular.get<Environment>();
+
+    List<Widget> cardsHome = [
+      _CardItemMenuHome(
+          icone: Assets.grafico_icone,
+          titulo: 'Monitor de Operações',
+          notificacoes: authProvider.empresaSelecionada!.assinaturaPendente,
+          onTap: () {
+            final AssinaturaProvider assinaturaProvider =
+                Modular.get<AssinaturaProvider>();
+            List<MonitorAssinaturasModel> assinaturasPendentes =
+                assinaturaProvider.assinaturasPendentes;
+            List<MonitorAssinaturasModel> assinaturas =
+                assinaturaProvider.todasAssinaturas;
+            Modular.to.pushNamed(AppRoutes.assinaturaDigitalRoute, arguments: {
+              'assinaturas': assinaturas,
+              'assinaturasPendentes': assinaturasPendentes
+            });
+          }),
+      _CardItemMenuHome(
+          icone: Assets.setas_perpendiculares,
+          titulo: 'Transferências',
+          onTap: () {}),
+      _CardItemMenuHome(
+          icone: Assets.lista_icone,
+          titulo: 'Extrato',
+          onTap: () {
+            Modular.to.pushNamed(AppRoutes.extratoScreenRoute);
+          }),
+      _CardItemMenuHome(
+          icone: ambiente.ted_menu_icone,
+          titulo: 'Ted para Terceiros',
+          onTap: () {
+            Modular.to.pushNamed(AppRoutes.tedTerceirosNavigatorRoute);
+          }),
+      _CardItemMenuHome(
+          icone: AssetsConfig.imagesCarteiraConsolidada,
+          titulo: 'Carteira Consolidada',
+          onTap: () {
+            Modular.to.pushNamed(AppRoutes.carteiraConsolidadaNavigatorRoute);
+          }),
+      _CardItemMenuHome(
+          icone: Assets.grupo_pessoas,
+          titulo: 'Grupo Econômico',
+          onTap: () {
+            Modular.to.navigate(AppRoutes.listaSelecaoEmpresasRoute);
+          }),
+      _CardItemMenuHome(
+          icone: Assets.balao_chat,
+          titulo: 'Fale conosco',
+          onTap: () {
+            Modular.to.pushNamed(AppRoutes.helpScreenRoute);
+          }),
+    ];
+
+    if (!authProvider.rolesAcesso!
+        .contains(RolesAcessoEnum.ROLE_MONITOR_OPERACOES)) {
+      cardsHome.removeWhere((card) =>
+          (card as _CardItemMenuHome).titulo == 'Monitor de Operações');
+    }
+
+    int rowCount = (cardsHome.length / 3).ceil();
+    double gridViewHeight = rowCount * 135.0;
+
+    bool acessoContaDigital =
+        authProvider.rolesAcesso!.contains(RolesAcessoEnum.ROLE_CONTA_DIGITAL);
+
     return Scaffold(
-      // bottomNavigationBar: SafeArea(
-      //   child: BottomNavigationBar(
-      //     backgroundColor: context.backgroundColor,
-      //     elevation: 0,
-      //     onTap: (value) {
-      //       setState(() {
-      //         _index = value;
-      //       });
-      //     },
-      //     currentIndex: _index,
-      //     selectedItemColor: context.secondaryColor,
-      //     type: BottomNavigationBarType.fixed,
-      //     items: [
-      //       BottomNavigationBarItem(
-      //         icon: Column(
-      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //           children: [
-      //             Container(
-      //               decoration: BoxDecoration(
-      //                   color: _index == 0 ? context.secondaryColor : null,
-      //                   borderRadius:
-      //                       const BorderRadius.all(Radius.circular(10))),
-      //               height: 4,
-      //               width: 30.r,
-      //             ),
-      //             SvgPicture.asset(Assets.home_icon,
-      //                 color: _index == 0 ? context.secondaryColor : null),
-      //           ],
-      //         ),
-      //         label: 'Início',
-      //       ),
-      //       BottomNavigationBarItem(
-      //         icon: Column(
-      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //           children: [
-      //             Container(
-      //               decoration: BoxDecoration(
-      //                   color: _index == 1 ? context.secondaryColor : null,
-      //                   borderRadius: BorderRadius.all(Radius.circular(10))),
-      //               height: 4,
-      //               width: 30.r,
-      //             ),
-      //             SvgPicture.asset(Assets.search_icon,
-      //                 color: _index == 1 ? context.secondaryColor : null),
-      //           ],
-      //         ),
-      //         label: 'Busca',
-      //       ),
-      //       BottomNavigationBarItem(
-      //           icon: Column(
-      //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //             children: [
-      //               Container(
-      //                 decoration: BoxDecoration(
-      //                     color: _index == 2 ? context.secondaryColor : null,
-      //                     borderRadius: BorderRadius.all(Radius.circular(10))),
-      //                 height: 4,
-      //                 width: 30.r,
-      //               ),
-      //               SvgPicture.asset(Assets.menu_options_icon,
-      //                   color: _index == 2 ? context.secondaryColor : null),
-      //             ],
-      //           ),
-      //           label: 'Opções'),
-      //     ],
-      //   ),
-      // ),
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,
         child: AppBarLogo(),
@@ -172,38 +171,51 @@ class _HomeViewState extends State<HomeView> {
                   ),
                   Column(
                     children: [
-                      Text('Saldo Disponível',
+                      Text(
+                          acessoContaDigital
+                              ? 'Saldo Disponível'
+                              : 'Saldo Indisponivel',
                           style: context.textTheme.bodySmall!
                               .copyWith(color: Colors.white)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          FutureBuilder(
-                              future: _saldoFuture,
-                              builder: (context, snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return CircularProgressIndicator(
-                                    color: context.primaryColor,
-                                  );
-                                } else if (snapshot.hasError) {
-                                  return Text(
-                                      'Houve um erro ao carregar o saldo!');
-                                } else {
-                                  return Text(
-                                    _isSaldoVisivel
-                                        ? contaDigitalProvider.saldoContaDigital
-                                                ?.saldoTotal.toBRL ??
-                                            0.0.toBRL
-                                        : 'R\$ * * * * *',
-                                    style: context.textTheme.displayMedium!
-                                        .copyWith(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w900),
-                                  );
-                                }
-                              }),
+                          acessoContaDigital
+                              ? FutureBuilder(
+                                  future: _saldoFuture,
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return CircularProgressIndicator(
+                                        color: context.primaryColor,
+                                      );
+                                    } else if (snapshot.hasError) {
+                                      return Text(
+                                          'Houve um erro ao carregar o saldo!');
+                                    } else {
+                                      return Text(
+                                        _isSaldoVisivel
+                                            ? contaDigitalProvider
+                                                    .saldoContaDigital
+                                                    ?.saldoTotal
+                                                    .toBRL ??
+                                                0.0.toBRL
+                                            : 'R\$ * * * * *',
+                                        style: context.textTheme.displayMedium!
+                                            .copyWith(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w900),
+                                      );
+                                    }
+                                  })
+                              : Text(
+                                  _isSaldoVisivel ? 0.0.toBRL : 'R\$ * * * * *',
+                                  style: context.textTheme.displayMedium!
+                                      .copyWith(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w900),
+                                ),
                           IconButton(
                               onPressed: () => setState(() {
                                     _isSaldoVisivel = !_isSaldoVisivel;
@@ -218,90 +230,18 @@ class _HomeViewState extends State<HomeView> {
                       )
                     ],
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(top: AppSizes.paddingExtraLarge.h),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            _CardItemMenuHome(
-                                icone: Assets.grafico_icone,
-                                titulo: 'Monitor de Operações',
-                                notificacoes: authProvider
-                                    .empresaSelecionada!.assinaturaPendente,
-                                onTap: () {
-                                  final AssinaturaProvider assinaturaProvider =
-                                      Modular.get<AssinaturaProvider>();
-                                  List<MonitorAssinaturasModel>
-                                      assinaturasPendentes =
-                                      assinaturaProvider.assinaturasPendentes;
-                                  List<MonitorAssinaturasModel> assinaturas =
-                                      assinaturaProvider.todasAssinaturas;
-                                  Modular.to.pushNamed(
-                                      AppRoutes.assinaturaDigitalRoute,
-                                      arguments: {
-                                        'assinaturas': assinaturas,
-                                        'assinaturasPendentes':
-                                            assinaturasPendentes
-                                      });
-                                }),
-                            _CardItemMenuHome(
-                                icone: Assets.setas_perpendiculares,
-                                titulo: 'Transferências',
-                                onTap: () {}),
-                            _CardItemMenuHome(
-                                icone: Assets.balao_chat,
-                                titulo: 'Fale conosco',
-                                onTap: () {
-                                  Modular.to
-                                      .pushNamed(AppRoutes.helpScreenRoute);
-                                }),
-                          ],
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            _CardItemMenuHome(
-                                icone: Assets.lista_icone,
-                                titulo: 'Extrato',
-                                onTap: () {
-                                  Modular.to
-                                      .pushNamed(AppRoutes.extratoScreenRoute);
-                                }),
-                            _CardItemMenuHome(
-                                icone: ambiente.ted_menu_icone,
-                                titulo: 'Ted para Terceiros',
-                                onTap: () {
-                                  Modular.to.pushNamed(
-                                      AppRoutes.tedTerceirosNavigatorRoute);
-                                }),
-                          ],
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            _CardItemMenuHome(
-                                icone: AssetsConfig.imagesCarteiraConsolidada,
-                                titulo: 'Carteira Consolidada',
-                                onTap: () {
-                                  Modular.to.pushNamed(AppRoutes
-                                      .carteiraConsolidadaNavigatorRoute);
-                                }),
-                            _CardItemMenuHome(
-                                icone: Assets.grupo_pessoas,
-                                titulo: 'Grupo Econômico',
-                                onTap: () {
-                                  Modular.to.navigate(
-                                      AppRoutes.listaSelecaoEmpresasRoute);
-                                }),
-                          ],
-                        )
-                      ],
+                  SizedBox(
+                    width: context.width,
+                    height: gridViewHeight,
+                    child: GridView.count(
+                      mainAxisSpacing: 4.h,
+                      crossAxisSpacing: 4.w,
+                      padding: EdgeInsets.all(20.r),
+                      physics: const NeverScrollableScrollPhysics(),
+                      crossAxisCount: 3,
+                      children: cardsHome,
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

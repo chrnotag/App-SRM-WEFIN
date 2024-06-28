@@ -1,24 +1,24 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../core/constants/enuns/RolesAcessoEnum.dart';
+
 import 'cedente_model.dart';
 
 part 'usuario_logado_model.g.dart';
 
 @JsonSerializable()
 class LoginResponse {
-  LoginResponse({
-    required this.nome,
-    required this.usuario,
-    required this.identificadorUsuario,
-    required this.identificadorCedente,
-    required this.token,
-    required this.tipoToken,
-    required this.dataExpiraSessao,
-    required this.idDevice,
-    required this.listaCedente,
-    required this.roles
-  });
+  LoginResponse(
+      {required this.nome,
+      required this.usuario,
+      required this.identificadorUsuario,
+      required this.identificadorCedente,
+      required this.token,
+      required this.tipoToken,
+      required this.dataExpiraSessao,
+      required this.idDevice,
+      required this.listaCedente,
+      required this.roles});
 
   late final String nome;
   late final String usuario;
