@@ -106,6 +106,5 @@ class ExtratoProvider extends ChangeNotifier {
     dataInicial = DateTime.now();
     intervaloDias = 7;
     extratoFuture = null;
-    extrato = null;
   }
 }
