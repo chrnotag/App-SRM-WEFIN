@@ -249,21 +249,16 @@ class _HomeViewState extends State<HomeView> {
                                       });
                                 }),
                             _CardItemMenuHome(
+                                icone: Assets.setas_perpendiculares,
+                                titulo: 'Transferências',
+                                onTap: () {}),
+                            _CardItemMenuHome(
                                 icone: Assets.balao_chat,
                                 titulo: 'Fale conosco',
                                 onTap: () {
                                   Modular.to
                                       .pushNamed(AppRoutes.helpScreenRoute);
                                 }),
-                            Visibility(
-                              visible: false,
-                              child: _CardItemMenuHome(
-                                  icone: ambiente.ted_menu_icone,
-                                  titulo: 'Ted para Terceiros',
-                                  onTap: () {
-                                    Modular.to.pushNamed(AppRoutes.tedTerceirosNavigatorRoute);
-                                  }),
-                            ),
                           ],
                         ),
                         Column(
@@ -277,16 +272,12 @@ class _HomeViewState extends State<HomeView> {
                                       .pushNamed(AppRoutes.extratoScreenRoute);
                                 }),
                             _CardItemMenuHome(
-                                icone: Assets.grupo_pessoas,
-                                titulo: 'Grupo Econômico',
-                                onTap: () {Modular.to.navigate(AppRoutes.listaSelecaoEmpresasRoute);}),
-                            Visibility(
-                              visible: false,
-                              child: _CardItemMenuHome(
-                                  icone: Assets.setas_perpendiculares,
-                                  titulo: 'Transferências',
-                                  onTap: () {}),
-                            ),
+                                icone: ambiente.ted_menu_icone,
+                                titulo: 'Ted para Terceiros',
+                                onTap: () {
+                                  Modular.to.pushNamed(
+                                      AppRoutes.tedTerceirosNavigatorRoute);
+                                }),
                           ],
                         ),
                         Column(
@@ -298,6 +289,13 @@ class _HomeViewState extends State<HomeView> {
                                 onTap: () {
                                   Modular.to.pushNamed(AppRoutes
                                       .carteiraConsolidadaNavigatorRoute);
+                                }),
+                            _CardItemMenuHome(
+                                icone: Assets.grupo_pessoas,
+                                titulo: 'Grupo Econômico',
+                                onTap: () {
+                                  Modular.to.navigate(
+                                      AppRoutes.listaSelecaoEmpresasRoute);
                                 }),
                           ],
                         )
