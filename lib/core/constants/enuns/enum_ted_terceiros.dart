@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 enum TedTerceirosEnum {
   PARA_APROVACAO(Color(0xfff3f7ff), 'Para Aprovação', Color(0xff0e6dfe)),
-  APROVADO(Color(0xffDAFADA), 'Aprovado', Color(0xff4CB04E)),
+  PAGO(Color(0xffDAFADA), 'Aprovado', Color(0xff4CB04E)),
   SOLICITADO(Colors.white, 'Solicitado', Color(0xffE1C11A)),
   RECUSADO(Color(0xfffdf7f6), 'Recusado', Color(0xffe6492d));
 
@@ -29,7 +29,7 @@ enum TedTerceirosEnum {
       case 'PARA_APROVACAO':
         return TedTerceirosEnum.PARA_APROVACAO;
       case 'APROVADO':
-        return TedTerceirosEnum.APROVADO;
+        return TedTerceirosEnum.PAGO;
       default:
         throw ArgumentError('Status inválido: $status');
     }

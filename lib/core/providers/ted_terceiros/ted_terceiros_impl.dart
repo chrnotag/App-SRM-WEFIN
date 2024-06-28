@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:Srm_Asset/core/constants/enuns/aprovar_ted_enum.dart';
 import 'package:Srm_Asset/core/implementations_config/export_impl.dart';
 import 'package:Srm_Asset/core/providers/ted_terceiros/ted_terceiros_provider.dart';
@@ -25,13 +27,8 @@ class TedTerceirosImpl {
       if (response.statusCode == 200) {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         TedTerceirosModel? data;
-        try {
-          data = TedTerceirosModel.fromJson(responseBody);
-        } catch (e, s) {
-          print('erro ao formatar: $e,$s');
-        }
+        data = TedTerceirosModel.fromJson(responseBody);
         tedProvider.teds = data;
-        print('sucesso');
         return SucessResponse(data);
       } else {
         return MensagemErroPadrao.erroResponse(response.bodyBytes);
@@ -41,11 +38,45 @@ class TedTerceirosImpl {
     }
   }
 
-  static Future<ApiResponse<dynamic>> aprovarOuRecusar(AprovarTedEnum aprovarTedEnum, String codigoTransferencia) async {
+  static Future<ApiResponse<dynamic>> aprovarOuRecusar(
+      AprovarTedEnum aprovarTedEnum, int codigoTransferencia) async {
     final Environment ambiente = Modular.get<Environment>();
     final authProvider = Modular.get<AuthProvider>();
     final tedProvider = Modular.get<TedTerceirosProvider>();
-    Uri url = ambiente.endpoints.montarUrlAprovacaoTed(aprovarTedEnum, codigoTransferencia);
+    Uri url = ambiente.endpoints
+        .montarUrlAprovacaoTed(aprovarTedEnum, '$codigoTransferencia');
+    print('url: $url');
+    final headers = {
+      'Content-Type': 'application/json; charset=utf-8',
+      'accept': 'application/json',
+      'Authorization': authProvider.dataUser!.token,
+      'plataforma': ambiente.plataforma.name
+    };
+    print('header: $headers');
+    try {
+      final response = await http.post(url, headers: headers);
+      print(response.body);
+      if (response.statusCode == 200) {
+        final responseBody = json.decode(utf8.decode(response.bodyBytes));
+        Transferencia? data;
+        data = Transferencia.fromJson(responseBody);
+        tedProvider.transferencia = data;
+        return SucessResponse(data);
+      } else {
+        return MensagemErroPadrao.erroResponse(response.bodyBytes);
+      }
+    } catch (_) {
+      return MensagemErroPadrao.codigo500();
+    }
+  }
+
+  static Future<ApiResponse<dynamic>> downloadComprovante(
+      int codigoTransacao) async {
+    final Environment ambiente = Modular.get<Environment>();
+    final authProvider = Modular.get<AuthProvider>();
+    final tedProvider = Modular.get<TedTerceirosProvider>();
+    Uri url =
+        ambiente.endpoints.montarUrlDownloadComprovanteTED('$codigoTransacao');
     final headers = {
       'Content-Type': 'application/json; charset=utf-8',
       'accept': 'application/json',
@@ -56,49 +87,9 @@ class TedTerceirosImpl {
       final response = await http.get(url, headers: headers);
       print(response.body);
       if (response.statusCode == 200) {
-        final responseBody = json.decode(utf8.decode(response.bodyBytes));
-        Transferencia? data;
-        try {
-          data = Transferencia.fromJson(responseBody);
-        } catch (e, s) {
-          print('erro ao formatar: $e,$s');
-        }
-        tedProvider.transferencia = data;
-        print('sucesso');
-        return SucessResponse(data);
-      } else {
-        return MensagemErroPadrao.erroResponse(response.bodyBytes);
-      }
-    } catch (_) {
-      return MensagemErroPadrao.codigo500();
-    }
-  }
-
-  static Future<ApiResponse<dynamic>> downloadComprovante(String codigoTransacao) async {
-    final Environment ambiente = Modular.get<Environment>();
-    final authProvider = Modular.get<AuthProvider>();
-    final tedProvider = Modular.get<TedTerceirosProvider>();
-    Uri url = ambiente.endpoints.montarUrlDownloadComprovanteTED(codigoTransacao);
-    final headers = {
-      'Content-Type': 'application/json; charset=utf-8',
-      'accept': 'application/json',
-      'Authorization': authProvider.dataUser!.token,
-      'plataforma': ambiente.plataforma.name
-    };
-    try {
-      final response = await http.get(url, headers: headers);
-      print(response.body);
-      if (response.statusCode == 200) {
-        final responseBody = json.decode(utf8.decode(response.bodyBytes));
-        Transferencia? data;
-        try {
-          data = Transferencia.fromJson(responseBody);
-        } catch (e, s) {
-          print('erro ao formatar: $e,$s');
-        }
-        tedProvider.transferencia = data;
-        print('sucesso');
-        return SucessResponse(data);
+        final Uint8List pdfBytes = response.bodyBytes;
+        tedProvider.pdfComprovante = pdfBytes;
+        return SucessResponse(pdfBytes);
       } else {
         return MensagemErroPadrao.erroResponse(response.bodyBytes);
       }
