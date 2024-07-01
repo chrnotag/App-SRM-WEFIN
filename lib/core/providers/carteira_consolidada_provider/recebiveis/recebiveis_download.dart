@@ -20,7 +20,6 @@ class DownloadRecebiveisImpl {
     };
     try {
       final response = await http.get(url, headers: headers);
-      print('response: ${response.body}');
       if (response.statusCode == 200) {
         final Uint8List pdfBytes = response.bodyBytes;
         recebiveisProvider.pdfRecebiveis = pdfBytes;

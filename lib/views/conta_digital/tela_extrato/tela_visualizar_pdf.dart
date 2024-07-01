@@ -11,8 +11,7 @@ import '../../../core/providers/conta_digital/extrato/extrato_provider.dart';
 import '../../../widgets/loader_widget.dart';
 
 class TelaVisualizarPdfExtrato extends StatefulWidget {
-  const TelaVisualizarPdfExtrato(
-      {super.key});
+  const TelaVisualizarPdfExtrato({super.key});
 
   @override
   State<TelaVisualizarPdfExtrato> createState() =>
@@ -20,13 +19,6 @@ class TelaVisualizarPdfExtrato extends StatefulWidget {
 }
 
 class _TelaVisualizarPdfExtratoState extends State<TelaVisualizarPdfExtrato> {
-  @override
-  void initState() {
-    super.initState();
-    final extratoProvider = Modular.get<ExtratoProvider>();
-    extratoProvider.baixarDados();
-  }
-
   @override
   Widget build(BuildContext context) {
     final extratoProvider = context.watch<ExtratoProvider>();
@@ -36,18 +28,25 @@ class _TelaVisualizarPdfExtratoState extends State<TelaVisualizarPdfExtrato> {
         backgroundColor: context.secondaryColor,
         shadowColor: Colors.transparent,
         centerTitle: true,
-        title: Text('Extrato', style: TextStyle(color: Colors.white),),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(bottomLeft: Radius.circular(12.r), bottomRight: Radius.circular(12.r))),
+        title: Text(
+          'Extrato',
+          style: TextStyle(color: Colors.white),
+        ),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(12.r),
+                bottomRight: Radius.circular(12.r))),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           final DateFormat dateFormat = DateFormat("MM-yyyy");
-          String name = "extrato_conta_digital_${dateFormat.format(extratoProvider.dataFinalFiltro())}";
+          String name =
+              "extrato_conta_digital_${dateFormat.format(extratoProvider.dataFinalFiltro())}";
 
           PDFUtils.sharePDF(extratoProvider.extratoDownloadBites!, name);
         },
         child: Icon(Icons.share, color: Colors.white),
-        backgroundColor: SRMColors.secondaryColor,
+        backgroundColor: context.primaryColor,
       ),
       body: FutureBuilder(
           future: extratoProvider.downloadExtratoFuture,
@@ -56,7 +55,6 @@ class _TelaVisualizarPdfExtratoState extends State<TelaVisualizarPdfExtrato> {
               return const Loader();
             }
             if (snapshot.hasError) {
-              print('erro ao exibir');
             }
             return SfPdfViewer.memory(extratoProvider.extratoDownloadBites!);
           }),

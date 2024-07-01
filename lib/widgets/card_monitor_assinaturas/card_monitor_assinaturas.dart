@@ -122,19 +122,30 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
       });
     }
 
-    bool exibirBotaoAssinar() {
+    bool exibirDocumentos(){
       final authProvider = Modular.get<AuthProvider>();
-      bool assinadoPeloUsuario = assinatura.assinantes.any((assinante) {
-        return assinante.identificadorAssinante ==
-            authProvider.dataUser!.identificadorUsuario &&
-            assinante.informacoesAssinante.any((info) =>
-            info.dataAssinatura != null);
-      });
-      print(assinatura.statusAssinaturaDigital != null &&
-          assinatura.statusAssinaturaDigital == 'Aguardando Assinatura'
-      );
-      return assinatura.statusAssinaturaDigital != null &&
-          assinatura.statusAssinaturaDigital == 'Aguardando Assinatura';
+      final identificadorUsuario = authProvider.dataUser!.identificadorUsuario;
+
+      bool assinadoPeloUsuario = true;
+
+      for (var assinante in assinatura.assinantes) {
+        for (var infoAssinantes in assinante.informacoesAssinante) {
+          if (infoAssinantes.identificadorAssinador != null &&
+              infoAssinantes.identificadorAssinador ==
+                  identificadorUsuario){
+            if(infoAssinantes.dataAssinatura != null){
+              assinadoPeloUsuario = false;
+            }
+          }
+        }
+      }
+
+      return assinadoPeloUsuario;
+    }
+
+    bool exibirBotaoAssinar() {
+      return exibirDocumentos() && assinatura.statusAssinaturaDigital != null &&
+              assinatura.statusAssinaturaDigital == 'Aguardando Assinatura';
     }
 
     final assinaturaProvider = Modular.get<AssinaturaProvider>();
@@ -184,8 +195,8 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                     children: [
                       _ItemTextCard(
                           titulo: "Data",
-                          conteudo:
-                          FormatarData.formatarPtBR(assinatura.dataOperacao)),
+                          conteudo: FormatarData.formatarPtBR(
+                              assinatura.dataOperacao)),
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 16.h),
                         child: _ItemTextCard(
@@ -227,7 +238,8 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                     ],
                   ),
                   _InteriorProcuradores(
-                    assinatura: assinatura,)
+                    assinatura: assinatura,
+                  )
                 ],
               ),
               Visibility(
@@ -257,14 +269,21 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                               ],
                             ),
                           ),
-                          Visibility(
-                            visible: exibirBotaoAssinar(),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(vertical: 20.h),
-                              child: _InteriorDocumentosLista(
-                                assinaturasModel: assinatura,
-                              ),
-                            ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Visibility(
+                                  visible: exibirBotaoAssinar(),
+                                  child: Padding(
+                                    padding:
+                                    EdgeInsets.symmetric(vertical: 20.h),
+                                    child: _InteriorDocumentosLista(
+                                      assinaturasModel: assinatura,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
                           Visibility(
                             visible: exibirBotaoAssinar(),
@@ -273,15 +292,15 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                               child: BotaoPadrao(
                                 label: 'Assinar Operação',
                                 onPressed: () {
-                                  final authProvider = Modular.get<
-                                      AuthProvider>();
+                                  final authProvider =
+                                  Modular.get<AuthProvider>();
                                   final assinaturaProvider =
                                   Modular.get<AssinaturaProvider>();
                                   assinaturaProvider.assinaturaSelecionada =
                                       assinatura;
                                   AssinaturaEletronicaProvider
-                                  assinaturaEletronicaProvider =
-                                  Modular.get<AssinaturaEletronicaProvider>();
+                                  assinaturaEletronicaProvider = Modular
+                                      .get<AssinaturaEletronicaProvider>();
                                   assinaturaEletronicaProvider.codigoOperacao =
                                       widget.assinatura.codigoOperacao;
                                   IniciarAssinaturaProvider iniciarAssinatura =
@@ -290,8 +309,8 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                                       iniciarAssinatura
                                           .obterInformacoesUsuarioLogado(
                                           assinatura,
-                                          authProvider
-                                              .dataUser!.identificadorUsuario),
+                                          authProvider.dataUser!
+                                              .identificadorUsuario),
                                       context);
                                 },
                               ),
@@ -302,8 +321,8 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                     )),
               ),
               Visibility(
-                visible: assinatura.statusAssinaturaDigital !=
-                    'Nao Inicializado',
+                visible:
+                assinatura.statusAssinaturaDigital != 'Nao Inicializado',
                 child: SizedBox(
                   width: context.width,
                   child: InkWell(

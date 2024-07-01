@@ -6,6 +6,7 @@ import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
+import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_impl.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_provider.dart';
 import 'package:Srm_Asset/core/utils/data_format.dart';
 import 'package:Srm_Asset/generated/assets.dart';
@@ -49,6 +50,7 @@ class _TelaExtratoState extends State<TelaExtrato>
     _tabController = TabController(length: 3, vsync: this, initialIndex: 2);
     extratoProviderInit.carregarDados();
     tamanhoLista = 7;
+
   }
 
   @override
@@ -111,7 +113,7 @@ class _TelaExtratoState extends State<TelaExtrato>
                                               .itensExtrato[index].saldoNaData.toBRL,
                                     ),
                                     ...BuildListaOperacao.buildLista(
-                                        context: context, index: index),
+                                        context: context, index: index, tipoConsulta: TipoConsultaExtrato.VISUALIZAR),
                                   ],
                                 );
                               });

@@ -11,7 +11,6 @@ import 'package:http/http.dart' as http;
 
 class ExtratoImpl {
   final TipoConsultaExtrato tipoConsulta;
-
   const ExtratoImpl({required this.tipoConsulta});
 
   Future<ApiResponse<dynamic>> pegarExtrato(
@@ -29,7 +28,6 @@ class ExtratoImpl {
         numeroContaTitular, dataInicial, dataFinal, tipoConsulta);
     try {
       final response = await http.get(url, headers: headers);
-      print('response: ${response.body}');
       if (response.statusCode == 200) {
         if (tipoConsulta == TipoConsultaExtrato.BAIXAR) {
           final Uint8List pdfBytes = response.bodyBytes;
@@ -38,7 +36,11 @@ class ExtratoImpl {
         } else {
           final responseBody = json.decode(utf8.decode(response.bodyBytes));
           ContaExtratoModel data = ContaExtratoModel.fromJson(responseBody);
-          extratoProvider.extrato = data;
+          if(tipoConsulta == TipoConsultaExtrato.PERSONALIZADO){
+            extratoProvider.extratoPersonalizado = data;
+          }else{
+            extratoProvider.extrato = data;
+          }
           return SucessResponse(data);
         }
       } else if (response.statusCode == 500) {
@@ -54,6 +56,7 @@ class ExtratoImpl {
 
 enum TipoConsultaExtrato {
   VISUALIZAR,
+  PERSONALIZADO,
   BAIXAR;
 
   const TipoConsultaExtrato();
@@ -62,8 +65,8 @@ enum TipoConsultaExtrato {
       TipoConsultaExtrato tipoConsulta, Environment ambiente) {
     switch (tipoConsulta) {
       case TipoConsultaExtrato.VISUALIZAR:
+      case TipoConsultaExtrato.PERSONALIZADO:
         return ambiente.endpoints.extratoContaDigital;
-        break;
       case TipoConsultaExtrato.BAIXAR:
         return ambiente.endpoints.downloadExtratoContaDigital;
     }

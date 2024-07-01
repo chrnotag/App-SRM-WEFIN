@@ -56,6 +56,7 @@ class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
                   extratoProvider.intervaloDias = SEMANA;
                   filtroSelecionado = SEMANA;
                   extratoProvider.carregarDados();
+                  extratoProvider.notificar();
                 }),
               ),
               Padding(
@@ -68,6 +69,7 @@ class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
                     extratoProvider.intervaloDias = QUINZENA;
                     filtroSelecionado = QUINZENA;
                     extratoProvider.carregarDados();
+                    extratoProvider.notificar();
                   }),
                 ),
               ),
@@ -79,6 +81,7 @@ class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
                   extratoProvider.intervaloDias = MES;
                   filtroSelecionado = MES;
                   extratoProvider.carregarDados();
+                  extratoProvider.notificar();
                 }),
               ),
               IconButton(

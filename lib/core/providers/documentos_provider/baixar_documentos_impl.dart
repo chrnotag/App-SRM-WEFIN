@@ -40,7 +40,6 @@ class BaixarDocumentosImpl {
     Modular.get<BaixarDocumentosProvider>();
     try {
       var response = await http.get(url, headers: header());
-      print('response: ${response.body}');
       if (response.statusCode == 200) {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = DocumentoModel.fromJson(responseBody);

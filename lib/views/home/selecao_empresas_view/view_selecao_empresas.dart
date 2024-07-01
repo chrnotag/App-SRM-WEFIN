@@ -12,6 +12,7 @@ import 'package:Srm_Asset/models/auth_login_models/SRM/cedente_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/constants/route_labels.dart';
+import '../../../core/providers/auth_provider_config/deslogar/deslogar_controller.dart';
 import '../../../widgets/mascara_texto_cnpj.dart';
 
 class ListaSelecaoEmpresas extends StatefulWidget {
@@ -88,9 +89,10 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                             ambiente.logoAppBar,
                             width: 32.w,
                           ),
-                          SvgPicture.asset(
-                            AssetsConfig.imagesExitIcone,
-                            width: 32.w,
+                          IconButton(
+                           icon: SvgPicture.asset(AssetsConfig.imagesExitIcone),
+                          onPressed: () => DeslogarUsuario(context: context).encerrarSessao(),
+                            iconSize: 32.r,
                           )
                         ],
                       ),
