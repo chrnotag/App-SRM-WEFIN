@@ -162,10 +162,11 @@ class AssinaturaProvider extends ChangeNotifier {
   }
 
   Future<void> carregarDados() async {
-    assinaturasFuture = Modular.get<AssinaturaProvider>().carregarAssinaturas();
+    assinaturasFuture = carregarAssinaturas();
     final authProvider = Modular.get<AuthProvider>();
     valorSelecionado = authProvider.empresaSelecionada!.identificador;
     listaCedentes = authProvider.listaCedente!;
+    notifyListeners();
   }
 
   Color corStatusAssinatura(String statusAssinatura) {
