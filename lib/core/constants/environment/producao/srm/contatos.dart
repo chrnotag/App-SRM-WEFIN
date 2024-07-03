@@ -8,4 +8,7 @@ class ContatosSRM extends ContatosAbstract{
   @override
   // TODO: implement telefone
   String get telefone => '0800 878 1005';
+
+  String? get whatsapp => null;
+
 }

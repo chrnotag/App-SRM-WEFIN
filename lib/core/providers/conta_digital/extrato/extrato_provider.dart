@@ -80,8 +80,10 @@ class ExtratoProvider extends ChangeNotifier {
   Future<void> carregarDados() async {
     final contaDigitalProvider = Modular.get<ContaDigitalProvider>();
     extratoFuture = ExtratoImpl(tipoConsulta: TipoConsultaExtrato.VISUALIZAR)
-        .pegarExtrato(contaDigitalProvider.dadosContaDigital!.conta,
-            (dataFinal ?? dataFinalFiltro()).formatarIso8601, dataInicial.formatarIso8601);
+        .pegarExtrato(
+            contaDigitalProvider.dadosContaDigital!.conta,
+            (dataFinal ?? dataFinalFiltro()).formatarIso8601,
+            dataInicial.formatarIso8601);
   }
 
   Future<void> baixarDados() async {
@@ -91,6 +93,13 @@ class ExtratoProvider extends ChangeNotifier {
             contaDigitalProvider.dadosContaDigital!.conta,
             dataFinalFiltro().formatarIso8601,
             dataInicial.formatarIso8601);
+  }
+
+  Future<void> baixarDadosPeriodo() async {
+    final contaDigitalProvider = Modular.get<ContaDigitalProvider>();
+    await const ExtratoImpl(tipoConsulta: TipoConsultaExtrato.BAIXAR)
+        .pegarExtrato(contaDigitalProvider.dadosContaDigital!.conta,
+            dataFinal!.formatarIso8601, dataInicial.formatarIso8601);
   }
 
   void limparDados() {

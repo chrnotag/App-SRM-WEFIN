@@ -1,5 +1,6 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/widgets/transparent_appbar_empty.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -17,7 +18,8 @@ class Ajuda extends StatelessWidget {
     Environment ambiente = Modular.get<Environment>();
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: AppBar().preferredSize, child: const TransparentAppBarEmpty()),
+          preferredSize: AppBar().preferredSize,
+          child: const TransparentAppBarEmpty()),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 64.w),
         child: Column(
@@ -67,6 +69,40 @@ class Ajuda extends StatelessWidget {
                       ],
                     ),
                   ),
+                  Visibility(
+                    visible: ambiente.contatos.whatsapp != null,
+                    child: Padding(
+                      padding: EdgeInsets.only(top: AppSizes.paddingSmall),
+                      child: RichText(
+                        text: TextSpan(
+                          text: 'Whatsapp: ',
+                          style: context.textTheme.bodyMedium,
+                          children: [
+                            TextSpan(
+                              text: ambiente.contatos
+                                  .whatsapp!,
+                              style: context.textTheme.bodyMedium!.copyWith(
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline,
+                                decorationColor: context.inverseSurfaceColor,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () async {
+                                  String phoneNumber = ambiente.contatos
+                                      .whatsapp!.replaceAll('/[()\s-]/g', '');
+                                  final url = 'https://wa.me/$phoneNumber';
+                                  if (await canLaunch(url)) {
+                                    await launch(url);
+                                  } else {
+                                    throw 'Could not launch $url';
+                                  }
+                                },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                   Padding(
                     padding:
                         EdgeInsets.symmetric(vertical: AppSizes.paddingSmall),
@@ -78,8 +114,7 @@ class Ajuda extends StatelessWidget {
                             style: context.textTheme.bodyMedium,
                           ),
                           TextSpan(
-                            text:
-                              ambiente.contatos.email,
+                            text: ambiente.contatos.email,
                             style: context.textTheme.bodyMedium!.copyWith(
                               fontWeight: FontWeight.bold,
                               decoration: TextDecoration.underline,
@@ -114,7 +149,8 @@ class Ajuda extends StatelessWidget {
                               fontWeight: FontWeight.bold),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () async {
-                              String url = ambiente.endpoints.politicaPrivacidade;
+                              String url =
+                                  ambiente.endpoints.politicaPrivacidade;
                               AbrirUrl().launchURL(url);
                             },
                         ),
