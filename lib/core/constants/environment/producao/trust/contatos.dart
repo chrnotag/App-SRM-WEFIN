@@ -8,4 +8,7 @@ class ContatosTRUST extends ContatosAbstract{
   @override
   // TODO: implement telefone
   String get telefone => '0800 878 8338';
+
+  String? get whatsapp => '11991536872';
+
 }

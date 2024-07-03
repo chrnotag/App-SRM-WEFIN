@@ -17,7 +17,8 @@ class Ajuda extends StatelessWidget {
     Environment ambiente = Modular.get<Environment>();
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: AppBar().preferredSize, child: const TransparentAppBarEmpty()),
+          preferredSize: AppBar().preferredSize,
+          child: const TransparentAppBarEmpty()),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 64.w),
         child: Column(
@@ -68,6 +69,36 @@ class Ajuda extends StatelessWidget {
                     ),
                   ),
                   Padding(
+                    padding: EdgeInsets.only(top: AppSizes.paddingSmall),
+                    child: RichText(
+                      text: TextSpan(
+                        text: 'Whatsapp: ',
+                        style: context.textTheme.bodyMedium,
+                        children: [
+                          TextSpan(
+                            text: '(11) 99153-6872',
+                            style: context.textTheme.bodyMedium!.copyWith(
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline,
+                              decorationColor: context.inverseSurfaceColor,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () async {
+                                String phoneNumber = ambiente.contatos
+                                    .whatsapp!;
+                                final url = 'https://wa.me/$phoneNumber';
+                                if (await canLaunch(url)) {
+                                  await launch(url);
+                                } else {
+                                  throw 'Could not launch $url';
+                                }
+                              },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
                     padding:
                         EdgeInsets.symmetric(vertical: AppSizes.paddingSmall),
                     child: RichText(
@@ -78,8 +109,7 @@ class Ajuda extends StatelessWidget {
                             style: context.textTheme.bodyMedium,
                           ),
                           TextSpan(
-                            text:
-                              ambiente.contatos.email,
+                            text: ambiente.contatos.email,
                             style: context.textTheme.bodyMedium!.copyWith(
                               fontWeight: FontWeight.bold,
                               decoration: TextDecoration.underline,
@@ -114,7 +144,8 @@ class Ajuda extends StatelessWidget {
                               fontWeight: FontWeight.bold),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () async {
-                              String url = ambiente.endpoints.politicaPrivacidade;
+                              String url =
+                                  ambiente.endpoints.politicaPrivacidade;
                               AbrirUrl().launchURL(url);
                             },
                         ),
