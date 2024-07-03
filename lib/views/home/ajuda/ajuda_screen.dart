@@ -1,5 +1,6 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/widgets/transparent_appbar_empty.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -68,33 +69,36 @@ class Ajuda extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(top: AppSizes.paddingSmall),
-                    child: RichText(
-                      text: TextSpan(
-                        text: 'Whatsapp: ',
-                        style: context.textTheme.bodyMedium,
-                        children: [
-                          TextSpan(
-                            text: '(11) 99153-6872',
-                            style: context.textTheme.bodyMedium!.copyWith(
-                              fontWeight: FontWeight.bold,
-                              decoration: TextDecoration.underline,
-                              decorationColor: context.inverseSurfaceColor,
+                  Visibility(
+                    visible: ambiente.contatos.whatsapp != null,
+                    child: Padding(
+                      padding: EdgeInsets.only(top: AppSizes.paddingSmall),
+                      child: RichText(
+                        text: TextSpan(
+                          text: 'Whatsapp: ',
+                          style: context.textTheme.bodyMedium,
+                          children: [
+                            TextSpan(
+                              text: '(11) 99153-6872',
+                              style: context.textTheme.bodyMedium!.copyWith(
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline,
+                                decorationColor: context.inverseSurfaceColor,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () async {
+                                  String phoneNumber = ambiente.contatos
+                                      .whatsapp!;
+                                  final url = 'https://wa.me/$phoneNumber';
+                                  if (await canLaunch(url)) {
+                                    await launch(url);
+                                  } else {
+                                    throw 'Could not launch $url';
+                                  }
+                                },
                             ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () async {
-                                String phoneNumber = ambiente.contatos
-                                    .whatsapp!;
-                                final url = 'https://wa.me/$phoneNumber';
-                                if (await canLaunch(url)) {
-                                  await launch(url);
-                                } else {
-                                  throw 'Could not launch $url';
-                                }
-                              },
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
