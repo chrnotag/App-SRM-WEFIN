@@ -1,8 +1,11 @@
+import 'package:Srm_Asset/assets_config/assets_config.dart';
 import 'package:Srm_Asset/core/constants/extensions/date_extensions.dart';
 import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_provider.dart';
+import 'package:Srm_Asset/core/utils/overlay.dart';
+import 'package:Srm_Asset/core/utils/pdf_manager.dart';
 import 'package:Srm_Asset/views/conta_digital/widgets/lista_operacao.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
 import 'package:Srm_Asset/widgets/popup_generico.dart';
@@ -48,6 +51,17 @@ class _ExtratosDataSelecionadaState extends State<ExtratosDataSelecionada> {
                 context.textTheme.displaySmall!.copyWith(color: Colors.white)),
         centerTitle: true,
       ),
+      floatingActionButton: FloatingActionButton(
+          child: Image.asset(AssetsConfig.imagesIconePdf, color: Colors.white,),
+          onPressed: () async {
+            OverlayApp.iniciaOverlay(context);
+            await extratoProvider.baixarDadosPeriodo();
+            OverlayApp.terminaOverlay();
+            final DateFormat dateFormat = DateFormat("dd-MM-yyyy");
+            String name = "extrato_${dateFormat.format(extratoProvider.dataFinal!)}_${dateFormat.format(extratoProvider.dataInicial)}";
+            print(extratoProvider.extratoDownloadBites ?? 'vazio');
+            PDFUtils.sharePDF(extratoProvider.extratoDownloadBites!, name);
+          }),
       body: SizedBox(
         height: context.height,
         child: Padding(

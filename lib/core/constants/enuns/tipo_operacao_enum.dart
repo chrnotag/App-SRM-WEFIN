@@ -21,6 +21,7 @@ enum TipoTED {
     switch (codigo) {
       case 'EFT':
       case 'TEDC':
+      case 'TIC':
         return TipoTED.RECEBIMENTO_TED;
       case 'TARTED':
         return TipoTED.TARIFA_TED;
