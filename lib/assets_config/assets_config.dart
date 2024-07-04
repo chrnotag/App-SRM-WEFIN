@@ -78,10 +78,13 @@ class AssetsConfig {
   static const String imagesCheckSrmIcon = 'assets/images/check_srm_icon.svg';
   static const String imagesCheckTrustIcon = 'assets/images/check_trust_icon.svg';
   static const String imagesDocumentCertTrust = 'assets/images/document_cert_trust.svg';
+  static const String imagesDocumentoVetor = 'assets/images/documento_vetor.svg';
   static const String imagesDolar = 'assets/images/dolar.svg';
   static const String imagesDollarListIcon = 'assets/images/dollar_list_icon.png';
   static const String imagesExitIcone = 'assets/images/exit_icone.svg';
+  static const String imagesExtratoVetor = 'assets/images/extrato_vetor.svg';
   static const String imagesGraficoIcone = 'assets/images/grafico_icone.svg';
+  static const String imagesGraficoVetor = 'assets/images/grafico_vetor.svg';
   static const String imagesGrupoPessoas = 'assets/images/grupo_pessoas.svg';
   static const String imagesHomeIcon = 'assets/images/home_icon.svg';
   static const String imagesIcAjuda = 'assets/images/ic_ajuda.png';
@@ -116,6 +119,7 @@ class AssetsConfig {
   static const String imagesTedTerceirosSrm = 'assets/images/ted_terceiros_srm.svg';
   static const String imagesUploadCertTrust = 'assets/images/upload_cert_trust.svg';
   static const String imagesUploadCertificado = 'assets/images/upload_certificado.svg';
+  static const String imagesWhatsappVetor = 'assets/images/whatsapp_vetor.svg';
   static const String imgDrawableHdpi = 'assets/img/drawable-hdpi.png';
   static const String imgDrawableLdpi = 'assets/img/drawable-ldpi.png';
   static const String imgDrawableMdpi = 'assets/img/drawable-mdpi.png';
