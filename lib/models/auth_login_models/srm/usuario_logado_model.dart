@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../core/constants/enuns/RolesAcessoEnum.dart';
+import '../../../core/constants/enuns/roles_acesso_enum.dart';
 
 import 'cedente_model.dart';
 

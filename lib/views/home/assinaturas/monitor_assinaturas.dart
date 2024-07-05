@@ -29,15 +29,6 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
     monitorProvider.carregarDados();
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

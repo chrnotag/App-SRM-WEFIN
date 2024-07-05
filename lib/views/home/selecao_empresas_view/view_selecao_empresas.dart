@@ -1,14 +1,12 @@
 import 'package:Srm_Asset/assets_config/assets_config.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
-import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
-import 'package:Srm_Asset/models/auth_login_models/SRM/cedente_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/constants/route_labels.dart';
@@ -177,7 +175,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                             radius: 34.r,
                             backgroundColor: Color(0xffF8F9FB),
                             child: SvgPicture.asset(
-                              AssetsConfig.imagesMaleta,
+                              AssetsConfig.srmMaleta,
                               color: context.primaryColor,
                               width: 30.w,
                             ),

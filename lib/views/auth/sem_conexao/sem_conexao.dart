@@ -5,7 +5,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
-import '../../../generated/assets.dart';
+
+import '../../../assets_config/assets_config.dart';
 
 class SemConexaoScreen extends StatefulWidget {
   const SemConexaoScreen({super.key});
@@ -31,7 +32,7 @@ class _SemConexaoScreenState extends State<SemConexaoScreen> {
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage(Assets.imagesBackgroundImage),
+                image: AssetImage(AssetsConfig.imagesBackgroundImage),
                 fit: BoxFit.cover)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,7 +46,7 @@ class _SemConexaoScreenState extends State<SemConexaoScreen> {
               backgroundColor: Colors.transparent,
               shadowColor: Colors.transparent,
             ),
-            Image.asset(Assets.imagesNoNetwork,
+            Image.asset(AssetsConfig.imagesNoNetwork,
                 scale: 3.r, color: context.onSecondaryColor),
             Column(
               children: [

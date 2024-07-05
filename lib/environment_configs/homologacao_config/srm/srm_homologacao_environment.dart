@@ -63,14 +63,39 @@ class SrmHomologacaoEnvironment extends Environment {
 
   @override
   // TODO: implement alerta_icone
-  String get alerta_icone => AssetsConfig.imagesAlertIconSrm;
+  String get alerta_icone => AssetsConfig.srmAlertIconSrm;
 
   @override
   // TODO: implement check_icone
-  String get check_icone => AssetsConfig.imagesCheckSrmIcon;
+  String get check_icone => AssetsConfig.srmCheckSrmIcon;
 
   @override
   // TODO: implement ted_menu_icone
-  String get ted_menu_icone => AssetsConfig.imagesTedTerceirosSrm;
+  String get ted_menu_icone => AssetsConfig.srmTedTerceirosSrm;
 
+  @override
+  // TODO: implement extratoIcone
+  String get extratoIcone => AssetsConfig.srmExtratoSrm;
+
+  @override
+  // TODO: implement faleConoscoIcone
+  String get faleConoscoIcone => AssetsConfig.srmFaleConoscoSrm;
+
+  @override
+  // TODO: implement grupoEconomicoIcone
+  String get grupoEconomicoIcone => AssetsConfig.srmGrupoPessoas;
+
+  @override
+  // TODO: implement monitorOperacoesIcone
+  String get monitorOperacoesIcone => AssetsConfig.srmMonitorOperacoesSrm;
+
+  @override
+  // TODO: implement tedTerceirosIcone
+  String get tedTerceirosIcone => AssetsConfig.srmTedTerceirosSrm;
+
+  @override
+  // TODO: implement transferenciasIcone
+  String get transferenciasIcone => AssetsConfig.srmSetasPerpendiculares;
+
+  String get imagemEmpresa => AssetsConfig.srmEmpresaSrm;
 }

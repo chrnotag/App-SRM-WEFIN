@@ -1,4 +1,4 @@
-import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
+import 'package:Srm_Asset/assets_config/assets_config.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
@@ -10,7 +10,6 @@ import 'package:Srm_Asset/core/constants/AppSizes.dart';
 import '../core/constants/classes_abstratas/envirioment.dart';
 import '../core/constants/route_labels.dart';
 import '../core/providers/auth_provider_config/logar/auth_providers.dart';
-import '../generated/assets.dart';
 import '../models/auth_login_models/SRM/cedente_model.dart';
 
 class AppBarLogo extends StatefulWidget {
@@ -102,7 +101,7 @@ class _AppBarLogoState extends State<AppBarLogo> {
             onPressed: () {
               DeslogarUsuario(context: context).encerrarSessao();
             },
-            icon: SvgPicture.asset(Assets.exit_icone, width: 29),
+            icon: SvgPicture.asset(AssetsConfig.imagesExitIcone, width: 29),
           )
         ],
       ),
