@@ -1,10 +1,10 @@
+import 'package:Srm_Asset/assets_config/assets_config.dart';
 import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
-import 'package:Srm_Asset/generated/assets.dart';
 import '../../../core/providers/auth_provider_config/logar/auth_providers.dart';
 import '../../../core/providers/sessao_provider.dart';
 import '../../../core/constants/AppSizes.dart';
@@ -36,7 +36,7 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
         child: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(Assets.imagesBackgroundImage),
+              image: AssetImage(AssetsConfig.imagesBackgroundImage),
               fit: BoxFit.cover,
             ),
           ),
@@ -76,7 +76,7 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Image.asset(
-                                  Assets.logoSRM,
+                                  AssetsConfig.imagesLogoSrm,
                                   width: 150.w,
                                   color: SRMColors.secondaryColor,
                                 ),
@@ -105,7 +105,7 @@ class _SelecaoEmpresaLoginState extends State<SelecaoEmpresaLogin> {
                               Modular.to.pushNamed(AppRoutes.loginAuthRoute);
                             },
                             child: Image.asset(
-                              Assets.logoTRUST,
+                              AssetsConfig.imagesLogoTrust,
                               width: 150.w,
                             ),
                           ),

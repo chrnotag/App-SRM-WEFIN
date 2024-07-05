@@ -26,7 +26,7 @@ class _WidgetDocumentos extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Image.asset(Assets.imagesIconePdf, color: Colors.green),
+            Image.asset(AssetsConfig.imagesIconePdf, color: Colors.green),
             Text(
               documento.nome!.length > 20
                   ? "${documento.nome!.substring(0, 20)}..."

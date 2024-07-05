@@ -59,7 +59,7 @@ class _CardItemMenuHome extends StatelessWidget {
                 Text(
                   titulo,
                   style: context.textTheme.displaySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
+                      .copyWith(fontWeight: FontWeight.bold, color: context.labelTextColor),
                 )
               ],
             ),

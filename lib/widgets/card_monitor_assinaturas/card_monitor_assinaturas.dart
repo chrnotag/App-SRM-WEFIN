@@ -1,15 +1,14 @@
+import 'package:Srm_Asset/assets_config/assets_config.dart';
+import 'package:Srm_Asset/core/constants/enuns/roles_acesso_enum.dart';
 import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/roles_extensions.dart';
 import 'package:Srm_Asset/core/constants/extensions/string_extensions.dart';
 import 'package:Srm_Asset/core/providers/documentos_provider/baixar_documentos_impl.dart';
 import 'package:Srm_Asset/core/providers/documentos_provider/baixar_documentos_provider.dart';
 import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:Srm_Asset/core/utils/data_format.dart';
-
-import 'package:Srm_Asset/generated/assets.dart';
 import 'package:Srm_Asset/widgets/pdfview.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
@@ -134,7 +133,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
           assinatura.statusAssinaturaDigital == 'Aguardando Assinatura'
       );
       return assinatura.statusAssinaturaDigital != null &&
-          assinatura.statusAssinaturaDigital == 'Aguardando Assinatura';
+          assinatura.statusAssinaturaDigital == 'Aguardando Assinatura' && !assinadoPeloUsuario && authProvider.rolesAcesso.contemRoles([RolesAcessoEnum.ROLE_MONITOR_OPERACOES]);
     }
 
     final assinaturaProvider = Modular.get<AssinaturaProvider>();

@@ -3,6 +3,7 @@ import 'package:Srm_Asset/core/constants/AppSizes.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/constants/enuns/plataforma_enum.dart';
 import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/roles_extensions.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
@@ -17,9 +18,7 @@ import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
-import 'package:Srm_Asset/generated/assets.dart';
-import 'package:Srm_Asset/widgets/appbar_logo_perfil.dart';
-import '../../../core/constants/enuns/RolesAcessoEnum.dart';
+import '../../../core/constants/enuns/roles_acesso_enum.dart';
 import '../../../core/implementations_config/api_response.dart';
 import '../../../models/auth_login_models/SRM/cedente_model.dart';
 import '../../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
@@ -83,7 +82,7 @@ class _HomeViewState extends State<HomeView> {
 
     List<Widget> cardsHome = [
       _CardItemMenuHome(
-          icone: AssetsConfig.imagesGraficoVetor,
+          icone: ambiente.monitorOperacoesIcone,
           titulo: 'Monitor de Operações',
           notificacoes: authProvider.empresaSelecionada!.assinaturaPendente,
           onTap: () {
@@ -99,11 +98,11 @@ class _HomeViewState extends State<HomeView> {
             });
           }),
       _CardItemMenuHome(
-          icone: Assets.setas_perpendiculares,
+          icone: ambiente.transferenciasIcone,
           titulo: 'Transferências',
           onTap: () {}),
       _CardItemMenuHome(
-          icone: AssetsConfig.imagesExtratoVetor,
+          icone: ambiente.extratoIcone,
           titulo: 'Extrato',
           onTap: () {
             Modular.to.pushNamed(AppRoutes.extratoScreenRoute);
@@ -116,44 +115,57 @@ class _HomeViewState extends State<HomeView> {
           }),
       isSRM
           ? _CardItemMenuHome(
-              icone: AssetsConfig.imagesCarteiraConsolidada,
+              icone: AssetsConfig.srmCarteiraConsolidada,
               titulo: 'Carteira Consolidada',
               onTap: () {
                 Modular.to
                     .pushNamed(AppRoutes.carteiraConsolidadaNavigatorRoute);
               })
           : _CardItemMenuHome(
-              icone: AssetsConfig.imagesDocumentoVetor,
+              icone: AssetsConfig.trustRelatorioTrust,
               titulo: 'Relatório de Títulos',
               onTap: () {
                 Modular.to
                     .pushNamed(AppRoutes.carteiraConsolidadaNavigatorRoute);
               }),
+      if (isSRM)
+        _CardItemMenuHome(
+            icone: ambiente.grupoEconomicoIcone!,
+            titulo: 'Grupo Econômico',
+            onTap: () {
+              Modular.to.navigate(AppRoutes.listaSelecaoEmpresasRoute);
+            }),
       _CardItemMenuHome(
-          icone: Assets.grupo_pessoas,
-          titulo: 'Grupo Econômico',
-          onTap: () {
-            Modular.to.navigate(AppRoutes.listaSelecaoEmpresasRoute);
-          }),
-      _CardItemMenuHome(
-          icone: isSRM ? Assets.balao_chat : AssetsConfig.imagesWhatsappVetor,
+          icone: ambiente.faleConoscoIcone,
           titulo: 'Fale conosco',
           onTap: () {
             Modular.to.pushNamed(AppRoutes.helpScreenRoute);
           }),
     ];
 
-    if (!authProvider.rolesAcesso!
-        .contains(RolesAcessoEnum.ROLE_MONITOR_OPERACOES)) {
+    print(authProvider.rolesAcesso);
+
+    if (!authProvider.rolesAcesso
+        .contemRoles([RolesAcessoEnum.ROLE_CONTA_DIGITAL])) {
       cardsHome.removeWhere((card) =>
-          (card as _CardItemMenuHome).titulo == 'Monitor de Operações');
+          (card as _CardItemMenuHome).titulo == 'Carteira Consolidada');
+      cardsHome.removeWhere((card) =>
+          (card as _CardItemMenuHome).titulo == 'Relatório de Títulos');
+      cardsHome.removeWhere(
+          (card) => (card as _CardItemMenuHome).titulo == 'Extrato');
     }
 
-    int rowCount = (cardsHome.length / 3).ceil();
-    double gridViewHeight = rowCount * 210.h;
+    if (!authProvider.rolesAcesso
+        .contemRoles([RolesAcessoEnum.ROLE_TRANSFERENCIA_CONTA_DIGITAL])) {
+      cardsHome.removeWhere(
+          (card) => (card as _CardItemMenuHome).titulo == 'Transferências');
+    }
 
-    bool acessoContaDigital =
-        authProvider.rolesAcesso!.contains(RolesAcessoEnum.ROLE_CONTA_DIGITAL);
+    if (!authProvider.rolesAcesso
+        .contemRoles([RolesAcessoEnum.ROLE_APROVACAO_TED_CONTA_GARANTIA])) {
+      cardsHome.removeWhere(
+          (card) => (card as _CardItemMenuHome).titulo == 'Ted para Terceiros');
+    }
 
     return Scaffold(
       body: Column(
@@ -199,26 +211,34 @@ class _HomeViewState extends State<HomeView> {
                                   child: DropdownButton(
                                     dropdownColor: Colors.white,
                                     value: _valorSelecionado,
-                                    selectedItemBuilder: (context) => _listaItens
-                                        .map((e) => DropdownMenuItem(
-                                              value: e.identificador,
-                                              child: Text("Olá, ${e.nome}",
-                                                  style: context.textTheme.bodyMedium!
-                                                      .copyWith(color: Colors.white),
-                                                  maxLines: 1,
-                                                  overflow: TextOverflow.ellipsis),
-                                            ))
-                                        .toList(),
+                                    selectedItemBuilder: (context) =>
+                                        _listaItens
+                                            .map((e) => DropdownMenuItem(
+                                                  value: e.identificador,
+                                                  child: Text("Olá, ${e.nome}",
+                                                      style: context
+                                                          .textTheme.bodyMedium!
+                                                          .copyWith(
+                                                              color:
+                                                                  Colors.white),
+                                                      maxLines: 1,
+                                                      overflow: TextOverflow
+                                                          .ellipsis),
+                                                ))
+                                            .toList(),
                                     menuMaxHeight: 300.h,
                                     isExpanded: true,
                                     items: _listaItens
                                         .map((e) => DropdownMenuItem(
                                               value: e.identificador,
                                               child: Text(e.nome,
-                                                  style: context.textTheme.bodyMedium!
-                                                      .copyWith(color: Colors.black),
+                                                  style: context
+                                                      .textTheme.bodyMedium!
+                                                      .copyWith(
+                                                          color: Colors.black),
                                                   maxLines: 1,
-                                                  overflow: TextOverflow.ellipsis),
+                                                  overflow:
+                                                      TextOverflow.ellipsis),
                                             ))
                                         .toList(),
                                     onChanged: (value) async {
@@ -242,8 +262,10 @@ class _HomeViewState extends State<HomeView> {
                                   padding: EdgeInsets.symmetric(vertical: 16.h),
                                   child: Text(
                                     'Conta Digital',
-                                    style: context.textTheme.displaySmall!.copyWith(
-                                        color: Colors.white, fontWeight: FontWeight.w900),
+                                    style: context.textTheme.displaySmall!
+                                        .copyWith(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w900),
                                   ),
                                 ),
                                 Row(
@@ -251,7 +273,8 @@ class _HomeViewState extends State<HomeView> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text('Saldo Disponível',
                                             style: context.textTheme.bodyMedium!
@@ -271,30 +294,37 @@ class _HomeViewState extends State<HomeView> {
                                                 return Text(
                                                   _isSaldoVisivel
                                                       ? contaDigitalProvider
-                                                      .saldoContaDigital
-                                                      ?.saldoTotal
-                                                      .toBRL ??
-                                                      0.0.toBRL
+                                                              .saldoContaDigital
+                                                              ?.saldoTotal
+                                                              .toBRL ??
+                                                          0.0.toBRL
                                                       : 'R\$ * * * * *',
                                                   style: context
                                                       .textTheme.displayMedium!
                                                       .copyWith(
-                                                      color: Colors.white,
-                                                      fontWeight: FontWeight.w900),
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.w900),
                                                 );
                                               }
                                             }),
                                       ],
                                     ),
-                                    IconButton(
-                                      onPressed: () => setState(() {
-                                        _isSaldoVisivel = !_isSaldoVisivel;
-                                      }),
-                                      icon: Icon(
-                                        _isSaldoVisivel
-                                            ? Icons.visibility
-                                            : Icons.visibility_off,
-                                        color: context.backgroundColor,
+                                    Visibility(
+                                      visible: authProvider.rolesAcesso
+                                          .contemRoles([
+                                        RolesAcessoEnum.ROLE_CONTA_DIGITAL
+                                      ]),
+                                      child: IconButton(
+                                        onPressed: () => setState(() {
+                                          _isSaldoVisivel = !_isSaldoVisivel;
+                                        }),
+                                        icon: Icon(
+                                          _isSaldoVisivel
+                                              ? Icons.visibility
+                                              : Icons.visibility_off,
+                                          color: context.backgroundColor,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -311,15 +341,25 @@ class _HomeViewState extends State<HomeView> {
                     ],
                   ),
                 ),
-                Positioned(
-                  left: -context.width * 0.15,
-                  top: -90.h,
-                  child: SvgPicture.asset(
-                    ambiente.logoAppBar,
-                    color: Color(0x1affffff),
-                    width: context.width * 0.5,
-                  ),
-                ),
+                ambiente.plataforma == Plataforma.TRUST
+                    ? Positioned(
+                        left: -context.width * 0.15,
+                        top: -90.h,
+                        child: SvgPicture.asset(
+                          ambiente.logoAppBar,
+                          color: Color(0x1affffff),
+                          width: context.width * 0.5,
+                        ),
+                      )
+                    : Positioned(
+                        left: -context.width * 0.1,
+                        top: -50.h,
+                        child: SvgPicture.asset(
+                          ambiente.logoAppBar,
+                          color: Color(0x1affffff),
+                          width: context.width * 0.4,
+                        ),
+                      ),
               ],
             ),
           ),

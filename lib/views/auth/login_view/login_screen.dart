@@ -1,5 +1,4 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
-import 'package:Srm_Asset/core/constants/enuns/plataforma_enum.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -8,7 +7,8 @@ import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
 import 'package:Srm_Asset/widgets/form_auth.dart';
-import '../../../generated/assets.dart';
+
+import '../../../assets_config/assets_config.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -40,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage(Assets.imagesBackgroundImage),
+                image: AssetImage(AssetsConfig.imagesBackgroundImage),
                 fit: BoxFit.cover)),
         child: Column(
           children: [

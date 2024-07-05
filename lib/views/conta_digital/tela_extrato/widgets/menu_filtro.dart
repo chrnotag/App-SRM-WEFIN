@@ -97,7 +97,7 @@ class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
                   extratoProvider.baixarDados();
                 },
                 child: Image.asset(
-                  Assets.imagesIconePdf,
+                  AssetsConfig.imagesIconePdf,
                   color: context.secondaryColor,
                   scale: 0.9,
                 ),

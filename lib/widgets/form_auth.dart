@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/assets_config/assets_config.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
@@ -23,7 +24,6 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:validatorless/validatorless.dart';
 import '../core/providers/certificado_provider/certificado_provider.dart';
 import '../core/providers/conta_digital/conta_digital_provider.dart';
-import '../generated/assets.dart';
 import 'link_component.dart';
 
 class AuthForm extends StatefulWidget {
@@ -176,7 +176,7 @@ class _AuthFormState extends State<AuthForm> {
                 if (widget.visible) {
                   await login(temLetras);
                 } else {
-                  await resetPassword();
+                  await resetPassword(ambiente);
                 }
               },
             ),
@@ -292,7 +292,7 @@ class _AuthFormState extends State<AuthForm> {
     }
   }
 
-  Future<void> resetPassword() async {
+  Future<void> resetPassword(Environment ambiente) async {
     RecuperarSenhaProvider recuperarSenhaProvider =
         Modular.get<RecuperarSenhaProvider>();
     _mensagemErro = null;
@@ -311,7 +311,7 @@ class _AuthFormState extends State<AuthForm> {
       } else {
         showDialog(
             context: context,
-            builder: (context) => confirmarRecuperarSenha(),
+            builder: (context) => confirmarRecuperarSenha(ambiente),
             barrierDismissible: false);
       }
     }
@@ -321,7 +321,7 @@ class _AuthFormState extends State<AuthForm> {
     return cnpj.replaceAll(".", "").replaceAll("/", "").replaceAll("-", "");
   }
 
-  Widget confirmarRecuperarSenha() {
+  Widget confirmarRecuperarSenha(Environment ambiente) {
     return AlertDialog(
       actionsAlignment: MainAxisAlignment.end,
       shape: RoundedRectangleBorder(
@@ -357,7 +357,7 @@ class _AuthFormState extends State<AuthForm> {
           ),
         ],
       ),
-      icon: SvgPicture.asset(Assets.iconsCheck, color: TRUSTColors.primaryColor),
+      icon: SvgPicture.asset(ambiente.check_icone),
     );
   }
 }

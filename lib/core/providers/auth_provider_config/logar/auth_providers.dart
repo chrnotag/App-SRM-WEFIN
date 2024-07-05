@@ -8,7 +8,7 @@ import 'package:Srm_Asset/core/utils/overlay.dart';
 import 'package:Srm_Asset/models/auth_login_models/SRM/cedente_model.dart';
 import 'package:Srm_Asset/models/auth_login_models/SRM/usuario_logado_model.dart';
 import 'package:Srm_Asset/models/user_model.dart';
-import '../../../constants/enuns/RolesAcessoEnum.dart';
+import '../../../constants/enuns/roles_acesso_enum.dart';
 import '../../../constants/route_labels.dart';
 
 class AuthProvider extends ChangeNotifier {
