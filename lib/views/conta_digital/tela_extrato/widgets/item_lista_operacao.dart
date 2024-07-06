@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/assets_config/assets_config.dart';
 import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
@@ -7,7 +8,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../../../core/constants/enuns/tipo_operacao_enum.dart';
 import '../../../../core/constants/route_labels.dart';
-import '../../../../generated/assets.dart';
 
 class ItemListaOperacao extends StatelessWidget {
   final TipoTED tipoTED;
@@ -47,7 +47,7 @@ class ItemListaOperacao extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.only(right: 8.0),
-            child: Image.asset(Assets.dolarIconList),
+            child: Image.asset(AssetsConfig.trustDollarListIcon),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

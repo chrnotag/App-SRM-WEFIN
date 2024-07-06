@@ -8,8 +8,42 @@ part of 'ted_terceiros_model.dart';
 
 TedTerceirosModel _$TedTerceirosModelFromJson(Map<String, dynamic> json) =>
     TedTerceirosModel(
+      saldo: (json['saldo'] as num).toDouble(),
+      listaBancos: (json['listaBancos'] as List<dynamic>)
+          .map((e) => ListaBanco.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      saldoInsuficiente: json['saldoInsuficiente'] as bool,
+      transferencias: (json['transferencias'] as List<dynamic>)
+          .map((e) => Transferencia.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      valorTarifaTedTerceiros:
+          (json['valorTarifaTedTerceiros'] as num).toDouble(),
+    );
+
+Map<String, dynamic> _$TedTerceirosModelToJson(TedTerceirosModel instance) =>
+    <String, dynamic>{
+      'saldo': instance.saldo,
+      'listaBancos': instance.listaBancos,
+      'saldoInsuficiente': instance.saldoInsuficiente,
+      'transferencias': instance.transferencias,
+      'valorTarifaTedTerceiros': instance.valorTarifaTedTerceiros,
+    };
+
+ListaBanco _$ListaBancoFromJson(Map<String, dynamic> json) => ListaBanco(
+      bcecodigo: json['bcecodigo'] as String,
+      bcenome: json['bcenome'] as String,
+    );
+
+Map<String, dynamic> _$ListaBancoToJson(ListaBanco instance) =>
+    <String, dynamic>{
+      'bcecodigo': instance.bcecodigo,
+      'bcenome': instance.bcenome,
+    };
+
+Transferencia _$TransferenciaFromJson(Map<String, dynamic> json) =>
+    Transferencia(
       codigo: json['codigo'] as int,
-      codigoCedente: json['codigoCedente'] as int,
+      codigoCedente: json['codigoCedente'] as int?,
       idInstrucaoParametrosProcessamento:
           json['idInstrucaoParametrosProcessamento'] as int,
       identificadorFavorecido: json['identificadorFavorecido'] as String,
@@ -17,14 +51,16 @@ TedTerceirosModel _$TedTerceirosModelFromJson(Map<String, dynamic> json) =>
       statusAprovacaoCedente: json['statusAprovacaoCedente'] as String,
       statusTransferencia: json['statusTransferencia'] as String,
       valor: json['valor'] as String,
-      dataEfetivacao: DateTime.parse(json['dataEfetivacao'] as String),
+      dataEfetivacao: json['dataEfetivacao'] == null
+          ? null
+          : DateTime.parse(json['dataEfetivacao'] as String),
       tipoTransferencia: json['tipoTransferencia'] as int,
-      clienteAprovacao: json['clienteAprovacao'] as String,
-      dataClienteAprovacao: json['dataClienteAprovacao'] as String,
-      codigoTransacao: json['codigoTransacao'] as String,
+      clienteAprovacao: json['clienteAprovacao'] as String?,
+      dataClienteAprovacao: json['dataClienteAprovacao'] as String?,
+      codigoTransacao: json['codigoTransacao'] as String?,
     );
 
-Map<String, dynamic> _$TedTerceirosModelToJson(TedTerceirosModel instance) =>
+Map<String, dynamic> _$TransferenciaToJson(Transferencia instance) =>
     <String, dynamic>{
       'codigo': instance.codigo,
       'codigoCedente': instance.codigoCedente,
@@ -35,7 +71,7 @@ Map<String, dynamic> _$TedTerceirosModelToJson(TedTerceirosModel instance) =>
       'statusAprovacaoCedente': instance.statusAprovacaoCedente,
       'statusTransferencia': instance.statusTransferencia,
       'valor': instance.valor,
-      'dataEfetivacao': instance.dataEfetivacao.toIso8601String(),
+      'dataEfetivacao': instance.dataEfetivacao?.toIso8601String(),
       'tipoTransferencia': instance.tipoTransferencia,
       'clienteAprovacao': instance.clienteAprovacao,
       'dataClienteAprovacao': instance.dataClienteAprovacao,

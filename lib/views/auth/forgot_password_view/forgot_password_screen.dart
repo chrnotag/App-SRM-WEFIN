@@ -7,7 +7,8 @@ import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
 import 'package:Srm_Asset/widgets/form_auth.dart';
 import 'package:Srm_Asset/widgets/transparent_appbar_empty.dart';
-import '../../../generated/assets.dart';
+
+import '../../../assets_config/assets_config.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -19,7 +20,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   void initState() {
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       final SessionProvider sessionProvider = Modular.get<SessionProvider>();
       sessionProvider.stopListening();
     });
@@ -37,7 +38,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         child: Container(
           decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage(Assets.imagesBackgroundImage),
+                  image: AssetImage(AssetsConfig.imagesBackgroundImage),
                   fit: BoxFit.cover)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -55,7 +56,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             height: 120.h,
                             width: 100.w,
                             child: SvgPicture.asset(
-                              Assets.imagesCadeado,
+                              AssetsConfig.imagesCadeado,
                               color: context.primaryColor,
                             ),
                           ),

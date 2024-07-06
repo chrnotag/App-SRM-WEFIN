@@ -9,5 +9,5 @@ class ContatosTRUST extends ContatosAbstract{
   // TODO: implement telefone
   String get telefone => '0800 878 8338';
 
-  String? get whatsapp => '11991536872';
+  String? get whatsapp => '(11) 99153-6872';
 }

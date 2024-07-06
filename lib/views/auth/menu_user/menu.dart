@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/assets_config/assets_config.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
 import 'package:Srm_Asset/core/utils/ambiente_atual.dart';
@@ -11,7 +12,6 @@ import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/deslogar/deslogar_controller.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
-import 'package:Srm_Asset/generated/assets.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 
 part 'widgets/menu_item.dart';
@@ -24,6 +24,7 @@ class Menu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthProvider authProvider = Modular.get<AuthProvider>();
+    final ambiente = Modular.get<Environment>();
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: AppBar().preferredSize, child: const TransparentAppBarEmpty()),
@@ -52,9 +53,8 @@ class Menu extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.all(30.r),
                             child: SvgPicture.asset(
-                              Assets.empresaIcon,
+                              ambiente.imagemEmpresa,
                               width: 70.w,
-                              color: context.focusColor,
                             ),
                           ),
                           Text(

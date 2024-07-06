@@ -8,6 +8,7 @@ import 'package:Srm_Asset/core/utils/overlay.dart';
 import 'package:Srm_Asset/models/auth_login_models/SRM/cedente_model.dart';
 import 'package:Srm_Asset/models/auth_login_models/SRM/usuario_logado_model.dart';
 import 'package:Srm_Asset/models/user_model.dart';
+import '../../../constants/enuns/roles_acesso_enum.dart';
 import '../../../constants/route_labels.dart';
 
 class AuthProvider extends ChangeNotifier {
@@ -34,12 +35,15 @@ class AuthProvider extends ChangeNotifier {
   LoginResponse? _dataUser;
   List<CedenteModel>? _listaCedente;
   CedenteModel? _empresaSelecionada;
+  List<RolesAcessoEnum>? _rolesAcesso;
 
   LoginResponse? get dataUser => _dataUser;
 
   List<CedenteModel>? get listaCedente => _listaCedente;
 
   CedenteModel? get empresaSelecionada => _empresaSelecionada;
+
+  List<RolesAcessoEnum>? get rolesAcesso => _rolesAcesso;
 
   set setDataUser(LoginResponse loginResponse) {
     _dataUser = loginResponse;
@@ -55,6 +59,8 @@ class AuthProvider extends ChangeNotifier {
     _empresaSelecionada = cedente;
     notifyListeners();
   }
+
+  set rolesAcesso(List<RolesAcessoEnum>? roles) => _rolesAcesso = roles;
 
   CedenteModel buscarEmpresa(String identificadorCedente) {
     return dataUser!.listaCedente

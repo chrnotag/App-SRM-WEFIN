@@ -18,8 +18,8 @@ class _CardItemMenuHome extends StatelessWidget {
   Widget build(BuildContext context) {
     final ambiente = Modular.get<Environment>();
     return SizedBox(
-      width: 135.w,
-      height: 120.h,
+      width: 190.w,
+      height: 150.h,
       child: InkWell(
         borderRadius: const BorderRadius.all(Radius.circular(15)),
         onTap: onTap,
@@ -33,18 +33,23 @@ class _CardItemMenuHome extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SvgPicture.asset(icone, color: ambiente.IconColor, width: 35.w,),
+                    SvgPicture.asset(icone, color: ambiente.IconColor, width: 60.w,),
                     Visibility(
                       visible: notificacoes >= 1,
-                      child: CircleAvatar(
-                        backgroundColor: Colors.red,
-                        radius: 12.r,
-                        child: Text(
-                          notificacoes > 9 ? '9+' : notificacoes.toString(),
-                          style: context.textTheme.bodyMedium!.copyWith(
-                            color: Colors.white,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        child: CircleAvatar(
+                          backgroundColor: Colors.red,
+                          radius: 15.r,
+                          child: Text(
+                            notificacoes > 9 ? '9+' : notificacoes.toString(),
+                            style: context.textTheme.displaySmall!.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w900
+                            ),
                           ),
                         ),
                       ),
@@ -53,8 +58,8 @@ class _CardItemMenuHome extends StatelessWidget {
                 ),
                 Text(
                   titulo,
-                  style: context.textTheme.bodyMedium!
-                      .copyWith(fontWeight: FontWeight.bold, fontSize: 13.sp),
+                  style: context.textTheme.displaySmall!
+                      .copyWith(fontWeight: FontWeight.bold, color: context.labelTextColor),
                 )
               ],
             ),

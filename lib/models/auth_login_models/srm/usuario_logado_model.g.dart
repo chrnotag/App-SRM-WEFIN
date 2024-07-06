@@ -19,6 +19,9 @@ LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) =>
       listaCedente: (json['listaCedente'] as List<dynamic>)
           .map((e) => CedenteModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      roles: (json['roles'] as List<dynamic>)
+          .map((e) => $enumDecode(_$RolesAcessoEnumEnumMap, e))
+          .toList(),
     );
 
 Map<String, dynamic> _$LoginResponseToJson(LoginResponse instance) =>
@@ -32,4 +35,14 @@ Map<String, dynamic> _$LoginResponseToJson(LoginResponse instance) =>
       'dataExpiraSessao': instance.dataExpiraSessao.toIso8601String(),
       'idDevice': instance.idDevice,
       'listaCedente': instance.listaCedente,
+      'roles': instance.roles.map((e) => _$RolesAcessoEnumEnumMap[e]!).toList(),
     };
+
+const _$RolesAcessoEnumEnumMap = {
+  RolesAcessoEnum.ROLE_MONITOR_OPERACOES: 'ROLE_MONITOR_OPERACOES',
+  RolesAcessoEnum.ROLE_CONTA_DIGITAL: 'ROLE_CONTA_DIGITAL',
+  RolesAcessoEnum.ROLE_TRANSFERENCIA_CONTA_DIGITAL:
+      'ROLE_TRANSFERENCIA_CONTA_DIGITAL',
+  RolesAcessoEnum.ROLE_APROVACAO_TED_CONTA_GARANTIA:
+      'ROLE_APROVACAO_TED_CONTA_GARANTIA',
+};

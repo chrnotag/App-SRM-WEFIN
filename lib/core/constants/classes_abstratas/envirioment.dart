@@ -38,4 +38,18 @@ abstract class Environment {
   String get check_icone;
 
   String get ted_menu_icone;
+
+  String get monitorOperacoesIcone;
+
+  String get transferenciasIcone;
+
+  String get extratoIcone;
+
+  String get tedTerceirosIcone;
+
+  String? get grupoEconomicoIcone;
+
+  String get faleConoscoIcone;
+
+  String get imagemEmpresa;
 }
