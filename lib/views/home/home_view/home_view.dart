@@ -2,6 +2,7 @@ import 'package:Srm_Asset/assets_config/assets_config.dart';
 import 'package:Srm_Asset/core/constants/AppSizes.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/roles_extensions.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
@@ -16,6 +17,7 @@ import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
+import '../../../core/constants/enuns/plataforma_enum.dart';
 import '../../../core/constants/enuns/roles_acesso_enum.dart';
 import '../../../core/implementations_config/api_response.dart';
 import '../../../models/auth_login_models/SRM/cedente_model.dart';
@@ -141,29 +143,27 @@ class _HomeViewState extends State<HomeView> {
           }),
     ];
 
-    print(authProvider.rolesAcesso);
+    // if (!authProvider.rolesAcesso
+    //     .contemRoles([RolesAcessoEnum.ROLE_CONTA_DIGITAL])) {
+    cardsHome.removeWhere(
+        (card) => (card as _CardItemMenuHome).titulo == 'Carteira Consolidada');
+    cardsHome.removeWhere(
+        (card) => (card as _CardItemMenuHome).titulo == 'Relatório de Títulos');
+    // cardsHome.removeWhere(
+    //     (card) => (card as _CardItemMenuHome).titulo == 'Extrato');
+    // }
 
-    if (!authProvider.rolesAcesso
-        .contemRoles([RolesAcessoEnum.ROLE_CONTA_DIGITAL])) {
-      cardsHome.removeWhere((card) =>
-          (card as _CardItemMenuHome).titulo == 'Carteira Consolidada');
-      cardsHome.removeWhere((card) =>
-          (card as _CardItemMenuHome).titulo == 'Relatório de Títulos');
-      cardsHome.removeWhere(
-          (card) => (card as _CardItemMenuHome).titulo == 'Extrato');
-    }
-
-    if (!authProvider.rolesAcesso
-        .contemRoles([RolesAcessoEnum.ROLE_TRANSFERENCIA_CONTA_DIGITAL])) {
-      cardsHome.removeWhere(
-          (card) => (card as _CardItemMenuHome).titulo == 'Transferências');
-    }
-
-    if (!authProvider.rolesAcesso
-        .contemRoles([RolesAcessoEnum.ROLE_APROVACAO_TED_CONTA_GARANTIA])) {
-      cardsHome.removeWhere(
-          (card) => (card as _CardItemMenuHome).titulo == 'Ted para Terceiros');
-    }
+    // if (!authProvider.rolesAcesso
+    //     .contemRoles([RolesAcessoEnum.ROLE_TRANSFERENCIA_CONTA_DIGITAL])) {
+    cardsHome.removeWhere(
+        (card) => (card as _CardItemMenuHome).titulo == 'Transferências');
+    // }
+    //
+    // if (!authProvider.rolesAcesso
+    //     .contemRoles([RolesAcessoEnum.ROLE_APROVACAO_TED_CONTA_GARANTIA])) {
+    cardsHome.removeWhere(
+        (card) => (card as _CardItemMenuHome).titulo == 'Ted para Terceiros');
+    // }
 
     return Scaffold(
       body: Column(

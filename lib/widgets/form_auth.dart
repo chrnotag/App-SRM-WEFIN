@@ -112,6 +112,7 @@ class _AuthFormState extends State<AuthForm> {
                   }),
                   hint: isTrust ? "CPF" :"E-mail ou CPF",
                   inputFormatters: _cpfFormatter,
+                  inputType: isTrust ? TextInputType.number : null,
                   onChanged: (value) => atualizarMascara(),
                   maxCaracters: maximoCaracteresCPF,
                   label: isTrust ? "Digite seu CPF" : 'Digite seu e-mail ou CPF',
