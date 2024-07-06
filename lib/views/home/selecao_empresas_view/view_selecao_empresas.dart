@@ -1,6 +1,7 @@
 import 'package:Srm_Asset/assets_config/assets_config.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
+import 'package:Srm_Asset/core/constants/extensions/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
@@ -10,7 +11,6 @@ import 'package:Srm_Asset/core/providers/sessao_provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/constants/route_labels.dart';
-import '../../../widgets/mascara_texto_cnpj.dart';
 
 class ListaSelecaoEmpresas extends StatefulWidget {
   const ListaSelecaoEmpresas({super.key});
@@ -187,9 +187,8 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                           ),
-                          subtitle: CNPJText(
-                            cnpjOuCpf: authProviderAtt
-                                .listaCedente![index].identificador,
+                          subtitle: Text(
+                            'CNPJ: ${authProviderAtt.listaCedente![index].identificador.formatarDocumento()}', style: context.textTheme.bodyLarge,
                           ),
                           trailing: Visibility(
                             visible: authProviderAtt

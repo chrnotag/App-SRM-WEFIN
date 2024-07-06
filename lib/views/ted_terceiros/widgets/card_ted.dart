@@ -32,7 +32,7 @@ class _CardTedTerceiros extends StatelessWidget {
               children: [
                 _ItemCardTed(
                     title: 'Favorecido', content: transferencia.nomeFavorecido),
-                _ItemCardTed(title: 'CPF/CNPJ', cnpjFormatter: CNPJText(cnpjOuCpf: transferencia.identificadorFavorecido,)),
+                _ItemCardTed(title: 'CPF/CNPJ', cnpjFormatter: Text('${transferencia.identificadorFavorecido}',)),
                 _ItemCardTed(title: 'Valor', content: double.parse(transferencia.valor).toBRL),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

@@ -2,11 +2,9 @@ import 'package:Srm_Asset/core/constants/enuns/enum_ted_terceiros.dart';
 import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
-import 'package:Srm_Asset/core/providers/ted_terceiros/ted_terceiros_impl.dart';
 import 'package:Srm_Asset/core/providers/ted_terceiros/ted_terceiros_provider.dart';
 import 'package:Srm_Asset/models/ted_terceiros/ted_terceiros_model.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
-import 'package:Srm_Asset/widgets/mascara_texto_cnpj.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
