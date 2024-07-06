@@ -9,14 +9,15 @@ class _MenuFiltroTelaExtrato extends StatefulWidget {
 
 class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
   int filtroSelecionado = 7;
+
   Map<String, Color> corSelecionado(int indicie) {
-    if(filtroSelecionado == indicie){
+    if (filtroSelecionado == indicie) {
       return {
         'borda': context.secondaryColor,
         'fundo': context.secondaryColor,
         'texto': Colors.white,
       };
-    }else{
+    } else {
       return {
         'borda': context.secondaryColor,
         'fundo': Colors.white,
@@ -25,9 +26,11 @@ class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
     }
   }
 
- final int MES = 30;
- final int QUINZENA = 15;
- final int SEMANA = 7;
+  final int MES = 30;
+  final int QUINZENA = 15;
+  final int SEMANA = 7;
+
+  final dadosBanco = Modular.get<ContaDigitalProvider>().dadosContaDigital;
 
   @override
   Widget build(BuildContext context) {
@@ -45,12 +48,69 @@ class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
                   fontWeight: FontWeight.w900, color: Color(0XFF696969)),
             ),
           ),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(10.r)),
+              color: Color(0xffF5F6F8),
+            ),
+            margin: EdgeInsets.all(10.r),
+            child: Padding(
+              padding: EdgeInsets.all(10.r),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        'Banco: ',
+                        style: context.textTheme.bodyLarge!
+                            .copyWith(fontWeight: FontWeight.w900),
+                      ),
+                      Text(
+                        '${dadosBanco!.idConta} - ${dadosBanco!.centroCusto.nome}',
+                        style: context.textTheme.bodyLarge,
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text('Agência: ',
+                          style: context.textTheme.bodyLarge!
+                              .copyWith(fontWeight: FontWeight.w900)),
+                      Text(
+                        dadosBanco!.agencia,
+                        style: context.textTheme.bodyLarge,
+                      ),
+                      SizedBox(width: 10.w,),
+                      Text('CC: ',
+                          style: context.textTheme.bodyLarge!
+                              .copyWith(fontWeight: FontWeight.w900)),
+                      Text(
+                        dadosBanco!.conta,
+                        style: context.textTheme.bodyLarge,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text('CNPJ: ',
+                          style: context.textTheme.bodyLarge!
+                              .copyWith(fontWeight: FontWeight.w900)),
+                      Text('${dadosBanco!.documentoTitular.formatarDocumento()}', style: context.textTheme.bodyLarge,)
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               InkWell(
                 radius: 12.r,
-                child: _ItemMenuFiltro(quantidadeDias: SEMANA, corSelecionado: corSelecionado(SEMANA),),
+                child: _ItemMenuFiltro(
+                  quantidadeDias: SEMANA,
+                  corSelecionado: corSelecionado(SEMANA),
+                ),
                 onTap: () => setState(() {
                   tamanhoLista = SEMANA;
                   extratoProvider.intervaloDias = SEMANA;
@@ -63,7 +123,10 @@ class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
                 padding: EdgeInsets.symmetric(horizontal: 8.w),
                 child: InkWell(
                   radius: 12.r,
-                  child: _ItemMenuFiltro(quantidadeDias: QUINZENA, corSelecionado: corSelecionado(QUINZENA),),
+                  child: _ItemMenuFiltro(
+                    quantidadeDias: QUINZENA,
+                    corSelecionado: corSelecionado(QUINZENA),
+                  ),
                   onTap: () => setState(() {
                     tamanhoLista = QUINZENA;
                     extratoProvider.intervaloDias = QUINZENA;
@@ -75,7 +138,10 @@ class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
               ),
               InkWell(
                 radius: 12.r,
-                child: _ItemMenuFiltro(quantidadeDias: MES,corSelecionado: corSelecionado(MES),),
+                child: _ItemMenuFiltro(
+                  quantidadeDias: MES,
+                  corSelecionado: corSelecionado(MES),
+                ),
                 onTap: () => setState(() {
                   tamanhoLista = MES;
                   extratoProvider.intervaloDias = MES;
@@ -95,12 +161,12 @@ class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
               ),
               InkWell(
                 radius: 100.r,
-                onTap: (){
+                onTap: () {
                   Modular.to.pushNamed(AppRoutes.visualizarPdfScreenRoute);
                   extratoProvider.baixarDados();
                 },
                 child: Image.asset(
-                  Assets.imagesIconePdf,
+                  AssetsConfig.imagesIconePdf,
                   color: context.secondaryColor,
                   scale: 0.9,
                 ),

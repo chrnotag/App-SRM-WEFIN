@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../providers/conta_digital/extrato/extrato_impl.dart';
 import '../../../classes_abstratas/envirioment.dart';
+import '../../../enuns/aprovar_ted_enum.dart';
 
 class EndPointsTRUST extends Endpoint {
   @override
@@ -111,4 +112,19 @@ class EndPointsTRUST extends Endpoint {
 
   String get downloadRecebiveis =>
       '$carteiraRecebiveis/download';
+
+  String get listaTransacoesTed => '$baseURL/transferencias';
+
+  Uri montarUrlAprovacaoTed(AprovarTedEnum aprovacao, String codigoTransferencia){
+    switch(aprovacao){
+      case AprovarTedEnum.APROVAR:
+        return Uri.parse('$listaTransacoesTed/$codigoTransferencia/aprovar');
+      case AprovarTedEnum.RECUSAR:
+        return Uri.parse('$listaTransacoesTed/$codigoTransferencia/recusar');
+      default:
+        throw Exception('Valor enum nao existente: ${aprovacao.name}');
+    }
+  }
+  Uri montarUrlComprovanteTed(String codigoTransacao) => Uri.parse('$listaTransacoesTed/comprovante/download?codigoTransacao=$codigoTransacao');
+
 }

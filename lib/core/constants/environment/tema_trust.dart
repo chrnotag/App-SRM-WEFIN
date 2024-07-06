@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import '../configs_tema/export_config_theme_srm.dart';
-import '../../../generated/assets.dart';
 import '../AppSizes.dart';
 
 class ThemeTRUST implements ImagensGuiaImportarCertificado{
@@ -68,67 +67,67 @@ class ThemeTRUST implements ImagensGuiaImportarCertificado{
         ),
       );
 
-  static String get logo => Assets.trust_logo;
+  static String get logo => AssetsConfig.imagesLogoTrust;
 
-  static String get logoAppBar => Assets.icone_trust;
+  static String get logoAppBar => AssetsConfig.imagesIconeTrust;
 
-  static Widget get imagemAjuda => Image.asset(Assets.imagesIcAjuda,
+  static Widget get imagemAjuda => Image.asset(AssetsConfig.trustIcAjuda,
       width: 176.w, color: TRUSTColors.primaryColor);
 
   @override
   // TODO: implement primeiroSlideDispositivo
-  String get primeiroSlideDispositivo => AssetsConfig.imagesDocumentCertTrust;
+  String get primeiroSlideDispositivo => AssetsConfig.trustDocumentCertTrust;
 
   @override
   // TODO: implement primeiroSlideQrCode
-  String get primeiroSlideQrCode => AssetsConfig.imagesDocumentCertTrust;
+  String get primeiroSlideQrCode => AssetsConfig.trustDocumentCertTrust;
 
   @override
   // TODO: implement quartoSlideDispositivo
-  String get quartoSlideDispositivo  => AssetsConfig.imagesSenhaSlideCertTrust;
+  String get quartoSlideDispositivo  => AssetsConfig.trustSenhaSlideCertTrust;
 
   @override
   // TODO: implement quartoSlideQrCode
-  String get quartoSlideQrCode => AssetsConfig.imagesSenhaSlideCertTrust;
+  String get quartoSlideQrCode => AssetsConfig.trustSenhaSlideCertTrust;
 
   @override
   // TODO: implement quintoSlideDispositivo
-  String get quintoSlideDispositivo => AssetsConfig.imagesCheckCertTrust;
+  String get quintoSlideDispositivo => AssetsConfig.trustCheckCertTrust;
 
   @override
   // TODO: implement quintoSlideQrCode
-  String get quintoSlideQrCode => AssetsConfig.imagesCheckCertTrust;
+  String get quintoSlideQrCode => AssetsConfig.trustCheckCertTrust;
 
   @override
   // TODO: implement segundoSlideDispositivo
-  String get segundoSlideDispositivo => AssetsConfig.imagesSelecionarCertTrust;
+  String get segundoSlideDispositivo => AssetsConfig.trustSelecionarCertTrust;
 
   @override
   // TODO: implement segundoSlideQrCode
-  String get segundoSlideQrCode => AssetsConfig.imagesUploadCertTrust;
+  String get segundoSlideQrCode => AssetsConfig.trustUploadCertTrust;
 
   @override
   // TODO: implement terceiroSlideDispositivo
-  String get terceiroSlideDispositivo => AssetsConfig.imagesProcurarCertTrust;
+  String get terceiroSlideDispositivo => AssetsConfig.trustProcurarCertTrust;
 
   @override
   // TODO: implement terceiroSlideQrCode
-  String get terceiroSlideQrCode => AssetsConfig.imagesQrcodeCertTrust;
+  String get terceiroSlideQrCode => AssetsConfig.trustQrcodeCertTrust;
 
   @override
   // TODO: implement senhaCertificado
-  String get senhaCertificado => AssetsConfig.imagesSenhaCertTrust;
+  String get senhaCertificado => AssetsConfig.trustSenhaCertTrust;
 
   @override
   // TODO: implement alerta_icone
-  String get alerta_icone => AssetsConfig.imagesAlertIconTrust;
+  String get alerta_icone => AssetsConfig.trustAlertIconTrust;
 
   @override
   // TODO: implement check_icone
-  String get check_icone => AssetsConfig.imagesCheckTrustIcon;
+  String get check_icone => AssetsConfig.trustCheckTrustIcon;
 
   @override
   // TODO: implement ted_menu_icone
-  String get ted_menu_icone => AssetsConfig.imagesTedTerceiros;
+  String get ted_menu_icone => AssetsConfig.trustTedTerceiros;
 
 }

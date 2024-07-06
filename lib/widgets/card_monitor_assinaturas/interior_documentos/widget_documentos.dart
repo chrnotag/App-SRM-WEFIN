@@ -21,19 +21,20 @@ class _WidgetDocumentos extends StatelessWidget {
           Fluttertoast.showToast(msg: 'O documento não pode ser apresentado no momento.');
         }
       },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Image.asset(Assets.imagesIconePdf, color: Colors.green),
-          SizedBox(
-            width: context.width * 0.7,
-            child: Text(
-              documento.nome!,
+      child: SizedBox(
+        width: context.width * 0.8,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Image.asset(AssetsConfig.imagesIconePdf, color: Colors.green),
+            Text(
+              documento.nome!.length > 20
+                  ? "${documento.nome!.substring(0, 20)}..."
+                  : documento.nome!,
               style: context.textTheme.bodyMedium,
-              overflow: TextOverflow.ellipsis,
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

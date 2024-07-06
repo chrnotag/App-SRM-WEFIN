@@ -62,14 +62,39 @@ class TrustHomologacaoEnvironment extends Environment {
 
   @override
   // TODO: implement alerta_icone
-  String get alerta_icone => AssetsConfig.imagesAlertIconTrust;
+  String get alerta_icone => AssetsConfig.trustAlertIconTrust;
 
   @override
   // TODO: implement check_icone
-  String get check_icone => AssetsConfig.imagesCheckTrustIcon;
+  String get check_icone => AssetsConfig.trustCheckTrustIcon;
 
   @override
   // TODO: implement ted_menu_icone
-  String get ted_menu_icone => AssetsConfig.imagesTedTerceiros;
+  String get ted_menu_icone => AssetsConfig.trustTedTerceiros;
 
+  @override
+  // TODO: implement extratoIcone
+  String get extratoIcone => AssetsConfig.trustExtratoTrust;
+
+  @override
+  // TODO: implement faleConoscoIcone
+  String get faleConoscoIcone => AssetsConfig.trustWhatsappVetor;
+
+  @override
+  // TODO: implement grupoEconomicoIcone
+  String? get grupoEconomicoIcone => null;
+
+  @override
+  // TODO: implement monitorOperacoesIcone
+  String get monitorOperacoesIcone => AssetsConfig.trustGraficoTrust;
+
+  @override
+  // TODO: implement tedTerceirosIcone
+  String get tedTerceirosIcone => AssetsConfig.trustTedTerceiros;
+
+  @override
+  // TODO: implement transferenciasIcone
+  String get transferenciasIcone => AssetsConfig.trustTransferenciasTrust;
+
+  String get imagemEmpresa => AssetsConfig.trustEmprestaTrust;
 }

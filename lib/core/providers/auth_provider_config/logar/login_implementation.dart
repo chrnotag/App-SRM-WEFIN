@@ -32,6 +32,7 @@ class LoginImpl {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = LoginResponse.fromJson(responseBody);
         authProvider.setDataUser = data;
+        authProvider.rolesAcesso = data.roles;
         return SucessResponse(data);
       } else if (response.statusCode == 500) {
         return MensagemErroPadrao.codigo500();
@@ -39,6 +40,7 @@ class LoginImpl {
         return MensagemErroPadrao.erroResponse(response.bodyBytes);
       }
     } catch (e) {
+      print(e);
       return MensagemErroPadrao.codigo500();
     }
   }

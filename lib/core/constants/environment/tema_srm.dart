@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
-import '../../../../../generated/assets.dart';
 import '../AppSizes.dart';
 import '../configs_tema/export_config_theme_srm.dart';
 
@@ -69,52 +68,52 @@ class ThemeSRM implements ImagensGuiaImportarCertificado{
 
   static String get logo => 'assets/images/logo_srm.png';
 
-  static String get logoAppBar => Assets.icone_srm;
+  static String get logoAppBar => AssetsConfig.imagesIconeSrm;
 
   static Widget get imagemAjuda =>
-      SvgPicture.asset(AssetsConfig.imagesCellphone, width: 176.w, color: null);
+      SvgPicture.asset(AssetsConfig.srmCellphone, width: 176.w, color: null);
 
   @override
   // TODO: implement primeiroSlideDispositivo
-  String get primeiroSlideDispositivo => Assets.importe_certificado_svg;
+  String get primeiroSlideDispositivo => AssetsConfig.srmImporteCertificado;
 
   @override
   // TODO: implement primeiroSlideQrCode
-  String get primeiroSlideQrCode => Assets.importe_certificado_svg;
+  String get primeiroSlideQrCode => AssetsConfig.srmImporteCertificado;
 
   @override
   // TODO: implement quartoSlideDispositivo
-  String get quartoSlideDispositivo => Assets.informe_senha_certificado_svg;
+  String get quartoSlideDispositivo => AssetsConfig.srmInformeSenhaCertificado;
 
   @override
   // TODO: implement quartoSlideQrCode
-  String get quartoSlideQrCode => Assets.informe_senha_certificado_svg;
+  String get quartoSlideQrCode => AssetsConfig.srmInformeSenhaCertificado;
 
   @override
   // TODO: implement quintoSlideDispositivo
-  String get quintoSlideDispositivo => Assets.importacao_concluida_svg;
+  String get quintoSlideDispositivo => AssetsConfig.srmImportacaoConcluida;
 
   @override
   // TODO: implement quintoSlideQrCode
-  String get quintoSlideQrCode => Assets.importacao_concluida_svg;
+  String get quintoSlideQrCode => AssetsConfig.srmImportacaoConcluida;
 
   @override
   // TODO: implement segundoSlideDispositivo
-  String get segundoSlideDispositivo => Assets.selecionar_certificado_svg;
+  String get segundoSlideDispositivo => AssetsConfig.srmSelecionarCertificado;
 
   @override
   // TODO: implement segundoSlideQrCode
-  String get segundoSlideQrCode => Assets.upload_certificado_svg;
+  String get segundoSlideQrCode => AssetsConfig.srmUploadCertificado;
 
   @override
   // TODO: implement terceiroSlideDispositivo
-  String get terceiroSlideDispositivo => Assets.localizar_cetificado_svg;
+  String get terceiroSlideDispositivo => AssetsConfig.srmLocalizarCertificado;
 
   @override
   // TODO: implement terceiroSlideQrCode
-  String get terceiroSlideQrCode => Assets.scanear_qrcode_svg;
+  String get terceiroSlideQrCode => AssetsConfig.srmScanearQrcode;
 
   @override
   // TODO: implement senhaCertificado
-  String get senhaCertificado => Assets.senha_certificado_dialog;
+  String get senhaCertificado => AssetsConfig.srmSenhaCertificadoDialog;
 }
