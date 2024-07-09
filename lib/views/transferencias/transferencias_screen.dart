@@ -105,15 +105,6 @@ class _TransferenciasState extends State<Transferencias> {
               SizedBox(height: 16.h),
               _CampoTexto(
                 tituloCampo: 'CPF/CNPJ',
-                formatos: controllerDocumento.text.length > 11
-                    ? [
-                  FilteringTextInputFormatter.digitsOnly,
-                  CnpjInputFormatter(),
-                ]
-                    : [
-                  FilteringTextInputFormatter.digitsOnly,
-                  CpfInputFormatter(),
-                ],
                 hint: 'CPF / CNPJ de quem irá receber',
                 controller: controllerDocumento,
               ),
