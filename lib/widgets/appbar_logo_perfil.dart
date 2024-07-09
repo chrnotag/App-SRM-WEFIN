@@ -42,7 +42,7 @@ class _AppBarLogoState extends State<AppBarLogo> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           InkWell(
-              onTap: () => Modular.to.pushNamed(AppRoutes.menuAppRoute),
+              onTap: () => Modular.to.pushNamed(AppRoutes.menuAppNavigatorRoute),
               borderRadius: BorderRadius.all(Radius.circular(20.r)),
               child: SvgPicture.asset(ambiente.logoAppBar, width: 20.w)),
           Padding(

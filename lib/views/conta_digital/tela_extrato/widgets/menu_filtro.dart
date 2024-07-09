@@ -152,7 +152,7 @@ class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
               ),
               IconButton(
                 onPressed: () =>
-                    Modular.to.pushNamed(AppRoutes.selecionarDataScreenRoute),
+                    Modular.to.pushNamed(AppRoutes.selecionarDataNavigatorRoute),
                 icon: Icon(
                   Icons.calendar_month,
                   size: 45.r,
@@ -162,7 +162,7 @@ class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
               InkWell(
                 radius: 100.r,
                 onTap: () {
-                  Modular.to.pushNamed(AppRoutes.visualizarPdfScreenRoute);
+                  Modular.to.pushNamed(AppRoutes.visualizarPdfNavigatorRoute);
                   extratoProvider.baixarDados();
                 },
                 child: Image.asset(

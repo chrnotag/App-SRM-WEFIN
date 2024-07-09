@@ -8,11 +8,12 @@ import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.da
 import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/tabbar_meses_provider.dart';
 import 'package:Srm_Asset/core/providers/ted_terceiros/ted_terceiros_provider.dart';
+import 'package:Srm_Asset/core/providers/transferencias/transferencia_provider.dart';
 import 'package:Srm_Asset/modules/carteira_consolidada_module.dart';
 import 'package:Srm_Asset/modules/conta_digital_module.dart';
 import 'package:Srm_Asset/modules/sem_conexao_module.dart';
 import 'package:Srm_Asset/modules/ted_terceiros_module.dart';
-import 'package:Srm_Asset/views/ted_terceiros/lista_teds_aprovacao_screen.dart';
+import 'package:Srm_Asset/modules/transferencias_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/recuperar_senha/recuperar_senha_provider.dart';
@@ -55,17 +56,20 @@ class AppModule extends Module {
     i.addSingleton(PrazoLiquidezProvider.new);
     i.addSingleton(RecebiveisProvider.new);
     i.addSingleton(TedTerceirosProvider.new);
+    i.addSingleton(TransferenciaProvider.new);
     i.addInstance(environment);
   }
 
   @override
   void routes(RouteManager r) {
     r.module(Modular.initialRoute, module: AuthModule());
-    r.module(AppRoutes.homeRoute, module: HomeModule());
+    r.module(AppRoutes.homeModuleRoute, module: HomeModule());
     r.module(AppRoutes.semConexaoMainRoute, module: SemConexaoModule());
-    r.module(AppRoutes.ContaDigitalRoute, module: ContaDigitalModule());
-    r.module(AppRoutes.carteiraConsolidadaRoute,
+    r.module(AppRoutes.ContaDigitalModuleRoute, module: ContaDigitalModule());
+    r.module(AppRoutes.carteiraConsolidadaModuleRoute,
         module: CarteiraConsolidadaModule());
-    r.module(AppRoutes.tedTerceirosRoute, module: TedTerceiroModule());
+    r.module(AppRoutes.tedTerceirosModuleRoute, module: TedTerceiroModule());
+    r.module(AppRoutes.transferenciasModuleRoute,
+        module: TransferenciasModule());
   }
 }

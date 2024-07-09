@@ -106,7 +106,7 @@ class ImportarCertificado extends StatelessWidget {
                           if (mostraGuiaImportacao) {
                             Modular.to.pop();
                             Modular.to.pushNamed(
-                                AppRoutes.guiaImportarCertificadoRoute,
+                                AppRoutes.guiaImportarCertificadoNavigatorRoute,
                                 arguments: {ImportarVia.QrCode});
                           } else {
                             String barcodeScanRes;
@@ -136,7 +136,7 @@ class ImportarCertificado extends StatelessWidget {
                       if (mostraGuiaImportacao) {
                         Modular.to.pop();
                         Modular.to.pushNamed(
-                            AppRoutes.guiaImportarCertificadoRoute,
+                            AppRoutes.guiaImportarCertificadoNavigatorRoute,
                             arguments: ImportarVia.Dispositivo);
                       } else {
                         bool isPegouCertificado =

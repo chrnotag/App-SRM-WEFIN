@@ -170,7 +170,7 @@ class CertificadoProvider extends ChangeNotifier {
         Fluttertoast.showToast(
             msg:
                 'Certificado ${certs.first.subjectDisplayName} importado com sucesso!');
-        Modular.to.navigate(AppRoutes.assinaturaDigitalRoute);
+        Modular.to.navigate(AppRoutes.assinaturaDigitalNavigatorRoute);
       }
       log('terminando');
       Modular.to.pop();

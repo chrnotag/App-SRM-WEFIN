@@ -284,13 +284,13 @@ class _AuthFormState extends State<AuthForm> {
         // _saveLoginDataIfNeeded();
         if (authProvider.listaCedente!.length > 1) {
           OverlayApp.terminaOverlay();
-          Modular.to.pushReplacementNamed(AppRoutes.listaSelecaoEmpresasRoute);
+          Modular.to.pushReplacementNamed(AppRoutes.listaSelecaoEmpresasNavigatorRoute);
         } else {
           //certificadoProvider.pegarCertificado();
           OverlayApp.terminaOverlay();
           authProvider.RelogarTrocarCedente(
               authProvider.dataUser!.identificadorCedente, context);
-          Modular.to.navigate(AppRoutes.homeAppRoute);
+          Modular.to.navigate(AppRoutes.homeAppNavigatorRoute);
         }
       }
     }

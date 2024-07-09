@@ -12,18 +12,18 @@ class ContaDigitalModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    r.child(AppRoutes.extratoScreenContaDigitalRoute,
+    r.child(AppRoutes.extratoContaDigitalScreenRoute,
         child: (context) => const TelaExtrato());
-    r.child(AppRoutes.selecionarDataScreenContaDigitalRoute,
+    r.child(AppRoutes.selecionarDataContaDigitalScreenRoute,
         child: (context) => const SelecionarDataScreen());
     r.child(
-        AppRoutes.visualizarPdfScreenContaDigitalRoute, child: (context) => const TelaVisualizarPdfExtrato());
+        AppRoutes.visualizarPdfContaDigitalScreenRoute, child: (context) => const TelaVisualizarPdfExtrato());
     r.child(
-        AppRoutes.comprovanteTEDScreenContaDigitalRoute + "/:codigoTransacao" + "/:dataComprovante",
+        AppRoutes.comprovanteTEDContaDigitalScreenRoute + "/:codigoTransacao" + "/:dataComprovante",
         child: (context) => ComprovanteTed(
               codigoTransacao: r.args.params['codigoTransacao'],
             dataComprovante: r.args.params['dataComprovante'],
             ));
-    r.child(AppRoutes.extratoDataSelecionadaDigitalRoute, child: (context) => const ExtratosDataSelecionada());
+    r.child(AppRoutes.extratoDataSelecionadaScreenRoute, child: (context) => const ExtratosDataSelecionada());
   }
 }

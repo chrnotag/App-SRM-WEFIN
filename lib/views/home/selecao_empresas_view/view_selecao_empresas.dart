@@ -162,7 +162,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                     await authProviderAtt.RelogarTrocarCedente(
                         authProviderAtt.listaCedente![index].identificador,
                         context);
-                    Modular.to.navigate(AppRoutes.homeAppRoute);
+                    Modular.to.navigate(AppRoutes.homeAppNavigatorRoute);
                   },
                   child: SizedBox(
                     height: 90.h,

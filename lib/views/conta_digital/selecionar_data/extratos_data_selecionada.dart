@@ -63,7 +63,7 @@ class _ExtratosDataSelecionadaState extends State<ExtratosDataSelecionada> {
             OverlayApp.iniciaOverlay(context);
             await extratoProvider.baixarDadosPeriodo();
             OverlayApp.terminaOverlay();
-            Modular.to.pushNamed(AppRoutes.visualizarPdfScreenRoute);
+            Modular.to.pushNamed(AppRoutes.visualizarPdfNavigatorRoute);
           }),
       body: SizedBox(
         height: context.height,

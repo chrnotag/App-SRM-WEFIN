@@ -55,7 +55,7 @@ class AssinaturaCompletaPopUp extends StatelessWidget {
                 label: 'Fechar',
                 filled: false,
                 onPressed: () {
-                  Modular.to.navigate(AppRoutes.homeAppRoute);
+                  Modular.to.navigate(AppRoutes.homeAppNavigatorRoute);
                 }),
           ),
         ],

@@ -94,7 +94,7 @@ class _HomeViewState extends State<HomeView> {
                 assinaturaProvider.assinaturasPendentes;
             List<MonitorAssinaturasModel> assinaturas =
                 assinaturaProvider.todasAssinaturas;
-            Modular.to.pushNamed(AppRoutes.assinaturaDigitalRoute, arguments: {
+            Modular.to.pushNamed(AppRoutes.assinaturaDigitalNavigatorRoute, arguments: {
               'assinaturas': assinaturas,
               'assinaturasPendentes': assinaturasPendentes
             });
@@ -102,12 +102,12 @@ class _HomeViewState extends State<HomeView> {
       _CardItemMenuHome(
           icone: ambiente.transferenciasIcone,
           titulo: 'Transferências',
-          onTap: () {}),
+          onTap: () => Modular.to.pushNamed(AppRoutes.transferenciasNavigatorRoute)),
       _CardItemMenuHome(
           icone: ambiente.extratoIcone,
           titulo: 'Extrato',
           onTap: () {
-            Modular.to.pushNamed(AppRoutes.extratoScreenRoute);
+            Modular.to.pushNamed(AppRoutes.extratoNavigatorRoute);
           }),
       _CardItemMenuHome(
           icone: ambiente.ted_menu_icone,
@@ -135,13 +135,13 @@ class _HomeViewState extends State<HomeView> {
             icone: ambiente.grupoEconomicoIcone!,
             titulo: 'Grupo Econômico',
             onTap: () {
-              Modular.to.navigate(AppRoutes.listaSelecaoEmpresasRoute);
+              Modular.to.navigate(AppRoutes.listaSelecaoEmpresasNavigatorRoute);
             }),
       _CardItemMenuHome(
           icone: ambiente.faleConoscoIcone,
           titulo: 'Fale conosco',
           onTap: () {
-            Modular.to.pushNamed(AppRoutes.helpScreenRoute);
+            Modular.to.pushNamed(AppRoutes.helpScreenNavigatorRoute);
           }),
     ];
 
@@ -159,8 +159,6 @@ class _HomeViewState extends State<HomeView> {
 
     // if (!authProvider.rolesAcesso
     //     .contemRoles([RolesAcessoEnum.ROLE_TRANSFERENCIA_CONTA_DIGITAL])) {
-    cardsHome.removeWhere(
-        (card) => (card as _CardItemMenuHome).titulo == 'Transferências');
     // }
     //
     // if (!authProvider.rolesAcesso
@@ -173,7 +171,7 @@ class _HomeViewState extends State<HomeView> {
       body: Column(
         children: [
           Container(
-            height: 230.h,
+            padding: EdgeInsets.only(bottom: 16.h),
             width: context.width,
             decoration: BoxDecoration(
               color: context.secondaryColor,

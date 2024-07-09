@@ -201,7 +201,7 @@ class _SelecionarDataScreenState extends State<SelecionarDataScreen> {
                     final extratoProvider = Modular.get<ExtratoProvider>();
                     extratoProvider.dataInicialPersonalizada = _dataFinalSelecionada!;
                     extratoProvider.dataFinalPersonalizada = _dataInicialSelecionada!;
-                    Modular.to.pushNamed(AppRoutes.extratoDataSelecionadaDigitalScreenRoute);
+                    Modular.to.pushNamed(AppRoutes.extratoDataSelecionadaNavigatorRoute);
                   }
                       : null)
             ],

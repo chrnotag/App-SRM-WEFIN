@@ -33,7 +33,7 @@ class ItemListaOperacao extends StatelessWidget {
       onTap: temComprovante
           ? () {
               Modular.to.pushNamed(
-                  AppRoutes.visualizarComprovanteTEDScreenRoute +
+                  AppRoutes.visualizarComprovanteTEDNavigatorRoute +
                       '/$codigoTransacao' +
                       '/$dataComprovante');
             }
