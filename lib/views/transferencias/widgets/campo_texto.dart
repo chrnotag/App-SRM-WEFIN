@@ -6,6 +6,7 @@ class _CampoTexto extends StatefulWidget {
   final TextEditingController controller;
   final bool obrigatorio;
   final List<TextInputFormatter> formatos;
+  final bool campoMonetario;
 
   _CampoTexto({
     super.key,
@@ -13,6 +14,7 @@ class _CampoTexto extends StatefulWidget {
     required this.hint,
     required this.controller,
     this.obrigatorio = false,
+    this.campoMonetario = false,
     List<TextInputFormatter>? formatos,
   }) : formatos = formatos ?? [];
 
@@ -55,8 +57,12 @@ class _CampoTextoState extends State<_CampoTexto> {
                   border: InputBorder.none,
                   hintStyle: context.textTheme.bodyLarge!
                       .copyWith(color: context.labelTextColor),
-              prefixText: 'R\$',
+              prefixText: widget.campoMonetario && widget.controller.text.isNotEmpty ? 'R\$ ' : null,
               prefixStyle: context.textTheme.bodyLarge),
+                onChanged: (value) {
+                setState(() {
+                });
+                },
             ),
           ),
         ),

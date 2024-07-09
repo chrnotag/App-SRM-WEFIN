@@ -1,5 +1,6 @@
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
+import 'package:Srm_Asset/core/constants/extensions/string_extensions.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:brasil_fields/brasil_fields.dart';
@@ -89,6 +90,7 @@ class _TransferenciasState extends State<Transferencias> {
               SizedBox(height: 16.h),
               _CampoTexto(
                 tituloCampo: 'Valor',
+                campoMonetario: true,
                 formatos: [
                   FilteringTextInputFormatter.digitsOnly,
                   CentavosInputFormatter()
