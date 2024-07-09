@@ -5,13 +5,16 @@ class _CampoTexto extends StatefulWidget {
   final String hint;
   final TextEditingController controller;
   final bool obrigatorio;
+  final List<TextInputFormatter> formatos;
 
-  const _CampoTexto(
-      {super.key,
-      required this.tituloCampo,
-      required this.hint,
-      required this.controller,
-      this.obrigatorio = false});
+  _CampoTexto({
+    super.key,
+    required this.tituloCampo,
+    required this.hint,
+    required this.controller,
+    this.obrigatorio = false,
+    List<TextInputFormatter>? formatos,
+  }) : formatos = formatos ?? [];
 
   @override
   State<_CampoTexto> createState() => _CampoTextoState();
@@ -44,13 +47,16 @@ class _CampoTextoState extends State<_CampoTexto> {
           child: Padding(
             padding: EdgeInsets.all(8.r),
             child: TextField(
+              inputFormatters: widget.formatos,
               style: context.textTheme.bodyLarge,
               controller: widget.controller,
               decoration: InputDecoration(
                   hintText: widget.hint,
                   border: InputBorder.none,
                   hintStyle: context.textTheme.bodyLarge!
-                      .copyWith(color: context.labelTextColor)),
+                      .copyWith(color: context.labelTextColor),
+              prefixText: 'R\$',
+              prefixStyle: context.textTheme.bodyLarge),
             ),
           ),
         ),
