@@ -1,6 +1,8 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
@@ -42,104 +44,93 @@ class _LoginScreenState extends State<LoginScreen> {
             image: DecorationImage(
                 image: AssetImage(AssetsConfig.imagesBackgroundImage),
                 fit: BoxFit.cover)),
-        child: Column(
-          children: [
-            if (isKeyboardVisible)
-              AppBar(
-                title: Image.asset(
-                  ambiente.logo,
-                  width: 80.w,
-                  color: context.secondaryColor,
-                  fit: BoxFit.fill,
+        child: SafeArea(
+          bottom: true,
+          top: false,
+          child: Column(
+            children: [
+              if (isKeyboardVisible)
+                AppBar(
+                  title: Image.asset(
+                    ambiente.logo,
+                    width: 80.w,
+                    color: context.secondaryColor,
+                    fit: BoxFit.fill,
+                  ),
+                  centerTitle: true,
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                )
+              else
+                AppBar(
+                  backgroundColor: ambiente.corQuadradoLogin,
                 ),
-                centerTitle: true,
-                backgroundColor: Colors.transparent,
-                shadowColor: Colors.transparent,
-              )
-            else
-              AppBar(
-                backgroundColor: ambiente.corQuadradoLogin,
-              ),
-            Expanded(
-              child: CustomScrollView(
-                slivers: [
-                  SliverFillRemaining(
-                    hasScrollBody: false,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Visibility(
-                              visible: !isKeyboardVisible,
-                              child: Padding(
-                                padding: EdgeInsets.zero,
-                                child: Container(
-                                  height: context.width * 0.3,
-                                  width: context.width,
-                                  decoration: BoxDecoration(
-                                      color: ambiente.corQuadradoLogin,
-                                      borderRadius: BorderRadius.vertical(
-                                          bottom: Radius.circular(12))),
-                                  child: Center(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Image.asset(
-                                          ambiente.logo,
-                                          width: 190.w,
-                                          color: ambiente.corImagemLogo,
-                                          fit: BoxFit.fill,
-                                        ),
-                                        Text(
-                                          ambiente.fraseSloganLogin ?? '',
-                                          style: context.textTheme.bodyMedium!
-                                              .copyWith(
-                                            fontSize: 15.sp,
-                                                  fontWeight: FontWeight.w900,
-                                                  color: context.primaryColor),
-                                          textAlign: TextAlign.center,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 100.h,
-                            ),
-                            AnimatedOpacity(
-                              duration: const Duration(milliseconds: 300),
-                              opacity: isKeyboardVisible ? 0.0 : 1.0,
-                              child: SizedBox(
-                                child: Text(
-                                  "Seja bem vindo\nao seu app de gestão",
-                                  style: context.textTheme.bodyLarge!.copyWith(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w400),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Spacer(),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16.w),
-                          child: SizedBox(
-                              height: context.height * 0.6,
-                              child: const AuthForm()),
-                        )
-                      ],
+              Visibility(
+                visible: !isKeyboardVisible,
+                child: Padding(
+                  padding: EdgeInsets.zero,
+                  child: Container(
+                    height: context.width * 0.3,
+                    width: context.width,
+                    decoration: BoxDecoration(
+                        color: ambiente.corQuadradoLogin,
+                        borderRadius: BorderRadius.vertical(
+                            bottom: Radius.circular(12))),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment:
+                        MainAxisAlignment.start,
+                        children: [
+                          Image.asset(
+                            ambiente.logo,
+                            width: 190.w,
+                            color: ambiente.corImagemLogo,
+                            fit: BoxFit.fill,
+                          ),
+                          Text(
+                            ambiente.fraseSloganLogin ?? '',
+                            style: context.textTheme.bodyMedium!
+                                .copyWith(
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.w900,
+                                color: context.primaryColor),
+                            textAlign: TextAlign.center,
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ],
+                ),
               ),
-            ),
-          ],
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Spacer(),
+                    AnimatedOpacity(
+                      duration: const Duration(milliseconds: 300),
+                      opacity: isKeyboardVisible ? 0.0 : 1.0,
+                      child: SizedBox(
+                        child: Text(
+                          "Seja bem vindo\nao seu app de gestão",
+                          style: context.textTheme.displaySmall!.copyWith(
+                            color: context.labelTextColor,
+                              fontWeight: FontWeight.w400),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: SizedBox(
+                          height: context.height * 0.6,
+                          child: const AuthForm()),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

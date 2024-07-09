@@ -40,7 +40,6 @@ class IniciarAssinaturaProvider extends ChangeNotifier {
       return informacaoUsuarioLogado;
     } catch (e) {
       // Tratamento de exceção caso não encontre nenhum assinante
-      print('Informação do assinante não encontrada, $e');
       return null;
     }
   }

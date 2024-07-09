@@ -15,6 +15,8 @@ ContaDigitalModel _$ContaDigitalModelFromJson(Map<String, dynamic> json) =>
       tipoConta: json['tipoConta'] as String,
       centroCusto:
           CentroCusto.fromJson(json['centroCusto'] as Map<String, dynamic>),
+      nome: json['nome'] as String,
+      codigo: json['codigo'] as String,
     );
 
 Map<String, dynamic> _$ContaDigitalModelToJson(ContaDigitalModel instance) =>
@@ -25,6 +27,8 @@ Map<String, dynamic> _$ContaDigitalModelToJson(ContaDigitalModel instance) =>
       'conta': instance.conta,
       'tipoConta': instance.tipoConta,
       'centroCusto': instance.centroCusto,
+      'nome': instance.nome,
+      'codigo': instance.codigo,
     };
 
 CentroCusto _$CentroCustoFromJson(Map<String, dynamic> json) => CentroCusto(

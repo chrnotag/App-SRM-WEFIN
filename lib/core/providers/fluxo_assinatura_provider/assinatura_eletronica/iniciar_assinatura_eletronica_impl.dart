@@ -27,7 +27,6 @@ class IniciarAssinaturaEletronicaImpl {
     final url = Uri.parse(ambiente.endpoints.iniciarAssinaturaEletronica);
     try {
       final response = await http.post(url, body: body, headers: headers);
-      print('status code: ${response.body}');
       switch (response.statusCode) {
         case 200:
           final responseBody = ResponseInicAssinaturaEletronica.fromJson(

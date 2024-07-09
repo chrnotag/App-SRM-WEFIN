@@ -23,7 +23,6 @@ class AssinaturaImpl {
         'Authorization': authProvider.dataUser!.token,
         'plataforma' : ambiente.plataforma.name
       });
-      print('response: ${response.body}');
       switch (response.statusCode) {
         case 200:
           final responseBody = json.decode(utf8.decode(response.bodyBytes));
@@ -31,7 +30,6 @@ class AssinaturaImpl {
           data = List<MonitorAssinaturasModel>.from(responseBody
               .map((model) => MonitorAssinaturasModel.fromJson(model)));
           assinaturaProvider.assinaturas = data;
-          print("data: $data");
           return SucessResponse(data);
         case 401:
           return MensagemErroPadrao.erroResponse(response.bodyBytes);

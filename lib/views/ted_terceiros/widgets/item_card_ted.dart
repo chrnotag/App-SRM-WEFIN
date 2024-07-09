@@ -1,4 +1,4 @@
-part of '../lista_ted_screen/lista_teds_aprovacao_screen.dart';
+part of '../lista_teds_aprovacao_screen.dart';
 
 class _ItemCardTed extends StatelessWidget {
   final String title;

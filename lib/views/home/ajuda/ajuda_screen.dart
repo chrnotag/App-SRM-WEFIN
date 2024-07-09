@@ -1,6 +1,5 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/widgets/transparent_appbar_empty.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -80,7 +79,7 @@ class Ajuda extends StatelessWidget {
                           children: [
                             TextSpan(
                               text: ambiente.contatos
-                                  .whatsapp!,
+                                  .whatsapp,
                               style: context.textTheme.bodyMedium!.copyWith(
                                 fontWeight: FontWeight.bold,
                                 decoration: TextDecoration.underline,
@@ -88,9 +87,8 @@ class Ajuda extends StatelessWidget {
                               ),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () async {
-                                  String phoneNumber = ambiente.contatos
-                                      .whatsapp!.replaceAll('/[()\s-]/g', '');
-                                  final url = 'https://wa.me/$phoneNumber';
+                                  String phoneNumber = ambiente.contatos.whatsapp!.replaceAll(RegExp(r'\D'), '');
+                                  final url = 'https://wa.me/55$phoneNumber';
                                   if (await canLaunch(url)) {
                                     await launch(url);
                                   } else {

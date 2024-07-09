@@ -1,6 +1,7 @@
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/providers/fluxo_assinatura_provider/assinatura_eletronica/assinatura_eletronica_provider.dart';
 import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
+import 'package:Srm_Asset/core/utils/overlay.dart';
 import 'package:Srm_Asset/models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -14,6 +15,7 @@ import '../wefin_patterns/wefin_default_button.dart';
 
 class ConfirmarAssinaturaDialog extends StatefulWidget {
   final InformacaoAssinante assinante;
+
   const ConfirmarAssinaturaDialog({super.key, required this.assinante});
 
   @override
@@ -23,6 +25,7 @@ class ConfirmarAssinaturaDialog extends StatefulWidget {
 
 class _ConfirmarAssinaturaDialogState extends State<ConfirmarAssinaturaDialog> {
   final assinaturaProvider = Modular.get<AssinaturaEletronicaProvider>();
+
   @override
   Widget build(BuildContext context) {
     final _overlayLoader = OverlayEntry(
@@ -32,7 +35,8 @@ class _ConfirmarAssinaturaDialogState extends State<ConfirmarAssinaturaDialog> {
       ),
     );
     final assinaturaProvider = Modular.get<AssinaturaProvider>();
-    final assinaturaEletronicaProvider = Modular.get<AssinaturaEletronicaProvider>();
+    final assinaturaEletronicaProvider =
+        Modular.get<AssinaturaEletronicaProvider>();
     return AlertDialog(
       icon: Icon(
         LineIcons.exclamationCircle,
@@ -51,18 +55,19 @@ class _ConfirmarAssinaturaDialogState extends State<ConfirmarAssinaturaDialog> {
             child: BotaoPadrao(
                 label: 'Confirmar',
                 onPressed: () async {
-                  Overlay.of(context).insert(_overlayLoader);
+                  OverlayApp.iniciaOverlay(context);
                   final response = await IniciarAssinaturaEletronicaImpl(
                           codigoOperacaoModel: IniciarAssinaturaEletronicaModel(
-                              codigoOperacao: assinaturaProvider.assinaturaSelecionada!.codigoOperacao))
+                              codigoOperacao: assinaturaProvider
+                                  .assinaturaSelecionada!.codigoOperacao))
                       .iniciarAssinaturaEletronica();
                   if (response.error != null) {
-                    _overlayLoader.remove();
+                    OverlayApp.terminaOverlay();
                     Fluttertoast.showToast(
                         msg:
                             'Erro ao iniciar assinatura, tente novamente mais tarde. ${response.error.mensagem}');
                   } else {
-                    _overlayLoader.remove();
+                    OverlayApp.terminaOverlay();
                     Modular.to.pop();
                     assinaturaEletronicaProvider.informarCodigoEmail(context);
                   }

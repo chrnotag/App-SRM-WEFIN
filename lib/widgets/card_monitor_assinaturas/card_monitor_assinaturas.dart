@@ -183,8 +183,8 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                     children: [
                       _ItemTextCard(
                           titulo: "Data",
-                          conteudo:
-                          FormatarData.formatarPtBR(assinatura.dataOperacao)),
+                          conteudo: FormatarData.formatarPtBR(
+                              assinatura.dataOperacao)),
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 16.h),
                         child: _ItemTextCard(
@@ -226,7 +226,8 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                     ],
                   ),
                   _InteriorProcuradores(
-                    assinatura: assinatura,)
+                    assinatura: assinatura,
+                  )
                 ],
               ),
               Visibility(

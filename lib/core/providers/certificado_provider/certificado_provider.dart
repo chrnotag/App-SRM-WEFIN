@@ -94,7 +94,6 @@ class CertificadoProvider extends ChangeNotifier {
   }
 
   Future<void> deletarCertificado(PKCertificate certificado) async {
-    print("thumb: ${certificadoAtual?.subjectDisplayName}");
     await CrossPki.removeCertificate(certificado.thumbprint);
     listaCertificados.removeWhere(
         (element) => element.thumbprint == certificado.thumbprint);

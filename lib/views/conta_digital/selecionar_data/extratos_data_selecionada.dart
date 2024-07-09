@@ -3,15 +3,20 @@ import 'package:Srm_Asset/core/constants/extensions/date_extensions.dart';
 import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_impl.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_provider.dart';
 import 'package:Srm_Asset/core/utils/overlay.dart';
 import 'package:Srm_Asset/core/utils/pdf_manager.dart';
+import 'package:Srm_Asset/views/conta_digital/tela_extrato/tela_visualizar_pdf.dart';
 import 'package:Srm_Asset/views/conta_digital/widgets/lista_operacao.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
 import 'package:Srm_Asset/widgets/popup_generico.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import '../../../core/constants/configs_tema/srm/colors.dart';
+import '../../../core/constants/route_labels.dart';
 import '../tela_extrato/widgets/item_lista_extrato.dart';
 
 class ExtratosDataSelecionada extends StatefulWidget {
@@ -29,7 +34,7 @@ class _ExtratosDataSelecionadaState extends State<ExtratosDataSelecionada> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    extratoProvider.carregarDados();
+    extratoProvider.carregarDadosPeriodoPersonalizado();
   }
 
   @override
@@ -46,21 +51,19 @@ class _ExtratosDataSelecionadaState extends State<ExtratosDataSelecionada> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-            '${dateFormat.format(extratoProvider.dataInicial)} - ${dateFormat.format(extratoProvider.dataFinal!)}',
+            '${dateFormat.format(extratoProvider.dataInicialPersonalizada!)} - ${dateFormat.format(extratoProvider.dataFinalPersonalizada!)}',
             style:
                 context.textTheme.displaySmall!.copyWith(color: Colors.white)),
         centerTitle: true,
       ),
       floatingActionButton: FloatingActionButton(
-          child: Image.asset(AssetsConfig.imagesIconePdf, color: Colors.white,),
+          child: Image.asset(AssetsConfig.imagesIconePdf, color: Colors.white),
+          backgroundColor: context.primaryColor,
           onPressed: () async {
             OverlayApp.iniciaOverlay(context);
             await extratoProvider.baixarDadosPeriodo();
             OverlayApp.terminaOverlay();
-            final DateFormat dateFormat = DateFormat("dd-MM-yyyy");
-            String name = "extrato_${dateFormat.format(extratoProvider.dataFinal!)}_${dateFormat.format(extratoProvider.dataInicial)}";
-            print(extratoProvider.extratoDownloadBites ?? 'vazio');
-            PDFUtils.sharePDF(extratoProvider.extratoDownloadBites!, name);
+            Modular.to.pushNamed(AppRoutes.visualizarPdfScreenRoute);
           }),
       body: SizedBox(
         height: context.height,
@@ -68,7 +71,7 @@ class _ExtratosDataSelecionadaState extends State<ExtratosDataSelecionada> {
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Card(
               child: FutureBuilder(
-                  future: extratoProvider.extratoFuture,
+                  future: extratoProvider.extratoPersonalizadoFuture,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Loader();
@@ -91,18 +94,28 @@ class _ExtratosDataSelecionadaState extends State<ExtratosDataSelecionada> {
                     }
 
                     return ListView.builder(
-                        itemCount: extratoProvider.itensExtrato.length,
+                        itemCount:
+                            extratoProvider.itensExtratoPersonalizado.length,
                         itemBuilder: (context, index) {
+                          print(
+                              'tamanho lista: ${extratoProvider.extratoPersonalizado!.itens.length}');
                           return Column(
                             children: [
                               ItemListaExtrato(
-                                dataDia: extratoProvider.itensExtrato[index]
-                                    .dataReferencia.formatarIso8601,
+                                dataDia: extratoProvider
+                                    .itensExtratoPersonalizado[index]
+                                    .dataReferencia
+                                    .formatarIso8601,
                                 saldoDia: extratoProvider
-                                    .itensExtrato[index].saldoNaData.toBRL,
+                                    .itensExtratoPersonalizado[index]
+                                    .saldoNaData
+                                    .toBRL,
                               ),
                               ...BuildListaOperacao.buildLista(
-                                  context: context, index: index),
+                                  context: context,
+                                  index: index,
+                                  tipoConsulta:
+                                      TipoConsultaExtrato.PERSONALIZADO),
                             ],
                           );
                         });

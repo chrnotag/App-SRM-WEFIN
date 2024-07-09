@@ -5,6 +5,8 @@ class AssetsConfig {
   static const String imagesBackgroundImage = 'assets/images/background_image.png';
   static const String imagesCadeado = 'assets/images/cadeado.svg';
   static const String imagesExitIcone = 'assets/images/exit_icone.svg';
+  static const String imagesIconAppSrm = 'assets/images/icon_app_srm.png';
+  static const String imagesIconAppTrust = 'assets/images/icon_app_trust.png';
   static const String imagesIconePdf = 'assets/images/icone_pdf.png';
   static const String imagesIconeSrm = 'assets/images/icone_srm.svg';
   static const String imagesIconeTrust = 'assets/images/icone_trust.svg';
