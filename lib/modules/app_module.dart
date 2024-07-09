@@ -12,7 +12,7 @@ import 'package:Srm_Asset/modules/carteira_consolidada_module.dart';
 import 'package:Srm_Asset/modules/conta_digital_module.dart';
 import 'package:Srm_Asset/modules/sem_conexao_module.dart';
 import 'package:Srm_Asset/modules/ted_terceiros_module.dart';
-import 'package:Srm_Asset/views/ted_terceiros/lista_ted_screen/lista_teds_aprovacao_screen.dart';
+import 'package:Srm_Asset/views/ted_terceiros/lista_teds_aprovacao_screen.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/recuperar_senha/recuperar_senha_provider.dart';

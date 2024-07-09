@@ -79,7 +79,7 @@ class Ajuda extends StatelessWidget {
                           children: [
                             TextSpan(
                               text: ambiente.contatos
-                                  .whatsapp!,
+                                  .whatsapp,
                               style: context.textTheme.bodyMedium!.copyWith(
                                 fontWeight: FontWeight.bold,
                                 decoration: TextDecoration.underline,
@@ -87,9 +87,8 @@ class Ajuda extends StatelessWidget {
                               ),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () async {
-                                  String phoneNumber = ambiente.contatos
-                                      .whatsapp!.replaceAll('/[()\s-]/g', '');
-                                  final url = 'https://wa.me/$phoneNumber';
+                                  String phoneNumber = ambiente.contatos.whatsapp!.replaceAll(RegExp(r'\D'), '');
+                                  final url = 'https://wa.me/55$phoneNumber';
                                   if (await canLaunch(url)) {
                                     await launch(url);
                                   } else {

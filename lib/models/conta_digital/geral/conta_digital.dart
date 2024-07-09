@@ -10,6 +10,8 @@ class ContaDigitalModel {
   String conta;
   String tipoConta;
   CentroCusto centroCusto;
+  String nome;
+  String codigo;
 
   ContaDigitalModel(
       {required this.documentoTitular,
@@ -17,7 +19,9 @@ class ContaDigitalModel {
       required this.agencia,
       required this.conta,
       required this.tipoConta,
-      required this.centroCusto});
+      required this.centroCusto,
+      required this.nome,
+      required this.codigo});
 
   factory ContaDigitalModel.fromJson(Map<String, dynamic> json) =>
       _$ContaDigitalModelFromJson(json);

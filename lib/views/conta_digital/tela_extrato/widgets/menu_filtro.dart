@@ -66,7 +66,7 @@ class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
                             .copyWith(fontWeight: FontWeight.w900),
                       ),
                       Text(
-                        '${dadosBanco!.idConta} - ${dadosBanco!.centroCusto.nome}',
+                        '${dadosBanco!.codigo} - ${dadosBanco!.nome}',
                         style: context.textTheme.bodyLarge,
                       )
                     ],

@@ -120,7 +120,7 @@ class EndPointsTRUST extends Endpoint {
       case AprovarTedEnum.APROVAR:
         return Uri.parse('$listaTransacoesTed/$codigoTransferencia/aprovar');
       case AprovarTedEnum.RECUSAR:
-        return Uri.parse('$listaTransacoesTed/$codigoTransferencia/recusar');
+        return Uri.parse('$listaTransacoesTed/$codigoTransferencia/reprovar');
       default:
         throw Exception('Valor enum nao existente: ${aprovacao.name}');
     }

@@ -19,5 +19,5 @@ class SRMColors{
   static Color get textBodyColor => Color(0XFF545454);
   static Color get textDisplayColor => Color(0XFFFFFFFF);
   static Color get textDisplayVariantColor => Color(0XFF1D3E80);
-  static Color get textLabelColor => Color(0XFF545454);
+  static Color get textLabelColor => Color(0xff696969);
 }
