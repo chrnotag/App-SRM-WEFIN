@@ -23,7 +23,7 @@ class _AlertTransferenciaFeita extends StatelessWidget {
                       fontWeight: FontWeight.w600),
                 ),
                 Text(
-                  'Sua solicitação de TED foi enviada para aprovação sucesso!',
+                  'Sua solicitação de TED foi enviada com sucesso!',
                   style: context.textTheme.bodyMedium,
                 ),
               ],

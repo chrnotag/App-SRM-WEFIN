@@ -49,7 +49,6 @@ class _TransferenciasState extends State<Transferencias> with SingleTickerProvid
 
   @override
   Widget build(BuildContext context) {
-    bool isTrust = Modular.get<Environment>().plataforma == Plataforma.TRUST;
 
     return Scaffold(
       appBar: AppBar(
@@ -58,9 +57,7 @@ class _TransferenciasState extends State<Transferencias> with SingleTickerProvid
           style: context.textTheme.displaySmall!.copyWith(color: Colors.white),
         ),
         centerTitle: true,
-        bottom: isTrust
-            ? null
-            : PreferredSize(
+        bottom: PreferredSize(
           preferredSize: Size.fromHeight(48.h),
               child: Expanded(
                 child: Container(
@@ -78,9 +75,7 @@ class _TransferenciasState extends State<Transferencias> with SingleTickerProvid
               ),
             ),
       ),
-      body: isTrust
-          ? _tansferenciaTED()
-          : TabBarView(
+      body: TabBarView(
         controller: _tabController,
         children: [
           _tansferenciaTED(),

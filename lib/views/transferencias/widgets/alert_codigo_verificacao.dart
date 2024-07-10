@@ -54,7 +54,7 @@ showDialog(context: context, builder: (context) => _AlertTransferenciaFeita(),);
           ),
           RichText(text: TextSpan(children: [
             TextSpan(text: 'Não recebeu o código no seu WhatsApp?\n', style: context.textTheme.bodyLarge),
-            TextSpan(text: 'Clique aqui para reinviar.', style: context.textTheme.bodyLarge!.copyWith(color: context.primaryColor, fontWeight: FontWeight.w900)),
+            TextSpan(text: 'Clique aqui para reenviar.', style: context.textTheme.bodyLarge!.copyWith(color: context.primaryColor, fontWeight: FontWeight.w900)),
           ]), textAlign: TextAlign.center,)
         ],
       ),
