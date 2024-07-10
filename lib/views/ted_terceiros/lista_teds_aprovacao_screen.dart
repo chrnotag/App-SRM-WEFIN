@@ -4,6 +4,7 @@ import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/providers/ted_terceiros/ted_terceiros_provider.dart';
 import 'package:Srm_Asset/models/ted_terceiros/ted_terceiros_model.dart';
+import 'package:Srm_Asset/views/ted_terceiros/widgets/item_card_ted.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
 import 'package:Srm_Asset/widgets/popup_generico.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +14,6 @@ import 'widgets/botao_comprovante.dart';
 import 'widgets/botoes_para_aprovacao.dart';
 
 part 'widgets/card_ted.dart';
-
-part 'widgets/item_card_ted.dart';
 
 class ListaAprovacaoTed extends StatefulWidget {
   const ListaAprovacaoTed({super.key});

@@ -23,6 +23,7 @@ class ContaDigitalImpl {
       final contaDigitalProvider = Modular.get<ContaDigitalProvider>();
       try {
         final response = await http.get(url, headers: headers);
+        print('conta: ${response.body}');
         if (response.statusCode == 200) {
           final responseBody = json.decode(utf8.decode(response.bodyBytes));
           final data = ContaDigitalModel.fromJson(responseBody);
@@ -33,7 +34,8 @@ class ContaDigitalImpl {
         } else {
           return MensagemErroPadrao.erroResponse(response.bodyBytes);
         }
-      } catch (e) {
+      } catch (e,s) {
+        print('erro conta digital $e,$s');
         return MensagemErroPadrao.codigo500();
       }
   }
