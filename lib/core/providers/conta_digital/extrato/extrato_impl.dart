@@ -44,11 +44,14 @@ class ExtratoImpl {
           return SucessResponse(data);
         }
       } else if (response.statusCode == 500) {
+        print('500');
         return MensagemErroPadrao.codigo500();
       } else {
+        print('erro response: ${response.body}');
         return MensagemErroPadrao.erroResponse(response.bodyBytes);
       }
     } catch (e, s) {
+      print('errp: $e,$s');
       return MensagemErroPadrao.codigo500();
     }
   }

@@ -111,7 +111,7 @@ class _HomeViewState extends State<HomeView> {
           }),
       _CardItemMenuHome(
           icone: ambiente.ted_menu_icone,
-          titulo: 'Ted para Terceiros',
+          titulo: 'Aprovação TED',
           onTap: () {
             Modular.to.pushNamed(AppRoutes.tedTerceirosNavigatorRoute);
           }),
@@ -308,7 +308,7 @@ class _HomeViewState extends State<HomeView> {
           ),
           SizedBox(
             width: context.width,
-            height: context.height * 0.7,
+            height: context.height * 0.77,
             child: GridView.count(
               padding: EdgeInsets.all(20.r),
               crossAxisCount: 2,

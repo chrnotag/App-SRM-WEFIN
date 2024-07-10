@@ -94,7 +94,7 @@ class TrustHomologacaoEnvironment extends Environment {
 
   @override
   // TODO: implement transferenciasIcone
-  String get transferenciasIcone => AssetsConfig.trustTransferenciasTrust;
+  String get transferenciasIcone => AssetsConfig.trustSetasPerpendicularesTrust;
 
   String get imagemEmpresa => AssetsConfig.trustEmprestaTrust;
 }

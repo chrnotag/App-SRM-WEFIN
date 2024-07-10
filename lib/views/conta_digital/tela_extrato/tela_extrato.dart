@@ -1,4 +1,5 @@
 import 'package:Srm_Asset/assets_config/assets_config.dart';
+import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/constants/extensions/date_extensions.dart';
 import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
@@ -15,6 +16,8 @@ import 'package:Srm_Asset/views/conta_digital/widgets/lista_operacao.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/svg.dart';
+import '../../../core/constants/configs_tema/srm/colors.dart';
 import '../../../core/providers/conta_digital/tabbar_meses_provider.dart';
 import '../../../core/utils/ultimo_dia_mes.dart';
 
@@ -45,12 +48,10 @@ class _TelaExtratoState extends State<TelaExtrato>
     _tabController = TabController(length: 3, vsync: this, initialIndex: 2);
     extratoProviderInit.carregarDados();
     tamanhoLista = 7;
-
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     final provider = Modular.get<ExtratoProvider>();
     provider.limparDados();
@@ -60,6 +61,7 @@ class _TelaExtratoState extends State<TelaExtrato>
   @override
   Widget build(BuildContext context) {
     final extratoProvider = context.watch<ExtratoProvider>();
+    final ambiente = Modular.get<Environment>();
 
     return Scaffold(
       appBar: PreferredSize(
@@ -83,38 +85,90 @@ class _TelaExtratoState extends State<TelaExtrato>
                   children: [
                     _MenuFiltroTelaExtrato(),
                     Expanded(
-                        child: RefreshIndicator(
-                      onRefresh: extratoProvider.carregarDados,
-                      child: FutureBuilder(
-                        future: extratoProvider.extratoFuture,
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return Loader();
-                          }
-                          if (!snapshot.hasData) {}
-                          return ListView.builder(
-                              itemCount: tamanhoLista,
-                              itemBuilder: (context, index) {
-                                return Column(
+                      child: RefreshIndicator(
+                        onRefresh: extratoProvider.carregarDados,
+                        child: FutureBuilder(
+                          future: extratoProvider.extratoFuture,
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Loader();
+                            }
+
+                            if (extratoProvider.extrato != null &&
+                                extratoProvider.extrato!.itens.isNotEmpty) {
+                              // Ajuste o tamanho da lista para não exceder o tamanho de itensExtrato
+                              final itemCount = extratoProvider.itensExtrato.length < tamanhoLista
+                                  ? extratoProvider.itensExtrato.length
+                                  : tamanhoLista;
+
+                              return ListView.builder(
+                                itemCount: itemCount,
+                                itemBuilder: (context, index) {
+                                  return Column(
+                                    children: [
+                                      ItemListaExtrato(
+                                        dataDia: extratoProvider
+                                            .itensExtrato[index]
+                                            .dataReferencia
+                                            .formatarIso8601,
+                                        saldoDia: extratoProvider
+                                            .itensExtrato[index]
+                                            .saldoNaData
+                                            .toBRL,
+                                      ),
+                                      ...BuildListaOperacao.buildLista(
+                                        context: context,
+                                        index: index,
+                                        tipoConsulta: TipoConsultaExtrato
+                                            .VISUALIZAR,
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            } else {
+                              return Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    ItemListaExtrato(
-                                      dataDia: extratoProvider
-                                          .itensExtrato[index]
-                                          .dataReferencia
-                                          .formatarIso8601,
-                                      saldoDia:
-                                          extratoProvider
-                                              .itensExtrato[index].saldoNaData.toBRL,
+                                    SvgPicture.asset(ambiente.alerta_icone),
+                                    Padding(
+                                      padding:
+                                      EdgeInsets.symmetric(vertical: 50.h),
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            'Não há movimentações disponíveis',
+                                            style: context.textTheme
+                                                .displaySmall!
+                                                .copyWith(
+                                                color:
+                                                SRMColors.textBodyColor,
+                                                fontWeight:
+                                                FontWeight.w900),
+                                          ),
+                                          Text(
+                                            'Não existem movimentações no periodo selecionado.',
+                                            style: context.textTheme.bodyLarge!
+                                                .copyWith(
+                                                color: context
+                                                    .labelTextColor),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                    ...BuildListaOperacao.buildLista(
-                                        context: context, index: index, tipoConsulta: TipoConsultaExtrato.VISUALIZAR),
                                   ],
-                                );
-                              });
-                        },
+                                ),
+                              );
+                            }
+                          },
+                        ),
                       ),
-                    ))
+                    )
                   ],
                 ),
               ),

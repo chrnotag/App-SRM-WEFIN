@@ -14,6 +14,8 @@ class BuildListaOperacao {
       required TipoConsultaExtrato tipoConsulta}) {
     final extratoProvider = context.watch<ExtratoProvider>();
     bool periodoFixo = tipoConsulta == TipoConsultaExtrato.VISUALIZAR;
+    print('total lancamentos: ${extratoProvider.itensExtrato[index].lancamentos.length}');
+    print('total itens: ${extratoProvider.itensExtrato.length}');
     return periodoFixo
         ? extratoProvider.itensExtrato[index].lancamentos
             .map((e) => ItemListaOperacao(

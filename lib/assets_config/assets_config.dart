@@ -59,6 +59,7 @@ class AssetsConfig {
   static const String trustSelecionarCertTrust = 'assets/trust/selecionar_cert_trust.svg';
   static const String trustSenhaCertTrust = 'assets/trust/senha_cert_trust.svg';
   static const String trustSenhaSlideCertTrust = 'assets/trust/senha_slide_cert_trust.svg';
+  static const String trustSetasPerpendicularesTrust = 'assets/trust/setas_perpendiculares_trust.svg';
   static const String trustTedTerceiros = 'assets/trust/ted_terceiros.svg';
   static const String trustTransferenciasTrust = 'assets/trust/transferencias_trust.svg';
   static const String trustUploadCertTrust = 'assets/trust/upload_cert_trust.svg';
