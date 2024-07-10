@@ -23,7 +23,7 @@ class TedTerceirosImpl {
     };
     try {
       final response = await http.get(url, headers: headers);
-      print(response.body);
+      print('response do ted: ${response.body}');
       if (response.statusCode == 200) {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         TedTerceirosModel? data;
@@ -45,17 +45,14 @@ class TedTerceirosImpl {
     final tedProvider = Modular.get<TedTerceirosProvider>();
     Uri url = ambiente.endpoints
         .montarUrlAprovacaoTed(aprovarTedEnum, '$codigoTransferencia');
-    print('url: $url');
     final headers = {
       'Content-Type': 'application/json; charset=utf-8',
       'accept': 'application/json',
       'Authorization': authProvider.dataUser!.token,
       'plataforma': ambiente.plataforma.name
     };
-    print('header: $headers');
     try {
       final response = await http.post(url, headers: headers);
-      print(response.body);
       if (response.statusCode == 200) {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         Transferencia? data;
@@ -63,7 +60,6 @@ class TedTerceirosImpl {
         tedProvider.transferencia = data;
         return SucessResponse(data);
       } else {
-        print('erro: ${response.body}');
         return MensagemErroPadrao.erroResponse(response.bodyBytes);
       }
     } catch (_) {
