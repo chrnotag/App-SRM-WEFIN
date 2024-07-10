@@ -46,6 +46,7 @@ class _AlertAprovacaoTed extends StatelessWidget {
                 BotaoPadrao(
                     label: 'Sim',
                     onPressed: () async {
+                      print('testando: $aprovacao, $codigoTransferencia');
                       OverlayApp.iniciaOverlay(context);
                       final result = await TedTerceirosImpl.aprovarOuRecusar(
                           aprovacao, codigoTransferencia);
@@ -59,6 +60,7 @@ class _AlertAprovacaoTed extends StatelessWidget {
                              _AlertConcluidoAprovacaoTed(aprovacao: aprovacao),
                        );
                      }
+                     Modular.get<TedTerceirosProvider>().carregarDados();
                     }),
               ],
             )

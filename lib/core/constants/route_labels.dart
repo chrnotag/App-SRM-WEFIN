@@ -15,49 +15,49 @@ class AppRoutes {
   static get loginAuthRoute => Modular.initialRoute;
 
   //Escopo HOME
-  static get homeRoute => '/home';
+  static get homeModuleRoute => '/home';
 
-  static get listaSelecaoEmpresasHomeRoute => '/lista_empresas';
+  static get listaSelecaoEmpresasModuleRoute => '/lista_empresas';
 
-  static get secondScreenHomeRoute => '/second_screen';
+  static get secondScreenModuleRoute => '/second_screen';
 
-  static get helpScreenHomeRoute => '/help_screen';
+  static get helpScreenModuleRoute => '/help_screen';
 
-  static get monitorOperacoesHomeRoute => '/monitor_operacoes';
+  static get monitorOperacoesModuleRoute => '/monitor_operacoes';
 
-  static get assinaturaDigitalHomeRoute => '/assinatura';
+  static get assinaturaDigitalModuleRoute => '/assinatura';
 
-  static get menuAppHomeRoute => '/menu_app';
+  static get menuAppModuleRoute => '/menu_app';
 
-  static get homeAppHomeRoute => '/home_app';
+  static get homeAppModuleRoute => '/home_app';
 
-  static get importarCertificadoHomeRoute => '/importar_certificado';
+  static get importarCertificadoModuleRoute => '/importar_certificado';
 
-  static get guiaImportarCertificadoHomeRoute => '/importar_dispositivo';
+  static get guiaImportarCertificadoModuleRoute => '/importar_dispositivo';
 
-  static get leitorQrCodeHomeRoute => '/leitor-qr-code';
+  static get leitorQrCodeModuleRoute => '/leitor-qr-code';
 
-  //Escopo para troca de telas usando o Modular.to.navigate HOME
-  static get listaSelecaoEmpresasRoute =>
-      '$homeRoute$listaSelecaoEmpresasHomeRoute';
+  //ESCOPO HOME NAVIGATOR
+  static get listaSelecaoEmpresasNavigatorRoute =>
+      '$homeModuleRoute$listaSelecaoEmpresasModuleRoute';
 
-  static get secondScreenRoute => '$homeRoute$secondScreenHomeRoute';
+  static get secondScreenNavigatorRoute => '$homeModuleRoute$secondScreenModuleRoute';
 
-  static get helpScreenRoute => '$homeRoute$helpScreenHomeRoute';
+  static get helpScreenNavigatorRoute => '$homeModuleRoute$helpScreenModuleRoute';
 
-  static get monitorOperacoesRoute => '$homeRoute$monitorOperacoesHomeRoute';
+  static get monitorOperacoesNavigatorRoute => '$homeModuleRoute$monitorOperacoesModuleRoute';
 
-  static get assinaturaDigitalRoute => '$homeRoute$assinaturaDigitalHomeRoute';
+  static get assinaturaDigitalNavigatorRoute => '$homeModuleRoute$assinaturaDigitalModuleRoute';
 
-  static get menuAppRoute => '$homeRoute$menuAppHomeRoute';
+  static get menuAppNavigatorRoute => '$homeModuleRoute$menuAppModuleRoute';
 
-  static get homeAppRoute => '$homeRoute$homeAppHomeRoute';
+  static get homeAppNavigatorRoute => '$homeModuleRoute$homeAppModuleRoute';
 
-  static get importarCertificadoRoute =>
-      '$homeRoute$importarCertificadoHomeRoute';
+  static get importarCertificadoNavigatorRoute =>
+      '$homeModuleRoute$importarCertificadoModuleRoute';
 
-  static get guiaImportarCertificadoRoute =>
-      '$homeRoute$guiaImportarCertificadoHomeRoute';
+  static get guiaImportarCertificadoNavigatorRoute =>
+      '$homeModuleRoute$guiaImportarCertificadoModuleRoute';
 
   // ESCOPO SEM CONEXÃO
   static get semConexaoMainRoute => '/sem-conexao';
@@ -65,49 +65,62 @@ class AppRoutes {
   static get semConexaoRoute => '$semConexaoMainRoute/sem-conexao';
 
   //CONTA DIGITAL ROUTE
-  static get ContaDigitalRoute => '/conta-digital';
+  static get ContaDigitalModuleRoute => '/conta-digital';
 
   //ESCOPO CONTA DIGITAL ROUTE
-  static get extratoScreenContaDigitalRoute => '/tela-extrato';
+  static get extratoContaDigitalScreenRoute => '/tela-extrato';
 
-  static get selecionarDataScreenContaDigitalRoute => '/selecionar-data';
+  static get selecionarDataContaDigitalScreenRoute => '/selecionar-data';
 
-  static get visualizarPdfScreenContaDigitalRoute => '/visualizar-pdf';
+  static get visualizarPdfContaDigitalScreenRoute => '/visualizar-pdf';
 
-  static get comprovanteTEDScreenContaDigitalRoute => '/comprovante-ted';
+  static get comprovanteTEDContaDigitalScreenRoute => '/comprovante-ted';
 
-  static get extratoDataSelecionadaDigitalRoute => '/extrato-data-selecionada';
+  static get extratoDataSelecionadaScreenRoute => '/extrato-data-selecionada';
 
   //ESCOPO CONTA DIGITAL NAVIGATOR ROUTE
-  static get extratoScreenRoute =>
-      '$ContaDigitalRoute$extratoScreenContaDigitalRoute';
+  static get extratoNavigatorRoute =>
+      '$ContaDigitalModuleRoute$extratoContaDigitalScreenRoute';
 
-  static get selecionarDataScreenRoute =>
-      '$ContaDigitalRoute$selecionarDataScreenContaDigitalRoute';
+  static get selecionarDataNavigatorRoute =>
+      '$ContaDigitalModuleRoute$selecionarDataContaDigitalScreenRoute';
 
-  static get visualizarPdfScreenRoute =>
-      '$ContaDigitalRoute$visualizarPdfScreenContaDigitalRoute';
+  static get visualizarPdfNavigatorRoute =>
+      '$ContaDigitalModuleRoute$visualizarPdfContaDigitalScreenRoute';
 
-  static get visualizarComprovanteTEDScreenRoute =>
-      '$ContaDigitalRoute$comprovanteTEDScreenContaDigitalRoute';
+  static get visualizarComprovanteTEDNavigatorRoute =>
+      '$ContaDigitalModuleRoute$comprovanteTEDContaDigitalScreenRoute';
 
-  static get extratoDataSelecionadaDigitalScreenRoute => '$ContaDigitalRoute$extratoDataSelecionadaDigitalRoute';
+  static get extratoDataSelecionadaNavigatorRoute => '$ContaDigitalModuleRoute$extratoDataSelecionadaScreenRoute';
 
   //CARTEIRA CONSOLIDADA ROUTE
-static get carteiraConsolidadaRoute => '/carteira-consolidada';
+static get carteiraConsolidadaModuleRoute => '/carteira-consolidada';
 
  //ESCOPO CARTEIRA CONSOLIDADA
 static get carteiraConsolidadaScreenRoute => '/screen';
 
   //ESCOPO CARTEIRA CONSOLIDADA NAVIGATOR ROUTE
-static get carteiraConsolidadaNavigatorRoute => '$carteiraConsolidadaRoute$carteiraConsolidadaScreenRoute';
+static get carteiraConsolidadaNavigatorRoute => '$carteiraConsolidadaModuleRoute$carteiraConsolidadaScreenRoute';
+
+
 
   //TED PARA TERCEIROS ROUTE
-static get tedTerceirosRoute => '/ted-terceiros';
+static get tedTerceirosModuleRoute => '/ted-terceiros';
 
   //ESCOPO TED PARA TERCEIROS
 static get tedTerceirosScreenRoute => '/ted-screen';
 
  //ESCOPO TED PARA TERCEIROS  NAVIGATOR ROUTE
-static get tedTerceirosNavigatorRoute => '$tedTerceirosRoute$tedTerceirosScreenRoute';
+static get tedTerceirosNavigatorRoute => '$tedTerceirosModuleRoute$tedTerceirosScreenRoute';
+
+
+
+  //TRASNFERENCIAS ROUTE
+static get transferenciasModuleRoute => '/transferencias';
+
+  //ESCOPO TED PARA TERCEIROS
+static get transferenciasScreenRoute => '/transferencias-screen';
+
+  //ESCOPO TRANSFERENCIAS NAVIGATOR ROUTE
+static get transferenciasNavigatorRoute => '$transferenciasModuleRoute$transferenciasScreenRoute';
 }

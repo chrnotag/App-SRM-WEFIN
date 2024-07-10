@@ -45,14 +45,12 @@ class _TabBarMesesState extends State<_TabBarMeses> {
           tabAlignment: TabAlignment.start,
           onTap: (value) {
             setState(() {
-              print('mes: $value');
               switch (value) {
                 case 0:
                   setState(() {
                     extratoProvider.dataInicial =
                         CalcularUltimoDiaMes.resultado(DateTime(
                             DateTime.now().year, DateTime.now().month - 2));
-                    print("data: ${extratoProvider.dataInicial}");
                     extratoProvider.carregarDados();
                   });
                   break;
@@ -61,19 +59,17 @@ class _TabBarMesesState extends State<_TabBarMeses> {
                     extratoProvider.dataInicial =
                         CalcularUltimoDiaMes.resultado(DateTime(
                             DateTime.now().year, DateTime.now().month - 1));
-                    print("data: ${extratoProvider.dataInicial}");
                     extratoProvider.carregarDados();
                   });
                   break;
                 case 2:
                   setState(() {
                     extratoProvider.dataInicial = DateTime.now();
-                    print("data: ${extratoProvider.dataInicial}");
                     extratoProvider.carregarDados();
                   });
                   break;
               }
-
+              extratoProvider.notificar();
               // extratoProvider.dataInicial = tabProvider.meses[value];
               // extratoProvider.carregarDados();
             });

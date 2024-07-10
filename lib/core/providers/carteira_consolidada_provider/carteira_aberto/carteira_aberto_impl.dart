@@ -27,11 +27,9 @@ class CarteiraAbertoImpl {
       } else if (response.statusCode == 500) {
         return MensagemErroPadrao.codigo500();
       } else {
-        print('erro');
         return MensagemErroPadrao.erroResponse(response.bodyBytes);
       }
     } catch (e, s) {
-      print("$e, $s");
       return MensagemErroPadrao.codigo500();
     }
   }

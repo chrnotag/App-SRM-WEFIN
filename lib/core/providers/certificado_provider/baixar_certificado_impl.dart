@@ -38,7 +38,7 @@ class BaixarCertificadoImpl {
         builder: (context) => AlertDialogGenerico(
           title: 'Erro',
           msg: 'Não foi possivel baixar o certificado, tente novamente.',
-          onPressed: () => Modular.to.pushNamed(AppRoutes.assinaturaDigitalRoute),
+          onPressed: () => Modular.to.pushNamed(AppRoutes.assinaturaDigitalNavigatorRoute),
         ),
       );
       return SucessResponse(null);

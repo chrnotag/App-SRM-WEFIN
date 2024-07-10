@@ -1,12 +1,12 @@
 import 'package:Srm_Asset/assets_config/assets_config.dart';
 import 'package:Srm_Asset/core/constants/AppSizes.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
-import 'package:Srm_Asset/core/constants/enuns/plataforma_enum.dart';
 import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/roles_extensions.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
+import 'package:Srm_Asset/widgets/appbar_logo_perfil.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +18,10 @@ import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
+import '../../../core/constants/enuns/plataforma_enum.dart';
 import '../../../core/constants/enuns/roles_acesso_enum.dart';
 import '../../../core/implementations_config/api_response.dart';
+import '../../../core/providers/auth_provider_config/deslogar/deslogar_controller.dart';
 import '../../../models/auth_login_models/SRM/cedente_model.dart';
 import '../../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 
@@ -33,7 +35,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  late Future<ApiResponse<dynamic>> _saldoFuture;
+  Future<ApiResponse<dynamic>>? _saldoFuture;
   final contaDigital = Modular.get<ContaDigitalProvider>();
 
   @override
@@ -92,7 +94,7 @@ class _HomeViewState extends State<HomeView> {
                 assinaturaProvider.assinaturasPendentes;
             List<MonitorAssinaturasModel> assinaturas =
                 assinaturaProvider.todasAssinaturas;
-            Modular.to.pushNamed(AppRoutes.assinaturaDigitalRoute, arguments: {
+            Modular.to.pushNamed(AppRoutes.assinaturaDigitalNavigatorRoute, arguments: {
               'assinaturas': assinaturas,
               'assinaturasPendentes': assinaturasPendentes
             });
@@ -100,12 +102,12 @@ class _HomeViewState extends State<HomeView> {
       _CardItemMenuHome(
           icone: ambiente.transferenciasIcone,
           titulo: 'Transferências',
-          onTap: () {}),
+          onTap: () => Modular.to.pushNamed(AppRoutes.transferenciasNavigatorRoute)),
       _CardItemMenuHome(
           icone: ambiente.extratoIcone,
           titulo: 'Extrato',
           onTap: () {
-            Modular.to.pushNamed(AppRoutes.extratoScreenRoute);
+            Modular.to.pushNamed(AppRoutes.extratoNavigatorRoute);
           }),
       _CardItemMenuHome(
           icone: ambiente.ted_menu_icone,
@@ -133,45 +135,43 @@ class _HomeViewState extends State<HomeView> {
             icone: ambiente.grupoEconomicoIcone!,
             titulo: 'Grupo Econômico',
             onTap: () {
-              Modular.to.navigate(AppRoutes.listaSelecaoEmpresasRoute);
+              Modular.to.navigate(AppRoutes.listaSelecaoEmpresasNavigatorRoute);
             }),
       _CardItemMenuHome(
           icone: ambiente.faleConoscoIcone,
           titulo: 'Fale conosco',
           onTap: () {
-            Modular.to.pushNamed(AppRoutes.helpScreenRoute);
+            Modular.to.pushNamed(AppRoutes.helpScreenNavigatorRoute);
           }),
     ];
 
-    print(authProvider.rolesAcesso);
-
-    if (!authProvider.rolesAcesso
-        .contemRoles([RolesAcessoEnum.ROLE_CONTA_DIGITAL])) {
+    // if (!authProvider.rolesAcesso
+    //     .contemRoles([RolesAcessoEnum.ROLE_CONTA_DIGITAL])) {
+    if (!isSRM) {
       cardsHome.removeWhere((card) =>
           (card as _CardItemMenuHome).titulo == 'Carteira Consolidada');
-      cardsHome.removeWhere((card) =>
-          (card as _CardItemMenuHome).titulo == 'Relatório de Títulos');
-      cardsHome.removeWhere(
-          (card) => (card as _CardItemMenuHome).titulo == 'Extrato');
     }
+    cardsHome.removeWhere(
+        (card) => (card as _CardItemMenuHome).titulo == 'Relatório de Títulos');
+    // cardsHome.removeWhere(
+    //     (card) => (card as _CardItemMenuHome).titulo == 'Extrato');
+    // }
 
-    if (!authProvider.rolesAcesso
-        .contemRoles([RolesAcessoEnum.ROLE_TRANSFERENCIA_CONTA_DIGITAL])) {
-      cardsHome.removeWhere(
-          (card) => (card as _CardItemMenuHome).titulo == 'Transferências');
-    }
-
-    if (!authProvider.rolesAcesso
-        .contemRoles([RolesAcessoEnum.ROLE_APROVACAO_TED_CONTA_GARANTIA])) {
-      cardsHome.removeWhere(
-          (card) => (card as _CardItemMenuHome).titulo == 'Ted para Terceiros');
-    }
+    // if (!authProvider.rolesAcesso
+    //     .contemRoles([RolesAcessoEnum.ROLE_TRANSFERENCIA_CONTA_DIGITAL])) {
+    // }
+    //
+    // if (!authProvider.rolesAcesso
+    //     .contemRoles([RolesAcessoEnum.ROLE_APROVACAO_TED_CONTA_GARANTIA])) {
+    // cardsHome.removeWhere(
+    //     (card) => (card as _CardItemMenuHome).titulo == 'Ted para Terceiros');
+    // }
 
     return Scaffold(
       body: Column(
         children: [
           Container(
-            height: 190.h,
+            padding: EdgeInsets.only(bottom: 16.h),
             width: context.width,
             decoration: BoxDecoration(
               color: context.secondaryColor,
@@ -182,169 +182,112 @@ class _HomeViewState extends State<HomeView> {
             ),
             child: Stack(
               children: [
-                Padding(
-                  padding: EdgeInsets.only(top: 35.h),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16.w),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SvgPicture.asset(
-                              ambiente.logoAppBar,
-                              width: 24.w,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    PreferredSize(
+                        preferredSize: AppBar().preferredSize,
+                        child: const AppBarLogo()),
+                    Padding(
+                      padding: EdgeInsets.only(left: context.width * 0.12),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 16.h),
+                            child: Text(
+                              'Conta Digital',
+                              style: context.textTheme.displaySmall!.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w900),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  width: context.width * 0.7,
-                                  height: 40.h,
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: AppSizes.paddingSmall),
-                                  decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.white),
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(12))),
-                                  child: DropdownButton(
-                                    dropdownColor: Colors.white,
-                                    value: _valorSelecionado,
-                                    selectedItemBuilder: (context) =>
-                                        _listaItens
-                                            .map((e) => DropdownMenuItem(
-                                                  value: e.identificador,
-                                                  child: Text("Olá, ${e.nome}",
-                                                      style: context
-                                                          .textTheme.bodyMedium!
-                                                          .copyWith(
-                                                              color:
-                                                                  Colors.white),
-                                                      maxLines: 1,
-                                                      overflow: TextOverflow
-                                                          .ellipsis),
-                                                ))
-                                            .toList(),
-                                    menuMaxHeight: 300.h,
-                                    isExpanded: true,
-                                    items: _listaItens
-                                        .map((e) => DropdownMenuItem(
-                                              value: e.identificador,
-                                              child: Text(e.nome,
-                                                  style: context
-                                                      .textTheme.bodyMedium!
-                                                      .copyWith(
-                                                          color: Colors.black),
-                                                  maxLines: 1,
-                                                  overflow:
-                                                      TextOverflow.ellipsis),
-                                            ))
-                                        .toList(),
-                                    onChanged: (value) async {
-                                      setState(() {
-                                        _valorSelecionado = value!;
-                                      });
-                                      await authProvider.RelogarTrocarCedente(
-                                          value!, context);
-                                    },
-                                    underline: Container(),
-                                    style: context.textTheme.bodyMedium!
-                                        .copyWith(color: Colors.white),
-                                    icon: const Icon(
-                                      Icons.keyboard_arrow_down,
-                                      size: 25,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 16.h),
-                                  child: Text(
-                                    'Conta Digital',
-                                    style: context.textTheme.displaySmall!
-                                        .copyWith(
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text('Saldo Disponível',
+                                      style: context.textTheme.bodyMedium!
+                                          .copyWith(color: Colors.white)),
+                                  FutureBuilder(
+                                      future: _saldoFuture,
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return const CircularProgressIndicator(
                                             color: Colors.white,
-                                            fontWeight: FontWeight.w900),
-                                  ),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text('Saldo Disponível',
-                                            style: context.textTheme.bodyMedium!
-                                                .copyWith(color: Colors.white)),
-                                        FutureBuilder(
-                                            future: _saldoFuture,
-                                            builder: (context, snapshot) {
-                                              if (snapshot.connectionState ==
-                                                  ConnectionState.waiting) {
-                                                return const CircularProgressIndicator(
-                                                  color: Colors.white,
-                                                );
-                                              } else if (snapshot.hasError) {
-                                                return Text(
-                                                    'Houve um erro ao carregar o saldo!');
-                                              } else {
-                                                return Text(
-                                                  _isSaldoVisivel
-                                                      ? contaDigitalProvider
-                                                              .saldoContaDigital
-                                                              ?.saldoTotal
-                                                              .toBRL ??
-                                                          0.0.toBRL
-                                                      : 'R\$ * * * * *',
-                                                  style: context
-                                                      .textTheme.displayMedium!
-                                                      .copyWith(
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.w900),
-                                                );
-                                              }
-                                            }),
-                                      ],
-                                    ),
-                                    Visibility(
-                                      visible: authProvider.rolesAcesso
-                                          .contemRoles([
-                                        RolesAcessoEnum.ROLE_CONTA_DIGITAL
-                                      ]),
-                                      child: IconButton(
-                                        onPressed: () => setState(() {
-                                          _isSaldoVisivel = !_isSaldoVisivel;
-                                        }),
-                                        icon: Icon(
-                                          _isSaldoVisivel
-                                              ? Icons.visibility
-                                              : Icons.visibility_off,
-                                          color: context.backgroundColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                            SvgPicture.asset(
-                              AssetsConfig.imagesExitIcone,
-                              width: 30.w,
-                            )
-                          ],
-                        ),
+                                          );
+                                        } else if (snapshot.hasError) {
+                                          return Text(
+                                              'Houve um erro ao carregar o saldo!');
+                                        } else {
+                                          return RichText(
+                                            text: TextSpan(
+                                                text: _isSaldoVisivel
+                                                    ? contaDigitalProvider
+                                                            .saldoContaDigital
+                                                            ?.saldoTotal
+                                                            .toBRL ??
+                                                        0.0.toBRL
+                                                    : 'R\$ * * * * *',
+                                                style: context
+                                                    .textTheme.displayMedium!
+                                                    .copyWith(
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.w900),
+                                                children: [
+                                                  WidgetSpan(
+                                                    child: Visibility(
+                                                      visible: authProvider
+                                                          .rolesAcesso
+                                                          .contemRoles([
+                                                        RolesAcessoEnum
+                                                            .ROLE_CONTA_DIGITAL
+                                                      ]),
+                                                      child: Padding(
+                                                        padding: EdgeInsets.only(
+                                                            left: 8.w),
+                                                        child: InkWell(
+                                                          onTap: () =>
+                                                              setState(() {
+                                                                print('teste: ${contaDigitalProvider.dadosContaDigital!.nome}');
+                                                            _isSaldoVisivel =
+                                                                !_isSaldoVisivel;
+                                                          }),
+                                                          child: Icon(
+                                                            _isSaldoVisivel
+                                                                ? Icons.visibility
+                                                                : Icons
+                                                                    .visibility_off,
+                                                            color: context
+                                                                .backgroundColor,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  )
+                                                ]),
+                                          );
+                                        }
+                                      }),
+                                ],
+                              ),
+                            ],
+                          )
+                        ],
                       ),
-                    ],
-                  ),
+                    )
+                  ],
                 ),
                 ambiente.plataforma == Plataforma.TRUST
                     ? Positioned(
-                        left: -context.width * 0.15,
-                        top: -90.h,
+                        left: -context.width * 0.1,
+                        top: -40.h,
                         child: SvgPicture.asset(
                           ambiente.logoAppBar,
                           color: Color(0x1affffff),
@@ -365,7 +308,7 @@ class _HomeViewState extends State<HomeView> {
           ),
           SizedBox(
             width: context.width,
-            height: context.height * 0.78,
+            height: context.height * 0.7,
             child: GridView.count(
               padding: EdgeInsets.all(20.r),
               crossAxisCount: 2,

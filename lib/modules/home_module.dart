@@ -14,24 +14,24 @@ class HomeModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    r.child(AppRoutes.listaSelecaoEmpresasHomeRoute,
+    r.child(AppRoutes.listaSelecaoEmpresasModuleRoute,
         child: (context) => const ListaSelecaoEmpresas());
-    r.child(AppRoutes.helpScreenHomeRoute, child: (context) => const Ajuda());
+    r.child(AppRoutes.helpScreenModuleRoute, child: (context) => const Ajuda());
     r.child(
-      AppRoutes.assinaturaDigitalHomeRoute,
+      AppRoutes.assinaturaDigitalModuleRoute,
       child: (context) => const MonitorAssinaturas(),
     );
     r.child(
-      AppRoutes.menuAppHomeRoute,
+      AppRoutes.menuAppModuleRoute,
       child: (context) => const Menu(),
     );
-    r.child(AppRoutes.homeAppHomeRoute, child: (context) => const HomeView());
+    r.child(AppRoutes.homeAppModuleRoute, child: (context) => const HomeView());
     r.child(
-      AppRoutes.importarCertificadoHomeRoute,
+      AppRoutes.importarCertificadoModuleRoute,
       child: (context) => const ImportarCertificado(),
     );
     r.child(
-      AppRoutes.guiaImportarCertificadoHomeRoute,
+      AppRoutes.guiaImportarCertificadoModuleRoute,
       child: (context) => const GuiaImportCertificado(),
     );
   }

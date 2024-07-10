@@ -74,7 +74,7 @@ class Menu extends StatelessWidget {
                         icon: LineIcons.questionCircle,
                         title: 'Ajuda',
                         onTap: () =>
-                             Modular.to.pushNamed(AppRoutes.helpScreenRoute)),
+                             Modular.to.pushNamed(AppRoutes.helpScreenNavigatorRoute)),
                     _MenuItem(
                         icon: Icons.exit_to_app,
                         title: 'Sair',

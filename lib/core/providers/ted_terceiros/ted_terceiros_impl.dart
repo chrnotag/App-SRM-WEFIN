@@ -63,6 +63,7 @@ class TedTerceirosImpl {
         tedProvider.transferencia = data;
         return SucessResponse(data);
       } else {
+        print('erro: ${response.body}');
         return MensagemErroPadrao.erroResponse(response.bodyBytes);
       }
     } catch (_) {

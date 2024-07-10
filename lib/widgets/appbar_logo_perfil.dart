@@ -42,13 +42,13 @@ class _AppBarLogoState extends State<AppBarLogo> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           InkWell(
-              child: SvgPicture.asset(ambiente.logoAppBar, width: 20.w),
-              onTap: () => Modular.to.pushNamed(AppRoutes.menuAppRoute),
-              borderRadius: BorderRadius.all(Radius.circular(20))),
+              onTap: () => Modular.to.pushNamed(AppRoutes.menuAppNavigatorRoute),
+              borderRadius: BorderRadius.all(Radius.circular(20.r)),
+              child: SvgPicture.asset(ambiente.logoAppBar, width: 20.w)),
           Padding(
             padding: EdgeInsets.only(left: AppSizes.paddingMedium),
             child: Container(
-              width: context.width * 0.7,
+              width: context.width * 0.74,
               height: 40.h,
               padding: EdgeInsets.symmetric(horizontal: AppSizes.paddingSmall),
               decoration: BoxDecoration(
@@ -97,11 +97,10 @@ class _AppBarLogoState extends State<AppBarLogo> {
             ),
           ),
           Spacer(),
-          IconButton(
-            onPressed: () {
-              DeslogarUsuario(context: context).encerrarSessao();
-            },
-            icon: SvgPicture.asset(AssetsConfig.imagesExitIcone, width: 29),
+          InkWell(
+            onTap: () => DeslogarUsuario(context: context).encerrarSessao(),
+            child: SvgPicture.asset(AssetsConfig.imagesExitIcone, width: 29),
+            borderRadius: BorderRadius.all(Radius.circular(20.r)),
           )
         ],
       ),

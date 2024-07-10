@@ -21,6 +21,14 @@ class TedTerceirosProvider extends ChangeNotifier {
 
   Future<void> carregarDados() async {
     futureListaTed = TedTerceirosImpl.pegarTransferencias();
+    notifyListeners();
+  }
+
+  void limparDados(){
+    _futureListaTed = null;
+    teds = null;
+    transferencia = null;
+    pdfComprovante = null;
   }
 
   TedTerceirosModel? _teds;

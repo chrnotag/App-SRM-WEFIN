@@ -30,7 +30,7 @@ class PopUpErroCarregarDados extends StatelessWidget {
           BotaoPadrao(
               label: 'Ok',
               onPressed: () =>
-                  Modular.to.navigate(AppRoutes.homeAppRoute))
+                  Modular.to.navigate(AppRoutes.homeAppNavigatorRoute))
         ],
       ),
     );

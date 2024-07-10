@@ -10,13 +10,24 @@ import '../../../../models/conta_digital/extrato/conta_extrato_model.dart';
 import '../../../utils/data_format.dart';
 
 class ExtratoProvider extends ChangeNotifier {
+
+
+  void notificar() => notifyListeners();
+
   ContaExtratoModel? _extrato;
 
   ContaExtratoModel? get extrato => _extrato;
 
   set extrato(ContaExtratoModel? listaExtrato) {
     _extrato = listaExtrato;
-    notifyListeners();
+  }
+
+  ContaExtratoModel? _extratoPersonalizado;
+
+  ContaExtratoModel? get extratoPersonalizado => _extratoPersonalizado;
+
+  set extratoPersonalizado(ContaExtratoModel? listaExtrato) {
+    _extratoPersonalizado = listaExtrato;
   }
 
   Uint8List? _extratoDownloadBites;
@@ -25,25 +36,37 @@ class ExtratoProvider extends ChangeNotifier {
 
   set extratoDownloadBites(Uint8List? bites) {
     _extratoDownloadBites = bites;
-    notifyListeners();
   }
 
   List<Item> get itensExtrato => extrato!.itens.reversed.toList();
+
+  List<Item> get itensExtratoPersonalizado =>
+      extratoPersonalizado!.itens.reversed.toList();
 
   DateTime _dataInicial = DateTime.now();
 
   DateTime get dataInicial => _dataInicial;
 
-  set dataInicial(DateTime data) {
-    _dataInicial = data;
-    notifyListeners();
-  }
+  set dataInicial(DateTime data) => _dataInicial = data;
+
+  DateTime? _dataInicialPersonalizada;
+
+  DateTime? get dataInicialPersonalizada => _dataInicialPersonalizada;
+
+  set dataInicialPersonalizada(DateTime? data) =>
+      _dataInicialPersonalizada = data;
 
   DateTime? _dataFinal;
 
   DateTime? get dataFinal => _dataFinal;
 
   set dataFinal(DateTime? data) => _dataFinal = data;
+
+  DateTime? _dataFinalPersonalizada;
+
+  DateTime? get dataFinalPersonalizada => _dataFinalPersonalizada;
+
+  set dataFinalPersonalizada(DateTime? data) => _dataFinalPersonalizada = data;
 
   // String _retornaDataFinal() =>
   //     mascaraData.format(DateTime.now().subtract(Duration(days: intervaloDias)));
@@ -57,7 +80,6 @@ class ExtratoProvider extends ChangeNotifier {
 
   set intervaloDias(int dias) {
     _intervaloDias = dias;
-    notifyListeners();
   }
 
   Future<ApiResponse<dynamic>>? _extratoFuture;
@@ -66,6 +88,15 @@ class ExtratoProvider extends ChangeNotifier {
 
   set extratoFuture(Future<ApiResponse<dynamic>>? extrato) {
     _extratoFuture = extrato;
+  }
+
+  Future<ApiResponse<dynamic>>? _extratoPersonalizadoFuture;
+
+  Future<ApiResponse<dynamic>>? get extratoPersonalizadoFuture =>
+      _extratoPersonalizadoFuture;
+
+  set extratoPersonalizadoFuture(Future<ApiResponse<dynamic>>? extrato) {
+    _extratoPersonalizadoFuture = extrato;
   }
 
   Future<ApiResponse<dynamic>>? _downloadExtratoFuture;
@@ -79,33 +110,44 @@ class ExtratoProvider extends ChangeNotifier {
 
   Future<void> carregarDados() async {
     final contaDigitalProvider = Modular.get<ContaDigitalProvider>();
-    extratoFuture = ExtratoImpl(tipoConsulta: TipoConsultaExtrato.VISUALIZAR)
-        .pegarExtrato(
-            contaDigitalProvider.dadosContaDigital!.conta,
-            (dataFinal ?? dataFinalFiltro()).formatarIso8601,
-            dataInicial.formatarIso8601);
+    extratoFuture =
+        const ExtratoImpl(tipoConsulta: TipoConsultaExtrato.VISUALIZAR)
+            .pegarExtrato(
+                contaDigitalProvider.dadosContaDigital!.conta,
+                (dataFinalFiltro()).formatarIso8601,
+                dataInicial.formatarIso8601);
+  }
+
+  Future<void> carregarDadosPeriodoPersonalizado() async {
+    final contaDigitalProvider = Modular.get<ContaDigitalProvider>();
+    extratoPersonalizadoFuture =
+        const ExtratoImpl(tipoConsulta: TipoConsultaExtrato.PERSONALIZADO)
+            .pegarExtrato(
+                contaDigitalProvider.dadosContaDigital!.conta,
+                dataFinalPersonalizada!.formatarIso8601,
+                dataInicialPersonalizada!.formatarIso8601);
   }
 
   Future<void> baixarDados() async {
     final contaDigitalProvider = Modular.get<ContaDigitalProvider>();
     downloadExtratoFuture =
-        ExtratoImpl(tipoConsulta: TipoConsultaExtrato.BAIXAR).pegarExtrato(
-            contaDigitalProvider.dadosContaDigital!.conta,
-            dataFinalFiltro().formatarIso8601,
-            dataInicial.formatarIso8601);
+        const ExtratoImpl(tipoConsulta: TipoConsultaExtrato.BAIXAR)
+            .pegarExtrato(contaDigitalProvider.dadosContaDigital!.conta,
+                dataFinalFiltro().formatarIso8601, dataInicial.formatarIso8601);
   }
 
   Future<void> baixarDadosPeriodo() async {
     final contaDigitalProvider = Modular.get<ContaDigitalProvider>();
     await const ExtratoImpl(tipoConsulta: TipoConsultaExtrato.BAIXAR)
-        .pegarExtrato(contaDigitalProvider.dadosContaDigital!.conta,
-            dataFinal!.formatarIso8601, dataInicial.formatarIso8601);
+        .pegarExtrato(
+            contaDigitalProvider.dadosContaDigital!.conta,
+            dataFinalPersonalizada!.formatarIso8601,
+            dataInicialPersonalizada!.formatarIso8601);
   }
 
   void limparDados() {
     dataInicial = DateTime.now();
     intervaloDias = 7;
     extratoFuture = null;
-    extrato = null;
   }
 }

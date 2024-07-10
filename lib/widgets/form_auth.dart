@@ -22,6 +22,7 @@ import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_textfield.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:validatorless/validatorless.dart';
+import '../core/constants/enuns/plataforma_enum.dart';
 import '../core/providers/certificado_provider/certificado_provider.dart';
 import '../core/providers/conta_digital/conta_digital_provider.dart';
 import 'link_component.dart';
@@ -94,6 +95,8 @@ class _AuthFormState extends State<AuthForm> {
       });
     }
 
+    final bool isTrust = ambiente.plataforma == Plataforma.TRUST;
+
     return Form(
       key: _formKey,
       child: AutofillGroup(
@@ -107,17 +110,18 @@ class _AuthFormState extends State<AuthForm> {
                   onTap: () => setState(() {
                     _mensagemErro = null;
                   }),
-                  hint: "E-mail ou CPF",
+                  hint: isTrust ? "CPF" :"E-mail ou CPF",
                   inputFormatters: _cpfFormatter,
+                  inputType: isTrust ? TextInputType.number : null,
                   onChanged: (value) => atualizarMascara(),
                   maxCaracters: maximoCaracteresCPF,
-                  label: 'Digite seu e-mail ou CPF',
+                  label: isTrust ? "Digite seu CPF" : 'Digite seu e-mail ou CPF',
                   autofillHint: AutofillHints.email,
                   controller: _loginEC,
                   validator: Validatorless.multiple([
-                    if (temLetras) Validatorless.email('Email inválido!'),
-                    if (!temLetras) Validatorless.cpf('CPF inválido!'),
-                    Validatorless.required('E-mail ou CPF Obrigatório'),
+                    if (temLetras && !isTrust) Validatorless.email('Email inválido!'),
+                    if (!temLetras || isTrust) Validatorless.cpf('CPF inválido!'),
+                    Validatorless.required(isTrust ? "CPF Obrigatório" : 'E-mail ou CPF Obrigatório'),
                     (value) => _mensagemErro
                   ]),
                 ),
@@ -280,13 +284,13 @@ class _AuthFormState extends State<AuthForm> {
         // _saveLoginDataIfNeeded();
         if (authProvider.listaCedente!.length > 1) {
           OverlayApp.terminaOverlay();
-          Modular.to.pushReplacementNamed(AppRoutes.listaSelecaoEmpresasRoute);
+          Modular.to.pushReplacementNamed(AppRoutes.listaSelecaoEmpresasNavigatorRoute);
         } else {
           //certificadoProvider.pegarCertificado();
           OverlayApp.terminaOverlay();
           authProvider.RelogarTrocarCedente(
               authProvider.dataUser!.identificadorCedente, context);
-          Modular.to.navigate(AppRoutes.homeAppRoute);
+          Modular.to.navigate(AppRoutes.homeAppNavigatorRoute);
         }
       }
     }

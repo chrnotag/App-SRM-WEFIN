@@ -3,9 +3,11 @@ import 'package:Srm_Asset/core/constants/extensions/date_extensions.dart';
 import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
+import 'package:Srm_Asset/core/constants/extensions/string_extensions.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
+import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_impl.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_provider.dart';
 import 'package:Srm_Asset/views/conta_digital/tela_extrato/widgets/item_lista_extrato.dart';
 import 'package:Srm_Asset/views/conta_digital/widgets/app_bar_conta_digital.dart';
@@ -43,6 +45,7 @@ class _TelaExtratoState extends State<TelaExtrato>
     _tabController = TabController(length: 3, vsync: this, initialIndex: 2);
     extratoProviderInit.carregarDados();
     tamanhoLista = 7;
+
   }
 
   @override
@@ -105,7 +108,7 @@ class _TelaExtratoState extends State<TelaExtrato>
                                               .itensExtrato[index].saldoNaData.toBRL,
                                     ),
                                     ...BuildListaOperacao.buildLista(
-                                        context: context, index: index),
+                                        context: context, index: index, tipoConsulta: TipoConsultaExtrato.VISUALIZAR),
                                   ],
                                 );
                               });

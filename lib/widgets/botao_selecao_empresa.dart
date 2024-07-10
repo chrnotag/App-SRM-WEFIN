@@ -47,7 +47,7 @@ class SelecaoEmpresa extends StatelessWidget {
             onTap: changeble && authProvider.listaCedente!.length > 1
                 ? () {
                     Modular.to
-                        .navigate(AppRoutes.listaSelecaoEmpresasRoute);
+                        .navigate(AppRoutes.listaSelecaoEmpresasNavigatorRoute);
                   }
                 : null,
             borderRadius: BorderRadius.circular(50.r),

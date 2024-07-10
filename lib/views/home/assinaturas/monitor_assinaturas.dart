@@ -46,7 +46,7 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
                 context.textTheme.displaySmall!.copyWith(color: Colors.white),
           ),
           centerTitle: true,
-          leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: () => Modular.to.navigate(AppRoutes.homeAppRoute),),
+          leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: () => Modular.to.navigate(AppRoutes.homeAppNavigatorRoute),),
         ),
         body: Column(
           children: [
@@ -68,7 +68,6 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
                                   child: Text(e.nome,
                                       style: context.textTheme.bodyLarge!
                                           .copyWith(
-                                              color: context.labelTextColor,
                                               fontWeight: FontWeight.w900),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis),
