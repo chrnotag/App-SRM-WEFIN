@@ -1,0 +1,12 @@
+flutter_native_splash:
+  color: "#2E477E"
+  image: "assets/images/icon_app_srm.png"
+  android: true
+  ios: true
+  fullscreen: true
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/icon_app_srm.png"
+  min_sdk_android: 21

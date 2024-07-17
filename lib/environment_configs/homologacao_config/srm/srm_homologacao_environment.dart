@@ -1,0 +1,101 @@
+import 'package:Srm_Asset/core/constants/classes_abstratas/abstract_endpoint.dart';
+import 'package:Srm_Asset/core/constants/classes_abstratas/imagens_guia_certificado.dart';
+import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
+import 'package:Srm_Asset/core/constants/enuns/plataforma_enum.dart';
+import 'package:Srm_Asset/core/constants/environment/homologacao/srm/contatos.dart';
+import 'package:Srm_Asset/core/constants/environment/homologacao/srm/endpoints.dart';
+import 'package:Srm_Asset/core/constants/environment/tema_srm.dart';
+import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
+import 'package:flutter/material.dart';
+
+import '../../../assets_config/assets_config.dart';
+
+class SrmHomologacaoEnvironment extends Environment {
+  const SrmHomologacaoEnvironment();
+
+  @override
+  Endpoint get endpoints => EndPointsSRM();
+
+  @override
+  ThemeData get tema => ThemeSRM.theme;
+
+  @override
+  // TODO: implement logo
+  String get logo => ThemeSRM.logo;
+
+  @override
+  // TODO: implement logoAppBar
+  String get logoAppBar => ThemeSRM.logoAppBar;
+
+  @override
+  // TODO: implement plataforma
+  Plataforma get plataforma => Plataforma.SRM;
+
+  @override
+  // TODO: implement imagemAjuda
+  Widget get imagemAjuda => ThemeSRM.imagemAjuda;
+
+  @override
+  // TODO: implement contatos
+  ContatosSRM get contatos => ContatosSRM();
+
+  @override
+  // TODO: implement iconColor
+  Color? get IconColor => null;
+
+  @override
+  // TODO: implement corQuadradoLogin
+  Color? get corQuadradoLogin => Colors.transparent;
+
+  @override
+  Color? get corImagemLogo => SRMColors.secondaryColor;
+
+  @override
+  Color? get corTextoSlogan => TRUSTColors.primaryColor;
+
+  @override
+  // TODO: implement fraseSloganLogin
+  String get fraseSloganLogin => 'Capital em Movimento';
+
+  @override
+  // TODO: implement imagensGuiaCertificado
+  ImagensGuiaImportarCertificado get imagensGuiaCertificado => ThemeSRM();
+
+  @override
+  // TODO: implement alerta_icone
+  String get alerta_icone => AssetsConfig.srmAlertIconSrm;
+
+  @override
+  // TODO: implement check_icone
+  String get check_icone => AssetsConfig.srmCheckSrmIcon;
+
+  @override
+  // TODO: implement ted_menu_icone
+  String get ted_menu_icone => AssetsConfig.srmTedTerceirosSrm;
+
+  @override
+  // TODO: implement extratoIcone
+  String get extratoIcone => AssetsConfig.srmExtratoSrm;
+
+  @override
+  // TODO: implement faleConoscoIcone
+  String get faleConoscoIcone => AssetsConfig.srmFaleConoscoSrm;
+
+  @override
+  // TODO: implement grupoEconomicoIcone
+  String get grupoEconomicoIcone => AssetsConfig.srmGrupoPessoas;
+
+  @override
+  // TODO: implement monitorOperacoesIcone
+  String get monitorOperacoesIcone => AssetsConfig.srmMonitorOperacoesSrm;
+
+  @override
+  // TODO: implement tedTerceirosIcone
+  String get tedTerceirosIcone => AssetsConfig.srmTedTerceirosSrm;
+
+  @override
+  // TODO: implement transferenciasIcone
+  String get transferenciasIcone => AssetsConfig.srmSetasPerpendiculares;
+
+  String get imagemEmpresa => AssetsConfig.srmEmpresaSrm;
+}
