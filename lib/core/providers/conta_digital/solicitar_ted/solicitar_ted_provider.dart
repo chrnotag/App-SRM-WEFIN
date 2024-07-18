@@ -36,8 +36,7 @@ class SolicitarTedProvider extends ChangeNotifier {
   Future<void> carregarBancos(String? codigoBanco) async {
     final response = await BancosModelImpl.carregarBancos(codigoBanco);
     if (response.error == null) {
-      listaBancos = response.data;
-      bancoSelecionado = listaBancos[0];
+      listaBancos = response.data..sort((a, b) => int.parse(a.codigo).compareTo(int.parse(b.codigo)));
       notifyListeners();
     } else {
       showToast('Erro ao carregar lista de bancos', response);

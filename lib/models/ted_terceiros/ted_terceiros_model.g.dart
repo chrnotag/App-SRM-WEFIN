@@ -49,7 +49,8 @@ Transferencia _$TransferenciaFromJson(Map<String, dynamic> json) =>
       identificadorFavorecido: json['identificadorFavorecido'] as String,
       nomeFavorecido: json['nomeFavorecido'] as String,
       statusAprovacaoCedente: json['statusAprovacaoCedente'] as String,
-      statusTransferencia: json['statusTransferencia'] as String,
+      statusTransferencia:
+          $enumDecode(_$TedTerceirosEnumEnumMap, json['statusTransferencia']),
       valor: json['valor'] as String,
       dataEfetivacao: json['dataEfetivacao'] == null
           ? null
@@ -69,7 +70,8 @@ Map<String, dynamic> _$TransferenciaToJson(Transferencia instance) =>
       'identificadorFavorecido': instance.identificadorFavorecido,
       'nomeFavorecido': instance.nomeFavorecido,
       'statusAprovacaoCedente': instance.statusAprovacaoCedente,
-      'statusTransferencia': instance.statusTransferencia,
+      'statusTransferencia':
+          _$TedTerceirosEnumEnumMap[instance.statusTransferencia]!,
       'valor': instance.valor,
       'dataEfetivacao': instance.dataEfetivacao?.toIso8601String(),
       'tipoTransferencia': instance.tipoTransferencia,
@@ -77,3 +79,10 @@ Map<String, dynamic> _$TransferenciaToJson(Transferencia instance) =>
       'dataClienteAprovacao': instance.dataClienteAprovacao,
       'codigoTransacao': instance.codigoTransacao,
     };
+
+const _$TedTerceirosEnumEnumMap = {
+  TedTerceirosEnum.PARA_APROVACAO: 'PARA_APROVACAO',
+  TedTerceirosEnum.PAGO: 'PAGO',
+  TedTerceirosEnum.SOLICITADO: 'SOLICITADO',
+  TedTerceirosEnum.REJEITADO: 'REJEITADO',
+};

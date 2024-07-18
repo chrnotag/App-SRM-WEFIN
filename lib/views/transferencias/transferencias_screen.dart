@@ -11,7 +11,7 @@ import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.da
 import 'package:Srm_Asset/core/providers/conta_digital/solicitacao_ted/solicitacao_ted_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/solicitar_ted/solicitar_ted_provider.dart';
 import 'package:Srm_Asset/core/utils/overlay.dart';
-import 'package:Srm_Asset/models/conta_digital/extrato/conta_extrato_model.dart';
+import 'package:Srm_Asset/views/transferencias/widgets/banco_dropdown.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
 import 'package:Srm_Asset/widgets/mensagem_tela_vazia.dart';
 import 'package:Srm_Asset/widgets/popup_generico.dart';
@@ -23,6 +23,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:validatorless/validatorless.dart';
 import '../../core/constants/classes_abstratas/envirioment.dart';
 import '../../core/providers/ted_terceiros/ted_terceiros_impl.dart';
 import '../../models/conta_digital/bancos/bancos_model.dart';

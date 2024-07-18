@@ -110,7 +110,6 @@ class AssinaturaProvider extends ChangeNotifier {
       bool op2AguardandoAssinaturaUsuarioAtual =
           estaAguardandoAssinaturaUsuarioAtual(op2, identificadorUsuario);
 
-      // Prioridade 1: Aguardando assinatura do usuário atual
       if (op1AguardandoAssinaturaUsuarioAtual &&
           !op2AguardandoAssinaturaUsuarioAtual) {
         return -1;
@@ -120,38 +119,38 @@ class AssinaturaProvider extends ChangeNotifier {
       }
 
       // Prioridade 2: Aguardando assinatura (de qualquer usuário)
-      if (op1.statusAssinaturaDigital == 'Aguardando Assinatura' &&
-          op2.statusAssinaturaDigital != 'Aguardando Assinatura') {
+      if (op1.statusOperacao == 'Aguardando Assinatura' &&
+          op2.statusOperacao != 'Aguardando Assinatura') {
         return -1;
-      } else if (op1.statusAssinaturaDigital != 'Aguardando Assinatura' &&
-          op2.statusAssinaturaDigital == 'Aguardando Assinatura') {
+      } else if (op1.statusOperacao != 'Aguardando Assinatura' &&
+          op2.statusOperacao == 'Aguardando Assinatura') {
         return 1;
       }
 
       // Prioridade 3: Assinada
-      if (op1.statusAssinaturaDigital == 'Assinado' &&
-          op2.statusAssinaturaDigital != 'Assinado') {
+      if (op1.statusOperacao == 'Assinado' &&
+          op2.statusOperacao != 'Assinado') {
         return -1;
-      } else if (op1.statusAssinaturaDigital != 'Assinado' &&
-          op2.statusAssinaturaDigital == 'Assinado') {
+      } else if (op1.statusOperacao != 'Assinado' &&
+          op2.statusOperacao == 'Assinado') {
         return 1;
       }
 
       // Prioridade 4: Rejeitada
-      if (op1.statusAssinaturaDigital == 'Rejeitado' &&
-          op2.statusAssinaturaDigital != 'Rejeitado') {
+      if (op1.statusOperacao == 'Rejeitado' &&
+          op2.statusOperacao != 'Rejeitado') {
         return -1;
-      } else if (op1.statusAssinaturaDigital != 'Rejeitado' &&
-          op2.statusAssinaturaDigital == 'Rejeitado') {
+      } else if (op1.statusOperacao != 'Rejeitado' &&
+          op2.statusOperacao == 'Rejeitado') {
         return 1;
       }
 
       // Prioridade 5: Não Iniciada
-      if (op1.statusAssinaturaDigital == 'Nao Inicializado' &&
-          op2.statusAssinaturaDigital != 'Nao Inicializado') {
+      if (op1.statusOperacao == 'Nao Inicializado' &&
+          op2.statusOperacao != 'Nao Inicializado') {
         return -1;
-      } else if (op1.statusAssinaturaDigital != 'Nao Inicializado' &&
-          op2.statusAssinaturaDigital == 'Nao Inicializado') {
+      } else if (op1.statusOperacao != 'Nao Inicializado' &&
+          op2.statusOperacao == 'Nao Inicializado') {
         return 1;
       }
 

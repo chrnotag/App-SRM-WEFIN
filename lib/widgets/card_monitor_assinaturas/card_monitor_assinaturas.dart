@@ -129,9 +129,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
             assinante.informacoesAssinante.any((info) =>
             info.dataAssinatura != null);
       });
-      print(assinatura.statusAssinaturaDigital != null &&
-          assinatura.statusAssinaturaDigital == 'Aguardando Assinatura'
-      );
+
       return assinatura.statusAssinaturaDigital != null &&
           assinatura.statusAssinaturaDigital == 'Aguardando Assinatura' && !assinadoPeloUsuario && authProvider.rolesAcesso.contemRoles([RolesAcessoEnum.ROLE_MONITOR_OPERACOES]);
     }

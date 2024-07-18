@@ -9,9 +9,6 @@ import 'package:Srm_Asset/core/providers/ted_terceiros/ted_terceiros_provider.da
 import 'package:Srm_Asset/models/ted_terceiros/ted_terceiros_model.dart';
 import 'package:Srm_Asset/views/ted_terceiros/widgets/item_card_ted.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
-import 'package:Srm_Asset/widgets/popup_generico.dart';
-import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';

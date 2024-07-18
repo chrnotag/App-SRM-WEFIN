@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../core/constants/enuns/enum_ted_terceiros.dart';
+
 part 'ted_terceiros_model.g.dart';
 
 @JsonSerializable()
@@ -21,6 +23,30 @@ class TedTerceirosModel {
   factory TedTerceirosModel.fromJson(Map<String, dynamic> json) => _$TedTerceirosModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$TedTerceirosModelToJson(this);
+
+
+  void ordenarTransferencias() {
+    transferencias.sort((a, b) {
+      int statusA = _statusPriority(a.statusTransferencia);
+      int statusB = _statusPriority(b.statusTransferencia);
+      return statusA.compareTo(statusB);
+    });
+  }
+
+  int _statusPriority(TedTerceirosEnum status) {
+    switch (status) {
+      case TedTerceirosEnum.PARA_APROVACAO:
+        return 1;
+      case TedTerceirosEnum.SOLICITADO:
+        return 2;
+      case TedTerceirosEnum.PAGO:
+        return 3;
+      case TedTerceirosEnum.REJEITADO:
+        return 4;
+      default:
+        return 5;
+    }
+  }
 
 }
 
@@ -48,7 +74,7 @@ class Transferencia {
   final String identificadorFavorecido;
   final String nomeFavorecido;
   final String statusAprovacaoCedente;
-  final String statusTransferencia;
+  final TedTerceirosEnum statusTransferencia;
   final String valor;
   final DateTime? dataEfetivacao;
   final int tipoTransferencia;
@@ -74,4 +100,5 @@ class Transferencia {
   factory Transferencia.fromJson(Map<String, dynamic> json) => _$TransferenciaFromJson(json);
 
   Map<String, dynamic> toJson() => _$TransferenciaToJson(this);
+
 }

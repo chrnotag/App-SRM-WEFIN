@@ -7,7 +7,6 @@ class _CardTedTerceiros extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('cpodigo transferencia: ${transferencia.codigo}');
-    final statusTed = TedTerceirosEnum.fromStatus(transferencia.statusTransferencia);
     Widget? botoesCard(TedTerceirosEnum statusTed){
       switch(statusTed){
         case TedTerceirosEnum.PAGO:
@@ -21,7 +20,7 @@ class _CardTedTerceiros extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       child: SizedBox(
-        height: statusTed == TedTerceirosEnum.PARA_APROVACAO || statusTed == TedTerceirosEnum.PAGO ? 300.h : 250.h,
+        height: transferencia.statusTransferencia == TedTerceirosEnum.PARA_APROVACAO || transferencia.statusTransferencia == TedTerceirosEnum.PAGO ? 300.h : 250.h,
         child: Card(
           elevation: 4.h,
           child: Padding(
@@ -40,7 +39,7 @@ class _CardTedTerceiros extends StatelessWidget {
                     Text('Status'),
                     Container(
                       decoration: BoxDecoration(
-                        color: statusTed.corFundo,
+                        color: transferencia.statusTransferencia.corFundo,
                         borderRadius: BorderRadius.all(
                           Radius.circular(50.r),
                         ),
@@ -49,9 +48,9 @@ class _CardTedTerceiros extends StatelessWidget {
                         padding:
                             EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
                         child: Text(
-                          statusTed.status,
+                          transferencia.statusTransferencia.status,
                           style: context.textTheme.bodyLarge!.copyWith(
-                              color: statusTed.corTexto,
+                              color: transferencia.statusTransferencia.corTexto,
                               fontWeight: FontWeight.w900),
                         ),
                       ),
@@ -60,7 +59,7 @@ class _CardTedTerceiros extends StatelessWidget {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [botoesCard(statusTed) ?? Container()],
+                  children: [botoesCard(transferencia.statusTransferencia) ?? Container()],
                 )
               ],
             ),

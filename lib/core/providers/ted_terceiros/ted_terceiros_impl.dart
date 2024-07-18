@@ -23,17 +23,18 @@ class TedTerceirosImpl {
     };
     try {
       final response = await http.get(url, headers: headers);
-      print('response do ted: ${response.body}');
       if (response.statusCode == 200) {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         TedTerceirosModel? data;
         data = TedTerceirosModel.fromJson(responseBody);
+        data.ordenarTransferencias();
         tedProvider.teds = data;
         return SucessResponse(data);
       } else {
         return MensagemErroPadrao.erroResponse(response.bodyBytes);
       }
-    } catch (_) {
+    } catch (e,s) {
+      print('erro: $e,$s');
       return MensagemErroPadrao.codigo500();
     }
   }
