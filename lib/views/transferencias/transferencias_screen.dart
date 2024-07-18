@@ -26,11 +26,13 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:validatorless/validatorless.dart';
 import '../../core/constants/classes_abstratas/envirioment.dart';
 import '../../core/providers/ted_terceiros/ted_terceiros_impl.dart';
-import '../../models/conta_digital/bancos/bancos_model.dart';
+import '../../core/providers/transferencias/transferencia_provider.dart';
 import '../ted_terceiros/widgets/item_card_ted.dart';
 import '../ted_terceiros/widgets/visualizar_pdf_ted.dart';
 
 part 'widgets/campo_texto.dart';
+
+part 'widgets/campo_dropdown.dart';
 
 part 'widgets/alert_codigo_verificacao.dart';
 
