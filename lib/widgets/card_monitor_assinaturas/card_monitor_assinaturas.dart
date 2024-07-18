@@ -129,9 +129,7 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
             assinante.informacoesAssinante.any((info) =>
             info.dataAssinatura != null);
       });
-      print(assinatura.statusAssinaturaDigital != null &&
-          assinatura.statusAssinaturaDigital == 'Aguardando Assinatura'
-      );
+
       return assinatura.statusAssinaturaDigital != null &&
           assinatura.statusAssinaturaDigital == 'Aguardando Assinatura' && !assinadoPeloUsuario && authProvider.rolesAcesso.contemRoles([RolesAcessoEnum.ROLE_MONITOR_OPERACOES]);
     }
@@ -172,11 +170,14 @@ class _CardMonitorAssinaturasState extends State<CardMonitorAssinaturas>
                       ),
                     ],
                   ),
-                  Column(
-                    children: [
-                      _ItemTextCard(
-                          titulo: "Produto", conteudo: assinatura.siglaProduto),
-                    ],
+                  SizedBox(
+                    width: context.width * 0.3,
+                    child: Column(
+                      children: [
+                        _ItemTextCard(
+                            titulo: "Produto", conteudo: assinatura.siglaProduto),
+                      ],
+                    ),
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

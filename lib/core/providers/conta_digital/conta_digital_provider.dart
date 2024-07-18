@@ -20,14 +20,12 @@ class ContaDigitalProvider extends ChangeNotifier{
   ContaDigitalModel? _dadosContaDigital;
   ContaDigitalModel? get dadosContaDigital => _dadosContaDigital;
   set dadosContaDigital(ContaDigitalModel? dados){
-    print('dados: ${dados!.nome}');
     _dadosContaDigital = dados;
     notifyListeners();
   }
   SaldoContaDigitalModel? _saldoContaDigital;
   SaldoContaDigitalModel? get saldoContaDigital => _saldoContaDigital;
   set saldoContaDigital(SaldoContaDigitalModel? saldo){
-    print('saldo: ${saldo!.saldoTotal}');
     _saldoContaDigital = saldo;
     notifyListeners();
   }

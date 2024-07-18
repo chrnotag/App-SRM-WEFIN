@@ -9,7 +9,7 @@ class LegendaGraficoWidget extends StatelessWidget {
   final Color corLegenda;
   final String titulo;
   final String porcentagem;
-  final double valor;
+  final double? valor;
   final int qtdTitulos;
 
   const LegendaGraficoWidget(
@@ -17,14 +17,12 @@ class LegendaGraficoWidget extends StatelessWidget {
       required this.corLegenda,
       required this.titulo,
       required this.porcentagem,
-      required this.valor,
+      this.valor = 0,
       required this.qtdTitulos});
 
   @override
   Widget build(BuildContext context) {
-    String formatarTitulo(){
-      return titulo.length >= 25 ? "${titulo.substring(0,25)}..." : titulo;
-    }
+    print('itens: $titulo $valor');
     return SizedBox(
       height: 85.h,
       child: Padding(
@@ -36,10 +34,10 @@ class LegendaGraficoWidget extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 12.r,
-                  backgroundColor: corLegenda,
+                  backgroundColor: valor == null && valor == 0 ? corLegenda : context.labelTextColor,
                 ),
                 SizedBox(width: 8.0),
-                Text(formatarTitulo())
+                Expanded(child: Text(titulo, maxLines: 1, overflow: TextOverflow.ellipsis,))
               ],
             ),
             Row(
@@ -60,12 +58,15 @@ class LegendaGraficoWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      valor.toBRL,
+                      (valor ?? 0).toBRL,
                       style: context.textTheme.bodyMedium!.copyWith(
                           color: context.labelTextColor,
                           fontWeight: FontWeight.w600),
                     ),
-                    Text('$qtdTitulos Duplicatas', textAlign: TextAlign.end,),
+                    Text(
+                      '$qtdTitulos Duplicatas',
+                      textAlign: TextAlign.end,
+                    ),
                   ],
                 ),
               ],

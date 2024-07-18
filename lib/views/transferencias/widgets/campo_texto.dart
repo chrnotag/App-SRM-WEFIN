@@ -7,6 +7,8 @@ class _CampoTexto extends StatefulWidget {
   final bool obrigatorio;
   final List<TextInputFormatter> formatos;
   final bool campoMonetario;
+  final TextInputType? tipoTeclado;
+  final FormFieldValidator<String>? validator;
 
   _CampoTexto({
     super.key,
@@ -15,6 +17,8 @@ class _CampoTexto extends StatefulWidget {
     required this.controller,
     this.obrigatorio = false,
     this.campoMonetario = false,
+    this.validator,
+    this.tipoTeclado,
     List<TextInputFormatter>? formatos,
   }) : formatos = formatos ?? [];
 
@@ -42,29 +46,40 @@ class _CampoTextoState extends State<_CampoTexto> {
                       color: context.errorColor, fontWeight: FontWeight.w600))
           ]),
         ),
-        Container(
-          decoration: BoxDecoration(
-              border: Border.all(color: context.labelTextColor),
-              borderRadius: BorderRadius.all(Radius.circular(12.r))),
-          child: Padding(
-            padding: EdgeInsets.all(8.r),
-            child: TextField(
-              inputFormatters: widget.formatos,
-              style: context.textTheme.bodyLarge,
-              controller: widget.controller,
-              decoration: InputDecoration(
-                  hintText: widget.hint,
-                  border: InputBorder.none,
-                  hintStyle: context.textTheme.bodyLarge!
-                      .copyWith(color: context.labelTextColor),
-              prefixText: widget.campoMonetario && widget.controller.text.isNotEmpty ? 'R\$ ' : null,
-              prefixStyle: context.textTheme.bodyLarge),
-                onChanged: (value) {
-                setState(() {
-                });
-                },
-            ),
-          ),
+        TextFormField(
+          keyboardType: widget.tipoTeclado,
+          inputFormatters: widget.formatos,
+          style: context.textTheme.bodyLarge,
+          controller: widget.controller,
+          validator: widget.validator,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          decoration: InputDecoration(
+            errorStyle: context.textTheme.bodySmall!.copyWith(
+                fontWeight: FontWeight.w900,
+                color: context.errorColor,
+                fontSize: 12.sp),
+              hintText: widget.hint,
+              border: InputBorder.none,
+              hintStyle: context.textTheme.bodyLarge!
+                  .copyWith(color: context.labelTextColor),
+          prefixText: widget.campoMonetario && widget.controller.text.isNotEmpty ? 'R\$ ' : null,
+          prefixStyle: context.textTheme.bodyLarge,
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: context.primaryColor, width: 2.w),
+                borderRadius: const BorderRadius.all(Radius.circular(12))),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: context.labelTextColor),
+                borderRadius: const BorderRadius.all(Radius.circular(12))),
+            errorBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: context.errorColor, width: 2.w),
+                borderRadius: const BorderRadius.all(Radius.circular(12))),
+            focusedErrorBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: context.errorColor, width: 2.w),
+                borderRadius: const BorderRadius.all(Radius.circular(12))),),
+            onChanged: (value) {
+            setState(() {
+            });
+            },
         ),
       ],
     );

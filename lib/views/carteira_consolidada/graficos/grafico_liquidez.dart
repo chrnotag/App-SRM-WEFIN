@@ -17,7 +17,6 @@ class GraficoLiquidez extends StatefulWidget {
 }
 
 class _GraficoLiquidezState extends State<GraficoLiquidez> {
-
   @override
   void initState() {
     // TODO: implement initState
@@ -36,7 +35,7 @@ class _GraficoLiquidezState extends State<GraficoLiquidez> {
     String totalOperado() {
       double total = 0;
       for (var dados in filteredItems) {
-        total += dados.valor;
+        total += dados.valor ?? 0;
       }
       return total.toBRL;
     }
@@ -64,10 +63,9 @@ class _GraficoLiquidezState extends State<GraficoLiquidez> {
                           PieChartData(
                             sectionsSpace: 0,
                             sections: filteredItems.map((e) {
-                              // Verifica se todos os valores são zero
-                              bool todosValoresZero = filteredItems
-                                  .every((item) => item.valor == 0);
-
+                              bool todosValoresZero = filteredItems.every(
+                                  (item) =>
+                                      item.valor == null || item.valor == 0);
                               return PieChartSectionData(
                                 color: todosValoresZero ? Colors.grey : e.cor,
                                 value: todosValoresZero ? 100 : e.valor,
@@ -112,7 +110,7 @@ class _GraficoLiquidezState extends State<GraficoLiquidez> {
                       titulo: e.titulo,
                       porcentagem: e.porcentagem,
                       valor: e.valor,
-                      qtdTitulos: e.qtdTitulos!,
+                      qtdTitulos: e.qtdTitulos ?? 0,
                     );
                   },
                 ),

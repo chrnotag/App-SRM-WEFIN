@@ -110,7 +110,6 @@ class AssinaturaProvider extends ChangeNotifier {
       bool op2AguardandoAssinaturaUsuarioAtual =
           estaAguardandoAssinaturaUsuarioAtual(op2, identificadorUsuario);
 
-      // Prioridade 1: Aguardando assinatura do usuário atual
       if (op1AguardandoAssinaturaUsuarioAtual &&
           !op2AguardandoAssinaturaUsuarioAtual) {
         return -1;

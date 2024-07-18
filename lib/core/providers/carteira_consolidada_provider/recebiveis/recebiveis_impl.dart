@@ -24,6 +24,7 @@ class RecebiveisImpl {
     final recebiveisProvider = Modular.get<RecebiveisProvider>();
     try {
       final response = await http.get(url, headers: headers);
+      print('dados recebiveis: ${response.body}');
       if (response.statusCode == 200) {
         final data = RecebiveisModel.fromJson(json.decode(utf8.decode(response.bodyBytes)));
         recebiveisProvider.recebiveis = data;

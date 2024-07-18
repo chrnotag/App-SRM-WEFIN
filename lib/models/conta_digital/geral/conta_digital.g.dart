@@ -28,7 +28,7 @@ Map<String, dynamic> _$ContaDigitalModelToJson(ContaDigitalModel instance) =>
       'tipoConta': instance.tipoConta,
       'centroCusto': instance.centroCusto,
       'nome': instance.nome,
-      'codigo': instance.codigoBanco,
+      'codigoBanco': instance.codigoBanco,
     };
 
 CentroCusto _$CentroCustoFromJson(Map<String, dynamic> json) => CentroCusto(

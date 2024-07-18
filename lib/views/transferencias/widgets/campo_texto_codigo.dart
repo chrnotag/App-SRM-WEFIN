@@ -6,11 +6,13 @@ class _CampoTextoCodigo extends StatefulWidget {
   final FocusNode? nextFocusNode;
   final FocusNode? prevFocusNode;
   final VoidCallback? onFilled;
+  final ValueChanged<String> onChanged;
 
   const _CampoTextoCodigo({
     super.key,
     required this.controller,
     required this.focusNode,
+    required this.onChanged,
     this.nextFocusNode,
     this.prevFocusNode,
     this.onFilled,
@@ -47,6 +49,7 @@ class _CampoTextoCodigoState extends State<_CampoTextoCodigo> {
           ),
         ),
         onChanged: (value) {
+          widget.onChanged(value);
           if (value.length == 1) {
             if (widget.nextFocusNode != null) {
               widget.nextFocusNode!.requestFocus();

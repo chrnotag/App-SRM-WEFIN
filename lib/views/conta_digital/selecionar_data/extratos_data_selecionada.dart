@@ -1,6 +1,8 @@
 import 'package:Srm_Asset/assets_config/assets_config.dart';
+import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/constants/extensions/date_extensions.dart';
 import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_impl.dart';
@@ -47,7 +49,7 @@ class _ExtratosDataSelecionadaState extends State<ExtratosDataSelecionada> {
   @override
   Widget build(BuildContext context) {
     final dateFormat = DateFormat('dd/MM/yyyy');
-
+final ambiente = Modular.get<Environment>();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -93,32 +95,67 @@ class _ExtratosDataSelecionadaState extends State<ExtratosDataSelecionada> {
                       });
                     }
 
-                    return ListView.builder(
-                        itemCount:
-                            extratoProvider.itensExtratoPersonalizado.length,
-                        itemBuilder: (context, index) {
-                          print(
-                              'tamanho lista: ${extratoProvider.extratoPersonalizado!.itens.length}');
-                          return Column(
-                            children: [
-                              ItemListaExtrato(
-                                dataDia: extratoProvider
-                                    .itensExtratoPersonalizado[index]
-                                    .dataReferencia
-                                    .formatarIso8601,
-                                saldoDia: extratoProvider
-                                    .itensExtratoPersonalizado[index]
-                                    .saldoNaData
-                                    .toBRL,
+                    if (extratoProvider.extrato != null &&
+                        extratoProvider.extrato!.itens.isNotEmpty) {
+                      return ListView.builder(
+                          itemCount:
+                              extratoProvider.itensExtratoPersonalizado.length,
+                          itemBuilder: (context, index) {
+                            print(
+                                'tamanho lista: ${extratoProvider.extratoPersonalizado!.itens.length}');
+                            return Column(
+                              children: [
+                                ItemListaExtrato(
+                                  dataDia: extratoProvider
+                                      .itensExtratoPersonalizado[index]
+                                      .dataReferencia
+                                      .formatarIso8601,
+                                  saldoDia: extratoProvider
+                                      .itensExtratoPersonalizado[index]
+                                      .saldoNaData
+                                      .toBRL,
+                                ),
+                                ...BuildListaOperacao.buildLista(
+                                    context: context,
+                                    index: index,
+                                    tipoConsulta:
+                                        TipoConsultaExtrato.PERSONALIZADO),
+                              ],
+                            );
+                          });
+                    } else {
+                      return Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset(ambiente.alerta_icone),
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 50.h),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    'Não há movimentações disponíveis',
+                                    style: context.textTheme.displaySmall!
+                                        .copyWith(
+                                            color: SRMColors.textBodyColor,
+                                            fontWeight: FontWeight.w900),
+                                  ),
+                                  Text(
+                                    'Não existem movimentações no periodo selecionado.',
+                                    style: context.textTheme.bodyLarge!
+                                        .copyWith(
+                                            color: context.labelTextColor),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
                               ),
-                              ...BuildListaOperacao.buildLista(
-                                  context: context,
-                                  index: index,
-                                  tipoConsulta:
-                                      TipoConsultaExtrato.PERSONALIZADO),
-                            ],
-                          );
-                        });
+                            ),
+                          ],
+                        ),
+                      );
+                    }
                   })),
         ),
       ),

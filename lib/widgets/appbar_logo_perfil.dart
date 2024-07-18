@@ -36,7 +36,7 @@ class _AppBarLogoState extends State<AppBarLogo> {
     Environment ambiente = Modular.get<Environment>();
     final authProvider = context.watch<AuthProvider>();
     return AppBar(
-      backgroundColor: context.secondaryColor,
+      backgroundColor: Colors.transparent,
       shadowColor: Colors.transparent,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -69,16 +69,40 @@ class _AppBarLogoState extends State<AppBarLogo> {
                     .toList(),
                 menuMaxHeight: 300.h,
                 isExpanded: true,
-                items: _listaItens
-                    .map((e) => DropdownMenuItem(
-                          value: e.identificador,
-                          child: Text(e.nome,
-                              style: context.textTheme.bodyMedium!
-                                  .copyWith(color: Colors.black),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis),
-                        ))
-                    .toList(),
+                items: _listaItens.asMap().entries.map((entry) {
+                  int idx = entry.key;
+                  CedenteModel e = entry.value;
+                  return DropdownMenuItem(
+                    value: e.identificador,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        if (idx != 0)
+                          Row(
+                            children: [
+                              Expanded(
+                                  child: Container(
+                                    color: context.labelTextColor.withAlpha(70),
+                                    height: 1,
+                                  ))
+                            ],
+                          ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(e.nome,
+                                  style: context.textTheme.bodyMedium!
+                                      .copyWith(color: Colors.black),
+                                  maxLines: 1,
+                                  textAlign: TextAlign.center,
+                                  overflow: TextOverflow.ellipsis),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
+                }).toList(),
                 onChanged: (value) async {
                   setState(() {
                     _valorSelecionado = value!;

@@ -9,14 +9,14 @@ class LegendaGraficoRecebiveisWidget extends StatelessWidget {
   final Color corLegenda;
   final String titulo;
   final String porcentagem;
-  final double valor;
+  final double? valor;
 
   const LegendaGraficoRecebiveisWidget({
     super.key,
     required this.corLegenda,
     required this.titulo,
     required this.porcentagem,
-    required this.valor,
+     this.valor = 0,
   });
 
   @override
@@ -48,7 +48,7 @@ class LegendaGraficoRecebiveisWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                valor.toBRL,
+                (valor ?? 0).toBRL,
                 style: context.textTheme.bodyMedium!.copyWith(
                     color: context.labelTextColor, fontWeight: FontWeight.w600),
               ),

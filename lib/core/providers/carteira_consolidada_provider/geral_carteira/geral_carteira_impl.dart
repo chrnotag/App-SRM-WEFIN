@@ -23,6 +23,7 @@ class GeralCarteiraImpl{
     final geralCarteiraProvider = Modular.get<GeralCarteiraProvider>();
     try{
       final response = await http.get(url,headers: headers);
+      print('grafico geral carteira: ${response.body}');
       if (response.statusCode == 200) {
         final data = GeralCarteiraModel.fromJson(json.decode(response.body));
         geralCarteiraProvider.dadosGeralCarteira = data;

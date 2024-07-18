@@ -14,6 +14,7 @@ import 'package:Srm_Asset/views/conta_digital/tela_extrato/widgets/item_lista_ex
 import 'package:Srm_Asset/views/conta_digital/widgets/app_bar_conta_digital.dart';
 import 'package:Srm_Asset/views/conta_digital/widgets/lista_operacao.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
+import 'package:Srm_Asset/widgets/mensagem_tela_vazia.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
@@ -98,9 +99,11 @@ class _TelaExtratoState extends State<TelaExtrato>
                             if (extratoProvider.extrato != null &&
                                 extratoProvider.extrato!.itens.isNotEmpty) {
                               // Ajuste o tamanho da lista para não exceder o tamanho de itensExtrato
-                              final itemCount = extratoProvider.itensExtrato.length < tamanhoLista
-                                  ? extratoProvider.itensExtrato.length
-                                  : tamanhoLista;
+                              final itemCount =
+                                  extratoProvider.itensExtrato.length <
+                                          tamanhoLista
+                                      ? extratoProvider.itensExtrato.length
+                                      : tamanhoLista;
 
                               return ListView.builder(
                                 itemCount: itemCount,
@@ -120,50 +123,18 @@ class _TelaExtratoState extends State<TelaExtrato>
                                       ...BuildListaOperacao.buildLista(
                                         context: context,
                                         index: index,
-                                        tipoConsulta: TipoConsultaExtrato
-                                            .VISUALIZAR,
+                                        tipoConsulta:
+                                            TipoConsultaExtrato.VISUALIZAR,
                                       ),
                                     ],
                                   );
                                 },
                               );
                             } else {
-                              return Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    SvgPicture.asset(ambiente.alerta_icone),
-                                    Padding(
-                                      padding:
-                                      EdgeInsets.symmetric(vertical: 50.h),
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            'Não há movimentações disponíveis',
-                                            style: context.textTheme
-                                                .displaySmall!
-                                                .copyWith(
-                                                color:
-                                                SRMColors.textBodyColor,
-                                                fontWeight:
-                                                FontWeight.w900),
-                                          ),
-                                          Text(
-                                            'Não existem movimentações no periodo selecionado.',
-                                            style: context.textTheme.bodyLarge!
-                                                .copyWith(
-                                                color: context
-                                                    .labelTextColor),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
+                              return MensagemTelaVazia(
+                                  titulo: 'Não há movimentações disponíveis',
+                                  mensagem:
+                                      'Não há movimentações para o período selecionado');
                             }
                           },
                         ),

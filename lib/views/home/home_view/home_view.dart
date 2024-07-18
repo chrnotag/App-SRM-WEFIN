@@ -1,8 +1,8 @@
+import 'dart:io';
+
 import 'package:Srm_Asset/assets_config/assets_config.dart';
-import 'package:Srm_Asset/core/constants/AppSizes.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
-import 'package:Srm_Asset/core/constants/extensions/roles_extensions.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
@@ -19,9 +19,7 @@ import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/providers/monitor_assinatura_provider/assinatura_provider.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/logar/auth_providers.dart';
 import '../../../core/constants/enuns/plataforma_enum.dart';
-import '../../../core/constants/enuns/roles_acesso_enum.dart';
 import '../../../core/implementations_config/api_response.dart';
-import '../../../core/providers/auth_provider_config/deslogar/deslogar_controller.dart';
 import '../../../models/auth_login_models/SRM/cedente_model.dart';
 import '../../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
 
@@ -161,11 +159,10 @@ class _HomeViewState extends State<HomeView> {
     //     .contemRoles([RolesAcessoEnum.ROLE_TRANSFERENCIA_CONTA_DIGITAL])) {
     // }
     //
-    // if (!authProvider.rolesAcesso
-    //     .contemRoles([RolesAcessoEnum.ROLE_APROVACAO_TED_CONTA_GARANTIA])) {
-    // cardsHome.removeWhere(
-    //     (card) => (card as _CardItemMenuHome).titulo == 'Ted para Terceiros');
-    // }
+    if (ambiente.plataforma == Plataforma.SRM) {
+    cardsHome.removeWhere(
+        (card) => (card as _CardItemMenuHome).titulo == 'Transferências');
+    }
 
     return Scaffold(
       body: Column(
@@ -182,6 +179,25 @@ class _HomeViewState extends State<HomeView> {
             ),
             child: Stack(
               children: [
+                ambiente.plataforma == Plataforma.TRUST
+                    ? Positioned(
+                      left: -context.width * 0.1,
+                      top: -40.h,
+                      child: SvgPicture.asset(
+                        ambiente.logoAppBar,
+                        color: Color(0x1affffff),
+                        width: context.width * 0.5,
+                      ),
+                    )
+                    : Positioned(
+                  left: -context.width * 0.1,
+                  top: -50.h,
+                  child: SvgPicture.asset(
+                    ambiente.logoAppBar,
+                    color: Color(0x1affffff),
+                    width: context.width * 0.4,
+                  ),
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -225,53 +241,39 @@ class _HomeViewState extends State<HomeView> {
                                           return Text(
                                               'Houve um erro ao carregar o saldo!');
                                         } else {
-                                          return RichText(
-                                            text: TextSpan(
-                                                text: _isSaldoVisivel
+                                          return Row(
+                                            children: [
+                                              Text(
+                                                _isSaldoVisivel
                                                     ? contaDigitalProvider
-                                                            .saldoContaDigital
-                                                            ?.saldoTotal
-                                                            .toBRL ??
-                                                        0.0.toBRL
+                                                    .saldoContaDigital
+                                                    ?.saldoTotal
+                                                    .toBRL ??
+                                                    0.0.toBRL
                                                     : 'R\$ * * * * *',
                                                 style: context
                                                     .textTheme.displayMedium!
                                                     .copyWith(
-                                                        color: Colors.white,
-                                                        fontWeight:
-                                                            FontWeight.w900),
-                                                children: [
-                                                  WidgetSpan(
-                                                    child: Visibility(
-                                                      visible: authProvider
-                                                          .rolesAcesso
-                                                          .contemRoles([
-                                                        RolesAcessoEnum
-                                                            .ROLE_CONTA_DIGITAL
-                                                      ]),
-                                                      child: Padding(
-                                                        padding: EdgeInsets.only(
-                                                            left: 8.w),
-                                                        child: InkWell(
-                                                          onTap: () =>
-                                                              setState(() {
-                                                                print('teste: ${contaDigitalProvider.dadosContaDigital!.nome}');
-                                                            _isSaldoVisivel =
-                                                                !_isSaldoVisivel;
-                                                          }),
-                                                          child: Icon(
-                                                            _isSaldoVisivel
-                                                                ? Icons.visibility
-                                                                : Icons
-                                                                    .visibility_off,
-                                                            color: context
-                                                                .backgroundColor,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  )
-                                                ]),
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                    FontWeight.w900),
+                                              ),
+                                              SizedBox(width: 8.w),
+                                              GestureDetector(
+                                                onTap: () => setState(() {
+                                                  _isSaldoVisivel =
+                                                  !_isSaldoVisivel;
+                                                  print('novo valor: $_isSaldoVisivel');
+                                                }),
+                                                child: Icon(
+                                                  _isSaldoVisivel
+                                                      ? Icons.visibility
+                                                      : Icons.visibility_off,
+                                                  color:
+                                                  context.backgroundColor,
+                                                ),
+                                              )
+                                            ],
                                           );
                                         }
                                       }),
@@ -284,31 +286,12 @@ class _HomeViewState extends State<HomeView> {
                     )
                   ],
                 ),
-                ambiente.plataforma == Plataforma.TRUST
-                    ? Positioned(
-                        left: -context.width * 0.1,
-                        top: -40.h,
-                        child: SvgPicture.asset(
-                          ambiente.logoAppBar,
-                          color: Color(0x1affffff),
-                          width: context.width * 0.5,
-                        ),
-                      )
-                    : Positioned(
-                        left: -context.width * 0.1,
-                        top: -50.h,
-                        child: SvgPicture.asset(
-                          ambiente.logoAppBar,
-                          color: Color(0x1affffff),
-                          width: context.width * 0.4,
-                        ),
-                      ),
               ],
             ),
           ),
           SizedBox(
             width: context.width,
-            height: context.height * 0.77,
+            height: Platform.isAndroid ? context.height * 0.77 : context.height * 0.70,
             child: GridView.count(
               padding: EdgeInsets.all(20.r),
               crossAxisCount: 2,

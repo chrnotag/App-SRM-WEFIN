@@ -21,4 +21,5 @@ extension StringExtensions on String {
         return this;
     }
   }
+
 }

@@ -10,6 +10,7 @@ class _AlertAprovacaoTed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ambiente = Modular.get<Environment>();
+    final tedProvider = Modular.get<TedTerceirosProvider>();
     return AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(15.r))),
@@ -46,7 +47,6 @@ class _AlertAprovacaoTed extends StatelessWidget {
                 BotaoPadrao(
                     label: 'Sim',
                     onPressed: () async {
-                      print('testando: $aprovacao, $codigoTransferencia');
                       OverlayApp.iniciaOverlay(context);
                       final result = await TedTerceirosImpl.aprovarOuRecusar(
                           aprovacao, codigoTransferencia);
@@ -54,6 +54,8 @@ class _AlertAprovacaoTed extends StatelessWidget {
                      if(result.error != null){
                        Fluttertoast.showToast(msg: 'Houve um erro ao processar a operação: ${result.error.mensagem}');
                      }else{
+                       Modular.to.pop();
+                       tedProvider.carregarDados();
                        showDialog(
                          context: context,
                          builder: (context) =>
@@ -104,7 +106,6 @@ class _AlertConcluidoAprovacaoTed extends StatelessWidget {
             BotaoPadrao(
                 label: 'Fechar',
                 onPressed: () {
-                  Modular.to.pop();
                   Modular.to.pop();
                 })
           ],

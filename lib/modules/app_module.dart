@@ -1,4 +1,5 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
+import 'package:Srm_Asset/core/providers/auth_provider_config/recuperar_versao/recuperar_versao_provider.dart';
 import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/carteira_aberto/carteira_aberto_provider.dart';
 import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/geral_carteira/geral_carteira_provider.dart';
 import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/prazo_liquidez/prazo_liquidez_provider.dart';
@@ -6,9 +7,10 @@ import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/recebivei
 import 'package:Srm_Asset/core/providers/conta_digital/comprovante_ted/comprovante_ted_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_provider.dart';
+import 'package:Srm_Asset/core/providers/conta_digital/solicitacao_ted/solicitacao_ted_provider.dart';
+import 'package:Srm_Asset/core/providers/conta_digital/solicitar_ted/solicitar_ted_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/tabbar_meses_provider.dart';
 import 'package:Srm_Asset/core/providers/ted_terceiros/ted_terceiros_provider.dart';
-import 'package:Srm_Asset/core/providers/transferencias/transferencia_provider.dart';
 import 'package:Srm_Asset/modules/carteira_consolidada_module.dart';
 import 'package:Srm_Asset/modules/conta_digital_module.dart';
 import 'package:Srm_Asset/modules/sem_conexao_module.dart';
@@ -56,7 +58,9 @@ class AppModule extends Module {
     i.addSingleton(PrazoLiquidezProvider.new);
     i.addSingleton(RecebiveisProvider.new);
     i.addSingleton(TedTerceirosProvider.new);
-    i.addSingleton(TransferenciaProvider.new);
+    i.addSingleton(SolicitarTedProvider.new);
+    i.addSingleton(SolicitacoesTedProvider.new);
+    i.addSingleton(RecuperarVersaoProvider.new);
     i.addInstance(environment);
   }
 

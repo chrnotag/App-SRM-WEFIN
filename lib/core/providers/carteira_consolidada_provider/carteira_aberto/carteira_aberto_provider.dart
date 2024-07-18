@@ -29,33 +29,33 @@ class CarteiraAbertoProvider extends ChangeNotifier {
         DadosGraficoModel(
             titulo: 'Vencidos',
             cor: const Color(0xffE62524),
-            valor: dadosCarteira!.valorTotalRecebiveisVencidos.toDouble(),
+            valor: dadosCarteira?.valorTotalRecebiveisVencidos.toDouble(),
             porcentagem: _calcular(
-                dadosCarteira!.valorTotalRecebiveisVencidos.toDouble(),
-                dadosCarteira!),
-            qtdTitulos: dadosCarteira!.quantidadeTotalRecebiveisVencidos),
+                dadosCarteira?.valorTotalRecebiveisVencidos.toDouble(),
+                dadosCarteira),
+            qtdTitulos: dadosCarteira?.quantidadeTotalRecebiveisVencidos),
         DadosGraficoModel(
             titulo: 'A Vencer',
             cor: const Color(0xff00A3FF),
-            valor: dadosCarteira!.valorTotalRecebiveisAVencer.toDouble(),
+            valor: dadosCarteira?.valorTotalRecebiveisAVencer.toDouble(),
             porcentagem: _calcular(
-                dadosCarteira!.valorTotalRecebiveisAVencer.toDouble(),
-                dadosCarteira!),
-            qtdTitulos: dadosCarteira!.quantidadeTotalRecebiveisAVencer),
+                dadosCarteira?.valorTotalRecebiveisAVencer.toDouble(),
+                dadosCarteira),
+            qtdTitulos: dadosCarteira?.quantidadeTotalRecebiveisAVencer),
       ];
 
-  static String _calcular(double valor, CarteiraAbertoModel dadosCarteira) {
+  static String _calcular(double? valor, CarteiraAbertoModel? dadosCarteira) {
     double valorTotal = 0;
-    valorTotal = dadosCarteira.valorTotalRecebiveisEmAberto;
+    if(dadosCarteira != null) {
+      valorTotal = dadosCarteira.valorTotalRecebiveisVencidos +
+          dadosCarteira.valorTotalRecebiveisEmAberto +
+          dadosCarteira.valorTotalRecebiveisAVencer;
+    }
 
-    if (valorTotal == 0) {
+    if (valorTotal == 0 || valor == null) {
       return 0.toPercent;
     }
 
     return ((valor / valorTotal) * 100).toPercent;
-  }
-
-  void limparDados() {
-    dadosCarteira = null;
   }
 }

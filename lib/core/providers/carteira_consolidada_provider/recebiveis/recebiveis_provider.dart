@@ -40,7 +40,7 @@ class RecebiveisProvider extends ChangeNotifier {
     recebiveisFuture = RecebiveisImpl.pegarDados();
   }
 
-  void limparDados(){
+  void limparDados() {
     recebiveisFuture = null;
     recebiveis = null;
   }
@@ -52,37 +52,33 @@ class RecebiveisProvider extends ChangeNotifier {
   set pdfRecebiveis(Uint8List? dados) => _pdfRecebiveis = dados;
 
   List<DadosGraficoModel> dadosGrafico() {
-    // Definindo o mapa de cores para cada sigla
-    Map<String, Color> siglaToColor = {
-      'DUP': Color(0xFFFF0000),
-      'GARKGCP': Color(0xFFFF9E01),
-      'SACADO': Color(0xFFFCD202),
-      'COBRANÇA': Color(0xFFF8FF01),
-    };
-
     List<DadosGraficoModel> dados = [];
 
-    // Iterando sobre a lista de recebíveis
-    for (var nota in recebiveis!.recebiveis) {
-      Color cor = siglaToColor[nota.sigla.toUpperCase()] ?? Colors.black;
-      dados.add(
-        DadosGraficoModel(
-            titulo: nota.sigla,
-            cor: cor,
-            valor: nota.saldoDevedor,
-            porcentagem: _calcular(nota.saldoDevedor)),
-      );
+    if (recebiveis != null) {
+      int count = 0;
+      for (var nota in recebiveis!.recebiveis) {
+        dados.add(
+          DadosGraficoModel(
+              titulo: nota.sigla,
+              cor: dados[count].cor,
+              valor: nota.saldoDevedor,
+              porcentagem: _calcular(nota.saldoDevedor)),
+        );
+        count++;
+      }
     }
 
     return dados;
   }
 
-  String _calcular(double valor) {
+  String _calcular(double? valor) {
     double valorTotal = 0;
-    for (var dado in recebiveis!.recebiveis) {
-      valorTotal += dado.saldoDevedor;
+    if (recebiveis != null) {
+      for (var dado in recebiveis!.recebiveis) {
+        valorTotal += dado.saldoDevedor;
+      }
     }
-    if (valorTotal == 0) {
+    if (valorTotal == 0 || valor == null) {
       return 0.toPercent;
     }
 

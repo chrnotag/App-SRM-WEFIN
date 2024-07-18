@@ -2,6 +2,7 @@ import 'package:Srm_Asset/assets_config/assets_config.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/string_extensions.dart';
+import 'package:Srm_Asset/core/providers/auth_provider_config/deslogar/deslogar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
@@ -86,9 +87,12 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                             ambiente.logoAppBar,
                             width: 32.w,
                           ),
-                          SvgPicture.asset(
-                            AssetsConfig.imagesExitIcone,
-                            width: 32.w,
+                          InkWell(
+                            onTap: () => DeslogarUsuario(context: context).encerrarSessao(),
+                            child: SvgPicture.asset(
+                              AssetsConfig.imagesExitIcone,
+                              width: 32.w,
+                            ),
                           )
                         ],
                       ),

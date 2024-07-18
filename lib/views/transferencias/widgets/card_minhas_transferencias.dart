@@ -1,7 +1,12 @@
 part of '../transferencias_screen.dart';
 
 class _CardMinhasTransferencias extends StatelessWidget {
-  const _CardMinhasTransferencias({super.key});
+  final String favorecido;
+  final String documento;
+  final DateTime data;
+  final StatusMinhasTransferenciasEnum status;
+  final String? codigoTransacao;
+  const _CardMinhasTransferencias({super.key, required this.favorecido, required this.documento, required this.data, this.codigoTransacao, required this.status});
 
   @override
   Widget build(BuildContext context) {
@@ -22,17 +27,17 @@ class _CardMinhasTransferencias extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ItemCardTed(title: 'Favorecido', content: 'Marcelo Neves'),
+                ItemCardTed(title: 'Favorecido', content: favorecido),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 20.h),
                   child: ItemCardTed(
                     title: 'CPF/CNPJ',
-                    content: '60211525383'.formatarDocumento(),
+                    content: documento.formatarDocumento(),
                   ),
                 ),
                 ItemCardTed(
                   title: 'Data',
-                  content: '${DateTime.now().formatarDataBR}',
+                  content: '${data.formatarDataBR}',
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 20.h),
@@ -42,7 +47,7 @@ class _CardMinhasTransferencias extends StatelessWidget {
                       Text('Status'),
                       Container(
                         decoration: BoxDecoration(
-                          color: Colors.amber,
+                          color: status.corStatus,
                           borderRadius: BorderRadius.all(
                             Radius.circular(50.r),
                           ),
@@ -51,7 +56,7 @@ class _CardMinhasTransferencias extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                               horizontal: 10.w, vertical: 4.h),
                           child: Text(
-                            'Aguardando Aprovação',
+                            status.status,
                             style: context.textTheme.bodyLarge!.copyWith(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w900),
@@ -62,7 +67,7 @@ class _CardMinhasTransferencias extends StatelessWidget {
                   ),
                 ),
                 Visibility(
-                  visible: true,
+                  visible: status.mostrarComprovante,
                   child: Column(
                     children: [
                       Divider(thickness: 0.1,),
@@ -70,7 +75,22 @@ class _CardMinhasTransferencias extends StatelessWidget {
                         children: [
                           Expanded(
                             child: TextButton(
-                                onPressed: () {},
+                                onPressed: () async {
+                                  OverlayApp.iniciaOverlay(context);
+                                  final result = await TedTerceirosImpl.downloadComprovante(codigoTransacao!);
+                                  OverlayApp.terminaOverlay();
+                                  if (result.error != null) {
+                                    Fluttertoast.showToast(
+                                        msg:
+                                        'Houve um erro ao tentar obter o comprovante: ${result.error.mensagem}');
+                                  } else {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => VisualizarPdfTed(),
+                                        ));
+                                  }
+                                },
                                 child: Text(
                                   'Ver Comprovante',
                                   style: context.textTheme.displaySmall!.copyWith(

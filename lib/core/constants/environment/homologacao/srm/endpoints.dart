@@ -85,6 +85,26 @@ class EndPointsSRM extends Endpoint {
   String get downloadExtratoContaDigital => "$extratoContaDigital/download";
 
   @override
+  // TODO: implement finalidadesTed
+  String get finalidadesTed => '$contaDigital/finalidades/ted';
+
+  @override
+  // TODO: implement listaBancosContaDigital
+  String get listaBancosContaDigital => '$contaDigital/bancos';
+
+  @override
+  // TODO: implement solicitacoesTed
+  String get solicitacoesTed => "$contaDigital/solicitacoes/ted";
+
+  @override
+  // TODO: implement solicitarTedContaDigital
+  String get solicitarTedContaDigital => '$contaDigital/ted/solicitar';
+
+  @override
+  // TODO: implement tokenSolicitacaoTed
+  String get tokenSolicitacaoTed => '$contaDigital/ted/token';
+
+  @override
   Uri montarUrlPegarExtrato(String numeroConta, String dataInicial,
       String dataFinal, TipoConsultaExtrato tipoConsulta) {
     final ambiente = Modular.get<Environment>();

@@ -37,7 +37,7 @@ class _GraficoCarteiraAbertoState extends State<GraficoCarteiraAberto> {
     String totalOperado() {
       double total = 0;
       for (var dados in filteredItems) {
-        total += dados.valor;
+        total += dados.valor ?? 0;
       }
       return total.toBRL;
     }
@@ -67,7 +67,7 @@ class _GraficoCarteiraAbertoState extends State<GraficoCarteiraAberto> {
                             sections: filteredItems.map((e) {
                               // Verifica se todos os valores são zero
                               bool todosValoresZero = filteredItems
-                                  .every((item) => item.valor == 0);
+                                  .every((item) => item.valor == null || item.valor == 0);
 
                               return PieChartSectionData(
                                 color: todosValoresZero ? Colors.grey : e.cor,
@@ -113,7 +113,7 @@ class _GraficoCarteiraAbertoState extends State<GraficoCarteiraAberto> {
                       titulo: e.titulo,
                       porcentagem: e.porcentagem,
                       valor: e.valor,
-                      qtdTitulos: e.qtdTitulos!,
+                      qtdTitulos: e.qtdTitulos ?? 0,
                     );
                   },
                 ),

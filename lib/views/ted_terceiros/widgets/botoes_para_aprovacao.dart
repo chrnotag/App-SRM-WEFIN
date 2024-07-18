@@ -16,6 +16,7 @@ part 'alert_aprovacao_ted.dart';
 
 class BotoesAprovarTedTerceiros extends StatelessWidget {
   final int codigoTransferencia;
+
   const BotoesAprovarTedTerceiros(
       {super.key, required this.codigoTransferencia});
 
@@ -26,16 +27,16 @@ class BotoesAprovarTedTerceiros extends StatelessWidget {
       child: Row(
         children: [
           BotaoPadrao(
-            label: 'Reprovar',
-            filled: false,
-            onPressed: () {
-              showDialog(
-              context: context,
-              builder: (context) => _AlertAprovacaoTed(
-                  aprovacao: AprovarTedEnum.RECUSAR,
-                  codigoTransferencia: codigoTransferencia),
-            );}
-          ),
+              label: 'Reprovar',
+              filled: false,
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => _AlertAprovacaoTed(
+                      aprovacao: AprovarTedEnum.RECUSAR,
+                      codigoTransferencia: codigoTransferencia),
+                );
+              }),
           SizedBox(
             width: 40.w,
           ),

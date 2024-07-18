@@ -55,7 +55,7 @@ class SrmProducaoEnvironment extends Environment {
   Color? get corTextoSlogan => SRMColors.primaryColor;
 
   @override
-  Color? get corImagemLogo => SRMColors.primaryColor;
+  Color? get corImagemLogo => SRMColors.secondaryColor;
 
   @override
   // TODO: implement imagensGuiaCertificado

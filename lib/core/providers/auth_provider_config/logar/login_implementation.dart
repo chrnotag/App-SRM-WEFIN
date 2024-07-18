@@ -25,10 +25,14 @@ class LoginImpl {
       'plataforma': ambiente.plataforma.name
     };
     final body = json.encode(userModel.toJson());
+    print('CURL: $headers\nbody: $body\n url: $url');
     try {
       final response =
           await http.post(Uri.parse(url), headers: headers, body: body);
+      print('response login: ${response.body}');
+
       if (response.statusCode == 200) {
+        print('response login: ${response.body}');
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = LoginResponse.fromJson(responseBody);
         authProvider.setDataUser = data;

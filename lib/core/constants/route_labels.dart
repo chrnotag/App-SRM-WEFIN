@@ -12,7 +12,7 @@ class AppRoutes {
   //Escopo AUT
   static get forgetPassAuthRoute => '/forgot_password';
 
-  static get loginAuthRoute => Modular.initialRoute;
+  static get loginAuthRoute => '/login';
 
   //Escopo HOME
   static get homeModuleRoute => '/home';

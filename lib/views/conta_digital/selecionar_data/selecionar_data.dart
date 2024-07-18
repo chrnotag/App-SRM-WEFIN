@@ -113,8 +113,8 @@ class _SelecionarDataScreenState extends State<SelecionarDataScreen> {
                                                 _dataInicialSelecionada = time;
                                                 _controllerDataInicial.text =
                                                     dateFormatter(time);
-                                                ultimaData(time);
                                                 _controllerDataFinal.text = '';
+                                                ultimaData(_dataInicialSelecionada!);
                                               });
                                               Modular.to.pop();
                                             }),
@@ -217,7 +217,16 @@ class _SelecionarDataScreenState extends State<SelecionarDataScreen> {
   }
 
   void ultimaData(DateTime dataInicial) {
-    DateTime lastDate = dataInicial.add(Duration(days: 90));
+    // Calcula a diferença em dias entre a data inicial e a data atual
+    int diferencaDias = DateTime.now().difference(dataInicial).inDays;
+
+    // Define a quantidade de dias a adicionar, garantindo que não ultrapasse 90 dias
+    int diasParaAdicionar = (diferencaDias > 90) ? 90 : diferencaDias;
+
+    // Adiciona a quantidade de dias calculada
+    DateTime lastDate = dataInicial.add(Duration(days: diasParaAdicionar));
+
+    // Atualiza o estado com a nova data
     setState(() {
       _ultimaData = lastDate;
     });

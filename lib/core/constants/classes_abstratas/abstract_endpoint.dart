@@ -19,6 +19,11 @@ abstract class Endpoint{
   String get contaDigital;
   String get saldoContaDigital;
   String get extratoContaDigital;
+  String get solicitarTedContaDigital;
+  String get listaBancosContaDigital;
+  String get tokenSolicitacaoTed;
+  String get finalidadesTed;
+  String get solicitacoesTed;
   String get downloadExtratoContaDigital;
   Uri montarUrlPegarExtrato(String numeroConta, String dataInicial, String dataFinal, TipoConsultaExtrato tipoConsulta);
   String get transacoes;

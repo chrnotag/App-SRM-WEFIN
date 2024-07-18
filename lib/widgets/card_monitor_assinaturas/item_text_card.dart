@@ -19,6 +19,8 @@ class _ItemTextCard extends StatelessWidget {
           style: context.textTheme.bodyLarge!.copyWith(
               color: Color(0XFF838383),
               fontWeight: FontWeight.bold),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         )
       ],
     );

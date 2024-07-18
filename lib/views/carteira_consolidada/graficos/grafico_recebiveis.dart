@@ -35,7 +35,7 @@ class _GraficoRecebiveisState extends State<GraficoRecebiveis> {
     String totalOperado() {
       double total = 0;
       for (var dados in filteredItems) {
-        total += dados.valor;
+        total += dados.valor ?? 0;
       }
       return total.toBRL;
     }
@@ -58,8 +58,8 @@ class _GraficoRecebiveisState extends State<GraficoRecebiveis> {
                         sectionsSpace: 0,
                         sections: filteredItems.map((e) {
                           // Verifica se todos os valores são zero
-                          bool todosValoresZero =
-                              filteredItems.every((item) => item.valor == 0);
+                          bool todosValoresZero = filteredItems.every(
+                              (item) => item.valor == null || item.valor == 0);
 
                           return PieChartSectionData(
                             color: todosValoresZero ? Colors.grey : e.cor,
@@ -116,18 +116,19 @@ class _GraficoRecebiveisState extends State<GraficoRecebiveis> {
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.all(16.r),
-            child: BotaoPadrao(
-                label: 'Baixar Distribuição de Recebíveis',
-                onPressed: () async {
-                  OverlayApp.iniciaOverlay(context);
-                  await DownloadRecebiveisImpl.baixar();
-                  OverlayApp.terminaOverlay();
-                  PDFUtils.sharePDF(
-                      recebiveisProvider.pdfRecebiveis!, 'Recebíveis');
-                }),
-          ),
+          if (recebiveisProvider.pdfRecebiveis != null)
+            Padding(
+              padding: EdgeInsets.all(16.r),
+              child: BotaoPadrao(
+                  label: 'Baixar Distribuição de Recebíveis',
+                  onPressed: () async {
+                    OverlayApp.iniciaOverlay(context);
+                    await DownloadRecebiveisImpl.baixar();
+                    OverlayApp.terminaOverlay();
+                    PDFUtils.sharePDF(
+                        recebiveisProvider.pdfRecebiveis, 'Recebíveis');
+                  }),
+            ),
         ],
       ),
     );

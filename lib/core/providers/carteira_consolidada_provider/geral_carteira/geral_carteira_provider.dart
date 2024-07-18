@@ -35,52 +35,54 @@ class GeralCarteiraProvider extends ChangeNotifier {
         DadosGraficoModel(
             titulo: 'Vencidos',
             cor: const Color(0xffE62524),
-            valor: dadosGeralCarteira!.valorTotalRecebiveisVencidos.toDouble(),
+            valor: dadosGeralCarteira?.valorTotalRecebiveisVencidos.toDouble(),
             porcentagem: _calcular(
-                dadosGeralCarteira!.valorTotalRecebiveisVencidos.toDouble(),
-                dadosGeralCarteira!),
-            qtdTitulos: dadosGeralCarteira!.quantidadeTotalRecebiveisVencidos),
+                dadosGeralCarteira?.valorTotalRecebiveisVencidos.toDouble(),
+                dadosGeralCarteira),
+            qtdTitulos: dadosGeralCarteira?.quantidadeTotalRecebiveisVencidos),
         DadosGraficoModel(
             titulo: 'A Vencer',
             cor: const Color(0xff00A3FF),
-            valor: dadosGeralCarteira!.valorTotalRecebiveisAVencer.toDouble(),
+            valor: dadosGeralCarteira?.valorTotalRecebiveisAVencer.toDouble(),
             porcentagem: _calcular(
-                dadosGeralCarteira!.valorTotalRecebiveisAVencer.toDouble(),
-                dadosGeralCarteira!),
-            qtdTitulos: dadosGeralCarteira!.quantidadeTotalRecebiveisAVencer),
+                dadosGeralCarteira?.valorTotalRecebiveisAVencer.toDouble(),
+                dadosGeralCarteira),
+            qtdTitulos: dadosGeralCarteira?.quantidadeTotalRecebiveisAVencer),
         DadosGraficoModel(
             titulo: 'Em Aberto',
             cor: Colors.yellow,
-            valor: dadosGeralCarteira!.valorTotalRecebiveisEmAberto.toDouble(),
+            valor: dadosGeralCarteira?.valorTotalRecebiveisEmAberto.toDouble(),
             porcentagem: _calcular(
-                dadosGeralCarteira!.valorTotalRecebiveisEmAberto.toDouble(),
-                dadosGeralCarteira!),
-            qtdTitulos: dadosGeralCarteira!.quantidadeTotalRecebiveis),
+                dadosGeralCarteira?.valorTotalRecebiveisEmAberto.toDouble(),
+                dadosGeralCarteira),
+            qtdTitulos: dadosGeralCarteira?.quantidadeTotalRecebiveis),
         DadosGraficoModel(
             titulo: 'Liquidados',
             cor: const Color(0xff3FE225),
             valor:
-                dadosGeralCarteira!.valorTotalRecebiveisLiquidados.toDouble(),
+                dadosGeralCarteira?.valorTotalRecebiveisLiquidados.toDouble(),
             porcentagem: _calcular(
-                dadosGeralCarteira!.valorTotalRecebiveisLiquidados.toDouble(),
-                dadosGeralCarteira!),
+                dadosGeralCarteira?.valorTotalRecebiveisLiquidados.toDouble(),
+                dadosGeralCarteira),
             qtdTitulos:
-                dadosGeralCarteira!.quantidadeTotalRecebiveisLiquidados),
-      ].where((item) => item.valor > 0).toList();
+                dadosGeralCarteira?.quantidadeTotalRecebiveisLiquidados),
+      ];
 
   void limparDados() {
     dadosGeralCarteira = null;
     futureGrafico = null;
   }
 
-  static String _calcular(double valor, GeralCarteiraModel dadosCarteira) {
+  static String _calcular(double? valor, GeralCarteiraModel? dadosCarteira) {
     double valorTotal = 0;
-    valorTotal = dadosCarteira.valorTotalRecebiveisVencidos +
-        dadosCarteira.valorTotalRecebiveisLiquidados +
-        dadosCarteira.valorTotalRecebiveisEmAberto +
-        dadosCarteira.valorTotalRecebiveisAVencer;
+    if(dadosCarteira != null) {
+      valorTotal = dadosCarteira.valorTotalRecebiveisVencidos +
+          dadosCarteira.valorTotalRecebiveisLiquidados +
+          dadosCarteira.valorTotalRecebiveisEmAberto +
+          dadosCarteira.valorTotalRecebiveisAVencer;
+    }
 
-    if (valorTotal == 0) {
+    if (valorTotal == 0 || valor == null) {
       return 0.toPercent;
     }
 
