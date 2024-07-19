@@ -63,7 +63,8 @@ update_version() {
   echo "2 - Minor"
   echo "3 - Patch"
   echo "4 - Build Number"
-  echo "5 - Cancelar"
+  echo "5 - Nao atualizar versao"
+  echo "6 - Cancelar"
   echo ""
 
   read -p "Escolha uma opção (1-4) e pressione Enter: " impact_option
@@ -72,7 +73,9 @@ update_version() {
     2) impact="minor" ;;
     3) impact="patch" ;;
     4) impact="buildnumber" ;;
-    5) end;;
+    5) echo "Versão não foi alterada. Versão atual: $current_version"
+      return ;;  # Sai da função sem fazer alterações
+    6) end;;
     *) update_version ;;
   esac
 

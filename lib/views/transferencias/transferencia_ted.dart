@@ -94,6 +94,7 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
                             campoMonetario: true,
                             validator:
                                 Validatorless.required('Campo obrigatório'),
+                            tipoTeclado: TextInputType.number,
                             formatos: [
                               FilteringTextInputFormatter.digitsOnly,
                               CentavosInputFormatter()
@@ -270,8 +271,7 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
                                       UtilBrasilFields.removeCaracteres(
                                           controllerConta.text);
                                   solicitarTedProvider.nome =
-                                      UtilBrasilFields.removeCaracteres(
-                                          controllerNome.text);
+                                      controllerNome.text;
                                   solicitarTedProvider.valor =
                                       UtilBrasilFields.converterMoedaParaDouble(
                                           controllerValor.text);
