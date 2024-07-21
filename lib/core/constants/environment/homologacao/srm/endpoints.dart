@@ -109,7 +109,8 @@ class EndPointsSRM extends Endpoint {
       String dataFinal, TipoConsultaExtrato tipoConsulta) {
     final ambiente = Modular.get<Environment>();
     return Uri.parse(
-        "${TipoConsultaExtrato.retornarEndpoint(tipoConsulta, ambiente)}?numeroContaTitular=$numeroConta&dataInicialExtrato=$dataInicial&dataFinalExtrato=$dataFinal");
+        "${TipoConsultaExtrato.retornarEndpoint(tipoConsulta,
+            ambiente)}?numeroContaTitular=$numeroConta&dataInicialExtrato=$dataInicial&dataFinalExtrato=$dataFinal");
   }
 
   @override
@@ -137,16 +138,20 @@ class EndPointsSRM extends Endpoint {
 
   String get listaTransacoesTed => '$baseURL/transferencias';
 
-  Uri montarUrlAprovacaoTed(AprovarTedEnum aprovacao, String codigoTransferencia){
-    switch(aprovacao){
+  Uri montarUrlAprovacaoTed(AprovarTedEnum aprovacao,
+      String codigoTransferencia) {
+    switch (aprovacao) {
       case AprovarTedEnum.APROVAR:
         return Uri.parse('$listaTransacoesTed/$codigoTransferencia/aprovar');
       case AprovarTedEnum.RECUSAR:
         return Uri.parse('$listaTransacoesTed/$codigoTransferencia/reprovar');
-        default:
-          throw Exception('Valor enum nao existente: ${aprovacao.name}');
+      default:
+        throw Exception('Valor enum nao existente: ${aprovacao.name}');
     }
   }
-  Uri montarUrlComprovanteTed(String codigoTransacao) => Uri.parse('$listaTransacoesTed/comprovante/download?codigoTransacao=$codigoTransacao');
 
+  Uri montarUrlComprovanteTed(String codigoTransacao) =>
+      Uri.parse(
+          '$listaTransacoesTed/comprovante/download?codigoTransacao=$codigoTransacao');
+  String? get relatorioTitulos => null;
 }

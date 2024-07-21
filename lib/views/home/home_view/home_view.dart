@@ -92,15 +92,17 @@ class _HomeViewState extends State<HomeView> {
                 assinaturaProvider.assinaturasPendentes;
             List<MonitorAssinaturasModel> assinaturas =
                 assinaturaProvider.todasAssinaturas;
-            Modular.to.pushNamed(AppRoutes.assinaturaDigitalNavigatorRoute, arguments: {
-              'assinaturas': assinaturas,
-              'assinaturasPendentes': assinaturasPendentes
-            });
+            Modular.to.pushNamed(AppRoutes.assinaturaDigitalNavigatorRoute,
+                arguments: {
+                  'assinaturas': assinaturas,
+                  'assinaturasPendentes': assinaturasPendentes
+                });
           }),
       _CardItemMenuHome(
           icone: ambiente.transferenciasIcone,
           titulo: 'Transferências',
-          onTap: () => Modular.to.pushNamed(AppRoutes.transferenciasNavigatorRoute)),
+          onTap: () =>
+              Modular.to.pushNamed(AppRoutes.transferenciasNavigatorRoute)),
       _CardItemMenuHome(
           icone: ambiente.extratoIcone,
           titulo: 'Extrato',
@@ -126,7 +128,7 @@ class _HomeViewState extends State<HomeView> {
               titulo: 'Relatório de Títulos',
               onTap: () {
                 Modular.to
-                    .pushNamed(AppRoutes.carteiraConsolidadaNavigatorRoute);
+                    .pushNamed(AppRoutes.relatorioTitulosNavigatorRoute);
               }),
       if (isSRM)
         _CardItemMenuHome(
@@ -149,8 +151,10 @@ class _HomeViewState extends State<HomeView> {
       cardsHome.removeWhere((card) =>
           (card as _CardItemMenuHome).titulo == 'Carteira Consolidada');
     }
-    cardsHome.removeWhere(
-        (card) => (card as _CardItemMenuHome).titulo == 'Relatório de Títulos');
+    // if (isSRM) {
+    //   cardsHome.removeWhere((card) =>
+    //       (card as _CardItemMenuHome).titulo == 'Relatório de Títulos');
+    // }
     // cardsHome.removeWhere(
     //     (card) => (card as _CardItemMenuHome).titulo == 'Extrato');
     // }
@@ -160,8 +164,8 @@ class _HomeViewState extends State<HomeView> {
     // }
     //
     if (ambiente.plataforma == Plataforma.SRM) {
-    cardsHome.removeWhere(
-        (card) => (card as _CardItemMenuHome).titulo == 'Transferências');
+      cardsHome.removeWhere(
+          (card) => (card as _CardItemMenuHome).titulo == 'Transferências');
     }
 
     return Scaffold(
@@ -181,23 +185,23 @@ class _HomeViewState extends State<HomeView> {
               children: [
                 ambiente.plataforma == Plataforma.TRUST
                     ? Positioned(
-                      left: -context.width * 0.1,
-                      top: -40.h,
-                      child: SvgPicture.asset(
-                        ambiente.logoAppBar,
-                        color: Color(0x1affffff),
-                        width: context.width * 0.5,
-                      ),
-                    )
+                        left: -context.width * 0.1,
+                        top: -40.h,
+                        child: SvgPicture.asset(
+                          ambiente.logoAppBar,
+                          color: Color(0x1affffff),
+                          width: context.width * 0.5,
+                        ),
+                      )
                     : Positioned(
-                  left: -context.width * 0.1,
-                  top: -50.h,
-                  child: SvgPicture.asset(
-                    ambiente.logoAppBar,
-                    color: Color(0x1affffff),
-                    width: context.width * 0.4,
-                  ),
-                ),
+                        left: -context.width * 0.1,
+                        top: -50.h,
+                        child: SvgPicture.asset(
+                          ambiente.logoAppBar,
+                          color: Color(0x1affffff),
+                          width: context.width * 0.4,
+                        ),
+                      ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -246,31 +250,32 @@ class _HomeViewState extends State<HomeView> {
                                               Text(
                                                 _isSaldoVisivel
                                                     ? contaDigitalProvider
-                                                    .saldoContaDigital
-                                                    ?.saldoTotal
-                                                    .toBRL ??
-                                                    0.0.toBRL
+                                                            .saldoContaDigital
+                                                            ?.saldoTotal
+                                                            .toBRL ??
+                                                        0.0.toBRL
                                                     : 'R\$ * * * * *',
                                                 style: context
                                                     .textTheme.displayMedium!
                                                     .copyWith(
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                    FontWeight.w900),
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.w900),
                                               ),
                                               SizedBox(width: 8.w),
                                               GestureDetector(
                                                 onTap: () => setState(() {
                                                   _isSaldoVisivel =
-                                                  !_isSaldoVisivel;
-                                                  print('novo valor: $_isSaldoVisivel');
+                                                      !_isSaldoVisivel;
+                                                  print(
+                                                      'novo valor: $_isSaldoVisivel');
                                                 }),
                                                 child: Icon(
                                                   _isSaldoVisivel
                                                       ? Icons.visibility
                                                       : Icons.visibility_off,
                                                   color:
-                                                  context.backgroundColor,
+                                                      context.backgroundColor,
                                                 ),
                                               )
                                             ],
@@ -291,7 +296,9 @@ class _HomeViewState extends State<HomeView> {
           ),
           SizedBox(
             width: context.width,
-            height: Platform.isAndroid ? context.height * 0.77 : context.height * 0.70,
+            height: Platform.isAndroid
+                ? context.height * 0.77
+                : context.height * 0.70,
             child: GridView.count(
               padding: EdgeInsets.all(20.r),
               crossAxisCount: 2,
