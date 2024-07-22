@@ -17,8 +17,6 @@ import 'package:Srm_Asset/widgets/loader_widget.dart';
 import 'package:Srm_Asset/widgets/mensagem_tela_vazia.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_svg/svg.dart';
-import '../../../core/constants/configs_tema/srm/colors.dart';
 import '../../../core/providers/conta_digital/tabbar_meses_provider.dart';
 import '../../../core/utils/ultimo_dia_mes.dart';
 
@@ -70,77 +68,78 @@ class _TelaExtratoState extends State<TelaExtrato>
       body: Column(
         children: [
           _TabBarMeses(controller: _tabController!),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(8, 0, 8, 16),
-            child: SizedBox(
-              height: context.height * 0.82,
-              child: Card(
-                margin: const EdgeInsets.only(top: 3),
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(15),
-                        bottomRight: Radius.circular(15))),
-                color: Colors.white,
-                surfaceTintColor: Colors.white,
-                child: Column(
-                  children: [
-                    _MenuFiltroTelaExtrato(),
-                    Expanded(
-                      child: RefreshIndicator(
-                        onRefresh: extratoProvider.carregarDados,
-                        child: FutureBuilder(
-                          future: extratoProvider.extratoFuture,
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return Loader();
-                            }
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.w),
+              child: SafeArea(
+                child: Card(
+                  margin: const EdgeInsets.only(top: 3),
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(15),
+                          bottomRight: Radius.circular(15))),
+                  color: Colors.white,
+                  surfaceTintColor: Colors.white,
+                  child: Column(
+                    children: [
+                      _MenuFiltroTelaExtrato(),
+                      Expanded(
+                        child: RefreshIndicator(
+                          onRefresh: extratoProvider.carregarDados,
+                          child: FutureBuilder(
+                            future: extratoProvider.extratoFuture,
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return Loader();
+                              }
 
-                            if (extratoProvider.extrato != null &&
-                                extratoProvider.extrato!.itens.isNotEmpty) {
-                              // Ajuste o tamanho da lista para não exceder o tamanho de itensExtrato
-                              final itemCount =
-                                  extratoProvider.itensExtrato.length <
-                                          tamanhoLista
-                                      ? extratoProvider.itensExtrato.length
-                                      : tamanhoLista;
+                              if (extratoProvider.extrato != null &&
+                                  extratoProvider.extrato!.itens.isNotEmpty) {
+                                // Ajuste o tamanho da lista para não exceder o tamanho de itensExtrato
+                                final itemCount =
+                                    extratoProvider.itensExtrato.length <
+                                            tamanhoLista
+                                        ? extratoProvider.itensExtrato.length
+                                        : tamanhoLista;
 
-                              return ListView.builder(
-                                itemCount: itemCount,
-                                itemBuilder: (context, index) {
-                                  return Column(
-                                    children: [
-                                      ItemListaExtrato(
-                                        dataDia: extratoProvider
-                                            .itensExtrato[index]
-                                            .dataReferencia
-                                            .formatarIso8601,
-                                        saldoDia: extratoProvider
-                                            .itensExtrato[index]
-                                            .saldoNaData
-                                            .toBRL,
-                                      ),
-                                      ...BuildListaOperacao.buildLista(
-                                        context: context,
-                                        index: index,
-                                        tipoConsulta:
-                                            TipoConsultaExtrato.VISUALIZAR,
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            } else {
-                              return MensagemTelaVazia(
-                                  titulo: 'Não há movimentações disponíveis',
-                                  mensagem:
-                                      'Não há movimentações para o período selecionado');
-                            }
-                          },
+                                return ListView.builder(
+                                  itemCount: itemCount,
+                                  itemBuilder: (context, index) {
+                                    return Column(
+                                      children: [
+                                        ItemListaExtrato(
+                                          dataDia: extratoProvider
+                                              .itensExtrato[index]
+                                              .dataReferencia
+                                              .formatarIso8601,
+                                          saldoDia: extratoProvider
+                                              .itensExtrato[index]
+                                              .saldoNaData
+                                              .toBRL,
+                                        ),
+                                        ...BuildListaOperacao.buildLista(
+                                          context: context,
+                                          index: index,
+                                          tipoConsulta:
+                                              TipoConsultaExtrato.VISUALIZAR,
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              } else {
+                                return MensagemTelaVazia(
+                                    titulo: 'Não há movimentações disponíveis',
+                                    mensagem:
+                                        'Não há movimentações para o período selecionado');
+                              }
+                            },
+                          ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
