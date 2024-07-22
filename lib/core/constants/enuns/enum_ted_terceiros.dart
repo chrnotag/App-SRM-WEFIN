@@ -1,5 +1,3 @@
-import 'package:Srm_Asset/views/ted_terceiros/widgets/botao_comprovante.dart';
-import 'package:Srm_Asset/views/ted_terceiros/widgets/botoes_para_aprovacao.dart';
 import 'package:flutter/material.dart';
 
 enum TedTerceirosEnum {

@@ -141,4 +141,6 @@ class EndPointsTRUST extends Endpoint{
   }
   Uri montarUrlComprovanteTed(String codigoTransacao) => Uri.parse('$listaTransacoesTed/comprovante/download?codigoTransacao=$codigoTransacao');
 
+  String? get relatorioTitulos => '$baseURL/relatorios/titulos';
+
 }

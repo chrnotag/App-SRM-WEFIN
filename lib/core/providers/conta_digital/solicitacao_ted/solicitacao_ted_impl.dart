@@ -10,7 +10,7 @@ class SolicitacaoTedImpl {
     final ambiente = Modular.get<Environment>();
     final Uri url = Uri.parse('${ambiente.endpoints.solicitacoesTed}?numeroContaTitular=$numeroContaTitular');
     try {
-      final response = await http.get(url, headers: HeaderPadrao.header());
+      final response = await http.get(url, headers: header());
       if (response.statusCode == 200) {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = SolicitacaoTed.fromJson(responseBody);

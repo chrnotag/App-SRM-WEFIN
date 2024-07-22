@@ -1,5 +1,6 @@
 import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/views/carteira_consolidada/carteira_consolidada_screen.dart';
+import 'package:Srm_Asset/views/relatorio_titulos/relatorio_titulos_screen.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class CarteiraConsolidadaModule extends Module {
@@ -14,5 +15,6 @@ class CarteiraConsolidadaModule extends Module {
     super.routes(r);
     r.child(AppRoutes.carteiraConsolidadaScreenRoute,
         child: (context) => const CarteiraConsolidadaScreen());
+    r.child(AppRoutes.relatorioTitulosScreenRoute, child: (context) => const RelatorioTitulosScreen());
   }
 }

@@ -23,10 +23,8 @@ class _TabBarMesesState extends State<_TabBarMeses> {
       width: context.width,
       height: 57.h,
       child: Card(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(5),
-                bottomLeft: Radius.circular(5))),
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.zero),
         margin: EdgeInsets.zero,
         elevation: 1,
         surfaceTintColor: Colors.white,

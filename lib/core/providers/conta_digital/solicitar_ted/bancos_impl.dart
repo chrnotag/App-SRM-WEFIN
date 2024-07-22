@@ -11,7 +11,7 @@ class BancosModelImpl {
     final Uri url = Uri.parse(
         '${ambiente.endpoints.listaBancosContaDigital}${codigoBanco != null ? '?codigoBanco=$codigoBanco' : ''}');
     try {
-      final response = await http.get(url, headers: HeaderPadrao.header());
+      final response = await http.get(url, headers: header());
       if (response.statusCode == 200) {
         print('lista bancos: ${response.body}');
         final responseBody = json.decode(utf8.decode(response.bodyBytes));

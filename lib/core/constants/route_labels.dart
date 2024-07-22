@@ -101,6 +101,11 @@ static get carteiraConsolidadaScreenRoute => '/screen';
 
   //ESCOPO CARTEIRA CONSOLIDADA NAVIGATOR ROUTE
 static get carteiraConsolidadaNavigatorRoute => '$carteiraConsolidadaModuleRoute$carteiraConsolidadaScreenRoute';
+//ESCOPO RELATORIOS TITULOS
+  static get relatorioTitulosScreenRoute => '/relatorios-titulos-screen';
+
+//ESCOPO RELATORIOS NAVIGATOR ROUTE
+  static get relatorioTitulosNavigatorRoute => '$carteiraConsolidadaModuleRoute$relatorioTitulosScreenRoute';
 
 
 

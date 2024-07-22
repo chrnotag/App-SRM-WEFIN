@@ -10,7 +10,7 @@ class FinalidadesTedModelImpl {
     final ambiente = Modular.get<Environment>();
     final Uri url = Uri.parse(ambiente.endpoints.finalidadesTed);
     try {
-      final response = await http.get(url, headers: HeaderPadrao.header());
+      final response = await http.get(url, headers: header());
       if (response.statusCode == 200) {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = (responseBody as List)

@@ -101,8 +101,7 @@ class _MonitorAssinaturasState extends State<MonitorAssinaturas> {
                 ),
               ),
             ),
-            SizedBox(
-              height: context.height * 0.82,
+            Expanded(
               child: RefreshIndicator(
                 onRefresh: () => assinaturaProvider.carregarDados(),
                 child: FutureBuilder(
