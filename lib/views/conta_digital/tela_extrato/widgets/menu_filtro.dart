@@ -85,7 +85,7 @@ class _MenuFiltroTelaExtratoState extends State<_MenuFiltroTelaExtrato> {
                           style: context.textTheme.bodyLarge!
                               .copyWith(fontWeight: FontWeight.w900)),
                       Text(
-                        dadosBanco!.conta,
+                        dadosBanco!.conta.digitoConta,
                         style: context.textTheme.bodyLarge,
                       ),
                     ],

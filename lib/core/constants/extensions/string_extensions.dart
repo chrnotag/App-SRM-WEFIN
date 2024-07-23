@@ -22,4 +22,6 @@ extension StringExtensions on String {
     }
   }
 
+  String get digitoConta => '${this.substring(0, this.length -1)}-${this.length - 1}';
+
 }
