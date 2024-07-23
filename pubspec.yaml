@@ -25,7 +25,7 @@ environment:
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
-version: 2.2.0+24
+version: 2.1.1+24
 
 dependencies:
   flutter:
@@ -81,7 +81,7 @@ dependencies:
 dependency_overrides:
   permission_handler: ^11.0.1
 
-flavorizr:
+flutter_flavorizr:
   flavors:
     SRM_PRODUCAO:
       app:
@@ -90,7 +90,6 @@ flavorizr:
         applicationId: "com.app.srm"
       ios:
         bundleId: "com.srm.appsrm"
-
     SRM_HOMOLOGACAO:
       app:
         name: "SRM Homologação"
@@ -98,7 +97,6 @@ flavorizr:
         applicationId: "com.homol.srm"
       ios:
         bundleId: "com.srm.appsrm"
-
     TRUST_PRODUCAO:
       app:
         name: "TRUST"
@@ -106,7 +104,6 @@ flavorizr:
         applicationId: "com.trust.trust_app"
       ios:
         bundleId: "com.app.apptrust"
-
     TRUST_HOMOLOGACAO:
       app:
         name: "TRUST Homologação"
@@ -168,6 +165,10 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
   assets:
+    - srm_homologacao.yaml
+    - srm_producao.yaml
+    - trust_homologacao.yaml
+    - trust_producao.yaml
     - assets/
     - assets/images/
     - assets/srm/

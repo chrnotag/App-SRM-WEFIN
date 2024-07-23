@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:Srm_Asset/core/constants/classes_abstratas/abstract_endpoint.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
+import 'package:Srm_Asset/core/constants/enuns/plataforma_enum.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_impl.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -109,8 +112,7 @@ class EndPointsSRM extends Endpoint {
       String dataFinal, TipoConsultaExtrato tipoConsulta) {
     final ambiente = Modular.get<Environment>();
     return Uri.parse(
-        "${TipoConsultaExtrato.retornarEndpoint(tipoConsulta,
-            ambiente)}?numeroContaTitular=$numeroConta&dataInicialExtrato=$dataInicial&dataFinalExtrato=$dataFinal");
+        "${TipoConsultaExtrato.retornarEndpoint(tipoConsulta, ambiente)}?numeroContaTitular=$numeroConta&dataInicialExtrato=$dataInicial&dataFinalExtrato=$dataFinal");
   }
 
   @override
@@ -133,13 +135,12 @@ class EndPointsSRM extends Endpoint {
   String get carteiraRecebiveis =>
       '$carteiraConsolidada/distribuicao-recebiveis';
 
-  String get downloadRecebiveis =>
-      '$carteiraRecebiveis/download';
+  String get downloadRecebiveis => '$carteiraRecebiveis/download';
 
   String get listaTransacoesTed => '$baseURL/transferencias';
 
-  Uri montarUrlAprovacaoTed(AprovarTedEnum aprovacao,
-      String codigoTransferencia) {
+  Uri montarUrlAprovacaoTed(
+      AprovarTedEnum aprovacao, String codigoTransferencia) {
     switch (aprovacao) {
       case AprovarTedEnum.APROVAR:
         return Uri.parse('$listaTransacoesTed/$codigoTransferencia/aprovar');
@@ -150,8 +151,18 @@ class EndPointsSRM extends Endpoint {
     }
   }
 
-  Uri montarUrlComprovanteTed(String codigoTransacao) =>
-      Uri.parse(
-          '$listaTransacoesTed/comprovante/download?codigoTransacao=$codigoTransacao');
+  Uri montarUrlComprovanteTed(String codigoTransacao) => Uri.parse(
+      '$listaTransacoesTed/comprovante/download?codigoTransacao=$codigoTransacao');
+
   String? get relatorioTitulos => null;
+
+  Uri montarUrlBuscarVersao() {
+    String SO = Platform.operatingSystem.toUpperCase();
+    return Uri.parse(
+        '$baseURL/aplicativos?plataforma=SRM&sistemaOperacional=$SO');
+  }
+
+  String get linkLoja => Platform.isAndroid
+      ? 'https://play.google.com/store/apps/details?id=com.app.srm'
+      : 'https://apps.apple.com/app/app-cliente-srm/id6479165868';
 }
