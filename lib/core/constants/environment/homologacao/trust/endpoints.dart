@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:Srm_Asset/core/constants/classes_abstratas/abstract_endpoint.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -142,5 +144,11 @@ class EndPointsTRUST extends Endpoint{
   Uri montarUrlComprovanteTed(String codigoTransacao) => Uri.parse('$listaTransacoesTed/comprovante/download?codigoTransacao=$codigoTransacao');
 
   String? get relatorioTitulos => '$baseURL/relatorios/titulos';
+
+  Uri montarUrlBuscarVersao(){
+    String SO = Platform.operatingSystem.toUpperCase();
+    return Uri.parse(
+        '$baseURL/aplicativos?plataforma=TRUST&sistemaOperacional=$SO');
+  }
 
 }

@@ -38,4 +38,5 @@ abstract class Endpoint{
   Uri montarUrlAprovacaoTed(AprovarTedEnum aprovacao, String codigoTransferencia);
   Uri montarUrlComprovanteTed(String codigoTransacao);
   String? get relatorioTitulos;
+  Uri montarUrlBuscarVersao();
 }
