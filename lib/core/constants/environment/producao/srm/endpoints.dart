@@ -151,4 +151,7 @@ class EndPointsSRM extends Endpoint{
         '$baseURL/aplicativos?plataforma=SRM&sistemaOperacional=$SO');
   }
 
+  String get linkLoja => Platform.isAndroid
+      ? 'https://play.google.com/store/apps/details?id=com.app.srm'
+      : 'https://apps.apple.com/app/app-cliente-srm/id6479165868';
 }

@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -91,23 +92,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _launchAppStore() async {
-    String url = '';
-
-    if (F.appFlavor == Flavor.TRUST_HOMOLOGACAO || F.appFlavor == Flavor.TRUST_PRODUCAO) {
-      if (Platform.isAndroid) {
-        url = 'https://play.google.com/store/apps/details?id=com.trust.trust_app';
-      } else if (Platform.isIOS) {
-        url = 'https://apps.apple.com/app/app-cliente-trust/id6479451107';
-      }
-    } else if (F.appFlavor == Flavor.SRM_HOMOLOGACAO || F.appFlavor == Flavor.SRM_PRODUCAO) {
-      if (Platform.isAndroid) {
-        url = 'https://play.google.com/store/apps/details?id=com.app.srm';
-      } else if (Platform.isIOS) {
-        url = 'https://apps.apple.com/app/app-cliente-srm/id6479165868';
-      }
-    } else {
-      throw UnsupportedError("Unsupported platform or OS");
-    }
+    String url = Modular.get<Environment>().endpoints.linkLoja;
 
     if (await canLaunch(url)) {
       await launch(url);
