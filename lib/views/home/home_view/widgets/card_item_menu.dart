@@ -19,7 +19,6 @@ class _CardItemMenuHome extends StatelessWidget {
     final ambiente = Modular.get<Environment>();
     return SizedBox(
       width: 190.w,
-      height: 150.h,
       child: InkWell(
         borderRadius: const BorderRadius.all(Radius.circular(15)),
         onTap: onTap,
@@ -27,28 +26,33 @@ class _CardItemMenuHome extends StatelessWidget {
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(12))),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SvgPicture.asset(icone, color: ambiente.IconColor, width: 60.w,),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10.w),
+                      child: SvgPicture.asset(icone, color: ambiente.IconColor,),
+                    ),
                     Visibility(
                       visible: notificacoes >= 1,
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16.w),
                         child: CircleAvatar(
                           backgroundColor: Colors.red,
-                          radius: 15.r,
+                          radius: ambiente.plataforma == Plataforma.TRUST ? 10.r : 15.r,
                           child: Text(
                             notificacoes > 9 ? '9+' : notificacoes.toString(),
-                            style: context.textTheme.displaySmall!.copyWith(
+                            style: ambiente.plataforma ==Plataforma.TRUST ? context.textTheme.bodySmall!.copyWith(
                               color: Colors.white,
                               fontWeight: FontWeight.w900
+                            ) : context.textTheme.displaySmall!.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w900
                             ),
                           ),
                         ),
@@ -58,8 +62,8 @@ class _CardItemMenuHome extends StatelessWidget {
                 ),
                 Text(
                   titulo,
-                  style: context.textTheme.displaySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
+                  style: context.textTheme.bodyLarge!
+                      .copyWith(fontWeight: FontWeight.w900, color: SRMColors.textBodyColor),
                 )
               ],
             ),

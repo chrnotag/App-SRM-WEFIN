@@ -123,7 +123,7 @@ class _AppBarLogoState extends State<AppBarLogo> {
           Spacer(),
           InkWell(
             onTap: () => DeslogarUsuario(context: context).encerrarSessao(),
-            child: SvgPicture.asset(AssetsConfig.imagesExitIcone, width: 29),
+            child: SvgPicture.asset(AssetsConfig.trustSair),
             borderRadius: BorderRadius.all(Radius.circular(20.r)),
           )
         ],

@@ -36,7 +36,7 @@ class TrustProducaoEnvironment extends Environment {
 
   @override
   // TODO: implement contatos
-  ContatosAbstract get contatos => ContatosTRUST();
+  ContatosTRUST get contatos => ContatosTRUST();
 
   @override
   // TODO: implement iconColor
@@ -47,14 +47,14 @@ class TrustProducaoEnvironment extends Environment {
   Color? get corQuadradoLogin => TRUSTColors.primaryColor;
 
   @override
-  // TODO: implement fraseSloganLogin
-  String? get fraseSloganLogin => '';
+  Color? get corImagemLogo => Colors.white;
 
   @override
   Color? get corTextoSlogan => Colors.white;
 
   @override
-  Color? get corImagemLogo => Colors.white;
+  // TODO: implement fraseSloganLogin
+  String? get fraseSloganLogin => '';
 
   @override
   // TODO: implement imagensGuiaCertificado
@@ -70,15 +70,15 @@ class TrustProducaoEnvironment extends Environment {
 
   @override
   // TODO: implement ted_menu_icone
-  String get ted_menu_icone => AssetsConfig.trustTedTerceiros;
+  String get ted_menu_icone => AssetsConfig.trustTed;
 
   @override
   // TODO: implement extratoIcone
-  String get extratoIcone => AssetsConfig.trustExtratoTrust;
+  String get extratoIcone => AssetsConfig.trustExtrato;
 
   @override
   // TODO: implement faleConoscoIcone
-  String get faleConoscoIcone => AssetsConfig.trustWhatsappVetor;
+  String get faleConoscoIcone => AssetsConfig.trustWhatsapp;
 
   @override
   // TODO: implement grupoEconomicoIcone
@@ -86,16 +86,15 @@ class TrustProducaoEnvironment extends Environment {
 
   @override
   // TODO: implement monitorOperacoesIcone
-  String get monitorOperacoesIcone => AssetsConfig.trustGraficoTrust;
+  String get monitorOperacoesIcone => AssetsConfig.trustMonitorOperacoes;
 
   @override
   // TODO: implement tedTerceirosIcone
-  String get tedTerceirosIcone => AssetsConfig.trustTedTerceiros;
+  String get tedTerceirosIcone => AssetsConfig.trustTed;
 
   @override
   // TODO: implement transferenciasIcone
-  String get transferenciasIcone => AssetsConfig.trustSetasPerpendicularesTrust;
+  String get transferenciasIcone => AssetsConfig.trustTransferencias;
 
-  String get imagemEmpresa => AssetsConfig.trustEmprestaTrust;
-
+  String get imagemEmpresa => AssetsConfig.trustMaletaPerfil;
 }

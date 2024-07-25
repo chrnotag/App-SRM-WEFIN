@@ -2,6 +2,10 @@
 class AssetsConfig {
   AssetsConfig._();
 
+  static const String coreAppHomebankingSrmHomologacao = 'srm_homologacao.yaml';
+  static const String coreAppHomebankingSrmProducao = 'srm_producao.yaml';
+  static const String coreAppHomebankingTrustHomologacao = 'trust_homologacao.yaml';
+  static const String coreAppHomebankingTrustProducao = 'trust_producao.yaml';
   static const String imagesBackgroundImage = 'assets/images/background_image.png';
   static const String imagesCadeado = 'assets/images/cadeado.svg';
   static const String imagesExitIcone = 'assets/images/exit_icone.svg';
@@ -44,25 +48,31 @@ class AssetsConfig {
   static const String srmTedTerceirosSrm = 'assets/srm/ted_terceiros_srm.svg';
   static const String srmUploadCertificado = 'assets/srm/upload_certificado.svg';
   static const String trustAlertIconTrust = 'assets/trust/alert_icon_trust.svg';
+  static const String trustCarteira = 'assets/trust/carteira.svg';
   static const String trustCheckCertTrust = 'assets/trust/check_cert_trust.svg';
   static const String trustCheckTrustIcon = 'assets/trust/check_trust_icon.svg';
   static const String trustDocumentCertTrust = 'assets/trust/document_cert_trust.svg';
   static const String trustDollarListIcon = 'assets/trust/dollar_list_icon.png';
-  static const String trustEmprestaTrust = 'assets/trust/empresta_trust.svg';
-  static const String trustExtratoTrust = 'assets/trust/extrato_trust.svg';
-  static const String trustGraficoTrust = 'assets/trust/grafico_trust.svg';
-  static const String trustIcAjuda = 'assets/trust/ic_ajuda.png';
+  static const String trustExtrato = 'assets/trust/extrati.svg';
+  static const String trustHome = 'assets/trust/home.svg';
   static const String trustMaleta = 'assets/trust/maleta.svg';
+  static const String trustMaletaBarra = 'assets/trust/maleta_barra.svg';
+  static const String trustMaletaPerfil = 'assets/trust/maleta_perfil.svg';
+  static const String trustMonitorOperacoes = 'assets/trust/monitor_operacoes.svg';
+  static const String trustNotificacoes = 'assets/trust/notificacoes.svg';
+  static const String trustOlhoAberto = 'assets/trust/olho_aberto.svg';
+  static const String trustOlhoFechado = 'assets/trust/olho_fechado.svg';
+  static const String trustPerfil = 'assets/trust/perfil.svg';
   static const String trustProcurarCertTrust = 'assets/trust/procurar_cert_trust.svg';
   static const String trustQrcodeCertTrust = 'assets/trust/qrcode_cert_trust.svg';
-  static const String trustRelatorioTrust = 'assets/trust/relatorio_trust.svg';
+  static const String trustRelatorio = 'assets/trust/relatorio.svg';
+  static const String trustSair = 'assets/trust/sair.svg';
   static const String trustSelecionarCertTrust = 'assets/trust/selecionar_cert_trust.svg';
   static const String trustSenhaCertTrust = 'assets/trust/senha_cert_trust.svg';
   static const String trustSenhaSlideCertTrust = 'assets/trust/senha_slide_cert_trust.svg';
-  static const String trustSetasPerpendicularesTrust = 'assets/trust/setas_perpendiculares_trust.svg';
-  static const String trustTedTerceiros = 'assets/trust/ted_terceiros.svg';
-  static const String trustTransferenciasTrust = 'assets/trust/transferencias_trust.svg';
+  static const String trustTed = 'assets/trust/ted.svg';
+  static const String trustTransferencias = 'assets/trust/transferencias.svg';
   static const String trustUploadCertTrust = 'assets/trust/upload_cert_trust.svg';
-  static const String trustWhatsappVetor = 'assets/trust/whatsapp_vetor.svg';
+  static const String trustWhatsapp = 'assets/trust/whatsapp.svg';
 
 }
