@@ -155,4 +155,7 @@ class EndPointsTRUST extends Endpoint {
     return Uri.parse(
         '$baseURL/aplicativos?plataforma=TRUST&sistemaOperacional=$SO');
   }
+  String get linkLoja => Platform.isAndroid
+      ? 'https://play.google.com/store/apps/details?id=com.trust.trust_app'
+      : 'https://apps.apple.com/app/app-cliente-trust/id6479451107';
 }
