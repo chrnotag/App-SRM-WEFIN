@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
@@ -40,6 +41,7 @@ class _AuthFormState extends State<AuthForm> {
   final _loginEC = TextEditingController();
   final _passwordEC = TextEditingController();
   String? _mensagemErro;
+  final authProvider = Modular.get<AuthProvider>();
 
   final MaskTextInputFormatter _cnpjFormatter = MaskTextInputFormatter(
     mask: '##.###.###/####-##',
@@ -55,6 +57,7 @@ class _AuthFormState extends State<AuthForm> {
     // WidgetsBinding.instance.addPostFrameCallback((_) {
     //   _loadSavedLoginData();
     // });
+    _loginEC.text = authProvider.loginSalvo ?? '';
   }
 
   @override
@@ -108,18 +111,23 @@ class _AuthFormState extends State<AuthForm> {
                   onTap: () => setState(() {
                     _mensagemErro = null;
                   }),
-                  hint: isTrust ? "CPF" :"E-mail ou CPF",
+                  hint: isTrust ? "CPF" : "E-mail ou CPF",
                   inputFormatters: _cpfFormatter,
                   inputType: isTrust ? TextInputType.number : null,
                   onChanged: (value) => atualizarMascara(),
                   maxCaracters: maximoCaracteresCPF,
-                  label: isTrust ? "Digite seu CPF" : 'Digite seu e-mail ou CPF',
+                  label:
+                      isTrust ? "Digite seu CPF" : 'Digite seu e-mail ou CPF',
                   autofillHint: AutofillHints.email,
                   controller: _loginEC,
                   validator: Validatorless.multiple([
-                    if (temLetras && !isTrust) Validatorless.email('Email inválido!'),
-                    if (!temLetras || isTrust) Validatorless.cpf('CPF inválido!'),
-                    Validatorless.required(isTrust ? "CPF Obrigatório" : 'E-mail ou CPF Obrigatório'),
+                    if (temLetras && !isTrust)
+                      Validatorless.email('Email inválido!'),
+                    if (!temLetras || isTrust)
+                      Validatorless.cpf('CPF inválido!'),
+                    Validatorless.required(isTrust
+                        ? "CPF Obrigatório"
+                        : 'E-mail ou CPF Obrigatório'),
                     (value) => _mensagemErro
                   ]),
                 ),
@@ -154,7 +162,9 @@ class _AuthFormState extends State<AuthForm> {
                               Visibility(
                                 visible: widget.visible,
                                 child: LinkComponent(
-                                  style: context.textTheme.bodyMedium!.copyWith(color: context.secondaryColor, fontWeight: FontWeight.bold),
+                                  style: context.textTheme.bodyMedium!.copyWith(
+                                      color: context.secondaryColor,
+                                      fontWeight: FontWeight.bold),
                                   label: 'Esqueci minha senha!',
                                   route: AppRoutes.forgetPassAuthRoute,
                                 ),
@@ -171,7 +181,7 @@ class _AuthFormState extends State<AuthForm> {
             BotaoPadrao(
               label: widget.label,
               onPressed: () async {
-                if(!temLetras){
+                if (!temLetras) {
                   removerCaracteresEspeciais();
                 }
                 TextInput.finishAutofillContext();
@@ -231,13 +241,12 @@ class _AuthFormState extends State<AuthForm> {
     );
   }
 
-//   final FlutterSecureStorage _storage = FlutterSecureStorage();
-//
-// // Função para salvar os dados de login (email e senha) se o usuário optar por isso
-//   void _saveLoginDataIfNeeded() async {
-//     await _storage.write(key: 'email', value: _loginEC.text);
-//     await _storage.write(key: 'password', value: _passwordEC.text);
-//   }
+  final FlutterSecureStorage _storage = FlutterSecureStorage();
+
+// Função para salvar os dados de login (email e senha) se o usuário optar por isso
+  void _salvarLogin() async {
+    await _storage.write(key: 'username', value: _loginEC.text);
+  }
 
   // void _loadSavedLoginData() async {
   //   // String? savedEmail = await _storage.read(key: 'email');
@@ -279,10 +288,11 @@ class _AuthFormState extends State<AuthForm> {
         await contaDigitalProvider.obterDadosContaDigital();
         await contaDigitalProvider.obterSaldoContaDigital();
         await certificadoProvider.pegarCertificado();
-        // _saveLoginDataIfNeeded();
+        _salvarLogin();
         if (authProvider.listaCedente!.length > 1) {
           OverlayApp.terminaOverlay();
-          Modular.to.pushReplacementNamed(AppRoutes.listaSelecaoEmpresasNavigatorRoute);
+          Modular.to.pushReplacementNamed(
+              AppRoutes.listaSelecaoEmpresasNavigatorRoute);
         } else {
           //certificadoProvider.pegarCertificado();
           OverlayApp.terminaOverlay();

@@ -179,7 +179,7 @@ class _ListaSelecaoEmpresasState extends State<ListaSelecaoEmpresas> {
                             radius: 34.r,
                             backgroundColor: Color(0xffF8F9FB),
                             child: SvgPicture.asset(
-                              AssetsConfig.srmMaleta,
+                              AssetsConfig.srmMaletaPerfil,
                               color: context.primaryColor,
                               width: 30.w,
                             ),
