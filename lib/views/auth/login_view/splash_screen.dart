@@ -60,7 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
       if (backendVersion.versao != currentVersion) {
         _showUpdateDialog();
       } else {
-        _loadSavedLoginData();
+        await _loadSavedLoginData();
         Modular.to.navigate(AppRoutes.loginAuthRoute);
       }
     } catch (error) {

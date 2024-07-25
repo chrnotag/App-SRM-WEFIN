@@ -36,6 +36,14 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   Future<ApiResponse<dynamic>>? _saldoFuture;
   final contaDigital = Modular.get<ContaDigitalProvider>();
+  int naviController = 0;
+
+  Color trocarCor(int posicao) {
+    if (posicao == naviController) {
+      return context.secondaryColor;
+    }
+    return context.labelTextColor;
+  }
 
   @override
   void initState() {
@@ -53,7 +61,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   void dispose() {
     final AssinaturaProvider assinaturaProvider =
-        Modular.get<AssinaturaProvider>();
+    Modular.get<AssinaturaProvider>();
     assinaturaProvider.limparAssinaturas();
     super.dispose();
   }
@@ -77,7 +85,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     final AuthProvider authProvider = context.watch<AuthProvider>();
     final ContaDigitalProvider contaDigitalProvider =
-        context.watch<ContaDigitalProvider>();
+    context.watch<ContaDigitalProvider>();
     final ambiente = Modular.get<Environment>();
     bool isSRM = ambiente.plataforma == Plataforma.SRM;
 
@@ -88,7 +96,7 @@ class _HomeViewState extends State<HomeView> {
           notificacoes: authProvider.empresaSelecionada!.assinaturaPendente,
           onTap: () {
             final AssinaturaProvider assinaturaProvider =
-                Modular.get<AssinaturaProvider>();
+            Modular.get<AssinaturaProvider>();
             List<MonitorAssinaturasModel> assinaturasPendentes =
                 assinaturaProvider.assinaturasPendentes;
             List<MonitorAssinaturasModel> assinaturas =
@@ -118,18 +126,18 @@ class _HomeViewState extends State<HomeView> {
           }),
       isSRM
           ? _CardItemMenuHome(
-              icone: AssetsConfig.srmCarteiraConsolidada,
-              titulo: 'Carteira Consolidada',
-              onTap: () {
-                Modular.to
-                    .pushNamed(AppRoutes.carteiraConsolidadaNavigatorRoute);
-              })
+          icone: AssetsConfig.srmCarteira,
+          titulo: 'Carteira Consolidada',
+          onTap: () {
+            Modular.to
+                .pushNamed(AppRoutes.carteiraConsolidadaNavigatorRoute);
+          })
           : _CardItemMenuHome(
-              icone: AssetsConfig.trustRelatorio,
-              titulo: 'Relatório de Títulos',
-              onTap: () {
-                Modular.to.pushNamed(AppRoutes.relatorioTitulosNavigatorRoute);
-              }),
+          icone: AssetsConfig.trustRelatorio,
+          titulo: 'Relatório de Títulos',
+          onTap: () {
+            Modular.to.pushNamed(AppRoutes.relatorioTitulosNavigatorRoute);
+          }),
       if (isSRM)
         _CardItemMenuHome(
             icone: ambiente.grupoEconomicoIcone!,
@@ -149,7 +157,7 @@ class _HomeViewState extends State<HomeView> {
     //     .contemRoles([RolesAcessoEnum.ROLE_CONTA_DIGITAL])) {
     if (!isSRM) {
       cardsHome.removeWhere((card) =>
-          (card as _CardItemMenuHome).titulo == 'Carteira Consolidada');
+      (card as _CardItemMenuHome).titulo == 'Carteira Consolidada');
     }
     // if (isSRM) {
     //   cardsHome.removeWhere((card) =>
@@ -165,17 +173,39 @@ class _HomeViewState extends State<HomeView> {
     //
     if (ambiente.plataforma == Plataforma.SRM) {
       cardsHome.removeWhere(
-          (card) => (card as _CardItemMenuHome).titulo == 'Transferências');
+              (card) => (card as _CardItemMenuHome).titulo == 'Transferências');
     }
 
     return Scaffold(
-
-      bottomNavigationBar: ambiente.plataforma == Plataforma.TRUST ? BottomNavigationBar(items: [
-        BottomNavigationBarItem(icon: SvgPicture.asset(AssetsConfig.trustHome), label: 'Início'),
-        BottomNavigationBarItem(icon: SvgPicture.asset(AssetsConfig.trustNotificacoes), label: 'Notificações'),
-        BottomNavigationBarItem(icon: SvgPicture.asset(AssetsConfig.trustMaletaBarra), label: 'Perfil'),
-      ]) : null,
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                AssetsConfig.trustHome,
+                color: trocarCor(0),
+              ),
+              label: 'Início'),
+          BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                AssetsConfig.trustNotificacoes,
+                color: trocarCor(1),
+              ),
+              label: 'Notificações'),
+          BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                AssetsConfig.trustMaletaBarra,
+                color: trocarCor(2),
+              ),
+              label: 'Perfil'),
+        ],
+        onTap: (value) =>
+            setState(() {
+              naviController = value;
+            }),
+        currentIndex: naviController,
+      ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             width: context.width,
@@ -190,23 +220,23 @@ class _HomeViewState extends State<HomeView> {
               children: [
                 ambiente.plataforma == Plataforma.TRUST
                     ? Positioned(
-                        left: -context.width * 0.1,
-                        top: -40.h,
-                        child: SvgPicture.asset(
-                          ambiente.logoAppBar,
-                          color: Color(0x1affffff),
-                          width: context.width * 0.5,
-                        ),
-                      )
+                  left: -context.width * 0.1,
+                  top: -40.h,
+                  child: SvgPicture.asset(
+                    ambiente.logoAppBar,
+                    color: Color(0x1affffff),
+                    width: context.width * 0.5,
+                  ),
+                )
                     : Positioned(
-                        left: -context.width * 0.1,
-                        top: -50.h,
-                        child: SvgPicture.asset(
-                          ambiente.logoAppBar,
-                          color: Color(0x1affffff),
-                          width: context.width * 0.4,
-                        ),
-                      ),
+                  left: -context.width * 0.1,
+                  top: -50.h,
+                  child: SvgPicture.asset(
+                    ambiente.logoAppBar,
+                    color: Color(0x1affffff),
+                    width: context.width * 0.4,
+                  ),
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -252,39 +282,40 @@ class _HomeViewState extends State<HomeView> {
                                         } else {
                                           return Padding(
                                             padding:
-                                                EdgeInsets.only(bottom: 25.h),
+                                            EdgeInsets.only(bottom: 25.h),
                                             child: Row(
                                               children: [
                                                 Text(
                                                   _isSaldoVisivel
                                                       ? contaDigitalProvider
-                                                              .saldoContaDigital
-                                                              ?.saldoTotal
-                                                              .toBRL ??
-                                                          0.0.toBRL
+                                                      .saldoContaDigital
+                                                      ?.saldoTotal
+                                                      .toBRL ??
+                                                      0.0.toBRL
                                                       : 'R\$ * * * * *',
                                                   style: context
                                                       .textTheme.displaySmall!
                                                       .copyWith(
-                                                          fontSize: 20.sp,
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.w600),
+                                                      fontSize: 20.sp,
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                      FontWeight.w600),
                                                 ),
                                                 SizedBox(width: 8.w),
                                                 InkWell(
-                                                  onTap: () => setState(() {
-                                                    _isSaldoVisivel =
+                                                  onTap: () =>
+                                                      setState(() {
+                                                        _isSaldoVisivel =
                                                         !_isSaldoVisivel;
-                                                    print(
-                                                        'novo valor: $_isSaldoVisivel');
-                                                  }),
+                                                        print(
+                                                            'novo valor: $_isSaldoVisivel');
+                                                      }),
                                                   child: SvgPicture.asset(
                                                     _isSaldoVisivel
                                                         ? AssetsConfig
-                                                            .trustOlhoAberto
+                                                        .trustOlhoAberto
                                                         : AssetsConfig
-                                                            .trustOlhoFechado,
+                                                        .trustOlhoFechado,
                                                     width: 25.w,
                                                   ),
                                                 )
@@ -303,6 +334,14 @@ class _HomeViewState extends State<HomeView> {
                   ],
                 ),
               ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(25.w, 20.h, 0, 0),
+            child: Text(
+              'Seus produtos e serviços',
+              style: context.textTheme.bodyMedium!.copyWith(
+                  fontWeight: FontWeight.w600, color: SRMColors.textBodyColor),
             ),
           ),
           Expanded(

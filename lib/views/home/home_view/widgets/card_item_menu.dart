@@ -44,15 +44,12 @@ class _CardItemMenuHome extends StatelessWidget {
                         padding: EdgeInsets.symmetric(horizontal: 16.w),
                         child: CircleAvatar(
                           backgroundColor: Colors.red,
-                          radius: ambiente.plataforma == Plataforma.TRUST ? 10.r : 15.r,
+                          radius: 10.r,
                           child: Text(
                             notificacoes > 9 ? '9+' : notificacoes.toString(),
-                            style: ambiente.plataforma ==Plataforma.TRUST ? context.textTheme.bodySmall!.copyWith(
+                            style: context.textTheme.bodySmall!.copyWith(
                               color: Colors.white,
                               fontWeight: FontWeight.w900
-                            ) : context.textTheme.displaySmall!.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w900
                             ),
                           ),
                         ),

@@ -71,31 +71,31 @@ class SrmHomologacaoEnvironment extends Environment {
 
   @override
   // TODO: implement ted_menu_icone
-  String get ted_menu_icone => AssetsConfig.srmTedTerceirosSrm;
+  String get ted_menu_icone => AssetsConfig.srmTed;
 
   @override
   // TODO: implement extratoIcone
-  String get extratoIcone => AssetsConfig.srmExtratoSrm;
+  String get extratoIcone => AssetsConfig.srmExtrato;
 
   @override
   // TODO: implement faleConoscoIcone
-  String get faleConoscoIcone => AssetsConfig.srmFaleConoscoSrm;
+  String get faleConoscoIcone => AssetsConfig.srmWhatsapp;
 
   @override
   // TODO: implement grupoEconomicoIcone
-  String get grupoEconomicoIcone => AssetsConfig.srmGrupoPessoas;
+  String get grupoEconomicoIcone => AssetsConfig.srmGrupo;
 
   @override
   // TODO: implement monitorOperacoesIcone
-  String get monitorOperacoesIcone => AssetsConfig.srmMonitorOperacoesSrm;
+  String get monitorOperacoesIcone => AssetsConfig.srmGrafico;
 
   @override
   // TODO: implement tedTerceirosIcone
-  String get tedTerceirosIcone => AssetsConfig.srmTedTerceirosSrm;
+  String get tedTerceirosIcone => AssetsConfig.srmTed;
 
   @override
   // TODO: implement transferenciasIcone
-  String get transferenciasIcone => AssetsConfig.srmSetasPerpendiculares;
+  String get transferenciasIcone => AssetsConfig.srmTransferencia;
 
-  String get imagemEmpresa => AssetsConfig.srmEmpresaSrm;
+  String get imagemEmpresa => AssetsConfig.srmMaletaPerfil;
 }
