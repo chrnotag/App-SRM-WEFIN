@@ -71,7 +71,7 @@ class ThemeTRUST implements ImagensGuiaImportarCertificado{
 
   static String get logoAppBar => AssetsConfig.imagesIconeTrust;
 
-  static Widget get imagemAjuda => Image.asset(AssetsConfig.trustIcAjuda,
+  static Widget get imagemAjuda => Image.asset(AssetsConfig.trustWhatsapp,
       width: 176.w, color: TRUSTColors.primaryColor);
 
   @override
@@ -128,6 +128,6 @@ class ThemeTRUST implements ImagensGuiaImportarCertificado{
 
   @override
   // TODO: implement ted_menu_icone
-  String get ted_menu_icone => AssetsConfig.trustTedTerceiros;
+  String get ted_menu_icone => AssetsConfig.trustTed;
 
 }

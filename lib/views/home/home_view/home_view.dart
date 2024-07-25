@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:Srm_Asset/assets_config/assets_config.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
+import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
 import 'package:Srm_Asset/core/constants/extensions/num_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/conta_digital_provider.dart';
@@ -124,11 +125,10 @@ class _HomeViewState extends State<HomeView> {
                     .pushNamed(AppRoutes.carteiraConsolidadaNavigatorRoute);
               })
           : _CardItemMenuHome(
-              icone: AssetsConfig.trustRelatorioTrust,
+              icone: AssetsConfig.trustRelatorio,
               titulo: 'Relatório de Títulos',
               onTap: () {
-                Modular.to
-                    .pushNamed(AppRoutes.relatorioTitulosNavigatorRoute);
+                Modular.to.pushNamed(AppRoutes.relatorioTitulosNavigatorRoute);
               }),
       if (isSRM)
         _CardItemMenuHome(
@@ -169,10 +169,15 @@ class _HomeViewState extends State<HomeView> {
     }
 
     return Scaffold(
+
+      bottomNavigationBar: ambiente.plataforma == Plataforma.TRUST ? BottomNavigationBar(items: [
+        BottomNavigationBarItem(icon: SvgPicture.asset(AssetsConfig.trustHome), label: 'Início'),
+        BottomNavigationBarItem(icon: SvgPicture.asset(AssetsConfig.trustNotificacoes), label: 'Notificações'),
+        BottomNavigationBarItem(icon: SvgPicture.asset(AssetsConfig.trustMaletaBarra), label: 'Perfil'),
+      ]) : null,
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.only(bottom: 16.h),
             width: context.width,
             decoration: BoxDecoration(
               color: context.secondaryColor,
@@ -214,7 +219,7 @@ class _HomeViewState extends State<HomeView> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: EdgeInsets.symmetric(vertical: 16.h),
+                            padding: EdgeInsets.only(top: 8.h, bottom: 10.h),
                             child: Text(
                               'Conta Digital',
                               style: context.textTheme.displaySmall!.copyWith(
@@ -245,40 +250,46 @@ class _HomeViewState extends State<HomeView> {
                                           return Text(
                                               'Houve um erro ao carregar o saldo!');
                                         } else {
-                                          return Row(
-                                            children: [
-                                              Text(
-                                                _isSaldoVisivel
-                                                    ? contaDigitalProvider
-                                                            .saldoContaDigital
-                                                            ?.saldoTotal
-                                                            .toBRL ??
-                                                        0.0.toBRL
-                                                    : 'R\$ * * * * *',
-                                                style: context
-                                                    .textTheme.displayMedium!
-                                                    .copyWith(
-                                                        color: Colors.white,
-                                                        fontWeight:
-                                                            FontWeight.w900),
-                                              ),
-                                              SizedBox(width: 8.w),
-                                              GestureDetector(
-                                                onTap: () => setState(() {
-                                                  _isSaldoVisivel =
-                                                      !_isSaldoVisivel;
-                                                  print(
-                                                      'novo valor: $_isSaldoVisivel');
-                                                }),
-                                                child: Icon(
+                                          return Padding(
+                                            padding:
+                                                EdgeInsets.only(bottom: 25.h),
+                                            child: Row(
+                                              children: [
+                                                Text(
                                                   _isSaldoVisivel
-                                                      ? Icons.visibility
-                                                      : Icons.visibility_off,
-                                                  color:
-                                                      context.backgroundColor,
+                                                      ? contaDigitalProvider
+                                                              .saldoContaDigital
+                                                              ?.saldoTotal
+                                                              .toBRL ??
+                                                          0.0.toBRL
+                                                      : 'R\$ * * * * *',
+                                                  style: context
+                                                      .textTheme.displaySmall!
+                                                      .copyWith(
+                                                          fontSize: 20.sp,
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.w600),
                                                 ),
-                                              )
-                                            ],
+                                                SizedBox(width: 8.w),
+                                                InkWell(
+                                                  onTap: () => setState(() {
+                                                    _isSaldoVisivel =
+                                                        !_isSaldoVisivel;
+                                                    print(
+                                                        'novo valor: $_isSaldoVisivel');
+                                                  }),
+                                                  child: SvgPicture.asset(
+                                                    _isSaldoVisivel
+                                                        ? AssetsConfig
+                                                            .trustOlhoAberto
+                                                        : AssetsConfig
+                                                            .trustOlhoFechado,
+                                                    width: 25.w,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
                                           );
                                         }
                                       }),
@@ -294,15 +305,16 @@ class _HomeViewState extends State<HomeView> {
               ],
             ),
           ),
-          SizedBox(
-            width: context.width,
-            height: Platform.isAndroid
-                ? context.height * 0.77
-                : context.height * 0.70,
-            child: GridView.count(
-              padding: EdgeInsets.all(20.r),
-              crossAxisCount: 2,
-              children: cardsHome,
+          Expanded(
+            child: SizedBox(
+              width: context.width,
+              child: GridView.count(
+                padding: EdgeInsets.all(20.r),
+                crossAxisCount: 2,
+                shrinkWrap: true,
+                childAspectRatio: 1.15,
+                children: cardsHome,
+              ),
             ),
           ),
         ],
