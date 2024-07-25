@@ -32,6 +32,10 @@ class AuthProvider extends ChangeNotifier {
   set credenciaisUsuario(UserModel credenciais) =>
       _credenciaisUsuario = credenciais;
 
+  String? _loginSalvo;
+  String? get loginSalvo => _loginSalvo;
+  set loginSalvo(String? login) => _loginSalvo = login;
+
   LoginResponse? _dataUser;
   List<CedenteModel>? _listaCedente;
   CedenteModel? _empresaSelecionada;
