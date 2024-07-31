@@ -34,18 +34,39 @@ class _MenuFiltroState extends State<_MenuFiltro> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        InkWell(onTap: () => setState(() {
-      menuSelecionado = MENU_LIQUIDACAO;
-    }),child: _ItemMenuFiltro(corSelecionado: corItemMenu(MENU_LIQUIDACAO), textoMenu: 'Liquidação')),
+        InkWell(
+            onTap: () => setState(() {
+                  menuSelecionado = MENU_LIQUIDACAO;
+                  showDialog(
+                    context: context,
+                    builder: (context) => SelecionarDataRelatorioScreen(
+                        chave: SelecionarDataRelatorioEnum.LIQUIDACAO),
+                  );
+                }),
+            child: _ItemMenuFiltro(
+                corSelecionado: corItemMenu(MENU_LIQUIDACAO),
+                textoMenu: 'Liquidação')),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.w),
-          child: InkWell(onTap: () => setState(() {
-    menuSelecionado = MENU_VENCIMENTO;
-    }),child: _ItemMenuFiltro(corSelecionado: corItemMenu(MENU_VENCIMENTO), textoMenu: 'Vencimento')),
+          child: InkWell(
+              onTap: () => setState(() {
+                    menuSelecionado = MENU_VENCIMENTO;
+                    showDialog(
+                      context: context,
+                      builder: (context) => SelecionarDataRelatorioScreen(
+                          chave: SelecionarDataRelatorioEnum.VENCIMENTO),
+                    );
+                  }),
+              child: _ItemMenuFiltro(
+                  corSelecionado: corItemMenu(MENU_VENCIMENTO),
+                  textoMenu: 'Vencimento')),
         ),
-        InkWell(onTap: () => setState(() {
-          menuSelecionado = MENU_STATUS;
-        }),child: _ItemMenuFiltro(corSelecionado: corItemMenu(MENU_STATUS), textoMenu: 'Status')),
+        InkWell(
+            onTap: () => setState(() {
+                  menuSelecionado = MENU_STATUS;
+                }),
+            child: _ItemMenuFiltro(
+                corSelecionado: corItemMenu(MENU_STATUS), textoMenu: 'Status')),
       ],
     );
   }

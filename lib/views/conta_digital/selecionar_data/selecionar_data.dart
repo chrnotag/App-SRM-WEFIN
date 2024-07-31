@@ -5,9 +5,7 @@ import 'package:Srm_Asset/core/constants/route_labels.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_provider.dart';
 import 'package:Srm_Asset/views/conta_digital/widgets/app_bar_conta_digital.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 
