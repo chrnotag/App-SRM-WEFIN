@@ -25,15 +25,22 @@ increment_version() {
 # Função para obter a versão atual do pubspec.yaml para um flavor específico
 get_current_version() {
   local flavor=$1
-  grep "^version:" "$flavor.yaml" | awk '{print $2}'
+  local file_extension=${2:-""}
+  grep "^version:" "${flavor}${file_extension}.yaml" | awk '{print $2}'
 }
 
 # Função para atualizar o pubspec.yaml com a nova versão para um flavor específico
 update_pubspec_version() {
   local new_version=$1
   local flavor=$2
-  sed -i '' "s/^version: .*/version: $new_version/" "$flavor.yaml"
-  sed -i '' "s/^version: .*/version: $new_version/" "${flavor}_ios.yaml"
+  local file_extension=${3:-""}
+  sed -i '' "s/^version: .*/version: $new_version/; s/^# Última versão atualizada:.*/# Última versão atualizada: $new_version/" "${flavor}${file_extension}.yaml"
+
+  # Se o arquivo _ios existir, atualiza ele também
+  if [ -f "${flavor}_ios.yaml" ]; then
+    sed -i '' "s/^version: .*/version: $new_version/; s/^# Última versão atualizada:.*/# Última versão atualizada: $new_version/" "${flavor}_ios.yaml"
+  fi
+
   update_main_pubspec_version "$new_version" "$flavor"
 }
 
@@ -41,6 +48,7 @@ update_pubspec_version() {
 update_main_pubspec_version() {
   local new_version=$1
   local flavor=$2
+  sed -i '' "s/^version: .*/version: $new_version/; s/^# Última versão atualizada:.*/# Última versão atualizada: $new_version/" pubspec.yaml
 }
 
 # Função para enviar a versão atual para o endpoint de homologação
@@ -94,7 +102,15 @@ send_ios_version_to_endpoint() {
 # Função para atualizar a versão no pubspec.yaml
 update_version() {
   local flavor=$1
-  local current_version=$(get_current_version "$flavor")
+  local is_ios=$2
+  local current_version
+
+  if [ "$is_ios" == "true" ]; then
+    current_version=$(get_current_version "$flavor" "_ios")
+  else
+    current_version=$(get_current_version "$flavor")
+  fi
+
   local impact
 
   clear
@@ -116,11 +132,11 @@ update_version() {
     5) echo "Versão não foi alterada. Versão atual: $current_version"
       return ;;  # Sai da função sem fazer alterações
     6) end ;;
-    *) update_version "$flavor" ;;
+    *) update_version "$flavor" "$is_ios" ;;
   esac
 
   local new_version=$(increment_version "$current_version" "$impact")
-  update_pubspec_version "$new_version" "$flavor"
+  update_pubspec_version "$new_version" "$flavor" $([ "$is_ios" == "true" ] && echo "_ios" || echo "")
 
   echo "Versão atualizada para: $new_version"
 }
@@ -184,9 +200,10 @@ submit_to_endpoint() {
   read -p "Escolha uma opção (1-2) e pressione Enter: " so_option
 
   local sistema_operacional
+  local is_ios="false"
   case $so_option in
     1) sistema_operacional="ANDROID" ;;
-    2) sistema_operacional="IOS" ;;
+    2) sistema_operacional="IOS"; is_ios="true" ;;
     *) submit_to_endpoint "$flavor" "$env" ;;
   esac
 
@@ -204,7 +221,7 @@ submit_to_endpoint() {
 
   # Enviar a versão do arquivo _ios.yaml se o sistema operacional for iOS
   if [ "$sistema_operacional" == "IOS" ]; then
-    local ios_version=$(get_current_version "${flavor}_ios")
+    local ios_version=$(get_current_version "$flavor" "_ios")
     send_ios_version_to_endpoint "$ios_version" "$sistema_operacional" "$plataforma" "$env"
   fi
 }
@@ -251,7 +268,7 @@ build_menu() {
     read -p "Escolha uma opção de build (1 ou 2) e pressione Enter: " build_option
 
     if [ "$build_option" == "1" ] || [ "$build_option" == "2" ]; then
-        environment_menu
+        environment_menu "$build_option"
     elif [ "$build_option" == "3" ]; then
         build_bundle
     elif [ "$build_option" == "4" ]; then
@@ -331,22 +348,25 @@ environment_menu() {
     read -p "Escolha uma opção de ambiente (1-4) e pressione Enter (Padrão SRM Homologação): " environment_option
     environment_option=${environment_option:-1}
 
+    local build_type=$1
+
     case $environment_option in
-        1) SRM_HOMOLOGACAO ;;
-        2) SRM_PRODUCAO ;;
-        3) TRUST_HOMOLOGACAO ;;
-        4) TRUST_PRODUCAO ;;
+        1) SRM_HOMOLOGACAO "$build_type" ;;
+        2) SRM_PRODUCAO "$build_type" ;;
+        3) TRUST_HOMOLOGACAO "$build_type" ;;
+        4) TRUST_PRODUCAO "$build_type" ;;
         5) build_menu ;;
-        *) environment_menu ;;
+        *) environment_menu "$build_type" ;;
     esac
 }
 
 SRM_HOMOLOGACAO() {
-    update_version "srm_homologacao"
+    local build_type=$1
+    update_version "srm_homologacao" $([ "$build_type" == "2" ] && echo "true" || echo "false")
     flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_srm.yaml
     dart run flutter_native_splash:create --path=configuracao_icone_splash_srm.yaml
 
-    if [ "$build_option" == "1" ]; then
+    if [ "$build_type" == "1" ]; then
         flutter pub run rename setAppName --targets android --value "SRM"
         flutter build apk --flavor SRM_HOMOLOGACAO -t lib/main_SRM_HOMOLOGACAO.dart
     else
@@ -358,14 +378,15 @@ SRM_HOMOLOGACAO() {
 }
 
 SRM_PRODUCAO() {
+    local build_type=$1
     flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_srm.yaml
     dart run flutter_native_splash:create --path=configuracao_icone_splash_srm.yaml
 
-    if [ "$build_option" == "1" ]; then
+    if [ "$build_type" == "1" ]; then
         flutter pub run rename setAppName --targets android --value "SRM"
         flutter build apk --flavor SRM -t lib/main_SRM.dart
     else
-        update_version "SRM_PRODUCAO"
+        update_version "SRM_PRODUCAO" "true"
         flutter pub run rename setAppName --targets ios --value "SRM"
         flutter pub run rename setBundleId --targets ios --value "com.srm.appsrm"
         flutter build ipa --flavor SRM -t lib/main_SRM.dart
@@ -374,11 +395,12 @@ SRM_PRODUCAO() {
 }
 
 TRUST_HOMOLOGACAO() {
-    update_version "trust_homologacao"
+    local build_type=$1
+    update_version "trust_homologacao" $([ "$build_type" == "2" ] && echo "true" || echo "false")
     flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_trust.yaml
     dart run flutter_native_splash:create --path=configuracao_icone_splash_trust.yaml
 
-    if [ "$build_option" == "1" ]; then
+    if [ "$build_type" == "1" ]; then
         flutter pub run rename setAppName --targets android --value "TRUST"
         flutter build apk --flavor TRUST_HOMOLOGACAO -t lib/main_TRUST_HOMOLOGACAO.dart
     else
@@ -390,14 +412,15 @@ TRUST_HOMOLOGACAO() {
 }
 
 TRUST_PRODUCAO() {
+    local build_type=$1
     flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_trust.yaml
     dart run flutter_native_splash:create --path=configuracao_icone_splash_trust.yaml
 
-    if [ "$build_option" == "1" ]; then
+    if [ "$build_type" == "1" ]; then
         flutter pub run rename setAppName --targets android --value "TRUST"
         flutter build apk --flavor TRUST -t lib/main_TRUST.dart
     else
-        update_version "TRUST_PRODUCAO"
+        update_version "TRUST_PRODUCAO" "true"
         flutter pub run rename setAppName --targets ios --value "TRUST"
         flutter pub run rename setBundleId --targets ios --value "com.app.apptrust"
         flutter build ipa --flavor TRUST -t lib/main_TRUST.dart
