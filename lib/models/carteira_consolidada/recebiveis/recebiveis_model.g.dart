@@ -27,6 +27,7 @@ Recebivel _$RecebivelFromJson(Map<String, dynamic> json) => Recebivel(
       valorTotalVencidoPorcentagem:
           (json['valorTotalVencidoPorcentagem'] as num?)?.toDouble(),
       saldoDevedor: (json['saldoDevedor'] as num).toDouble(),
+      corProduto: json['corProduto'] as String,
     );
 
 Map<String, dynamic> _$RecebivelToJson(Recebivel instance) => <String, dynamic>{
@@ -36,4 +37,5 @@ Map<String, dynamic> _$RecebivelToJson(Recebivel instance) => <String, dynamic>{
       'valorTotalVencido': instance.valorTotalVencido,
       'valorTotalVencidoPorcentagem': instance.valorTotalVencidoPorcentagem,
       'saldoDevedor': instance.saldoDevedor,
+      'corProduto': instance.corProduto,
     };

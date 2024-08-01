@@ -160,8 +160,8 @@ class _HomeViewState extends State<HomeView> {
       (card as _CardItemMenuHome).titulo == 'Carteira Consolidada');
     }
     // if (isSRM) {
-    //   cardsHome.removeWhere((card) =>
-    //       (card as _CardItemMenuHome).titulo == 'Relatório de Títulos');
+      cardsHome.removeWhere((card) =>
+          (card as _CardItemMenuHome).titulo == 'Relatório de Títulos');
     // }
     // cardsHome.removeWhere(
     //     (card) => (card as _CardItemMenuHome).titulo == 'Extrato');
@@ -171,39 +171,39 @@ class _HomeViewState extends State<HomeView> {
     //     .contemRoles([RolesAcessoEnum.ROLE_TRANSFERENCIA_CONTA_DIGITAL])) {
     // }
     //
-    if (ambiente.plataforma == Plataforma.SRM) {
+    if (isSRM) {
       cardsHome.removeWhere(
               (card) => (card as _CardItemMenuHome).titulo == 'Transferências');
     }
 
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                AssetsConfig.trustHome,
-                color: trocarCor(0),
-              ),
-              label: 'Início'),
-          BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                AssetsConfig.trustNotificacoes,
-                color: trocarCor(1),
-              ),
-              label: 'Notificações'),
-          BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                AssetsConfig.trustMaletaBarra,
-                color: trocarCor(2),
-              ),
-              label: 'Perfil'),
-        ],
-        onTap: (value) =>
-            setState(() {
-              naviController = value;
-            }),
-        currentIndex: naviController,
-      ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   items: [
+      //     BottomNavigationBarItem(
+      //         icon: SvgPicture.asset(
+      //           AssetsConfig.trustHome,
+      //           color: trocarCor(0),
+      //         ),
+      //         label: 'Início'),
+      //     BottomNavigationBarItem(
+      //         icon: SvgPicture.asset(
+      //           AssetsConfig.trustNotificacoes,
+      //           color: trocarCor(1),
+      //         ),
+      //         label: 'Notificações'),
+      //     BottomNavigationBarItem(
+      //         icon: SvgPicture.asset(
+      //           AssetsConfig.trustMaletaBarra,
+      //           color: trocarCor(2),
+      //         ),
+      //         label: 'Perfil'),
+      //   ],
+      //   onTap: (value) =>
+      //       setState(() {
+      //         naviController = value;
+      //       }),
+      //   currentIndex: naviController,
+      // ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

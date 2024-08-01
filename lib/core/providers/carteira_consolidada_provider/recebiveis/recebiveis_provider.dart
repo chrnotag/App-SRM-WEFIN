@@ -43,6 +43,7 @@ class RecebiveisProvider extends ChangeNotifier {
   void limparDados() {
     recebiveisFuture = null;
     recebiveis = null;
+    recebiveisDownload = null;
   }
 
   Uint8List? _pdfRecebiveis;
@@ -53,21 +54,17 @@ class RecebiveisProvider extends ChangeNotifier {
 
   List<DadosGraficoModel> dadosGrafico() {
     List<DadosGraficoModel> dados = [];
-
     if (recebiveis != null) {
-      int count = 0;
       for (var nota in recebiveis!.recebiveis) {
         dados.add(
           DadosGraficoModel(
               titulo: nota.sigla,
-              cor: dados[count].cor,
+              cor: Color(int.parse(nota.corProduto)),
               valor: nota.saldoDevedor,
               porcentagem: _calcular(nota.saldoDevedor)),
         );
-        count++;
       }
     }
-
     return dados;
   }
 
