@@ -33,6 +33,14 @@ update_pubspec_version() {
   local new_version=$1
   local flavor=$2
   sed -i '' "s/^version: .*/version: $new_version/" "$flavor.yaml"
+  sed -i '' "s/^version: .*/version: $new_version/" "${flavor}_ios.yaml"
+  update_main_pubspec_version "$new_version" "$flavor"
+}
+
+# Função para atualizar a versão principal no pubspec.yaml
+update_main_pubspec_version() {
+  local new_version=$1
+  local flavor=$2
 }
 
 # Função para enviar a versão atual para o endpoint de homologação
@@ -69,6 +77,20 @@ send_version_to_prod_endpoint() {
     https://core-app-bff.srmasset.com/core-app-bff/v1/aplicativos
 }
 
+# Função para enviar a versão dos arquivos _ios.yaml para o endpoint
+send_ios_version_to_endpoint() {
+  local version=$1
+  local sistema_operacional=$2
+  local plataforma=$3
+  local env=$4
+
+  if [ "$env" == "homolog" ]; then
+    send_version_to_homolog_endpoint "$version" "$sistema_operacional" "$plataforma"
+  elif [ "$env" == "prod" ]; then
+    send_version_to_prod_endpoint "$version" "$sistema_operacional" "$plataforma"
+  fi
+}
+
 # Função para atualizar a versão no pubspec.yaml
 update_version() {
   local flavor=$1
@@ -93,7 +115,7 @@ update_version() {
     4) impact="buildnumber" ;;
     5) echo "Versão não foi alterada. Versão atual: $current_version"
       return ;;  # Sai da função sem fazer alterações
-    6) end;;
+    6) end ;;
     *) update_version "$flavor" ;;
   esac
 
@@ -179,6 +201,12 @@ submit_to_endpoint() {
   elif [ "$env" == "prod" ]; then
     send_version_to_prod_endpoint "$version" "$sistema_operacional" "$plataforma"
   fi
+
+  # Enviar a versão do arquivo _ios.yaml se o sistema operacional for iOS
+  if [ "$sistema_operacional" == "IOS" ]; then
+    local ios_version=$(get_current_version "${flavor}_ios")
+    send_ios_version_to_endpoint "$ios_version" "$sistema_operacional" "$plataforma" "$env"
+  fi
 }
 
 build_or_emulate_menu() {
@@ -225,7 +253,7 @@ build_menu() {
     if [ "$build_option" == "1" ] || [ "$build_option" == "2" ]; then
         environment_menu
     elif [ "$build_option" == "3" ]; then
-      build_bundle
+        build_bundle
     elif [ "$build_option" == "4" ]; then
         build_or_emulate_menu
     else
@@ -248,7 +276,7 @@ emulate_menu() {
     emulate_option=${emulate_option:-1}
 
     case $emulate_option in
-         1) SRM_HOMOLOGACAO_EMULATE ;;
+        1) SRM_HOMOLOGACAO_EMULATE ;;
         2) SRM_PRODUCAO_EMULATE ;;
         3) TRUST_HOMOLOGACAO_EMULATE ;;
         4) TRUST_PRODUCAO_EMULATE ;;
@@ -314,6 +342,7 @@ environment_menu() {
 }
 
 SRM_HOMOLOGACAO() {
+    update_version "srm_homologacao"
     flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_srm.yaml
     dart run flutter_native_splash:create --path=configuracao_icone_splash_srm.yaml
 
@@ -336,7 +365,7 @@ SRM_PRODUCAO() {
         flutter pub run rename setAppName --targets android --value "SRM"
         flutter build apk --flavor SRM -t lib/main_SRM.dart
     else
-      update_version "SRM_PRODUCAO"
+        update_version "SRM_PRODUCAO"
         flutter pub run rename setAppName --targets ios --value "SRM"
         flutter pub run rename setBundleId --targets ios --value "com.srm.appsrm"
         flutter build ipa --flavor SRM -t lib/main_SRM.dart
@@ -345,6 +374,7 @@ SRM_PRODUCAO() {
 }
 
 TRUST_HOMOLOGACAO() {
+    update_version "trust_homologacao"
     flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_trust.yaml
     dart run flutter_native_splash:create --path=configuracao_icone_splash_trust.yaml
 
@@ -367,7 +397,7 @@ TRUST_PRODUCAO() {
         flutter pub run rename setAppName --targets android --value "TRUST"
         flutter build apk --flavor TRUST -t lib/main_TRUST.dart
     else
-      update_version "TRUST_PRODUCAO"
+        update_version "TRUST_PRODUCAO"
         flutter pub run rename setAppName --targets ios --value "TRUST"
         flutter pub run rename setBundleId --targets ios --value "com.app.apptrust"
         flutter build ipa --flavor TRUST -t lib/main_TRUST.dart
@@ -396,7 +426,7 @@ build_bundle() {
 }
 
 SRM_PRODUCAO_BUNDLE() {
-  update_version "SRM_PRODUCAO"
+    update_version "SRM_PRODUCAO"
     flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_srm.yaml
     dart run flutter_native_splash:create --path=configuracao_icone_splash_srm.yaml
     flutter build appbundle --flavor SRM -t lib/main_SRM.dart
@@ -404,7 +434,7 @@ SRM_PRODUCAO_BUNDLE() {
 }
 
 TRUST_PRODUCAO_BUNDLE() {
-  update_version "TRUST_PRODUCAO"
+    update_version "TRUST_PRODUCAO"
     flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_trust.yaml
     dart run flutter_native_splash:create --path=configuracao_icone_splash_trust.yaml
     flutter build appbundle --flavor TRUST -t lib/main_TRUST.dart

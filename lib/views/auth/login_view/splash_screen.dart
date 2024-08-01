@@ -34,7 +34,8 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<String> _getCurrentVersion() async {
     try {
       final flavor = F.appFlavor;
-      final pubspecPath = '${flavor!.name.toLowerCase()}.yaml';
+      final so = Platform.isAndroid;
+      final pubspecPath = so ? '${flavor!.name.toLowerCase()}.yaml' : '${flavor!.name.toLowerCase()}_ios.yaml';
       final pubspecContent = await rootBundle.loadString(pubspecPath);
       final pubspec = loadYaml(pubspecContent);
       print(pubspec['version']);
