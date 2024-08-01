@@ -1,4 +1,4 @@
-part of '../../menu_user/menu.dart';
+part of '../menu.dart';
 
 class PopUpDeslogarApp {
   BuildContext context;

@@ -1,6 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:Srm_Asset/core/constants/route_labels.dart';
-import 'package:Srm_Asset/views/auth/menu_user/menu.dart';
 import 'package:Srm_Asset/views/home/ajuda/ajuda_screen.dart';
 import 'package:Srm_Asset/views/home/assinaturas/monitor_assinaturas.dart';
 import 'package:Srm_Asset/views/home/home_view/home_view.dart';
@@ -20,10 +19,6 @@ class HomeModule extends Module {
     r.child(
       AppRoutes.assinaturaDigitalModuleRoute,
       child: (context) => const MonitorAssinaturas(),
-    );
-    r.child(
-      AppRoutes.menuAppModuleRoute,
-      child: (context) => const Menu(),
     );
     r.child(AppRoutes.homeAppModuleRoute, child: (context) => const HomeView());
     r.child(

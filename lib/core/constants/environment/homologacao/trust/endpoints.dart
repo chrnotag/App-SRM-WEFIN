@@ -52,8 +52,7 @@ class EndPointsTRUST extends Endpoint{
 
   @override
   // TODO: implement politicaPrivacidade
-  String get politicaPrivacidade => "https://trusthub.com.br/new/assets/documents/Trust-Politica-de-Privacidade-e-Tratamento-de-Dados-Pessoais.html";
-
+  String get politicaPrivacidade => "https://trusthub.com.br/new/assets/documentos/politicas/Trust-PoliticadePrivacidadeeTratamentodeDadosPessoais.pdf";
   @override
   // TODO: implement recuperarSenha
   String get recuperarSenha => "$login/recuperar-senha";
@@ -64,7 +63,7 @@ class EndPointsTRUST extends Endpoint{
 
   @override
   // TODO: implement termosDeUso
-  String get termosDeUso => "https://trusthub.com.br/new/assets/documents/Trust_-_Termos_e_Condicoes_de_Uso_para_abertura_da_Conta_Digital.html";
+  String get termosDeUso => "https://trusthub.com.br/new/assets/documentos/termos/Trust-TermosECondicoesDeUsoParaAberturaDaContaDigitalDePag.pdf";
 
   @override
   // TODO: implement contaDigital

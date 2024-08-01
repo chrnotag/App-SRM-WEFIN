@@ -1,11 +1,16 @@
+import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
+import 'package:Srm_Asset/core/constants/enuns/plataforma_enum.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
+import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/utils/lista_execao_tempo_sessao.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:Srm_Asset/core/providers/internet_provider.dart';
 import 'package:Srm_Asset/core/providers/sessao_provider.dart';
+import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 
 class AppWidget extends StatefulWidget {
   const AppWidget({super.key});
@@ -63,7 +68,7 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     final ConnectivityProvider connectivityProvider =
-        context.watch<ConnectivityProvider>();
+    context.watch<ConnectivityProvider>();
     connectivityProvider.dispose();
     super.dispose();
   }
@@ -71,6 +76,8 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
   Future<bool> checkInternetConnection() async {
     return await InternetConnectionChecker().hasConnection;
   }
+
+  final Color corBarra = Colors.white;
 
   @override
   Widget build(BuildContext context) {
@@ -92,10 +99,16 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
             sessionProvider.resetListening();
           }
         },
-        child: MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          routerConfig: Modular.routerConfig,
-          theme: ambiente.tema,
+        child: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle(
+            statusBarIconBrightness:
+            useWhiteForeground(corBarra) ? Brightness.light : Brightness.dark,
+          ),
+          child: MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            routerConfig: Modular.routerConfig,
+            theme: ambiente.tema,
+          ),
         ),
       ),
     );

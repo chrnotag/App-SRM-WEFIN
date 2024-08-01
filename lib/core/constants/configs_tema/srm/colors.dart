@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 class SRMColors{
-  static Color get primaryColor => Color(0XFFF18820);
-  static Color get onPrimaryColor => Color(0XFFFFFFFF);
-  static Color get primaryVariant => Color(0XFFE6E9F1);
-  static Color get secondaryColor => Color(0XFF1E376F);
+  static Color get primaryColor => Color(0xffF18820);
+  static Color get onPrimaryColor => Color(0xffFFFFFF);
+  static Color get primaryVariant => Color(0xffE6E9F1);
+  static Color get secondaryColor => Color(0xff1E376F);
   static Color get onSecondaryColor => Color(0XFFFFFFFF);
   static Color get focusColor => Color(0XFFF18820);
   static Color get backgorundColor => Color(0XFFF8F9FB);

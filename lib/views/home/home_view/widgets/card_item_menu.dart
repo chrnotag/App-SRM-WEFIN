@@ -1,4 +1,4 @@
-part of '../home_view.dart';
+part of '../paineis_navegacao_home/home/painel_home.dart';
 
 class _CardItemMenuHome extends StatelessWidget {
   final String icone;
