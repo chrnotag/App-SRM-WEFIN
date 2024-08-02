@@ -1,7 +1,3 @@
-import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
-import 'package:Srm_Asset/core/constants/enuns/plataforma_enum.dart';
-import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
-import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/utils/lista_execao_tempo_sessao.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:flutter/material.dart';
