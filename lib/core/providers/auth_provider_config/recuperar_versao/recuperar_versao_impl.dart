@@ -29,7 +29,6 @@ class RecuperarVersaoImpl {
         return MensagemErroPadrao.erroResponse(response.bodyBytes);
       }
     } catch (e, s) {
-      print('o ero que ta acontcendo nessa caralha: $e, $s');
       return MensagemErroPadrao.codigo500();
     }
   }
