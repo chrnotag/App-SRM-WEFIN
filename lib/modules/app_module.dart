@@ -12,6 +12,7 @@ import 'package:Srm_Asset/core/providers/conta_digital/solicitar_ted/solicitar_t
 import 'package:Srm_Asset/core/providers/conta_digital/tabbar_meses_provider.dart';
 import 'package:Srm_Asset/core/providers/relatorio_titulos_provider/relatorio_titulos_provider.dart';
 import 'package:Srm_Asset/core/providers/ted_terceiros/ted_terceiros_provider.dart';
+import 'package:Srm_Asset/core/services/firebase/fcm_service.dart';
 import 'package:Srm_Asset/modules/carteira_consolidada_module.dart';
 import 'package:Srm_Asset/modules/conta_digital_module.dart';
 import 'package:Srm_Asset/modules/sem_conexao_module.dart';
