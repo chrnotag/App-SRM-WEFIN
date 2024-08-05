@@ -153,4 +153,5 @@ class EndPointsTRUST extends Endpoint{
       ? 'https://play.google.com/store/apps/details?id=com.trust.trust_app'
       : 'https://apps.apple.com/app/app-cliente-trust/id6479451107';
 
+  String get downloadRelatorioTitulos => '$relatorioTitulos/download';
 }

@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+import 'package:Srm_Asset/core/providers/relatorio_titulos_provider/download_relatorio.dart';
 import 'package:Srm_Asset/core/providers/relatorio_titulos_provider/relatorio_titulos_impl.dart';
 import 'package:Srm_Asset/models/relatorio_titulos/relatorio_titulos_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,6 +25,19 @@ class RelatorioTitulosProvider extends ChangeNotifier {
     return response;
   }
 
+  Future<ApiResponse<dynamic>> baixarRelatorio(RelatorioEnum status) async {
+    final response = await DownloadRelatorioImpl.baixar(status);
+    if(response.error == null){
+      dadosPdf = response.data;
+    }else{
+      showToast('Erro: ', response);
+    }
+    return response;
+  }
+
+  Uint8List? _dadosPdf;
+  Uint8List? get dadosPdf => _dadosPdf;
+  set dadosPdf(Uint8List? dados) => _dadosPdf = dados;
 
   double saldoAVencer() {
     double valor = 0;

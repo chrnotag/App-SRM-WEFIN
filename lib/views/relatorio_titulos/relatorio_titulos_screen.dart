@@ -1,10 +1,14 @@
 import 'package:Srm_Asset/core/constants/enuns/enum_selecionar_data_relatorio.dart';
+import 'package:Srm_Asset/core/constants/enuns/relatorio_enum.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/size_screen_media_query.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
 import 'package:Srm_Asset/core/providers/relatorio_titulos_provider/relatorio_titulos_provider.dart';
+import 'package:Srm_Asset/core/utils/overlay.dart';
+import 'package:Srm_Asset/views/relatorio_titulos/relatorio_pdf.dart';
 import 'package:Srm_Asset/views/relatorio_titulos/widgets/selecionar_data.dart';
 import 'package:Srm_Asset/widgets/loader_widget.dart';
+import 'package:Srm_Asset/widgets/pdfview.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -153,7 +157,8 @@ class _RelatorioTitulosScreenState extends State<RelatorioTitulosScreen> {
                                       overflow: TextOverflow.ellipsis,
                                       style: context.textTheme.bodyMedium!
                                           .copyWith(
-                                              color: SRMColors.textBodyColor, fontWeight: FontWeight.w600),
+                                              color: SRMColors.textBodyColor,
+                                              fontWeight: FontWeight.w600),
                                     ),
                                   ),
                                   SizedBox(
@@ -162,11 +167,11 @@ class _RelatorioTitulosScreenState extends State<RelatorioTitulosScreen> {
                                   Expanded(
                                     flex: 3,
                                     child: Text(
-                                      UtilBrasilFields.obterReal(item.valor),
-                                      style: context.textTheme.bodyMedium!
-                                          .copyWith(
-                                          color: SRMColors.textBodyColor, fontWeight: FontWeight.w600)
-                                    ),
+                                        UtilBrasilFields.obterReal(item.valor),
+                                        style: context.textTheme.bodyMedium!
+                                            .copyWith(
+                                                color: SRMColors.textBodyColor,
+                                                fontWeight: FontWeight.w600)),
                                   ),
                                   SizedBox(
                                     width: 5.w,
@@ -225,8 +230,15 @@ class _RelatorioTitulosScreenState extends State<RelatorioTitulosScreen> {
                       width: context.width * 0.8,
                       child: Padding(
                         padding: EdgeInsets.only(bottom: 10.h, top: 20.h),
-                        child:
-                            BotaoPadrao(label: 'Salvar PDF', onPressed: () {}),
+                        child: BotaoPadrao(
+                            label: 'Salvar PDF', onPressed: () async {
+                              OverlayApp.iniciaOverlay(context);
+                              final response = await relatorioProvider.baixarRelatorio(RelatorioEnum.A_VENCER);
+                              OverlayApp.terminaOverlay();
+                              if(response.error == null){
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => PdfRelatorioView(),));
+                              }
+                        }),
                       ),
                     ),
                   )

@@ -17,6 +17,7 @@ import '../../../../../core/constants/enuns/plataforma_enum.dart';
 import '../../../../../core/implementations_config/export_impl.dart';
 import '../../../../../models/auth_login_models/SRM/cedente_model.dart';
 import '../../../../../models/monitor_assinaturas_model/monitor_assinaturas_model.dart';
+
 part '../../widgets/card_item_menu.dart';
 
 class PainelHome extends StatefulWidget {
@@ -27,9 +28,9 @@ class PainelHome extends StatefulWidget {
 }
 
 class _PainelHomeState extends State<PainelHome> {
-
   Future<ApiResponse<dynamic>>? _saldoFuture;
   final contaDigital = Modular.get<ContaDigitalProvider>();
+
   @override
   void initState() {
     super.initState();
@@ -46,7 +47,7 @@ class _PainelHomeState extends State<PainelHome> {
   @override
   void dispose() {
     final AssinaturaProvider assinaturaProvider =
-    Modular.get<AssinaturaProvider>();
+        Modular.get<AssinaturaProvider>();
     assinaturaProvider.limparAssinaturas();
     super.dispose();
   }
@@ -70,7 +71,7 @@ class _PainelHomeState extends State<PainelHome> {
   Widget build(BuildContext context) {
     final AuthProvider authProvider = context.watch<AuthProvider>();
     final ContaDigitalProvider contaDigitalProvider =
-    context.watch<ContaDigitalProvider>();
+        context.watch<ContaDigitalProvider>();
     final ambiente = Modular.get<Environment>();
     bool isSRM = ambiente.plataforma == Plataforma.SRM;
 
@@ -81,7 +82,7 @@ class _PainelHomeState extends State<PainelHome> {
           notificacoes: authProvider.empresaSelecionada!.assinaturaPendente,
           onTap: () {
             final AssinaturaProvider assinaturaProvider =
-            Modular.get<AssinaturaProvider>();
+                Modular.get<AssinaturaProvider>();
             List<MonitorAssinaturasModel> assinaturasPendentes =
                 assinaturaProvider.assinaturasPendentes;
             List<MonitorAssinaturasModel> assinaturas =
@@ -109,27 +110,24 @@ class _PainelHomeState extends State<PainelHome> {
           onTap: () {
             Modular.to.pushNamed(AppRoutes.tedTerceirosNavigatorRoute);
           }),
-      isSRM
-          ? _CardItemMenuHome(
+      _CardItemMenuHome(
           icone: AssetsConfig.srmCarteira,
           titulo: 'Carteira Consolidada',
           onTap: () {
-            Modular.to
-                .pushNamed(AppRoutes.carteiraConsolidadaNavigatorRoute);
-          })
-          : _CardItemMenuHome(
+            Modular.to.pushNamed(AppRoutes.carteiraConsolidadaNavigatorRoute);
+          }),
+      _CardItemMenuHome(
           icone: AssetsConfig.trustRelatorio,
           titulo: 'Relatório de Títulos',
           onTap: () {
             Modular.to.pushNamed(AppRoutes.relatorioTitulosNavigatorRoute);
           }),
-      if (isSRM)
-        _CardItemMenuHome(
-            icone: ambiente.grupoEconomicoIcone!,
-            titulo: 'Grupo Econômico',
-            onTap: () {
-              Modular.to.navigate(AppRoutes.listaSelecaoEmpresasNavigatorRoute);
-            }),
+      _CardItemMenuHome(
+          icone: ambiente.grupoEconomicoIcone!,
+          titulo: 'Grupo Econômico',
+          onTap: () {
+            Modular.to.navigate(AppRoutes.listaSelecaoEmpresasNavigatorRoute);
+          }),
       _CardItemMenuHome(
           icone: ambiente.faleConoscoIcone,
           titulo: 'Fale conosco',
@@ -137,28 +135,17 @@ class _PainelHomeState extends State<PainelHome> {
             Modular.to.pushNamed(AppRoutes.helpScreenNavigatorRoute);
           }),
     ];
-
-    // if (!authProvider.rolesAcesso
-    //     .contemRoles([RolesAcessoEnum.ROLE_CONTA_DIGITAL])) {
     if (!isSRM) {
       cardsHome.removeWhere((card) =>
-      (card as _CardItemMenuHome).titulo == 'Carteira Consolidada');
+          (card as _CardItemMenuHome).titulo == 'Carteira Consolidada');
+      cardsHome.removeWhere(
+          (card) => (card as _CardItemMenuHome).titulo == 'Grupo Econômico');
     }
-    if (isSRM) {
-      cardsHome.removeWhere((card) =>
-      (card as _CardItemMenuHome).titulo == 'Relatório de Títulos');
-    }
-    // cardsHome.removeWhere(
-    //     (card) => (card as _CardItemMenuHome).titulo == 'Extrato');
-    // }
-
-    // if (!authProvider.rolesAcesso
-    //     .contemRoles([RolesAcessoEnum.ROLE_TRANSFERENCIA_CONTA_DIGITAL])) {
-    // }
-    //
     if (isSRM) {
       cardsHome.removeWhere(
-              (card) => (card as _CardItemMenuHome).titulo == 'Transferências');
+          (card) => (card as _CardItemMenuHome).titulo == 'Transferências');
+      cardsHome.removeWhere((card) =>
+          (card as _CardItemMenuHome).titulo == 'Relatório de Títulos');
     }
     return Scaffold(
       body: Column(
@@ -177,23 +164,23 @@ class _PainelHomeState extends State<PainelHome> {
               children: [
                 ambiente.plataforma == Plataforma.TRUST
                     ? Positioned(
-                  left: -context.width * 0.1,
-                  top: -40.h,
-                  child: SvgPicture.asset(
-                    ambiente.logoAppBar,
-                    color: Color(0x1affffff),
-                    width: context.width * 0.5,
-                  ),
-                )
+                        left: -context.width * 0.1,
+                        top: -40.h,
+                        child: SvgPicture.asset(
+                          ambiente.logoAppBar,
+                          color: Color(0x1affffff),
+                          width: context.width * 0.5,
+                        ),
+                      )
                     : Positioned(
-                  left: -context.width * 0.1,
-                  top: -50.h,
-                  child: SvgPicture.asset(
-                    ambiente.logoAppBar,
-                    color: Color(0x1affffff),
-                    width: context.width * 0.4,
-                  ),
-                ),
+                        left: -context.width * 0.1,
+                        top: -50.h,
+                        child: SvgPicture.asset(
+                          ambiente.logoAppBar,
+                          color: Color(0x1affffff),
+                          width: context.width * 0.4,
+                        ),
+                      ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -239,40 +226,39 @@ class _PainelHomeState extends State<PainelHome> {
                                         } else {
                                           return Padding(
                                             padding:
-                                            EdgeInsets.only(bottom: 25.h),
+                                                EdgeInsets.only(bottom: 25.h),
                                             child: Row(
                                               children: [
                                                 Text(
                                                   _isSaldoVisivel
                                                       ? contaDigitalProvider
-                                                      .saldoContaDigital
-                                                      ?.saldoTotal
-                                                      .toBRL ??
-                                                      0.0.toBRL
+                                                              .saldoContaDigital
+                                                              ?.saldoTotal
+                                                              .toBRL ??
+                                                          0.0.toBRL
                                                       : 'R\$ * * * * *',
                                                   style: context
                                                       .textTheme.displaySmall!
                                                       .copyWith(
-                                                      fontSize: 20.sp,
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                      FontWeight.w600),
+                                                          fontSize: 20.sp,
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.w600),
                                                 ),
                                                 SizedBox(width: 8.w),
                                                 InkWell(
-                                                  onTap: () =>
-                                                      setState(() {
-                                                        _isSaldoVisivel =
+                                                  onTap: () => setState(() {
+                                                    _isSaldoVisivel =
                                                         !_isSaldoVisivel;
-                                                        print(
-                                                            'novo valor: $_isSaldoVisivel');
-                                                      }),
+                                                    print(
+                                                        'novo valor: $_isSaldoVisivel');
+                                                  }),
                                                   child: SvgPicture.asset(
                                                     _isSaldoVisivel
                                                         ? AssetsConfig
-                                                        .trustOlhoAberto
+                                                            .trustOlhoAberto
                                                         : AssetsConfig
-                                                        .trustOlhoFechado,
+                                                            .trustOlhoFechado,
                                                     width: 25.w,
                                                   ),
                                                 )
