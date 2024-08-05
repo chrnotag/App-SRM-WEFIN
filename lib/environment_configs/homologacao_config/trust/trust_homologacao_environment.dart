@@ -82,7 +82,7 @@ class TrustHomologacaoEnvironment extends Environment {
 
   @override
   // TODO: implement grupoEconomicoIcone
-  String? get grupoEconomicoIcone => null;
+  String get grupoEconomicoIcone => AssetsConfig.srmGrupo;
 
   @override
   // TODO: implement monitorOperacoesIcone

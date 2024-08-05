@@ -137,15 +137,11 @@ class _PainelHomeState extends State<PainelHome> {
     ];
     if (!isSRM) {
       cardsHome.removeWhere((card) =>
-          (card as _CardItemMenuHome).titulo == 'Carteira Consolidada');
-      cardsHome.removeWhere(
-          (card) => (card as _CardItemMenuHome).titulo == 'Grupo Econômico');
+      (card as _CardItemMenuHome).titulo == 'Carteira Consolidada' || (card as _CardItemMenuHome).titulo == 'Grupo Econômico');
     }
     if (isSRM) {
       cardsHome.removeWhere(
-          (card) => (card as _CardItemMenuHome).titulo == 'Transferências');
-      cardsHome.removeWhere((card) =>
-          (card as _CardItemMenuHome).titulo == 'Relatório de Títulos');
+              (card) => (card as _CardItemMenuHome).titulo == 'Transferências' || (card as _CardItemMenuHome).titulo == 'Relatório de Títulos');
     }
     return Scaffold(
       body: Column(

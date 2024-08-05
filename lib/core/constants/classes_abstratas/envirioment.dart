@@ -47,7 +47,7 @@ abstract class Environment {
 
   String get tedTerceirosIcone;
 
-  String? get grupoEconomicoIcone;
+  String get grupoEconomicoIcone;
 
   String get faleConoscoIcone;
 
