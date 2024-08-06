@@ -40,4 +40,5 @@ abstract class Endpoint{
   String? get relatorioTitulos;
   Uri montarUrlBuscarVersao();
   String get linkLoja;
+  String get downloadRelatorioTitulos;
 }

@@ -165,4 +165,6 @@ class EndPointsSRM extends Endpoint {
   String get linkLoja => Platform.isAndroid
       ? 'https://play.google.com/store/apps/details?id=com.app.srm'
       : 'https://apps.apple.com/app/app-cliente-srm/id6479165868';
+
+  String get downloadRelatorioTitulos => '$relatorioTitulos/download';
 }

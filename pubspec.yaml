@@ -25,7 +25,7 @@ environment:
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
-version: 2.1.2+23 # Último alterado: trust_homologacao
+version: 2.0.3+19
 
 dependencies:
   flutter:
@@ -79,6 +79,7 @@ dependencies:
   flutter_typeahead: ^5.2.0
   flutter_secure_storage: ^9.2.2
   yaml: ^3.1.2
+  flutter_statusbarcolor_ns: ^0.5.0
 
 dependency_overrides:
   permission_handler: ^11.0.1

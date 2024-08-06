@@ -1,4 +1,6 @@
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/carteira_aberto/carteira_aberto_provider.dart';
+import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/prazo_liquidez/prazo_liquidez_provider.dart';
 import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/recebiveis/recebiveis_provider.dart';
 import 'package:Srm_Asset/views/carteira_consolidada/graficos/grafico_recebiveis.dart';
 import 'package:Srm_Asset/views/carteira_consolidada/widgets/titulo_list_item.dart';
@@ -31,6 +33,9 @@ class _CarteiraConsolidadaScreenState extends State<CarteiraConsolidadaScreen> {
     // TODO: implement dispose
     super.dispose();
     Modular.get<RecebiveisProvider>().limparDados();
+    Modular.get<GeralCarteiraProvider>().limparDados();
+    Modular.get<PrazoLiquidezProvider>().limparDados();
+    Modular.get<CarteiraAbertoProvider>().limparDados();
   }
 
   @override

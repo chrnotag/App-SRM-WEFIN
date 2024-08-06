@@ -25,6 +25,11 @@ class CarteiraAbertoProvider extends ChangeNotifier {
     futureGrafico = CarteiraAbertoImpl.pegarCarteiraAberto();
   }
 
+  void limparDados(){
+    dadosCarteira = null;
+    futureGrafico = null;
+  }
+
   List<DadosGraficoModel> get dadosGrafico => [
         DadosGraficoModel(
             titulo: 'Vencidos',
