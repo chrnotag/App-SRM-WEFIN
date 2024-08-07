@@ -1,3 +1,4 @@
+import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
@@ -15,7 +16,7 @@ class CustomNotification {
       {required this.ID, this.title, this.body, this.payload});
 }
 
-class NotificationService {
+class NotificationService{
   late FlutterLocalNotificationsPlugin localNotificationsPlugin; // Plugin para gerenciar notificações locais
   late AndroidNotificationDetails androidDetails; // Detalhes específicos da notificação para Android
 
@@ -88,7 +89,8 @@ class NotificationService {
         priority: Priority.max, // Prioridade máxima da notificação
         enableVibration: true, // Habilita vibração
         enableLights: true, // Habilita luzes
-        icon: '@mipmap/ic_launcher' // Ícone da notificação
+        icon: '@drawable/splash', // Ícone da notificação
+      color: TRUSTColors.primaryColor,
     );
     localNotificationsPlugin.show(
       notification.ID, // ID da notificação

@@ -30,6 +30,10 @@ class _MenuFiltroState extends State<_MenuFiltro> {
     }
   }
 
+  bool VENCIDO = false;
+  bool A_VENCER = false;
+  bool LIQUIDADO = false;
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -62,11 +66,16 @@ class _MenuFiltroState extends State<_MenuFiltro> {
                   textoMenu: 'Vencimento')),
         ),
         InkWell(
-            onTap: () => setState(() {
-                  menuSelecionado = MENU_STATUS;
-                }),
-            child: _ItemMenuFiltro(
-                corSelecionado: corItemMenu(MENU_STATUS), textoMenu: 'Status')),
+          onTap: () => setState(() {
+            menuSelecionado = MENU_STATUS;
+            showDialog(
+              context: context,
+              builder: (context) => _AlertStatus()
+            );
+          }),
+          child: _ItemMenuFiltro(
+              corSelecionado: corItemMenu(MENU_STATUS), textoMenu: 'Status'),
+        ),
       ],
     );
   }

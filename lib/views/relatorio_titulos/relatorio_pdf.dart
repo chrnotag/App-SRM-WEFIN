@@ -14,13 +14,19 @@ class PdfRelatorioView extends StatefulWidget {
 }
 
 class _PdfRelatorioViewState extends State<PdfRelatorioView> {
+  final provider = Modular.get<RelatorioTitulosProvider>();
+  @override
+  void dispose() {
+    super.dispose();
+    provider.dadosPdfRelatorio = null;
+    provider.dadosBoleto = null;
+  }
   @override
   Widget build(BuildContext context) {
-    final provider = Modular.get<RelatorioTitulosProvider>();
     return Scaffold(
-      floatingActionButton: FloatingActionButton(onPressed: () => PDFUtils.sharePDF(provider.dadosPdf!, 'Relatório_Titulos_Trust'), child: Image.asset(AssetsConfig.imagesIconePdf, color: Colors.white,),),
+      floatingActionButton: FloatingActionButton(onPressed: () => PDFUtils.sharePDF(provider.dadosPdfRelatorio ?? provider.dadosBoleto!, 'Relatório_Titulos_Trust'), child: Image.asset(AssetsConfig.imagesIconePdf, color: Colors.white,),),
       appBar: AppBar(),
-      body: SfPdfViewer.memory(provider.dadosPdf!),
+      body: SfPdfViewer.memory(provider.dadosPdfRelatorio!),
     );
   }
 }

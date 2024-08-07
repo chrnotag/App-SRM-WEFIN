@@ -1,3 +1,5 @@
+import 'package:Srm_Asset/core/services/firebase/fcm_service.dart';
+import 'package:Srm_Asset/core/services/notifications/notification_service.dart';
 import 'package:Srm_Asset/core/utils/lista_execao_tempo_sessao.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:flutter/material.dart';
@@ -54,9 +56,21 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
     }
   }
 
+  // Utilizado para checar notificações que foram enviadas com o app fechado
+  void checkNotifications() async {
+    await Modular.get<NotificationService>().checkForNotifications();
+  }
+
+  // Inicializar o Firebase Messaging
+  void initializeFirebaseMessaging() async {
+    await Modular.get<FirebaseMessaginService>().initialize();
+  }
+
   @override
   void initState() {
     super.initState();
+    checkNotifications();
+    initializeFirebaseMessaging();
     WidgetsBinding.instance.addObserver(this);
   }
 
