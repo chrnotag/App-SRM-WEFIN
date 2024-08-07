@@ -80,6 +80,9 @@ dependencies:
   flutter_secure_storage: ^9.2.2
   yaml: ^3.1.2
   flutter_statusbarcolor_ns: ^0.5.0
+  firebase_core: ^3.3.0
+  firebase_messaging: ^15.0.4
+  flutter_local_notifications: ^17.2.1+2
 
 dependency_overrides:
   permission_handler: ^11.0.1

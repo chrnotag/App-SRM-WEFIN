@@ -1,7 +1,12 @@
 import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
 import 'package:Srm_Asset/core/constants/enuns/enum_selecionar_data_relatorio.dart';
+import 'package:Srm_Asset/core/constants/enuns/relatorio_enum.dart';
+import 'package:Srm_Asset/core/constants/extensions/date_extensions.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import 'package:Srm_Asset/core/constants/extensions/theme_extensions.dart';
+import 'package:Srm_Asset/core/providers/relatorio_titulos_provider/relatorio_titulos_provider.dart';
+import 'package:Srm_Asset/core/utils/overlay.dart';
+import 'package:Srm_Asset/models/relatorio_titulos/query_status_model/query_parameters.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -13,16 +18,19 @@ class SelecionarDataRelatorioScreen extends StatefulWidget {
   const SelecionarDataRelatorioScreen({super.key, required this.chave});
 
   @override
-  State<SelecionarDataRelatorioScreen> createState() => _SelecionarDataRelatorioScreenState();
+  State<SelecionarDataRelatorioScreen> createState() =>
+      _SelecionarDataRelatorioScreenState();
 }
 
-TextEditingController _controllerDataInicial = TextEditingController();
-TextEditingController _controllerDataFinal = TextEditingController();
-DateTime _ultimaData = DateTime.now();
-DateTime? _dataInicialSelecionada;
-DateTime? _dataFinalSelecionada;
+class _SelecionarDataRelatorioScreenState
+    extends State<SelecionarDataRelatorioScreen> {
+  TextEditingController _controllerDataInicial = TextEditingController();
+  TextEditingController _controllerDataFinal = TextEditingController();
+  DateTime _ultimaData = DateTime.now();
+  DateTime? _dataInicialSelecionada;
+  DateTime? _dataFinalSelecionada;
+  final relatorioProvider = Modular.get<RelatorioTitulosProvider>();
 
-class _SelecionarDataRelatorioScreenState extends State<SelecionarDataRelatorioScreen> {
   @override
   void dispose() {
     super.dispose();
@@ -72,8 +80,8 @@ class _SelecionarDataRelatorioScreenState extends State<SelecionarDataRelatorioS
                           decoration: InputDecoration(
                               hintText: 'Selecionar período',
                               border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: context.labelTextColor),
+                                  borderSide:
+                                      BorderSide(color: context.labelTextColor),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(12)))),
                           onChanged: (value) {
@@ -109,6 +117,7 @@ class _SelecionarDataRelatorioScreenState extends State<SelecionarDataRelatorioS
                           icon: Icon(
                             Icons.calendar_month,
                             size: 45.r,
+                            color: context.primaryColor,
                           ))
                     ],
                   )
@@ -137,8 +146,8 @@ class _SelecionarDataRelatorioScreenState extends State<SelecionarDataRelatorioS
                           decoration: InputDecoration(
                               hintText: 'Selecionar período',
                               border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: context.labelTextColor),
+                                  borderSide:
+                                      BorderSide(color: context.labelTextColor),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(12)))),
                           onChanged: (value) {
@@ -172,6 +181,7 @@ class _SelecionarDataRelatorioScreenState extends State<SelecionarDataRelatorioS
                           icon: Icon(
                             Icons.calendar_month,
                             size: 45.r,
+                            color: context.primaryColor,
                           ))
                     ],
                   )
@@ -182,9 +192,31 @@ class _SelecionarDataRelatorioScreenState extends State<SelecionarDataRelatorioS
                 label: 'Filtrar',
                 onPressed: _controllerDataInicial.text.isNotEmpty &&
                         _controllerDataFinal.text.isNotEmpty
-                    ? () {
-
-                }
+                    ? () async {
+                        late RelatorioQueryParams params;
+                        switch (widget.chave.relatorioEnum) {
+                          case RelatorioEnum.VENCIDO:
+                          case RelatorioEnum.A_VENCER:
+                            params = RelatorioQueryParams(
+                                dataInicialAVencer:
+                                    _dataInicialSelecionada!.formatarIso8601,
+                                dataFinalAVencer:
+                                    _dataFinalSelecionada!.formatarIso8601);
+                          case RelatorioEnum.LIQUIDADO:
+                            params = RelatorioQueryParams(
+                                dataInicialLiquidacao:
+                                    _dataInicialSelecionada!.formatarIso8601,
+                                dataFinalLiquidacao:
+                                    _dataFinalSelecionada!.formatarIso8601);
+                          default:
+                            throw Exception(
+                                'Status inválido ${widget.chave.relatorioEnum?.name}');
+                        }
+                        OverlayApp.iniciaOverlay(context);
+                        await relatorioProvider.recuperarTitulos(params);
+                        OverlayApp.terminaOverlay();
+                        Modular.to.pop();
+                      }
                     : null)
           ],
         ),

@@ -167,4 +167,5 @@ class EndPointsSRM extends Endpoint {
       : 'https://apps.apple.com/app/app-cliente-srm/id6479165868';
 
   String get downloadRelatorioTitulos => '$relatorioTitulos/download';
+  String get downloadBoletoRelatorio => '';
 }

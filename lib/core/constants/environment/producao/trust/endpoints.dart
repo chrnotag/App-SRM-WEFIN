@@ -160,5 +160,7 @@ class EndPointsTRUST extends Endpoint {
       : 'https://apps.apple.com/app/app-cliente-trust/id6479451107';
 
   String get downloadRelatorioTitulos => '$relatorioTitulos/download';
+  String get downloadBoletoRelatorio => '$baseURL/relatorios/boletos/download';
+
 
 }
