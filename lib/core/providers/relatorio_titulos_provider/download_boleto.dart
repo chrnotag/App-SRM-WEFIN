@@ -16,9 +16,12 @@ class DownloadBoletoImpl {
     Uri url = Uri.parse(ambiente.endpoints.downloadBoletoRelatorio);
     print(url);
     print(json.encode(dadosDownload.toJson()));
+
+    final List<DownloadBoletoModel> bodyList = [dadosDownload];
+    final String bodyJson = json.encode(bodyList.map((e) => e.toJson()).toList());
     try {
       final response = await http.post(url,
-          headers: header(), body: json.encode(dadosDownload.toJson()));
+          headers: header(), body: bodyJson);
       print(response.body);
       final body = response.bodyBytes;
       if (response.statusCode == 200) {
