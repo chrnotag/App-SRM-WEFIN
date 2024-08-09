@@ -96,7 +96,7 @@ class _AlertStatusState extends State<_AlertStatus> {
                       }),
                     ),
                     Text(
-                      "Liquídado",
+                      "Liquidado",
                       style: LIQUIDADO
                           ? context.textTheme.displayMedium!.copyWith(
                               fontWeight: FontWeight.w600,

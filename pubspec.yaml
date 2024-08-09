@@ -172,9 +172,13 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
   assets:
     - srm_homologacao.yaml
+    - srm_homologacao_ios.yaml
     - srm_producao.yaml
+    - srm_producao_ios.yaml
     - trust_homologacao.yaml
+    - trust_homologacao_ios.yaml
     - trust_producao.yaml
+    - trust_producao_ios.yaml
     - assets/
     - assets/images/
     - assets/srm/

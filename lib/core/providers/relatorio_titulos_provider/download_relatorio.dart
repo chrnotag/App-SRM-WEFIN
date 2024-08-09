@@ -12,6 +12,7 @@ class DownloadRelatorioImpl {
     final ambiente = Modular.get<Environment>();
     if(ambiente.endpoints.relatorioTitulos != null){
       Uri url = Uri.parse('${ambiente.endpoints.downloadRelatorioTitulos}${params.queryStatusDownload()}');
+      print(params.queryStatusDownload());
       print(url);
       try{
         final response = await http.get(url, headers: header());

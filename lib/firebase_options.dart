@@ -59,10 +59,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCeggZef9t-qkNvnj05j8isgqlJOGZOiak',
-    appId: '1:968806609029:ios:6021521e7e77723dadb9ec',
+    appId: '1:968806609029:ios:0233df3f29a26182adb9ec',
     messagingSenderId: '968806609029',
     projectId: 'core-app-homebanking',
     storageBucket: 'core-app-homebanking.appspot.com',
-    iosBundleId: 'com.srm.appsrm',
+    iosBundleId: 'com.app.trust',
   );
+
 }

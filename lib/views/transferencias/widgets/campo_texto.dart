@@ -9,6 +9,7 @@ class _CampoTexto extends StatefulWidget {
   final bool campoMonetario;
   final TextInputType? tipoTeclado;
   final FormFieldValidator<String>? validator;
+  final bool campoConta;
 
   _CampoTexto({
     super.key,
@@ -19,6 +20,7 @@ class _CampoTexto extends StatefulWidget {
     this.campoMonetario = false,
     this.validator,
     this.tipoTeclado,
+    this.campoConta = false,
     List<TextInputFormatter>? formatos,
   }) : formatos = formatos ?? [];
 
@@ -78,10 +80,24 @@ class _CampoTextoState extends State<_CampoTexto> {
                 borderRadius: const BorderRadius.all(Radius.circular(12))),),
             onChanged: (value) {
             setState(() {
+              _formatarNumeroConta();
             });
             },
         ),
       ],
     );
+  }
+  void _formatarNumeroConta() {
+  if(widget.campoConta){
+    String text = widget.controller.text;
+    text = text.replaceAll('-', ''); // Remove existing hyphen if any
+    if (text.length > 1) {
+      text = text.substring(0, text.length - 1) + '-' + text.substring(text.length - 1);
+    }
+    widget.controller.value = TextEditingValue(
+      text: text,
+      selection: TextSelection.fromPosition(TextPosition(offset: text.length)),
+    );
+  }
   }
 }
