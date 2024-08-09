@@ -67,6 +67,7 @@ class AppModule extends Module {
     i.addSingleton(SolicitacoesTedProvider.new);
     i.addSingleton(RecuperarVersaoProvider.new);
     i.addSingleton(RelatorioTitulosProvider.new);
+    i.addSingleton(NotificationService.new);
     i.addInstance<FirebaseMessaginService>(messaginService);
     i.addInstance<Environment>(environment);
   }

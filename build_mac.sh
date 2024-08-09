@@ -226,6 +226,20 @@ submit_to_endpoint() {
   fi
 }
 
+copy_google_service_info_plist() {
+  local flavor=$1
+
+  if [ "$flavor" == "srm_homologacao" ]; then
+    cp "ios/Runner/SRM_HOMOLOGACAO/GoogleService-Info.plist" "ios/Runner/GoogleService-Info.plist"
+  elif [ "$flavor" == "srm_producao" ]; then
+    cp "ios/Runner/SRM_PRODUCAO/GoogleService-Info.plist" "ios/Runner/GoogleService-Info.plist"
+  elif [ "$flavor" == "trust_homologacao" ]; then
+    cp "ios/Runner/TRUST_HOMOLOGACAO/GoogleService-Info.plist" "ios/Runner/GoogleService-Info.plist"
+  elif [ "$flavor" == "trust_producao" ]; then
+    cp "ios/Runner/TRUST_PRODUCAO/GoogleService-Info.plist" "ios/Runner/GoogleService-Info.plist"
+  fi
+}
+
 build_or_emulate_menu() {
     clear
     echo ""
@@ -306,6 +320,8 @@ SRM_HOMOLOGACAO_EMULATE() {
     flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_srm.yaml
     dart run flutter_native_splash:create --path=configuracao_icone_splash_srm.yaml
     flutter pub run rename setAppName --targets android --value "SRM"
+    flutter pub run rename setBundleId --targets ios --value "com.srm.appsrm"
+    copy_google_service_info_plist "srm_homologacao"
     flutter run --flavor SRM_HOMOLOGACAO -t lib/main_SRM_HOMOLOGACAO.dart
     end
 }
@@ -314,6 +330,8 @@ SRM_PRODUCAO_EMULATE() {
     flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_srm.yaml
     dart run flutter_native_splash:create --path=configuracao_icone_splash_srm.yaml
     flutter pub run rename setAppName --targets android --value "SRM"
+    flutter pub run rename setBundleId --targets ios --value "com.srm.appsrm"
+    copy_google_service_info_plist "srm_producao"
     flutter run --flavor SRM -t lib/main_SRM.dart
     end
 }
@@ -322,6 +340,8 @@ TRUST_HOMOLOGACAO_EMULATE() {
     flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_trust.yaml
     dart run flutter_native_splash:create --path=configuracao_icone_splash_trust.yaml
     flutter pub run rename setAppName --targets android --value "TRUST"
+    flutter pub run rename setBundleId --targets ios --value "com.app.apptrust"
+    copy_google_service_info_plist "trust_homologacao"
     flutter run --flavor TRUST_HOMOLOGACAO -t lib/main_TRUST_HOMOLOGACAO.dart
     end
 }
@@ -330,6 +350,8 @@ TRUST_PRODUCAO_EMULATE() {
     flutter pub run flutter_launcher_icons:main -f configuracao_icone_splash_trust.yaml
     dart run flutter_native_splash:create --path=configuracao_icone_splash_trust.yaml
     flutter pub run rename setAppName --targets android --value "TRUST"
+    flutter pub run rename setBundleId --targets ios --value "com.app.apptrust"
+    copy_google_service_info_plist "trust_producao"
     flutter run --flavor TRUST -t lib/main_TRUST.dart
     end
 }
@@ -370,6 +392,7 @@ SRM_HOMOLOGACAO() {
         flutter pub run rename setAppName --targets android --value "SRM"
         flutter build apk --flavor SRM_HOMOLOGACAO -t lib/main_SRM_HOMOLOGACAO.dart
     else
+        copy_google_service_info_plist "srm_homologacao"
         flutter pub run rename setAppName --targets ios --value "SRM"
         flutter pub run rename setBundleId --targets ios --value "com.srm.appsrm"
         flutter build ipa --flavor SRM_HOMOLOGACAO -t lib/main_SRM_HOMOLOGACAO.dart
@@ -386,6 +409,7 @@ SRM_PRODUCAO() {
         flutter pub run rename setAppName --targets android --value "SRM"
         flutter build apk --flavor SRM -t lib/main_SRM.dart
     else
+        copy_google_service_info_plist "srm_producao"
         update_version "SRM_PRODUCAO" "true"
         flutter pub run rename setAppName --targets ios --value "SRM"
         flutter pub run rename setBundleId --targets ios --value "com.srm.appsrm"
@@ -404,6 +428,7 @@ TRUST_HOMOLOGACAO() {
         flutter pub run rename setAppName --targets android --value "TRUST"
         flutter build apk --flavor TRUST_HOMOLOGACAO -t lib/main_TRUST_HOMOLOGACAO.dart
     else
+        copy_google_service_info_plist "trust_homologacao"
         flutter pub run rename setAppName --targets ios --value "TRUST"
         flutter pub run rename setBundleId --targets ios --value "com.app.apptrust"
         flutter build ipa --flavor TRUST_HOMOLOGACAO -t lib/main_TRUST_HOMOLOGACAO.dart
@@ -420,6 +445,7 @@ TRUST_PRODUCAO() {
         flutter pub run rename setAppName --targets android --value "TRUST"
         flutter build apk --flavor TRUST -t lib/main_TRUST.dart
     else
+        copy_google_service_info_plist "trust_producao"
         update_version "TRUST_PRODUCAO" "true"
         flutter pub run rename setAppName --targets ios --value "TRUST"
         flutter pub run rename setBundleId --targets ios --value "com.app.apptrust"

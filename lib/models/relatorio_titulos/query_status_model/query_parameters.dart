@@ -50,6 +50,8 @@ class RelatorioQueryParams {
       for (var status in statusRecebiveis!) {
         queryString.write('statusRecebivel=${status.name.toLowerCase()}&');
       }
+    }else{
+      queryString.write('statusRecebivel=');
     }
     final queryStringResult = queryString.toString();
     if (queryStringResult.endsWith('&')) {

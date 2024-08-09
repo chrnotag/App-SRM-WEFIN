@@ -23,6 +23,7 @@ class RelatorioTitulosImpl {
           return MensagemErroPadrao.erroResponse(body);
         }
       }catch(_){
+        print(_);
         return MensagemErroPadrao.codigo500();
       }
     }

@@ -2,6 +2,7 @@ import 'package:Srm_Asset/core/services/firebase/fcm_service.dart';
 import 'package:Srm_Asset/core/services/notifications/notification_service.dart';
 import 'package:Srm_Asset/core/utils/lista_execao_tempo_sessao.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -66,12 +67,28 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
     await Modular.get<FirebaseMessaginService>().initialize();
   }
 
+  Future<void> _requestPermissions() async {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+    print('User granted permission: ${settings.authorizationStatus}');
+  }
+
+
   @override
   void initState() {
     super.initState();
     checkNotifications();
     initializeFirebaseMessaging();
     WidgetsBinding.instance.addObserver(this);
+    _requestPermissions();
   }
 
   @override

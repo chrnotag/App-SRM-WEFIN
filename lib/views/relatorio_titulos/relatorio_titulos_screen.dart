@@ -234,7 +234,7 @@ class _RelatorioTitulosScreenState extends State<RelatorioTitulosScreen> {
                                                             DownloadBoletoModel(
                                                                 identificadorSacado:
                                                                     item.identificadorSacado,
-                                                                numerosDocumento: [item.id.toString()]);
+                                                                numerosDocumento: [item.documento.toString()]);
                                                         OverlayApp
                                                             .iniciaOverlay(
                                                                 context);

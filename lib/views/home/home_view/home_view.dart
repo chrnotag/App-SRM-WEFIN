@@ -52,31 +52,34 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-          items: [
-            BottomNavigationBarItem(
-                icon: SvgPicture.asset(
-                  AssetsConfig.trustHome,
-                  color: trocarCor(0),
-                ),
-                label: 'Início'),
-            BottomNavigationBarItem(
-                icon: SvgPicture.asset(
-                  AssetsConfig.trustNotificacoes,
-                  color: trocarCor(1),
-                ),
-                label: 'Notificações'),
-            BottomNavigationBarItem(
-                icon: SvgPicture.asset(
-                  AssetsConfig.trustMaletaBarra,
-                  color: trocarCor(2),
-                ),
-                label: 'Perfil'),
-          ],
-          onTap: (value) => setState(() {
-            naviController = value;
-          }),
-          currentIndex: naviController,
+        bottomNavigationBar: Visibility(
+          visible: false,
+          child: BottomNavigationBar(
+            items: [
+              BottomNavigationBarItem(
+                  icon: SvgPicture.asset(
+                    AssetsConfig.trustHome,
+                    color: trocarCor(0),
+                  ),
+                  label: 'Início'),
+              BottomNavigationBarItem(
+                  icon: SvgPicture.asset(
+                    AssetsConfig.trustNotificacoes,
+                    color: trocarCor(1),
+                  ),
+                  label: 'Notificações'),
+              BottomNavigationBarItem(
+                  icon: SvgPicture.asset(
+                    AssetsConfig.trustMaletaBarra,
+                    color: trocarCor(2),
+                  ),
+                  label: 'Perfil'),
+            ],
+            onTap: (value) => setState(() {
+              naviController = value;
+            }),
+            currentIndex: naviController,
+          ),
         ),
         body: Column(
           children: [

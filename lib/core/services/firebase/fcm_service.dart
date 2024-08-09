@@ -32,16 +32,17 @@ class FirebaseMessaginService {
     debugPrint("==================");
   }
 
-
   void _onMessage() {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print('onMessage: ${message.notification?.title}, ${message.notification?.body}');
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
+      AppleNotification? apple = message.notification?.apple;
 
-      if (notification != null && android != null) {
+      if (notification != null) {
         _notificationService.showNotification(
           CustomNotification(
-            ID: android.hashCode,
+            ID: notification.hashCode,
             title: notification.title!,
             body: notification.body!,
           ),
@@ -51,11 +52,15 @@ class FirebaseMessaginService {
   }
 
   void _onMessageOpenedApp() {
-    FirebaseMessaging.onMessageOpenedApp.listen(_goToPageAfterMessaging);
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('onMessageOpenedApp: ${message.notification?.title}, ${message.notification?.body}');
+      _goToPageAfterMessaging(message);
+    });
   }
 
   void _goToPageAfterMessaging(RemoteMessage message) {
     final String route = message.data['route'] ?? '';
+    print('Navigating to route: $route');
     if (route.isNotEmpty) {
       //navigatorKey.currentState?.pushNamed(route);
     }
