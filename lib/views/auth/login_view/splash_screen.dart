@@ -31,18 +31,18 @@ class _SplashScreenState extends State<SplashScreen> {
   final FlutterSecureStorage _storage = FlutterSecureStorage();
 
 
-  Future<String> _getCurrentVersion() async {
+  Future<int> _getCurrentVersion() async {
     try {
       final flavor = F.appFlavor;
       final so = Platform.isAndroid;
       final pubspecPath = so ? '${flavor!.name.toLowerCase()}.yaml' : '${flavor!.name.toLowerCase()}_ios.yaml';
       final pubspecContent = await rootBundle.loadString(pubspecPath);
       final pubspec = loadYaml(pubspecContent);
-      print(pubspec['version']);
-      return pubspec['version'];
+      final String version = pubspec['version'].toString().replaceAll('.', '').replaceAll('+', '');
+      return int.parse(version);
     } catch (e) {
       print('Erro ao carregar a versão do pubspec.yaml: $e');
-      return '';
+      return 0;
     }
   }
 
@@ -58,7 +58,9 @@ class _SplashScreenState extends State<SplashScreen> {
       print('Versão atual: $currentVersion');
       print('Versão do backend: ${backendVersion.versao}');
 
-      if (backendVersion.versao != currentVersion) {
+      final String versaoBack = backendVersion.versao.replaceAll('.', '').replaceAll('+', '');
+      final int versaoBackInt = int.parse(versaoBack);
+      if (versaoBackInt > currentVersion) {
         _showUpdateDialog();
       } else {
         await _loadSavedLoginData();
