@@ -10,7 +10,7 @@ IniciarAssinaturaModel _$IniciarAssinaturaModelFromJson(
         Map<String, dynamic> json) =>
     IniciarAssinaturaModel(
       certificadoBase64: json['certificadoBase64'] as String,
-      codigoOperacao: json['codigoOperacao'] as int,
+      codigoOperacao: (json['codigoOperacao'] as num).toInt(),
     );
 
 Map<String, dynamic> _$IniciarAssinaturaModelToJson(

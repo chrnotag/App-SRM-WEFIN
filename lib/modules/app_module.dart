@@ -10,7 +10,9 @@ import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_provider.
 import 'package:Srm_Asset/core/providers/conta_digital/solicitacao_ted/solicitacao_ted_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/solicitar_ted/solicitar_ted_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/tabbar_meses_provider.dart';
+import 'package:Srm_Asset/core/providers/relatorio_titulos_provider/relatorio_titulos_provider.dart';
 import 'package:Srm_Asset/core/providers/ted_terceiros/ted_terceiros_provider.dart';
+import 'package:Srm_Asset/core/services/firebase/fcm_service.dart';
 import 'package:Srm_Asset/modules/carteira_consolidada_module.dart';
 import 'package:Srm_Asset/modules/conta_digital_module.dart';
 import 'package:Srm_Asset/modules/sem_conexao_module.dart';
@@ -31,11 +33,14 @@ import 'package:Srm_Asset/core/providers/sessao_provider.dart';
 import 'package:Srm_Asset/modules/auth_module.dart';
 import 'package:Srm_Asset/modules/home_module.dart';
 
+import '../core/services/notifications/notification_service.dart';
+
 //Não há necessidade de mecher nesse código
 class AppModule extends Module {
   final Environment environment;
+  final FirebaseMessaginService messaginService;
 
-  AppModule(this.environment);
+  AppModule(this.environment, this.messaginService);
 
   @override
   void binds(Injector i) {
@@ -61,7 +66,10 @@ class AppModule extends Module {
     i.addSingleton(SolicitarTedProvider.new);
     i.addSingleton(SolicitacoesTedProvider.new);
     i.addSingleton(RecuperarVersaoProvider.new);
-    i.addInstance(environment);
+    i.addSingleton(RelatorioTitulosProvider.new);
+    i.addSingleton(NotificationService.new);
+    i.addInstance<FirebaseMessaginService>(messaginService);
+    i.addInstance<Environment>(environment);
   }
 
   @override

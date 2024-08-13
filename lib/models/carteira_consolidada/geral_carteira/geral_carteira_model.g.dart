@@ -16,13 +16,14 @@ GeralCarteiraModel _$GeralCarteiraModelFromJson(Map<String, dynamic> json) =>
           (json['valorTotalRecebiveisVencidos'] as num).toDouble(),
       valorTotalRecebiveisLiquidados:
           (json['valorTotalRecebiveisLiquidados'] as num).toDouble(),
-      quantidadeTotalRecebiveis: json['quantidadeTotalRecebiveis'] as int,
+      quantidadeTotalRecebiveis:
+          (json['quantidadeTotalRecebiveis'] as num).toInt(),
       quantidadeTotalRecebiveisAVencer:
-          json['quantidadeTotalRecebiveisAVencer'] as int,
+          (json['quantidadeTotalRecebiveisAVencer'] as num).toInt(),
       quantidadeTotalRecebiveisVencidos:
-          json['quantidadeTotalRecebiveisVencidos'] as int,
+          (json['quantidadeTotalRecebiveisVencidos'] as num).toInt(),
       quantidadeTotalRecebiveisLiquidados:
-          json['quantidadeTotalRecebiveisLiquidados'] as int,
+          (json['quantidadeTotalRecebiveisLiquidados'] as num).toInt(),
     );
 
 Map<String, dynamic> _$GeralCarteiraModelToJson(GeralCarteiraModel instance) =>

@@ -27,8 +27,6 @@ class AppRoutes {
 
   static get assinaturaDigitalModuleRoute => '/assinatura';
 
-  static get menuAppModuleRoute => '/menu_app';
-
   static get homeAppModuleRoute => '/home_app';
 
   static get importarCertificadoModuleRoute => '/importar_certificado';
@@ -48,8 +46,6 @@ class AppRoutes {
   static get monitorOperacoesNavigatorRoute => '$homeModuleRoute$monitorOperacoesModuleRoute';
 
   static get assinaturaDigitalNavigatorRoute => '$homeModuleRoute$assinaturaDigitalModuleRoute';
-
-  static get menuAppNavigatorRoute => '$homeModuleRoute$menuAppModuleRoute';
 
   static get homeAppNavigatorRoute => '$homeModuleRoute$homeAppModuleRoute';
 
@@ -101,6 +97,11 @@ static get carteiraConsolidadaScreenRoute => '/screen';
 
   //ESCOPO CARTEIRA CONSOLIDADA NAVIGATOR ROUTE
 static get carteiraConsolidadaNavigatorRoute => '$carteiraConsolidadaModuleRoute$carteiraConsolidadaScreenRoute';
+//ESCOPO RELATORIOS TITULOS
+  static get relatorioTitulosScreenRoute => '/relatorios-titulos-screen';
+
+//ESCOPO RELATORIOS NAVIGATOR ROUTE
+  static get relatorioTitulosNavigatorRoute => '$carteiraConsolidadaModuleRoute$relatorioTitulosScreenRoute';
 
 
 

@@ -76,7 +76,7 @@ class ItemListaOperacao extends StatelessWidget {
                           padding: EdgeInsets.only(left: 4.w),
                           child: temComprovante
                               ? Icon(
-                                  Icons.arrow_forward_ios,
+                                  Icons.attach_file,
                                   color: context.primaryColor,
                                 )
                               : Padding(padding: EdgeInsets.only(left: 16.w)),

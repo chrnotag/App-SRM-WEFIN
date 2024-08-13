@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:Srm_Asset/core/constants/classes_abstratas/abstract_endpoint.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -141,5 +143,20 @@ class EndPointsSRM extends Endpoint{
   }
 
   Uri montarUrlComprovanteTed(String codigoTransacao) => Uri.parse('$listaTransacoesTed/comprovante/download?codigoTransacao=$codigoTransacao');
+  String? get relatorioTitulos => null;
+
+  Uri montarUrlBuscarVersao(){
+    String SO = Platform.operatingSystem.toUpperCase();
+    return Uri.parse(
+        '$baseURL/aplicativos?plataforma=SRM&sistemaOperacional=$SO');
+  }
+
+  String get linkLoja => Platform.isAndroid
+      ? 'https://play.google.com/store/apps/details?id=com.app.srm'
+      : 'https://apps.apple.com/app/app-cliente-srm/id6479165868';
+
+  String get downloadRelatorioTitulos => '$relatorioTitulos/download';
+  String get downloadBoletoRelatorio => '';
+
 
 }

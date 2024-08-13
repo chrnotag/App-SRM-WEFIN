@@ -24,6 +24,7 @@ class Recebivel {
   final double valorTotalVencido;
   final double? valorTotalVencidoPorcentagem;
   final double saldoDevedor;
+  final String corProduto;
 
   Recebivel({
     required this.sigla,
@@ -32,6 +33,7 @@ class Recebivel {
     required this.valorTotalVencido,
     required this.valorTotalVencidoPorcentagem,
     required this.saldoDevedor,
+    required this.corProduto,
   });
 
   factory Recebivel.fromJson(Map<String, dynamic> json) =>

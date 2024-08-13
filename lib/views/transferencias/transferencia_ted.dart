@@ -94,6 +94,7 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
                             campoMonetario: true,
                             validator:
                                 Validatorless.required('Campo obrigatório'),
+                            tipoTeclado: TextInputType.number,
                             formatos: [
                               FilteringTextInputFormatter.digitsOnly,
                               CentavosInputFormatter()
@@ -155,9 +156,10 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
                         SizedBox(width: 16.w),
                         Expanded(
                           child: _CampoTexto(
-                            tituloCampo: 'Conta',
+                            tituloCampo: 'Conta e Digito',
                             obrigatorio: true,
-                            hint: '0000000-00',
+                            campoConta: true,
+                            hint: '00000-0',
                             tipoTeclado: TextInputType.number,
                             validator:
                                 Validatorless.required('Campo obrigatório'),
@@ -268,10 +270,9 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
                                           controllerAgencia.text);
                                   solicitarTedProvider.conta =
                                       UtilBrasilFields.removeCaracteres(
-                                          controllerConta.text);
+                                          controllerConta.text.replaceAll('-', ''));
                                   solicitarTedProvider.nome =
-                                      UtilBrasilFields.removeCaracteres(
-                                          controllerNome.text);
+                                      controllerNome.text;
                                   solicitarTedProvider.valor =
                                       UtilBrasilFields.converterMoedaParaDouble(
                                           controllerValor.text);

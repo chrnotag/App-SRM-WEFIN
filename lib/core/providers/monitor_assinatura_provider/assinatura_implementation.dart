@@ -23,6 +23,7 @@ class AssinaturaImpl {
         'Authorization': authProvider.dataUser!.token,
         'plataforma' : ambiente.plataforma.name
       });
+      print(response.body);
       switch (response.statusCode) {
         case 200:
           final responseBody = json.decode(utf8.decode(response.bodyBytes));

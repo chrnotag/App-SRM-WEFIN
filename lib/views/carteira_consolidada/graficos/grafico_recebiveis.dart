@@ -8,6 +8,7 @@ import 'package:Srm_Asset/core/utils/overlay.dart';
 import 'package:Srm_Asset/core/utils/pdf_manager.dart';
 import 'package:Srm_Asset/views/carteira_consolidada/utils/dados_grafico_model.dart';
 import 'package:Srm_Asset/widgets/wefin_patterns/wefin_default_button.dart';
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -30,15 +31,14 @@ class _GraficoRecebiveisState extends State<GraficoRecebiveis> {
         recebiveisProvider.dadosGrafico();
     final int itemCount = filteredItems.length;
     final double itemHeight = 50.h;
-    final double listViewHeight = itemHeight * 4;
-
     String totalOperado() {
       double total = 0;
       for (var dados in filteredItems) {
         total += dados.valor ?? 0;
       }
-      return total.toBRL;
+      return UtilBrasilFields.obterReal(total);
     }
+    final double listViewHeight = UtilBrasilFields.converterMoedaParaDouble(totalOperado()) > 0 ? itemHeight * 4 : itemHeight * 2;
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -116,7 +116,7 @@ class _GraficoRecebiveisState extends State<GraficoRecebiveis> {
               ),
             ),
           ),
-          if (recebiveisProvider.pdfRecebiveis != null)
+          if (UtilBrasilFields.converterMoedaParaDouble(totalOperado()) > 0)
             Padding(
               padding: EdgeInsets.all(16.r),
               child: BotaoPadrao(

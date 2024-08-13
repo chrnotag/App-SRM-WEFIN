@@ -15,7 +15,9 @@ class ItemCardTed extends StatelessWidget {
       children: [
         Text(title, style: context.textTheme.bodyMedium,),
         cnpjFormatter != null ? cnpjFormatter! : Text(
-          content!,
+          content!.length > 30 ? '$content...' : content!,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
           style: context.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w900),
         )
       ],

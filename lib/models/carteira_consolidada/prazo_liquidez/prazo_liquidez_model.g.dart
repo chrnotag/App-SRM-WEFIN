@@ -31,25 +31,27 @@ PrazoLiquidezModel _$PrazoLiquidezModelFromJson(Map<String, dynamic> json) =>
           (json['valorTotalRecebiveisLiquidadosAntesDoVencimento'] as num)
               .toDouble(),
       quantidadeTotalRecebiveisLiquidados:
-          json['quantidadeTotalRecebiveisLiquidados'] as int,
+          (json['quantidadeTotalRecebiveisLiquidados'] as num).toInt(),
       quantidadeTotalRecebiveisLiquidadosNoDia:
-          json['quantidadeTotalRecebiveisLiquidadosNoDia'] as int,
+          (json['quantidadeTotalRecebiveisLiquidadosNoDia'] as num).toInt(),
       quantidadeTotalRecebiveisLiquidadosAntesVencimento:
-          json['quantidadeTotalRecebiveisLiquidadosAntesVencimento'] as int,
+          (json['quantidadeTotalRecebiveisLiquidadosAntesVencimento'] as num)
+              .toInt(),
       quantidadeTotalRecebiveisLiquidados7Dias:
-          json['quantidadeTotalRecebiveisLiquidados7Dias'] as int,
+          (json['quantidadeTotalRecebiveisLiquidados7Dias'] as num).toInt(),
       quantidadeTotalRecebiveisLiquidados15Dias:
-          json['quantidadeTotalRecebiveisLiquidados15Dias'] as int,
+          (json['quantidadeTotalRecebiveisLiquidados15Dias'] as num).toInt(),
       quantidadeTotalRecebiveisLiquidados30Dias:
-          json['quantidadeTotalRecebiveisLiquidados30Dias'] as int,
+          (json['quantidadeTotalRecebiveisLiquidados30Dias'] as num).toInt(),
       quantidadeTotalRecebiveisLiquidados45Dias:
-          json['quantidadeTotalRecebiveisLiquidados45Dias'] as int,
+          (json['quantidadeTotalRecebiveisLiquidados45Dias'] as num).toInt(),
       quantidadeTotalRecebiveisLiquidados60Dias:
-          json['quantidadeTotalRecebiveisLiquidados60Dias'] as int,
+          (json['quantidadeTotalRecebiveisLiquidados60Dias'] as num).toInt(),
       quantidadeTotalRecebiveisLiquidados90Dias:
-          json['quantidadeTotalRecebiveisLiquidados90Dias'] as int,
+          (json['quantidadeTotalRecebiveisLiquidados90Dias'] as num).toInt(),
       quantidadeTotalRecebiveisLiquidadosMaisDe90Dias:
-          json['quantidadeTotalRecebiveisLiquidadosMaisDe90Dias'] as int,
+          (json['quantidadeTotalRecebiveisLiquidadosMaisDe90Dias'] as num)
+              .toInt(),
     );
 
 Map<String, dynamic> _$PrazoLiquidezModelToJson(PrazoLiquidezModel instance) =>

@@ -1,6 +1,7 @@
 import 'package:Srm_Asset/assets_config/assets_config.dart';
 import 'package:Srm_Asset/core/constants/classes_abstratas/imagens_guia_certificado.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:Srm_Asset/core/constants/extensions/screen_util_extension.dart';
 import '../configs_tema/export_config_theme_srm.dart';
@@ -71,7 +72,7 @@ class ThemeTRUST implements ImagensGuiaImportarCertificado{
 
   static String get logoAppBar => AssetsConfig.imagesIconeTrust;
 
-  static Widget get imagemAjuda => Image.asset(AssetsConfig.trustIcAjuda,
+  static Widget get imagemAjuda => Image.asset(AssetsConfig.trustAjuda,
       width: 176.w, color: TRUSTColors.primaryColor);
 
   @override
@@ -128,6 +129,6 @@ class ThemeTRUST implements ImagensGuiaImportarCertificado{
 
   @override
   // TODO: implement ted_menu_icone
-  String get ted_menu_icone => AssetsConfig.trustTedTerceiros;
+  String get ted_menu_icone => AssetsConfig.trustTed;
 
 }
