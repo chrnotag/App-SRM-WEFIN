@@ -7,7 +7,7 @@ part of 'bancos_model.dart';
 // **************************************************************************
 
 BancosModel _$BancosModelFromJson(Map<String, dynamic> json) => BancosModel(
-      identificador: json['identificador'] as int?,
+      identificador: (json['identificador'] as num?)?.toInt(),
       codigo: json['codigo'] as String,
       nome: json['nome'] as String,
       ispb: json['ispb'] as String,

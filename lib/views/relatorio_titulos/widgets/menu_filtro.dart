@@ -34,6 +34,8 @@ class _MenuFiltroState extends State<_MenuFiltro> {
   bool A_VENCER = false;
   bool LIQUIDADO = false;
 
+  final provider = Modular.get<RelatorioTitulosProvider>();
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -41,6 +43,9 @@ class _MenuFiltroState extends State<_MenuFiltro> {
         InkWell(
             onTap: () => setState(() {
                   menuSelecionado = MENU_LIQUIDACAO;
+                  provider.VENCIDO = false;
+                  provider.A_VENCER = false;
+                  provider.LIQUIDADO = true;
                   showDialog(
                     context: context,
                     builder: (context) => SelecionarDataRelatorioScreen(
@@ -55,6 +60,9 @@ class _MenuFiltroState extends State<_MenuFiltro> {
           child: InkWell(
               onTap: () => setState(() {
                     menuSelecionado = MENU_VENCIMENTO;
+                    provider.VENCIDO = true;
+                    provider.A_VENCER = true;
+                    provider.LIQUIDADO = false;
                     showDialog(
                       context: context,
                       builder: (context) => SelecionarDataRelatorioScreen(
@@ -68,6 +76,9 @@ class _MenuFiltroState extends State<_MenuFiltro> {
         InkWell(
           onTap: () => setState(() {
             menuSelecionado = MENU_STATUS;
+            provider.VENCIDO = true;
+            provider.A_VENCER = true;
+            provider.LIQUIDADO = true;
             showDialog(
               context: context,
               builder: (context) => _AlertStatus()

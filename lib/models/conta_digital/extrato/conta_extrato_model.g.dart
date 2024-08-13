@@ -37,7 +37,7 @@ Map<String, dynamic> _$ItemToJson(Item instance) => <String, dynamic>{
     };
 
 Lancamento _$LancamentoFromJson(Map<String, dynamic> json) => Lancamento(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       status: Status.fromJson(json['status'] as Map<String, dynamic>),
       evento: Evento.fromJson(json['evento'] as Map<String, dynamic>),
       valor: (json['valor'] as num).toDouble(),

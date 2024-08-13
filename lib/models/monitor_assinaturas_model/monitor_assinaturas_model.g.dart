@@ -9,7 +9,7 @@ part of 'monitor_assinaturas_model.dart';
 MonitorAssinaturasModel _$MonitorAssinaturasModelFromJson(
         Map<String, dynamic> json) =>
     MonitorAssinaturasModel(
-      codigoOperacao: json['codigoOperacao'] as int,
+      codigoOperacao: (json['codigoOperacao'] as num).toInt(),
       statusAssinaturaDigital: json['statusAssinaturaDigital'] as String?,
       siglaProduto: json['siglaProduto'] as String,
       statusOperacao: json['statusOperacao'] as String,
@@ -77,7 +77,7 @@ Map<String, dynamic> _$InformacaoAssinanteToJson(
     };
 
 Documento _$DocumentoFromJson(Map<String, dynamic> json) => Documento(
-      idAssinaturaDigital: json['idAssinaturaDigital'] as int?,
+      idAssinaturaDigital: (json['idAssinaturaDigital'] as num?)?.toInt(),
       nome: json['nome'] as String?,
     );
 

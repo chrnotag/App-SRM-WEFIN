@@ -9,7 +9,7 @@ part of 'finalizar_assinatura.dart';
 FinalizarAssinaturaModel _$FinalizarAssinaturaModelFromJson(
         Map<String, dynamic> json) =>
     FinalizarAssinaturaModel(
-      codigoOperacao: json['codigoOperacao'] as int,
+      codigoOperacao: (json['codigoOperacao'] as num).toInt(),
       hashAssinado: json['hashAssinado'] as String,
       chaveDocumento: json['chaveDocumento'] as String,
       token: json['token'] as String,

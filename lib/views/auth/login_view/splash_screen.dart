@@ -30,19 +30,23 @@ class _SplashScreenState extends State<SplashScreen> {
   final authProvider = Modular.get<AuthProvider>();
   final FlutterSecureStorage _storage = FlutterSecureStorage();
 
+  List<int> _parseVersion(String version) {
+    return version.split(RegExp(r'[.+]')).map((e) => int.parse(e)).toList();
+  }
 
-  Future<String> _getCurrentVersion() async {
+  Future<List<int>> _getCurrentVersion() async {
     try {
       final flavor = F.appFlavor;
       final so = Platform.isAndroid;
       final pubspecPath = so ? '${flavor!.name.toLowerCase()}.yaml' : '${flavor!.name.toLowerCase()}_ios.yaml';
       final pubspecContent = await rootBundle.loadString(pubspecPath);
       final pubspec = loadYaml(pubspecContent);
-      print(pubspec['version']);
-      return pubspec['version'];
+      final String version = pubspec['version'].toString();
+
+      return _parseVersion(version);
     } catch (e) {
       print('Erro ao carregar a versão do pubspec.yaml: $e');
-      return '';
+      return [0, 0, 0, 0]; // Retornar uma lista de inteiros padrão em caso de erro
     }
   }
 
@@ -57,8 +61,19 @@ class _SplashScreenState extends State<SplashScreen> {
 
       print('Versão atual: $currentVersion');
       print('Versão do backend: ${backendVersion.versao}');
+      final List<int> versaoBackList = _parseVersion(backendVersion.versao);
 
-      if (backendVersion.versao != currentVersion) {
+      bool isUpdateRequired = false;
+      for (int i = 0; i < versaoBackList.length; i++) {
+        if (versaoBackList[i] > currentVersion[i]) {
+          isUpdateRequired = true;
+          break;
+        } else if (versaoBackList[i] < currentVersion[i]) {
+          break;
+        }
+      }
+
+      if (isUpdateRequired) {
         _showUpdateDialog();
       } else {
         await _loadSavedLoginData();
