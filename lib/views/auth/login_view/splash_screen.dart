@@ -31,19 +31,49 @@ class _SplashScreenState extends State<SplashScreen> {
   final FlutterSecureStorage _storage = FlutterSecureStorage();
 
 
-  Future<int> _getCurrentVersion() async {
+  Future<Map<String, int>> _getCurrentVersion() async {
     try {
       final flavor = F.appFlavor;
       final so = Platform.isAndroid;
       final pubspecPath = so ? '${flavor!.name.toLowerCase()}.yaml' : '${flavor!.name.toLowerCase()}_ios.yaml';
       final pubspecContent = await rootBundle.loadString(pubspecPath);
       final pubspec = loadYaml(pubspecContent);
-      final String version = pubspec['version'].toString().replaceAll('.', '').replaceAll('+', '');
-      return int.parse(version);
+      final String version = pubspec['version'].toString();
+
+      return _parseVersion(version);
     } catch (e) {
       print('Erro ao carregar a versão do pubspec.yaml: $e');
-      return 0;
+      return {'major': 0, 'minor': 0, 'patch': 0, 'build': 0}; // Retornar um mapa padrão em caso de erro
     }
+  }
+
+  Map<String, int> _parseVersion(String version) {
+    final versionParts = version.split(RegExp(r'[.+]'));
+    return {
+      'major': int.parse(versionParts[0]),
+      'minor': int.parse(versionParts[1]),
+      'patch': int.parse(versionParts[2]),
+      'build': int.parse(versionParts.length > 3 ? versionParts[3] : '0'),
+    };
+  }
+
+  bool _isUpdateRequired(Map<String, int> currentVersion, Map<String, int> backendVersion) {
+    if (backendVersion['major']! > currentVersion['major']!) {
+      return true;
+    } else if (backendVersion['major']! == currentVersion['major']!) {
+      if (backendVersion['minor']! > currentVersion['minor']!) {
+        return true;
+      } else if (backendVersion['minor']! == currentVersion['minor']!) {
+        if (backendVersion['patch']! > currentVersion['patch']!) {
+          return true;
+        } else if (backendVersion['patch']! == currentVersion['patch']!) {
+          if (backendVersion['build']! > currentVersion['build']!) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
   }
 
   Future<void> pegarVersao() async {
@@ -58,25 +88,9 @@ class _SplashScreenState extends State<SplashScreen> {
       print('Versão atual: $currentVersion');
       print('Versão do backend: ${backendVersion.versao}');
 
-      // Função para converter a versão em uma lista de inteiros
-      List<int> _parseVersion(String version) {
-        return version.split(RegExp(r'[.+]')).map((e) => int.parse(e)).toList();
-      }
+      final Map<String, int> versaoBackMap = _parseVersion(backendVersion.versao);
 
-      final List<int> versaoBackList = _parseVersion(backendVersion.versao);
-      final List<int> currentVersionList = _parseVersion(currentVersion.toString());
-
-      bool isUpdateRequired = false;
-      for (int i = 0; i < versaoBackList.length; i++) {
-        if (versaoBackList[i] > currentVersionList[i]) {
-          isUpdateRequired = true;
-          break;
-        } else if (versaoBackList[i] < currentVersionList[i]) {
-          break;
-        }
-      }
-
-      if (isUpdateRequired) {
+      if (_isUpdateRequired(currentVersion, versaoBackMap)) {
         _showUpdateDialog();
       } else {
         await _loadSavedLoginData();
@@ -86,6 +100,7 @@ class _SplashScreenState extends State<SplashScreen> {
       print('Erro ao recuperar a versão: $error');
     }
   }
+
 
   void _showUpdateDialog() {
     print('chamando');
