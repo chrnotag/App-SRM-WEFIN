@@ -58,9 +58,25 @@ class _SplashScreenState extends State<SplashScreen> {
       print('Versão atual: $currentVersion');
       print('Versão do backend: ${backendVersion.versao}');
 
-      final String versaoBack = backendVersion.versao.replaceAll('.', '').replaceAll('+', '');
-      final int versaoBackInt = int.parse(versaoBack);
-      if (versaoBackInt > currentVersion) {
+      // Função para converter a versão em uma lista de inteiros
+      List<int> _parseVersion(String version) {
+        return version.split(RegExp(r'[.+]')).map((e) => int.parse(e)).toList();
+      }
+
+      final List<int> versaoBackList = _parseVersion(backendVersion.versao);
+      final List<int> currentVersionList = _parseVersion(currentVersion.toString());
+
+      bool isUpdateRequired = false;
+      for (int i = 0; i < versaoBackList.length; i++) {
+        if (versaoBackList[i] > currentVersionList[i]) {
+          isUpdateRequired = true;
+          break;
+        } else if (versaoBackList[i] < currentVersionList[i]) {
+          break;
+        }
+      }
+
+      if (isUpdateRequired) {
         _showUpdateDialog();
       } else {
         await _loadSavedLoginData();
