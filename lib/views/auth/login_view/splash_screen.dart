@@ -30,6 +30,9 @@ class _SplashScreenState extends State<SplashScreen> {
   final authProvider = Modular.get<AuthProvider>();
   final FlutterSecureStorage _storage = FlutterSecureStorage();
 
+  List<int> _parseVersion(String version) {
+    return version.split(RegExp(r'[.+]')).map((e) => int.parse(e)).toList();
+  }
 
   Future<List<int>> _getCurrentVersion() async {
     try {
@@ -40,10 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
       final pubspec = loadYaml(pubspecContent);
       final String version = pubspec['version'].toString();
 
-      // Converter a versão em uma lista de inteiros
-      List<int> versionList = version.split(RegExp(r'[.+]')).map((e) => int.parse(e)).toList();
-
-      return versionList;
+      return _parseVersion(version);
     } catch (e) {
       print('Erro ao carregar a versão do pubspec.yaml: $e');
       return [0, 0, 0, 0]; // Retornar uma lista de inteiros padrão em caso de erro
@@ -61,21 +61,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
       print('Versão atual: $currentVersion');
       print('Versão do backend: ${backendVersion.versao}');
-
-      // Função para converter a versão em uma lista de inteiros
-      List<int> _parseVersion(String version) {
-        return version.split(RegExp(r'[.+]')).map((e) => int.parse(e)).toList();
-      }
-
       final List<int> versaoBackList = _parseVersion(backendVersion.versao);
-      final List<int> currentVersionList = _parseVersion(currentVersion.toString());
 
       bool isUpdateRequired = false;
       for (int i = 0; i < versaoBackList.length; i++) {
-        if (versaoBackList[i] > currentVersionList[i]) {
+        if (versaoBackList[i] > currentVersion[i]) {
           isUpdateRequired = true;
           break;
-        } else if (versaoBackList[i] < currentVersionList[i]) {
+        } else if (versaoBackList[i] < currentVersion[i]) {
           break;
         }
       }
