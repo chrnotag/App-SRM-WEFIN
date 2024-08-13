@@ -9,7 +9,7 @@ part of 'finalizar_assinatura_eletronica_model.dart';
 FinalizarAssinaturaEletronicaModel _$FinalizarAssinaturaEletronicaModelFromJson(
         Map<String, dynamic> json) =>
     FinalizarAssinaturaEletronicaModel(
-      codigoOperacao: json['codigoOperacao'] as int,
+      codigoOperacao: (json['codigoOperacao'] as num).toInt(),
       deslocamentoFusoHorarioUsuario:
           json['deslocamentoFusoHorarioUsuario'] as String,
       evidencias:

@@ -24,7 +24,7 @@ Titulo _$TituloFromJson(Map<String, dynamic> json) => Titulo(
           : DateTime.parse(json['dataLiquidacao'] as String),
       dataVencimento: DateTime.parse(json['dataVencimento'] as String),
       documento: json['documento'] as String,
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       identificadorCedente: json['identificadorCedente'] as String,
       identificadorSacado: json['identificadorSacado'] as String,
       kgfinPos: json['kgfinPos'] as bool,
@@ -52,7 +52,7 @@ Map<String, dynamic> _$TituloToJson(Titulo instance) => <String, dynamic>{
     };
 
 const _$RelatorioEnumEnumMap = {
-  RelatorioEnum.A_VENCER: 'A_VENCER',
+  RelatorioEnum.A_VENCER: 'A VENCER',
   RelatorioEnum.VENCIDO: 'VENCIDO',
   RelatorioEnum.LIQUIDADO: 'LIQUIDADO',
 };

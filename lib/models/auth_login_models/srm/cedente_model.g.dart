@@ -9,7 +9,7 @@ part of 'cedente_model.dart';
 CedenteModel _$CedenteModelFromJson(Map<String, dynamic> json) => CedenteModel(
       identificador: json['identificador'] as String,
       nome: json['nome'] as String,
-      assinaturaPendente: json['assinaturaPendente'] as int,
+      assinaturaPendente: (json['assinaturaPendente'] as num).toInt(),
     );
 
 Map<String, dynamic> _$CedenteModelToJson(CedenteModel instance) =>

@@ -15,9 +15,9 @@ CarteiraAbertoModel _$CarteiraAbertoModelFromJson(Map<String, dynamic> json) =>
       valorTotalRecebiveisVencidos:
           (json['valorTotalRecebiveisVencidos'] as num).toDouble(),
       quantidadeTotalRecebiveisAVencer:
-          json['quantidadeTotalRecebiveisAVencer'] as int,
+          (json['quantidadeTotalRecebiveisAVencer'] as num).toInt(),
       quantidadeTotalRecebiveisVencidos:
-          json['quantidadeTotalRecebiveisVencidos'] as int,
+          (json['quantidadeTotalRecebiveisVencidos'] as num).toInt(),
     );
 
 Map<String, dynamic> _$CarteiraAbertoModelToJson(

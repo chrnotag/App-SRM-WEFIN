@@ -9,7 +9,7 @@ part of 'iniciar_assinatura_eletronica_model.dart';
 IniciarAssinaturaEletronicaModel _$IniciarAssinaturaEletronicaModelFromJson(
         Map<String, dynamic> json) =>
     IniciarAssinaturaEletronicaModel(
-      codigoOperacao: json['codigoOperacao'] as int,
+      codigoOperacao: (json['codigoOperacao'] as num).toInt(),
     );
 
 Map<String, dynamic> _$IniciarAssinaturaEletronicaModelToJson(

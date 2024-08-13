@@ -42,10 +42,10 @@ Map<String, dynamic> _$ListaBancoToJson(ListaBanco instance) =>
 
 Transferencia _$TransferenciaFromJson(Map<String, dynamic> json) =>
     Transferencia(
-      codigo: json['codigo'] as int,
-      codigoCedente: json['codigoCedente'] as int?,
+      codigo: (json['codigo'] as num).toInt(),
+      codigoCedente: (json['codigoCedente'] as num?)?.toInt(),
       idInstrucaoParametrosProcessamento:
-          json['idInstrucaoParametrosProcessamento'] as int,
+          (json['idInstrucaoParametrosProcessamento'] as num).toInt(),
       identificadorFavorecido: json['identificadorFavorecido'] as String,
       nomeFavorecido: json['nomeFavorecido'] as String,
       statusAprovacaoCedente: json['statusAprovacaoCedente'] as String,
@@ -55,7 +55,7 @@ Transferencia _$TransferenciaFromJson(Map<String, dynamic> json) =>
       dataEfetivacao: json['dataEfetivacao'] == null
           ? null
           : DateTime.parse(json['dataEfetivacao'] as String),
-      tipoTransferencia: json['tipoTransferencia'] as int,
+      tipoTransferencia: (json['tipoTransferencia'] as num).toInt(),
       clienteAprovacao: json['clienteAprovacao'] as String?,
       dataClienteAprovacao: json['dataClienteAprovacao'] as String?,
       codigoTransacao: json['codigoTransacao'] as String?,

@@ -31,7 +31,7 @@ Map<String, dynamic> _$RelatorioQueryParamsToJson(
     };
 
 const _$RelatorioEnumEnumMap = {
-  RelatorioEnum.A_VENCER: 'A_VENCER',
+  RelatorioEnum.A_VENCER: 'A VENCER',
   RelatorioEnum.VENCIDO: 'VENCIDO',
   RelatorioEnum.LIQUIDADO: 'LIQUIDADO',
 };
