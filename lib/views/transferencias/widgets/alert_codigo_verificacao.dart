@@ -37,6 +37,40 @@ class _AlertCodigoVerificacaoState extends State<_AlertCodigoVerificacao> {
     }
   }
 
+  int _contador = 60;
+  bool _exibirMensagemTimer = false;
+
+  String _mensagemReenviarCodigo() {
+    if (_exibirMensagemTimer) {
+      return 'Toque aqui para reinviar o codigo.';
+    } else {
+      return 'Toque aqui para reinviar em 00:${_contador}';
+    }
+  }
+
+  Future<void> timerNovaMensagem() async {
+    final timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
+      if (_contador > 0) {
+        setState(() {
+          _contador--;
+        });
+      } else {
+        t.cancel();
+        setState(() {
+          _exibirMensagemTimer = true;
+        });
+        _contador = 60;
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    timerNovaMensagem();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -82,14 +116,19 @@ class _AlertCodigoVerificacaoState extends State<_AlertCodigoVerificacao> {
                   text: 'Não recebeu o código no seu WhatsApp?\n',
                   style: context.textTheme.bodyLarge),
               TextSpan(
-                  text: 'Clique aqui para reenviar.',
+                  text: _mensagemReenviarCodigo(),
                   style: context.textTheme.bodyLarge!.copyWith(
-                      color: context.primaryColor, fontWeight: FontWeight.w900),
+                      color: _exibirMensagemTimer
+                          ? context.primaryColor
+                          : context.labelTextColor,
+                      fontWeight: FontWeight.w900),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () async {
-                      OverlayApp.iniciaOverlay(context);
-                      final response = await provider.enviarToken();
-                      OverlayApp.terminaOverlay();
+                      if (_exibirMensagemTimer) {
+                        OverlayApp.iniciaOverlay(context);
+                        final response = await provider.enviarToken();
+                        OverlayApp.terminaOverlay();
+                      }
                     }),
             ]),
             textAlign: TextAlign.center,
