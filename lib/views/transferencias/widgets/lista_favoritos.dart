@@ -31,55 +31,63 @@ class _ListaFavoritosState extends State<_ListaFavoritos> {
               child: Container(
                 height: 160.h,
                 color: Colors.white,
-                child: FutureBuilder(
-                  future: teste(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Loader();
-                    }
-                    return ListView.builder(
-                      itemCount: 5,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 80.h,
-                              width: 80.w,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Color(0xffEEEEEE),
-                                  border:
-                                      Border.all(color: context.primaryColor)),
-                              child: Center(
-                                child: Text(
-                                pegarIniciais(limitarTexto('nome teste inteiro')).toUpperCase(),
-                                  style: context.textTheme.displaySmall!
-                                      .copyWith(
-                                          fontWeight: FontWeight.w900,
-                                          color: SRMColors.textBodyColor),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(left: 29.w),
+                      child: Text('Transferencias Recentes', style: context.textTheme.bodyLarge,),
+                    ),
+                    FutureBuilder(
+                      future: teste(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return Loader();
+                        }
+                        return ListView.builder(
+                          itemCount: 5,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) => Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: 80.h,
+                                  width: 80.w,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Color(0xffEEEEEE),
+                                      border:
+                                          Border.all(color: context.primaryColor)),
+                                  child: Center(
+                                    child: Text(
+                                    pegarIniciais(limitarTexto('nome teste inteiro')).toUpperCase(),
+                                      style: context.textTheme.displaySmall!
+                                          .copyWith(
+                                              fontWeight: FontWeight.w900,
+                                              color: SRMColors.textBodyColor),
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                Text(
+                                  limitarTexto('nome teste inteiro').capitalizeCadaPalavra(),
+                    
+                                  style: context.textTheme.bodyLarge,
+                                ),
+                                InkWell(
+                                    onTap: () {},
+                                    child: Icon(
+                                      Icons.star,
+                                      color: context.primaryColor,
+                                      size: 35.r,
+                                    ))
+                              ],
                             ),
-                            Text(
-                              limitarTexto('nome teste inteiro').capitalizeCadaPalavra(),
-
-                              style: context.textTheme.bodyLarge,
-                            ),
-                            InkWell(
-                                onTap: () {},
-                                child: Icon(
-                                  Icons.star,
-                                  color: context.primaryColor,
-                                  size: 35.r,
-                                ))
-                          ],
-                        ),
-                      ),
-                    );
-                  },
+                          ),
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ),
             ),
