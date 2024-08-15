@@ -809,7 +809,7 @@
 		};
 		B7E6AA102C66566C004F671C /* Release-SRM_HOMOLOGACAO */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 352A27D75B9B62275A2EB5C2 /* Pods-RunnerTests.release-srm_homologacao.xcconfig */;
+			baseConfigurationReference = 1FB5ADE10C699FA5A17A230C /* Pods-RunnerTests.release-srm_homologacao.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
