@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.srm.appsrm</string>
+	<string>com.app.apptrust</string>
 	<key>PROJECT_ID</key>
 	<string>core-app-homebanking</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:968806609029:ios:1cb835a267222ddeadb9ec</string>
+	<string>1:968806609029:ios:a07f2a51e586f259adb9ec</string>
 </dict>
 </plist>
