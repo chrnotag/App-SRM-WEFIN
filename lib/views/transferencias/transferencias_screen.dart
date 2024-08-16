@@ -48,6 +48,7 @@ part 'widgets/card_minhas_transferencias.dart';
 part 'minhas_transferencias.dart';
 
 part 'transferencia_ted.dart';
+part 'widgets/lista_favoritos.dart';
 
 class Transferencias extends StatefulWidget {
   const Transferencias({super.key});

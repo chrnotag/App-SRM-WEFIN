@@ -31,7 +31,7 @@ class _AlertCodigoVerificacaoState extends State<_AlertCodigoVerificacao> {
         context: context,
         builder: (context) => AlertDialogGenerico(
             title: 'Erro na requisição',
-            msg: '${response.error.erros}',
+            msg: '${response.error.mensagem}',
             onPressed: () => Modular.to.pop()),
       );
     }
