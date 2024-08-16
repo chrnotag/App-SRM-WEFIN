@@ -9,7 +9,7 @@ import '../../main.dart';
 class SessionProvider with ChangeNotifier {
   bool _isShowingDialog = false;
   Timer? _timer;
-  static const int _tempoLimite = 9999;
+  static const int _tempoLimite = 120;
   int _timeout = _tempoLimite;
   final AuthProvider authProvider = Modular.get<AuthProvider>();
 
