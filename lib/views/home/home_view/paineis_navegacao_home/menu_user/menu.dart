@@ -79,12 +79,12 @@ class PerfilUsuario extends StatelessWidget {
                               height: 200.h,
                               width: 200.w,
                               decoration: BoxDecoration(
-                                  color: const Color(0xffF8F9FB),
+                                  color: context.secondaryColor.withAlpha(10),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(12.r))),
                               child: Center(
                                 child: SvgPicture.asset(
-                                    AssetsConfig.srmMaletaPerfil),
+                                    AssetsConfig.srmMaletaPerfil, color: context.secondaryColor,),
                               ),
                             ),
                           ),

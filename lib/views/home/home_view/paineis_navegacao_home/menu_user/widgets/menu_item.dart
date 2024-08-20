@@ -23,6 +23,7 @@ class _ItemMenuState extends State<_ItemMenu> {
         ),
         Text(
           widget.content,
+          textAlign: TextAlign.center,
           style: context.textTheme.bodyLarge!
               .copyWith(color: SRMColors.textBodyColor, fontWeight: FontWeight.w900,),
         ),

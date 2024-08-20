@@ -11,13 +11,23 @@ class _AlertCodigoVerificacao extends StatefulWidget {
 class _AlertCodigoVerificacaoState extends State<_AlertCodigoVerificacao> {
   final provider = Modular.get<SolicitarTedProvider>();
   final List<TextEditingController> _controllers =
-      List.generate(6, (_) => TextEditingController());
+  List.generate(6, (_) => TextEditingController());
   final List<FocusNode> _focusNodes = List.generate(6, (_) => FocusNode());
+
+  DateTime _tempoRestante = DateTime(0, 0, 0, 0, 1, 0);
+  bool _exibirMensagemTimer = false;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    timerNovaMensagem();
+  }
 
   void _onLastFieldFilled() async {
     OverlayApp.iniciaOverlay(context);
     final response =
-        await provider.solicitarTed(provider.parametroSolicitarTed);
+    await provider.solicitarTed(provider.parametroSolicitarTed);
     Modular.to.pop();
     if (response.error == null) {
       OverlayApp.terminaOverlay();
@@ -37,38 +47,30 @@ class _AlertCodigoVerificacaoState extends State<_AlertCodigoVerificacao> {
     }
   }
 
-  int _contador = 60;
-  bool _exibirMensagemTimer = false;
-
   String _mensagemReenviarCodigo() {
     if (_exibirMensagemTimer) {
-      return 'Toque aqui para reinviar o codigo.';
+      return 'Toque aqui para reinviar o código.';
     } else {
-      return 'Toque aqui para reinviar em 00:${_contador}';
+      final minutos = _tempoRestante.minute.toString().padLeft(2, '0');
+      final segundos = _tempoRestante.second.toString().padLeft(2, '0');
+      return 'Toque aqui para reinviar em $minutos:$segundos';
     }
   }
 
-  Future<void> timerNovaMensagem() async {
-    final timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
-      if (_contador > 0) {
-        setState(() {
-          _contador--;
-        });
-      } else {
-        t.cancel();
-        setState(() {
-          _exibirMensagemTimer = true;
-        });
-        _contador = 60;
-      }
-    });
-  }
+  void timerNovaMensagem() {
+    _exibirMensagemTimer = false;
+    _tempoRestante = DateTime(0, 0, 0, 0, 1, 0); // 1 minuto
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    timerNovaMensagem();
+    _timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
+      setState(() {
+        if (_tempoRestante.second > 0 || _tempoRestante.minute > 0) {
+          _tempoRestante = _tempoRestante.subtract(Duration(seconds: 1));
+        } else {
+          t.cancel();
+          _exibirMensagemTimer = true;
+        }
+      });
+    });
   }
 
   @override
@@ -127,6 +129,7 @@ class _AlertCodigoVerificacaoState extends State<_AlertCodigoVerificacao> {
                       if (_exibirMensagemTimer) {
                         OverlayApp.iniciaOverlay(context);
                         final response = await provider.enviarToken();
+                        timerNovaMensagem();
                         OverlayApp.terminaOverlay();
                       }
                     }),
@@ -146,6 +149,7 @@ class _AlertCodigoVerificacaoState extends State<_AlertCodigoVerificacao> {
     for (var focusNode in _focusNodes) {
       focusNode.dispose();
     }
+    _timer?.cancel(); // Cancela o timer ao destruir o widget
     super.dispose();
   }
 }
