@@ -273,6 +273,7 @@ class _AuthFormState extends State<AuthForm> {
       final userModel = UserModel(
           usuario: _loginEC.text,
           senha: _passwordEC.text,
+          tokenNotificacao: authProvider.tokenNotificacao!,
           idDevice: await DeviceUtils().getDeviceID());
 
       final response = await authProvider.login(userModel);
