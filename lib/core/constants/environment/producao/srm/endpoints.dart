@@ -157,6 +157,7 @@ class EndPointsSRM extends Endpoint{
 
   String get downloadRelatorioTitulos => '$relatorioTitulos/download';
   String get downloadBoletoRelatorio => '';
+  String get beneficiariosRecentes => '$baseURL/beneficiarios-recentes';
 
 
 }

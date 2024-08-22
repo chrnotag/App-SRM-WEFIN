@@ -42,4 +42,5 @@ abstract class Endpoint{
   String get linkLoja;
   String get downloadRelatorioTitulos;
   String get downloadBoletoRelatorio;
+  String get beneficiariosRecentes;
 }

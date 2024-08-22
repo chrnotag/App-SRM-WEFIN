@@ -26,7 +26,7 @@ class _MinhasTransferenciasState extends State<_MinhasTransferencias> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Loader();
           }
-          if (solicitacoesProvider.solicitacoesTed!.itens.length <= 0) {
+          if (solicitacoesProvider.solicitacoesTed == null || solicitacoesProvider.solicitacoesTed!.itens.length  <= 0) {
             return MensagemTelaVazia(
                 titulo: 'Não há trasnferencias',
                 mensagem: 'Sem transferencias para acompanhamento');
@@ -37,9 +37,9 @@ class _MinhasTransferenciasState extends State<_MinhasTransferencias> {
                 itemCount: solicitacoesProvider.solicitacoesTed!.itens.length,
                 itemBuilder: (context, index) => _CardMinhasTransferencias(
                     favorecido: solicitacoesProvider
-                        .solicitacoesTed!.itens[index].beneficiario.nome,
+                        .solicitacoesTed!.itens[index].beneficiario.nomeBeneficiario,
                     documento: solicitacoesProvider
-                        .solicitacoesTed!.itens[index].beneficiario.documento,
+                        .solicitacoesTed!.itens[index].beneficiario.identificadorBeneficiario,
                     data: solicitacoesProvider
                         .solicitacoesTed!.itens[index].dataCriacao,
                     codigoTransacao: solicitacoesProvider

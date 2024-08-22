@@ -155,5 +155,7 @@ class EndPointsTRUST extends Endpoint{
 
   String get downloadRelatorioTitulos => '$relatorioTitulos/download';
   String get downloadBoletoRelatorio => '$baseURL/relatorios/boletos/download';
+  String get beneficiariosRecentes => '$baseURL/beneficiarios-recentes';
+
 
 }

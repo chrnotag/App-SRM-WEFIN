@@ -8,8 +8,12 @@ class _ListaFavoritos extends StatefulWidget {
 }
 
 class _ListaFavoritosState extends State<_ListaFavoritos> {
-  Future<void> teste() async {
-    return;
+  final favoritosProvider = Modular.get<BeneficiariosRecentesProvider>();
+
+  @override
+  void initState() {
+    super.initState();
+    favoritosProvider.futureDados = favoritosProvider.carregarBeneficiariosRecentes();
   }
 
   @override
@@ -30,7 +34,7 @@ class _ListaFavoritosState extends State<_ListaFavoritos> {
           width: context.width,
           color: Colors.white,
           child: FutureBuilder(
-            future: teste(),
+            future: favoritosProvider.futureDados,
             builder: (context, snapshot) {
               if (snapshot.connectionState ==
                   ConnectionState.waiting) {
@@ -49,7 +53,7 @@ class _ListaFavoritosState extends State<_ListaFavoritos> {
                   SizedBox(
                     height: 160.h,
                     child: ListView.builder(
-                      itemCount: 5,
+                      itemCount: favoritosProvider.listaBeneficiarios.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) => Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -65,7 +69,7 @@ class _ListaFavoritosState extends State<_ListaFavoritos> {
                               ),
                               child: Center(
                                 child: Text(
-                                  pegarIniciais(limitarTexto('nome teste inteiro')).toUpperCase(),
+                                  favoritosProvider.listaBeneficiarios[index].nomeBeneficiario.iniciais.toUpperCase(),
                                   style: context.textTheme.displaySmall!.copyWith(
                                     fontWeight: FontWeight.w900,
                                     color: SRMColors.textBodyColor,
@@ -74,13 +78,14 @@ class _ListaFavoritosState extends State<_ListaFavoritos> {
                               ),
                             ),
                             Text(
-                              limitarTexto('nome teste inteiro').capitalizeCadaPalavra(),
+                              favoritosProvider.listaBeneficiarios[index].nomeBeneficiario.primeirasDuasPalavras.capitalizeCadaPalavra(),
                               style: context.textTheme.bodyLarge,
                             ),
                             InkWell(
                               onTap: () {},
                               child: Icon(
-                                Icons.star,
+                                favoritosProvider.listaBeneficiarios[index].favorito ?
+                                Icons.star : Icons.star_border,
                                 color: context.primaryColor,
                                 size: 35.r,
                               ),
@@ -97,21 +102,5 @@ class _ListaFavoritosState extends State<_ListaFavoritos> {
         )
       ],
     );
-  }
-
-  String limitarTexto(String texto) {
-    List<String> palavras = texto.split(' ');
-
-    if (palavras.length > 2) {
-      return palavras.sublist(0, 2).join(' ');
-    }
-
-    return texto;
-  }
-
-  String pegarIniciais(String texto) {
-    List<String> palavras = texto.split(' ');
-
-    return palavras.map((palavra) => palavra[0]).join('');
   }
 }

@@ -11,6 +11,7 @@ class SolicitacaoTedImpl {
     final Uri url = Uri.parse('${ambiente.endpoints.solicitacoesTed}?numeroContaTitular=$numeroContaTitular');
     try {
       final response = await http.get(url, headers: header());
+      print('response do back: ${response.body}');
       if (response.statusCode == 200) {
         final responseBody = json.decode(utf8.decode(response.bodyBytes));
         final data = SolicitacaoTed.fromJson(responseBody);
