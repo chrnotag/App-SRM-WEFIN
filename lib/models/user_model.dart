@@ -7,12 +7,14 @@ class UserModel {
   UserModel({
     required this.usuario,
     required this.senha,
+    required this.tokenNotificacao,
     this.identificadorCedente,
     required this.idDevice,
   });
 
   late final String usuario;
   late final String senha;
+  late final String tokenNotificacao;
   String? identificadorCedente;
   late final String idDevice;
 

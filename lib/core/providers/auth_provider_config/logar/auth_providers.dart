@@ -9,7 +9,6 @@ import 'package:Srm_Asset/models/auth_login_models/SRM/cedente_model.dart';
 import 'package:Srm_Asset/models/auth_login_models/SRM/usuario_logado_model.dart';
 import 'package:Srm_Asset/models/user_model.dart';
 import '../../../constants/enuns/roles_acesso_enum.dart';
-import '../../../constants/route_labels.dart';
 
 class AuthProvider extends ChangeNotifier {
   AuthProvider._();
@@ -35,6 +34,10 @@ class AuthProvider extends ChangeNotifier {
   String? _loginSalvo;
   String? get loginSalvo => _loginSalvo;
   set loginSalvo(String? login) => _loginSalvo = login;
+
+  String? _tokenNotificacao;
+  String? get tokenNotificacao => _tokenNotificacao;
+  set tokenNotificacao(String? token) => _tokenNotificacao = token;
 
   LoginResponse? _dataUser;
   List<CedenteModel>? _listaCedente;
@@ -80,6 +83,7 @@ class AuthProvider extends ChangeNotifier {
       final credenciaisLogin = UserModel(
           usuario: credenciaisUsuario.usuario,
           senha: credenciaisUsuario.senha,
+          tokenNotificacao: credenciaisUsuario.tokenNotificacao,
           idDevice: credenciaisUsuario.idDevice,
           identificadorCedente: identificadorCedente);
 
@@ -115,6 +119,6 @@ class AuthProvider extends ChangeNotifier {
     _dataUser = null;
     _empresaSelecionada = null;
     _listaCedente = null;
-    _credenciaisUsuario = UserModel(usuario: '', senha: '', idDevice: '');
+    _credenciaisUsuario = UserModel(usuario: '', senha: '', tokenNotificacao: '',idDevice: '');
   }
 }

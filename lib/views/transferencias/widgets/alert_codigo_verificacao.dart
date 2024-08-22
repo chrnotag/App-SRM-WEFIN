@@ -49,11 +49,11 @@ class _AlertCodigoVerificacaoState extends State<_AlertCodigoVerificacao> {
 
   String _mensagemReenviarCodigo() {
     if (_exibirMensagemTimer) {
-      return 'Toque aqui para reinviar o código.';
+      return 'Toque aqui para reenviar o código.';
     } else {
       final minutos = _tempoRestante.minute.toString().padLeft(2, '0');
       final segundos = _tempoRestante.second.toString().padLeft(2, '0');
-      return 'Toque aqui para reinviar em $minutos:$segundos';
+      return 'Toque aqui para reenviar em $minutos:$segundos';
     }
   }
 

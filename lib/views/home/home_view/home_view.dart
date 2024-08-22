@@ -53,7 +53,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
         bottomNavigationBar: Visibility(
-          visible: false,
+          visible: true,
           child: BottomNavigationBar(
             items: [
               BottomNavigationBarItem(
