@@ -30,18 +30,22 @@ class SolicitarTedParametroModel {
 class Beneficiario {
   final String codigoBanco;
   final String agencia;
-  final String conta;
-  final String tipo;
-  final String documento;
-  final String nome;
+  final String numeroConta;
+  final String tipoConta;
+  final String identificadorBeneficiario;
+  final String nomeBeneficiario;
+  final bool? favorito;
+  final int? idBeneficiario;
 
   Beneficiario({
     required this.codigoBanco,
     required this.agencia,
-    required this.conta,
-    required this.tipo,
-    required this.documento,
-    required this.nome,
+    required this.numeroConta,
+    required this.tipoConta,
+    required this.identificadorBeneficiario,
+    required this.nomeBeneficiario,
+    this.favorito,
+    this.idBeneficiario,
   });
 
   factory Beneficiario.fromJson(Map<String, dynamic> json) => _$BeneficiarioFromJson(json);

@@ -12,6 +12,7 @@ class BeneficiariosRecentesModel {
   final String nomeBeneficiario;
   final bool favorito;
   final int idBeneficiario;
+  final DateTime? dataUltimaTransferencia;
 
   BeneficiariosRecentesModel({
     required this.codigoBanco,
@@ -22,6 +23,7 @@ class BeneficiariosRecentesModel {
     required this.nomeBeneficiario,
     required this.favorito,
     required this.idBeneficiario,
+    this.dataUltimaTransferencia
   });
 
   // Factory method to create an instance from JSON

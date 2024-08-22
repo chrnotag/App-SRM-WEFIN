@@ -12,16 +12,46 @@ class BeneficiariosRecentesProvider extends ChangeNotifier {
   Future<void> carregarBeneficiariosRecentes() async {
     final response = await BeneficiariosRecentesImpl.recentes();
     if (response.error == null) {
-      _listaBeneficiarios = response.data;
-      _listaBeneficiarios.sort((a, b) => (b.favorito ? 1 : 0).compareTo(a.favorito ? 1 : 0));
+      List<BeneficiariosRecentesModel> listaFavoritos = [];
+      List<BeneficiariosRecentesModel> listaNaoFavoritos = [];
+
+      // Separar os beneficiários entre favoritos e não favoritos
+      for (var beneficiario in response.data) {
+        if (beneficiario.favorito) {
+          listaFavoritos.add(beneficiario);
+        } else {
+          listaNaoFavoritos.add(beneficiario);
+        }
+      }
+
+      // Ordenar os favoritos pela data de última transferência (mais recente primeiro)
+      listaFavoritos.sort((a, b) {
+        if (a.dataUltimaTransferencia == null && b.dataUltimaTransferencia == null) return 0;
+        if (a.dataUltimaTransferencia == null) return 1;
+        if (b.dataUltimaTransferencia == null) return -1;
+        return b.dataUltimaTransferencia!.compareTo(a.dataUltimaTransferencia!);
+      });
+
+      // Ordenar os não favoritos pela data de última transferência (mais recente primeiro)
+      listaNaoFavoritos.sort((a, b) {
+        if (a.dataUltimaTransferencia == null && b.dataUltimaTransferencia == null) return 0;
+        if (a.dataUltimaTransferencia == null) return 1;
+        if (b.dataUltimaTransferencia == null) return -1;
+        return b.dataUltimaTransferencia!.compareTo(a.dataUltimaTransferencia!);
+      });
+
+      // Mesclar as duas listas, primeiro os favoritos e depois os não favoritos
+      _listaBeneficiarios = [...listaFavoritos, ...listaNaoFavoritos];
+
       notifyListeners();
     } else {
       showToast('Erro ao carregar beneficiários recentes', response);
     }
   }
 
+
   Future<void> favoritarBeneficiario(BeneficiariosRecentesModel beneficiario) async {
-    final response = await BeneficiariosRecentesImpl.favoritar(beneficiario.idBeneficiario);
+    final response = await BeneficiariosRecentesImpl.favoritar(beneficiario);
     if (response.error == null) {
       await carregarBeneficiariosRecentes();
       notifyListeners();

@@ -9,32 +9,23 @@ class _TransferenciasTed extends StatefulWidget {
 
 class _TransferenciasTedState extends State<_TransferenciasTed> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController controllerAgencia = TextEditingController();
-  final TextEditingController controllerConta = TextEditingController();
-  final TextEditingController controllerValor = TextEditingController();
-  final TextEditingController controllerNome = TextEditingController();
-  final TextEditingController controllerDocumento = TextEditingController();
+  final solicitarTedProvider = Modular.get<SolicitarTedProvider>();
 
   @override
   void initState() {
     super.initState();
-    final solicitarTedProvider = Modular.get<SolicitarTedProvider>();
     solicitarTedProvider.futureDados = solicitarTedProvider.carregarDados();
 
-    controllerAgencia.addListener(_updateButtonState);
-    controllerConta.addListener(_updateButtonState);
-    controllerValor.addListener(_updateButtonState);
-    controllerNome.addListener(_updateButtonState);
-    controllerDocumento.addListener(_updateButtonState);
+    solicitarTedProvider.controllerAgencia.addListener(_updateButtonState);
+    solicitarTedProvider.controllerConta.addListener(_updateButtonState);
+    solicitarTedProvider.controllerValor.addListener(_updateButtonState);
+    solicitarTedProvider.controllerNome.addListener(_updateButtonState);
+    solicitarTedProvider.controllerIdBeneficiario.addListener(_updateButtonState);
   }
 
   @override
   void dispose() {
-    controllerAgencia.dispose();
-    controllerConta.dispose();
-    controllerValor.dispose();
-    controllerNome.dispose();
-    controllerDocumento.dispose();
+    solicitarTedProvider.limparControladores();
     final provider = Modular.get<SolicitarTedProvider>();
     provider.bancoSelecionado = null;
     super.dispose();
@@ -45,11 +36,11 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
   }
 
   bool _isFormValid(SolicitarTedProvider provider) {
-    return controllerDocumento.text.isNotEmpty &&
-        controllerNome.text.isNotEmpty &&
-        controllerValor.text.isNotEmpty &&
-        controllerConta.text.isNotEmpty &&
-        controllerAgencia.text.isNotEmpty &&
+    return solicitarTedProvider.controllerIdBeneficiario.text.isNotEmpty &&
+        solicitarTedProvider.controllerNome.text.isNotEmpty &&
+        solicitarTedProvider.controllerValor.text.isNotEmpty &&
+        solicitarTedProvider.controllerConta.text.isNotEmpty &&
+        solicitarTedProvider.controllerAgencia.text.isNotEmpty &&
         provider.tipoContaSelecionada.isNotEmpty &&
         provider.bancoSelecionado != null;
   }
@@ -69,7 +60,8 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
               children: [
                 _ListaFavoritos(),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 8.h),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 25.w, vertical: 8.h),
                   child: Form(
                     key: _formKey,
                     child: Column(
@@ -103,7 +95,7 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
                                   CentavosInputFormatter()
                                 ],
                                 hint: 'R\$ 0,00',
-                                controller: controllerValor,
+                                controller: solicitarTedProvider.controllerValor,
                               ),
                               SizedBox(
                                 height: 16.h,
@@ -117,18 +109,19 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
                                   ),
                                   TextSpan(
                                       text: ' *',
-                                      style: context.textTheme.bodyLarge!.copyWith(
-                                          color: context.errorColor,
-                                          fontWeight: FontWeight.w600))
+                                      style: context.textTheme.bodyLarge!
+                                          .copyWith(
+                                              color: context.errorColor,
+                                              fontWeight: FontWeight.w600))
                                 ]),
                               ),
                               Container(
                                 width: context.width,
                                 decoration: BoxDecoration(
-                                    border:
-                                        Border.all(color: context.labelTextColor),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(12.r))),
+                                    border: Border.all(
+                                        color: context.labelTextColor),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(12.r))),
                                 child: Padding(
                                   padding: EdgeInsets.all(8.r),
                                   child: BancoDropdown(),
@@ -153,7 +146,7 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
                                 formatos: [
                                   FilteringTextInputFormatter.digitsOnly,
                                 ],
-                                controller: controllerAgencia,
+                                controller: solicitarTedProvider.controllerAgencia,
                               ),
                             ),
                             SizedBox(width: 16.w),
@@ -169,7 +162,7 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
                                 formatos: [
                                   FilteringTextInputFormatter.digitsOnly,
                                 ],
-                                controller: controllerConta,
+                                controller: solicitarTedProvider.controllerConta,
                               ),
                             ),
                           ],
@@ -189,26 +182,27 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
                                   ),
                                   TextSpan(
                                       text: ' *',
-                                      style: context.textTheme.bodyLarge!.copyWith(
-                                          color: context.errorColor,
-                                          fontWeight: FontWeight.w600))
+                                      style: context.textTheme.bodyLarge!
+                                          .copyWith(
+                                              color: context.errorColor,
+                                              fontWeight: FontWeight.w600))
                                 ]),
                               ),
                               Container(
                                 width: context.width,
                                 decoration: BoxDecoration(
-                                    border:
-                                        Border.all(color: context.labelTextColor),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(12.r))),
+                                    border: Border.all(
+                                        color: context.labelTextColor),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(12.r))),
                                 child: Padding(
                                   padding: EdgeInsets.all(8.r),
                                   child: DropdownButton(
                                     style: context.textTheme.bodyLarge,
                                     underline: Container(),
                                     isExpanded: true,
-                                    value:
-                                        solicitarTedProvider.tipoContaSelecionada,
+                                    value: solicitarTedProvider
+                                        .tipoContaSelecionada,
                                     items: TipoContaEnum.values
                                         .map((e) => DropdownMenuItem<String>(
                                               value: e.tipoConta,
@@ -219,8 +213,8 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
                                       setState(() {
                                         print(
                                             'valor: ${TipoContaEnum.traduzir(value!)}');
-                                        solicitarTedProvider.tipoContaSelecionada =
-                                            value!;
+                                        solicitarTedProvider
+                                            .tipoContaSelecionada = value;
                                       });
                                     },
                                     iconEnabledColor: context.primaryColor,
@@ -230,7 +224,8 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
                                     hint: Text(
                                       'Ex: Corrente',
                                       style: context.textTheme.bodyLarge!
-                                          .copyWith(color: context.labelTextColor),
+                                          .copyWith(
+                                              color: context.labelTextColor),
                                     ),
                                   ),
                                 ),
@@ -244,8 +239,9 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
                           tituloCampo: 'Nome completo',
                           hint: 'Nome de quem vai receber',
                           obrigatorio: true,
-                          validator: Validatorless.required('Campo obrigatório'),
-                          controller: controllerNome,
+                          validator:
+                              Validatorless.required('Campo obrigatório'),
+                          controller: solicitarTedProvider.controllerNome,
                         ),
                         SizedBox(height: 16.h),
                         _CampoTexto(
@@ -254,13 +250,13 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
                           obrigatorio: true,
                           validator: Validatorless.multiple([
                             Validatorless.required('Campo obrigatório'),
-                            if (controllerDocumento.text.length > 14)
+                            if (solicitarTedProvider.controllerIdBeneficiario.text.length > 14)
                               Validatorless.cnpj('CPNJ inválido'),
-                            if (controllerDocumento.text.length <= 14)
+                            if (solicitarTedProvider.controllerIdBeneficiario.text.length <= 14)
                               Validatorless.cpf('CPF inválido'),
                           ]),
                           formatos: [CpfCnpjInputFormatter()],
-                          controller: controllerDocumento,
+                          controller: solicitarTedProvider.controllerIdBeneficiario,
                         ),
                         SizedBox(height: 16.h),
                         BotaoPadrao(
@@ -270,21 +266,24 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
                                     if (_formKey.currentState!.validate()) {
                                       solicitarTedProvider.agencia =
                                           UtilBrasilFields.removeCaracteres(
-                                              controllerAgencia.text);
+                                              solicitarTedProvider.controllerAgencia.text);
                                       solicitarTedProvider.conta =
                                           UtilBrasilFields.removeCaracteres(
-                                              controllerConta.text.replaceAll('-', ''));
+                                              solicitarTedProvider.controllerConta.text
+                                                  .replaceAll('-', ''));
                                       solicitarTedProvider.nome =
-                                          controllerNome.text;
+                                          solicitarTedProvider.controllerNome.text;
                                       solicitarTedProvider.valor =
-                                          UtilBrasilFields.converterMoedaParaDouble(
-                                              controllerValor.text);
-                                      solicitarTedProvider.documento =
+                                          UtilBrasilFields
+                                              .converterMoedaParaDouble(
+                                                  solicitarTedProvider.controllerValor.text);
+                                      solicitarTedProvider.idBeneficiario =
                                           UtilBrasilFields.removeCaracteres(
-                                              controllerDocumento.text);
+                                              solicitarTedProvider.controllerIdBeneficiario.text);
                                       OverlayApp.iniciaOverlay(context);
                                       final response =
-                                          await solicitarTedProvider.enviarToken();
+                                          await solicitarTedProvider
+                                              .enviarToken();
                                       OverlayApp.terminaOverlay();
                                       print(response);
                                       if (response) {
@@ -295,10 +294,13 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
                                       } else {
                                         showDialog(
                                           context: context,
-                                          builder: (context) => AlertDialogGenerico(
-                                              title: 'Erro na requisição',
-                                              msg: 'Erro durante a confirmação',
-                                              onPressed: () => Modular.to.pop()),
+                                          builder: (context) =>
+                                              AlertDialogGenerico(
+                                                  title: 'Erro na requisição',
+                                                  msg:
+                                                      'Erro durante a confirmação',
+                                                  onPressed: () =>
+                                                      Modular.to.pop()),
                                         );
                                       }
                                     }

@@ -29,20 +29,21 @@ class BeneficiariosRecentesImpl {
     }
   }
 
-  static favoritar(int idBeneficiario) async {
+  static favoritar(BeneficiariosRecentesModel beneficiario) async {
     final ambiente = Modular.get<Environment>();
     final url = Uri.parse(
-        '${ambiente.endpoints.beneficiariosRecentes}/$idBeneficiario/favoritar');
+        '${ambiente.endpoints.beneficiariosRecentes}/${beneficiario.idBeneficiario}/favoritar');
+    print('url do favoritar: $url');
+    final body = jsonEncode({"favoritar": !beneficiario.favorito});
+    print('body: $body');
     try {
-      final response = await http.post(url, headers: header());
+      final response = await http.patch(url, body: body, headers: header());
       print(response.body);
-      final body = response.bodyBytes;
-      if (response.statusCode == 200) {
-        final result = json.decode(utf8.decode(body));
-        final favoritar = result['favoritar'] as bool;
-        return SucessResponse(favoritar);
+      final result = response.bodyBytes;
+      if (response.statusCode == 204) {
+        return SucessResponse(null);
       } else {
-        return MensagemErroPadrao.erroResponse(body);
+        return MensagemErroPadrao.erroResponse(result);
       }
     } catch (_) {
       print(_);

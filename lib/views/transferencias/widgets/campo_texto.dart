@@ -10,6 +10,7 @@ class _CampoTexto extends StatefulWidget {
   final TextInputType? tipoTeclado;
   final FormFieldValidator<String>? validator;
   final bool campoConta;
+  final String? valorCampo;
 
   _CampoTexto({
     super.key,
@@ -21,6 +22,7 @@ class _CampoTexto extends StatefulWidget {
     this.validator,
     this.tipoTeclado,
     this.campoConta = false,
+    this.valorCampo,
     List<TextInputFormatter>? formatos,
   }) : formatos = formatos ?? [];
 

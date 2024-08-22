@@ -35,20 +35,24 @@ Map<String, dynamic> _$SolicitarTedParametroModelToJson(
 Beneficiario _$BeneficiarioFromJson(Map<String, dynamic> json) => Beneficiario(
       codigoBanco: json['codigoBanco'] as String,
       agencia: json['agencia'] as String,
-      conta: json['conta'] as String,
-      tipo: json['tipo'] as String,
-      documento: json['documento'] as String,
-      nome: json['nome'] as String,
+      numeroConta: json['numeroConta'] as String,
+      tipoConta: json['tipoConta'] as String,
+      identificadorBeneficiario: json['identificadorBeneficiario'] as String,
+      nomeBeneficiario: json['nomeBeneficiario'] as String,
+      favorito: json['favorito'] as bool?,
+      idBeneficiario: (json['idBeneficiario'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$BeneficiarioToJson(Beneficiario instance) =>
     <String, dynamic>{
       'codigoBanco': instance.codigoBanco,
       'agencia': instance.agencia,
-      'conta': instance.conta,
-      'tipo': instance.tipo,
-      'documento': instance.documento,
-      'nome': instance.nome,
+      'numeroConta': instance.numeroConta,
+      'tipoConta': instance.tipoConta,
+      'identificadorBeneficiario': instance.identificadorBeneficiario,
+      'nomeBeneficiario': instance.nomeBeneficiario,
+      'favorito': instance.favorito,
+      'idBeneficiario': instance.idBeneficiario,
     };
 
 InformacoesAdicionais _$InformacoesAdicionaisFromJson(

@@ -17,6 +17,9 @@ BeneficiariosRecentesModel _$BeneficiariosRecentesModelFromJson(
       nomeBeneficiario: json['nomeBeneficiario'] as String,
       favorito: json['favorito'] as bool,
       idBeneficiario: (json['idBeneficiario'] as num).toInt(),
+      dataUltimaTransferencia: json['dataUltimaTransferencia'] == null
+          ? null
+          : DateTime.parse(json['dataUltimaTransferencia'] as String),
     );
 
 Map<String, dynamic> _$BeneficiariosRecentesModelToJson(
@@ -30,4 +33,6 @@ Map<String, dynamic> _$BeneficiariosRecentesModelToJson(
       'nomeBeneficiario': instance.nomeBeneficiario,
       'favorito': instance.favorito,
       'idBeneficiario': instance.idBeneficiario,
+      'dataUltimaTransferencia':
+          instance.dataUltimaTransferencia?.toIso8601String(),
     };

@@ -17,6 +17,7 @@ class SolicitarTedRespostaImpl {
     final body = json.encode(parametro.toJson());
     try {
       final response = await http.post(url, headers: header(), body: body);
+      print(response.body);
       if (response.statusCode == 200) {
         return SucessResponse(null);
       } else {

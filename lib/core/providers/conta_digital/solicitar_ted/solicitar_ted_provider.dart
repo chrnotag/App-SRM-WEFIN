@@ -2,8 +2,10 @@ import 'dart:typed_data';
 
 import 'package:Srm_Asset/core/constants/enuns/tipo_conta_enum.dart';
 import 'package:Srm_Asset/core/constants/extensions/date_extensions.dart';
+import 'package:Srm_Asset/core/constants/extensions/string_extensions.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/solicitar_ted/solicitar_ted_impl.dart';
 import 'package:Srm_Asset/core/utils/toast_erro_util.dart';
+import 'package:Srm_Asset/models/beneficiarios_recentes/beneficiarios_recentes_model.dart';
 import 'package:Srm_Asset/models/conta_digital/solicitar_ted/resposta_token/resposta_token_model.dart';
 import 'package:flutter/cupertino.dart';
 import '../../../../models/conta_digital/bancos/bancos_model.dart';
@@ -205,14 +207,53 @@ class SolicitarTedProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  String? _documento;
+  String? _idBeneficiario;
 
-  String? get documento => _documento;
+  String? get idBeneficiario => _idBeneficiario;
 
-  set documento(String? value) {
-    _documento = value;
+  set idBeneficiario(String? value) {
+    _idBeneficiario = value;
     notifyListeners();
   }
 
-  SolicitarTedParametroModel get parametroSolicitarTed => SolicitarTedParametroModel(valor: valor!, tokenConfirmacao: codigoToken, beneficiario: Beneficiario(codigoBanco: bancoSelecionado!.codigo, agencia: agencia!, conta: conta!, tipo: TipoContaEnum.traduzir(tipoContaSelecionada), documento: documento!, nome: nome!), informacoesAdicionais: InformacoesAdicionais(codigoFinalidade: '6', descricao: 'teste'), favoritar: false, data: DateTime.now().formatarIso8601);
+  final TextEditingController controllerAgencia = TextEditingController();
+  final TextEditingController controllerConta = TextEditingController();
+  final TextEditingController controllerValor = TextEditingController();
+  final TextEditingController controllerNome = TextEditingController();
+  final TextEditingController controllerIdBeneficiario = TextEditingController();
+  final TextEditingController controllerBancoSelecionado = TextEditingController();
+
+  void autoPreencherFavorito(BeneficiariosRecentesModel beneficiario){
+    controllerAgencia.text = beneficiario.agencia;
+
+    tipoConta = beneficiario.tipoConta;
+
+    controllerIdBeneficiario.text = beneficiario
+        .identificadorBeneficiario.formatarDocumento();
+
+    controllerConta.text = beneficiario.numeroConta;
+
+    controllerNome.text= beneficiario
+        .nomeBeneficiario;
+
+    bancoSelecionado =
+        listaBancos.firstWhere(
+              (element) => beneficiario
+              .codigoBanco ==
+              element.codigo,
+        );
+    controllerBancoSelecionado.text =  '${bancoSelecionado!.codigo} - ${bancoSelecionado!.nome}';
+    notifyListeners();
+  }
+
+  void limparControladores() {
+    controllerAgencia.clear();
+    controllerConta.clear();
+    controllerValor.clear();
+    controllerNome.clear();
+    controllerIdBeneficiario.clear();
+    controllerBancoSelecionado.clear();
+  }
+
+  SolicitarTedParametroModel get parametroSolicitarTed => SolicitarTedParametroModel(valor: valor!, tokenConfirmacao: codigoToken, beneficiario: Beneficiario(codigoBanco: bancoSelecionado!.codigo, agencia: agencia!, numeroConta: conta!, tipoConta: TipoContaEnum.traduzir(tipoContaSelecionada), identificadorBeneficiario: idBeneficiario!, nomeBeneficiario: nome!), informacoesAdicionais: InformacoesAdicionais(codigoFinalidade: '6', descricao: 'teste'), favoritar: false, data: DateTime.now().formatarIso8601);
 }
