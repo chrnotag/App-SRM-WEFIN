@@ -13,12 +13,11 @@ class BancoDropdown extends StatefulWidget {
 }
 
 class _BancoDropdownState extends State<BancoDropdown> {
-  TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final solicitarTedProvider = Modular.get<SolicitarTedProvider>();
+    final solicitarTedProvider = context.watch<SolicitarTedProvider>();
     return TypeAheadField<BancosModel>(
-      controller: controller,
+      controller: solicitarTedProvider.controllerBancoSelecionado,
       builder: (context, controller, focusNode) {
         return TextField(
             controller: controller,
@@ -52,7 +51,7 @@ class _BancoDropdownState extends State<BancoDropdown> {
       onSelected: (BancosModel suggestion) {
         solicitarTedProvider.bancoSelecionado = suggestion;
         setState(() {
-          controller.text =
+          solicitarTedProvider.controllerBancoSelecionado.text =
               '${solicitarTedProvider.bancoSelecionado!.codigo} - ${solicitarTedProvider.bancoSelecionado!.nome}';
         });
       },

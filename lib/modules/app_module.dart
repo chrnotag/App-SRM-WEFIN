@@ -1,5 +1,6 @@
 import 'package:Srm_Asset/core/constants/classes_abstratas/envirioment.dart';
 import 'package:Srm_Asset/core/providers/auth_provider_config/recuperar_versao/recuperar_versao_provider.dart';
+import 'package:Srm_Asset/core/providers/beneficiarios_recentes/beneficiarios_recentes_provider.dart';
 import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/carteira_aberto/carteira_aberto_provider.dart';
 import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/geral_carteira/geral_carteira_provider.dart';
 import 'package:Srm_Asset/core/providers/carteira_consolidada_provider/prazo_liquidez/prazo_liquidez_provider.dart';
@@ -67,6 +68,7 @@ class AppModule extends Module {
     i.addSingleton(SolicitacoesTedProvider.new);
     i.addSingleton(RecuperarVersaoProvider.new);
     i.addSingleton(RelatorioTitulosProvider.new);
+    i.addSingleton(BeneficiariosRecentesProvider.new);
     i.addSingleton(NotificationService.new);
     i.addInstance<FirebaseMessaginService>(messaginService);
     i.addInstance<Environment>(environment);

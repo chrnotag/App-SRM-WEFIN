@@ -24,4 +24,27 @@ extension StringExtensions on String {
 
   String get digitoConta => '${this.substring(0, this.length -1)}-${this.substring(this.length - 1)}';
 
+  String get iniciais {
+    if (isEmpty) return '';
+    List<String> palavras = trim().split(' ');
+    if (palavras.isEmpty) return '';
+
+    String primeiraInicial = palavras[0].substring(0, 1).toUpperCase();
+    String segundaInicial = palavras.length > 1
+        ? palavras[1].substring(0, 1).toUpperCase()
+        : '';
+
+    return primeiraInicial + segundaInicial;
+  }
+
+  String get primeirasDuasPalavras {
+    if (isEmpty) return '';
+    List<String> palavras = trim().split(' ');
+    if (palavras.length < 2) {
+      return this;
+    } else {
+      return '${palavras[0]} ${palavras[1]}';
+    }
+  }
+
 }
