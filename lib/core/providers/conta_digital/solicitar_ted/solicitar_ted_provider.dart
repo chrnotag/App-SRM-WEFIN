@@ -207,12 +207,12 @@ class SolicitarTedProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  String? _idBeneficiario;
+  String? _identificadorBeneficiario;
 
-  String? get idBeneficiario => _idBeneficiario;
+  String? get identificadorBeneficiario => _identificadorBeneficiario;
 
-  set idBeneficiario(String? value) {
-    _idBeneficiario = value;
+  set identificadorBeneficiario(String? value) {
+    _identificadorBeneficiario = value;
     notifyListeners();
   }
 
@@ -255,5 +255,5 @@ class SolicitarTedProvider extends ChangeNotifier {
     controllerBancoSelecionado.clear();
   }
 
-  SolicitarTedParametroModel get parametroSolicitarTed => SolicitarTedParametroModel(valor: valor!, tokenConfirmacao: codigoToken, beneficiario: Beneficiario(codigoBanco: bancoSelecionado!.codigo, agencia: agencia!, numeroConta: conta!, tipoConta: TipoContaEnum.traduzir(tipoContaSelecionada), identificadorBeneficiario: idBeneficiario!, nomeBeneficiario: nome!), informacoesAdicionais: InformacoesAdicionais(codigoFinalidade: '6', descricao: 'teste'), favoritar: false, data: DateTime.now().formatarIso8601);
+  SolicitarTedParametroModel get parametroSolicitarTed => SolicitarTedParametroModel(valor: valor!, tokenConfirmacao: codigoToken, beneficiario: Beneficiario(codigoBanco: bancoSelecionado!.codigo, agencia: agencia!, numeroConta: conta!, tipoConta: TipoContaEnum.traduzir(tipoContaSelecionada), identificadorBeneficiario: identificadorBeneficiario!, nomeBeneficiario: nome!), informacoesAdicionais: InformacoesAdicionais(codigoFinalidade: '6', descricao: 'teste'), favoritar: false, data: DateTime.now().formatarIso8601);
 }

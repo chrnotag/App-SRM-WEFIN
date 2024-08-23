@@ -277,7 +277,7 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
                                           UtilBrasilFields
                                               .converterMoedaParaDouble(
                                                   solicitarTedProvider.controllerValor.text);
-                                      solicitarTedProvider.idBeneficiario =
+                                      solicitarTedProvider.identificadorBeneficiario =
                                           UtilBrasilFields.removeCaracteres(
                                               solicitarTedProvider.controllerIdBeneficiario.text);
                                       OverlayApp.iniciaOverlay(context);
