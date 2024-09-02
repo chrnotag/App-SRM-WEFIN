@@ -11,6 +11,7 @@ import 'package:Srm_Asset/core/providers/conta_digital/extrato/extrato_provider.
 import 'package:Srm_Asset/core/providers/conta_digital/solicitacao_ted/solicitacao_ted_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/solicitar_ted/solicitar_ted_provider.dart';
 import 'package:Srm_Asset/core/providers/conta_digital/tabbar_meses_provider.dart';
+import 'package:Srm_Asset/core/providers/notificacoes_provider/notificacoes_provider.dart';
 import 'package:Srm_Asset/core/providers/relatorio_titulos_provider/relatorio_titulos_provider.dart';
 import 'package:Srm_Asset/core/providers/ted_terceiros/ted_terceiros_provider.dart';
 import 'package:Srm_Asset/core/services/firebase/fcm_service.dart';
@@ -69,6 +70,7 @@ class AppModule extends Module {
     i.addSingleton(RecuperarVersaoProvider.new);
     i.addSingleton(RelatorioTitulosProvider.new);
     i.addSingleton(BeneficiariosRecentesProvider.new);
+    i.addSingleton(NotificacoesProvider.new);
     i.addSingleton(NotificationService.new);
     i.addInstance<FirebaseMessaginService>(messaginService);
     i.addInstance<Environment>(environment);

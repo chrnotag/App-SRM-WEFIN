@@ -20,7 +20,8 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
     solicitarTedProvider.controllerConta.addListener(_updateButtonState);
     solicitarTedProvider.controllerValor.addListener(_updateButtonState);
     solicitarTedProvider.controllerNome.addListener(_updateButtonState);
-    solicitarTedProvider.controllerIdBeneficiario.addListener(_updateButtonState);
+    solicitarTedProvider.controllerIdBeneficiario
+        .addListener(_updateButtonState);
   }
 
   @override
@@ -55,10 +56,13 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Loader();
         } else {
+          final favoritoProvider = Modular.get<BeneficiariosRecentesProvider>();
           return SingleChildScrollView(
             child: Column(
               children: [
-                _ListaFavoritos(),
+                Visibility(
+                    visible: favoritoProvider.listaBeneficiarios.isNotEmpty,
+                    child: const _ListaFavoritos()),
                 Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 25.w, vertical: 8.h),
@@ -95,7 +99,8 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
                                   CentavosInputFormatter()
                                 ],
                                 hint: 'R\$ 0,00',
-                                controller: solicitarTedProvider.controllerValor,
+                                controller:
+                                    solicitarTedProvider.controllerValor,
                               ),
                               SizedBox(
                                 height: 16.h,
@@ -146,7 +151,8 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
                                 formatos: [
                                   FilteringTextInputFormatter.digitsOnly,
                                 ],
-                                controller: solicitarTedProvider.controllerAgencia,
+                                controller:
+                                    solicitarTedProvider.controllerAgencia,
                               ),
                             ),
                             SizedBox(width: 16.w),
@@ -162,7 +168,8 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
                                 formatos: [
                                   FilteringTextInputFormatter.digitsOnly,
                                 ],
-                                controller: solicitarTedProvider.controllerConta,
+                                controller:
+                                    solicitarTedProvider.controllerConta,
                               ),
                             ),
                           ],
@@ -250,13 +257,18 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
                           obrigatorio: true,
                           validator: Validatorless.multiple([
                             Validatorless.required('Campo obrigatório'),
-                            if (solicitarTedProvider.controllerIdBeneficiario.text.length > 14)
+                            if (solicitarTedProvider
+                                    .controllerIdBeneficiario.text.length >
+                                14)
                               Validatorless.cnpj('CPNJ inválido'),
-                            if (solicitarTedProvider.controllerIdBeneficiario.text.length <= 14)
+                            if (solicitarTedProvider
+                                    .controllerIdBeneficiario.text.length <=
+                                14)
                               Validatorless.cpf('CPF inválido'),
                           ]),
                           formatos: [CpfCnpjInputFormatter()],
-                          controller: solicitarTedProvider.controllerIdBeneficiario,
+                          controller:
+                              solicitarTedProvider.controllerIdBeneficiario,
                         ),
                         SizedBox(height: 16.h),
                         BotaoPadrao(
@@ -266,20 +278,27 @@ class _TransferenciasTedState extends State<_TransferenciasTed> {
                                     if (_formKey.currentState!.validate()) {
                                       solicitarTedProvider.agencia =
                                           UtilBrasilFields.removeCaracteres(
-                                              solicitarTedProvider.controllerAgencia.text);
+                                              solicitarTedProvider
+                                                  .controllerAgencia.text);
                                       solicitarTedProvider.conta =
                                           UtilBrasilFields.removeCaracteres(
-                                              solicitarTedProvider.controllerConta.text
+                                              solicitarTedProvider
+                                                  .controllerConta.text
                                                   .replaceAll('-', ''));
                                       solicitarTedProvider.nome =
-                                          solicitarTedProvider.controllerNome.text;
+                                          solicitarTedProvider
+                                              .controllerNome.text;
                                       solicitarTedProvider.valor =
                                           UtilBrasilFields
                                               .converterMoedaParaDouble(
-                                                  solicitarTedProvider.controllerValor.text);
-                                      solicitarTedProvider.identificadorBeneficiario =
+                                                  solicitarTedProvider
+                                                      .controllerValor.text);
+                                      solicitarTedProvider
+                                              .identificadorBeneficiario =
                                           UtilBrasilFields.removeCaracteres(
-                                              solicitarTedProvider.controllerIdBeneficiario.text);
+                                              solicitarTedProvider
+                                                  .controllerIdBeneficiario
+                                                  .text);
                                       OverlayApp.iniciaOverlay(context);
                                       final response =
                                           await solicitarTedProvider
