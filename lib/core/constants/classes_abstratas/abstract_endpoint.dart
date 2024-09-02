@@ -43,4 +43,5 @@ abstract class Endpoint{
   String get downloadRelatorioTitulos;
   String get downloadBoletoRelatorio;
   String get beneficiariosRecentes;
+  String get notificacoes;
 }

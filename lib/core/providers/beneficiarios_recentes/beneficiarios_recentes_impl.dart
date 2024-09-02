@@ -46,7 +46,6 @@ class BeneficiariosRecentesImpl {
         return MensagemErroPadrao.erroResponse(result);
       }
     } catch (_) {
-      print(_);
       return MensagemErroPadrao.codigo500();
     }
   }

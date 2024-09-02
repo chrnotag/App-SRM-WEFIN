@@ -1,9 +1,7 @@
 import 'package:Srm_Asset/core/constants/configs_tema/export_config_theme_srm.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest_all.dart' as tz;
-import 'package:Srm_Asset/main.dart';
 
 class CustomNotification {
   final int ID;

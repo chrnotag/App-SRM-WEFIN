@@ -243,7 +243,7 @@ class _AuthFormState extends State<AuthForm> {
 
   final FlutterSecureStorage _storage = FlutterSecureStorage();
 
-// Função para salvar os dados de login (email e senha) se o usuário optar por isso
+// Função para salvar o login do usuário
   void _salvarLogin() async {
     await _storage.write(key: 'username', value: _loginEC.text);
   }
