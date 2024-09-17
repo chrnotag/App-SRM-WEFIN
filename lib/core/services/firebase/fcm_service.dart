@@ -55,6 +55,7 @@ class FirebaseMessaginService {
             title: notification.title!,
             body: notification.body!,
           ),
+
         );
       }
     });
