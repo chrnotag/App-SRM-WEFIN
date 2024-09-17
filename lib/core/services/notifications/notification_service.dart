@@ -82,8 +82,8 @@ class NotificationService {
 
   showNotification(CustomNotification notification) {
     androidDetails = AndroidNotificationDetails(
-      'assinatura',
-      'Lembretes',
+      'NOTIFICACAO_APROVACAO_TED',
+      'NOTIFICACAO_APROVACAO_TED',
       channelDescription: 'Esta POC é para eu nao ser demitido',
       importance: Importance.max,
       priority: Priority.max,
@@ -93,8 +93,8 @@ class NotificationService {
     );
 
     androidDetails = AndroidNotificationDetails(
-      'ted',
-      'Lembretes',
+      'NOTIFICACAO_ASSINATURA_PENDENTE',
+      'NOTIFICACAO_ASSINATURA_PENDENTE',
       importance: Importance.max,
       priority: Priority.max,
       enableVibration: true,
